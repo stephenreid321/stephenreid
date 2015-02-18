@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="blog-meta">
-    <span class="blog-posted">Posted <%=blog_post.created_at%> &middot;</span>
+    <span class="blog-posted">Posted <%=blog_post.created_at%></span>
     <%= partial :share, :locals => {:key => blog_post.slug, :url => "http://#{ENV['DOMAIN']}#{url(:blog, :post, :slug => blog_post.slug)}"} %>
   </div>
 
