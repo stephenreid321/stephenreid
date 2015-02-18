@@ -34,7 +34,9 @@
     <meta property="og:image" content="<%=@og_image%>" />
 
     <style>
-<% unless request.path.starts_with?('/blog') %>
+<% if request.path.starts_with?('/blog') %>
+        #l > div, #r > div { margin: 20px 0; }
+<% else %>
         body { background-position: center; background-image: url(/images/background.jpg); background-size: cover; background-repeat: no-repeat }
 <% end %>
     </style>
