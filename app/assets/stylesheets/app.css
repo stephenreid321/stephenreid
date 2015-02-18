@@ -4,7 +4,6 @@
 #alert-wrap { margin-top: -40px; position: absolute; z-index: 1040; width: 40%; margin-left: -20%; left: 50%; }
 
 html, body { min-height: 100% }
-body { background-position: center; background-image: url(/images/background.jpg); background-size: cover; background-repeat: no-repeat }
 
 body, p, h1,h2,h3,h4,h5,h6 { color: white; font-family: 'Roboto' }
 

@@ -33,6 +33,12 @@
     <meta property="og:title" content="<%=@title%>" />
     <meta property="og:image" content="<%=@og_image%>" />
 
+    <style>
+<% unless request.path.starts_with?('/blog') %>
+        body { background-position: center; background-image: url(/images/background.jpg); background-size: cover; background-repeat: no-repeat }
+<% end %>
+    </style>
+
   </head>
   <body>
 
@@ -62,7 +68,7 @@
           </div>
 
         </div>
-        <div class="col-sm-5 col-sm-offset-3" id="r">
+        <div class="<% if request.path.starts_with?('/blog') %>col-md-8<% else %> col-sm-5 col-sm-offset-3 <% end %>" id="r">
 
           <div>
 
