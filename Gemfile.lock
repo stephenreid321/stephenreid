@@ -250,6 +250,7 @@ GEM
       rack
     raindrops (0.13.0)
     rake (10.4.2)
+    redcarpet (3.2.2)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -295,5 +296,6 @@ DEPENDENCIES
   padrino
   rack (= 1.5.2)
   rake
+  redcarpet
   unicorn
   will_paginate!

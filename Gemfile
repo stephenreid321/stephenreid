@@ -34,3 +34,5 @@ gem 'mail'
 # Interacting with other websites
 gem 'mechanize'
 
+gem 'redcarpet'
+
