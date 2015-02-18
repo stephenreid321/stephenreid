@@ -1,0 +1,23 @@
+
+<div class="blog-post">
+
+  <h2>
+    <a href="<%=url(:blog, :post, :slug => blog_post.slug)%>">
+      <%=blog_post.title%>
+    </a>
+  </h2>
+  <% if blog_post.subtitle %>
+    <h3 class="subtitle"><%=blog_post.subtitle%></h3>
+  <% end %>
+
+  <div class="blog-meta">
+    <span class="blog-posted">Posted <%=blog_post.created_at%> &middot;</span>
+    <%= partial :share, :locals => {:key => blog_post.slug, :url => "http://#{ENV['DOMAIN']}#{url(:blog, :post, :slug => blog_post.slug)}"} %>
+  </div>
+
+  <div class="blog-content"><%=blog_post.markdown ? Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:hard_wrap => true), :autolink => true).render(blog_post.body) : blog_post.body %></div>
+
+  <hr />
+  
+</div>
+

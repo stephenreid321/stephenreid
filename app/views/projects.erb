@@ -1,0 +1,61 @@
+<script src="https://raw.githubusercontent.com/christianbach/tablesorter/master/jquery.tablesorter.min.js"></script>
+<script>
+  $(function () {
+    $('a.countme').each(function () {
+      var a = this;
+      var url = $(this).attr('href')
+      $.getJSON('http://graph.facebook.com/?ids=' + encodeURIComponent(url), function (data) {
+        $(a).parent().next().text(data[url]['shares'] || 0);
+      });
+      $.getJSON("http://urls.api.twitter.com/1/urls/count.json?url=" + encodeURIComponent(url) + "&callback=?", function (data) {
+        $(a).parent().next().next().html('<a target="_blank" href="http://twitter.com/search?q=' + url + '">' + data['count'] + '</a>');
+      });
+    });
+    $(document).ajaxComplete(function () {
+      $("#hits").tablesorter({sortList: [[1, 1]]});
+    })
+  });
+</script>
+
+<p>
+  I work as a freelance digital consultant for organisations including 38 Degrees, the New Economics Foundation and the Green Party.
+  You can find examples of my work below.
+  I'm occasionally available for work; you're welcome to <a href="mailto:stephen.reid.inbox@gmail.com">get in touch</a>.
+</p>
+
+<table id="hits" class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th><i class="fa fa-facebook-square"></i></th>
+      <th><i class="fa fa-twitter"></i></th>
+    </tr>
+  </thead>    
+  <%
+  [
+    ['Parasite Street', 'http://www.parasite-street.co.uk'],
+    ['Pledge to Vote Green', 'http://pledge.greenparty.org.uk'],
+    ['My Fracking Questions', 'http://www.myfrackingquestions.org'],
+    ['Stop TTIP', 'http://ttipaction.38degrees.org.uk/'],
+    ['Reasons to Vote Green', 'http://www.reasonstovotegreen.org.uk/'],
+    ['Brandalism', 'http://www.brandalism.org.uk/'],
+    ['Labour Party scrolling survey', 'http://action.labour.org.uk/index.php/poll/index'],
+    ['Join the Vote', 'http://www.jointhevote.org/'],
+    ['Save our NHS', 'http://nhsaction.38degrees.org.uk/'],
+    ['Back Balcombe', 'http://www.backbalcombe.org/'],
+    ['Paint a Fish', 'http://www.paintafish.org'],
+    ['Happy Planet Index', 'http://www.happyplanetindex.org/'],      
+    ['Black tie activists crash HMRC boss\' retirement do', 'http://www.youtube.com/watch?v=3w4tcIsaInE'],
+    ['The Intruders crash the Investment Banking Awards in Mayfair', 'http://www.youtube.com/watch?v=WXhqvAbUDmg'],
+    ['I set up Parasite Street to balance the benefits debate', 'http://www.independent.co.uk/voices/comment/i-set-up-parasite-street-to-balance-the-benefits-debate-9067202.html']
+    ].each { |name, url|
+  %>
+    <tr>
+      <td><a target="_blank" class="countme" href="<%=url%>"><%=name%></a></td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% } %>
+</table>
+
+

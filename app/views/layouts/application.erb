@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%
+    [
+      'bootstrap.min.css',
+      'font-awesome.min.css',
+      'share.css',
+      'app.css'        
+      ].each { |file| %> 
+      <link rel="stylesheet" href="/stylesheets/<%=file%>" />    
+    <% } %>
+
+    <% [
+      'jquery-1.11.2.min.js',
+      'bootstrap.min.js',
+      'app.js',
+      ].each { |file| %>
+      <script src="/javascripts/<%=file%>"></script>
+    <% } %>
+
+    <script src="/webshim/polyfiller.js"></script> 
+    <script>
+      webshims.polyfill();
+    </script>      
+
+    <%= favicon_tag 'favicon.png' %>
+    <title><%=@title%></title>
+    <meta name="description" content="<%=@og_desc%>">
+    <meta property="og:title" content="<%=@title%>" />
+    <meta property="og:image" content="<%=@og_image%>" />
+
+  </head>
+  <body>
+
+    <%= partial :alert %>
+
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-sm-4" id="l">
+
+          <div>
+
+            <ul class="fa-ul" style="padding: 0; margin-bottom: 0;">
+              <li><i class="fa fa-li fa-envelope"></i> <a target="_blank" href="mailto:stephen.reid.inbox@gmail.com">stephen.reid.inbox@gmail.com</a></li>
+              <li><i class="fa fa-li fa-twitter"></i> <a target="_blank" href="http://twitter.com/wordsandwriting">@wordsandwriting</a></li>
+              <li><i class="fa fa-li fa-facebook-square"></i> <a target="_blank" href="http://facebook.com/wordsandwriting">/wordsandwriting</a></li>
+              <li><i class="fa fa-li fa-github"></i> <a target="_blank" href="http://github.com/wordsandwriting">wordsandwriting</a></li>
+              <li><i class="fa fa-li fa-soundcloud"></i> <a target="_blank" href="http://soundcloud.com/wordsandwriting">wordsandwriting</a></li>
+            </ul>
+
+            <blockquote style="margin-top: 20px">
+              <p>Yet my Mind was not at rest, because Nothing was Acted, and thoughts run in me that Words and Writing were all Nothing and must Die, for Action is the Life of all and if thou dost not Act, thou dost Nothing.</p>
+              <small>Gerrard Winstanley, ‘A Watchword to the City of London’, 1649</small>
+            </blockquote>
+
+          </div>
+
+        </div>
+        <div class="col-sm-5 col-sm-offset-3" id="r">
+
+          <div>
+
+            <nav class="navbar navbar-inverse" style="border: 0; background: rgba(0,0,0,0.3); border-radius: 0">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                  <%= ul_nav 'nav navbar-nav', [
+                    ['Portfolio' ,'/'],
+                    ['Other projects', '/other'],
+                    ['Lumen', '/lumen'],
+                    ['Blog', '/blog'],
+                    ] %>
+                </div>
+              </div>
+            </nav>
+
+            <%= yield %>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>
