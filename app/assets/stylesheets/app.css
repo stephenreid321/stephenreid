@@ -24,7 +24,7 @@ table a:not(.btn), .table a:not(.btn){ text-decoration: none }
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: white }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus { color: white }
 
-.blog-post > hr { margin: 2em 0; border-color: #ccc }
+.blog-post > hr { margin: 2em 0; border-color: rgba(0,0,0,0.2) }
 .blog-post h2 { margin-bottom: 0.2em }
 .blog-post h3.subtitle { font-style: italic; margin-top: 0 }
 .blog-post .blog-meta { margin: 0.5em 0 }
