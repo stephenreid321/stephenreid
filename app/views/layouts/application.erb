@@ -36,6 +36,8 @@
     <style>
 <% if request.path.starts_with?('/blog') %>
         #l > div, #r > div { margin: 20px 0; }
+        #l > div { float: none; }
+        #r > div { float: none }
 <% else %>
         body { background-position: center top; background-image: url(/images/background.jpg); background-size: cover; background-repeat: no-repeat }
 <% end %>
