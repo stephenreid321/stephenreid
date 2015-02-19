@@ -34,5 +34,5 @@ table a:not(.btn), .table a:not(.btn){ text-decoration: none }
 blockquote footer, blockquote small, blockquote .small { color: #ccc }
 
 .pagination a { background: none !important; border: 0 !important; color: white !important }
-.pagination li.disabled a { color: #aaa !important }
+.pagination li.disabled a { color: #ccc !important }
 .pagination li.active a { color: #52c2ea !important }
