@@ -7,8 +7,8 @@
 .share-buttons .twitter .button:hover { text-decoration:none; background: #ddd }
 
 .share-buttons .count { font-family: arial,sans-serif; font-size: 12px; background-color: #FFFFFF; border: 1px solid #CDD5E5; height: 14px; margin-left: 3px; padding: 1px 2px; position: relative; }
-.share-buttons .count i, .share-buttons .count u { border-color: transparent #ccc transparent transparent; border-style: solid; border-width: 4px 5px 4px 0; display: block; height: 1px; position: absolute; top: 4px; left: -5px; }
-.share-buttons .count i { border-right-color: white; left: -3px; z-index: 1; }      
+.share-buttons .count i, .share-buttons .count u { border-color: transparent #ccc transparent transparent; border-style: solid; border-width: 4px 4px 4px 0; display: block; height: 1px; position: absolute; top: 4px; left: -4px; }
+.share-buttons .count i { border-right-color: white; left: -2px; z-index: 1; }      
 .share-buttons .count, .share-buttons .count a { color: black }
 
 .share-big a { display:inline-block; text-decoration: none; color: white; border-radius: 5px; padding: 10px }
