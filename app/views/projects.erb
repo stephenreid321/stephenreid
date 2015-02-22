@@ -3,12 +3,27 @@
   $(function () {
     $('a.countme').each(function () {
       var a = this;
-      var url = $(this).attr('href')
-      $.getJSON('http://graph.facebook.com/?ids=' + encodeURIComponent(url), function (data) {
-        $(a).parent().next().text(data[url]['shares'] || 0);
-      });
-      $.getJSON("http://urls.api.twitter.com/1/urls/count.json?url=" + encodeURIComponent(url) + "&callback=?", function (data) {
-        $(a).parent().next().next().html('<a target="_blank" href="http://twitter.com/search?q=' + url + '">' + data['count'] + '</a>');
+      var primaryUrl = $(this).attr('href')
+      var twitterSearchString = primaryUrl;
+      var urls = [];
+      if (primaryUrl == 'http://speakout.38degrees.org.uk') {
+        twitterSearchString = 'speakout.38degrees.org.uk'
+        for (var i = 1; i < 50; i++) {
+          urls.push('http://speakout.38degrees.org.uk/campaigns/' + i)
+        }
+        console.log(urls)
+      } else {
+        urls = [primaryUrl]
+      }
+      $.each(urls, function (i, url) {
+        $.getJSON('http://graph.facebook.com/?ids=' + encodeURIComponent(url), function (data) {
+          var n = $(a).parent().next().text().length > 0 ? parseInt($(a).parent().next().text()) : 0
+          $(a).parent().next().text(n + (data[url]['shares'] || 0));
+        });
+        $.getJSON("http://urls.api.twitter.com/1/urls/count.json?url=" + encodeURIComponent(url) + "&callback=?", function (data) {
+          var n = $(a).parent().next().next().text().length > 0 ? parseInt($(a).parent().next().next().text()) : 0
+          $(a).parent().next().next().html('<a target="_blank" href="http://twitter.com/search?q=' + twitterSearchString + '">' + (n + data['count']) + '</a>');
+        });
       });
     });
     $(document).ajaxComplete(function () {
@@ -36,18 +51,19 @@
     ['Parasite Street', 'http://www.parasite-street.co.uk'],
     ['Pledge to Vote Green', 'http://pledge.greenparty.org.uk'],
     ['My Fracking Questions', 'http://www.myfrackingquestions.org'],
-    ['Stop TTIP', 'http://ttipaction.38degrees.org.uk/'],
-    ['Reasons to Vote Green', 'http://www.reasonstovotegreen.org.uk/'],
-    ['Brandalism', 'http://www.brandalism.org.uk/'],
+    ['Stop TTIP', 'http://ttipaction.38degrees.org.uk'],
+    ['Reasons to Vote Green', 'http://www.reasonstovotegreen.org.uk'],
+    ['Brandalism', 'http://www.brandalism.org.uk'],
     ['Labour Party scrolling survey', 'http://action.labour.org.uk/index.php/poll/index'],
-    ['Join the Vote', 'http://www.jointhevote.org/'],
-    ['Save our NHS', 'http://nhsaction.38degrees.org.uk/'],
-    ['Back Balcombe', 'http://www.backbalcombe.org/'],
+    ['Join the Vote', 'http://www.jointhevote.org'],
+    ['Save our NHS', 'http://nhsaction.38degrees.org.uk'],
+    ['Back Balcombe', 'http://www.backbalcombe.org'],
     ['Paint a Fish', 'http://www.paintafish.org'],
-    ['Happy Planet Index', 'http://www.happyplanetindex.org/'],      
+    ['Happy Planet Index', 'http://www.happyplanetindex.org'],      
     ['Black tie activists crash HMRC boss\' retirement do', 'http://www.youtube.com/watch?v=3w4tcIsaInE'],
     ['The Intruders crash the Investment Banking Awards in Mayfair', 'http://www.youtube.com/watch?v=WXhqvAbUDmg'],
-    ['I set up Parasite Street to balance the benefits debate', 'http://www.independent.co.uk/voices/comment/i-set-up-parasite-street-to-balance-the-benefits-debate-9067202.html']
+    ['I set up Parasite Street to balance the benefits debate', 'http://www.independent.co.uk/voices/comment/i-set-up-parasite-street-to-balance-the-benefits-debate-9067202.html'],
+    ['38 Degrees speakout tool', 'http://speakout.38degrees.org.uk']
     ].each { |name, url|
   %>
     <tr>
