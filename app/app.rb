@@ -37,7 +37,7 @@ module ActivateApp
       Time.zone = current_account.time_zone if current_account and current_account.time_zone    
       fix_params!
       @title = 'Stephen Reid'
-      @og_desc = 'Freelance digital consultant and director of the Psychedelic Society'
+      @og_desc = 'Freelance digital creative and director of the Psychedelic Society'
       @og_image = "http://#{ENV['DOMAIN']}/images/background.jpg"
     end        
                 
