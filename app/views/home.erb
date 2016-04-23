@@ -1,0 +1,59 @@
+<script src="https://raw.githubusercontent.com/christianbach/tablesorter/master/jquery.tablesorter.min.js"></script>
+<script>
+  $(function () {
+    $('a.countme').each(function () {
+      var a = this;
+      var primaryUrl = $(this).attr('href')
+      var urls = [];
+      urls = [primaryUrl]
+      $.each(urls, function (i, url) {
+        $.getJSON('http://graph.facebook.com/?ids=' + encodeURIComponent(url), function (data) {
+          var n = $(a).parent().next().text().length > 0 ? parseInt($(a).parent().next().text()) : 0
+          $(a).parent().next().text(n + (data[url]['shares'] || 0));
+        });
+      });
+    });
+    $(document).ajaxComplete(function () {
+      $("#hits").tablesorter({sortList: [[1, 1]]});
+    })
+  });
+</script>
+
+<p>
+  <span class="label" style="background: #CC342D">Ruby</span>
+  <span class="label" style="background: #8ACF17">Javascript</span>  
+  <span class="label" style="background: #F16529">HTML</span>
+  <span class="label" style="background: #29A8E0">CSS</span>  
+</p>
+
+<p>
+  I've done freelance digital work for organisations including 38 Degrees, the New Economics Foundation, 350.org, Positive Money, City Hunt, 10:10, SumOfUs, Brandalism, the Living Wage Foundation, the Labour Party and the Green Party.
+  I'm occasionally available for work; you're welcome to <a href="mailto:stephen.reid.inbox@gmail.com">get in touch</a>.
+</p>
+
+<p>
+  Things I've written have appeared in the Guardian, the Independent, the Huffington Post.
+</p>
+
+<table class="table">
+  <%
+  [
+    ['The Psychedelic Society', 'http://www.psychedelicsociety.org.uk/', 'Founder and director'],
+    ['Lumen', 'http://wordsandwriting.github.io/lumen/', 'Creator and lead developer'],    
+    ['New Economy Organisers Network', 'http://www.neweconomyorganisersnetwork.org/', 'Co-founder'],
+    ['UK Uncut', 'http://www.ukuncut.org.uk', 'Co-founder'],    
+    ['The Intruders', 'https://www.youtube.com/user/WeAreTheIntruders/videos', 'Co-founder'],        
+    ['Greenpeace UK', 'http://www.greenpeace.org.uk', 'Former board member'],    
+    ['University of Oxford', 'http://www2.physics.ox.ac.uk/', 'MPhys (First Class), Physics  (<a href="https://dl.dropboxusercontent.com/u/136370/reid_report_final.pdf">dissertation</a>)'],    
+    ['University of Bristol', 'http://www.bristol.ac.uk/bccs/', 'MRes (Distinction), Complexity Sciences'],    
+    ].each { |name, url, comment|
+  %>
+    <tr>
+      <td><a href="<%=url%>"><%=name%></a></td>
+      <td><%=comment%></td>
+    </tr>
+  <% } %>
+</table>
+
+
+

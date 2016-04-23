@@ -26,7 +26,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 
 # Error reporting
-gem 'airbrake'
+gem 'airbrake', '4.3.5'
 
 # Email
 gem 'mail'

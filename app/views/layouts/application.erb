@@ -38,6 +38,7 @@
         #l > div, #r > div { margin: 20px 0; }
         #l > div { float: none; }
         #r > div { float: none }
+        body { background: rgba(0,0,0,0.5) }
 <% else %>
         body { background-position: center top; background-image: url(/images/background.jpg); background-size: cover; background-repeat: no-repeat }
 <% end %>
@@ -78,7 +79,7 @@
 
           <div>
 
-            <nav class="navbar navbar-inverse" style="border: 0; background: rgba(0,0,0,0.3); border-radius: 0">
+            <nav class="navbar navbar-inverse" style="border: 0; background: rgba(0,0,0,0.3); border-radius: 0; margin-bottom: 10px">
               <div class="container-fluid">
                 <div class="navbar-header">
                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -90,9 +91,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                   <%= ul_nav 'nav navbar-nav', [
-                    ['Portfolio' ,'/'],
-                    ['Other projects', '/other'],
-                    ['Lumen', '/lumen'],
+                    ['Projects' ,'/'],
                     ['Blog', '/blog'],
                     ] %>
                 </div>

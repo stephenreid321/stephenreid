@@ -51,13 +51,9 @@ module ActivateApp
     end
     
     get :home, :map => '/' do
-      erb :projects
+      erb :home
     end
-    
-    get '/other' do
-      erb :other
-    end
-    
+        
     get '/lumen' do
       erb :lumen
     end

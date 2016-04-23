@@ -1,18 +1,18 @@
 development:
-  sessions:
+  clients:
     default:
       database: <%= File.basename(PADRINO_ROOT) %>
       hosts:
         - localhost:27017
         
 test:
-  sessions:
+  clients:
     default:
       database: <%= File.basename(PADRINO_ROOT) %>_test
       hosts:
-        - localhost:27017        
+        - localhost:27017   
 
 production:
-  sessions:
+  clients:
     default:
-      uri: <%= ENV['MONGO_URL'] %>
+      uri: <%= ENV['MONGOLAB_URI'] || ENV['MONGO_URL'] %>
