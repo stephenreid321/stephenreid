@@ -21,16 +21,7 @@
     <a class="button popup" href="http://twitter.com/intent/tweet?<%=[:url,:via,:text,:in_reply_to,:hashtags,:related].map { |x| begin "#{x}=#{CGI::escape(eval(x.to_s))}" rescue nil; end }.compact.join('&') %>">
       <i class="fa fa-twitter"></i> Tweet
     </a>
-    <span class="count"><i></i><u></u></span>  
   </span>
-
-  <script>
-    $(function() {
-      $.getJSON("http://urls.api.twitter.com/1/urls/count.json?url=<%=CGI::escape(url)%>+&callback=?", function(data) {
-        $('#<%=id%> .twitter .count').append('<a target="_blank" href="http://twitter.com/search?q=<%=CGI::escape(url)%>">' + data['count'] + '</a>');
-      });
-    });
-  </script>
 
 </div>
 
