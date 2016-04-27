@@ -36,6 +36,7 @@ module ActivateApp
       redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
       Time.zone = current_account.time_zone if current_account and current_account.time_zone    
       fix_params!
+      @_params = params; def params; @_params; end # force controllers to inherit the fixed params
       @title = 'Stephen Reid'
       @og_desc = 'Freelance digital creative and director of the Psychedelic Society'
       @og_image = "http://#{ENV['DOMAIN']}/images/background.jpg"
