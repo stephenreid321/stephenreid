@@ -5,7 +5,7 @@ gem 'unicorn'
 gem 'padrino'
 gem 'rake'
 gem 'erubis'
-gem 'rack', '1.5.2'
+gem 'rack'
 
 # Admin
 gem 'will_paginate', github: 'mislav/will_paginate'

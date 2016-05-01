@@ -6,7 +6,7 @@ ActivateApp::App.controllers :blog do
   end
   
   get :post, :with => :slug do 
-    @blog_post = BlogPost.find_by(slug: params[:slug])
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     @title = @blog_post.title
     erb :'blog/post'
   end  
