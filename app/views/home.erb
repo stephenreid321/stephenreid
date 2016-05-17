@@ -1,72 +1,81 @@
-<script src="https://raw.githubusercontent.com/christianbach/tablesorter/master/jquery.tablesorter.min.js"></script>
-<script>
-  $(function () {
-    $('a.countme').each(function () {
-      var a = this;
-      var primaryUrl = $(this).attr('href')
-      var urls = [];
-      urls = [primaryUrl]
-      $.each(urls, function (i, url) {
-        $.getJSON('http://graph.facebook.com/?ids=' + encodeURIComponent(url), function (data) {
-          var n = $(a).parent().next().text().length > 0 ? parseInt($(a).parent().next().text()) : 0
-          $(a).parent().next().text(n + (data[url]['shares'] || 0));
-        });
-      });
-    });
-    $(document).ajaxComplete(function () {
-      $("#hits").tablesorter({sortList: [[1, 1]]});
-    })
-  });
-</script>
+<table style="width: 100%">
 
-<p>
-  <span class="label" style="background: #CC342D">Ruby</span>
-  <span class="label" style="background: #8DC926">Javascript</span>  
-  <span class="label" style="background: #F16529">HTML</span>
-  <span class="label" style="background: #29A8E0">CSS</span>  
-</p>
+  <tr>
+    <td colspan="2">
+      <p>
+        I'm currently the director of <a href="http://www.psychedelicsociety.org.uk/">The Psychedelic Society</a>, which I founded in November 2014.
+      </p>
+    </td>
+  </tr>
 
-<p>
-  I've done freelance digital work for organisations including
-  38 Degrees,
-  the New Economics Foundation,
-  the Labour Party,
-  the Green Party,
-  350.org,
-  the Living Wage Foundation,
-  Positive Money,
-  SumOfUs,
-  City Hunt,
-  10:10
-  and Brandalism.
+  <tr>
+    <td colspan="2">
+      <h2 style="margin-top: 0.25em">Freelance digital work
+        <span style="font-size: 16px; position: relative; top: -4px">
+          <span class="label" style="background: #CC342D">Ruby</span>
+          <span class="label" style="background: #8DC926">Javascript</span>  
+          <span class="label" style="background: #F16529">HTML</span>
+          <span class="label" style="background: #29A8E0">CSS</span>
+        </span>
+      </h2>
 
-  Things I've written have appeared in the <a href="http://www.theguardian.com/profile/stephen-reid">Guardian</a>, the <a href="http://www.independent.co.uk/author/stephen-reid">Independent</a> and the <a href="http://www.huffingtonpost.co.uk/stephen-reid/">Huffington Post</a>.
-</p>
+      <p>
+        I've done freelance digital work for organisations including
+        38 Degrees,
+        the New Economics Foundation,
+        the Labour Party,
+        the Green Party,
+        350.org,
+        the Living Wage Foundation,
+        Positive Money,
+        SumOfUs,
+        City Hunt,
+        10:10
+        and Brandalism.
+        <a href="mailto:stephen.reid.inbox@gmail.com">Get in touch</a> to see whether I can help you with your project!
+      </p>
 
-<p>
-    <a href="mailto:stephen.reid.inbox@gmail.com">Get in touch</a> to see whether I can help you with your project!
-</p>
+    </td>
+  </tr>
 
-<table class="table">
   <%
   [
-    ['The Psychedelic Society', 'http://www.psychedelicsociety.org.uk/', 'Founder and director'],
+    ['Lumen', 'http://wordsandwriting.github.io/lumen/', 'Creator and lead developer'],    
+    ['Campaign Kit', 'https://github.com/wordsandwriting/campaign-kit', 'Creator and lead developer'],        
+    ].each { |name, url, comment|
+  %>
+    <tr>
+      <td style="padding: 0.4em 0"><a href="<%=url%>"><%=name%></a></td>
+      <td style="padding: 0.4em 0"><%=comment%></td>
+    </tr>
+  <% } %>
+
+  <tr>
+    <td colspan="2">
+
+      <h2 style="margin-top: 0.25em">Past projects</h2>
+
+      <p>
+        Things I've written have appeared in the <a href="http://www.theguardian.com/profile/stephen-reid">Guardian</a>, the <a href="http://www.independent.co.uk/author/stephen-reid">Independent</a> and the <a href="http://www.huffingtonpost.co.uk/stephen-reid/">Huffington Post</a>.
+      </p>
+
+
+    </td>
+  </tr>
+
+  <%
+  [
     ['New Economy Organisers Network', 'http://www.neweconomyorganisersnetwork.org/', 'Co-founder'],
     ['UK Uncut', 'http://www.ukuncut.org.uk', 'Co-founder'],    
     ['The Intruders', 'https://www.youtube.com/user/WeAreTheIntruders/videos', 'Co-founder'],        
     ['Greenpeace UK', 'http://www.greenpeace.org.uk', 'Former board member'],    
     ['University of Oxford', 'http://www2.physics.ox.ac.uk/', 'MPhys (First Class), Physics  (<a href="https://dl.dropboxusercontent.com/u/136370/reid_report_final.pdf">dissertation</a>)'],    
     ['University of Bristol', 'http://www.bristol.ac.uk/bccs/', 'MRes (Distinction), Complexity Sciences'],    
-    ['Lumen', 'http://wordsandwriting.github.io/lumen/', 'Creator and lead developer'],    
-    ['Campaign Kit', 'https://github.com/wordsandwriting/campaign-kit', 'Creator and lead developer'],        
     ].each { |name, url, comment|
   %>
     <tr>
-      <td><a href="<%=url%>"><%=name%></a></td>
-      <td><%=comment%></td>
+      <td style="padding: 0.4em 0"<a href="<%=url%>"><%=name%></a></td>
+      <td style="padding: 0.4em 0"><%=comment%></td>
     </tr>
   <% } %>
 </table>
-
-
-
