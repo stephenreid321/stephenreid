@@ -38,9 +38,13 @@
         #l > div, #r > div { margin: 20px 0; }
         #l > div { float: none; }
         #r > div { float: none }
-        body { background: rgba(0,0,0,0.5) }
+        body { background-color: rgba(0,0,0,0.5) }
 <% else %>
-        body { background-position: center top; background-image: url(/images/background.jpg); background-size: cover; background-repeat: no-repeat }
+        body { padding-top: 32vh; background-position: 49.5% -20vh; background-image: url(/images/background.jpg); background-repeat: no-repeat; background-color: rgba(0,0,0,1)  }
+        @media(min-width: 768px) {
+          body {  background-position: center top; background-size: cover; padding-top: 0 }
+        }
+        
 <% end %>
     </style>
 
