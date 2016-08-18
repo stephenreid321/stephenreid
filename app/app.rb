@@ -65,7 +65,11 @@ module ActivateApp
       else
         pass
       end
-    end    
+    end  
+    
+    get '/radio' do
+      redirect Fragment.find_by(slug: 'radio').try(:body)
+    end
      
   end         
 end
