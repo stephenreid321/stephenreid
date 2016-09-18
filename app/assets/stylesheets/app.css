@@ -5,7 +5,9 @@
 
 html, body { min-height: 100% }
 
-body, p, h1,h2,h3,h4,h5,h6 { color: white; font-family: 'Roboto'; font-size: 16px }
+body, p, h1,h2,h3,h4,h5,h6 { color: white; font-family: 'Roboto'; }
+
+body, p { font-size: 16px }
 
 a, a:hover, a:focus, a:active { color: #52C2EA }
 
