@@ -22,11 +22,6 @@
       <script src="/javascripts/<%=file%>"></script>
     <% } %>
 
-    <script src="/webshim/polyfiller.js"></script> 
-    <script>
-      webshims.polyfill();
-    </script>      
-
     <%= favicon_tag 'favicon.png' %>
     <title><%=@title%></title>
     <meta name="description" content="<%=@og_desc%>">
