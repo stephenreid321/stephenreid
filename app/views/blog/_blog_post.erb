@@ -15,7 +15,7 @@
     <%= partial :share, :locals => {:key => blog_post.slug, :url => "http://#{ENV['DOMAIN']}#{url(:blog, :post, :slug => blog_post.slug)}"} %>
   </div>
 
-  <div class="blog-content"><%=blog_post.markdown ? Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:hard_wrap => true), :autolink => true).render(blog_post.body) : blog_post.body %></div>
+  <div class="blog-content"><%=blog_post.body %></div>
 
   <hr />
   
