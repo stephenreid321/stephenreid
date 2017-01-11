@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.3.0'
-gem 'unicorn'
+gem 'puma'
 gem 'padrino'
 gem 'rake'
 gem 'erubis'
