@@ -7,7 +7,8 @@ ActivateApp::App.controllers :blog do
   
   get :post, :with => :slug do 
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
-    @title = @blog_post.title
+    @title = "#{@blog_post.title} · Stephen Reid"
+    @og_desc = 'Blog of Stephen Reid, director of the Psychedelic Society and freelance digital creative'
     erb :'blog/post'
   end  
   
