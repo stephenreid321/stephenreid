@@ -29,13 +29,14 @@
     <meta property="og:image" content="<%=@og_image%>" />
 
     <style>
-      body {  background-image: url(/images/diy.jpeg); background-position: center top; background-size: cover; padding-top: 0 }      
-      <% if request.path.starts_with?('/blog') %>
+<% if request.path.starts_with?('/blog') %>
         #l > div, #r > div { margin: 20px 0; }
         #l > div { float: none; }
         #r > div { float: none }
-
-      <% end %>      
+        body { background-color: rgba(0,0,0,0.5) }
+<% else %>
+        body {  background-image: url(/images/diy.jpeg); background-position: center top; background-size: cover; padding-top: 0 }      
+<% end %>
     </style>
 
   </head>
@@ -78,7 +79,7 @@
             <div>
               <a href="https://twitter.com/stephenreid_" class="twitter-follow-button" data-show-screen-name="false" data-show-count="true">Follow @stephenreid_</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
-
+            
           </div>
 
         </div>
