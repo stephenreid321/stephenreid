@@ -41,7 +41,7 @@ ActivateApp::App.controller :accounts do
     end        
     if @account.save
       flash[:notice] = "<strong>Awesome!</strong> Your account was created successfully."
-      session['account_id'] = @account.id
+      session['account_id'] = @account.id.to_s
       redirect url(:home)
     else
       flash.now[:error] = "<strong>Oops.</strong> Some errors prevented the account from being saved."
