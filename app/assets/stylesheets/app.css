@@ -1,11 +1,22 @@
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700);
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,700i,900,900i');
+p, ul, ol, input, select, .form-control, body { font-family: 'Raleway', 'Helvetica Neue',Helvetica,Arial,sans-serif }
+h1, h2, h3, h4, h5, h6, .h { font-family: 'Raleway'; text-transform: uppercase; font-weight: 900 }
 
+body { padding-top: 60px }
 #alert-wrap { margin-top: -40px; position: absolute; z-index: 1040; width: 40%; margin-left: -20%; left: 50%; }
 
-html, body { min-height: 100% }
+body, p, h1,h2,h3,h4,h5,h6 { color: white; }
 
-body, p, h1,h2,h3,h4,h5,h6 { color: white; font-family: 'Roboto'; }
+img { image-orientation: from-image; }
+
+input[name$='[day]'], input[name$='[month]'], input[name$='[year]'], select[name$='[hour]'], select[name$='[min]'] { display:inline; } 
+input[name$='[day]'], input[name$='[year]'] { width: 4em }
+input[name$='[month]'] { width: 8em }
+select[name$='[hour]'], select[name$='[min]'] { width: 6em }
+input[name$='[lat]'], input[name$='[lng]'] { display:inline; width: auto } 
+
+.btn { text-transform: none }
 
 body, p { font-size: 16px }
 
@@ -25,13 +36,6 @@ table a:not(.btn), .table a:not(.btn){ text-decoration: none }
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: white }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus { color: white }
 
-.blog-post > hr { margin: 2em 0; border-color: rgba(0,0,0,0.2) }
-.blog-post h2 { margin-bottom: 0.2em }
-.blog-post h3.subtitle { font-style: italic; margin-top: 0 }
-.blog-post .blog-meta { margin: 0.5em 0 }
-.blog-post .blog-meta .blog-posted { color: #ccc; font-size: 12px}
-.blog-post .blog-meta .share-buttons { display: inline }
-
 blockquote footer, blockquote small, blockquote .small { color: #ccc }
 
 .pagination a { font-weight: normal !important; background: none !important; border: 0 !important; color: white !important; text-transform: none !important }
@@ -39,3 +43,5 @@ blockquote footer, blockquote small, blockquote .small { color: #ccc }
 .pagination li.active a { color: #52c2ea !important }
 
 .table { margin-bottom: 0 }
+
+body {  background-image: url(/images/diy.jpeg); background-position: center top; background-size: cover; padding-top: 0 }      

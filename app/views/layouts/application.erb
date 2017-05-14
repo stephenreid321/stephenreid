@@ -4,40 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%
-    [
-      'bootstrap.min.css',
-      'font-awesome.min.css',
-      'share.css',
-      'app.css'        
-      ].each { |file| %> 
-      <link rel="stylesheet" href="/stylesheets/<%=file%>" />    
+    <% {            
+      'jquery/3.2.0' => 'jquery.min.js',
+      'twitter-bootstrap/3.3.7' => 'js/bootstrap.min.js css/bootstrap.min.css css/bootstrap-theme.min.css ',
+      'font-awesome/4.7.0' => 'css/font-awesome.min.css',
+      'select2/3.5.2' => 'select2.min.js select2.min.css',
+      'codemirror/5.0.0' => 'codemirror.min.css theme/monokai.min.css codemirror.min.js mode/xml/xml.min.js',
+      'summernote/0.6.1' => 'summernote.min.css summernote.min.js',
+      'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',      
+      }.each { |k,v| %>    
+      <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
+        <% case f.split('.').last.to_sym; when :js %>
+          <script src="<%=u%>"></script>      
+        <% when :css %>
+          <link rel="stylesheet" href="<%=u%>" />
+        <% end %>
+      <% } %>
     <% } %>
 
     <% [
-      'jquery-1.11.2.min.js',
-      'bootstrap.min.js',
-      'app.js',
-      ].each { |file| %>
-      <script src="/javascripts/<%=file%>"></script>
+      '/stylesheets/share.css',
+      "/stylesheets/app.css?#{Time.now.to_i}"
+      ].each { |f| %> 
+      <link rel="stylesheet" href="<%=f%>" />    
     <% } %>
+
+    <% [
+      "//maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_MAPS_API_KEY']}",
+      '//cdn.rawgit.com/wordsandwriting/activate-tools/f39002fcc10a9a554c651543b3065847130c2811/js/jquery.geopicker.js',      
+      "/javascripts/app.js?#{Time.now.to_i}"
+      ].each { |f| %>
+      <script src="<%=f%>"></script>
+    <% } %>  
 
     <%= favicon_tag 'favicon.png' %>
     <title><%=@title%></title>
     <meta name="description" content="<%=@og_desc%>">
     <meta property="og:title" content="<%=@title%>" />
     <meta property="og:image" content="<%=@og_image%>" />
-
-    <style>
-<% if request.path.starts_with?('/blog') %>
-        #l > div, #r > div { margin: 20px 0; }
-        #l > div { float: none; }
-        #r > div { float: none }
-        body { background-color: rgba(0,0,0,0.5) }
-<% else %>
-        body {  background-image: url(/images/diy.jpeg); background-position: center top; background-size: cover; padding-top: 0 }      
-<% end %>
-    </style>
 
   </head>
   <body>
@@ -83,29 +87,9 @@
           </div>
 
         </div>
-        <div class="<% if request.path.starts_with?('/blog') %>col-md-8<% else %> col-sm-5 col-sm-offset-3 <% end %>" id="r">
+        <div class="col-sm-5 col-sm-offset-3" id="r">
 
           <div>
-
-            <nav class="navbar navbar-inverse" style="border: 0; background: rgba(0,0,0,0.3); border-radius: 0; margin-bottom: 10px">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                  <%= ul_nav 'nav navbar-nav', [
-                    ['Bio' ,'/'],
-                    ['Blog', '/blog'],
-                    ] %>
-                </div>
-              </div>
-            </nav>
-
             <%= yield %>
           </div>
 
