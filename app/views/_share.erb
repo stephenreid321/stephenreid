@@ -8,11 +8,11 @@
     </a>
     <span class="count"><i></i><u></u></span>
   </span>
-  
+
   <script>
-    $(function() {
-      $.getJSON('http://graph.facebook.com/?ids=<%=CGI::escape(url)%>', function(data) {
-        $('#<%=id%> .facebook .count').append(data['<%=url%>']['shares'] || 0);
+    $(function () {
+      $.getJSON('http://graph.facebook.com/?ids=<%=CGI::escape(url)%>', function (data) {
+        $('#<%=id%> .facebook .count').append(data['<%=url%>']['share']['share_count'] || 0);
       });
     });
   </script>
