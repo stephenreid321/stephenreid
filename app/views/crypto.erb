@@ -24,7 +24,7 @@
 				<%=h.amount%>
 			</td>
 			<td>
-				£<%=h.valuation %>
+				<%=number_to_currency h.valuation, unit: '£', precision: 0 %>
 			</td>
 		</tr>
 	<% } %>
@@ -33,6 +33,6 @@
 		<th></th>
 		<th></th>
 		<th></th>
-		<th>£<%=Holding.all.map(&:valuation).sum%></th>
+		<th><%=number_to_currency Holding.all.map(&:valuation).sum, unit: '£', precision: 0 %></th>
 	</tr>
 </table>
