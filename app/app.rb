@@ -61,7 +61,6 @@ module ActivateApp
     
     get '/crypto' do
       sign_in_required!
-      @rclass = 'col-sm-8'
       erb :crypto
     end
             

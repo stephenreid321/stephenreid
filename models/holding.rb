@@ -18,6 +18,7 @@ class Holding
         
   def self.admin_fields
     {
+      :description => :text,
       :currency => :text,
       :amount => :number
     }
