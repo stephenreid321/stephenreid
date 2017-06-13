@@ -58,6 +58,12 @@ module ActivateApp
     get '/gh' do
       redirect 'https://www.google.co.uk/maps/place/Greenhouse/@51.5529027,-0.0879017,15z/data=!4m2!3m1!1s0x0:0x9850520d11f22809'
     end
+    
+    get '/crypto' do
+      sign_in_required!
+      @rclass = 'col-sm-8'
+      erb :crypto
+    end
             
     get '/:slug' do
       if @fragment = Fragment.find_by(slug: params[:slug], page: true)

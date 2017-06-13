@@ -1,0 +1,33 @@
+
+<h1>Holdings</h1>
+
+<table class="table">
+	<thead>
+		<th>Currency</th>
+		<th>£/unit</th>
+		<th>Units</th>
+		<th>Valuation</th>
+	</thead>
+	<% Holding.each { |h| %>
+		<tr>
+			<td>
+				<%=h.currency%>
+			</td>
+			<td>
+				£<%=h.gbp_per_unit  %>
+			</td>
+			<td>
+				<%=h.amount%>
+			</td>
+			<td>
+				£<%=h.valuation %>
+			</td>
+		</tr>
+	<% } %>
+	<tr>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th>£<%=Holding.all.map(&:valuation).sum%></th>
+	</tr>
+</table>
