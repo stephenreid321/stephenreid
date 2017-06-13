@@ -2,6 +2,7 @@ class Holding
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :description, :type => String
   field :currency, :type => String
   field :amount, :type => Float
   

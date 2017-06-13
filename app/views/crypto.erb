@@ -3,6 +3,7 @@
 
 <table class="table">
 	<thead>
+		<th>Description</th>
 		<th>Currency</th>
 		<th>£/unit</th>
 		<th>Units</th>
@@ -10,6 +11,9 @@
 	</thead>
 	<% Holding.each { |h| %>
 		<tr>
+			<td>
+				<%=h.description%>
+			</td>		
 			<td>
 				<%=h.currency%>
 			</td>
@@ -25,6 +29,7 @@
 		</tr>
 	<% } %>
 	<tr>
+		<th></th>
 		<th></th>
 		<th></th>
 		<th></th>
