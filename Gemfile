@@ -11,10 +11,11 @@ gem 'activate-tools', github: 'wordsandwriting/activate-tools'
 gem 'activate-admin', github: 'wordsandwriting/activate-admin'
 
 # Data storage
+gem 'activemodel', '~>4.2'
 gem 'mongoid'
 gem 'dragonfly'
 gem 'dragonfly-s3_data_store'
-gem 'activemodel', '~>4.2'
+gem 'delayed_job_mongoid', '2.3.0'
 
 # Authentication
 gem 'bcrypt'
