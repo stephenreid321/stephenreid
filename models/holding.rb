@@ -15,6 +15,10 @@ class Holding
     Mechanize.new.get("https://www.coinmath.com/bitcoin/usd").search('.price.number-with-commas')[0].text.to_f
   end  
   
+  def self.gbp_per_usd
+    JSON.parse(Mechanize.new.get('https://api.fixer.io/latest?base=USD&symbols=GBP').body)['rates']['GBP']
+  end
+  
   def usd_per_unit
     btc_per_unit * Holding.usd_per_btc
   end

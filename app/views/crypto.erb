@@ -35,4 +35,11 @@
 		<th></th>
 		<th><%=number_to_currency Holding.all.map(&:valuation).sum, unit: '$', precision: 0 %></th>
 	</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
+	</tr>  
 </table>
