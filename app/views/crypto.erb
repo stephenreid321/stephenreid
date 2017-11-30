@@ -5,7 +5,7 @@
 	<thead>
 		<th>Description</th>
 		<th>Currency</th>
-		<th>£/unit</th>
+		<th>$/unit</th>
 		<th>Units</th>
 		<th>Valuation</th>
 	</thead>
@@ -18,13 +18,13 @@
 				<%=h.currency%>
 			</td>
 			<td>
-				£<%=h.gbp_per_unit  %>
+				$<%=h.usd_per_unit  %>
 			</td>
 			<td>
 				<%=h.amount%>
 			</td>
 			<td>
-				<%=number_to_currency h.valuation, unit: '£', precision: 0 %>
+				<%=number_to_currency h.valuation, unit: '$', precision: 0 %>
 			</td>
 		</tr>
 	<% } %>
@@ -33,6 +33,6 @@
 		<th></th>
 		<th></th>
 		<th></th>
-		<th><%=number_to_currency Holding.all.map(&:valuation).sum, unit: '£', precision: 0 %></th>
+		<th><%=number_to_currency Holding.all.map(&:valuation).sum, unit: '$', precision: 0 %></th>
 	</tr>
 </table>
