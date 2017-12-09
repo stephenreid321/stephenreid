@@ -7,11 +7,8 @@ class Holding
   field :units, :type => Float
     
   def btc_per_unit
-    @btc_per_unit ||= if currency == 'iota'
-      Mechanize.new.get("https://www.coingecko.com/en/coins/#{currency}").search('[data-price-btc]').attr('data-price-btc').value.to_f
-    else
-      Mechanize.new.get("https://www.coinmath.com/#{currency}/btc").search('.price.number-with-commas')[0].text.to_f
-    end    
+    @btc_per_unit ||= Mechanize.new.get("https://coinmarketcap.com/currencies/#{currency}/").search('.text-gray.details-text-medium')[0].text.split(' ').first.to_f
+    # @btc_per_unit ||= Mechanize.new.get("https://www.coinmath.com/#{currency}/btc").search('.price.number-with-commas')[0].text.to_f
   end
   
   def self.usd_per_btc
