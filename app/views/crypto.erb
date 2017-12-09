@@ -5,8 +5,8 @@
 	<thead>
 		<th>Wallet</th>
 		<th>Currency</th>
-		<th>$/unit</th>
 		<th>Units</th>
+		<th>$/unit</th>    
 		<th>Valuation</th>
 	</thead>
 	<% Holding.all.sort_by { |h| -h.valuation }.each { |h| %>
