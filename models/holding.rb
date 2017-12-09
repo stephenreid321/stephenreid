@@ -7,7 +7,7 @@ class Holding
   field :amount, :type => Float
     
   def btc_per_unit    
-    return 1 if currency == 'btc'
+    return 1 if currency == 'bitcoin'
     Mechanize.new.get("https://www.coingecko.com/en/coins/#{currency}").search('[data-price-btc]').attr('data-price-btc').value.to_f
   end
   
