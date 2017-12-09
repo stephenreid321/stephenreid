@@ -15,7 +15,7 @@ ActivateApp::App.controller :accounts do
   end
   
   post :forgot_password do
-    if @account = Account.find_by(email: /^#{Regexp.escape(params[:email])}$/)
+    if @account = Account.find_by(email: /^#{::Regexp.escape(params[:email])}$/)
       if @account.reset_password!        
         flash[:notice] = "A new password was sent to #{@account.email}"
       else

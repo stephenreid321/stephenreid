@@ -6,14 +6,16 @@ module ActivateApp
     helpers Activate::DatetimeHelpers
     helpers Activate::ParamHelpers
     helpers Activate::NavigationHelpers
+        
+    require 'sass/plugin/rack'
+    Sass::Plugin.options[:template_location] = Padrino.root('app', 'assets', 'stylesheets')
+    Sass::Plugin.options[:css_location] = Padrino.root('app', 'assets', 'stylesheets')
+    use Sass::Plugin::Rack      
             
     use Dragonfly::Middleware       
     use Airbrake::Rack::Middleware
     use OmniAuth::Builder do
       provider :account
-      Provider.registered.each { |provider|
-        provider provider.omniauth_name, ENV["#{provider.display_name.upcase}_KEY"], ENV["#{provider.display_name.upcase}_SECRET"]
-      }
     end 
     OmniAuth.config.on_failure = Proc.new { |env|
       OmniAuth::FailureEndpoint.new(env).redirect_to_failure

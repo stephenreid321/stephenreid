@@ -1,0 +1,103 @@
+/*
+Error: Invalid CSS after "...lor}: #{$value}": expected "{", was ";"
+        on line 4 of /Users/macbookpro/htdocs/stephenreid/app/assets/stylesheets/bootstrap/_root.scss
+        from line 11 of /Users/macbookpro/htdocs/stephenreid/app/assets/stylesheets/bootstrap/bootstrap.scss
+
+1: :root {
+2:   // Custom variable values only support SassScript inside `#{}`.
+3:   @each $color, $value in $colors {
+4:     --#{$color}: #{$value};
+5:   }
+6: 
+7:   @each $color, $value in $theme-colors {
+8:     --#{$color}: #{$value};
+9:   }
+
+Backtrace:
+/Users/macbookpro/htdocs/stephenreid/app/assets/stylesheets/bootstrap/_root.scss:4
+/Users/macbookpro/htdocs/stephenreid/app/assets/stylesheets/bootstrap/bootstrap.scss:11
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:1207:in `expected'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:1137:in `expected'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:1132:in `tok!'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:665:in `block'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:735:in `declaration_or_ruleset'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:685:in `block_child'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:674:in `block_contents'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:666:in `block'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:307:in `each_directive'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:222:in `special_directive'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:197:in `directive'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:685:in `block_child'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:674:in `block_contents'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:666:in `block'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:658:in `ruleset'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:684:in `block_child'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:674:in `block_contents'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:125:in `stylesheet'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/scss/parser.rb:41:in `parse'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/engine.rb:406:in `_to_tree'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/engine.rb:312:in `to_tree'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:326:in `block in visit_import'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/stack.rb:88:in `block in with_import'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/stack.rb:115:in `with_frame'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/stack.rb:88:in `with_import'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:325:in `visit_import'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/stack.rb:79:in `block in with_base'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/stack.rb:115:in `with_frame'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/stack.rb:79:in `with_base'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `visit'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:159:in `visit'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/plugin.rb:82:in `update_stylesheets'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/plugin.rb:54:in `check_for_updates'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sass-3.4.23/lib/sass/plugin/rack.rb:51:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-protection-1.5.3/lib/rack/protection/xss_header.rb:18:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-protection-1.5.3/lib/rack/protection/base.rb:49:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-protection-1.5.3/lib/rack/protection/base.rb:49:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-protection-1.5.3/lib/rack/protection/json_csrf.rb:18:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-protection-1.5.3/lib/rack/protection/base.rb:49:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-protection-1.5.3/lib/rack/protection/base.rb:49:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-protection-1.5.3/lib/rack/protection/frame_options.rb:31:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-1.6.5/lib/rack/head.rb:13:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-1.6.5/lib/rack/methodoverride.rb:22:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/padrino-core-0.13.3.2/lib/padrino-core/reloader/rack.rb:25:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/padrino-core-0.13.3.2/lib/padrino-core/logger.rb:480:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sinatra-1.4.8/lib/sinatra/show_exceptions.rb:25:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-1.6.5/lib/rack/session/abstract/id.rb:225:in `context'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/rack-1.6.5/lib/rack/session/abstract/id.rb:220:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sinatra-1.4.8/lib/sinatra/base.rb:2013:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sinatra-1.4.8/lib/sinatra/base.rb:1487:in `block in call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sinatra-1.4.8/lib/sinatra/base.rb:1787:in `synchronize'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/sinatra-1.4.8/lib/sinatra/base.rb:1487:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/padrino-core-0.13.3.2/lib/padrino-core/router.rb:84:in `block in call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/padrino-core-0.13.3.2/lib/padrino-core/router.rb:75:in `each'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/padrino-core-0.13.3.2/lib/padrino-core/router.rb:75:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/puma-3.8.2/lib/puma/configuration.rb:224:in `call'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/puma-3.8.2/lib/puma/server.rb:600:in `handle_request'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/puma-3.8.2/lib/puma/server.rb:435:in `process_client'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/puma-3.8.2/lib/puma/server.rb:299:in `block in run'
+/Users/macbookpro/.rvm/gems/ruby-2.4.2/gems/puma-3.8.2/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...lor}: #{$value}\": expected \"{\", was \";\"\A         on line 4 of /Users/macbookpro/htdocs/stephenreid/app/assets/stylesheets/bootstrap/_root.scss\A         from line 11 of /Users/macbookpro/htdocs/stephenreid/app/assets/stylesheets/bootstrap/bootstrap.scss\A \A 1: :root {\A 2:   // Custom variable values only support SassScript inside `#{}`.\A 3:   @each $color, $value in $colors {\A 4:     --#{$color}: #{$value};\A 5:   }\A 6: \A 7:   @each $color, $value in $theme-colors {\A 8:     --#{$color}: #{$value};\A 9:   }"; }

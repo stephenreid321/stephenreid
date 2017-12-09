@@ -32,7 +32,5 @@ class Provider
 
 end
 
-Provider.new('Twitter', image: ->(hash){ hash['info']['image'].gsub(/_normal/,'') })
-Provider.new('Facebook', image: ->(hash){ "#{hash['info']['image']}?width=200&height=200" })
+Provider.new('Facebook', icon: 'facebook-square', nickname: ->(hash) { hash['info']['name'] }, image: ->(hash){ hash['info']['image'] + '?type=large' }, profile_url: ->(hash){ "http://facebook.com/#{hash['uid']}"})
 Provider.new('Google', omniauth_name: 'google_oauth2', icon: 'google-plus', nickname: ->(hash) { hash['info']['name'] }, profile_url: ->(hash){ "http://plus.google.com/#{hash['uid']}"})
-Provider.new('LinkedIn', nickname: ->(hash) { hash['info']['name'] }, profile_url: ->(hash){ hash['info']['urls']['public_profile'] })
