@@ -9,7 +9,7 @@
 		<th>Units</th>
 		<th>Valuation</th>
 	</thead>
-	<% Holding.sort_by { |h| -h.valuation }.each { |h| %>
+	<% Holding.all.sort_by { |h| -h.valuation }.each { |h| %>
 		<tr>
 			<td>
 				<%=h.wallet%>
