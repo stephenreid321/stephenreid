@@ -35,4 +35,3 @@ gem 'mail'
 gem 'mechanize'
 
 gem 'redcarpet'
-
