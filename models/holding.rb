@@ -8,7 +8,11 @@ class Holding
     
   def btc_per_unit    
     return 1 if currency == 'bitcoin'
-    Mechanize.new.get("https://www.coinmath.com/#{currency}/btc").search('.price.number-with-commas')[0].text.to_f
+    begin
+      Mechanize.new.get("https://www.coinmath.com/#{currency}/btc").search('.price.number-with-commas')[0].text.to_f
+    rescue
+      0
+    end
   end
   
   def self.usd_per_btc
