@@ -18,11 +18,11 @@
 				<%=h.currency%>
 			</td>
 			<td>
-				$<%=h.usd_per_unit  %>
+				<%=h.units%>
 			</td>
 			<td>
-				<%=h.amount%>
-			</td>
+				$<%=h.usd_per_unit  %>
+			</td>      
 			<td>
 				<%=number_to_currency h.valuation, unit: '$', precision: 0 %>
 			</td>

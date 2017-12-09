@@ -4,7 +4,7 @@ class Holding
 
   field :wallet, :type => String
   field :currency, :type => String
-  field :amount, :type => Float
+  field :units, :type => Float
     
   def btc_per_unit    
     return 1 if currency == 'bitcoin'
@@ -24,16 +24,16 @@ class Holding
   end
   
   def valuation
-    (amount*usd_per_unit).round
+    (units*usd_per_unit).round
   end
   
-  validates_presence_of :wallet, :currency, :amount
+  validates_presence_of :wallet, :currency, :units
         
   def self.admin_fields
     {
       :wallet => :text,
       :currency => :text,
-      :amount => :number
+      :units => :number
     }
   end
     
