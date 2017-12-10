@@ -20,7 +20,7 @@
 				<%=h.units%>
 			</td>
 			<td>
-				$<%=h.usd_per_unit  %>
+				<%=number_to_currency h.usd_per_unit, unit: '$', precision: 2  %>
 			</td>      
 			<td>
 				<%=number_to_currency h.valuation, unit: '$', precision: 0 %>
