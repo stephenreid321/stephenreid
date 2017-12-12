@@ -68,7 +68,7 @@ labels = []
       data: {
         datasets: [{
             data: <%=data%>,
-            backgroundColor: [
+            backgroundColor: <%= [
               '#4dc9f6',
               '#f67019',
               '#f53794',
@@ -78,7 +78,7 @@ labels = []
               '#00a950',
               '#58595b',
               '#8549ba'
-            ]
+            ].shuffle %>
           }],
         labels: <%=labels%>
       },
