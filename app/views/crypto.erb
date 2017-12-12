@@ -32,7 +32,7 @@
 				<%=number_to_currency h.valuation*Holding.gbp_per_usd, unit: '£', precision: 0 %>
 			</td>     
       <td>
-        <%= ((h.valuation/s)*100).round %>%
+        <%= ((h.valuation.to_f/s)*100).round %>%
       </td>
 		</tr>
 	<% } %>
