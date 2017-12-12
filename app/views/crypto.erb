@@ -1,4 +1,6 @@
 
+<% s = Holding.all.map(&:valuation).sum %>
+
 <table class="table mt-3">
 	<thead>
 		<th>Wallet</th>
@@ -7,6 +9,7 @@
 		<th>$/unit</th>    
 		<th>$</th>
     <th>£</th>
+    <th>%</th>
 	</thead>
 	<% Holding.all.sort_by { |h| -h.valuation }.each { |h| %>
 		<tr>
@@ -27,7 +30,10 @@
 			</td>
 			<td>
 				<%=number_to_currency h.valuation*Holding.gbp_per_usd, unit: '£', precision: 0 %>
-			</td>      
+			</td>     
+      <td>
+        <%= ((h.valuation/sum)*100).round %>%
+      </td>
 		</tr>
 	<% } %>
 	<tr>
@@ -35,7 +41,7 @@
 		<th></th>
 		<th></th>
 		<th></th>
-		<th><%=number_to_currency Holding.all.map(&:valuation).sum, unit: '$', precision: 0 %></th>
+		<th><%=number_to_currency s, unit: '$', precision: 0 %></th>
     <th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
 	</tr>  
 </table>
