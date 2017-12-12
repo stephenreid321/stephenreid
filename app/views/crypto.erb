@@ -9,10 +9,12 @@ labels = []
   <thead>
   <th>Wallet</th>
   <th>Currency</th>
-  <th>Units</th>
   <th>$/unit</th>    
-  <th>$</th>
-  <th>£</th>
+  <% if current_account %>
+    <th>Units</th>  
+    <th>$</th>
+    <th>£</th>
+  <% end %>  
   <th>%</th>
 </thead>
 <% Holding.all.sort_by { |h| -h.valuation }.each { |h| pc = ((h.valuation.to_f/s)*100).round; data << pc; labels << "#{h.wallet}/#{h.currency}" %>
@@ -24,17 +26,19 @@ labels = []
       <%=h.currency%>
     </td>
     <td>
-      <%=h.units%>
-    </td>
-    <td>
       <%=number_to_currency h.usd_per_unit, unit: '$', precision: 2  %>
     </td>      
-    <td>
-      <%= number_to_currency h.valuation, unit: '$', precision: 0 %>
-    </td>
-    <td>
-      <%=number_to_currency h.valuation*Holding.gbp_per_usd, unit: '£', precision: 0 %>
-    </td>     
+    <% if current_account %>
+      <td>
+        <%=h.units%>
+      </td>    
+      <td>
+        <%= number_to_currency h.valuation, unit: '$', precision: 0 %>
+      </td>
+      <td>
+        <%=number_to_currency h.valuation*Holding.gbp_per_usd, unit: '£', precision: 0 %>
+      </td>   
+    <% end %>
     <td>
       <%= pc %>%
     </td>
@@ -44,9 +48,11 @@ labels = []
   <th></th>
   <th></th>
   <th></th>
-  <th></th>
-  <th><%=number_to_currency s, unit: '$', precision: 0 %></th>
-  <th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
+  <% if current_account %>
+    <th></th>
+    <th><%=number_to_currency s, unit: '$', precision: 0 %></th>
+    <th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
+  <% end %>
   <th></th>
 </tr>  
 </table>
