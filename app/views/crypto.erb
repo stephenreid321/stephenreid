@@ -8,10 +8,10 @@ labels = []
 <table class="table mt-3">
   <thead>
   <th>Wallet</th>
-  <th>Currency</th>
-  <th>$/unit</th>    
+  <th>Currency</th> 
   <% if current_account %>
     <th>Units</th>  
+    <th>$/unit</th>   
     <th>$</th>
     <th>£</th>
   <% end %>  
@@ -25,13 +25,13 @@ labels = []
     <td>
       <%=h.currency%>
     </td>
-    <td>
-      <%=number_to_currency h.usd_per_unit, unit: '$', precision: 2  %>
-    </td>      
     <% if current_account %>
       <td>
         <%=h.units%>
       </td>    
+      <td>
+        <%=number_to_currency h.usd_per_unit, unit: '$', precision: 2  %>
+      </td>            
       <td>
         <%= number_to_currency h.valuation, unit: '$', precision: 0 %>
       </td>
@@ -47,8 +47,8 @@ labels = []
 <tr>
   <th></th>
   <th></th>
-  <th></th>
   <% if current_account %>
+    <th></th>
     <th></th>
     <th><%=number_to_currency s, unit: '$', precision: 0 %></th>
     <th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
