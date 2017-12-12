@@ -5,90 +5,82 @@ data = []
 labels = []
 %>
 
-<div class="row mt-3">
+<table class="table mt-3">
+  <thead>
+  <th>Wallet</th>
+  <th>Currency</th>
+  <th>Units</th>
+  <th>$/unit</th>    
+  <th>$</th>
+  <th>£</th>
+  <th>%</th>
+</thead>
+<% Holding.all.sort_by { |h| -h.valuation }.each { |h| pc = ((h.valuation.to_f/s)*100).round; data << "#{pc}%"; labels << "#{h.wallet}/#{h.currency}" %>
+  <tr>
+    <td>
+      <%=h.wallet%>
+    </td>		
+    <td>
+      <%=h.currency%>
+    </td>
+    <td>
+      <%=h.units%>
+    </td>
+    <td>
+      <%=number_to_currency h.usd_per_unit, unit: '$', precision: 2  %>
+    </td>      
+    <td>
+      <%= number_to_currency h.valuation, unit: '$', precision: 0 %>
+    </td>
+    <td>
+      <%=number_to_currency h.valuation*Holding.gbp_per_usd, unit: '£', precision: 0 %>
+    </td>     
+    <td>
+      <%= pc %>%
+    </td>
+  </tr>
+<% } %>
+<tr>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th><%=number_to_currency s, unit: '$', precision: 0 %></th>
+  <th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
+  <th></th>
+</tr>  
+</table>
 
-  <div class="col-md-6">
-    <table class="table">
-      <thead>
-      <th>Wallet</th>
-      <th>Currency</th>
-      <th>Units</th>
-      <th>$/unit</th>    
-      <th>$</th>
-      <th>£</th>
-      <th>%</th>
-      </thead>
-      <% Holding.all.sort_by { |h| -h.valuation }.each { |h| pc = ((h.valuation.to_f/s)*100).round; data << "#{pc}%"; labels << "#{h.wallet}/#{h.currency}" %>
-        <tr>
-          <td>
-            <%=h.wallet%>
-          </td>		
-          <td>
-            <%=h.currency%>
-          </td>
-          <td>
-            <%=h.units%>
-          </td>
-          <td>
-            <%=number_to_currency h.usd_per_unit, unit: '$', precision: 2  %>
-          </td>      
-          <td>
-            <%= number_to_currency h.valuation, unit: '$', precision: 0 %>
-          </td>
-          <td>
-            <%=number_to_currency h.valuation*Holding.gbp_per_usd, unit: '£', precision: 0 %>
-          </td>     
-          <td>
-            <%= pc %>%
-          </td>
-        </tr>
-      <% } %>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th><%=number_to_currency s, unit: '$', precision: 0 %></th>
-        <th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
-        <th></th>
-      </tr>  
-    </table>
+<div class="my-3">
+  <canvas id="canvas"></canvas>
+  <script>
 
-  </div>
-  <div class="col-md-6">
+    colors = []
 
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+            data: <%=data%>,
+            backgroundColor: [
+              '#e647a6', '#54e645', '#47a6e6', '#8747e6',
+              '#e647a6', '#e6d647', '#54e645', '#47a6e6', '#8747e6',
+              '#e647a6', '#e6d647', '#54e645', '#47a6e6', '#8747e6'
+            ]
+          }],
+        labels: <%=labels%>
+      },
+      options: {
+        responsive: true
+      }
+    };
 
-    <canvas id="canvas"></canvas>
-    <script>
+    window.onload = function () {
+      var ctx = document.getElementById("canvas").getContext("2d");
+      window.myPie = new Chart(ctx, config);
+    };
 
-      colors = []
-
-      var config = {
-        type: 'pie',
-        data: {
-          datasets: [{
-              data: <%=data%>,
-              backgroundColor: [
-                '#e647a6', '#54e645', '#47a6e6', '#8747e6',
-                '#e647a6', '#e6d647', '#54e645', '#47a6e6', '#8747e6',
-                '#e647a6', '#e6d647', '#54e645', '#47a6e6', '#8747e6'
-              ]
-            }],
-          labels: <%=labels%>
-        },
-        options: {
-          responsive: true
-        }
-      };
-
-      window.onload = function () {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myPie = new Chart(ctx, config);
-      };
-
-    </script>
-
-
-  </div>
+  </script>
 </div>
+
 
