@@ -13,6 +13,7 @@
       'codemirror/5.0.0' => 'codemirror.min.css theme/monokai.min.css codemirror.min.js mode/xml/xml.min.js',
       'summernote/0.6.1' => 'summernote.min.css summernote.min.js',
       'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',      
+      'Chart.js/2.7.0' => 'Chart.bundle.min.js',
       }.each { |k,v| %>    
       <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
         <% case f.split('.').last.to_sym; when :js %>
@@ -57,12 +58,12 @@
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=619967114806800";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));</script>    
-    
+
     <div class="container">
-    
+
       <%= partial :alert %>  
       <%= yield %>
-    
+
     </div>
 
   </body>
