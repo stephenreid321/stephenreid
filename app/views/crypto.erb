@@ -32,7 +32,7 @@
 				<%=number_to_currency h.valuation*Holding.gbp_per_usd, unit: '£', precision: 0 %>
 			</td>     
       <td>
-        <%= ((h.valuation/sum)*100).round %>%
+        <%= ((h.valuation/s)*100).round %>%
       </td>
 		</tr>
 	<% } %>
@@ -43,5 +43,6 @@
 		<th></th>
 		<th><%=number_to_currency s, unit: '$', precision: 0 %></th>
     <th><%=number_to_currency Holding.all.map(&:valuation).sum*Holding.gbp_per_usd, unit: '£', precision: 0 %></th>
+    <th></th>
 	</tr>  
 </table>
