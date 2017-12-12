@@ -15,7 +15,7 @@ labels = []
   <th>£</th>
   <th>%</th>
 </thead>
-<% Holding.all.sort_by { |h| -h.valuation }.each { |h| pc = ((h.valuation.to_f/s)*100).round; data << "#{pc}%"; labels << "#{h.wallet}/#{h.currency}" %>
+<% Holding.all.sort_by { |h| -h.valuation }.each { |h| pc = ((h.valuation.to_f/s)*100).round; data << pc; labels << "#{h.wallet}/#{h.currency}" %>
   <tr>
     <td>
       <%=h.wallet%>
@@ -63,15 +63,35 @@ labels = []
         datasets: [{
             data: <%=data%>,
             backgroundColor: [
-              '#e647a6', '#54e645', '#47a6e6', '#8747e6',
-              '#e647a6', '#e6d647', '#54e645', '#47a6e6', '#8747e6',
-              '#e647a6', '#e6d647', '#54e645', '#47a6e6', '#8747e6'
+              '#4dc9f6',
+              '#f67019',
+              '#f53794',
+              '#537bc4',
+              '#acc236',
+              '#166a8f',
+              '#00a950',
+              '#58595b',
+              '#8549ba'
             ]
           }],
         labels: <%=labels%>
       },
       options: {
-        responsive: true
+        responsive: true,
+        legend: {
+          display: true
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function (tooltipItem, data) {
+              var label = data.labels[tooltipItem.index];
+              var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              return label + ': ' + datasetLabel + '%';
+            }
+          }
+        }
       }
     };
 
