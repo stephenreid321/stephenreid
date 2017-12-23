@@ -62,8 +62,7 @@ module ActivateApp
     end
     
     get '/crypto' do
-      @title = 'Crypto holdings · Stephen Reid'      
-      erb :crypto
+      redirect 'https://www.cryptocompare.com/portfolio-public/?id=204788'
     end
             
     get '/:slug' do
