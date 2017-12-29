@@ -26,7 +26,7 @@ class Place
   def self.categories
     [
       "Places I've learnt and trained",
-      "Communities that have inspired me",
+      "Communities I've been part of",
       "Landscapes that have inspired me"
     ]
   end
