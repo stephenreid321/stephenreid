@@ -74,13 +74,15 @@
       </script>
       <div class="row no-gutters">
         <% Place.where(category: v).each { |place| %>     
-          <div class="col-md-4 mb-3 mr-md-3">
-            <a href="<%=place.website%>" class="place" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
-              <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
-              <h3 style="position: absolute; bottom: 0; left: 10px; color: white">
-                <%=place.name%>
-              </h3>
-            </a>
+          <div class="col-md-4 mb-3">
+            <div class="mr-md-3">
+              <a href="<%=place.website%>" class="place" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
+                <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
+                <h3 style="position: absolute; bottom: 0; left: 10px; color: white">
+                  <%=place.name%>
+                </h3>
+              </a>
+            </div>
           </div>
         <% } %>
       </div>
