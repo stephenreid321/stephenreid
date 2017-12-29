@@ -6,6 +6,7 @@ class Place
   field :name, :type => String
   field :website, :type => String  
   field :image_uid, :type => String
+  field :category, :type => String
   
   # Dragonfly
   dragonfly_accessor :image
@@ -21,10 +22,19 @@ class Place
   
   validates_presence_of :name
   validates_uniqueness_of :name
+  
+  def self.categories
+    [
+      "Places I've learnt and trained",
+      "Communities that have inspired me",
+      "Landscapes that have inspired me"
+    ]
+  end
         
   def self.admin_fields
     {
       :name => :text,
+      :category => :select,
       :website => :url,
       :image_url => :text,
       :image => :image
