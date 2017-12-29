@@ -27,7 +27,8 @@ class Place
     [
       "Places I've learnt and trained",
       "Communities I've been part of",
-      "Landscapes that have inspired me"
+      "Landscapes that have inspired me",
+      "Favourite shops and restaurants"
     ]
   end
         
