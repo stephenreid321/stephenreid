@@ -60,8 +60,8 @@
       a tool for organising co-created gatherings.
     </p>
 
-    <% Place.categories.each { |category| %>    
-      <h2><%=category%></h2>
+    <% Place.categories.each { |k,v| %>    
+      <h2><%=k%></h2>
 
       <script>
         $(function () {
@@ -73,7 +73,7 @@
         })
       </script>
       <div class="row no-gutters">
-        <% Place.where(category: category).each { |place| %>     
+        <% Place.where(category: v).each { |place| %>     
           <div class="col-md-4 mb-3">
             <a href="<%=place.website%>" class="place mr-md-3" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
               <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>

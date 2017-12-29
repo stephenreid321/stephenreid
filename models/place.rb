@@ -24,12 +24,12 @@ class Place
   validates_uniqueness_of :name
   
   def self.categories
-    [
-      "Places I've learnt and trained",
-      "Communities I've been part of",
-      "Landscapes that have inspired me",
-      "Favourite shops and restaurants"
-    ]
+    {
+      "Places I've learnt and trained" => 'learning',
+      "Communities I've been part of" => 'communities',
+      "Landscapes that have inspired me" => 'landscapes',
+      "Favourite shops and restaurants" => 'shops'
+    }
   end
         
   def self.admin_fields
