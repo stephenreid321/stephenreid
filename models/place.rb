@@ -1,4 +1,4 @@
-class Highlight
+class Place
   include Mongoid::Document
   include Mongoid::Timestamps
   extend Dragonfly::Model    
