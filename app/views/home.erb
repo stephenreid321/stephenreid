@@ -60,6 +60,28 @@
       a tool for organising co-created gatherings.
     </p>
 
+    <h2>Places I've learnt and trained</h2>
+
+    <script>
+      $(function() {
+        $('.place').hover(function() { $('.bgo',this).hide() }, function() { $('.bgo',this).show() })
+      })
+    </script>
+    <div class="row no-gutters">
+      <% 10.times do %>
+        <% Place.each { |place| %>     
+          <div class="col-md-4 mb-3">
+            <a href="<%=place.website%>" class="place mr-md-3" style="display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
+              <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
+              <h3 style="position: absolute; bottom: 0; left: 10px; color: white">
+                <%=place.name%>
+              </h3>
+            </a>
+          </div>
+        <% } %>
+      <% end %> 
+    </div>
+
   </div>
 
 </div>
