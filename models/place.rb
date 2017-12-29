@@ -25,10 +25,11 @@ class Place
   
   def self.categories
     {
-      "Places I've learnt and trained" => 'learning',
-      "Communities I've been part of" => 'communities',
+      "Key places and processes" => 'learning',
+      "Communities I've spent time at" => 'communities',
       "Landscapes that have inspired me" => 'landscapes',
-      "Favourite shops and restaurants" => 'shops'
+      "Favourite shops and restaurants" => 'shops',
+      "Other great places and processes" => 'other'
     }
   end
         
