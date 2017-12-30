@@ -60,34 +60,52 @@
       a tool for organising co-created gatherings.
     </p>
 
-    <% Place.categories.each { |k,v| %>    
-      <h2><%=k%></h2>
 
-      <script>
-        $(function () {
-          $('.place').hover(function () {
-            $('.bgo', this).hide()
-          }, function () {
-            $('.bgo', this).show()
-          })
+    <script>
+      $(function () {
+        $('.place').hover(function () {
+          $('.bgo', this).hide()
+        }, function () {
+          $('.bgo', this).show()
         })
-      </script>
-      <div class="row no-gutters">
-        <% Place.where(category: v).each { |place| %>     
-          <div class="col-md-4 mb-3">
-            <div class="mr-md-3">
-              <a href="<%=place.website%>" class="place" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
-                <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
-                <h3 style="position: absolute; bottom: 0; color: white; padding: 0 1rem">
-                  <%=place.name%>
-                </h3>
+      })
+    </script>    
+
+    <div id="accordion" role="tablist">
+
+      <% Place.categories.each { |k,v| %>    
+
+        <div class="card mb-1">
+          <div class="card-header" role="tab" id="heading-<%=v%>">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" href="#collapse-<%=v%>" role="button">
+                <%=k%>
               </a>
+            </h5>
+          </div>      
+
+          <div id="collapse-<%=v%>" class="collapse" role="tabpanel" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row no-gutters">
+                <% Place.where(category: v).each { |place| %>     
+                  <div class="col-md-4 mb-3">
+                    <div class="mr-md-3">
+                      <a href="<%=place.website%>" class="place" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
+                        <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
+                        <h3 style="position: absolute; bottom: 0; color: white; padding: 0 1rem">
+                          <%=place.name%>
+                        </h3>
+                      </a>
+                    </div>
+                  </div>
+                <% } %>
+              </div>
             </div>
           </div>
-        <% } %>
-      </div>
+        </div>          
 
-    <% } %>
+      <% } %>
+    </div>
 
   </div>
 
