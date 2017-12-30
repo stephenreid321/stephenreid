@@ -40,8 +40,8 @@ module ActivateApp
       fix_params!
       @_params = params; def params; @_params; end # force controllers to inherit the fixed params
       @title = 'Stephen Reid'
-      @og_desc = 'Director of the Psychedelic Society and freelance digital creative'
-      @og_image = "http://#{ENV['DOMAIN']}/images/speaking.jpg"
+      @og_desc = ''
+      @og_image = "http://#{ENV['DOMAIN']}/images/bunny.jpg"
     end        
                 
     error do
