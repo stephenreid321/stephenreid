@@ -94,7 +94,7 @@
           <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'learning' %>" role="tabpanel" data-parent="#accordion">
             <div class="card-body pb-0">
               <div class="row no-gutters">
-                <% Place.where(category: v).each { |place| %>     
+                <% Place.where(category: v).shuffle.each { |place| %>     
                   <div class="col-md-4 mb-3">
                     <div class="mr-md-3">
                       <a href="<%=place.website%>" class="place" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
