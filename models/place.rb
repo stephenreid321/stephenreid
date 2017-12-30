@@ -25,6 +25,7 @@ class Place
   
   def self.categories
     {
+      "Current affiliations" => 'current',
       "Key places and processes" => 'learning',
       "Academic study" => 'academic',
       "Organisations I've worked for" => 'work',      
