@@ -1,6 +1,9 @@
 <a href="<%=place.website%>" class="place" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
   <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
-  <h3 style="position: absolute; bottom: 0; color: white; padding: 0 1rem">
-    <%=place.name%>
-  </h3>
+  <div style="position: absolute; bottom: 0; padding: 0 1rem">
+    <h3 style="color: white;" class="mb-0"><%=place.name%></h3>
+    <% if @view == 'map' %>
+      <p style="color: white; font-size: 0.9rem"><%=Place.categories.invert[place.category]%></p>
+    <% end %>
+  </div>
 </a>
