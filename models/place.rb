@@ -27,11 +27,11 @@ class Place
     {
       "Key places and processes" => 'learning',
       "Academic study" => 'academic',
+      "Organisations I've worked for" => 'work',      
       "Communities I've spent time with" => 'communities',
       "Landscapes that have inspired me" => 'landscapes',
       "Favourite shops and restaurants" => 'shops',
       "Other great places and processes" => 'other',
-      "Organisations I've worked with" => 'work',
       "Plans for the future" => 'upcoming',
     }
   end
