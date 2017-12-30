@@ -8,6 +8,7 @@ class Place
   field :image_uid, :type => String
   field :category, :type => String
   field :notes, :type => String
+  field :coordinates, :type => Array
   
   # Dragonfly
   dragonfly_accessor :image
@@ -45,7 +46,8 @@ class Place
       :category => :select,
       :website => :url,
       :image_url => :text,
-      :image => :image
+      :image => :image,
+      :coordinates => :geopicker
     }
   end
     
