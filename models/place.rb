@@ -30,7 +30,8 @@ class Place
       "Landscapes that have inspired me" => 'landscapes',
       "Favourite shops and restaurants" => 'shops',
       "Other great places and processes" => 'other',
-      "Plans for the future" => 'upcoming'
+      "Organisations I've worked with" => 'work',
+      "Plans for the future" => 'upcoming',
     }
   end
         
