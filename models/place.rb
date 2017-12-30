@@ -26,6 +26,7 @@ class Place
   def self.categories
     {
       "Key places and processes" => 'learning',
+      "Academic study" => 'academic',
       "Communities I've spent time with" => 'communities',
       "Landscapes that have inspired me" => 'landscapes',
       "Favourite shops and restaurants" => 'shops',
