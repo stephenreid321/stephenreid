@@ -94,7 +94,7 @@
             </h5>
           </div>      
 
-          <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'current' %>" role="tabpanel" data-parent="#accordion">
+          <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'learning' %>" role="tabpanel" data-parent="#accordion">
             <div class="card-body pb-0">
               <div class="row no-gutters">
                 <% Place.where(category: v).each { |place| %>     
