@@ -6354,4 +6354,7 @@ a.text-dark:focus, a.text-dark:hover {
 .invisible {
   visibility: hidden !important; }
 
+.badge-warning {
+  color: white; }
+
 /*# sourceMappingURL=app.css.map */
