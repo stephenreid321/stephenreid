@@ -58,7 +58,8 @@ module ActivateApp
     end
     
     get '/map' do
-      erb :map
+      @view = 'map'
+      erb :home
     end
     
     get '/gh' do

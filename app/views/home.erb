@@ -42,72 +42,87 @@
     <p class="lead" style="margin-top: 1em">
       Stephen Reid is the founder and director of the <a href="http://psychedelicsociety.org.uk">Psychedelic Society</a>, which was the first national-level Psychedelic Society worldwide,
       and the press officer for the <a href="http://breakingconvention.co.uk">Breaking Convention Conference on Psychedelic Consciousness</a>.
+      <a class="btn btn-primary btn-sm" href="javascript:;" onclick="$('#more').slideDown(); $(this).hide()">Read more</a>
     </p>
-    <p>
-      Previously, he served on the board of <a href="http://www.greenpeace.org.uk">Greenpeace UK</a>,        
-      and co-founded
-      the New Economics Foundation's <a href="http://www.neweconomyorganisers.org/">New Economy Organisers Network</a>
-      and direct action movements <a href="http://facebook.com/ukuncut">UK Uncut</a> and <a href="https://www.youtube.com/user/WeAreTheIntruders/videos">The Intruders</a>.
-      Stephen has Masters degrees in <a href="http://www2.physics.ox.ac.uk/">Physics</a> from the University of Oxford (MPhys, First Class &mdash; <a href="/reid_report_final.pdf">dissertation</a>) and <a href="http://www.bristol.ac.uk/bccs/">Complexity Sciences</a> (MRes, Distinction) from the University of Bristol.     
-    </p>
-    <p>
-      An accomplished full-stack developer with particular expertise in <a href="http://ruby-lang.org/">Ruby</a>, Stephen has completed freelance digital work for organisations including
-      38 Degrees,
-      the New Economics Foundation,
-      the Labour Party,
-      the Green Party,
-      350.org,
-      the Living Wage Foundation,
-      Positive Money,
-      SumOfUs,
-      City Hunt,
-      10:10
-      and Brandalism. 
-      He is the creator of several <a href="https://github.com/wordsandwriting">open source projects</a> including <a href="https://huddl.tech">Huddl</a>,
-      a tool for organising co-created gatherings.
-    </p>
+    <div id="more" style="display: none">
+      <p>
+        Previously, he served on the board of <a href="http://www.greenpeace.org.uk">Greenpeace UK</a>,        
+        and co-founded
+        the New Economics Foundation's <a href="http://www.neweconomyorganisers.org/">New Economy Organisers Network</a>
+        and direct action movements <a href="http://facebook.com/ukuncut">UK Uncut</a> and <a href="https://www.youtube.com/user/WeAreTheIntruders/videos">The Intruders</a>.
+        Stephen has Masters degrees in <a href="http://www2.physics.ox.ac.uk/">Physics</a> from the University of Oxford (MPhys, First Class &mdash; <a href="/reid_report_final.pdf">dissertation</a>) and <a href="http://www.bristol.ac.uk/bccs/">Complexity Sciences</a> (MRes, Distinction) from the University of Bristol.     
+      </p>
+      <p>
+        An accomplished full-stack developer with particular expertise in <a href="http://ruby-lang.org/">Ruby</a>, Stephen has completed freelance digital work for organisations including
+        38 Degrees,
+        the New Economics Foundation,
+        the Labour Party,
+        the Green Party,
+        350.org,
+        the Living Wage Foundation,
+        Positive Money,
+        SumOfUs,
+        City Hunt,
+        10:10
+        and Brandalism. 
+        He is the creator of several <a href="https://github.com/wordsandwriting">open source projects</a> including <a href="https://huddl.tech">Huddl</a>,
+        a tool for organising co-created gatherings.
+      </p>
+    </div>
 
+    <%= ul_nav [
+      ['List view', '/'],
+      ['Map view', '/map'],
+      ], ul_class: 'nav nav-tabs mb-3', li_class: 'nav-item', a_class: 'nav-link' %>
 
-    <script>
-      $(function () {
-        $('.place').hover(function () {
-          $('.bgo', this).hide()
-        }, function () {
-          $('.bgo', this).show()
+    <% if @view == 'map' %>
+
+      <%= partial :map %>
+
+    <% else %>
+
+      <script>
+        $(function () {
+          $('.place').hover(function () {
+            $('.bgo', this).hide()
+          }, function () {
+            $('.bgo', this).show()
+          })
         })
-      })
-    </script>    
+      </script>    
 
-    <div id="accordion" role="tablist">
+      <div id="accordion" role="tablist">
 
-      <% Place.categories.each { |k,v| %>    
+        <% Place.categories.each { |k,v| %>    
 
-        <div class="card mb-1">
-          <div class="card-header" role="tab" id="heading-<%=v%>">
-            <h5 class="mb-0">
-              <a data-toggle="collapse" href="#collapse-<%=v%>" role="button">
-                <%=k%>
-              </a>
-            </h5>
-          </div>      
+          <div class="card mb-1">
+            <div class="card-header" role="tab" id="heading-<%=v%>">
+              <h5 class="mb-0">
+                <a data-toggle="collapse" href="#collapse-<%=v%>" role="button">
+                  <%=k%>
+                </a>
+              </h5>
+            </div>      
 
-          <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'learning' %>" role="tabpanel" data-parent="#accordion">
-            <div class="card-body pb-0">
-              <div class="row no-gutters">
-                <% Place.where(category: v).shuffle.each { |place| %>     
-                  <div class="col-md-4 mb-3">
-                    <div class="mr-md-3">
-                      <%= partial :place, :object => place %>
+            <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'learning' %>" role="tabpanel" data-parent="#accordion">
+              <div class="card-body pb-0">
+                <div class="row no-gutters">
+                  <% Place.where(category: v).shuffle.each { |place| %>     
+                    <div class="col-md-4 mb-3">
+                      <div class="mr-md-3">
+                        <%= partial :place, :object => place %>
+                      </div>
                     </div>
-                  </div>
-                <% } %>
+                  <% } %>
+                </div>
               </div>
             </div>
-          </div>
-        </div>          
+          </div>          
 
-      <% } %>
-    </div>
+        <% } %>
+      </div>
+
+    <% end %>
 
   </div>
 
