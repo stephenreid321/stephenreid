@@ -41,7 +41,7 @@ class Place
   def self.admin_fields
     {
       :name => :text,
-      :notes => :textarea,
+      :notes => :text_area,
       :category => :select,
       :website => :url,
       :image_url => :text,
