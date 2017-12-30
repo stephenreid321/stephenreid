@@ -32,7 +32,7 @@ class Place
       "Communities I've spent time at" => 'communities',
       "Landscapes that have inspired me" => 'landscapes',
       "Favourite shops and restaurants" => 'shops',
-      "Other great places and processes" => 'other',
+      "Other places important to me" => 'other',
       "Plans for the future" => 'upcoming',
     }
   end
