@@ -10,6 +10,10 @@ class Place
   field :notes, :type => String
   field :coordinates, :type => Array
   
+  def lat; coordinates[1] if coordinates; end  
+  def lng; coordinates[0] if coordinates; end  
+  def self.marker_color; '3DA2E4'; end    
+  
   # Dragonfly
   dragonfly_accessor :image
   before_validation do

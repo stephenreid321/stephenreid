@@ -1,0 +1,59 @@
+<style>
+  div.infowindow { white-space: nowrap }
+</style>
+
+<script>
+  $(function () {
+  map = new google.maps.Map(document.getElementById("map-canvas"), {
+  mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          scaleControl: true,
+          streetViewControl: false,
+          maxZoom: 10,
+<% if @disable_scrollwheel %>
+    scrollwheel: false
+<% end %>
+  });
+  var bounds = new google.maps.LatLngBounds();
+  var points = []
+<% Place.all.select(&:coordinates).each { |point| f = (point.is_a?(Account) ? (1 + (rand-0.5)/5000) : 1) %>
+    points.push({
+    id: '<%=point.id%>',
+            lat: <%=f*point.lat%>,
+            lng: <%=f*point.lng%>,
+            color: '<%=point.class.marker_color%>',
+            name: "<%=js_escape_html(point.try(:name) || point.try(:title))%>",
+            image_url: '<%=point.image_url%>',
+            content_url: '/maps/<%=point.class.to_s%>/<%=point.id%>'
+    })
+<% } %>
+
+  var infowindow = new google.maps.InfoWindow();
+  var markers = []
+          for (i = 0; i < points.length; i++) {
+  var point = points[i];
+  var marker = new google.maps.Marker({
+  position: new google.maps.LatLng(point.lat, point.lng),
+          title: point.name,
+          icon: point.image_url,
+          content_url: point.content_url
+  });
+  bounds.extend(marker.getPosition());
+  markers.push(marker);
+  }
+
+  var markerClusterer = new MarkerClusterer(map, markers);
+<% if defined?(center) and defined?(zoom) %>
+    map.setCenter(new google.maps.LatLng(<%=center[0]%>, <%=center[1]%>))
+            map.setZoom(<%=zoom%>)
+<% else %>
+    map.fitBounds(bounds);
+<% end %>
+
+
+  }
+  );</script>
+
+<div style="position: relative">
+  <div style="width: 100%; height: 70vh" id="map-canvas"></div>
+</div>
