@@ -62,8 +62,8 @@ module ActivateApp
       erb :map 
     end
    
-    get '/diet' do
-      erb :diet
+    get '/habits' do
+      erb :habits
     end
     
     get '/gh' do
