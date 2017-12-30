@@ -21,7 +21,7 @@ class Place
     end
   end     
   
-  validates_presence_of :name
+  validates_presence_of :name, :website, :category
   validates_uniqueness_of :name
   
   def self.categories
