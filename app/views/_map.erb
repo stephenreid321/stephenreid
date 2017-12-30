@@ -23,7 +23,7 @@
             lng: <%=f*point.lng%>,
             color: '<%=point.class.marker_color%>',
             name: "<%=js_escape_html(point.try(:name) || point.try(:title))%>",
-            image_url: '<%=point.image.url%>',
+            image_url: '<%=point.image.thumb('50x50#').url%>',
             content_url: '/maps/<%=point.class.to_s%>/<%=point.id%>'
     })
 <% } %>
