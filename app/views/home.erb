@@ -66,8 +66,8 @@
       He is the creator of several <a href="https://github.com/wordsandwriting">open source projects</a> including <a href="https://huddl.tech">Huddl</a>,
       a tool for organising co-created gatherings.
     </p>
-    
-    
+
+
     <script>
       $(function () {
         $('.place').hover(function () {
@@ -97,12 +97,7 @@
                 <% Place.where(category: v).shuffle.each { |place| %>     
                   <div class="col-md-4 mb-3">
                     <div class="mr-md-3">
-                      <a href="<%=place.website%>" class="place" style="position: relative; display: block; height: 200px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
-                        <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
-                        <h3 style="position: absolute; bottom: 0; color: white; padding: 0 1rem">
-                          <%=place.name%>
-                        </h3>
-                      </a>
+                      <%= partial :place, :object => place %>
                     </div>
                   </div>
                 <% } %>

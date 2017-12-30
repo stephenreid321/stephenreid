@@ -1,59 +1,188 @@
 <style>
   div.infowindow { white-space: nowrap }
+  .place { width: 200px }
 </style>
 
 <script>
   $(function () {
-  map = new google.maps.Map(document.getElementById("map-canvas"), {
-  mapTypeId: google.maps.MapTypeId.ROADMAP,
-          mapTypeControl: false,
-          scaleControl: true,
-          streetViewControl: false,
-          maxZoom: 10,
+    map = new google.maps.Map(document.getElementById("map-canvas"), {
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false,
+            scaleControl: true,
+            streetViewControl: false,
+            maxZoom: 16,
 <% if @disable_scrollwheel %>
-    scrollwheel: false
+      scrollwheel: false
 <% end %>
   });
   var bounds = new google.maps.LatLngBounds();
   var points = []
 <% Place.all.select(&:coordinates).each { |point| f = (point.is_a?(Account) ? (1 + (rand-0.5)/5000) : 1) %>
     points.push({
-    id: '<%=point.id%>',
-            lat: <%=f*point.lat%>,
-            lng: <%=f*point.lng%>,
-            color: '<%=point.class.marker_color%>',
-            name: "<%=js_escape_html(point.try(:name) || point.try(:title))%>",
-            image_url: '<%=point.image.thumb('50x50#').url%>',
-            content_url: '/maps/<%=point.class.to_s%>/<%=point.id%>'
+      id: '<%=point.id%>',
+      lat: <%=f*point.lat%>,
+      lng: <%=f*point.lng%>,
+      color: '<%=point.class.marker_color%>',
+      name: "<%=js_escape_html(point.try(:name) || point.try(:title))%>",
+      content: '<%=js_escape_html(partial "#{point.class.to_s.underscore}".to_sym, :object => point)%>'
     })
 <% } %>
 
+
   var infowindow = new google.maps.InfoWindow();
   var markers = []
-          for (i = 0; i < points.length; i++) {
-  var point = points[i];
-  var marker = new google.maps.Marker({
-  position: new google.maps.LatLng(point.lat, point.lng),
-          title: point.name,
-          icon: point.image_url,
-          content_url: point.content_url
-  });
-  bounds.extend(marker.getPosition());
-  markers.push(marker);
+  for (i = 0; i < points.length; i++) {
+    var point = points[i];
+    var pinColor = point.color;
+    var pinImage = new google.maps.MarkerImage(
+            "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+            new google.maps.Size(21, 34),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(10, 34)
+            );
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(point.lat, point.lng),
+      title: point.name,
+      icon: pinImage,
+      content: point.content
+    });
+    google.maps.event.addListener(marker, 'click', function (marker) {
+      return function () {
+        infowindow.setContent('<div class="infowindow">' + marker.content + '</div>');
+        infowindow.open(map, marker);
+      }
+    }(marker));
+    bounds.extend(marker.getPosition());
+    markers.push(marker);
   }
 
-  var markerClusterer = new MarkerClusterer(map, markers);
-<% if defined?(center) and defined?(zoom) %>
-    map.setCenter(new google.maps.LatLng(<%=center[0]%>, <%=center[1]%>))
-            map.setZoom(<%=zoom%>)
-<% else %>
-    map.fitBounds(bounds);
-<% end %>
+  var markerClusterer = new MarkerClusterer(map, markers, {zoomOnClick: false});
+  map.fitBounds(bounds);
 
-
+  google.maps.event.addListener(markerClusterer, "click", function (cluster) {
+  var content = '<ul class="list-unstyled">';
+          $.each(cluster.getMarkers(), function (i, marker) {
+          content += '<li>' + marker.content + '</li>';
+          })
+          content += '</ul>';
+          infowindow.setContent('<div class="infowindow">' + content + '</div>');
+          infowindow.setPosition(cluster.getCenter())
+          infowindow.open(map);
+  });
   }
   );</script>
 
 <div style="position: relative">
-  <div style="width: 100%; height: 70vh" id="map-canvas"></div>
+  <div style="width: 100%; height: 80vh" id="map-canvas"></div>
+
+  <% if params[:form] %>
+    <script>
+      $(function () {
+        $('input[name=venues]').change(function () {
+          if ($(this).prop('checked'))
+            $('#venue-filters').show()
+          else
+            $('#venue-filters').hide()
+        }).change();
+        $('#map-form input, #map-form select').change(function () {
+          $(this.form).submit();
+        });
+        $('#map-form').submit(function (e) {
+          var form = this;
+          e.preventDefault();
+          $('.fa-spinner', this).show();
+          $('#map').load('/map?' + $(this).serialize(), function () {
+            $('.fa-spinner', form).hide();
+            $('button[type=submit]', form).attr('disabled', false).html('<%= I18n.t(:search).capitalize%>');
+          });
+          return false;
+        });
+      });</script>
+    <style>
+      #map-form i.fa-map-marker { float: right }
+      @media(min-width: 768px) {
+        #map-form { position: absolute; width: 20%; top: 0; right: 0; background: rgba(255,255,255,0.8); padding: 20px }
+      }
+    </style>
+    <form id="map-form">
+      <input type="hidden" name="form" value="1" />
+      <div class="checkbox">
+        <div style="margin-bottom: 5px">
+          <%= select_tag :scope, :options => [['All groups','']] + current_account.groups.order('name asc').map { |group| [group.name,group.id] }, :class => 'form-control', :selected => params[:scope] %>
+        </div>
+        <label>
+          <%= check_box_tag :accounts, :value => true, :checked => params[:accounts] %>
+          <%= I18n.t(:people).capitalize%>  <i class="fa fa-map-marker" style="color: <%= "##{Account.marker_color}" %>"></i>
+        </label>
+      </div>   
+      <div class="checkbox">
+        <label>
+          <%= check_box_tag :events, :value => true, :checked => params[:events] %>
+          <%= I18n.t(:events).capitalize%>  <i class="fa fa-map-marker" style="color: <%= "##{Event.marker_color}" %>"></i>
+        </label>
+      </div>           
+      <div class="checkbox">
+        <label>
+          <%= check_box_tag :venues, :value => true, :checked => params[:venues] %>
+          <%= I18n.t(:venues).capitalize%> <i class="fa fa-map-marker" style="color: <%= "##{Venue.marker_color}" %>"></i>
+        </label>
+      </div>  
+      <div id="venue-filters" style="padding: 10px;" >
+
+        <div class="form-group"> 
+          <label><%= I18n.t(:capacity_of_at_least).capitalize%></label>
+          <%= number_field_tag :min_capacity, :class => 'form-control', :min => 0, :step => 1, :value => params[:min_capacity] %>
+        </div>    
+
+        <div class="form-group"> 
+          <label>
+            <%= check_box_tag :accessible, :value => 1, :checked => params[:accessible] %>
+            <%= I18n.t(:accessible).capitalize%>
+          </label>
+        </div> 
+
+        <div class="form-group"> 
+          <label>
+            <%= check_box_tag :private, :value => 1, :checked => params[:private] %>
+            <%= I18n.t(:private_room_available).capitalize%>
+          </label>
+        </div>           
+
+        <div class="form-group"> 
+          <label>
+            <%= check_box_tag :serves_food, :value => 1, :checked => params[:serves_food] %>
+            <%= I18n.t(:serves_food).capitalize%>
+          </label>
+        </div>    
+
+        <div class="form-group"> 
+          <label>
+            <%= check_box_tag :serves_alcohol, :value => 1, :checked => params[:serves_alcohol] %>
+            <%= I18n.t(:serves_alcohol).capitalize%>
+          </label>
+        </div>      
+
+        <div class="form-group"> 
+          <label><%= I18n.t(:maximum_hourly_cost).capitalize%></label>
+          <div class="input-group">
+            <span class="input-group-addon"><%= I18n.t(:currency_symbol)%></span>
+            <%= number_field_tag :max_hourly_cost, :class => 'form-control', :min => 0, :step => 1, :value => params[:max_hourly_cost] %>
+          </div>
+        </div>            
+
+      </div>
+      <div class="checkbox">
+        <label>          
+          <%= check_box_tag :organisations, :value => true, :checked => params[:organisations]  %>
+          <%= I18n.t(:organisations).capitalize%> <i class="fa fa-map-marker" style="color: <%= "##{Organisation.marker_color}" %>"></i>
+        </label>
+      </div>     
+      <button type="submit" class="btn btn-default"><%= I18n.t(:search).capitalize%></button>
+      <i class="fa fa-spin fa-spinner" style="display: none"></i>
+      <div>
+        <a style="display:inline-block;margin-top: 10px" class="btn btn-primary modal-trigger" href="/venues/new"><i class="fa fa-plus"></i> <%= I18n.t(:add_a_venue).capitalize%></a>
+      </div>
+    </form>
+  <% end %>
+
 </div>
