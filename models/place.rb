@@ -12,7 +12,7 @@ class Place
   
   def lat; coordinates[1] if coordinates; end  
   def lng; coordinates[0] if coordinates; end  
-  def self.marker_color; '3DA2E4'; end    
+  def self.marker_color; 'CE2828'; end    
   
   # Dragonfly
   dragonfly_accessor :image
