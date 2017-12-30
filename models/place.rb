@@ -7,6 +7,7 @@ class Place
   field :website, :type => String  
   field :image_uid, :type => String
   field :category, :type => String
+  field :notes, :type => String
   
   # Dragonfly
   dragonfly_accessor :image
@@ -40,6 +41,7 @@ class Place
   def self.admin_fields
     {
       :name => :text,
+      :notes => :textarea,
       :category => :select,
       :website => :url,
       :image_url => :text,
