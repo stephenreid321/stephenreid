@@ -21,7 +21,6 @@
       id: '<%=point.id%>',
       lat: <%=f*point.lat%>,
       lng: <%=f*point.lng%>,
-      color: '<%=point.class.marker_color%>',
       name: "<%=js_escape_html(point.try(:name) || point.try(:title))%>",
       content: '<%=js_escape_html(partial "#{point.class.to_s.underscore}".to_sym, :object => point)%>'
     })
@@ -32,17 +31,9 @@
   var markers = []
   for (i = 0; i < points.length; i++) {
     var point = points[i];
-    var pinColor = point.color;
-    var pinImage = new google.maps.MarkerImage(
-            "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-            new google.maps.Size(21, 34),
-            new google.maps.Point(0, 0),
-            new google.maps.Point(10, 34)
-            );
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(point.lat, point.lng),
       title: point.name,
-      icon: pinImage,
       content: point.content
     });
     google.maps.event.addListener(marker, 'click', function (marker) {
