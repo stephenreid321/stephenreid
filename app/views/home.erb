@@ -42,7 +42,8 @@
     <p class="lead" style="margin-top: 1em">
       Stephen Reid is the founder and director of the <a href="http://psychedelicsociety.org.uk">Psychedelic Society</a>, which was the first national-level Psychedelic Society worldwide,
       and the press officer for the <a href="http://breakingconvention.co.uk">Breaking Convention Conference on Psychedelic Consciousness</a>.
-      <a class="btn btn-primary btn-sm" href="javascript:;" onclick="$('#more').slideDown(); $(this).hide()">Read more</a>
+      <a class="btn btn-primary btn-sm" href="javascript:;" onclick="$('#more').slideDown();
+          $(this).hide()">Read more</a>
     </p>
     <div id="more" style="display: none">
       <p>
@@ -70,6 +71,16 @@
       </p>
     </div>
 
+    <script>
+      $(function () {
+        $('.place').hover(function () {
+          $('.bgo', this).hide()
+        }, function () {
+          $('.bgo', this).show()
+        })
+      })
+    </script>       
+
     <%= ul_nav [
       ['List view', '/'],
       ['Map view', '/map'],
@@ -80,16 +91,6 @@
       <%= partial :map %>
 
     <% else %>
-
-      <script>
-        $(function () {
-          $('.place').hover(function () {
-            $('.bgo', this).hide()
-          }, function () {
-            $('.bgo', this).show()
-          })
-        })
-      </script>    
 
       <div id="accordion" role="tablist">
 
