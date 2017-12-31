@@ -16,7 +16,7 @@
   });
   var bounds = new google.maps.LatLngBounds();
   var points = []
-<% Place.all.select(&:coordinates).each { |point| f = (point.is_a?(Account) ? (1 + (rand-0.5)/5000) : 1) %>
+<% @places.select(&:coordinates).each { |point| f = (point.is_a?(Account) ? (1 + (rand-0.5)/5000) : 1) %>
     points.push({
       id: '<%=point.id%>',
       lat: <%=f*point.lat%>,
