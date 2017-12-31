@@ -60,7 +60,7 @@ module ActivateApp
     get '/map' do
       @view = 'map'
       @places = Place.all
-      @places = @places.where(category: 'plans') if params[:plans]
+      @places = @places.where(category: 'upcoming') if params[:plans]
       erb :map 
     end
    
