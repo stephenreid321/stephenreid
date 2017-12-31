@@ -143,18 +143,22 @@
               }, function () {
                 $('.bgo', this).show()
               })
-              
-              $("a[href='https://psychedelicsociety.org.uk/books']").attr('target','_blank')
+
+              $("#nav a[href^=http]").attr('target', '_blank')
             })
           </script>       
 
-          <%= ul_nav [
-            ['List', '/'],
-            ['Map', '/map'],
-            ['Habits', '/habits'],
-            ['Books', 'https://psychedelicsociety.org.uk/books'],
-            ], ul_class: 'nav nav-tabs mb-3', li_class: 'nav-item', a_class: 'nav-link' %>
-          
+          <div id="nav">
+            <%= ul_nav [
+              ['List', '/'],
+              ['Map', '/map'],
+              ['Habits', '/habits'],
+              ['Music', '/music'],            
+              ['Books <i class="fa fa-external-link"></i>', 'https://psychedelicsociety.org.uk/books'],
+              ['Blog <i class="fa fa-external-link"></i>', 'https://medium.com/@stephenreid_']
+              ], ul_class: 'nav nav-tabs mb-3', li_class: 'nav-item', a_class: 'nav-link' %>
+          </div>
+
           <%= yield %>
 
         </div>

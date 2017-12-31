@@ -66,6 +66,10 @@ module ActivateApp
       erb :habits
     end
     
+    get '/music' do
+      erb :music
+    end
+    
     get '/gh' do
       redirect 'https://www.google.co.uk/maps/place/Greenhouse/@51.5529027,-0.0879017,15z/data=!4m2!3m1!1s0x0:0x9850520d11f22809'
     end
