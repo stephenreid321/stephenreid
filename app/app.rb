@@ -65,8 +65,12 @@ module ActivateApp
     end
    
     get '/habits' do
-      erb :habits
+      redirect '/living'
     end
+    
+    get '/living' do
+      erb :living
+    end    
     
     get '/music' do
       erb :music
