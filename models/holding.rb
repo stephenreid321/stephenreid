@@ -45,5 +45,11 @@ class Holding
       :gbp_per_unit => gbp_per_unit
     )    
   end
+  
+  def self.create_snapshot
+    Holding.all.each { |holding|
+      holding.create_snapshot
+    }
+  end
     
 end
