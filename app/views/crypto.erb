@@ -18,7 +18,7 @@ labels = []
   <% end %>  
   <th>%</th>
 </thead>
-<% Holding.all.sort_by { |h| -h.usd_value }.each { |h| pc = ((h.usd_value.to_f/s)*100).round; data << pc; labels << "#{h.wallet}/#{h.currency}" %>
+<% Holding.all.sort_by { |h| -h.usd_value }.each { |h| pc = ((h.usd_value.to_f/usd_value_sum)*100).round; data << pc; labels << "#{h.wallet}/#{h.currency}" %>
   <tr>
     <td>
       <%=h.wallet%>
