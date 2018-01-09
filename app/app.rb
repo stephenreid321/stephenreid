@@ -57,6 +57,10 @@ module ActivateApp
       erb :home
     end
     
+    get '/crypto' do
+      erb :crypto
+    end
+    
     get '/map' do
       @view = 'map'
       @places = Place.all
