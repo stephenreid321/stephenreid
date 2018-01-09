@@ -6,6 +6,13 @@ data = []
 labels = []
 %>
 
+<% if current_account %>
+  <h1>
+    <%=number_to_currency usd_value_sum, unit: '$', precision: 0 %>
+    <small class="text-secondary"><%=number_to_currency gbp_value_sum, unit: '£', precision: 0 %></small>
+  </h1>
+<% end %>
+
 <table class="table mt-3">
   <thead>
   <th>Wallet</th>
@@ -57,57 +64,3 @@ labels = []
   <th></th>
 </tr>  
 </table>
-
-<div class="my-3">
-  <canvas id="canvas"></canvas>
-  <script>
-
-    colors = []
-
-    var config = {
-      type: 'pie',
-      data: {
-        datasets: [{
-            data: <%=data%>,
-            backgroundColor: <%= [
-              '#4dc9f6',
-              '#f67019',
-              '#f53794',
-              '#537bc4',
-              '#acc236',
-              '#166a8f',
-              '#00a950',
-              '#58595b',
-              '#8549ba'
-            ].shuffle %>
-          }],
-        labels: <%=labels%>
-      },
-      options: {
-        responsive: true,
-        legend: {
-          display: true
-        },
-        tooltips: {
-          enabled: true,
-          mode: 'single',
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.labels[tooltipItem.index];
-              var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-              return label + ': ' + datasetLabel + '%';
-            }
-          }
-        }
-      }
-    };
-
-    window.onload = function () {
-      var ctx = document.getElementById("canvas").getContext("2d");
-      window.myPie = new Chart(ctx, config);
-    };
-
-  </script>
-</div>
-
-
