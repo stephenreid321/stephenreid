@@ -46,7 +46,7 @@ class Holding
     )    
   end
   
-  def self.create_snapshot
+  def self.create_snapshots
     Holding.all.each { |holding|
       holding.create_snapshot
     }
