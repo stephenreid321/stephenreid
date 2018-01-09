@@ -15,7 +15,9 @@ labels = []
 
 <table class="table mt-3">
   <thead>
-  <th>Wallet</th>
+  <% if current_account %>
+    <th>Wallet</th>
+  <% end %>
   <th>Currency</th> 
   <% if current_account %>
     <th>Units</th>  
@@ -27,9 +29,11 @@ labels = []
 </thead>
 <% Holding.all.sort_by { |h| -h.usd_value }.each { |h| pc = ((h.usd_value.to_f/usd_value_sum)*100).round; data << pc; labels << "#{h.wallet}/#{h.currency}" %>
   <tr>
-    <td>
-      <%=h.wallet%>
-    </td>		
+    <% if current_account %>
+      <td>
+        <%=h.wallet%>
+      </td>		
+    <% end %>
     <td>
       <%=h.currency%>
     </td>
