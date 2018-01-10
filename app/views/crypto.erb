@@ -72,66 +72,56 @@ labels = []
   </tfoot>
 </table>
 
+<% if current_account %>
+  <div class="my-3" style="max-width: 700px">
+    <canvas id="canvas"></canvas>
+    <script>
 
-<div class="my-3" style="max-width: 500px">
-  <canvas id="canvas"></canvas>
-  <script>
+      colors = []
 
-    colors = []
-
-    var config = {
-      type: 'pie',
-      data: {
-        datasets: [{
-            data: <%=data%>,
-            backgroundColor: <%= [
-  '#4dc9f6',
-  '#f67019',
-  '#f53794',
-  '#537bc4',
-  '#acc236',
-  '#166a8f',
-  '#00a950',
-  '#58595b',
-  '#8549ba',
-  '#4dc9f6',
-  '#f67019',
-  '#f53794',
-  '#537bc4',
-  '#acc236',
-  '#166a8f',
-  '#00a950',
-  '#58595b',
-  '#8549ba',              
-  ].shuffle %>
-          }],
-        labels: <%=labels%>
-      },
-      options: {
-        responsive: true,
-        legend: {
-          display: true
+      var config = {
+        type: 'pie',
+        data: {
+          datasets: [{
+              data: <%=data%>,
+              backgroundColor: <%= [
+    '#4dc9f6',
+    '#f67019',
+    '#f53794',
+    '#537bc4',
+    '#acc236',
+    '#166a8f',
+    '#00a950',
+    '#58595b',
+    '#8549ba'             
+    ] %>
+            }],
+          labels: <%=labels%>
         },
-        tooltips: {
-          enabled: true,
-          mode: 'single',
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.labels[tooltipItem.index];
-              var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-              return label + ': ' + datasetLabel + '%';
+        options: {
+          responsive: true,
+          legend: {
+            display: true
+          },
+          tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+              label: function (tooltipItem, data) {
+                var label = data.labels[tooltipItem.index];
+                var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                return label + ': ' + datasetLabel + '%';
+              }
             }
           }
         }
-      }
-    };
+      };
 
-    window.onload = function () {
-      var ctx = document.getElementById("canvas").getContext("2d");
-      window.myPie = new Chart(ctx, config);
-    };
+      window.onload = function () {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myPie = new Chart(ctx, config);
+      };
 
-  </script>
-</div>
-
-
+    </script>
+  </div>
+<% end %>
