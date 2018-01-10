@@ -11,15 +11,10 @@ labels = []
     <%=number_to_currency usd_value_sum, unit: '$', precision: 0 %>
     <small class="text-secondary"><%=number_to_currency gbp_value_sum, unit: '£', precision: 0 %></small>
   </h1>
-<% else %>
-  <p class="mt-3">If a currency is listed multiple times, it means I'm holding it across multiple wallets.</p>
 <% end %>
 
 <table class="table mt-3">
   <thead>
-    <% if current_account %>
-    <th>Wallet</th>
-  <% end %>
   <th>Currency</th> 
   <% if current_account %>
     <th>Units</th>  
@@ -29,28 +24,28 @@ labels = []
   <% end %>  
   <th>%</th>
 </thead>
-<% Holding.all.sort_by { |h| -h.usd_value }.each { |h| pc = ((h.usd_value.to_f/usd_value_sum)*100).round; data << pc; labels << "#{h.wallet}/#{h.currency}" %>
+<% Holding.pluck(:currency).uniq.each { |currency|
+  holdings = Holding.where(currency: currency)
+  pc = ((holdings.map(&:usd_value).sum.to_f/usd_value_sum)*100).round;
+  data << pc;
+  labels << currency
+%>
   <tr>
-    <% if current_account %>
-      <td style="font-variant: small-caps">
-        <%=h.wallet.downcase%>
-      </td>		
-    <% end %>
     <td style="font-variant: small-caps">
-      <%=h.currency%>
+      <%=currency%>
     </td>
     <% if current_account %>
       <td>
-        <%=h.units%>
+        <%=holdings.map(&:units).sum%>
       </td>    
       <td>
-        <%=number_to_currency h.usd_per_unit, unit: '$', precision: 2  %>
+        <%=number_to_currency holdings.first.usd_per_unit, unit: '$', precision: 2  %>
       </td>            
       <td>
-        <%= number_to_currency h.usd_value, unit: '$', precision: 0 %>
+        <%= number_to_currency holdings.map(&:usd_value).sum, unit: '$', precision: 0 %>
       </td>
       <td>
-        <%=number_to_currency h.gbp_value, unit: '£', precision: 0 %>
+        <%=number_to_currency holdings.map(&:gbp_value).sum, unit: '£', precision: 0 %>
       </td>   
     <% end %>
     <td>
@@ -72,3 +67,67 @@ labels = []
   <th></th>
 </tr>  
 </table>
+
+
+<div class="my-3" style="max-width: 500px">
+  <canvas id="canvas"></canvas>
+  <script>
+
+    colors = []
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+            data: <%=data%>,
+            backgroundColor: <%= [
+  '#4dc9f6',
+  '#f67019',
+  '#f53794',
+  '#537bc4',
+  '#acc236',
+  '#166a8f',
+  '#00a950',
+  '#58595b',
+  '#8549ba',
+  '#4dc9f6',
+  '#f67019',
+  '#f53794',
+  '#537bc4',
+  '#acc236',
+  '#166a8f',
+  '#00a950',
+  '#58595b',
+  '#8549ba',              
+  ].shuffle %>
+          }],
+        labels: <%=labels%>
+      },
+      options: {
+        responsive: true,
+        legend: {
+          display: true
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function (tooltipItem, data) {
+              var label = data.labels[tooltipItem.index];
+              var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              return label + ': ' + datasetLabel + '%';
+            }
+          }
+        }
+      }
+    };
+
+    window.onload = function () {
+      var ctx = document.getElementById("canvas").getContext("2d");
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+</div>
+
+
