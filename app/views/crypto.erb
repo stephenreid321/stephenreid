@@ -15,57 +15,61 @@ labels = []
 
 <table class="table mt-3">
   <thead>
-  <th>Currency</th> 
-  <% if current_account %>
-    <th>Units</th>  
-    <th>$/unit</th>   
-    <th>$</th>
-    <th>£</th>
-  <% end %>  
-  <th>%</th>
-</thead>
-<% Holding.pluck(:currency).uniq.each { |currency|
-  holdings = Holding.where(currency: currency)
-  pc = ((holdings.map(&:usd_value).sum.to_f/usd_value_sum)*100).round;
-  data << pc;
-  labels << currency
-%>
-  <tr>
-    <td style="font-variant: small-caps">
-      <%=currency%>
-    </td>
-    <% if current_account %>
-      <td>
-        <%=holdings.map(&:units).sum%>
-      </td>    
-      <td>
-        <%=number_to_currency holdings.first.usd_per_unit, unit: '$', precision: 2  %>
-      </td>            
-      <td>
-        <%= number_to_currency holdings.map(&:usd_value).sum, unit: '$', precision: 0 %>
+    <tr>
+      <th>Currency</th> 
+      <% if current_account %>
+        <th>Units</th>  
+        <th>$/unit</th>   
+        <th>$</th>
+        <th>£</th>
+      <% end %>  
+      <th>%</th>
+    </tr>
+  </thead>
+  <% Holding.pluck(:currency).uniq.sort_by { |currency| -Holding.where(currency: currency).map(&:usd_value).sum }.each { |currency|
+    holdings = Holding.where(currency: currency)
+    pc = ((holdings.map(&:usd_value).sum.to_f/usd_value_sum)*100).round;
+    data << pc;
+    labels << currency
+  %>
+    <tr>
+      <td style="font-variant: small-caps">
+        <%=currency%>
       </td>
+      <% if current_account %>
+        <td>
+          <%=holdings.map(&:units).sum%>
+        </td>    
+        <td>
+          <%=number_to_currency holdings.first.usd_per_unit, unit: '$', precision: 2  %>
+        </td>            
+        <td>
+          <%= number_to_currency holdings.map(&:usd_value).sum, unit: '$', precision: 0 %>
+        </td>
+        <td>
+          <%=number_to_currency holdings.map(&:gbp_value).sum, unit: '£', precision: 0 %>
+        </td>   
+      <% end %>
       <td>
-        <%=number_to_currency holdings.map(&:gbp_value).sum, unit: '£', precision: 0 %>
-      </td>   
-    <% end %>
-    <td>
-      <%= pc %>%
-    </td>
-  </tr>
-<% } %>
-<tr>
-  <% if current_account %>
-    <th></th>
-  <% end %>
-  <th></th>
-  <% if current_account %>
-    <th></th>
-    <th></th>
-    <th><%=number_to_currency usd_value_sum, unit: '$', precision: 0 %></th>
-    <th><%=number_to_currency gbp_value_sum, unit: '£', precision: 0 %></th>
-  <% end %>
-  <th></th>
-</tr>  
+        <%= pc %>%
+      </td>
+    </tr>
+  <% } %>
+  <tfoot>
+    <tr>
+      <% if current_account %>
+        <th></th>
+      <% end %>
+      <th></th>
+      <% if current_account %>
+        <th></th>
+        <th></th>
+        <th><%=number_to_currency usd_value_sum, unit: '$', precision: 0 %></th>
+        <th><%=number_to_currency gbp_value_sum, unit: '£', precision: 0 %></th>
+      <% end %>
+      <th></th>
+    </tr>  
+  </tfoot>
 </table>
 
 

@@ -14,6 +14,7 @@
       'summernote/0.6.1' => 'summernote.min.css summernote.min.js',
       'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',      
       'Chart.js/2.7.0' => 'Chart.bundle.min.js',
+      'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css',
       }.each { |k,v| %>    
       <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
         <% case f.split('.').last.to_sym; when :js %>
