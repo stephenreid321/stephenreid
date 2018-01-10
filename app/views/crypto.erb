@@ -16,6 +16,7 @@ labels = []
 <table class="table mt-3">
   <thead>
     <tr>
+      <th>#</th> 
       <th>Currency</th> 
       <% if current_account %>
         <th>Units</th>  
@@ -26,13 +27,16 @@ labels = []
       <th>%</th>
     </tr>
   </thead>
-  <% Holding.pluck(:currency).uniq.sort_by { |currency| -Holding.where(currency: currency).map(&:usd_value).sum }.each { |currency|
+  <% Holding.pluck(:currency).uniq.sort_by { |currency| -Holding.where(currency: currency).map(&:usd_value).sum }.each_with_index { |currency, i|
     holdings = Holding.where(currency: currency)
     pc = ((holdings.map(&:usd_value).sum.to_f/usd_value_sum)*100).round;
     data << pc;
     labels << currency
   %>
     <tr>
+      <td>
+        <%=i+1%>
+      </td>
       <td style="font-variant: small-caps">
         <%=currency%>
       </td>
@@ -57,6 +61,7 @@ labels = []
   <% } %>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <% if current_account %>
         <th></th>
