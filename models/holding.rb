@@ -7,6 +7,8 @@ class Holding
   field :symbol, :type => String
   field :units, :type => Float
   
+  validates_presence_of :wallet, :currency, :symbol, :units
+  
   def usd_per_unit
     @usd_per_unit ||= Mechanize.new.get("https://coinmarketcap.com/currencies/#{currency}").search('#quote_price .text-large2')[0].text.to_f
   end  
@@ -26,8 +28,6 @@ class Holding
   def gbp_value
     (units*gbp_per_unit).round
   end  
-  
-  validates_presence_of :wallet, :currency, :symbol, :units
         
   def self.admin_fields
     {
