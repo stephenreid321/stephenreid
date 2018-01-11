@@ -4,18 +4,19 @@ class Holding
 
   field :wallet, :type => String
   field :currency, :type => String
+  field :symbol, :type => String
   field :units, :type => Float
   
-  def usd_per_unit
-    @usd_per_unit ||= Mechanize.new.get("https://coinmarketcap.com/currencies/#{currency}").search('#quote_price .text-large2')[0].text.to_f
-  end  
-          
-  def self.gbp_per_usd
-    @gbp_per_usd ||= JSON.parse(Mechanize.new.get('https://api.fixer.io/latest?base=USD&symbols=GBP').body)['rates']['GBP']
+  def cryptocompare
+    @cryptocompare ||= JSON.parse(Mechanize.new.get("https://min-api.cryptocompare.com/data/price?fsym=#{symbol}&tsyms=USD,GBP").body)
   end
-    
+  
+  def usd_per_unit    
+    @cryptocompare['USD']
+  end  
+              
   def gbp_per_unit
-    usd_per_unit * Holding.gbp_per_usd
+    @cryptocompare['GBP']
   end  
   
   def usd_value
@@ -26,12 +27,13 @@ class Holding
     (units*gbp_per_unit).round
   end  
   
-  validates_presence_of :wallet, :currency, :units
+  validates_presence_of :wallet, :currency, :symbol, :units
         
   def self.admin_fields
     {
       :wallet => :text,
       :currency => :text,
+      :symbol => :text,
       :units => :number
     }
   end
@@ -40,6 +42,7 @@ class Holding
     Snapshot.create(
       :wallet => wallet,
       :currency => currency,
+      :symbol => symbol,
       :units => units,
       :usd_per_unit => usd_per_unit,
       :gbp_per_unit => gbp_per_unit
