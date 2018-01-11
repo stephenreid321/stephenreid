@@ -54,5 +54,5 @@ class Holding
       holding.create_snapshot
     }
   end
-    
+        
 end
