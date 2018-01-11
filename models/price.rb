@@ -8,7 +8,7 @@ class Price
   validates_presence_of :symbol, :usd_per_unit
   
   def self.symbols
-    %w{BTC ETH}
+    %w{XRP BTC ETH DASH DCR XMR XLM OMG SALT NEO ADA XVG}
   end
   
   def self.snap

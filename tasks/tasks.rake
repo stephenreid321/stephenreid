@@ -4,4 +4,10 @@ namespace :holdings do
     Holding.create_snapshots
   end  
 end
+
+namespace :prices do
+  task :snap => :environment do
+    Price.snap
+  end  
+end
   
