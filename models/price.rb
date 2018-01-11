@@ -11,14 +11,18 @@ class Price
     %w{XRP BTC ETH DASH DCR XMR XLM OMG SALT NEO ADA XVG}
   end
   
-  def self.snap
-    symbols.each { |symbol|
-      Price.create(
-        :symbol => symbol,
-        :usd_per_unit => JSON.parse(Mechanize.new.get("https://min-api.cryptocompare.com/data/price?fsym=#{symbol}&tsyms=USD").body)['USD']
-      )        
-    }
-  end  
+  class << self
+    def snap
+      symbols.each { |symbol|
+        Price.create(
+          :symbol => symbol,
+          :usd_per_unit => JSON.parse(Mechanize.new.get("https://min-api.cryptocompare.com/data/price?fsym=#{symbol}&tsyms=USD").body)['USD']
+        )        
+      }    
+      Price.snap
+    end
+    handle_asynchronously :snap, :run_at => Proc.new { 1.minute.from_now }
+  end
         
   def self.admin_fields
     {
