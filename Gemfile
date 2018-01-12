@@ -28,7 +28,7 @@ gem 'omniauth-google-oauth2'
 gem 'mail'
 
 # Interacting with other websites
-gem 'airbrake'
+gem 'airbrake', '~> 5.0'
 gem 'mechanize'
 
 gem 'sass'

@@ -32,9 +32,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (7.1.0)
-      airbrake-ruby (~> 2.5)
-    airbrake-ruby (2.6.2)
+    airbrake (5.8.1)
+      airbrake-ruby (~> 1.8)
+    airbrake-ruby (1.8.0)
     bcrypt (3.1.11)
     bson (4.2.2)
     builder (3.2.3)
@@ -205,7 +205,7 @@ DEPENDENCIES
   activate-admin!
   activate-tools!
   activemodel
-  airbrake
+  airbrake (~> 5.0)
   bcrypt
   delayed_job_mongoid
   dragonfly
