@@ -20,7 +20,8 @@ labels = []
       <th>Currency</th> 
       <th>%</th>      
       <% if current_account %>
-        <th>$/unit</th>
+        <th>$/unit</th>   
+        <th>$</th>
         <th>£</th>
       <% end %>  
     </tr>
@@ -46,6 +47,9 @@ labels = []
           <%=number_to_currency holdings.first.usd_per_unit, unit: '$', precision: 2  %>
         </td>            
         <td>
+          <%= number_to_currency holdings.map(&:usd_value).sum, unit: '$', precision: 0 %>
+        </td>
+        <td>
           <%=number_to_currency holdings.map(&:gbp_value).sum, unit: '£', precision: 0 %>
         </td>   
       <% end %>
@@ -58,6 +62,7 @@ labels = []
       <th></th>      
       <% if current_account %>
         <th></th>
+        <th><%=number_to_currency usd_value_sum, unit: '$', precision: 0 %></th>
         <th><%=number_to_currency gbp_value_sum, unit: '£', precision: 0 %></th>
       <% end %>
     </tr>  
