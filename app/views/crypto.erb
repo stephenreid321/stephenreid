@@ -129,5 +129,4 @@
     </div>
   <% end %>
 
-
   <% Fragment.find_by(slug: 'last-checked-crypto').update_attribute(:body, Date.today); end %>

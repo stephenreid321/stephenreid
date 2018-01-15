@@ -14,9 +14,9 @@
       <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'learning' %>" role="tabpanel" data-parent="#accordion">
         <div class="card-body pb-0">
           <div class="row no-gutters">
-            <% Place.where(category: v).shuffle.each { |place| %>     
+            <% Place.where(category: v).shuffle.each_with_index { |place,i| %>
               <div class="col-md-4 mb-3">
-                <div class="mr-md-3">
+                <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
                   <%= partial :place, :object => place %>
                 </div>
               </div>
