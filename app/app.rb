@@ -58,7 +58,7 @@ module ActivateApp
     end
     
     get '/crypto' do
-      sign_in_required!
+      sign_in_required!      
       erb :crypto
     end
     
