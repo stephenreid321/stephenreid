@@ -1,5 +1,7 @@
 
 $(function () {
+  
+  $('[data-toggle="tooltip"]').tooltip()
 
   $('input[type=text].slug').each(function () {
     var slug = $(this);
