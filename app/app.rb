@@ -58,23 +58,22 @@ module ActivateApp
     end
     
     get '/places' do
-      erb :places
+      if params[:map]
+        @places = Place.all
+        @places = @places.where(category: 'upcoming') if params[:plans]
+        erb :map 
+      else 
+        erb :places
+      end
     end
     
     get '/crypto' do
       sign_in_required!      
       erb :crypto
     end
-    
-    get '/map' do
-      @view = 'map'
-      @places = Place.all
-      @places = @places.where(category: 'upcoming') if params[:plans]
-      erb :map 
-    end
-   
-    get '/habits' do
-      erb :habits
+       
+    get '/aspirations' do
+      erb :aspirations
     end
     
     get '/music' do
