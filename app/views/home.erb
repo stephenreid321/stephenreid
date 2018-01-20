@@ -1,30 +1,42 @@
-<div id="accordion" role="tablist">
+<p class="lead" style="margin-top: 1em">
+  Stephen Reid is the founder and co-director of the <a href="http://psychedelicsociety.org.uk">Psychedelic Society</a>,
+  the creator of <a href="http://huddl.tech">Huddl</a>,
+  the press officer for the <a href="http://breakingconvention.co.uk">Breaking Convention Conference on Psychedelic Consciousness</a>
+  and is currently setting up <a href="http://metamonastery.net">Metamonastery</a>.
+</p>
 
-  <% Place.categories.each { |k,v| %>    
+<p>
+  Previously, he served on the board of <a href="http://www.greenpeace.org.uk">Greenpeace UK</a>,        
+  and co-founded
+  the New Economics Foundation's <a href="http://www.neweconomyorganisers.org/">New Economy Organisers Network</a>
+  and direct action movements <a href="http://facebook.com/ukuncut">UK Uncut</a> and <a href="https://www.youtube.com/user/WeAreTheIntruders/videos">The Intruders</a>.
+  Stephen has Masters degrees in <a href="http://www2.physics.ox.ac.uk/">Physics</a> from the University of Oxford (MPhys, First Class &mdash; <a href="/reid_report_final.pdf">dissertation</a>) and <a href="http://www.bristol.ac.uk/bccs/">Complexity Sciences</a> (MRes, Distinction) from the University of Bristol.     
+</p>
+<p>
+  An accomplished full-stack developer with particular expertise in <a href="http://ruby-lang.org/">Ruby</a>, Stephen has completed freelance digital work for organisations including
+  38 Degrees,
+  the New Economics Foundation,
+  the Labour Party,
+  the Green Party,
+  350.org,
+  the Living Wage Foundation,
+  Positive Money,
+  SumOfUs,
+  City Hunt,
+  10:10
+  and Brandalism. 
+  He is the creator of several <a href="https://github.com/wordsandwriting">open source projects</a>.
+</p>
 
-    <div class="card mb-1">
-      <div class="card-header" role="tab" id="heading-<%=v%>">
-        <h5 class="mb-0">
-          <a data-toggle="collapse" href="#collapse-<%=v%>" role="button">
-            <%=k%>
-          </a>
-        </h5>
-      </div>      
-
-      <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'learning' %>" role="tabpanel" data-parent="#accordion">
-        <div class="card-body pb-0">
-          <div class="row no-gutters">
-            <% Place.where(category: v).shuffle.each_with_index { |place,i| %>
-              <div class="col-md-4 mb-3">
-                <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
-                  <%= partial :place, :object => place %>
-                </div>
-              </div>
-            <% } %>
-          </div>
-        </div>
-      </div>
-    </div>          
-
-  <% } %>
+<div class="row align-items-center">
+  <% [
+    ['The Psychedelic Society', 'http://psychedelicsociety.org.uk/', 'https://psychedelicsociety.org.uk/images/logo.png'],
+    ['Huddl', 'http://huddl.tech/', 'https://huddl.tech/images/huddl.png'],        
+    ['Breaking Convention', 'http://breakingconvention.co.uk/', '/images/bc.png'],
+    ['Metamonastery', 'http://metamonastery.net/', 'http://metamonastery.net/images/horizontal.png'],
+    ].each { |name, website, image_src| %>
+    <div class="col-md-3 mb-3 mb-md-0">
+      <a href="<%=website%>"><img class="w-100" src="<%=image_src%>" /></a>
+    </div>
+  <% } %>                    
 </div>

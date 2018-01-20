@@ -57,6 +57,10 @@ module ActivateApp
       erb :home
     end
     
+    get '/places' do
+      erb :places
+    end
+    
     get '/crypto' do
       sign_in_required!      
       erb :crypto

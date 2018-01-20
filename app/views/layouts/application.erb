@@ -93,7 +93,7 @@
               <li><i class="fa fa-li fa-medium"></i> <a target="_blank" href="https://medium.com/@stephenreid_/">@stephenreid_</a></li>        
               <li><i class="fa fa-li fa-book"></i> <a target="_blank" href="http://goodreads.com/stephenreid_">stephenreid_</a></li>                      
             </ul>
-            
+
             <div class="mb-1">
               <div class="fb-follow" data-href="https://www.facebook.com/stephenreid.0" data-layout="button_count" data-size="small" data-show-faces="true"></div>
             </div>
@@ -108,41 +108,7 @@
 
         </div>
 
-
         <div class="col-md">
-
-          <p class="lead" style="margin-top: 1em">
-            Stephen Reid is the founder and co-director of the <a href="http://psychedelicsociety.org.uk">Psychedelic Society</a>,
-            the press officer for the <a href="http://breakingconvention.co.uk">Breaking Convention Conference on Psychedelic Consciousness</a>
-            and is currently setting up <a href="http://metamonastery.net">Metamonastery</a>.
-            <a class="btn btn-primary btn-sm" href="javascript:;" onclick="$('#more').slideDown();
-        $(this).hide()">Read more</a>
-          </p>
-          <div id="more" style="display: none">
-            <p>
-              Previously, he served on the board of <a href="http://www.greenpeace.org.uk">Greenpeace UK</a>,        
-              and co-founded
-              the New Economics Foundation's <a href="http://www.neweconomyorganisers.org/">New Economy Organisers Network</a>
-              and direct action movements <a href="http://facebook.com/ukuncut">UK Uncut</a> and <a href="https://www.youtube.com/user/WeAreTheIntruders/videos">The Intruders</a>.
-              Stephen has Masters degrees in <a href="http://www2.physics.ox.ac.uk/">Physics</a> from the University of Oxford (MPhys, First Class &mdash; <a href="/reid_report_final.pdf">dissertation</a>) and <a href="http://www.bristol.ac.uk/bccs/">Complexity Sciences</a> (MRes, Distinction) from the University of Bristol.     
-            </p>
-            <p>
-              An accomplished full-stack developer with particular expertise in <a href="http://ruby-lang.org/">Ruby</a>, Stephen has completed freelance digital work for organisations including
-              38 Degrees,
-              the New Economics Foundation,
-              the Labour Party,
-              the Green Party,
-              350.org,
-              the Living Wage Foundation,
-              Positive Money,
-              SumOfUs,
-              City Hunt,
-              10:10
-              and Brandalism. 
-              He is the creator of several <a href="https://github.com/wordsandwriting">open source projects</a> including <a href="https://huddl.tech">Huddl</a>,
-              a tool for organising co-created gatherings.
-            </p>
-          </div>
 
           <script>
             $(function () {
@@ -156,16 +122,17 @@
             })
           </script>       
 
-          <div id="nav">
+          <div id="nav" class="mt-2">
             <%= ul_nav [
-              ['List', '/'],
+              ['Bio', '/'],
+              ['Places', '/places'],
               ['Map', '/map'],
               ['Habits', '/habits'],
               ['Music', '/music'],       
               ['Books <i class="fa fa-external-link"></i>', 'http://goodreads.com/stephenreid_'],
               ['Google Maps reviews <i class="fa fa-external-link"></i>', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
               ['Blog <i class="fa fa-external-link"></i>', 'https://medium.com/@stephenreid_']
-              ], ul_class: 'nav nav-tabs mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
+              ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
           </div>
 
           <%= yield %>
