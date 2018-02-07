@@ -11,7 +11,7 @@
         </p>
 
         <%  Provider.registered.each { |provider| %>             
-          <a class="btn btn-default" href="/auth/<%=provider.omniauth_name%>"><i class="fa fa-<%=provider.icon%>"></i> Sign up via <%=provider.display_name%></a>
+          <a class="btn btn-default" href="/auth/<%=provider.omniauth_name%>"><i class="fab fa-<%=provider.icon%>"></i> Sign up via <%=provider.display_name%></a>
         <% } %>
       <% end %>
 

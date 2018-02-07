@@ -21,7 +21,7 @@
       <% Provider.registered.each { |provider| %>
       <% if @account.persisted? or (session['omniauth.auth'] and session['omniauth.auth']['provider'] == provider.omniauth_name) %>
         <div class="row" style="margin-bottom: 10px">
-          <div class="col-md-3" style="text-align: right"><i class="fa fa-<%=provider.icon%>"></i></div>
+          <div class="col-md-3" style="text-align: right"><i class="fab fa-<%=provider.icon%>"></i></div>
           <div class="col-md-8">      
             <div class="row">
               <% if provider_link = @account.provider_links.select { |provider_link| provider_link.provider == provider.display_name }[0] %>

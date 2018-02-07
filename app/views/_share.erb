@@ -4,7 +4,7 @@
 
   <span class="facebook">
     <a class="button popup" href="http://www.facebook.com/sharer/sharer.php?u=<%=CGI::escape(url)%>">
-      <i class="fa fa-facebook-square"></i> Share
+      <i class="fab fa-facebook-square"></i> Share
     </a>
     <span class="count"><i></i><u></u></span>
   </span>
@@ -19,7 +19,7 @@
 
   <span class="twitter">
     <a class="button popup" href="http://twitter.com/intent/tweet?<%=[:url,:via,:text,:in_reply_to,:hashtags,:related].map { |x| begin "#{x}=#{CGI::escape(eval(x.to_s))}" rescue nil; end }.compact.join('&') %>">
-      <i class="fa fa-twitter"></i> Tweet
+      <i class="fab fa-twitter"></i> Tweet
     </a>
   </span>
 

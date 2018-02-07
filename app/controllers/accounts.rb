@@ -73,7 +73,7 @@ ActivateApp::App.controller :accounts do
     @account = current_account
     @account.picture_url = @provider.image.call(@account.provider_links.find_by(provider: @provider.display_name).omniauth_hash)
     if @account.save
-      flash[:notice] = "<i class=\"fa fa-#{@provider.icon}\"></i> Grabbed your picture!"
+      flash[:notice] = "<i class=\"fab fa-#{@provider.icon}\"></i> Grabbed your picture!"
       redirect url(:accounts, :edit)
     else
       flash.now[:error] = "<strong>Hmm.</strong> There was a problem grabbing your picture."
@@ -86,7 +86,7 @@ ActivateApp::App.controller :accounts do
     @provider = Provider.object(params[:provider])    
     @account = current_account
     if @account.provider_links.find_by(provider: @provider.display_name).destroy
-      flash[:notice] = "<i class=\"fa fa-#{@provider.icon}\"></i> Disconnected!"
+      flash[:notice] = "<i class=\"fab fa-#{@provider.icon}\"></i> Disconnected!"
       redirect url(:accounts, :edit)
     else
       flash.now[:error] = "<strong>Oops.</strong> The disconnect wasn't successful."

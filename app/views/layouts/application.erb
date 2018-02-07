@@ -8,7 +8,6 @@
       'jquery/3.2.0' => 'jquery.min.js',
       'popper.js/1.11.0' => 'umd/popper.min.js',
       'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
-      'font-awesome/4.7.0' => 'css/font-awesome.min.css',
       'select2/3.5.2' => 'select2.min.js select2.min.css',
       'codemirror/5.0.0' => 'codemirror.min.css theme/monokai.min.css codemirror.min.js mode/xml/xml.min.js',
       'summernote/0.6.1' => 'summernote.min.css summernote.min.js',
@@ -26,7 +25,7 @@
 
     <% [
       '/stylesheets/share.css',
-      "/stylesheets/app.css?#{Time.now.to_i}"
+      "/stylesheets/app.css?#{Time.now.to_i}",
       ].each { |f| %> 
       <link rel="stylesheet" href="<%=f%>" />    
     <% } %>
@@ -35,6 +34,7 @@
       "//maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_MAPS_API_KEY']}",
       '//cdn.rawgit.com/mahnunchik/markerclustererplus/736b0e3a7d916fbeb2ee5007494f17a5329b11a8/src/markerclusterer.js',
       '//cdn.rawgit.com/wordsandwriting/activate-tools/f39002fcc10a9a554c651543b3065847130c2811/js/jquery.geopicker.js',      
+      '//use.fontawesome.com/releases/v5.0.6/js/all.js',
       "/javascripts/app.js?#{Time.now.to_i}"
       ].each { |f| %>
       <script src="<%=f%>"></script>
@@ -85,63 +85,67 @@
             <img src="/images/me-square.png" class="rounded-circle my-3" style="max-width: 200px; width: 100%" />
 
             <ul class="fa-ul">
-              <li><i class="fa fa-li fa-envelope"></i> <a data-toggle="tooltip" title="Email" target="_blank" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a></li>              
-              <li><i class="fa fa-li fa-facebook-square"></i> <a data-toggle="tooltip" title="Facebook" target="_blank" href="http://facebook.com/stephenreid.0">/stephenreid.0</a></li>
-              <li><i class="fa fa-li fa-twitter"></i> <a data-toggle="tooltip" title="Twitter" target="_blank" href="http://twitter.com/stephenreid_">@stephenreid_</a></li>
-              <li><i class="fa fa-li fa-github"></i> <a data-toggle="tooltip" title="Github" target="_blank" href="http://github.com/wordsandwriting">wordsandwriting</a></li>
-              <li><i class="fa fa-li fa-soundcloud"></i> <a data-toggle="tooltip" title="Soundcloud" target="_blank" href="http://soundcloud.com/wordsandwriting">wordsandwriting</a></li>
-              <li><i class="fa fa-li fa-medium"></i> <a data-toggle="tooltip" title="Medium" target="_blank" href="https://medium.com/@stephenreid_/">@stephenreid_</a></li>        
-              <li><i class="fa fa-li fa-book"></i> <a data-toggle="tooltip" title="Goodreads" target="_blank" href="http://goodreads.com/stephenreid_">stephenreid_</a></li>                      
+              <li><span class="fa-li"><i class="fas fa-envelope"></i></span> <a data-toggle="tooltip" title="Email" target="_blank" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a></li>              
+              <li><span class="fa-li"><i class="fab fa-facebook-square"></i></span> <a data-toggle="tooltip" title="Facebook" target="_blank" href="http://facebook.com/stephenreid.0">/stephenreid.0</a></li>              
+              <li><span class="fa-li"><i class="fab fa-twitter"></i></span> <a data-toggle="tooltip" title="Twitter" target="_blank" href="http://twitter.com/stephenreid_">@stephenreid_</a></li>
+              <li><span class="fa-li"><i class="fab fa-github"></i></span> <a data-toggle="tooltip" title="Github" target="_blank" href="http://github.com/wordsandwriting">wordsandwriting</a></li>  
+              <li><span class="fa-li"><i class="fab fa-soundcloud"></i></span> <a data-toggle="tooltip" title="Soundcloud" target="_blank" href="http://soundcloud.com/wordsandwriting">wordsandwriting</a></li>
+              <li><span class="fa-li"><i class="fab fa-medium"></i></span> <a data-toggle="tooltip" title="Medium" target="_blank" href="https://medium.com/@stephenreid_/">@stephenreid_</a></li>
+              <li><span class="fa-li"><i class="fas fa-book"></i></span> <a data-toggle="tooltip" title="Goodreads" target="_blank" href="http://goodreads.com/stephenreid_">stephenreid_</a></li>
+              <li><span class="fa-li"><i class="fab fa-ethereum"></i></span> <span data-toggle="tooltip" title="Ethereum">stephenreid.eth</span></li>
             </ul>
 
+            <% form_tag '', :onsubmit => %Q{web3.eth.sendTransaction({to:'0xd7a731AeBDAE763bCC80F3aec07d8cE703f9A46A', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline' do %>
+            Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
+              <% end %>
 
-            <div class="mb-1">
-              <div class="fb-follow" data-href="https://www.facebook.com/stephenreid.0" data-layout="button" data-size="small" data-show-faces="true"></div>
+              <div class="mb-1">
+                <div class="fb-follow" data-href="https://www.facebook.com/stephenreid.0" data-layout="button" data-size="small" data-show-faces="true"></div>
+              </div>
+              <div>
+                <a href="https://twitter.com/stephenreid_" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @stephenreid_</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+              </div>
+              <div>
+                <a class="github-button" href="https://github.com/wordsandwriting" aria-label="Follow @wordsandwriting on GitHub">Follow</a>            
+              </div>                
+
             </div>
-            <div>
-              <a href="https://twitter.com/stephenreid_" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @stephenreid_</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-            <div>
-              <a class="github-button" href="https://github.com/wordsandwriting" aria-label="Follow @wordsandwriting on GitHub">Follow</a>            
-            </div>                
 
           </div>
 
-        </div>
+          <div class="col-md">
 
-        <div class="col-md">
+            <script>
+        $(function () {
+          $('.place').hover(function () {
+            $('.bgo', this).hide()
+          }, function () {
+            $('.bgo', this).show()
+          })
 
-          <script>
-      $(function () {
-        $('.place').hover(function () {
-          $('.bgo', this).hide()
-        }, function () {
-          $('.bgo', this).show()
+          $("#nav a[href^=http]").attr('target', '_blank')
         })
+            </script>       
 
-        $("#nav a[href^=http]").attr('target', '_blank')
-      })
-          </script>       
+            <div id="nav" class="mt-2">
+              <%= ul_nav [
+                ['Bio', '/'],
+                ['Places', '/places'],
+                ['Aspirations', '/aspirations'],
+                ['Music', '/music'],       
+                ['Books <i class="fas fa-external-link-alt"></i>', 'http://goodreads.com/stephenreid_'],
+                ['Google Maps reviews <i class="fas fa-external-link-alt"></i>', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
+                ['Blog <i class="fas fa-external-link-alt"></i>', 'https://medium.com/@stephenreid_']
+                ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
+            </div>
 
-          <div id="nav" class="mt-2">
-            <%= ul_nav [
-              ['Bio', '/'],
-              ['Places', '/places'],
-              ['Aspirations', '/aspirations'],
-              ['Music', '/music'],       
-              ['Books <i class="fa fa-external-link"></i>', 'http://goodreads.com/stephenreid_'],
-              ['Google Maps reviews <i class="fa fa-external-link"></i>', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
-              ['Blog <i class="fa fa-external-link"></i>', 'https://medium.com/@stephenreid_']
-              ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
+            <%= yield %>
+
           </div>
 
-          <%= yield %>
+        </div>      
 
-        </div>
+      </div>
 
-      </div>      
-
-    </div>
-
-  </body>
-</html>
+    </body>
+  </html>
