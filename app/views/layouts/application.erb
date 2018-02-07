@@ -92,7 +92,7 @@
               <li><span class="fa-li"><i class="fab fa-soundcloud"></i></span> <a data-toggle="tooltip" title="Soundcloud" target="_blank" href="http://soundcloud.com/wordsandwriting">wordsandwriting</a></li>
               <li><span class="fa-li"><i class="fab fa-medium"></i></span> <a data-toggle="tooltip" title="Medium" target="_blank" href="https://medium.com/@stephenreid_/">@stephenreid_</a></li>
               <li><span class="fa-li"><i class="fas fa-book"></i></span> <a data-toggle="tooltip" title="Goodreads" target="_blank" href="http://goodreads.com/stephenreid_">stephenreid_</a></li>
-              <li><span class="fa-li"><i class="fab fa-ethereum"></i></span> <span data-toggle="tooltip" title="Ethereum">stephenreid.eth</span></li>
+              <li><span class="fa-li"><i class="fab fa-ethereum"></i></span> <a data-toggle="tooltip" title="Ethereum" target="_blank" href="https://etherscan.io/enslookup?q=stephenreid.eth">stephenreid.eth</span></li>
             </ul>
 
             <% form_tag '', :onsubmit => %Q{web3.eth.sendTransaction({to:'0xd7a731AeBDAE763bCC80F3aec07d8cE703f9A46A', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline' do %>
