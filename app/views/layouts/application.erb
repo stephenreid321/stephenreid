@@ -95,7 +95,7 @@
               <li><span class="fa-li"><i class="fab fa-ethereum"></i></span> <a data-toggle="tooltip" title="Ethereum" target="_blank" href="https://etherscan.io/enslookup?q=stephenreid.eth">stephenreid.eth</a></li>
             </ul>
 
-            <% form_tag '', :onsubmit => %Q{web3.eth.sendTransaction({to:'0xd7a731AeBDAE763bCC80F3aec07d8cE703f9A46A', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline' do %>
+            <% form_tag '', :onsubmit => %Q{web3.eth.sendTransaction({to:'0x72e1638bd8cd371bfb04cf665b749a0e4ae38324', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline' do %>
             Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
               <% end %>
 
