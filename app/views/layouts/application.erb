@@ -35,6 +35,7 @@
       '//cdn.rawgit.com/mahnunchik/markerclustererplus/736b0e3a7d916fbeb2ee5007494f17a5329b11a8/src/markerclusterer.js',
       '//cdn.rawgit.com/wordsandwriting/activate-tools/f39002fcc10a9a554c651543b3065847130c2811/js/jquery.geopicker.js',      
       '//use.fontawesome.com/releases/v5.0.6/js/all.js',
+      '//cdn.rawgit.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
       "/javascripts/app.js?#{Time.now.to_i}"
       ].each { |f| %>
       <script src="<%=f%>"></script>
@@ -95,57 +96,67 @@
               <li><span class="fa-li"><i class="fab fa-ethereum"></i></span> <a data-toggle="tooltip" title="Ethereum" target="_blank" href="https://etherscan.io/address/stephenreid.eth">stephenreid.eth</a></li>
             </ul>
 
-            <% form_tag '', :onsubmit => %Q{web3.eth.sendTransaction({to:'0x72e1638bd8cd371bfb04cf665b749a0e4ae38324', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline' do %>
-            Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
-              <% end %>
-
-              <div class="mb-1">
-                <div class="fb-follow" data-href="https://www.facebook.com/stephenreid.0" data-layout="button" data-size="small" data-show-faces="true"></div>
-              </div>
-              <div>
-                <a href="https://twitter.com/stephenreid_" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @stephenreid_</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-              </div>
-              <div>
-                <a class="github-button" href="https://github.com/wordsandwriting" aria-label="Follow @wordsandwriting on GitHub">Follow</a>            
-              </div>                
-
-            </div>
-
-          </div>
-
-          <div class="col-md">
-
             <script>
-        $(function () {
-          $('.place').hover(function () {
-            $('.bgo', this).hide()
-          }, function () {
-            $('.bgo', this).show()
-          })
+              $(function () {
+                new QRCode('qrcode', {text: '<%=@eth%>', width: 200, height: 200});
+                if (typeof web3 !== 'undefined') {
+                  $('#send-eth').show()
+                }
+              });
+            </script>            
+            <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
+            <div id="qrcode" style="display: none; width: 200px;"></div>
+            <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
+              Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
+            <% end %>
 
-          $("#nav a[href^=http]").attr('target', '_blank')
-        })
-            </script>       
-
-            <div id="nav" class="mt-2">
-              <%= ul_nav [
-                ['Bio', '/'],
-                ['Places', '/places'],
-                ['Aspirations', '/aspirations'],
-                ['Music', '/music'],       
-                ['Books <i class="fas fa-external-link-alt"></i>', 'http://goodreads.com/stephenreid_'],
-                ['Google Maps reviews <i class="fas fa-external-link-alt"></i>', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
-                ['Blog <i class="fas fa-external-link-alt"></i>', 'https://medium.com/@stephenreid_']
-                ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
+            <div class="mb-1">
+              <div class="fb-follow" data-href="https://www.facebook.com/stephenreid.0" data-layout="button" data-size="small" data-show-faces="true"></div>
             </div>
-
-            <%= yield %>
+            <div>
+              <a href="https://twitter.com/stephenreid_" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @stephenreid_</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <div>
+              <a class="github-button" href="https://github.com/wordsandwriting" aria-label="Follow @wordsandwriting on GitHub">Follow</a>            
+            </div>                
 
           </div>
 
-        </div>      
+        </div>
 
-      </div>
+        <div class="col-md">
 
-    </body>
-  </html>
+          <script>
+              $(function () {
+                $('.place').hover(function () {
+                  $('.bgo', this).hide()
+                }, function () {
+                  $('.bgo', this).show()
+                })
+
+                $("#nav a[href^=http]").attr('target', '_blank')
+              })
+          </script>       
+
+          <div id="nav" class="mt-2">
+            <%= ul_nav [
+              ['Bio', '/'],
+              ['Places', '/places'],
+              ['Aspirations', '/aspirations'],
+              ['Music', '/music'],       
+              ['Books <i class="fas fa-external-link-alt"></i>', 'http://goodreads.com/stephenreid_'],
+              ['Google Maps reviews <i class="fas fa-external-link-alt"></i>', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
+              ['Blog <i class="fas fa-external-link-alt"></i>', 'https://medium.com/@stephenreid_']
+              ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
+          </div>
+
+          <%= yield %>
+
+        </div>
+
+      </div>      
+
+    </div>
+
+  </body>
+</html>

@@ -42,6 +42,7 @@ module ActivateApp
       @title = 'Stephen Reid'
       @og_desc = ''
       @og_image = "http://#{ENV['DOMAIN']}/images/bunny.jpg"
+      @eth = '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324'
     end        
                 
     error do
