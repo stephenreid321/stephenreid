@@ -109,17 +109,7 @@
             <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
               Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
             <% end %>
-
-            <div class="mb-1">
-              <div class="fb-follow" data-href="https://www.facebook.com/stephenreid.0" data-layout="button" data-size="small" data-show-faces="true"></div>
-            </div>
-            <div>
-              <a href="https://twitter.com/stephenreid_" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @stephenreid_</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-            <div>
-              <a class="github-button" href="https://github.com/wordsandwriting" aria-label="Follow @wordsandwriting on GitHub">Follow</a>            
-            </div>                
-
+               
           </div>
 
         </div>

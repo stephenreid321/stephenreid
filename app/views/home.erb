@@ -29,11 +29,11 @@
 
 <div class="row align-items-center">
   <% [
-    ['The Psychedelic Society', 'http://psychedelicsociety.org.uk/', 'https://psychedelicsociety.org.uk/images/logo.png', %Q{<div class="fb-follow" data-href="https://www.facebook.com/psychedelicsuk" data-layout="button_count" data-size="large" data-show-faces="true"></div>}],
+    ['The Psychedelic Society', 'http://psychedelicsociety.org.uk/', 'https://psychedelicsociety.org.uk/images/logo.png'],
     ['Huddl', 'http://huddl.tech/', 'https://huddl.tech/images/huddl.png'],        
     ['Breaking Convention', 'http://breakingconvention.co.uk/', '/images/bc.png'],
     ['Metamonastery', 'http://metamonastery.net/', 'http://metamonastery.net/images/horizontal.png'],
-    ].each { |name, website, image_src, follow| %>
+    ].each { |name, website, image_src| %>
     <div class="col-6 col-md-3 mb-3 mb-md-0">
       <a title="<%=name%>" target="_blank" href="<%=website%>"><img class="w-100" src="<%=image_src%>" /></a>
     </div>
