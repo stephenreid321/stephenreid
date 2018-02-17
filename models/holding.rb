@@ -37,22 +37,5 @@ class Holding
       :units => :number
     }
   end
-  
-  def create_snapshot
-    Snapshot.create(
-      :wallet => wallet,
-      :currency => currency,
-      :symbol => symbol,
-      :units => units,
-      :usd_per_unit => usd_per_unit,
-      :gbp_per_unit => gbp_per_unit
-    )    
-  end
-  
-  def self.create_snapshots
-    Holding.all.each { |holding|
-      holding.create_snapshot
-    }
-  end
         
 end
