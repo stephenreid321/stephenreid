@@ -4,7 +4,22 @@
   <li>Morning exercises (when I wake up, before doing anything else): leg lifts, push ups, toe touch</li>
   <li>Meditation (<a href="https://insighttimer.com/">Insight Timer</a>)</li>
   <li>Yoga (<a href="https://www.downdogapp.com/">Down Dog</a>)</li>      
-  <li>Spanish (<a href="https://www.fluencia.com/">Fluencia</a>, <a href="https://www.ankiapp.com/">Anki</a>)</li>    
+  <li>Spanish:
+    <ul>
+      <li>
+        <a href="https://www.fluencia.com/">Fluencia</a>: <%=x = ef('fluencia') %>
+        <%= partial :progress, locals: {p: x.split('%').first} %>        
+      </li>
+      <li>
+        <a href="https://www.ankiapp.com/">Anki vocab</a>: <%=x = anki('vocab')%>
+        <%= partial :progress, locals: {p: x.split('%').first} %>           
+      </li>    
+      <li>
+        <a href="https://www.ankiapp.com/">Anki conjugations</a>: <%=x = anki('conjugations')%>
+        <%= partial :progress, locals: {p: x.split('%').first} %>             
+      </li>    
+    </ul>
+  </li>
   <li>Cardio: skipping, swimming, squash, running, dancing, climbing, football, cycling, hiking</li>
 </ul>
 <hr />
