@@ -28,7 +28,7 @@ ActivateApp::App.helpers do
       x += ' '
       y = %Q{<small>Updated #{timeago(fragment.updated_at)}</small>}
       x += if current_account
-        %Q{<a href="/admin/edit/Fragment/#{fragment.id}">#{y}</a>}
+        %Q{<a target="_blank" href="/admin/edit/Fragment/#{fragment.id}">#{y}</a>}
       else
         y
       end      
