@@ -34,7 +34,7 @@ ActivateApp::App.helpers do
       end      
     else
       if current_account
-        x = %Q{<a class="btn btn-sm btn-primary" href="/admin/new/Fragment">Create fragment</a>}
+        x = %Q{<a target="_blank" class="btn btn-sm btn-primary" href="/admin/new/Fragment">Create fragment</a>}
       end
     end
     x
