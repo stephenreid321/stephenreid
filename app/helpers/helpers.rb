@@ -25,9 +25,10 @@ ActivateApp::App.helpers do
   def ef(slug, body: nil)
     if fragment = Fragment.find_by(slug: slug)
       x = body || fragment.body
+      x += ' '
       y = %Q{<small>#{timeago(fragment.updated_at)}</small>}
       x += if current_account
-        %Q{ <a href="/admin/edit/Fragment/#{fragment.id}">#{y}</a>}
+        %Q{<a href="/admin/edit/Fragment/#{fragment.id}">#{y}</a>}
       else
         y
       end      
