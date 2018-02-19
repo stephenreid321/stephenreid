@@ -20,6 +20,11 @@
       </li>    
     </ul>
   </li>
+  <li>
+    Tarot: <%=x = ef('tarot') %>
+    <%= partial :progress, locals: {p: 100*(x.split(' ')[0].to_f/x.split(' ')[2].to_f)} %>
+  </li>  
+  <li>Read a book (<a href="http://goodreads.com/stephenreid_">Goodreads</a>)</li>
   <li>Cardio: skipping, swimming, squash, running, dancing, climbing, football, cycling, hiking</li>
 </ul>
 <hr />
