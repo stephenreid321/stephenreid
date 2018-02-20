@@ -9,8 +9,6 @@
       'popper.js/1.11.0' => 'umd/popper.min.js',
       'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
       'select2/3.5.2' => 'select2.min.js select2.min.css',
-      'codemirror/5.0.0' => 'codemirror.min.css theme/monokai.min.css codemirror.min.js mode/xml/xml.min.js',
-      'summernote/0.6.1' => 'summernote.min.css summernote.min.js',
       'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',      
       'Chart.js/2.7.0' => 'Chart.bundle.min.js'
       }.each { |k,v| %>    
@@ -36,6 +34,7 @@
       '//cdn.rawgit.com/wordsandwriting/activate-tools/f39002fcc10a9a554c651543b3065847130c2811/js/jquery.geopicker.js',      
       '//use.fontawesome.com/releases/v5.0.6/js/all.js',
       '//cdn.rawgit.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
+      "//cdn.rawgit.com/wordsandwriting/activate-tools/7a73525b76c8234a4803e3196b4403ec6fd6ded7/js/textboxio/textboxio.js",
       "/javascripts/app.js?#{Time.now.to_i}"
       ].each { |f| %>
       <script src="<%=f%>"></script>

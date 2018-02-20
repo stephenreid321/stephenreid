@@ -19,30 +19,14 @@ $(function () {
 
   $("abbr.timeago").timeago()
 
-  $('textarea.wysiwyg').each(function () {
-    var textarea = this;
-    var summernote = $('<div class="summernote"></div>');
-    $(summernote).insertAfter(this);
-    $(summernote).summernote({
-      styleWithSpan: false,
-      toolbar: [
-        ['view', ['codeview', 'fullscreen']],
-        ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-      ],
-      height: 300,
-      codemirror: {theme: 'monokai'},
-    });
-    $(textarea).prop('required', false);
-    $(summernote).code($(textarea).val());
-    $(textarea).hide();
-    $(textarea.form).submit(function () {
-      $(textarea).val($(summernote).code());
+   $('textarea.wysiwyg').each(function () {
+    textboxio.replace(this, {
+      css: {
+        stylesheets: ['/stylesheets/app.css']
+      },
+      images: {
+        allowLocal: false
+      }
     });
   });
 
