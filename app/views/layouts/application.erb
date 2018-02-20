@@ -111,7 +111,7 @@
             <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
               Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
             <% end %>
-               
+
           </div>
 
         </div>
@@ -119,25 +119,22 @@
         <div class="col-md">
 
           <script>
-              $(function () {
-                $('.place').hover(function () {
-                  $('.bgo', this).hide()
-                }, function () {
-                  $('.bgo', this).show()
-                })
-
-                $("#nav a[href^=http]").attr('target', '_blank')
+            $(function () {
+              $('.place').hover(function () {
+                $('.bgo', this).hide()
+              }, function () {
+                $('.bgo', this).show()
               })
+
+              $("#nav a[href^=http]").attr('target', '_blank')
+            })
           </script>       
 
           <div id="nav" class="mt-2">
             <%= ul_nav [
               ['Bio', '/'],
               ['Places', '/places'],
-              ['Aspirations', '/aspirations'],
-              ['Music', '/music'],       
-              ['Google Maps reviews <i class="fas fa-external-link-alt"></i>', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
-              ['Blog <i class="fas fa-external-link-alt"></i>', 'https://medium.com/@stephenreid0']
+              ['Aspirations', '/aspirations']
               ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
           </div>
 
