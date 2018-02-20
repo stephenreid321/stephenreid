@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
 ruby '2.4.2'
-gem 'sinatra'
+gem 'sinatra', '2.0.0'
 gem 'padrino'
 gem 'puma'
 gem 'rake'
+gem 'sass'
 
 # Admin
 gem 'will_paginate', github: 'mislav/will_paginate'
