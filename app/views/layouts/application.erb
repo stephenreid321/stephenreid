@@ -92,7 +92,7 @@
             </div>
 
             <style>
-              .icon a { font-size: 9vw; color: rgb(33, 37, 41) }
+              .icon a { font-size: 14vw; color: rgb(33, 37, 41) }
               .icon a:hover { color: rgb(206, 40, 40) }
               @media(min-width: 768px) {
                 .icon a { font-size: 3.5vw }
@@ -121,7 +121,7 @@
                 ].each { |network,url,text,icon|
               %>
                 <% if network %>
-                  <div class="col-3 col-md-4 icon">
+                  <div class="col-4 icon">
                     <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>"><i class="<%= icon ? icon : "fab fa-#{network.downcase}" %>"></i></a>                  
                   </div>                  
                 <% else %>
