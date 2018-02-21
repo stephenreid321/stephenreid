@@ -76,42 +76,67 @@
 
       <div class="row justify-content-center">
 
-        <div class="col-auto">
+        <div class="col-md-3">
 
           <div id="sidebar">
 
+            <style>
+              #sidebar { text-align: center }
+              @media(min-width: 768px) {
+                #sidebar { text-align:  none }  
+              }
+            </style>
             <h1 style="font-size: 2em" class="mt-2 mb-0 font-weight-bold">Stephen Reid</h1>
 
             <img src="/images/me-square.png" class="rounded-circle my-3" style="max-width: 200px; width: 100%" />
 
-            <ul class="fa-ul">
-              <li><span class="fa-li"><i class="fas fa-envelope"></i></span> <a data-toggle="tooltip" title="Email" target="_blank" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a></li>              
-              <li><span class="fa-li"><i class="fab fa-facebook-square"></i></span> <a data-toggle="tooltip" title="Facebook" target="_blank" href="http://facebook.com/stephenreid321">stephenreid321</a></li>              
-              <li><span class="fa-li"><i class="fab fa-twitter"></i></span> <a data-toggle="tooltip" title="Twitter" target="_blank" href="http://twitter.com/stephenreid321">stephenreid321</a></li>
-              <li><span class="fa-li"><i class="fab fa-linkedin"></i></span> <a data-toggle="tooltip" title="LinkedIn" target="_blank" href="https://www.linkedin.com/in/stephenreid321">stephenreid321</a></li>              
-              <li><hr /></li>
-              <li><span class="fa-li"><i class="fab fa-github"></i></span> <a data-toggle="tooltip" title="Github" target="_blank" href="http://github.com/stephenreid321">stephenreid321</a></li>                
-              <li><span class="fa-li"><i class="fab fa-soundcloud"></i></span> <a data-toggle="tooltip" title="Soundcloud" target="_blank" href="http://soundcloud.com/stephenreid321">stephenreid321</a></li>
-              <li><span class="fa-li"><i class="fab fa-medium"></i></span> <a data-toggle="tooltip" title="Medium" target="_blank" href="https://medium.com/@stephenreid321">stephenreid321</a></li>
-              <li><span class="fa-li"><i class="fab fa-reddit"></i></span> <a data-toggle="tooltip" title="reddit" target="_blank" href="https://reddit.com//user/stephenreid321">stephenreid321</a></li>
-              <li><span class="fa-li"><i class="fab fa-youtube"></i></span> <a data-toggle="tooltip" title="YouTube" target="_blank" href="https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA">Stephen Reid</a></li>              
-              <li><hr /></li>
-              <li><span class="fa-li"><i class="fab fa-goodreads"></i></span> <a data-toggle="tooltip" title="Goodreads" target="_blank" href="http://goodreads.com/stephenreid321">stephenreid321</a></li>
-              <li><span class="fa-li"><i class="fab fa-imdb"></i></span> <a data-toggle="tooltip" title="IMDb" target="_blank" href="https://www.imdb.com/user/ur85653381/">stephenreid321</a></li>
-              <li><hr /></li>
-              <li><span class="fa-li"><i class="fab fa-ethereum"></i></span> <a data-toggle="tooltip" title="Ethereum" target="_blank" href="https://etherscan.io/address/stephenreid.eth">stephenreid.eth</a></li>
-            </ul>
+            <style>
+              .icon a { font-size: 9vw; color: rgb(33, 37, 41) }
+              .icon a:hover { color: rgb(206, 40, 40) }
+              @media(min-width: 768px) {
+                .icon a { font-size: 3.5vw }
+              }
+            </style>
+            <div class="row no-gutters">
+              <%
+              [
+                ['Email', 'mailto:stephen@stephenreid.net', 'stephen@stephenreid.net', 'fas fa-envelope'],
+                ['Facebook'],
+                ['Twitter'],
+                ['LinkedIn', 'https://www.linkedin.com/in/stephenreid321'],
+              [],
+                ['Github'],
+                ['Soundcloud'],
+                ['Medium', 'https://medium.com/@stephenreid321'],
+                ['Reddit', 'https://reddit.com//user/stephenreid321'],
+                ['Youtube', 'https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA'],
+              [],
+                ['Goodreads'],
+                ['IMDb', 'https://www.imdb.com/user/ur85653381/'],
+              [],
+                ['Ethereum', 'https://etherscan.io/address/stephenreid.eth', 'stephenreid.eth']
+                ].each { |network,url,text,icon|
+              %>
+                <% if network %>
+                  <div class="col-3 col-md-4 icon">
+                    <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>"><i class="<%= icon ? icon : "fab fa-#{network.downcase}" %>"></i></a>              
+                  </div>                  
+                <% else %>
+                  <div class="col-12"><hr /></div>
+                <% end %>
+              <% } %>
+            </div>
 
             <script>
               $(function () {
-                new QRCode('qrcode', {text: '<%=@eth%>', width: 200, height: 200});
+                new QRCode('qrcode', {text: '<%=@eth%>', width: 150, height: 150});
                 if (typeof web3 !== 'undefined') {
                   $('#send-eth').show()
                 }
               });
             </script>            
             <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
-            <div id="qrcode" style="display: none; width: 200px;"></div>
+            <div id="qrcode" style="display: none; width: 150px;" class="mx-auto my-3"></div>
             <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
               Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
             <% end %>
