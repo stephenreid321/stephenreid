@@ -81,14 +81,15 @@
           <div id="sidebar">
 
             <style>
-              #sidebar { text-align: center }
+              #pic { text-align: center }
               @media(min-width: 768px) {
-                #sidebar { text-align:  none }  
+                #pic { text-align:  none }  
               }
             </style>
-            <h1 style="font-size: 2em" class="mt-2 mb-0 font-weight-bold">Stephen Reid</h1>
-
-            <img src="/images/me-square.png" class="rounded-circle my-3" style="max-width: 200px; width: 100%" />
+            <div id="pic"
+                 <h1 style="font-size: 2em" class="mt-2 mb-0 font-weight-bold">Stephen Reid</h1>
+              <img src="/images/me-square.png" class="rounded-circle my-3" style="max-width: 200px; width: 100%" />
+            </div>
 
             <style>
               .icon a { font-size: 9vw; color: rgb(33, 37, 41) }
@@ -122,7 +123,7 @@
                     <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>"><i class="<%= icon ? icon : "fab fa-#{network.downcase}" %>"></i></a>              
                   </div>                  
                 <% else %>
-                  <div class="col-12"><hr /></div>
+                  <div class="col-12"><hr class="my-1" /></div>
                 <% end %>
               <% } %>
             </div>
@@ -135,8 +136,10 @@
                 }
               });
             </script>            
-            <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
-            <div id="qrcode" style="display: none; width: 150px;" class="mx-auto my-3"></div>
+            <div class="my-3">
+              <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
+              <div id="qrcode" style="display: none; width: 150px;" class="mx-auto"></div>
+            </div>
             <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
               Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
             <% end %>
