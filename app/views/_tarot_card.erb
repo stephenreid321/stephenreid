@@ -1,0 +1,13 @@
+<% if !defined?(text); text = t.name; end %>
+
+<% if t.description %>
+  <a href="javascript:;" data-toggle="popover"><%=text%></a>
+  <span style="display: none"><%=text%></span>
+  <span style="display: none"><%=t.description%></span>
+<% else %>
+  <%=text%>              
+<% end %>
+<% if current_account %>
+  <a style="opacity: 0.3" target="_blank" href="<%=t.teachmetarot_url%>"><i class="fas fa-link"></i></a>
+  <a style="opacity: 0.3" target="_blank" href="<%="/admin/edit/#{t.class}/#{t.id}"%>"><i class="fas fa-edit"></i></a>
+<% end %>

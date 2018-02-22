@@ -13,10 +13,7 @@
         <th>
           <% begin %>
             <% if t = TarotSuit.find_by(name: suit_name) %>
-              <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
-              <% if current_account %>
-                <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank"  href="<%="/admin/edit/TarotSuit/#{t.id}"%>"><i class="fas fa-edit"></i></a>
-              <% end %>
+              <%= partial :tarot_card, :locals => {:t => t} %>
             <% end; rescue; end %>
           <i data-toggle="tooltip" title="<%= TarotSuit.icons[suit_name.to_sym][0] %>" class="fas fa-<%= TarotSuit.icons[suit_name.to_sym][1] %>"></i>                    
         </th>
@@ -30,10 +27,7 @@
           <% begin %>
             <% if t = TarotNumber.find_by(name: n) %>
               <% if t.teachmetarot_url %>
-                <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%> <%=TarotNumber.numerals[i]%></a>
-                <% if current_account %>
-                  <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank"  href="<%="/admin/edit/TarotNumber/#{t.id}"%>"><i class="fas fa-edit"></i></a>
-                <% end %>          
+                <%= partial :tarot_card, :locals => {:t => t, :text => "#{t.name} #{TarotNumber.numerals[i]}"} %>
               <% else %>
                 <%=t.name%> <%=TarotNumber.numerals[i]%>
               <% end %>
@@ -51,21 +45,15 @@
         <td>
           <% begin %>
             <% if t = TarotCard.find_by(tarot_suit: nil, tarot_number: TarotNumber.find_by(name: n)) %>
-              <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
-              <% if current_account %>
-                <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank"  href="<%="/admin/edit/TarotCard/#{t.id}"%>"><i class="fas fa-edit"></i></a>
-              <% end %>                    
+              <%= partial :tarot_card, :locals => {:t => t} %>                 
             <% end; rescue; end %>
         </td>
         <% TarotSuit.suits.each { |suit_name| %>
           <td>
             <% begin %>
               <% if t = TarotCard.find_by(tarot_suit: TarotSuit.find_by(name: suit_name), tarot_number: TarotNumber.find_by(name: n)) %>
-                <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
-                <% if current_account %>
-                  <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank"  href="<%="/admin/edit/TarotCard/#{t.id}"%>"><i class="fas fa-edit"></i></a>
-                  <% end %>                                
-                <% end; rescue; end %>
+                <%= partial :tarot_card, :locals => {:t => t} %>                               
+              <% end; rescue; end %>
           </td>
         <% } %>
       </tr>

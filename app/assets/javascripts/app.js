@@ -1,6 +1,6 @@
 
 $(function () {
-  
+
   $('[data-toggle="tooltip"]').tooltip()
 
   $('input[type=text].slug').each(function () {
@@ -19,7 +19,7 @@ $(function () {
 
   $("abbr.timeago").timeago()
 
-   $('textarea.wysiwyg').each(function () {
+  $('textarea.wysiwyg').each(function () {
     textboxio.replace(this, {
       css: {
         stylesheets: ['/stylesheets/app.css']
@@ -86,5 +86,36 @@ $(function () {
     if ($(pagelet).html().length == 0)
       $(pagelet).load($(pagelet).attr('data-pagelet-url'))
   })
+
+  $('[data-toggle="popover"]').popover({
+    html: true,
+    viewport: false,
+    trigger: 'manual',
+    placement: 'top',
+    animation: false,
+    title: function () {
+      return $(this).next('span').html()
+    },
+    content: function () {
+      return $(this).next('span').next('span').html()
+    }
+  }).on("mouseenter", function () {
+    var _this = this;
+    setTimeout(function () {
+      if ($(_this).filter(':hover').length) {
+        $(_this).popover("show");
+        $($(_this).data('bs.popover')['tip']).on("mouseleave", function () {
+          $(_this).popover('hide');
+        });
+      }
+    }, 200);
+  }).on("mouseleave", function () {
+    var _this = this;
+    setTimeout(function () {
+      if (!$($(_this).data('bs.popover')['tip']).filter(':hover').length) {
+        $(_this).popover("hide");
+      }
+    }, 200);
+  });
 
 });
