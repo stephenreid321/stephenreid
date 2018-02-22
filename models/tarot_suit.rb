@@ -3,7 +3,7 @@ class TarotSuit
   include Mongoid::Timestamps
 
   field :name, :type => String
-  field :keywords, :type => String
+  field :description, :type => String
   field :teachmetarot_url, :type => String
   
   has_many :tarot_cards, :dependent => :destroy
@@ -11,7 +11,7 @@ class TarotSuit
   def self.admin_fields
     {
       :name => :text,
-      :keywords => :text_area,
+      :description => :text_area,
       :teachmetarot_url => :url,
       :tarot_cards => :collection
     }
@@ -44,7 +44,7 @@ class TarotSuit
         next
       end
       
-      TarotSuit.create name: suit_name, keywords: a.get(page).search('.entry p').first.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
+      TarotSuit.create name: suit_name, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
     }    
   end
     

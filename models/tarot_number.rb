@@ -3,7 +3,7 @@ class TarotNumber
   include Mongoid::Timestamps
 
   field :name, :type => String
-  field :keywords, :type => String
+  field :description, :type => String
   field :teachmetarot_url, :type => String
   
   has_many :tarot_cards, :dependent => :destroy
@@ -11,7 +11,7 @@ class TarotNumber
   def self.admin_fields
     {
       :name => :text,
-      :keywords => :text_area,
+      :description => :text_area,
       :teachmetarot_url => :url,
       :tarot_cards => :collection
     }
@@ -50,7 +50,7 @@ class TarotNumber
           puts "couldn't find #{slugs.first}"
           next
         end    
-        TarotNumber.create name: n, keywords: a.get(page).search('.entry p')[1].text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"        
+        TarotNumber.create name: n, teachmetarot_url: "https://teachmetarot.com/#{slug}/"        
       else
         TarotNumber.create name: n
       end
