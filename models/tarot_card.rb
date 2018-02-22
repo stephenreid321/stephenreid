@@ -6,19 +6,19 @@ class TarotCard
   field :keywords, :type => String
   field :teachmetarot_url, :type => String
   
-  belongs_to :tarot_suit, optional: true
-  belongs_to :tarot_number, optional: true
+  belongs_to :tarot_number
+  belongs_to :tarot_suit, optional: true  
   
   def self.majors
-    ['fool', 'magician', 'high priestess', 'empress', 'emperor', 'lovers', 'chariot', 'strength', 'hermit', 'wheel of fortune',
+    ['fool', 'magician', 'high priestess', 'empress', 'emperor', 'hierophant', 'lovers', 'chariot', 'strength', 'hermit', 'wheel of fortune',
       'justice', 'hanged man', 'death', 'temperance', 'devil', 'tower', 'star', 'moon', 'sun', 'judgement', 'world']
   end
   
   def self.admin_fields
     {
       :name => :text,
-      :tarot_suit_id => :lookup,
       :tarot_number_id => :lookup,
+      :tarot_suit_id => :lookup,      
       :teachmetarot_url => :url,
       :keywords => :text_area
     }
@@ -26,7 +26,7 @@ class TarotCard
   
   def self.import_majors
     a = Mechanize.new
-    majors.each_with_index { |major,i|
+    majors.each_with_index { |major,i|      
       slugs = [
         "#{major}-#{TarotNumber.numerals[i]}-upright",
         "the-#{major}-#{TarotNumber.numerals[i]}-upright",
@@ -48,9 +48,9 @@ class TarotCard
         puts "couldn't find #{slugs.first}"
         next
       end
-        
+            
       begin
-        TarotCard.create name: major, keywords: page.search(".entry h2:contains('Keywords')").first.next.next.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
+        TarotCard.create name: major, tarot_number: TarotNumber.find_by(name: TarotNumber.numbers[i]), keywords: page.search(".entry h2:contains('Keywords')").first.next.next.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
       rescue => e
         puts "couldn't find keywords for #{major}"
         next
@@ -60,14 +60,15 @@ class TarotCard
   
   def self.import_suits
     a = Mechanize.new    
-    TarotSuit.suits.each { |suit|           
+    TarotSuit.suits.each { |suit_name|           
       TarotNumber.numbers.each_with_index { |n,i|                        
-        next if i == 0
+        next if i == 0 or i > 14
+        n_or_court = n.split('-').first
         slugs = [
-          "#{n}-of-#{suit.pluralize}",
-          "#{n}-#{TarotNumber.numerals[i]}-of-#{suit.pluralize}",
-          "the-#{n}-#{TarotNumber.numerals[i]}-of-#{suit.pluralize}",
-          "the-#{n}-of-#{suit.pluralize}",          
+          "#{n_or_court}-of-#{suit_name.pluralize}",
+          "#{n_or_court}-#{TarotNumber.numerals[i]}-of-#{suit_name.pluralize}",
+          "the-#{n_or_court}-#{TarotNumber.numerals[i]}-of-#{suit_name.pluralize}",
+          "the-#{n_or_court}-of-#{suit_name.pluralize}",          
         ]
         
         page = nil
@@ -86,9 +87,9 @@ class TarotCard
         end
         
         begin
-          TarotCard.create name: "the #{n} of #{suit}", tarot_suit: TarotSuit.find_by(suit: suit), tarot_number: TarotNumber.find_by(number: n), keywords: page.search(".entry h2:contains('Keywords')").first.next.next.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
+          TarotCard.create name: "the #{n_or_court} of #{suit_name}", tarot_suit: TarotSuit.find_by(name: suit_name), tarot_number: TarotNumber.find_by(name: TarotNumber.numbers[i]), keywords: page.search(".entry h2:contains('Keywords')").first.next.next.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
         rescue => e
-          puts "couldn't find keywords for the #{n} of #{suit}: #{e}"
+          puts "couldn't find keywords for the #{n_or_court} of #{suit_name}: #{e}"
           next
         end
                         

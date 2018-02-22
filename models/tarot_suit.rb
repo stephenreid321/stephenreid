@@ -2,7 +2,7 @@ class TarotSuit
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :suit, :type => String
+  field :name, :type => String
   field :keywords, :type => String
   field :teachmetarot_url, :type => String
   
@@ -10,7 +10,7 @@ class TarotSuit
   
   def self.admin_fields
     {
-      :suit => :text,
+      :name => :text,
       :keywords => :text_area,
       :teachmetarot_url => :url,
       :tarot_cards => :collection
@@ -23,10 +23,10 @@ class TarotSuit
   
   def self.import
     a = Mechanize.new    
-    suits.each { |suit|      
+    suits.each { |suit_name|      
       slugs = [
-        "the-suit-of-#{suit}",
-        "the-suitof-#{suit}",
+        "the-suit-of-#{suit_name}",
+        "the-suitof-#{suit_name}",
       ]
       
       page = nil
@@ -44,7 +44,7 @@ class TarotSuit
         next
       end
       
-      TarotSuit.create suit: suit, keywords: a.get(page).search('.entry p').first.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
+      TarotSuit.create name: suit_name, keywords: a.get(page).search('.entry p').first.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
     }    
   end
     
