@@ -1,3 +1,9 @@
+<% if current_account %>
+  <style>
+    a.not-described { opacity: 0.5 }
+  </style>
+<% end %>
+
 <table class="table">
   <thead>
     <tr>
@@ -7,7 +13,7 @@
         <th>
           <% begin %>
             <% if t = TarotSuit.find_by(name: suit_name) %>
-              <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+              <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
             <% end; rescue; end %>
           <i data-toggle="tooltip" title="<%= TarotSuit.icons[suit_name.to_sym][0] %>" class="fas fa-<%= TarotSuit.icons[suit_name.to_sym][1] %>"></i>                    
         </th>
@@ -21,7 +27,7 @@
           <% begin %>
             <% if t = TarotNumber.find_by(name: n) %>
               <% if t.teachmetarot_url %>
-                <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%> <%=TarotNumber.numerals[i]%></a>
+                <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%> <%=TarotNumber.numerals[i]%></a>
               <% else %>
                 <%=t.name%> <%=TarotNumber.numerals[i]%>
               <% end %>
@@ -39,14 +45,14 @@
         <td>
           <% begin %>
             <% if t = TarotCard.find_by(tarot_suit: nil, tarot_number: TarotNumber.find_by(name: n)) %>
-              <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+              <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
             <% end; rescue; end %>
         </td>
         <% TarotSuit.suits.each { |suit_name| %>
           <td>
             <% begin %>
               <% if t = TarotCard.find_by(tarot_suit: TarotSuit.find_by(name: suit_name), tarot_number: TarotNumber.find_by(name: n)) %>
-                <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+                <a class="<% if t.description%>described<% else %>not-described<% end%>" target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
               <% end; rescue; end %>
           </td>
         <% } %>
