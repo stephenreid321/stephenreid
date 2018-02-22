@@ -59,6 +59,7 @@ module ActivateApp
     end
     
     get '/places' do
+      @title = 'Places · Stephen Reid'
       if params[:map]
         @places = Place.all
         @places = @places.where(category: 'upcoming') if params[:plans]
@@ -74,6 +75,7 @@ module ActivateApp
     end
        
     get '/aspirations' do
+      @title = 'Aspirations · Stephen Reid'
       erb :aspirations
     end
     
@@ -82,6 +84,7 @@ module ActivateApp
     end
     
     get '/tarot' do
+      @title = 'Tarot · Stephen Reid'
       erb :tarot
     end
     
