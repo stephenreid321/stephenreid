@@ -21,9 +21,9 @@
           <% begin %>
             <% if t = TarotNumber.find_by(name: n) %>
               <% if t.teachmetarot_url %>
-                <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+                <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%> <%=TarotNumber.numerals[i]%></a>
               <% else %>
-                <%=t.name%>
+                <%=t.name%> <%=TarotNumber.numerals[i]%>
               <% end %>
             <% end; rescue; end %>                    
           <% case n; when 'page/eleven' %>
