@@ -21,6 +21,10 @@ class TarotSuit
     %w{wands pentacles cups swords}
   end
   
+  def self.icons
+    {:wands => ['fire', :fire], :pentacles => ['earth', :globe], :cups => ['water', :tint], :swords => ['air', :cloud]}
+  end
+  
   def self.import
     a = Mechanize.new    
     suits.each { |suit_name|      
