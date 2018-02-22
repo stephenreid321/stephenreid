@@ -10,8 +10,8 @@ class TarotCard
   belongs_to :tarot_suit, optional: true  
   
   def self.majors
-    ['fool', 'magician', 'high-priestess', 'empress', 'emperor', 'hierophant', 'lovers', 'chariot', 'strength', 'hermit', 'wheel-of-fortune',
-      'justice', 'hanged-man', 'death', 'temperance', 'devil', 'tower', 'star', 'moon', 'sun', 'judgement', 'world']
+    ['fool', 'magician', 'high priestess', 'empress', 'emperor', 'hierophant', 'lovers', 'chariot', 'strength', 'hermit', 'wheel of fortune',
+      'justice', 'hanged man', 'death', 'temperance', 'devil', 'tower', 'star', 'moon', 'sun', 'judgement', 'world']
   end
   
   def self.admin_fields
@@ -37,12 +37,13 @@ class TarotCard
   def self.import_majors
     a = Mechanize.new
     majors.each_with_index { |major,i|      
+      mp = major.parameterize
       slugs = [
-        "#{major}-#{TarotNumber.numerals[i]}-upright",
-        "the-#{major}-#{TarotNumber.numerals[i]}-upright",
-        "the-#{major}-#{TarotNumber.numerals[i]}-upright",
-        "#{major}-#{TarotNumber.numerals[i]}",
-        "the-#{major}-#{TarotNumber.numerals[i]}"    
+        "#{mp}-#{TarotNumber.numerals[i]}-upright",
+        "the-#{mp}-#{TarotNumber.numerals[i]}-upright",
+        "the-#{mp}-#{TarotNumber.numerals[i]}-upright",
+        "#{mp}-#{TarotNumber.numerals[i]}",
+        "the-#{mp}-#{TarotNumber.numerals[i]}"    
       ]
       
       page = nil
