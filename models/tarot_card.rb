@@ -96,14 +96,12 @@ class TarotCard
           puts "couldn't find #{slugs.first}"
           next
         end
-        
-        begin
-          TarotCard.create name: "the #{n_or_court} of #{suit_name}", tarot_suit: TarotSuit.find_by(name: suit_name), tarot_number: TarotNumber.find_by(name: TarotNumber.numbers[i]), keywords: page.search(".entry h2:contains('Keywords')").first.next.next.text, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
-        rescue => e
-          puts "couldn't find keywords for the #{n_or_court} of #{suit_name}: #{e}"
-          next
+                
+        if !(keywords = begin; page.search(".entry h2:contains('Keywords')").first.next.next.text; rescue; end)
+          puts "couldn't find keywords for the #{n_or_court} of #{suit_name}"
         end
-                        
+        TarotCard.create name: "the #{n_or_court} of #{suit_name}", tarot_suit: TarotSuit.find_by(name: suit_name), tarot_number: TarotNumber.find_by(name: TarotNumber.numbers[i]), keywords: keywords, teachmetarot_url: "https://teachmetarot.com/#{slug}/"
+                                
       }
     }    
   end
