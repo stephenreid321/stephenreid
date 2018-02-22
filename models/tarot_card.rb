@@ -24,6 +24,16 @@ class TarotCard
     }
   end
   
+  def self.reimport    
+    TarotSuit.delete_all
+    TarotNumber.delete_all
+    TarotCard.delete_all
+    TarotSuit.import
+    TarotNumber.import
+    TarotCard.import_majors
+    TarotCard.import_suits
+  end
+  
   def self.import_majors
     a = Mechanize.new
     majors.each_with_index { |major,i|      
