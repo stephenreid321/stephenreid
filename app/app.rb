@@ -85,6 +85,7 @@ module ActivateApp
     
     get '/tarot' do
       @title = 'Tarot · Stephen Reid'
+      @og_image = "http://#{ENV['DOMAIN']}/images/tarotcards.jpg"
       erb :tarot
     end
     
