@@ -71,7 +71,7 @@ class TarotCard
     TarotSuit.suits.each { |suit_name|           
       TarotNumber.numbers.each_with_index { |n,i|                        
         next if i == 0 or i > 14
-        n_or_court = n.split('-').first
+        n_or_court = n.split('/').first
         slugs = [
           "#{n_or_court}-of-#{suit_name.pluralize}",
           "#{n_or_court}-#{TarotNumber.numerals[i]}-of-#{suit_name.pluralize}",

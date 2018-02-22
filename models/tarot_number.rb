@@ -29,11 +29,11 @@ class TarotNumber
     a = Mechanize.new         
     numbers.each_with_index { |n,i|    
       if i > 0 and i < 15
-        n_or_court = n.split('-').first
+        n_or_court_pp = n.split('/').first.parameterize.pluralize
         slugs = [
-          "#{n_or_court.pluralize}-intro",
-          "the-#{n_or_court.pluralize}-intro",
-          "#{n_or_court.pluralize}-#{numerals[i]}-intro"
+          "#{n_or_court_pp}-intro",
+          "the-#{n_or_court_pp}-intro",
+          "#{n_or_court_pp}-#{numerals[i]}-intro"
         ]
 
         page = nil
