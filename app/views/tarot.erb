@@ -1,11 +1,14 @@
 <table class="table">
   <thead>
     <tr>
-      <th>number</th>
-      <th>major arcana</th>
+      <th><a target="_blank" href="https://teachmetarot.com/numerology-destiny-number/">number</a></th>
+      <th><a target="_blank" href="https://teachmetarot.com/part-iii-major-arcana/">major arcana</a></th>
       <% TarotSuit.suits.each { |suit_name| %>
         <th>
-          <%=suit_name%>
+          <% begin %>
+            <% if t = TarotSuit.find_by(name: suit_name) %>
+              <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+            <% end; rescue; end %>
           <i data-toggle="tooltip" title="<%= TarotSuit.icons[suit_name.to_sym][0] %>" class="fas fa-<%= TarotSuit.icons[suit_name.to_sym][1] %>"></i>                    
         </th>
       <% } %>
@@ -14,9 +17,12 @@
   <tbody>
     <% TarotNumber.numbers.each_with_index { |n,i| %>
       <tr>
-        <td>
-          <%=n%>
-        </td>
+        <th>
+          <% begin %>
+            <% if t = TarotNumber.find_by(name: n) %>
+              <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+            <% end; rescue; end %>                    
+        </th>
         <td>
           <% begin %>
             <% if t = TarotCard.find_by(tarot_suit: nil, tarot_number: TarotNumber.find_by(name: n)) %>
