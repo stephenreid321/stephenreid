@@ -18,7 +18,7 @@ class TarotNumber
   end
   
   def self.numbers
-    %w{zero ace two three four five six seven eight nine ten page/eleven/air knight/twelve/fire queen/thirteen/water king/fourteen/earth fifteen sixteen seventeen eighteen nineteen twenty} + ['twenty one']
+    %w{zero ace two three four five six seven eight nine ten page/eleven knight/twelve queen/thirteen king/fourteen fifteen sixteen seventeen eighteen nineteen twenty} + ['twenty one']
   end
   
   def self.numerals

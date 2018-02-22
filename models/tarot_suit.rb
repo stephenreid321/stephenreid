@@ -18,11 +18,11 @@ class TarotSuit
   end
   
   def self.suits
-    %w{wands pentacles cups swords}
+    %w{swords wands cups pentacles}
   end
   
   def self.icons
-    {:wands => ['fire', :fire], :pentacles => ['earth', :globe], :cups => ['water', :tint], :swords => ['air', :cloud]}
+    {:swords => ['air', :cloud], :wands => ['fire', :fire], :cups => ['water', :tint], :pentacles => ['earth', :globe]}
   end
   
   def self.import

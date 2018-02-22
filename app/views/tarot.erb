@@ -20,8 +20,21 @@
         <th>
           <% begin %>
             <% if t = TarotNumber.find_by(name: n) %>
-              <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+              <% if t.teachmetarot_url %>
+                <a target="_blank" href="<%=t.teachmetarot_url%>"><%=t.name%></a>
+              <% else %>
+                <%=t.name%>
+              <% end %>
             <% end; rescue; end %>                    
+          <% case n; when 'page/eleven' %>
+            <i data-toggle="tooltip" title="air" class="fas fa-cloud"></i>                    
+          <% when 'knight/twelve' %>
+            <i data-toggle="tooltip" title="fire" class="fas fa-fire"></i>                    
+          <% when 'queen/thirteen' %>
+            <i data-toggle="tooltip" title="water" class="fas fa-tint"></i>                    
+          <% when 'king/fourteen' %>
+            <i data-toggle="tooltip" title="earth" class="fas fa-globe"></i>                    
+          <% end %>
         </th>
         <td>
           <% begin %>
