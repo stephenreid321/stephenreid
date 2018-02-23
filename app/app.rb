@@ -55,18 +55,20 @@ module ActivateApp
     end
     
     get :home, :map => '/' do
-      erb :home
-    end
-    
-    get '/places' do
-      @title = 'Places · Stephen Reid'
+      @title = 'Stephen Reid'
       if params[:map]
         @places = Place.all
         @places = @places.where(category: 'upcoming') if params[:plans]
         erb :map 
       else 
         erb :places
-      end
+      end      
+      
+    end
+    
+    get '/bio' do
+      @title = 'Bio · Stephen Reid'
+      erb :bio
     end
     
     get '/crypto' do
