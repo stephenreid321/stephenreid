@@ -24,37 +24,5 @@ class TarotNumber
   def self.numerals
     %w{0 i ii iii iv v vi vii viii ix x xi xii xiii xiv xv xvi xvii xviii xix xx xxi}
   end
-  
-  def self.import    
-    a = Mechanize.new         
-    numbers.each_with_index { |n,i|    
-      if i > 0 and i < 15
-        n_or_court_pp = n.split('/').first.parameterize.pluralize
-        slugs = [
-          "#{n_or_court_pp}-intro",
-          "the-#{n_or_court_pp}-intro",
-          "#{n_or_court_pp}-#{numerals[i]}-intro"
-        ]
-
-        page = nil
-        slug = nil
-        slugs.each { |s|
-          slug = s
-          page = begin; a.get("https://teachmetarot.com/#{slug}/"); rescue; end
-          if page
-            # puts "found #{slug}"
-            break 
-          end
-        }
-        if !page
-          puts "couldn't find #{slugs.first}"
-          next
-        end    
-        TarotNumber.create name: n, teachmetarot_url: "https://teachmetarot.com/#{slug}/"        
-      else
-        TarotNumber.create name: n
-      end
-    }    
-  end
-    
+      
 end
