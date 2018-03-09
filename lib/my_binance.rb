@@ -72,7 +72,7 @@ class MyBinance
     def enter
       btc_per_usd = 1/usd_per_asset('BTC')
       q_btc = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f*btc_per_usd
-      client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.round(dp_for_symbol('BTCUSDT'))      
+      client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.floor(dp_for_symbol('BTCUSDT'))      
     end    
     
     def exit
