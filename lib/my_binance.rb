@@ -82,13 +82,16 @@ class MyBinance
     
     def enter   
       refresh
-      btc_per_usd = 1/usd_per_asset('BTC')
-      q_btc = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f*btc_per_usd
-      result = client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.round(dp('BTCUSDT'))
-      while result['code'] == -2010 do
-        q_btc = q_btc*0.9999 # Try 99.99% of previous figure
-        result = client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.round(dp('BTCUSDT'))
-      end
+      q_usd = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f
+      assets = {'BTC' => 0.5, 'ETH' => 0.5}
+      assets.each { |asset, weight|
+        q = (q_usd/usd_per_asset(asset))*weight
+        result = client.create_order symbol: "#{asset}USDT", side: 'BUY', type: 'MARKET', quantity: q.round(dp("#{asset}USDT"))
+        while result['code'] == -2010 do
+          q = q*0.9999 # Try 99.99% of previous figure
+          result = client.create_order symbol: "#{asset}USDT", side: 'BUY', type: 'MARKET', quantity: q.round(dp("#{asset}USDT"))
+        end
+      }
     end    
     
     def exit
