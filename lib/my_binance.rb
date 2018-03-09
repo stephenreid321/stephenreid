@@ -5,6 +5,13 @@ class MyBinance
     def client
       @client ||= Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
     end
+    
+    def refresh
+      prices(true)
+      exchange_info(true)
+      balances(true)
+      gbp_per_usd(true)
+    end
   
     def prices(refresh = false)
       if !@prices or refresh
@@ -74,7 +81,7 @@ class MyBinance
     end    
     
     def enter   
-      balances(true)
+      refresh
       btc_per_usd = 1/usd_per_asset('BTC')
       q_btc = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f*btc_per_usd
       result = client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.round(dp('BTCUSDT'))
@@ -85,7 +92,7 @@ class MyBinance
     end    
     
     def exit
-      balances(true)
+      refresh
       balances.each { |balance|  
         if !%w{USDT BTC}.include?(balance['asset'])
           symbol = "#{balance['asset']}BTC"
