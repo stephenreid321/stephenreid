@@ -100,8 +100,7 @@ class MyBinance
           client.create_order symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
         end
       } 
-      balances(true)
-      q = balances.detect { |balance| balance['asset'] == 'BTC' }['free'].to_f.floor(dp('BTCUSDT'))
+      q = balances(true).detect { |balance| balance['asset'] == 'BTC' }['free'].to_f.floor(dp('BTCUSDT'))
       client.create_order symbol: 'BTCUSDT', side: 'SELL', type: 'MARKET', quantity: q      
     end
       
