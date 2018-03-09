@@ -98,9 +98,11 @@ class MyBinance
     def exit
       refresh
       balances.each { |balance| 
-        symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance
-        q = balance['free'].to_f.floor(dp(symbol))
-        client.create_order symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
+        if balance['asset'] != 'USDT'
+          symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance
+          q = balance['free'].to_f.floor(dp(symbol))
+          client.create_order symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
+        end
       }
     end
       
