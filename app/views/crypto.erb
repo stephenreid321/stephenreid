@@ -1,132 +1,117 @@
 
-<% if false and f = Fragment.find_by(slug: 'last-checked-crypto') and b = f.body and Date.parse(b) == Date.today %>
+<h1>
+  <%=number_to_currency MyBinance.usd_value_sum, unit: '$', precision: 0 %>
+  <small class="text-secondary"><%=number_to_currency MyBinance.gbp_value_sum, unit: '£', precision: 0 %></small>
+</h1>
 
-  <h1>You've already checked today!</h1>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th style="width: 1px">#</th> 
+      <th>Currency</th> 
+      <th>%</th>  
+      <th>Units</th>  
+      <th>$/unit</th>   
+      <th>$</th>
+      <th>£</th>
+    </tr>
+  </thead>
+  <%     
 
-<% else %>
-
-  <%
-  usd_value_sum = Holding.all.map(&:usd_value).sum
-  gbp_value_sum = Holding.all.map(&:gbp_value).sum
   data = []
   labels = []
-%>
 
-  <% if current_account %>
-    <h1>
-      <%=number_to_currency usd_value_sum, unit: '$', precision: 0 %>
-      <small class="text-secondary"><%=number_to_currency gbp_value_sum, unit: '£', precision: 0 %></small>
-    </h1>
-  <% end %>
+  MyBinance.balances.each_with_index { |balance, i|
+    pc = ((balance['usd']/MyBinance.usd_value_sum)*100).round;
+    data << pc;
+    labels << balance['asset']
+  %>
+    <tr>
+      <td>
+        <%=i+1%>
+      </td>
+      <td>
+        <%=balance['asset']%>
+      </td>
+      <td>
+        <%= pc %>%
+      </td>      
+      <td>
+        <%= balance['free'] %>
+      </td>
+      <td>
+        <%=number_to_currency MyBinance.usd_per_asset(balance['asset']), unit: '$', precision: 2  %>
+      </td>            
+      <td>
+        <%= number_to_currency balance['usd'], unit: '$', precision: 0 %>
+      </td>
+      <td>
+        <%=number_to_currency balance['usd']*MyBinance.gbp_per_usd, unit: '£', precision: 0 %>
+      </td>   
+    </tr>
+  <% } %>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>      
+      <th></th>
+      <th><%=number_to_currency MyBinance.usd_value_sum, unit: '$', precision: 0 %></th>
+      <th><%=number_to_currency MyBinance.gbp_value_sum, unit: '£', precision: 0 %></th>
+    </tr>  
+  </tfoot>
+</table>
 
-  <table class="table mt-3">
-    <thead>
-      <tr>
-        <th style="width: 1px">#</th> 
-        <th>Currency</th> 
-        <th>%</th>      
-        <% if current_account %>
-          <th>$/unit</th>   
-          <th>$</th>
-          <th>£</th>
-        <% end %>  
-      </tr>
-    </thead>
-    <% Holding.pluck(:currency).uniq.sort_by { |currency| -Holding.where(currency: currency).map(&:usd_value).sum }.each_with_index { |currency, i|
-      holdings = Holding.where(currency: currency)
-      pc = ((holdings.map(&:usd_value).sum.to_f/usd_value_sum)*100).round;
-      data << pc;
-      labels << currency
-    %>
-      <tr>
-        <td>
-          <%=i+1%>
-        </td>
-        <td style="font-variant: small-caps">
-          <%=currency.gsub('-',' ')%>
-        </td>
-        <td>
-          <%= pc %>%
-        </td>      
-        <% if current_account %>
-          <td>
-            <%=number_to_currency holdings.first.usd_per_unit, unit: '$', precision: 2  %>
-          </td>            
-          <td>
-            <%= number_to_currency holdings.map(&:usd_value).sum, unit: '$', precision: 0 %>
-          </td>
-          <td>
-            <%=number_to_currency holdings.map(&:gbp_value).sum, unit: '£', precision: 0 %>
-          </td>   
-        <% end %>
-      </tr>
-    <% } %>
-    <tfoot>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>      
-        <% if current_account %>
-          <th></th>
-          <th><%=number_to_currency usd_value_sum, unit: '$', precision: 0 %></th>
-          <th><%=number_to_currency gbp_value_sum, unit: '£', precision: 0 %></th>
-        <% end %>
-      </tr>  
-    </tfoot>
-  </table>
+<div class="my-3" style="max-width: 700px">
+  <canvas id="canvas"></canvas>
+  <script>
 
-  <% if current_account %>
-    <div class="my-3" style="max-width: 700px">
-      <canvas id="canvas"></canvas>
-      <script>
+    colors = []
 
-        colors = []
-
-        var config = {
-          type: 'pie',
-          data: {
-            datasets: [{
-                data: <%=data%>,
-                backgroundColor: <%= [
-      '#4dc9f6',
-      '#f67019',
-      '#f53794',
-      '#537bc4',
-      '#acc236',
-      '#166a8f',
-      '#00a950',
-      '#58595b',
-      '#8549ba'             
-      ] %>
-              }],
-            labels: <%=labels%>
-          },
-          options: {
-            responsive: true,
-            legend: {
-              display: true
-            },
-            tooltips: {
-              enabled: true,
-              mode: 'single',
-              callbacks: {
-                label: function (tooltipItem, data) {
-                  var label = data.labels[tooltipItem.index];
-                  var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                  return label + ': ' + datasetLabel + '%';
-                }
-              }
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+            data: <%=data%>,
+            backgroundColor: <%= [
+  '#4dc9f6',
+  '#f67019',
+  '#f53794',
+  '#537bc4',
+  '#acc236',
+  '#166a8f',
+  '#00a950',
+  '#58595b',
+  '#8549ba'             
+  ] %>
+          }],
+        labels: <%=labels%>
+      },
+      options: {
+        responsive: true,
+        legend: {
+          display: true
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function (tooltipItem, data) {
+              var label = data.labels[tooltipItem.index];
+              var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              return label + ': ' + datasetLabel + '%';
             }
           }
-        };
+        }
+      }
+    };
 
-        window.onload = function () {
-          var ctx = document.getElementById("canvas").getContext("2d");
-          window.myPie = new Chart(ctx, config);
-        };
+    window.onload = function () {
+      var ctx = document.getElementById("canvas").getContext("2d");
+      window.myPie = new Chart(ctx, config);
+    };
 
-      </script>
-    </div>
-  <% end %>
+  </script>
+</div>
 
-  <% Fragment.find_by(slug: 'last-checked-crypto').update_attribute(:body, Date.today); end %>

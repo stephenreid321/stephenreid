@@ -50,5 +50,5 @@ ActivateApp::App.helpers do
       ef(slug)
     end
   end
-  
+      
 end

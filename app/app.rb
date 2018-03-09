@@ -70,12 +70,7 @@ module ActivateApp
       @title = 'Bio · Stephen Reid'
       erb :bio
     end
-    
-    get '/crypto' do
-      sign_in_required!      
-      erb :crypto
-    end
-       
+           
     get '/aspirations' do
       @title = 'Aspirations · Stephen Reid'
       erb :aspirations
