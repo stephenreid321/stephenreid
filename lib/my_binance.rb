@@ -85,11 +85,12 @@ class MyBinance
       q_usd = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f
       assets = {'BTC' => 0.5, 'ETH' => 0.25, 'NEO' => 0.25} # the pair XXXUSDT must exist on Binance
       assets.each { |asset, weight|
+        symbol = "#{asset}USDT"
         q = (q_usd/usd_per_asset(asset))*weight
-        result = client.create_order symbol: "#{asset}USDT", side: 'BUY', type: 'MARKET', quantity: q.round(dp("#{asset}USDT"))
+        result = client.create_order symbol: symbol, side: 'BUY', type: 'MARKET', quantity: q.round(dp(symbol))
         while result['code'] == -2010 do
           q = q*0.9999 # Try 99.99% of previous figure
-          result = client.create_order symbol: "#{asset}USDT", side: 'BUY', type: 'MARKET', quantity: q.round(dp("#{asset}USDT"))
+          result = client.create_order symbol: symbol, side: 'BUY', type: 'MARKET', quantity: q.round(dp(symbol))
         end
       }
     end    
@@ -97,14 +98,12 @@ class MyBinance
     def exit
       refresh
       balances.each { |balance|  
-        if !%w{USDT BTC}.include?(balance['asset'])
-          symbol = "#{balance['asset']}BTC"
+        if balance['asset'] != 'USDT'
+          symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance
           q = balance['free'].to_f.floor(dp(symbol))
           client.create_order symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
         end
-      } 
-      q = balances(true).detect { |balance| balance['asset'] == 'BTC' }['free'].to_f.floor(dp('BTCUSDT'))
-      client.create_order symbol: 'BTCUSDT', side: 'SELL', type: 'MARKET', quantity: q      
+      }
     end
       
   end
