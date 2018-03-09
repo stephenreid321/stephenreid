@@ -83,7 +83,7 @@ class MyBinance
     def enter   
       refresh
       q_usd = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f
-      assets = {'BTC' => 0.25, 'ETH' => 0.25, 'XLM' => 0.25, 'DCR' => 0.25}
+      assets = {'BTC' => 0.5, 'ETH' => 0.25, 'NEO' => 0.25} # the pair XXXUSDT must exist on Binance
       assets.each { |asset, weight|
         q = (q_usd/usd_per_asset(asset))*weight
         result = client.create_order symbol: "#{asset}USDT", side: 'BUY', type: 'MARKET', quantity: q.round(dp("#{asset}USDT"))
