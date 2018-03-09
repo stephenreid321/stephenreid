@@ -62,16 +62,16 @@ class MyBinance
         prices.detect { |x| x['symbol'] == "#{asset}BTC" }['price'].to_f * prices.detect { |x| x['symbol'] == "BTCUSDT" }['price'].to_f
       end
     end
-  
-    def dp(symbol)
-      dp = step_size(symbol).index('1')
-      dp > 0 ? dp-1 : dp
-    end
-    
+      
     def step_size(symbol)
       info = exchange_info['symbols'].detect { |x| x['symbol'] == symbol }
       info['filters'].detect { |x| x['filterType'] == 'LOT_SIZE' }['stepSize'] # string
     end
+    
+    def dp(symbol)
+      dp = step_size(symbol).index('1')
+      dp > 0 ? dp-1 : dp
+    end    
     
     def enter   
       balances(true)
