@@ -63,28 +63,38 @@ class MyBinance
       end
     end
   
-    def dp_for_symbol(symbol)
-      info = exchange_info['symbols'].detect { |x| x['symbol'] == symbol }
-      dp = info['filters'].detect { |x| x['filterType'] == 'LOT_SIZE' }['stepSize'].index('1')
+    def dp(symbol)
+      dp = step_size(symbol).index('1')
       dp > 0 ? dp-1 : dp
     end
     
-    def enter
+    def step_size(symbol)
+      info = exchange_info['symbols'].detect { |x| x['symbol'] == symbol }
+      info['filters'].detect { |x| x['filterType'] == 'LOT_SIZE' }['stepSize'] # string
+    end
+    
+    def enter   
+      balances(true)
       btc_per_usd = 1/usd_per_asset('BTC')
       q_btc = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f*btc_per_usd
-      client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.floor(dp_for_symbol('BTCUSDT'))      
+      result = client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.round(dp('BTCUSDT'))
+      while result['code'] == -2010 do
+        q_btc = q_btc*0.9999 # Try 99.99% of previous figure
+        result = client.create_order symbol: 'BTCUSDT', side: 'BUY', type: 'MARKET', quantity: q_btc.round(dp('BTCUSDT'))
+      end
     end    
     
     def exit
+      balances(true)
       balances.each { |balance|  
         if !%w{USDT BTC}.include?(balance['asset'])
           symbol = "#{balance['asset']}BTC"
-          q = balance['free'].to_f.floor(dp_for_symbol(symbol))
+          q = balance['free'].to_f.floor(dp(symbol))
           client.create_order symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
         end
       } 
       balances(true)
-      q = balances.detect { |balance| balance['asset'] == 'BTC' }['free'].to_f.floor(dp_for_symbol('BTCUSDT'))
+      q = balances.detect { |balance| balance['asset'] == 'BTC' }['free'].to_f.floor(dp('BTCUSDT'))
       client.create_order symbol: 'BTCUSDT', side: 'SELL', type: 'MARKET', quantity: q      
     end
       

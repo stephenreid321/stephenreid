@@ -5,6 +5,7 @@ ActivateApp::App.controller do
   end
     
   get '/crypto' do        
+    MyBinance.balances(true)
     erb :crypto
   end
     
