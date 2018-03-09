@@ -4,6 +4,14 @@
   <small class="text-secondary"><%=number_to_currency MyBinance.gbp_value_sum, unit: '£', precision: 0 %></small>
 </h1>
 
+<% form_tag '/crypto/enter', :class => 'd-inline' do %>
+  <%= submit_tag 'Enter', :class => 'btn btn-primary' %>
+<% end %>
+
+<% form_tag '/crypto/enter', :class => 'd-inline' do %>
+  <%= submit_tag 'Exit', :class => 'btn btn-primary' %>
+<% end %>
+
 <table class="table mt-3">
   <thead>
     <tr>

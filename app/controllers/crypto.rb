@@ -8,12 +8,12 @@ ActivateApp::App.controller do
     erb :crypto
   end
     
-  get '/crypto/enter' do
+  post '/crypto/enter' do
     MyBinance.enter
     redirect '/crypto'
   end  
   
-  get '/crypto/exit' do
+  post '/crypto/exit' do
     MyBinance.exit
     redirect '/crypto'
   end
