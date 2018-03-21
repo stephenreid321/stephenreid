@@ -20,14 +20,24 @@ $(function () {
   $("abbr.timeago").timeago()
 
   $('textarea.wysiwyg').each(function () {
-    textboxio.replace(this, {
+    var textarea = this
+    var editor = textboxio.replace(textarea, {
       css: {
         stylesheets: ['/stylesheets/app.css']
+      },
+      paste: {
+        style: 'plain'
       },
       images: {
         allowLocal: false
       }
     });
+    if (textarea.form)
+      $(textarea.form).submit(function () {
+        alert($(editor.content.get()).text().trim() == '')
+        if ($(editor.content.get()).text().trim() == '')
+          editor.content.set(' ')
+      })
   });
 
   $(document).on('click', 'a[data-confirm]', function (e) {
