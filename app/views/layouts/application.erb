@@ -107,8 +107,10 @@
                 ['Github'],
                 ['Medium', 'https://medium.com/@stephenreid321'],
                 ['Youtube', 'https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA'],                
-                ['Reddit', 'https://reddit.com//user/stephenreid321'],                
                 ['Soundcloud', 'https://soundcloud.com/stephenreid321/sets/stephen-reid'],
+              [],
+                ['Google Maps', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/', 'Stephen Reid', 'fas fa-map'],
+                ['Reddit', 'https://reddit.com//user/stephenreid321'],                
               [],
                 ['Goodreads'],
                 ['IMDb', 'https://www.imdb.com/user/ur85653381/'],
@@ -122,10 +124,10 @@
               %>
                 <% if network %>
                   <div class="col-auto icon">
-                    <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>"><i class="<%= icon ? icon : "fab fa-#{network.downcase}" %>"></i></a>                  
+                    <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>"><i class="<%= icon ? icon : "fab fa-#{network.parameterize}" %>"></i></a>                  
                   </div>                  
                 <% else %>
-                  
+
                 <% end %>
               <% } %>
             </div>
