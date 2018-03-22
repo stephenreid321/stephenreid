@@ -1,13 +1,13 @@
 <p><a class="btn btn-sm btn-secondary" href="/"><i class="fas fa-list"></i> Switch to list view</a></p>
 
 <% form_tag '', :method => :get, :class => 'mb-1 form-inline' do %>
-  <div class="form-check">
-    <%= hidden_field_tag :map, value: 1 %>
+  <%= hidden_field_tag :map, value: 1 %>
+  <div class="form-check">    
     <%= check_box_tag :plans, class: 'form-check-input', id: 'plans', onchange: 'this.form.submit()', checked: params[:plans] %>
-    <label class="form-check-label" for="plans">
-      Show only plans for the future
-    </label>
-  </div>
-<% end %>
+      <label class="form-check-label" for="plans">
+        Show only plans for the future
+      </label>
+    </div>
+  <% end %>
 
-<%= partial :map %>
+  <%= partial :map %>
