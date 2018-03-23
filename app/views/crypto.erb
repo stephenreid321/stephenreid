@@ -5,7 +5,7 @@
   <%
   # $64,866 invested at 17:00 on Friday 23rd March 2018 would have bought 7.51 BTC
   hold = 7.51*MyBinance.usd_per_asset('BTC')
-  p = (((MyBinance.usd_value_sum/hold)*100) - 100).round(2)
+  p = (((MyBinance.usd_value_sum/hold) - 1)*100).round(2)
 %>
   <small class="<%= if p > 0; 'text-success'; elsif p < 0; 'text-danger'; end %> "><%="#{p}%"%></small>
 </h1>
