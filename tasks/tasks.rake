@@ -36,10 +36,13 @@ namespace :crypto do
       end
     end  
     
+    hold = 7.51*MyBinance.usd_per_asset('BTC')
+    p = (((MyBinance.usd_value_sum/hold)*100) - 100).round(2)    
+    
     mail = Mail.new
     mail.to = 'stephen@stephenreid.net'
     mail.from = 'crypto@stephenreid.net'
-    mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')}"
+    mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')} #{p}%"
     mail.body = "#{url}\n#{cmd}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
     mail.deliver        
     
