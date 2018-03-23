@@ -27,12 +27,12 @@ module ActivateApp
     
     Mail.defaults do
       delivery_method :smtp, {
-        :user_name => ENV['MANDRILL_USERNAME'],
-        :password => ENV['MANDRILL_APIKEY'],
-        :address => "smtp.mandrillapp.com",
+        :user_name => ENV['SMTP_USERNAME'],
+        :password => ENV['SMTP_PASSWORD'],
+        :address => ENV['SMTP_ADDRESS'],
         :port => 587
       }   
-    end 
+    end   
        
     before do
       redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']

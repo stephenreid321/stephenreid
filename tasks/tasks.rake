@@ -18,8 +18,15 @@ namespace :crypto do
 
     score = (results['Strong Buy'] * 2) + (results['Buy'] * 1) + (results['Sell'] * -1) + (results['Strong Sell'] * -2)
 
+    mail = Mail.new
+    mail.to = 'stephen@stephenreid.net'
+    mail.from = 'crypto@stephenreid.net'
+    mail.subject = "Score: #{score}"
+    mail.body = signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+    mail.deliver     
+    
     if score >= 0
-      MyBinance.enter
+      MyBinance.enter             
     else
       MyBinance.exit
     end    
