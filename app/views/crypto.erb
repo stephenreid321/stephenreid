@@ -4,6 +4,11 @@
   <small class="text-secondary"><%=number_to_currency MyBinance.gbp_value_sum, unit: '£', precision: 0 %></small>
 </h1>
 
+<p class="lead">
+  $64,866 invested at 17:00 on Friday 23rd March 2018 would have bought
+  7.5 BTC, now worth <%= 7.5*MyBinance.usd_per_asset('BTC') %>
+</p>
+
 <% form_tag '/crypto/enter', :class => 'd-inline' do %>
   <%= submit_tag 'Enter', :class => 'btn btn-primary' %>
 <% end %>
