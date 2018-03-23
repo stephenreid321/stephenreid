@@ -22,7 +22,7 @@ namespace :crypto do
     
     action = 'no action'
     f = Fragment.find_by(slug: 'crypto-status')
-    if score >= 1
+    if score >= 1 # build in a little inertia in light of the trading fee
       if f.body == 'exited'
         MyBinance.enter    
         action = 'entered'        
