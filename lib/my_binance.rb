@@ -83,7 +83,7 @@ class MyBinance
     def enter   
       refresh
       q_usd = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f
-      asset_weights = {'BTC' => 0.5, 'ETH' => 0.25, 'NEO' => 0.25} # the pair XXXUSDT must exist on Binance
+      asset_weights = {'BTC' => 1} # the pair XXXUSDT must exist on Binance
       asset_weights.each { |asset, weight|
         symbol = "#{asset}USDT"
         q = (q_usd/usd_per_asset(asset))*weight
