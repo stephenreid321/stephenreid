@@ -39,7 +39,7 @@ namespace :crypto do
       mail.to = 'stephen@stephenreid.net'
       mail.from = 'crypto@stephenreid.net'
       mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')}"
-      mail.body = "Score: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+      mail.body = "#{url}\n#{cmd}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
       mail.deliver        
     end
     
