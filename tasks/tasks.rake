@@ -14,7 +14,7 @@ namespace :crypto do
     signals
 
     statuses = ['Strong Buy', 'Buy', 'Neutral', 'Sell',  'Strong Sell']
-    raise 'unknown signal' unless signals.values.all? { |v| statuses.include?(v) }
+    raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }
 
     results = signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
 
