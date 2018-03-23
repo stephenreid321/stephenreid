@@ -8,7 +8,7 @@ namespace :crypto do
     page = Mechanize.new.get("http://selenium321.herokuapp.com/visit?url=#{URI::encode(url)}&cmd=#{URI::encode(cmd)}")
 
     signals = {}
-    page.search('#technicals-root table')[0..1].search('tr[class^=row]').each { |row|
+    page.search('#technicals-root table').first.search('tr[class^=row]').each { |row|
       signals[row.search('td')[0].text] = row.search('td')[2].text
     }
     signals
