@@ -26,7 +26,6 @@
       <th>Units</th>  
       <th>$/unit</th>   
       <th>$</th>
-      <th>£</th>
     </tr>
   </thead>
   <%     
@@ -58,9 +57,6 @@
       <td>
         <%= number_to_currency balance['usd'], unit: '$', precision: 0 %>
       </td>
-      <td>
-        <%=number_to_currency balance['usd']*MyBinance.gbp_per_usd, unit: '£', precision: 0 %>
-      </td>   
     </tr>
   <% } %>
   <tfoot>
@@ -71,7 +67,6 @@
       <th></th>      
       <th></th>
       <th><%=number_to_currency MyBinance.usd_value_sum, unit: '$', precision: 0 %></th>
-      <th><%=number_to_currency MyBinance.gbp_value_sum, unit: '£', precision: 0 %></th>
     </tr>  
   </tfoot>
 </table>
