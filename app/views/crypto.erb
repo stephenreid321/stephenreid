@@ -1,13 +1,14 @@
 
 <h1>
+  <%
+  # $64,866 invested at 17:00 on Friday 23rd March 2018 would have bought 7.51 BTC
+  hold = 7.51*MyBinance.usd_per_asset('BTC')
+%>
   <%=number_to_currency MyBinance.usd_value_sum, unit: '$', precision: 0 %>
-  <small class="text-secondary"><%=number_to_currency MyBinance.gbp_value_sum, unit: '£', precision: 0 %></small>
+  <% p = ((MyBinance.usd_value_sum/hold)*100).round %>
+  <small class="<%= if p > 0; 'text-success'; elsif p < 0; 'text-danger'; end %> "><%="p#{%}"%></small>
 </h1>
 
-<p class="lead">
-  $64,866 invested at 17:00 on Friday 23rd March 2018 would have bought
-  7.51 BTC, now worth <%= number_to_currency 7.51*MyBinance.usd_per_asset('BTC'), unit: '$', precision: 0 %>
-</p>
 
 <% form_tag '/crypto/enter', :class => 'd-inline' do %>
   <%= submit_tag 'Enter', :class => 'btn btn-primary' %>
