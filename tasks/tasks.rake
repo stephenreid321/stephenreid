@@ -22,7 +22,7 @@ namespace :crypto do
     mail.to = 'stephen@stephenreid.net'
     mail.from = 'crypto@stephenreid.net'
     mail.subject = "Score: #{score}"
-    mail.body = signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+    mail.body = results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
     mail.deliver     
     
     if score >= 0
