@@ -32,5 +32,4 @@ gem 'mail'
 gem 'airbrake', '~> 5.0'
 gem 'mechanize'
 
-gem 'sass'
 gem 'binance'
