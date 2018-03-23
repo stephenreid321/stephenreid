@@ -22,13 +22,13 @@ namespace :crypto do
     
     action = 'no action'
     f = Fragment.find_by(slug: 'crypto-status')
-    if score >= 0
+    if score >= 1
       if f.body == 'exited'
         MyBinance.enter    
         action = 'entered'        
         f.set(body: action)
       end
-    else
+    else score <= -1
       if f.body == 'entered'
         MyBinance.exit
         action = 'exited'
