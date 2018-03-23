@@ -20,28 +20,28 @@ namespace :crypto do
 
     score = (results['Strong Buy'] * 2) + (results['Buy'] * 1) + (results['Sell'] * -1) + (results['Strong Sell'] * -2)
     
-    action = nil
+    action = 'no action'
     f = Fragment.find_by(slug: 'crypto-status')
     if score >= 0
       if f.body == 'exited'
-        MyBinance.enter                
-        f.set(body: (action = 'entered'))
+        MyBinance.enter    
+        action = 'entered'        
+        f.set(body: action)
       end
     else
       if f.body == 'entered'
         MyBinance.exit
-        f.set(body: (action = 'exited'))
+        action = 'exited'
+        f.set(body: action)
       end
     end  
     
-    if action
-      mail = Mail.new
-      mail.to = 'stephen@stephenreid.net'
-      mail.from = 'crypto@stephenreid.net'
-      mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')}"
-      mail.body = "#{url}\n#{cmd}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
-      mail.deliver        
-    end
+    mail = Mail.new
+    mail.to = 'stephen@stephenreid.net'
+    mail.from = 'crypto@stephenreid.net'
+    mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')}"
+    mail.body = "#{url}\n#{cmd}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+    mail.deliver        
     
   end
 end
