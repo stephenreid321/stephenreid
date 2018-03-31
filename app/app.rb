@@ -66,6 +66,11 @@ module ActivateApp
       
     end
     
+    get '/calendar' do
+      @title = 'Calendar · Stephen Reid'
+      erb :calendar
+    end
+    
     get '/bio' do
       @title = 'Bio · Stephen Reid'
       erb :bio
