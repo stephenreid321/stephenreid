@@ -10,6 +10,7 @@ nbproject
 .envtest
 dragonfly.log
 
+
 *.gem
 *.rbc
 .bundle
