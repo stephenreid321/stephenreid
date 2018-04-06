@@ -13,9 +13,9 @@ namespace :crypto do
     }
     timestamp = Time.now
     signals.each { |name,value|
-      Indicator.create name: name, value: value, timestamp: timestamp
+      Indicator.create symbol: 'BTCUSD', name: name, value: value, timestamp: timestamp
     }    
-    Indicator.create name: 'usd_per_btc', value: MyBinance.usd_per_asset('BTC'), timestamp: timestamp
+    Indicator.create symbol: 'BTCUSD', name: 'price', value: MyBinance.usd_per_asset('BTC'), timestamp: timestamp
 
     statuses = ['Buy', 'Neutral', 'Sell']
     raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }
