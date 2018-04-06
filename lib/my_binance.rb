@@ -88,6 +88,7 @@ class MyBinance
       asset_weights.each { |asset, weight|
         symbol = "#{asset}USDT"
         q = (q_usd/usd_per_asset(asset))*weight
+        puts "buying #{symbol} #{q}"
         order = client.create_order! symbol: symbol, side: 'BUY', type: 'MARKET', quantity: q.round(dp(symbol))
         while order['code'] == -2010 do
           q = q*0.9999 # Try 99.99% of previous figure
@@ -103,8 +104,9 @@ class MyBinance
       orders = []
       balances.each { |balance| 
         if balance['asset'] != 'USDT'
-          symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance
+          symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance          
           q = balance['free'].to_f.floor(dp(symbol))
+          puts "selling #{symbol} #{q}"
           order = client.create_order! symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
           orders << order
         end
