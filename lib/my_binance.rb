@@ -36,7 +36,7 @@ class MyBinance
         @balances.each_with_index { |balance, i|
           @balances[i]['usd'] = balance['free'].to_f*usd_per_asset(balance['asset'])
         }
-        @balances = @balances.reject { |balance| balance['usd'] < 1 }
+        @balances = @balances.reject { |balance| balance['usd'] < 100 }
         @balances = @balances.sort_by { |balance| -balance['usd'] }      
       else
         @balances
