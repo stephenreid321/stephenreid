@@ -84,7 +84,7 @@ class MyBinance
       refresh
       orders = []
       q_usd = balances.detect { |balance| balance['asset'] == 'USDT' }['free'].to_f
-      asset_weights = {'BTC' => 1} # the pair XXXUSDT must exist on Binance
+      asset_weights = {'BTC' => 1} # assets to buy. the pair XXXUSDT must exist on Binance          
       asset_weights.each { |asset, weight|
         symbol = "#{asset}USDT"
         q = (q_usd/usd_per_asset(asset))*weight
@@ -103,8 +103,8 @@ class MyBinance
       refresh
       orders = []
       balances.each { |balance| 
-        if %w{BTC}.include? balance['asset']
-          symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance          
+        if %w{BTC}.include? balance['asset'] # assets to sell. the pair XXXUSDT must exist on Binance          
+          symbol = "#{balance['asset']}USDT"
           q = balance['free'].to_f.floor(dp(symbol))
           puts "selling #{symbol} #{q}"
           order = client.create_order! symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
