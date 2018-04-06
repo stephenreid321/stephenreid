@@ -11,11 +11,11 @@ namespace :crypto do
     page.search('#technicals-root table').first.search('tr[class^=row]').each { |row|
       signals[row.search('td')[0].text] = row.search('td')[2].text
     }
-    step = Time.now.to_i
+    timestamp = Time.now
     signals.each { |name,value|
-      Indicator.create name: name, value: value, step: step
+      Indicator.create name: name, value: value, timestamp: timestamp
     }    
-    Indicator.create name: 'usd_per_btc', value: MyBinance.usd_per_asset('BTC'), step: step
+    Indicator.create name: 'usd_per_btc', value: MyBinance.usd_per_asset('BTC'), timestamp: timestamp
 
     statuses = ['Strong Buy', 'Buy', 'Neutral', 'Sell',  'Strong Sell']
     raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }

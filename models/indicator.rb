@@ -4,13 +4,13 @@ class Indicator
 
   field :name, :type => String
   field :value, :type => String  
-  field :step, :type => Integer
+  field :timestamp, :type => Time
           
   def self.admin_fields
     {
       :name => :text,
       :value => :text,
-      :step => :number
+      :timestamp => :datetime
     }
   end
     
