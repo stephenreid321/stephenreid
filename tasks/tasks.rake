@@ -29,7 +29,7 @@ namespace :crypto do
       if status == 'in'
         action = 'remain in'
       else
-        orders = MyBinance.enter    
+        orders = MyBinance.enter
         action = 'entered'
       end            
     else score <= -1
