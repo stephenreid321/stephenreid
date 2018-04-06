@@ -15,7 +15,7 @@ class MyBinance
   
     def prices(refresh = false)
       if !@prices or refresh
-        @prices = client.all_prices
+        @prices = client.price
       else
         @prices
       end
@@ -88,10 +88,10 @@ class MyBinance
       asset_weights.each { |asset, weight|
         symbol = "#{asset}USDT"
         q = (q_usd/usd_per_asset(asset))*weight
-        order = client.create_order symbol: symbol, side: 'BUY', type: 'MARKET', quantity: q.round(dp(symbol))
+        order = client.create_order! symbol: symbol, side: 'BUY', type: 'MARKET', quantity: q.round(dp(symbol))
         while order['code'] == -2010 do
           q = q*0.9999 # Try 99.99% of previous figure
-          order = client.create_order symbol: symbol, side: 'BUY', type: 'MARKET', quantity: q.round(dp(symbol))
+          order = client.create_order! symbol: symbol, side: 'BUY', type: 'MARKET', quantity: q.round(dp(symbol))
         end
         orders << order
       }
@@ -105,7 +105,7 @@ class MyBinance
         if balance['asset'] != 'USDT'
           symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance
           q = balance['free'].to_f.floor(dp(symbol))
-          order = client.create_order symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
+          order = client.create_order! symbol: symbol, side: 'SELL', type: 'MARKET', quantity: q
           orders << order
         end
       }
