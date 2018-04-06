@@ -21,19 +21,21 @@ namespace :crypto do
     score = (results['Strong Buy'] * 2) + (results['Buy'] * 1) + (results['Sell'] * -1) + (results['Strong Sell'] * -2)
     
     action = 'no action'
+    status = MyBinance.balances.detect { |balance| balance['asset'] == 'BTC' } ? 'in' : 'out'
     orders = []
-    f = Fragment.find_by(slug: 'crypto-status')
     if score >= 1 # build in a little inertia in light of the trading fee
-      if f.body == 'exited'
+      if status == 'in'
+        action = 'remain in'
+      else
         orders = MyBinance.enter    
-        action = 'entered'        
-        f.set(body: action)
-      end
+        action = 'entered'
+      end            
     else score <= -1
-      if f.body == 'entered'
+      if status == 'out'
+        action = 'remain out'
+      else
         orders = MyBinance.exit
         action = 'exited'
-        f.set(body: action)
       end
     end  
     
