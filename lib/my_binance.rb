@@ -103,7 +103,7 @@ class MyBinance
       refresh
       orders = []
       balances.each { |balance| 
-        if balance['asset'] != 'USDT'
+        if %w{BTC}.include? balance['asset']
           symbol = "#{balance['asset']}USDT" # the pair XXXUSDT must exist on Binance          
           q = balance['free'].to_f.floor(dp(symbol))
           puts "selling #{symbol} #{q}"
