@@ -38,7 +38,7 @@ namespace :crypto do
     end  
     
     usd_ref = 45000
-    usd_per_btc_ref = 6607
+    usd_per_btc_ref = 6576
     btc_ref = usd_ref.to_f/usd_per_btc_ref
     hold = btc_ref*MyBinance.usd_per_asset('BTC')
     p = (((MyBinance.usd_value_sum/hold) - 1)*100).round(2)
