@@ -17,12 +17,12 @@ namespace :crypto do
     }    
     Indicator.create name: 'usd_per_btc', value: MyBinance.usd_per_asset('BTC'), timestamp: timestamp
 
-    statuses = ['Strong Buy', 'Buy', 'Neutral', 'Sell',  'Strong Sell']
+    statuses = ['Buy', 'Neutral', 'Sell']
     raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }
 
     results = signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
 
-    score = (results['Strong Buy'] * 2) + (results['Buy'] * 1) + (results['Sell'] * -1) + (results['Strong Sell'] * -2)
+    score = (results['Buy'] * 1) + (results['Sell'] * -1)
     
     action = 'no action'
     status = MyBinance.balances.detect { |balance| balance['asset'] == 'BTC' } ? 'in' : 'out'
