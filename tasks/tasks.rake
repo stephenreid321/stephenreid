@@ -21,29 +21,33 @@ namespace :crypto do
     score = (results['Strong Buy'] * 2) + (results['Buy'] * 1) + (results['Sell'] * -1) + (results['Strong Sell'] * -2)
     
     action = 'no action'
+    orders = []
     f = Fragment.find_by(slug: 'crypto-status')
     if score >= 1 # build in a little inertia in light of the trading fee
       if f.body == 'exited'
-        MyBinance.enter    
+        orders = MyBinance.enter    
         action = 'entered'        
         f.set(body: action)
       end
     else score <= -1
       if f.body == 'entered'
-        MyBinance.exit
+        orders = MyBinance.exit
         action = 'exited'
         f.set(body: action)
       end
     end  
     
-    hold = 7.51*MyBinance.usd_per_asset('BTC')
+    usd_ref = 45000
+    usd_per_btc_ref = 6607
+    btc_ref = usd_ref.to_f/usd_per_btc_ref
+    hold = btc_ref*MyBinance.usd_per_asset('BTC')
     p = (((MyBinance.usd_value_sum/hold) - 1)*100).round(2)
     
     mail = Mail.new
     mail.to = 'stephen@stephenreid.net'
     mail.from = 'crypto@stephenreid.net'
     mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')} #{p}%"
-    mail.body = "#{url}\n#{cmd}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+    mail.body = "#{url}\n#{cmd}\n\n#{orders}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
     mail.deliver        
     
   end
