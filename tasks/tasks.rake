@@ -11,7 +11,9 @@ namespace :crypto do
     page.search('#technicals-root table').first.search('tr[class^=row]').each { |row|
       signals[row.search('td')[0].text] = row.search('td')[2].text
     }
-    signals
+    signals.each { |name,value|
+      Indicator.create name: name, value: value 
+    }
 
     statuses = ['Strong Buy', 'Buy', 'Neutral', 'Sell',  'Strong Sell']
     raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }
