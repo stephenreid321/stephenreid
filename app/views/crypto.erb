@@ -1,3 +1,4 @@
+<style>#sidebar { display: none }</style>
 
 <h2>
   <%=number_to_currency MyBinance.usd_value_sum, unit: '$', precision: 0 %>
@@ -128,22 +129,34 @@
   </script>
 </div>
 
-<% indicator_names = Indicator.pluck(:name).uniq %>
+<% indicator_names = Indicator.where(:name.ne => 'price').pluck(:name).uniq %>
+<% timestamps = Indicator.order('timestamp desc').pluck(:timestamp).uniq %>
 <table class="table">
   <thead>
     <tr>
       <th></th>
       <% indicator_names.each { |indicator_name| %>
-        <th><%=indicator.name%></th>
+        <th><%=indicator_name%></th>
       <% } %>     
+      <th>Price</th>
     </tr>
   </thead>
-  <% Indicator.order('timestamp desc').pluck(:timestamp).uniq.each { |t|  %>
+  <% timestamps.each { |t|  %>
     <tr>
       <td><%=t%></td>
       <% indicator_names.each { |indicator_name| %>
         <td><%= Indicator.find_by(timestamp: t, name: indicator_name).value %></td>
       <% } %>
+      <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
     </tr>
   <% } %>
+    <tfoot>
+      <tr>
+      <th></th>
+      <% indicator_names.each { |indicator_name| %>
+        <th></th>
+      <% } %>     
+      <th></th>
+      </tr>
+    </tfoot>
 </table>
