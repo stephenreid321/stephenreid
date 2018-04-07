@@ -25,28 +25,28 @@ namespace :crypto do
     }    
     Indicator.create symbol: 'BTCUSD', name: 'price', value: MyBinance.usd_per_asset('BTC'), timestamp: timestamp
 
-    featured_signals = oscillators    
-    results = featured_signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
-    score = (results['Buy'] * 1) + (results['Sell'] * -1)
+#    featured_signals = oscillators    
+#    results = featured_signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
+#    score = (results['Buy'] * 1) + (results['Sell'] * -1)
     
-    action = 'no action'
-    status = MyBinance.balances.detect { |balance| balance['asset'] == 'BTC' } ? 'in' : 'out'
-    orders = []
-    if score >= 1 # build in a little inertia in light of the trading fee
-      if status == 'in'
-        action = 'remain in'
-      else
+#    action = 'no action'
+#    status = MyBinance.balances.detect { |balance| balance['asset'] == 'BTC' } ? 'in' : 'out'
+#    orders = []
+#    if score >= 1 # build in a little inertia in light of the trading fee
+#      if status == 'in'
+#        action = 'remain in'
+#      else
 #        orders = MyBinance.enter
-        action = 'entered'
-      end            
-    else score <= -1
-      if status == 'out'
-        action = 'remain out'
-      else
+#        action = 'entered'
+#      end            
+#    else score <= -1
+#      if status == 'out'
+#        action = 'remain out'
+#      else
 #        orders = MyBinance.exit
-        action = 'exited'
-      end
-    end  
+#        action = 'exited'
+#      end
+#    end  
     
 #    On 15:40 on 6th April 2018, the portfolio value was $45,000 and the BTC price was $6576    
 #    usd_ref = 45000
