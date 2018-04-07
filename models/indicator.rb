@@ -27,8 +27,6 @@ class Indicator
         price_next > price
       when 'Sell'
         price_next < price
-      when 'Neutral'
-        price_next == price
       end
     end
   end
