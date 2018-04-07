@@ -36,30 +36,30 @@ namespace :crypto do
       if status == 'in'
         action = 'remain in'
       else
-        orders = MyBinance.enter
+#        orders = MyBinance.enter
         action = 'entered'
       end            
     else score <= -1
       if status == 'out'
         action = 'remain out'
       else
-        orders = MyBinance.exit
+#        orders = MyBinance.exit
         action = 'exited'
       end
     end  
     
-    usd_ref = 45000
-    usd_per_btc_ref = 6576
-    btc_ref = usd_ref.to_f/usd_per_btc_ref
-    hold = btc_ref*MyBinance.usd_per_asset('BTC')
-    p = (((MyBinance.usd_value_sum/hold) - 1)*100).round(2)
+#    usd_ref = 45000
+#    usd_per_btc_ref = 6576
+#    btc_ref = usd_ref.to_f/usd_per_btc_ref
+#    hold = btc_ref*MyBinance.usd_per_asset('BTC')
+#    p = (((MyBinance.usd_value_sum/hold) - 1)*100).round(2)
     
-    mail = Mail.new
-    mail.to = 'stephen@stephenreid.net'
-    mail.from = 'crypto@stephenreid.net'
-    mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')} #{p}%"
-    mail.body = "#{url}\n#{cmd}\n\n#{orders}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + featured_signals.map { |k,v| "#{k}: #{v}" }.join("\n")
-    mail.deliver        
+#    mail = Mail.new
+#    mail.to = 'stephen@stephenreid.net'
+#    mail.from = 'crypto@stephenreid.net'
+#    mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')} #{p}%"
+#    mail.body = "#{url}\n#{cmd}\n\n#{orders}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + featured_signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+#    mail.deliver        
     
   end
 end
