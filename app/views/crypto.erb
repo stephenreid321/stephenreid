@@ -77,58 +77,6 @@
   </tfoot>
 </table>
 
-<div class="my-3" style="max-width: 700px">
-  <canvas id="canvas"></canvas>
-  <script>
-
-    colors = []
-
-    var config = {
-      type: 'pie',
-      data: {
-        datasets: [{
-            data: <%=data%>,
-            backgroundColor: <%= [
-  '#4dc9f6',
-  '#f67019',
-  '#f53794',
-  '#537bc4',
-  '#acc236',
-  '#166a8f',
-  '#00a950',
-  '#58595b',
-  '#8549ba'             
-  ] %>
-          }],
-        labels: <%=labels%>
-      },
-      options: {
-        responsive: true,
-        legend: {
-          display: true
-        },
-        tooltips: {
-          enabled: true,
-          mode: 'single',
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var label = data.labels[tooltipItem.index];
-              var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-              return label + ': ' + datasetLabel + '%';
-            }
-          }
-        }
-      }
-    };
-
-    window.onload = function () {
-      var ctx = document.getElementById("canvas").getContext("2d");
-      window.myPie = new Chart(ctx, config);
-    };
-
-  </script>
-</div>
-
 <% indicator_names = Indicator.where(:name.ne => 'price').pluck(:name).uniq %>
 <% timestamps = Indicator.order('timestamp desc').pluck(:timestamp).uniq %>
 <table class="table">
@@ -144,19 +92,19 @@
   <% timestamps.each { |t|  %>
     <tr>
       <td><%=t%></td>
-      <% indicator_names.each { |indicator_name| %>
-        <td><%= Indicator.find_by(timestamp: t, name: indicator_name).value %></td>
+      <% indicator_names.each { |indicator_name| indicator = Indicator.find_by(timestamp: t, name: indicator_name) %>
+        <td class="<%=case indicator.correct?; when true; 'bg-success'; when false; 'bg-danger'; end %>"><%= indicator.value %></td>
       <% } %>
       <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
     </tr>
   <% } %>
-    <tfoot>
-      <tr>
+  <tfoot>
+    <tr>
       <th></th>
       <% indicator_names.each { |indicator_name| %>
         <th></th>
       <% } %>     
       <th></th>
-      </tr>
-    </tfoot>
+    </tr>
+  </tfoot>
 </table>

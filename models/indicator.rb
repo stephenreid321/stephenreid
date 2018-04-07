@@ -15,5 +15,22 @@ class Indicator
       :timestamp => :datetime
     }
   end
+  
+  def correct?
+    timestamps = Indicator.order('timestamp desc').pluck(:timestamp).uniq
+    i = timestamps.index(timestamp)
+    price = value.to_f
+    if price_indicator_next = Indicator.find_by(timestamp: timestamps[i+1], name: 'price')
+      price_next = price_indicator_next.value.to_f
+      case value
+      when 'Buy'      
+        price_next > price
+      when 'Sell'
+        price_next < price
+      when 'Neutral'
+        price_next == price
+      end
+    end
+  end
     
 end
