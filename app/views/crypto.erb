@@ -77,6 +77,7 @@
   </tfoot>
 </table>
 
+<% scores = {} %>
 <% indicator_names = Indicator.where(:name.ne => 'price').pluck(:name).uniq %>
 <% timestamps = Indicator.order('timestamp desc').pluck(:timestamp).uniq %>
 <table class="table">
@@ -92,7 +93,11 @@
   <% timestamps.each { |t|  %>
     <tr>
       <td><%=t%></td>
-      <% indicator_names.each { |indicator_name| indicator = Indicator.find_by(timestamp: t, name: indicator_name) %>
+      <% indicator_names.each { |indicator_name|
+        indicator = Indicator.find_by(timestamp: t, name: indicator_name)
+        scores[indicator_name] = 0 if !scores[indicator_name]
+        case indicator.correct?; when true; scores[indicator_name] += 1; when false; scores[indicator_name] -= 1; end
+      %>
         <td class="<%=case indicator.correct?; when true; 'bg-success'; when false; 'bg-danger'; end %>"><%= indicator.value %></td>
       <% } %>
       <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
@@ -102,7 +107,7 @@
     <tr>
       <th></th>
       <% indicator_names.each { |indicator_name| %>
-        <th></th>
+        <th><%=scores[indicator_name]%></th>
       <% } %>     
       <th></th>
     </tr>
