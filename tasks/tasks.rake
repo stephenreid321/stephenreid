@@ -7,20 +7,27 @@ namespace :crypto do
     cmd = %Q{page.all('#technicals-root div').detect { |div| div.text == '1 hour' }.click and sleep 1}
     page = Mechanize.new.get("http://selenium321.herokuapp.com/visit?url=#{URI::encode(url)}&cmd=#{URI::encode(cmd)}")
 
-    signals = {}
-    page.search('#technicals-root table')[0..1].search('tr[class^=row]').each { |row|
-      signals[row.search('td')[0].text] = row.search('td')[2].text
+    signals = {}    
+    oscillators = {}
+    moving_averages = {}
+    page.search('#technicals-root table')[0].search('tr[class^=row]').each { |row|
+      oscillators[row.search('td')[0].text] = row.search('td')[2].text
     }
+    page.search('#technicals-root table')[1].search('tr[class^=row]').each { |row|
+      moving_averages[row.search('td')[0].text] = row.search('td')[2].text
+    }    
+    signals = oscillators.merge(moving_averages)
+    statuses = ['Buy', 'Neutral', 'Sell']
+    raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }    
     timestamp = Time.now
     signals.each { |name,value|
       Indicator.create symbol: 'BTCUSD', name: name, value: value, timestamp: timestamp
     }    
     Indicator.create symbol: 'BTCUSD', name: 'price', value: MyBinance.usd_per_asset('BTC'), timestamp: timestamp
 
-    statuses = ['Buy', 'Neutral', 'Sell']
-    raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }
-    # signals = signals.slice('Momentum (10)', 'MACD Level (12, 27)')
-    results = signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
+
+    featured_signals = oscillators    
+    results = featured_signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
     score = (results['Buy'] * 1) + (results['Sell'] * -1)
     
     action = 'no action'
@@ -52,7 +59,7 @@ namespace :crypto do
     mail.to = 'stephen@stephenreid.net'
     mail.from = 'crypto@stephenreid.net'
     mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')} #{p}%"
-    mail.body = "#{url}\n#{cmd}\n\n#{orders}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+    mail.body = "#{url}\n#{cmd}\n\n#{orders}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + featured_signals.map { |k,v| "#{k}: #{v}" }.join("\n")
     mail.deliver        
     
   end
