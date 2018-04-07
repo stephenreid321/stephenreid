@@ -48,6 +48,7 @@ namespace :crypto do
       end
     end  
     
+#    On 15:40 on 6th April 2018, the portfolio value was $45,000 and the BTC price was $6576    
 #    usd_ref = 45000
 #    usd_per_btc_ref = 6576
 #    btc_ref = usd_ref.to_f/usd_per_btc_ref

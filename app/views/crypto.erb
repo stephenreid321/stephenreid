@@ -2,18 +2,7 @@
 
 <h2>
   <%=number_to_currency MyBinance.usd_value_sum, unit: '$', precision: 0 %>
-
-  <%
-  # On 15:40 on 6th April 2018, the portfolio value was $45,000 and the BTC price was $6576
-  usd_ref = 45000
-  usd_per_btc_ref = 6576
-  btc_ref = usd_ref.to_f/usd_per_btc_ref
-  hold = btc_ref*MyBinance.usd_per_asset('BTC')
-  p = (((MyBinance.usd_value_sum/hold) - 1)*100).round(2)
-%>
-  <small class="<%= if p > 0; 'text-success'; elsif p < 0; 'text-danger'; end %> "><%="#{p}%"%></small>
 </h2>
-
 
 <% form_tag '/crypto/enter', :class => 'd-inline' do %>
   <%= submit_tag 'Enter', :class => 'btn btn-primary' %>
