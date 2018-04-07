@@ -17,7 +17,7 @@ class Indicator
   end
   
   def correct?
-    timestamps = Indicator.order('timestamp desc').pluck(:timestamp).uniq
+    timestamps = Indicator.order('timestamp asc').pluck(:timestamp).uniq
     i = timestamps.index(timestamp)
     price = value.to_f
     if price_indicator_next = Indicator.find_by(timestamp: timestamps[i+1], name: 'price')
