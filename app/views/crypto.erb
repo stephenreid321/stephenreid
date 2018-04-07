@@ -84,15 +84,16 @@
   <thead>
     <tr>
       <th></th>
+      <th>Price</th>
       <% indicator_names.each { |indicator_name| %>
         <th><%=indicator_name%></th>
-      <% } %>     
-      <th>Price</th>
+      <% } %>           
     </tr>
   </thead>
   <% timestamps.each { |t|  %>
     <tr>
       <td><%=t%></td>
+      <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
       <% indicator_names.each { |indicator_name| %>
         <% if indicator = Indicator.find_by(timestamp: t, name: indicator_name)
           scores[indicator_name] = 0 if !scores[indicator_name]        
@@ -101,8 +102,7 @@
           <td class="<%=case indicator.correct?; when true; 'bg-success'; when false; 'bg-danger'; end %>"><%= indicator.value %></td>
         <% else %>
           <td></td>
-        <% end } %>
-      <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
+        <% end } %>      
     </tr>
   <% } %>
   <tfoot>
