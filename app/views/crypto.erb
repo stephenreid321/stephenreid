@@ -94,12 +94,12 @@
     <tr>
       <td><%=t%></td>
       <% indicator_names.each { |indicator_name|
-        indicator = Indicator.find_by(timestamp: t, name: indicator_name)
+        if indicator = Indicator.find_by(timestamp: t, name: indicator_name)
         scores[indicator_name] = 0 if !scores[indicator_name]
         case indicator.correct?; when true; scores[indicator_name] += 1; when false; scores[indicator_name] -= 1; end
       %>
         <td class="<%=case indicator.correct?; when true; 'bg-success'; when false; 'bg-danger'; end %>"><%= indicator.value %></td>
-      <% } %>
+      <% end } %>
       <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
     </tr>
   <% } %>

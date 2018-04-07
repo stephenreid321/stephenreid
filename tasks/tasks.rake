@@ -8,7 +8,7 @@ namespace :crypto do
     page = Mechanize.new.get("http://selenium321.herokuapp.com/visit?url=#{URI::encode(url)}&cmd=#{URI::encode(cmd)}")
 
     signals = {}
-    page.search('#technicals-root table').first.search('tr[class^=row]').each { |row|
+    page.search('#technicals-root table')[0..1].search('tr[class^=row]').each { |row|
       signals[row.search('td')[0].text] = row.search('td')[2].text
     }
     timestamp = Time.now
@@ -19,7 +19,8 @@ namespace :crypto do
 
     statuses = ['Buy', 'Neutral', 'Sell']
     raise 'unknown signal value' unless signals.values.all? { |v| statuses.include?(v) }
-    results = signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
+    included_signals = ['Momentum (10)', 'MACD Level (12, 27)']
+    results = signals.slice(*included_signals).values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
     score = (results['Buy'] * 1) + (results['Sell'] * -1)
     
     action = 'no action'
@@ -51,7 +52,7 @@ namespace :crypto do
     mail.to = 'stephen@stephenreid.net'
     mail.from = 'crypto@stephenreid.net'
     mail.subject = "#{action.upcase} at #{MyBinance.usd_per_asset('BTC')} #{p}%"
-    mail.body = "#{url}\n#{cmd}\n\n#{orders}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
+    mail.body = "#{url}\n#{cmd}\n\n#{orders}\n\nIncluded signals: #{included_signals}\n\nScore: #{score}\n\n" + results.map { |k,v| "#{k}: #{v}" }.join("\n") + "\n\n" + signals.map { |k,v| "#{k}: #{v}" }.join("\n")
     mail.deliver        
     
   end
