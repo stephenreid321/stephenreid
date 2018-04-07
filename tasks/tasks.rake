@@ -1,7 +1,7 @@
 
 namespace :crypto do
   
-  task :enter_or_exit => :environment do
+  task :indicators => :environment do
    
     url = 'https://uk.tradingview.com/symbols/BTCUSD/technicals/'
     cmd = %Q{page.all('#technicals-root div').detect { |div| div.text == '1 hour' }.click and sleep 1}
