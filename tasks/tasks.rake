@@ -25,7 +25,6 @@ namespace :crypto do
     }    
     Indicator.create symbol: 'BTCUSD', name: 'price', value: MyBinance.usd_per_asset('BTC'), timestamp: timestamp
 
-
     featured_signals = oscillators    
     results = featured_signals.values.each_with_object(Hash.new(0)){|key,hash| hash[key] += 1}
     score = (results['Buy'] * 1) + (results['Sell'] * -1)
