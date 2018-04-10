@@ -8,6 +8,8 @@ class Podcast
   field :image_uid, :type => String
   
   validates_presence_of :name
+  
+  dragonfly_accessor :image
         
   def self.admin_fields
     {

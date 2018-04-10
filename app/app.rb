@@ -62,9 +62,13 @@ module ActivateApp
         erb :map 
       else 
         erb :places
-      end      
-      
+      end            
     end
+    
+    get '/podcasts' do
+      @title = 'Podcasts · Stephen Reid'
+      erb :podcasts
+    end    
     
     get '/calendar' do
       @title = 'Calendar · Stephen Reid'
