@@ -1,7 +1,10 @@
-<% Podcast.all.shuffle.each_with_index { |podcast,i| %>
-  <div class="col-md-4 mb-3">
-    <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
-      <%= partial :podcast, :object => podcast %>
+
+<div class="row no-gutters">
+  <% Podcast.all.shuffle.each_with_index { |podcast,i| %>
+    <div class="col-md-4 mb-3">
+      <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
+        <%= partial :podcast, :object => podcast %>
+      </div>
     </div>
-  </div>
-<% } %>
+  <% } %>
+</div>
