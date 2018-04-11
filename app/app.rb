@@ -41,7 +41,7 @@ module ActivateApp
       @_params = params; def params; @_params; end # force controllers to inherit the fixed params
       @title = 'Stephen Reid'
       @og_desc = 'Stephen Reid is the founder and co-director of the Psychedelic Society, the creator of Huddl and psychedelic.community, the press officer for the Breaking Convention Conference on Psychedelic Consciousness and is currently exploring the idea of a Metamonastery'
-      @og_image = "http://selenium321.herokuapp.com/visit?url=http://#{ENV['DOMAIN']}#{request.path}&screenshot=true"
+      @og_image = "http://selenium321.herokuapp.com/visit.png?url=http://#{ENV['DOMAIN']}#{request.path}"
       @eth = '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324'
     end        
                 
