@@ -16,9 +16,5 @@ class Preview
       :image => :image,
     }
   end
-  
-  before_validation do
-    self.image = open("http://selenium321.herokuapp.com/visit.png?url=#{url}")
-  end
-    
+      
 end
