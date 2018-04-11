@@ -1,6 +1,7 @@
 class Preview
   include Mongoid::Document
   include Mongoid::Timestamps
+  extend Dragonfly::Model    
 
   field :url, :type => String
   field :image_uid, :type => String
