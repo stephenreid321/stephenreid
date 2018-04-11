@@ -18,7 +18,7 @@ class Preview
   end
   
   before_validation do
-    self.image_url = "http://selenium321.herokuapp.com/visit.png?url=#{url}"
+    self.image = open("http://selenium321.herokuapp.com/visit.png?url=#{url}")
   end
     
 end
