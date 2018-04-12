@@ -106,6 +106,14 @@ module ActivateApp
         pass
       end
     end  
+    
+    get '/arena' do
+      erb :arena
+    end
+    
+    get '/block' do
+      partial :block, :locals => {:name => params[:name], :link => params[:link], :image_url => params[:image_url]}
+    end
      
   end         
 end
