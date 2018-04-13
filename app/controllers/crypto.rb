@@ -18,5 +18,9 @@ ActivateApp::App.controller do
     MyBinance.exit
     redirect '/crypto'
   end
+  
+  get '/indicators' do        
+    erb :indicators
+  end  
    
 end
