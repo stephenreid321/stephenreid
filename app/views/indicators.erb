@@ -3,7 +3,7 @@
 scores = {}
 %>
 <% indicator_names = Indicator.where(:name.ne => 'price').pluck(:name).uniq %>
-<% timestamps = Indicator.order('timestamp desc').pluck(:timestamp).uniq %>
+<% timestamps = Indicator.order('timestamp desc').limit(24*3).pluck(:timestamp).uniq %>
 <table class="table">
   <thead>
     <tr>
@@ -14,7 +14,7 @@ scores = {}
       <% } %>           
     </tr>
   </thead>
-  <% timestamps.limit(24*3).each { |t|  %>
+  <% timestamps.each { |t|  %>
     <tr>
       <td><%=t%></td>
       <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
