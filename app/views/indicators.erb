@@ -14,7 +14,7 @@ scores = {}
       <% } %>           
     </tr>
   </thead>
-  <% timestamps.each { |t|  %>
+  <% timestamps.limit(24*3).each { |t|  %>
     <tr>
       <td><%=t%></td>
       <td><%= Indicator.find_by(timestamp: t, name: 'price').value %></td>
