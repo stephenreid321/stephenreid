@@ -111,6 +111,7 @@
               [],
                 ['Google Maps', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/', 'Stephen Reid', 'fas fa-map'],
                 ['Reddit', 'https://reddit.com//user/stephenreid321'],                
+                ['Are.na', 'https://www.are.na/stephen-reid', 'Stephen Reid', '<span style="letter-spacing: -0.6rem">✶✶</span>'],                
               [],
                 ['Goodreads'],
                 ['IMDb', 'https://www.imdb.com/user/ur85653381/'],
@@ -124,7 +125,13 @@
               %>
                 <% if network %>
                   <div class="col-auto icon">
-                    <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>"><i class="<%= icon ? icon : "fab fa-#{network.parameterize}" %>"></i></a>                  
+                    <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>">
+                      <% if !icon or icon.starts_with?('fa') %>
+                        <i class="<%= icon ? icon : "fab fa-#{network.parameterize}" %>"></i>
+                      <% else %>
+                        <%=icon%>
+                      <% end %>
+                    </a>                  
                   </div>                  
                 <% else %>
 

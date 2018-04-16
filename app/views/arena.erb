@@ -3,7 +3,7 @@
     $.getJSON('https://api.are.na/v2/channels/key-places-and-processes', function (data) {
       $.each(data.contents, function (i, block) {
         console.log(block)
-        $.get('/block', {name: block.title, link: block.class == 'Link' ? block.source.url : 'http://are.na/block/' + block.id, image_url: block.image.display.url}, function (data) {
+        $.get('/block', {title: block.title, link: block.class == 'Link' ? block.source.url : 'http://are.na/block/' + block.id, image_url: block.image.display.url}, function (data) {
           $('#blocks').append('<div class="col-md-4 mb-3">' + data + '</div>')
         })
       })

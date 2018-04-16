@@ -98,22 +98,30 @@ module ActivateApp
     get '/gh' do
       redirect 'https://www.google.co.uk/maps/place/Greenhouse/@51.5529027,-0.0879017,15z/data=!4m2!3m1!1s0x0:0x9850520d11f22809'
     end   
-            
+     
+    get '/arena' do
+      erb :arena
+    end
+    
+    get '/block' do
+      partial :block, :locals => {:title => params[:title], :link => params[:link], :image_url => params[:image_url]}
+    end
+
+    get '/art-block' do
+      partial :art_block, :locals => {:title => params[:title], :link => params[:link], :image_url => params[:image_url]}
+    end
+    
+    get '/art' do
+      erb :art
+    end
+                
     get '/:slug' do
       if @fragment = Fragment.find_by(slug: params[:slug], page: true)
         erb :page
       else
         pass
       end
-    end  
-    
-    get '/arena' do
-      erb :arena
-    end
-    
-    get '/block' do
-      partial :block, :locals => {:name => params[:name], :link => params[:link], :image_url => params[:image_url]}
-    end
+    end     
      
   end         
 end
