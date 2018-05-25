@@ -59,6 +59,7 @@ module ActivateApp
       if params[:map]
         @places = Place.all
         @places = @places.where(category: 'upcoming') if params[:plans]
+        @view = 'map'
         erb :map 
       else 
         erb :places
