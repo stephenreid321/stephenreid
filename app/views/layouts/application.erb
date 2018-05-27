@@ -87,7 +87,7 @@
               }
             </style>
             <div id="pic">
-              <h1 style="font-size: 2em" class="mt-2 mb-0 font-weight-bold">Stephen Reid</h1>
+              <h1 style="font-size: 2em" class="rainbow mt-2 mb-0 font-weight-bold">Stephen Reid</h1>
               <img src="<%= request.path == '/tarot' ? '/images/tarotcards.jpg' : '/images/me-ocean-sq.jpg' %>" class="rounded-circle my-3" style="max-width: 200px; width: 100%" />
             </div>
 
@@ -95,7 +95,7 @@
               .icon a { font-size: 8vw; color: rgb(33, 37, 41) }
               .icon a:hover { color: rgb(206, 40, 40) }
               @media(min-width: 768px) {
-                .icon a { font-size: 3vw }
+                .icon a { font-size: 2vw }
               }
             </style>
             <div class="row justify-content-center" style="text-align: center">
@@ -139,21 +139,23 @@
               <% } %>
             </div>
 
-            <script>
-              $(function () {
-                new QRCode('qrcode', {text: '<%=@eth%>', width: 150, height: 150});
-                if (typeof web3 !== 'undefined') {
-                  $('#send-eth').show()
-                }
-              });
-            </script>            
-            <div class="my-3">
-              <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
-              <div id="qrcode" style="display: none; width: 150px;" class="mx-auto"></div>
+            <div style="display: none">
+              <script>
+                $(function () {
+                  new QRCode('qrcode', {text: '<%=@eth%>', width: 150, height: 150});
+                  if (typeof web3 !== 'undefined') {
+                    $('#send-eth').show()
+                  }
+                });
+              </script>            
+              <div class="my-3">
+                <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
+                <div id="qrcode" style="display: none; width: 150px;" class="mx-auto"></div>
+              </div>
+              <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
+                Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
+              <% end %>
             </div>
-            <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
-              Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
-            <% end %>
 
           </div>
 

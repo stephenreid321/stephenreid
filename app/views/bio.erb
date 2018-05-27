@@ -26,6 +26,20 @@
   He is the creator of several <a href="https://github.com/stephenreid321">open source projects</a>.
 </p>
 
+<h2>Speaking engagements</h2>
+
+<ul>
+<% %Q{Feb 2016, Cambridge Union:  This House believes that taking Recreational drugs is worth the risk
+July 2016, Conway Hall: Psychedelics and Nonduality
+Dec 2016, Conway Hall: The Legal Regulation of Psychedelics
+May 2018, HowTheLightGetsIn: A Long Strange Trip (panel with Prof. David Nutt and Amanda Feilding)
+July 2018, Noisily Festival: Psychedelics, non-duality and the nature of consciousness.
+July 2018, Boom Festival: Turn on, Tune in, Drop out… Integrate?}.split("\n").each { |line| info, title = line.split(': ') 
+%>
+<li><strong><%=info%></strong>: <%=title%></li>
+<% } %>
+</ul>
+
 <div class="row align-items-center">
   <% [
     ['The Psychedelic Society', 'http://psychedelicsociety.org.uk/', 'https://psychedelicsociety.org.uk/images/logo.png'],
