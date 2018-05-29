@@ -43,7 +43,7 @@ Apr 2018, LSD75: Growing A Psychedelic Society https://www.lsd75.ch/reid
 May 2018, HowTheLightGetsIn: A Long Strange Trip https://hay.htlgi.iai.tv/events/a-long-strange-trip-2144
 Jun 2018, Beyond Psychedelics: Psychedelics, Democracy and Reform http://beyondpsychedelics.cz/
 Jul 2018, Noisily Festival: Psychedelics, Nonduality and the Nature of Consciousness http://www.noisilyfestival.com/mind-body-and-soul/talks-and-workshops/
-Jul 2018, Boom Festival: Turn on, Tune in, Drop out… Integrate? https://www.boomfestival.org/boom2018/program/ngo-django/psychedelic-society/}.split("\n").each { |line| info, title = line.split(': ')
+Jul 2018, Boom Festival: Turn on, Tune in, Drop out… Integrate? https://www.boomfestival.org/boom2018/program/ngo-django/psychedelic-society/}.split("\n").reverse.each { |line| info, title = line.split(': ')
   parts = title.split(' '); title = parts[0..-2].join(' '); link = parts[-1]
 %>
   <li><strong><%=info%></strong>: <a href="<%=link%>"><%=title%></a></li>
