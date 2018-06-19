@@ -81,9 +81,9 @@ module ActivateApp
       erb :bio
     end
            
-    get '/aspirations' do
-      @title = 'Aspirations · Stephen Reid'
-      erb :aspirations
+    get '/routine' do
+      @title = 'Routine · Stephen Reid'
+      erb :routine
     end
     
     get '/music' do
