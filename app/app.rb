@@ -120,7 +120,7 @@ module ActivateApp
     get '/darknet' do
       @title = 'Step-by-step guide to the darknet'
       @og_desc = 'A step-by-step guide to using a darknet marketplace. Start to finish, it takes a couple of hours.'
-      @og_image = "#{ENV['BASE_URI']}/images/marketplace/tor.png"   
+      @og_image = "http://#{ENV['DOMAIN']}/images/marketplace/tor.png"   
       erb :darknet
     end
         
