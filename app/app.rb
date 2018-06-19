@@ -126,7 +126,7 @@ module ActivateApp
         
     get '/why-use-the-darknet' do
       @title = 'Why use the darknet to obtain psychedelics?'
-      @og_desc = 'Why using the darknet to obtain psychedelics is good for you and good for society'        
+      @og_desc = 'Why using the darknet to obtain psychedelics is better for you and better for society'        
       erb :why_use_the_darknet
     end      
                     
