@@ -1,0 +1,64 @@
+
+<p class="lead">
+  This is a minimal, step-by-step guide to using Dream Market, a popular darknet marketplace. Start to finish, it takes a couple of hours.
+</p>
+
+
+<ul>
+
+  <li>
+    <strong>Please note that some products available for purchase on Dream Market are illegal to import to or possess in the UK.</strong>
+    If you choose to use this guide to pursue activity that is illegal in your jurisdiction, it's at your own risk.
+  </li>
+
+  <li>
+    If you're trying a psychedelic for the first time, I strongly recommend you attend a facilitated experience like one of the Psychedelic Society's <a href="http://psychedelicsociety.org.uk/experience-retreats">Psychedelic Experience Retreats</a>.
+  </li>
+
+  <li>
+    <a href="/why-use-the-darknet">Why using the darknet to obtain psychedelics is better for you and better for society</a>
+  </li>
+
+</ul>
+
+
+<% guide = %Q{Download Tor      
+You can only access Dream Market using a special web browser called Tor. Download it at <a href="https://www.torproject.org/">torproject.org</a>.
+/images/marketplace/tor.png
+
+Create a Dream Market account
+Open Tor and create a Dream Market account via <a href="http://lchudifyeqm4ldjj.onion/?ai=489532 ">http://lchudifyeqm4ldjj.onion</a>.
+/images/marketplace/dream.png
+
+Pick a product
+Choose a product and take a note of the price and shipping fees (below the image) in ฿ (bitcoin).
+/images/marketplace/dream-product.png
+
+Buy some bitcoin
+(You don't need to use Tor for this bit.) Go to <a href="http://bittylicious.com/">Bittylicious</a>, enter your Dream Market deposit address (you can find this on your Dream Market 'Account' page) as the bitcoin address and purchase the appropriate amount of bitcoins, making sure you've taken into account shipping fees. The bitcoins should arrive in your Dream Market account in an hour or so.
+/images/marketplace/bittylicious.png
+
+Complete the purchase
+Go back to your product on Dream Market, pick a shipping option and click 'Add to cart'. Enter your address in the 'Shipping address' box (consider what name you put on the order, and don't include your country if the vendor is shipping from the same country). <strong>Make sure you click 'Encrypt message'</strong> and then click 'Order now'. You're done!
+/images/marketplace/dream-encrypt.png
+} %>
+
+<% guide.split("\n\n").each_with_index { |section, i|; lines = section.split("\n"); h2 = lines.first %>
+  <h2 id="<%=h2.parameterize%>"><%=i+1%>. <%=h2%></h2>
+  <% lines[1..-1].each_slice(2) { |a,b| %>
+    <div class="row" style="margin-bottom: 20px">
+      <% if b %>
+        <div class="col-sm-6">
+          <%=a%>
+        </div>
+        <div class="col-sm-6">
+          <img class="img-fluid" src="<%=b%>" />
+        </div>
+      <% else %>
+        <div class="col-sm-12">
+          <%=a%>
+        </div>      
+      <% end %>
+    </div>
+  <% } %>
+<% } %>

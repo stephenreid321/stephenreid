@@ -116,6 +116,19 @@ module ActivateApp
     get '/block' do
       partial :block, :locals => {:title => params[:title], :link => params[:link], :image_url => params[:image_url]}
     end    
+    
+    get '/darknet' do
+      @title = 'Step-by-step guide to the darknet'
+      @og_desc = 'A step-by-step guide to using a darknet marketplace. Start to finish, it takes a couple of hours.'
+      @og_image = "#{ENV['BASE_URI']}/images/marketplace/tor.png"   
+      erb :darknet
+    end
+        
+    get '/why-use-the-darknet' do
+      @title = 'Why use the darknet to obtain psychedelics?'
+      @og_desc = 'Why using the darknet to obtain psychedelics is good for you and good for society'        
+      erb :why_use_the_darknet
+    end      
                     
     get '/:slug' do
       if @fragment = Fragment.find_by(slug: params[:slug], page: true)
