@@ -38,8 +38,7 @@ module ActivateApp
       redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
       Time.zone = current_account.time_zone if current_account and current_account.time_zone    
       fix_params!
-      @_params = params; def params; @_params; end # force controllers to inherit the fixed params
-      @title = 'Stephen Reid'
+      @_params = params; def params; @_params; end # force controllers to inherit the fixed params      
       @og_desc = 'Social entrepreneur, activist and public speaker'
       @og_image = (Preview.find_by(url: "http://#{ENV['DOMAIN']}#{request.path}") || Preview.find_by(url: "http://#{ENV['DOMAIN']}/")).try(:image).try(:url)
       @eth = '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324'
