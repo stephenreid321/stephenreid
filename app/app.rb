@@ -84,7 +84,7 @@ module ActivateApp
     end
            
     get '/a-good-day' do
-      @title = 'A good day'
+      @title = 'A Good Day'
       erb :routine
     end
     
