@@ -55,19 +55,10 @@
     markers.push(marker);
   }
 
-  var markerClusterer = new MarkerClusterer(map, markers, {zoomOnClick: false});
+  var markerClusterer = new MarkerClusterer(map, markers);
   map.fitBounds(bounds);
 
-  google.maps.event.addListener(markerClusterer, "click", function (cluster) {
-  var content = '<ul class="list-unstyled">';
-          $.each(cluster.getMarkers(), function (i, marker) {
-          content += '<li>' + marker.content + '</li>';
-          })
-          content += '</ul>';
-          infowindow.setContent('<div class="infowindow">' + content + '</div>');
-          infowindow.setPosition(cluster.getCenter())
-          infowindow.open(map);
-  });
+
   }
   );</script>
 
