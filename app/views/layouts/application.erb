@@ -101,6 +101,11 @@
             <div class="row justify-content-center" style="text-align: center">
               <div class="col-12">
                 <a href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a>
+
+                <div class="my-2">
+                  <a target="_blank" href="http://facebook.com/stephenreid321"><i class="fab fa-facebook-square"></i> Follow me on Facebook</a>
+                </div>
+
               </div>
               <%
               [
@@ -157,20 +162,12 @@
               <% end %>
             </div>
 
-            <div class="my-2" style="text-align: center">
-              <a target="_blank" href="http://facebook.com/stephenreid321"><i class="fab fa-facebook-square"></i> Follow me on Facebook</a>
-            </div>
-
             <% unless request.path == '/' %>
-              <h4>Join my mailing list</h4>              
-              <form action="https://stephenreid.us18.list-manage.com/subscribe/post?u=b319030fc545a24d344ab37f9&amp;id=cb2c77dedc" method="post" target="_blank">                          
-                <input type="email" value="" name="EMAIL" class="required email form-control mb-1" required="required" placeholder="Email*">
-                <input type="text" value="" name="FNAME" class="form-control mb-1"  placeholder="First name">
-                <input type="text" value="" name="LNAME" class="form-control mb-1"  placeholder="Last name">      
-                <input type="submit" value="Subscribe" name="subscribe" class="btn btn-primary button">
-              </form>            
+              <div class="d-none d-sm-block">
+                <%= partial :mailing_list %>          
+              </div>
             <% end %>
-              
+
           </div>
 
         </div>
@@ -186,6 +183,10 @@
           <%= partial :nav %>
 
           <%= yield %>
+
+          <div class="d-sm-none my-3">
+            <%= partial :mailing_list %>          
+          </div>          
 
         </div>
 
