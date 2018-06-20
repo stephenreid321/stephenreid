@@ -40,7 +40,7 @@ module ActivateApp
       fix_params!
       @_params = params; def params; @_params; end # force controllers to inherit the fixed params
       @title = 'Stephen Reid'
-      @og_desc = 'Stephen Reid is the founder and co-director of the Psychedelic Society, the creator of Huddl and psychedelic.community, the press officer for the Breaking Convention Conference on Psychedelic Consciousness and is currently exploring the idea of a Metamonastery'
+      @og_desc = 'Social entrepreneur, activist and public speaker'
       @og_image = (Preview.find_by(url: "http://#{ENV['DOMAIN']}#{request.path}") || Preview.find_by(url: "http://#{ENV['DOMAIN']}/")).try(:image).try(:url)
       @eth = '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324'
     end        
