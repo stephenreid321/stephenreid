@@ -41,7 +41,7 @@
     <% } %>  
 
     <%= favicon_tag 'favicon.png' %>
-    <title><%=@title%></title>
+    <title><%=if @title; "#{@title} · Stephen Reid"; else; "Stephen Reid"; end %></title>
     <meta name="description" content="<%=@og_desc%>">
     <meta property="og:title" content="<%=@title%>" />
     <meta property="og:image" content="<%=@og_image%>" />

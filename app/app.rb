@@ -55,7 +55,25 @@ module ActivateApp
     end
     
     get :home, :map => '/' do
-      @title = 'Stephen Reid'
+      erb :bio                
+    end
+    
+    get '/bio' do
+      redirect '/'
+    end
+    
+    get '/podcasts' do
+      @title = 'Podcasts'
+      erb :podcasts
+    end    
+    
+    get '/calendar' do
+      @title = 'Calendar'
+      erb :calendar
+    end
+    
+    get '/places' do
+      @title = 'Places'
       if params[:map]
         @places = Place.all
         @places = @places.where(category: 'upcoming') if params[:plans]
@@ -63,26 +81,11 @@ module ActivateApp
         erb :map 
       else 
         erb :places
-      end            
-    end
-    
-    get '/podcasts' do
-      @title = 'Podcasts · Stephen Reid'
-      erb :podcasts
-    end    
-    
-    get '/calendar' do
-      @title = 'Calendar · Stephen Reid'
-      erb :calendar
-    end
-    
-    get '/bio' do
-      @title = 'Bio · Stephen Reid'
-      erb :bio
+      end 
     end
            
     get '/routine' do
-      @title = 'Routine · Stephen Reid'
+      @title = 'Routine'
       erb :routine
     end
     
@@ -91,7 +94,7 @@ module ActivateApp
     end
     
     get '/tarot' do
-      @title = 'Tarot · Stephen Reid'
+      @title = 'Tarot'
       @og_image = "http://#{ENV['DOMAIN']}/images/tarotcards.jpg"
       erb :tarot
     end
@@ -101,7 +104,7 @@ module ActivateApp
     end   
      
     get '/art' do
-      @title = 'Art · Stephen Reid'
+      @title = 'Art'
       erb :art
     end    
     
