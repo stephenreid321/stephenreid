@@ -31,7 +31,7 @@
 %>
   <% if network %>
     <div class="col-auto icon">
-      <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>">
+      <a style="text-decoration:none" data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>">
         <% if !icon or icon.starts_with?('fa') %>
           <i class="<%= icon ? icon : "fab fa-#{network.parameterize}" %>"></i>
         <% else %>
