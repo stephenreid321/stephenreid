@@ -18,17 +18,21 @@
   I've had the good fortune to <a href="/places">travel extensively</a> and have lived in London, Berlin and Strasbourg.
 </p>
 
-<p class="lead">Let's stay in touch! Join my mailing list below, <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or <a href="stephen@stephenreid.net">send me an email</a>.</p>
+<style>
+  #pic { text-align: center }
+  @media(min-width: 768px) {
+    #pic { text-align:  none }  
+  }
+</style>
+<div id="pic">
+  <img src="<%= request.path == '/tarot' ? '/images/tarotcards.jpg' : '/images/me-ocean-sq.jpg' %>" style="max-width: 300px; width: 100%" />
+</div>
 
-<form action="https://stephenreid.us18.list-manage.com/subscribe/post?u=b319030fc545a24d344ab37f9&amp;id=cb2c77dedc" method="post" class="my-3 form-inline" target="_blank">            
-  <input type="email" value="" name="EMAIL" class="required email form-control mb-1 mb-sm-0 mr-sm-1" required="required" placeholder="Email*">
-  <input type="text" value="" name="FNAME" class="form-control mb-1 mb-sm-0 mr-sm-1"  placeholder="First name">
-  <input type="text" value="" name="LNAME" class="form-control mb-1 mb-sm-0 mr-sm-1"  placeholder="Last name">      
-  <input type="submit" value="Subscribe" name="subscribe" class="btn btn-primary button">
-</form>
+<p class="lead mt-3">Let's stay in touch! Join my mailing list below, <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or <a href="stephen@stephenreid.net">send me an email</a>.</p>
 
+<%= partial :mailing_list %>
 
-<h2>Current affiliations</h2>
+<h2 class="mt-3">Current affiliations</h2>
 <ul>
   <li><a href="http://psychedelicsociety.org.uk">The Psychedelic Society</a>, founder and co-director</li>
   <li><a href="http://breakingconvention.co.uk">Breaking Convention Conference on Psychedelic Consciousness</a>, press officer</li>  

@@ -1,11 +1,21 @@
-<div id="nav" class="mt-2">
-  <%= ul_nav [    
-    ['Bio', '/'],
-    ['Places', '/places'],
-    ['A Good Day', '/a-good-day'],    
-    ['Podcasts', '/podcasts'],
-    ['Darknet', '/darknet'],
-    ['Tarot', '/tarot'],
-    ['Calendar', '/calendar'],
-    ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
+
+<script>
+  $(function () {
+    $("#nav a[href^=http]").attr('target', '_blank')
+  })
+</script>       
+
+
+<div class="row justify-content-center">
+  <div id="nav">
+    <%= ul_nav [    
+      ['Bio', '/'],
+      ['Places', '/places'],
+      ['A Good Day', '/a-good-day'],    
+      ['Podcasts', '/podcasts'],
+      ['Darknet', '/darknet'],
+      ['Tarot', '/tarot'],
+      ['Calendar', '/calendar'],
+      ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
+  </div>
 </div>

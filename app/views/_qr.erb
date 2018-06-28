@@ -1,0 +1,15 @@
+<script>
+  $(function () {
+    new QRCode('qrcode', {text: '<%=@eth%>', width: 150, height: 150});
+    if (typeof web3 !== 'undefined') {
+      $('#send-eth').show()
+    }
+  });
+</script>            
+<div class="my-3">
+  <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
+  <div id="qrcode" style="display: none; width: 150px;" class="mx-auto"></div>
+</div>
+<% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
+  Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
+<% end %>

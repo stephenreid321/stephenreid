@@ -1,0 +1,45 @@
+
+
+<style> 
+  .icon a { font-size: 8vw; color: rgb(33, 37, 41) }
+  .icon a:hover { color:  #0056b3; }
+  @media(min-width: 768px) {
+    .icon a { font-size: 2vw }
+  }
+</style>
+
+<%
+[
+  ['Github'],
+  ['Medium', 'https://medium.com/@stephenreid321'],
+  ['Youtube', 'https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA'],                
+  ['Soundcloud', 'https://soundcloud.com/stephenreid321/sets/stephen-reid'],
+[],
+  ['Google Maps', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/', 'Stephen Reid', 'fas fa-map'],
+  ['Reddit', 'https://reddit.com//user/stephenreid321'],                
+  ['Are.na', 'https://www.are.na/stephen-reid', 'Stephen Reid', '✶'],                
+[],
+  ['Goodreads'],
+  ['IMDb', 'https://www.imdb.com/user/ur85653381/'],
+[],
+  ['Facebook'],
+  ['Twitter'],
+  ['LinkedIn', 'https://www.linkedin.com/in/stephenreid321'],                  
+[],
+  ['Ethereum', 'https://etherscan.io/address/stephenreid.eth', 'stephenreid.eth']
+  ].each { |network,url,text,icon|
+%>
+  <% if network %>
+    <div class="col-auto icon">
+      <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>">
+        <% if !icon or icon.starts_with?('fa') %>
+          <i class="<%= icon ? icon : "fab fa-#{network.parameterize}" %>"></i>
+        <% else %>
+          <%=icon%>
+        <% end %>
+      </a>                  
+    </div>                  
+  <% else %>
+
+  <% end %>
+<% } %>

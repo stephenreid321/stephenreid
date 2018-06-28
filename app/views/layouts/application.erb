@@ -66,132 +66,61 @@
 
       <%= partial :alert %>  
 
-
       <style>
+        #title { font-size: 3rem }
         @media(min-width: 768px) {
-          #sidebar { position: sticky; top: 0; padding-bottom: 1rem }
-        }
+          #title { font-size: 5rem }
+        }    
       </style>
+      <div style="text-align: center">
+        <h1 id="title" style="display: inline-block;" class="rainbow mt-2 mb-0 font-weight-bold">
+          <a style="text-decoration: none" href="/">
+            Stephen Reid
+          </a>
+        </h1>
+      </div>
 
-      <div class="row justify-content-center">
 
-        <div class="col-md-3">
-
-          <div id="sidebar">
-
-            <style>
-              #pic { text-align: center }
-              @media(min-width: 768px) {
-                #pic { text-align:  none }  
-              }
-            </style>
-            <div id="pic">
-              <a style="text-decoration: none" href="/"><h1 style="font-size: 2em" class="rainbow mt-2 mb-0 font-weight-bold">Stephen Reid</h1></a>
-              <img src="<%= request.path == '/tarot' ? '/images/tarotcards.jpg' : '/images/me-ocean-sq.jpg' %>" class="rounded-circle my-3" style="max-width: 200px; width: 100%" />
-            </div>
-
-            <style>
-              .icon a { font-size: 8vw; color: rgb(33, 37, 41) }
-              .icon a:hover { color:  #0056b3; }
-              @media(min-width: 768px) {
-                .icon a { font-size: 2vw }
-              }
-            </style>
-            <div class="row justify-content-center" style="text-align: center">
-              <div class="col-12">
-                <a href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a>
-
-                <div class="my-2">
-                  <a target="_blank" href="http://facebook.com/stephenreid321"><i class="fab fa-facebook-square"></i> Follow me on Facebook</a>
-                </div>
-
-              </div>
-              <%
-              [
-                ['Github'],
-                ['Medium', 'https://medium.com/@stephenreid321'],
-                ['Youtube', 'https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA'],                
-                ['Soundcloud', 'https://soundcloud.com/stephenreid321/sets/stephen-reid'],
-              [],
-                ['Google Maps', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/', 'Stephen Reid', 'fas fa-map'],
-                ['Reddit', 'https://reddit.com//user/stephenreid321'],                
-                ['Are.na', 'https://www.are.na/stephen-reid', 'Stephen Reid', '✶'],                
-              [],
-                ['Goodreads'],
-                ['IMDb', 'https://www.imdb.com/user/ur85653381/'],
-              [],
-                ['Facebook'],
-                ['Twitter'],
-                ['LinkedIn', 'https://www.linkedin.com/in/stephenreid321'],                  
-              [],
-                ['Ethereum', 'https://etherscan.io/address/stephenreid.eth', 'stephenreid.eth']
-                ].each { |network,url,text,icon|
-              %>
-                <% if network %>
-                  <div class="col-auto icon">
-                    <a data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>">
-                      <% if !icon or icon.starts_with?('fa') %>
-                        <i class="<%= icon ? icon : "fab fa-#{network.parameterize}" %>"></i>
-                      <% else %>
-                        <%=icon%>
-                      <% end %>
-                    </a>                  
-                  </div>                  
-                <% else %>
-
-                <% end %>
-              <% } %>
-            </div>
-
-            <div style="display: none">
-              <script>
-                $(function () {
-                  new QRCode('qrcode', {text: '<%=@eth%>', width: 150, height: 150});
-                  if (typeof web3 !== 'undefined') {
-                    $('#send-eth').show()
-                  }
-                });
-              </script>            
-              <div class="my-3">
-                <a href="javascript:;" onclick="$(this).hide().next().show()"><small>Show ETH address as a QR code</small></a>
-                <div id="qrcode" style="display: none; width: 150px;" class="mx-auto"></div>
-              </div>
-              <% form_tag '', :id => 'send-eth', :onsubmit => %Q{web3.eth.sendTransaction({to:'#{@eth}', value: web3.toWei($('input[name=amount]', this).val(), 'ether')}, function(error, transactionHash) { }); return false}, :class => 'my-3 form-inline', :style => 'display: none' do %>
-                Send <%= text_field_tag :amount, :class => 'mx-1 form-control', :style => 'width: 3.5rem', :value => '0.01' %> <span style="font-variant: all-small-caps">ETH</span> <%= submit_tag 'Send', :class => 'ml-1 btn btn-primary btn-sm' %>
-              <% end %>
-            </div>
-
-            <% unless request.path == '/' %>
-              <div class="d-none d-sm-block mt-2">
-                <%= partial :mailing_list %>          
-              </div>
-            <% end %>
-
-          </div>
-
+      <div id="key-info" class="my-2 text-center">
+        <a class="btn btn-outline-primary" href="mailto:stephen@stephenreid.net"><i class="fas fa-envelope"></i> stephen@stephenreid.net</a>
+        
+        <div class="d-block d-sm-inline-block mt-1 mt-sm-0">
+          <a class="btn btn-outline-primary" target="_blank" href="http://facebook.com/stephenreid321"><i class="fab fa-facebook-square"></i> Follow me on Facebook</a>
         </div>
-
-        <div class="col-md">
-
-          <script>
-            $(function () {
-              $("#nav a[href^=http]").attr('target', '_blank')
-            })
-          </script>       
-
-          <%= partial :nav %>
-
-          <%= yield %>
-
-          <div class="d-sm-none my-3">
-            <%= partial :mailing_list %>          
-          </div>          
-
-        </div>
-
       </div>      
 
-    </div>
+      <div class="container">
+        <%= partial :nav %>
+      </div>      
+
+      <div style="display: none">
+        <%= partial :qr %>
+      </div>
+
+      <div class="mt-3">
+        <%= yield %>
+      </div>
+
+      <hr />
+
+      <div class="row justify-content-center mt-3">        
+        <%= partial :icons %>        
+      </div>     
+
+      <% unless request.path == '/' %>        
+        <div class="row justify-content-center my-3">
+          <div class="col-sm-auto">
+            <h4 class="text-center">Join my mailing list</h4>
+            <%= partial :mailing_list %>          
+          </div>          
+        </div>
+      <% end %>
+
+
+
+    </div>      
+
+
 
   </body>
 </html>
