@@ -1,34 +1,52 @@
 
 <p class="lead">
   I'm a social entrepreneur, activist and public speaker who believes a more beautiful world is possible through the healing and growth of the individual.
-</p>
-<p class="lead">
-  Topics I'm currently interested in include
-  altered states of consciousness via meditation, psychedelics and dreams;
-  bodywork including somatic experiencing, yoga and dance;
-  neuro/biohacking and ayurveda;
-  the placebo effect and ritual magic;
-  the unconscious;
-  mythology;
-  and metamodernism.
-  <small>(Check out <a href="https://www.goodreads.com/review/list/55629816?shelf=currently-reading">books I'm currently reading</a> and <a href="/podcasts">podcasts I'm currently listening to</a>.)</small>
+  Topics I'm currently interested in include:
+
 </p>
 
-<p class="lead">
+
+<%
+topics = {'Consciousness' => 'The nature of consciousness;
+  altered states of consciousness via meditation, psychedelics and dreams;  
+  the placebo effect and ritual magic;
+  the unconscious;
+  mythology',
+  'Technology and systems' => "Holocracy and workers' co-operatives;
+  blockchain technology and decentralisation; digital nomadism",
+  'The body' => 'Bodywork including somatic experiencing, yoga and dance;
+  neuro/biohacking and ayurveda',
+  'Politics' => 'Metamodernism'
+  }
+
+%>
+
+<dl class="row">
+  <% topics.each { |topic,desc| %>
+    <dt class="col-sm-2"><%=topic%></dt>
+    <dd class="col-sm-10"><%=desc%></dd>   
+  <% } %>  
+</dl>
+
+<p>
+  (Check out <a href="https://www.goodreads.com/review/list/55629816?shelf=currently-reading">books I'm currently reading</a> and <a href="/podcasts">podcasts I'm currently listening to</a>.)</small>
+</p>
+
+<p>
   I've had the good fortune to <a href="/places">travel extensively</a> and have lived in London, Berlin and Strasbourg.
 </p>
 
 <style>
-  #pic { text-align: center }
+  #pic { width: 100% }
   @media(min-width: 768px) {
-    #pic { text-align:  none }  
+    #pic { max-width: 300px; }  
   }
 </style>
-<div id="pic">
-  <img src="<%= request.path == '/tarot' ? '/images/tarotcards.jpg' : '/images/me-ocean-sq.jpg' %>" style="max-width: 300px; width: 100%" />
+<div style="text-align: center">  
+  <img id="pic" src="/images/me-ocean-sq.jpg" />
 </div>
 
-<p class="lead mt-3">Let's stay in touch! Join my mailing list below, <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or <a href="mailto:stephen@stephenreid.net">send me an email</a>.</p>
+<p class="mt-3">Let's stay in touch! Join my mailing list below, <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or <a href="mailto:stephen@stephenreid.net">send me an email</a>.</p>
 
 <%= partial :mailing_list %>
 
