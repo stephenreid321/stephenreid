@@ -51,14 +51,26 @@ topics = {'Consciousness' => 'The nature of consciousness;
 <%= partial :mailing_list %>
 
 <h2 class="mt-3">Current affiliations</h2>
-<ul>
-  <li><a href="http://psychedelicsociety.org.uk">The Psychedelic Society</a>, founder and co-director</li>
-  <li><a href="http://breakingconvention.co.uk">Breaking Convention Conference on Psychedelic Consciousness</a>, press officer</li>  
-  <li><a href="https://psychedelic.community">psychedelic.community</a>, creator</li>  
-  <li><a href="http://huddl.tech">Huddl</a>, creator</li>  
-  <li><a href="https://www.facebook.com/cosmicpotions/">La Botica Exótica</a> (camp at Nowhere and the Borderland), co-founder</li>
-  <li><a href="http://metamonastery.net/">Metamonastery</a>, initiator</li>    
-</ul>
+
+
+<div class="row align-items-center"> 
+  <%[
+    ['The Psychedelic Society', 'Founder and co-director', 'http://psychedelicsociety.org.uk', 'http://psychedelicsociety.org.uk/images/logo.png'],
+    ['Autopo', 'Creator', 'https://app.autopo.co', 'https://app.autopo.co/images/autopo-link-inverse.png'],
+    ['Breaking Convention Conference on Psychedelic Consciousness', 'Press officer', 'http://breakingconvention.co.uk', '/images/bc.png'],
+    ['psychedelic.community', 'Creator', 'https://psychedelic.community', '/images/psycom.png'],
+    ['La Botica Exótica', 'Co-founder', 'https://www.facebook.com/cosmicpotions/', '/images/la-botica.jpg'],
+    ['Metamonastery', 'Initiator', 'http://metamonastery.net/', 'http://metamonastery.net/images/share.png'],
+    ].each_with_index { |org, i| name, title, url, src  = *org
+  %>
+    <div class="col-sm-4 my-3 text-center">
+      <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=name%>" href="<%=url%>">        
+        <img class="w-100 mb-2" src="<%=src%>">
+        <strong><%= name %></strong><br /><%= title %>
+      </a>
+    </div>
+  <% } %>
+</div>
 
 <h2>Previous affiliations</h2>
 
