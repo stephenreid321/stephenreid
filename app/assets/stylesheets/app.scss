@@ -1,11 +1,9 @@
-
+@import url('/fonts/mellony/stylesheet.css');
 @import url('/fonts/samarkan/stylesheet.css');
 
 $font-weight-normal: 300;
 
 @import "bootstrap/bootstrap";
-
-h1 { font-family: 'samarkannormal';  }
 
 .badge-warning { color: white }
 
