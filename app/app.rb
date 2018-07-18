@@ -61,8 +61,12 @@ module ActivateApp
     end
     
     get '/podcasts' do
-      @title = 'Podcasts'
-      erb :podcasts
+      redirect '/podcast'
+    end
+    
+    get '/podcast' do
+      @title = 'Podcast'
+      erb :podcast
     end    
         
     get '/calendar' do
