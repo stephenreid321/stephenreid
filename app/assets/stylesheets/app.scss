@@ -1,9 +1,11 @@
 @import url('/fonts/zilap_marine/stylesheet.css');
+@import url('https://fonts.googleapis.com/css?family=Unica+One');
 
 $font-weight-normal: 300;
 
 @import "bootstrap/bootstrap";
 
+h1,h2,h3,h4,h5,h6 { font-family: 'Unica One'; font-weight: normal; text-transform: uppercase }
 .badge-warning { color: white }
 
 .bgo:hover { opacity: 0 !important }
