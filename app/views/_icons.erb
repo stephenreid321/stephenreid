@@ -1,45 +1,36 @@
-
-
-<style> 
-  .icon a { font-size: 8vw; color: rgb(33, 37, 41) }
-  .icon a:hover { color:  #0056b3; }
-  @media(min-width: 768px) {
-    .icon a { font-size: 2vw }
-  }
-</style>
-
 <%
 [
-  ['Github'],
-  ['Medium', 'https://medium.com/@stephenreid321'],
+  ['Github', 'http://github.com/stephenreid321'],  
+  ['Ethereum', 'https://etherscan.io/address/stephenreid.eth'],
+[],
+  ['Anchor', 'http://anchor.fm/stephenreid321'],
   ['Youtube', 'https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA'],                
+[],
+  # ['Spotify', ''],
+  ['Bandlab', 'http://bandlab.com/stephenreid321'],
   ['Soundcloud', 'https://soundcloud.com/stephenreid321/sets/stephen-reid'],
 [],
-  ['Google Maps', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/', 'Stephen Reid', 'fas fa-map'],
-  ['Reddit', 'https://reddit.com//user/stephenreid321'],                
-  ['Are.na', 'https://www.are.na/stephen-reid', 'Stephen Reid', '✶'],                
-[],
-  ['Goodreads'],
+  ['Medium', 'https://medium.com/@stephenreid321'],  
+  ['Google Maps', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
+  ['Goodreads', 'http://goodreads.com/stephenreid321'],
   ['IMDb', 'https://www.imdb.com/user/ur85653381/'],
-[],
-  ['Facebook'],
-  ['Twitter'],
-  ['LinkedIn', 'https://www.linkedin.com/in/stephenreid321'],                  
-[],
-  ['Ethereum', 'https://etherscan.io/address/stephenreid.eth', 'stephenreid.eth']
-  ].each { |network,url,text,icon|
+[],  
+  ['Steem', 'https://steemit.com/@stephenreid321'],
+  ['Reddit', 'https://reddit.com//user/stephenreid321'],                    
+  ['Facebook', 'http://facebook.com/stephenreid321'],  
+  ['Twitter', 'http://twitter.com/stephenreid321'],
+  ['Instagram', 'http://instagram.com/stephenreid321'],
+  ['LinkedIn', 'https://www.linkedin.com/in/stephenreid321'],
+  ['Are.na', 'https://www.are.na/stephen-reid']  
+  ].each { |network,url|
 %>
   <% if network %>
-    <div class="col-auto icon">
-      <a style="text-decoration:none" data-toggle="tooltip" title="<%=network%>: <%=text or 'stephenreid321'%>" target="_blank" href="<%=url ? url : "https://#{network}.com/stephenreid321"%>">
-        <% if !icon or icon.starts_with?('fa') %>
-          <i class="<%= icon ? icon : "fab fa-#{network.parameterize}" %>"></i>
-        <% else %>
-          <%=icon%>
-        <% end %>
+    <div class="col-auto">
+      <a style="text-decoration:none" class="text-dark" data-toggle="tooltip" title="<%=url.split('/')[3..-1].join('/')%>" target="_blank" href="<%=url%>">
+        <%=network%>
       </a>                  
     </div>                  
   <% else %>
-
+    
   <% end %>
 <% } %>
