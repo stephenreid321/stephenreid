@@ -1,10 +1,7 @@
 
-<p class="lead">
-  I'm a social entrepreneur, software engineer and public speaker who believes a more beautiful world is possible through the healing and growth of the individual.
-  Topics I'm currently interested in include:
-
+<p class="lead">  
+  Welcome, traveller! A summary of some of the things I'm interested in right now:
 </p>
-
 
 <%
 topics = {'Consciousness' => 'The nature of consciousness;
@@ -15,6 +12,7 @@ topics = {'Consciousness' => 'The nature of consciousness;
   Plant medicines;
   song;
   tantra and sexual shamanism;
+  technoshamanism;
   breathwork;
   prayer;
   ritual magic including chaos magick and sex magick;
@@ -29,20 +27,10 @@ topics = {'Consciousness' => 'The nature of consciousness;
 
 %>
 
-<div class="text-sm-center">
   <% topics.each { |topic,desc| %>
     <h4><%=topic%></h4>
     <p><%=desc%></p>   
   <% } %>  
-</div>
-
-<p>
-  (Check out <a href="https://www.goodreads.com/review/list/55629816?shelf=currently-reading">books I'm currently reading</a> and <a href="/podcasts">podcasts I'm currently listening to</a>.)</small>
-</p>
-
-<p>
-  I've had the good fortune to <a href="/places">travel extensively</a> and have lived in London, Berlin and Strasbourg.
-</p>
 
 <style>
   #pic { width: 100% }
