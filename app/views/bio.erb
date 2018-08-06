@@ -9,24 +9,32 @@
 <%
 topics = {'Consciousness' => 'The nature of consciousness;
   altered states of consciousness via meditation, psychedelics and dreams;  
-  the placebo effect and ritual magic;
-  the unconscious;
-  mythology',
-  'Technology and systems' => "Holocracy and workers' co-operatives;
-  blockchain technology and decentralisation; digital nomadism",
+  the placebo effect;  
+  the unconscious',
+  'Shamanism' => "
+  Plant medicines;
+  song;
+  tantra and sexual shamanism;
+  breathwork;
+  prayer;
+  ritual magic including chaos magick and sex magick;
+  mythology
+  ",
   'The body' => 'Bodywork including somatic experiencing, yoga and dance;
   neuro/biohacking and ayurveda',
+  'Technology and systems' => "Holocracy and workers' co-operatives;
+  blockchain technology and decentralisation; digital nomadism",
   'Politics' => 'Metamodernism'
   }
 
 %>
 
-<dl class="row">
+<div class="text-sm-center">
   <% topics.each { |topic,desc| %>
-    <dt class="col-sm-2"><%=topic%></dt>
-    <dd class="col-sm-10"><%=desc%></dd>   
+    <h4><%=topic%></h4>
+    <p><%=desc%></p>   
   <% } %>  
-</dl>
+</div>
 
 <p>
   (Check out <a href="https://www.goodreads.com/review/list/55629816?shelf=currently-reading">books I'm currently reading</a> and <a href="/podcasts">podcasts I'm currently listening to</a>.)</small>
@@ -60,7 +68,7 @@ topics = {'Consciousness' => 'The nature of consciousness;
     ['Breaking Convention Conference on Psychedelic Consciousness', 'Press officer', 'http://breakingconvention.co.uk', '/images/bc.png'],
     #['psychedelic.community', 'Creator', 'https://psychedelic.community', '/images/psycom.png'],
     #['La Botica Exótica', 'Co-founder', 'https://www.facebook.com/cosmicpotions/', '/images/la-botica.png'],
-    #['Metamonastery', 'Initiator', 'http://metamonastery.net/', 'http://metamonastery.net/images/share.png'],
+  #['Metamonastery', 'Initiator', 'http://metamonastery.net/', 'http://metamonastery.net/images/share.png'],
     ].each_with_index { |org, i| name, title, url, src  = *org
   %>
     <div class="col-sm-4 my-3 text-center">
