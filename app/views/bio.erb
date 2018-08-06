@@ -1,8 +1,4 @@
 
-<p class="lead">  
-  Welcome, traveller! A summary of some of the things I'm interested in right now:
-</p>
-
 <%
 topics = {'Consciousness' => 'The nature of consciousness;
   altered states of consciousness via meditation, psychedelics and dreams;  
@@ -27,22 +23,24 @@ topics = {'Consciousness' => 'The nature of consciousness;
 
 %>
 
-  <% topics.each { |topic,desc| %>
-    <h4><%=topic%></h4>
-    <p><%=desc%></p>   
-  <% } %>  
+<div class="row">
+  <div class="col-sm-8">
 
-<style>
-  #pic { width: 100% }
-  @media(min-width: 768px) {
-    #pic { max-width: 300px; }  
-  }
-</style>
-<div style="text-align: center">  
-  <img id="pic" src="/images/me-ocean-sq.jpg" />
+    <p class="lead">  
+      Welcome, traveller! A summary of some of the things I'm interested in right now:
+    </p>
+
+    <% topics.each { |topic,desc| %>
+      <h4><%=topic%></h4>
+      <p><%=desc%></p>   
+    <% } %>      
+  </div>
+  <div class="col-sm-4">
+    <img class="w-100 mb-3" src="/images/me-ocean-sq.jpg" />  
+  </div>  
 </div>
 
-<p class="mt-3">Let's stay in touch! Join my mailing list below, <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or <a href="mailto:stephen@stephenreid.net">send me an email</a>.</p>
+<p>Let's stay in touch! Join my mailing list below, <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or <a href="mailto:stephen@stephenreid.net">send me an email</a>.</p>
 
 <%= partial :mailing_list %>
 
