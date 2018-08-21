@@ -56,7 +56,7 @@ module ActivateApp
     end
 
     get :home, :map => '/' do
-      erb :bio
+      erb :home
     end
 
     get '/bio' do
