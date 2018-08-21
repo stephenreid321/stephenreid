@@ -89,9 +89,9 @@ module ActivateApp
       end
     end
 
-    get '/a-good-day' do
-      @title = 'A Good Day'
-      erb :routine
+    get '/habits' do
+      @title = 'Habits'
+      erb :habits
     end
 
     get '/music' do
