@@ -292,4 +292,4 @@ orgs = orgs.split("\n")
 # urls.detect{ |e| urls.count(e) > 1 }
 %>
 
-<% orgs.each_slice(3).to_a.shuffle.each { |name,url,src| %><a data-toggle="tooltip" class="d-inline-block" title="<%=name%>" href="<%=url%>"><img src="<%=src%>" /></a><% } %>
+<% orgs.each_slice(3).to_a.shuffle.each { |name,url,src| %><a target="_blank" data-toggle="tooltip" class="d-inline-block" title="<%=name%>" href="<%=url%>"><img src="<%=src%>" /></a><% } %>
