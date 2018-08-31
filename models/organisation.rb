@@ -33,6 +33,7 @@ class Organisation
   
   def self.categories
     {
+      "" => '',
       "Key places and processes" => 'learning',
       "Academic study" => 'academic',
       "Organisations I've worked with" => 'work',      
