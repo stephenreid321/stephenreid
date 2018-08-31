@@ -80,8 +80,8 @@ module ActivateApp
     get '/places' do
       @title = 'Places'
       if params[:map]
-        @places = Organisation.all
-        @places = @places.where(category: 'upcoming') if params[:plans]
+        @organisations = Organisation.all
+        @organisations = @organisations.where(category: 'upcoming') if params[:plans]
         @view = 'map'
         erb :map
       else
