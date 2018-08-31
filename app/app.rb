@@ -108,6 +108,11 @@ module ActivateApp
       @og_image = "http://#{ENV['DOMAIN']}/images/tarotcards.jpg"
       erb :tarot
     end
+    
+    get '/books' do
+      @title = 'Books'
+      erb :books
+    end
 
     get '/gh' do
       redirect 'https://www.google.co.uk/maps/place/Greenhouse/@51.5529027,-0.0879017,15z/data=!4m2!3m1!1s0x0:0x9850520d11f22809'
