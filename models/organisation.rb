@@ -49,14 +49,14 @@ class Organisation
     {
       :name => :text,
       :facebook_name => :text,
-      :facebook_url => :url,
-      :notes => :text_area,
-      :category => :select,
+      :facebook_url => :url,    
       :website => :url,    
+      :category => :select,
       :podcast => :check_box,    
       :image_url => :text,
       :image => :image,
-      :coordinates => :geopicker
+      :coordinates => :geopicker,
+      :notes => :text_area,      
     }
   end
     
