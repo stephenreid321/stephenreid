@@ -19,7 +19,7 @@
             <% Organisation.where(category: v).shuffle.each_with_index { |organisation,i| %>
               <div class="col-md-4 mb-3">
                 <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
-                  <%= partial :organsation, :object => organisation %>
+                  <%= partial :organisation, :object => organisation %>
                 </div>
               </div>
             <% } %>
