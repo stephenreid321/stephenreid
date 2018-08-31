@@ -40,8 +40,7 @@ class Organisation
       "Organisations I've worked with" => 'work',      
       "Communities I've spent time at" => 'communities',
       "Landscapes that have inspired me" => 'landscapes',
-      "Favourite shops and restaurants" => 'shops',
-      "Other places important to me" => 'other'
+      "Favourite shops and restaurants" => 'shops'
     }
   end
         
