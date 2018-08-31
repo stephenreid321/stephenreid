@@ -85,7 +85,7 @@ module ActivateApp
         @view = 'map'
         erb :map
       else
-        erb :places
+        erb :organisations
       end
     end
         
