@@ -1,9 +1,9 @@
-<a target="_blank" href="<%=place.website%>" class="bgo-container place" style="position: relative; display: block; height: 180px; background-position: center; background-size: cover; background-image: url('<%=place.image.url%>')">
+<a target="_blank" href="<%=organisation.website%>" class="bgo-container place" style="position: relative; display: block; height: 180px; background-position: center; background-size: cover; background-image: url('<%=organisation.image.url%>')">
   <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
   <div style="position: absolute; bottom: 0;" class="p-2">
-    <h3 style="color: white;" class="mb-0"><%=place.name%></h3>
+    <h3 style="color: white;" class="mb-0"><%=organisation.name%></h3>
     <% if @view == 'map' %>
-      <p style="color: white; font-size: 0.9rem" class="mb-0"><%=Place.categories.invert[place.category]%></p>
+      <p style="color: white; font-size: 0.9rem" class="mb-0"><%=Organisation.categories.invert[organisation.category]%></p>
     <% end %>
   </div>
 </a>
