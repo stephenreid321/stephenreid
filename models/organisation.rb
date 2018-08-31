@@ -34,14 +34,14 @@ class Organisation
   def self.categories
     {
       "" => '',
+      "Plans for the future" => 'upcoming',      
       "Key places and processes" => 'key',
       "Academic study" => 'academic',
       "Organisations I've worked with" => 'work',      
       "Communities I've spent time at" => 'communities',
       "Landscapes that have inspired me" => 'landscapes',
       "Favourite shops and restaurants" => 'shops',
-      "Other places important to me" => 'other',
-      "Plans for the future" => 'upcoming'
+      "Other places important to me" => 'other'
     }
   end
         

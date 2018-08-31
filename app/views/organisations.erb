@@ -13,7 +13,7 @@
         </h4>
       </div>      
 
-      <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'learning' %>" role="tabpanel" data-parent="#accordion">
+      <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'upcoming' %>" role="tabpanel" data-parent="#accordion">
         <div class="card-body pb-0">
           <div class="row no-gutters">
             <% Organisation.where(category: v).shuffle.each_with_index { |organisation,i| %>
