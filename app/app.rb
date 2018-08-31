@@ -88,6 +88,11 @@ module ActivateApp
         erb :places
       end
     end
+        
+    get '/following' do
+      @title = 'Following'
+      erb :following
+    end        
 
     get '/habits' do
       @title = 'Habits'
