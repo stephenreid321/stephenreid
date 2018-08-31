@@ -3,9 +3,9 @@
   <a href="https://anchor.fm/stephenreid321"><img style="max-width: 300px" src="/images/in dialogue.png" /></a>
   <p class="lead">
     Listen and subscribe via 
-  <a href="https://anchor.fm/stephenreid321">Anchor</a>
-  or
-  <a href="https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA">YouTube</a>
+    <a href="https://anchor.fm/stephenreid321">Anchor</a>
+    or
+    <a href="https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA">YouTube</a>
   </p>
 </div>
 
@@ -16,10 +16,10 @@
 </p>
 
 <div class="row no-gutters">
-  <% Podcast.all.shuffle.each_with_index { |podcast,i| %>
+  <% Organisation.where(podcast: true).shuffle.each_with_index { |podcast,i| %>
     <div class="col-md-4 mb-3">
       <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
-        <%= partial :podcast, :object => podcast %>
+        <%= partial :organisation, :object => organisation %>
       </div>
     </div>
   <% } %>
