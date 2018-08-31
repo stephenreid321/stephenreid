@@ -4,6 +4,7 @@ class Organisation
   extend Dragonfly::Model    
 
   field :name, :type => String
+  field :facebook_name, :type => String
   field :website, :type => String 
   field :facebook_url, :type => String 
   field :image_uid, :type => String
@@ -46,6 +47,7 @@ class Organisation
   def self.admin_fields
     {
       :name => :text,
+      :facebook_name => :text,
       :notes => :text_area,
       :category => :select,
       :website => :url,
