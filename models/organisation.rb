@@ -41,6 +41,7 @@ class Organisation
       "Favourite shops and restaurants" => 'shops',
       "Other places important to me" => 'other',
       "Plans for the future" => 'upcoming',
+      "Non-geographic organisations" => 'nogeo',      
     }
   end
         
@@ -48,10 +49,10 @@ class Organisation
     {
       :name => :text,
       :facebook_name => :text,
+      :facebook_url => :url,
       :notes => :text_area,
       :category => :select,
-      :website => :url,
-      :facebook_url => :url,
+      :website => :url,      
       :image_url => :text,
       :image => :image,
       :coordinates => :geopicker
