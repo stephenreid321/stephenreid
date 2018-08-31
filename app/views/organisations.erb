@@ -2,7 +2,7 @@
 
 <div id="accordion" role="tablist">
 
-  <% Organisation.categories.each { |k,v| %>    
+  <% Organisation.categories.each { |k,v| if !k.blank? %>    
 
     <div class="card mb-1">
       <div class="card-header" role="tab" id="heading-<%=v%>">
@@ -28,5 +28,5 @@
       </div>
     </div>          
 
-  <% } %>
+  <% end } %>
 </div>

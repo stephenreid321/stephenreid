@@ -40,8 +40,7 @@ class Organisation
       "Landscapes that have inspired me" => 'landscapes',
       "Favourite shops and restaurants" => 'shops',
       "Other places important to me" => 'other',
-      "Plans for the future" => 'upcoming',
-      "Non-geographic organisations" => 'nogeo',      
+      "Plans for the future" => 'upcoming'
     }
   end
         
