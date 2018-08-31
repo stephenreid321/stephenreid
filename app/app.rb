@@ -77,8 +77,8 @@ module ActivateApp
       erb :calendar
     end
 
-    get '/places' do
-      @title = 'Places'
+    get '/organisations' do
+      @title = 'Organisations'
       if params[:map]
         @organisations = Organisation.all
         @organisations = @organisations.where(category: 'upcoming') if params[:plans]
@@ -88,12 +88,7 @@ module ActivateApp
         erb :organisations
       end
     end
-        
-    get '/following' do
-      @title = 'Following'
-      erb :following
-    end        
-
+     
     get '/habits' do
       @title = 'Habits'
       erb :habits
