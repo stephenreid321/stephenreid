@@ -5,8 +5,9 @@ class Organisation
 
   field :name, :type => String
   field :facebook_name, :type => String
-  field :website, :type => String 
   field :facebook_url, :type => String 
+  field :website, :type => String 
+  field :podcast, :type => Boolean
   field :image_uid, :type => String
   field :category, :type => String
   field :notes, :type => String
@@ -51,7 +52,8 @@ class Organisation
       :facebook_url => :url,
       :notes => :text_area,
       :category => :select,
-      :website => :url,      
+      :website => :url,    
+      :podcast => :check_box,    
       :image_url => :text,
       :image => :image,
       :coordinates => :geopicker
