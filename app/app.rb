@@ -77,8 +77,8 @@ module ActivateApp
       erb :calendar
     end
 
-    get '/organisations' do
-      @title = 'Organisations'
+    get '/places-plans' do
+      @title = 'Places & Plans'
       if params[:map]
         @organisations = Organisation.all
         @organisations = @organisations.where(category: 'upcoming') if params[:plans]
