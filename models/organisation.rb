@@ -5,6 +5,7 @@ class Organisation
 
   field :name, :type => String
   field :facebook_name, :type => String
+  field :facebook_username, :type => String
   field :facebook_url, :type => String 
   field :website, :type => String 
   field :podcast, :type => Boolean
@@ -49,6 +50,7 @@ class Organisation
     {
       :name => :text,
       :facebook_name => :text,
+      :facebook_username => :text,
       :facebook_url => :url,    
       :website => :url,    
       :category => :select,
