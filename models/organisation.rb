@@ -6,7 +6,6 @@ class Organisation
   field :name, :type => String
   field :facebook_name, :type => String
   field :facebook_username, :type => String
-  field :facebook_url, :type => String 
   field :website, :type => String 
   field :podcast, :type => Boolean
   field :image_uid, :type => String
@@ -51,7 +50,6 @@ class Organisation
       :name => :text,
       :facebook_name => :text,
       :facebook_username => :text,
-      :facebook_url => :url,    
       :website => :url,    
       :category => :select,
       :podcast => :check_box,    
@@ -61,5 +59,9 @@ class Organisation
       :notes => :text_area,      
     }
   end
-    
+      
+  def facebook_url
+    "http://facebook.com/#{facebook_username}" if facebook_username
+  end
+  
 end
