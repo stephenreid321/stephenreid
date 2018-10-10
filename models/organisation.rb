@@ -13,6 +13,8 @@ class Organisation
   field :notes, :type => String
   field :coordinates, :type => Array
   
+  has_many :podcast_appearances, :dependent => :destroy
+  
   def lat; coordinates[1] if coordinates; end  
   def lng; coordinates[0] if coordinates; end  
   def self.marker_color; 'CE2828'; end    

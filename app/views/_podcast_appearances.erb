@@ -1,4 +1,9 @@
-<ul>
-  <li>Oct 2018: <a target="_blank" href="https://anchor.fm/alterego/episodes/Stephen-Reid-joins-as-a-co-director-of-Alter-Ego-e2b42o">Alter Ego</a></li>
-  <li>Jul 2018: <a target="_blank" href="https://www.stitcher.com/podcast/emerge/e/55551580">Emerge</a></li>
-</ul>
+<div class="row no-gutters">
+  <% PodcastAppearance.all.shuffle.each_with_index { |podcast_appearance,i| %>
+    <div class="col-md-4 mb-3">
+      <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
+        <%= partial :podcast_appearance, :object => podcast_appearance %>
+      </div>
+    </div>
+  <% } %>
+</div>
