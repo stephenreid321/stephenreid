@@ -1,56 +1,14 @@
 
-<%
-topics = {'Consciousness' => 'The nature of consciousness;
-  altered states of consciousness via meditation, psychedelics and dreams;  
-  the placebo effect;  
-  the unconscious',
-  'Shamanism and magick' => %Q{
-  Plant medicines;
-  song;
-  <a href="https://www.angsbacka.se/en/festival-program/tantra">tantra</a> and sexual shamanism;
-  technoshamanism;
-  breathwork;
-  prayer;
-  ritual magic including <a href="https://www.goodreads.com/book/show/7735637-condensed-chaos">chaos magick</a>, sex magick and metamagic;
-  mythology
-  },
-  'The body' => '<a href="https://www.goodreads.com/book/show/22815968-the-body-keeps-the-score">Bodywork including somatic experiencing, yoga and dance</a>;
-  neuro/biohacking; ayurveda',
-  'Technology and systems' => %Q{<a href="https://www.goodreads.com/book/show/20787425-reinventing-organizations">Teal organisations</a>; Holocracy; workers' co-operatives;
-  blockchain technology and decentralisation; Holochain; Scuttlebutt; solarpunk; digital nomadism},
-  'Politics' => '<a href="https://www.goodreads.com/book/show/36107916-the-listening-society">Metamodernism</a>'
-  }
-
-%>
-
-<div class="row">
-  <div class="col-sm-6">
-
-    <h2>Current areas of interest</h2>
-
-    <% topics.each { |topic,desc| %>
-      <h4><%=topic%></h4>
-      <p><%=desc%></p>   
-    <% } %>      
-  </div>
-  <div class="col-sm-6">
-
-    <figure class="figure">
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FPsychedelicsUK%2Fvideos%2F1484837941620397%2F&show_text=0&mute=0"style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-      </div>
-      <figcaption class="figure-caption mt-1">Speaking after the Psychedelic Society's Psychedelics for Mental Health campaign launch, <a href="https://www.independent.co.uk/news/long_reads/psychedelic-drugs-new-class-antidepressant-albert-hofmann-lsd-a8437201.html">as featured by the Independent</a></figcaption>
-    </figure>
-
-  </div>  
-</div>
-
-<p>Let's stay in touch! Join my mailing list below, <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or <a href="mailto:stephen@stephenreid.net">send me an email</a>.</p>
+<p class="lead">
+  Welcome to my personal site.
+  If you've come this far, I'd love to stay in touch. Join my mailing list using the form below,
+  <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or
+  <a href="mailto:stephen@stephenreid.net">send me an email</a>.
+</p>
 
 <%= partial :mailing_list %>
 
 <h2 class="mt-5">Current affiliations</h2>
-
 
 <div class="row align-items-center justify-content-center"> 
   <%[
@@ -75,6 +33,37 @@ topics = {'Consciousness' => 'The nature of consciousness;
 <h2 class="mt-5">Podcast appearances</h2>
 
 <%= partial :podcast_appearances %>
+
+<%
+topics = {'Consciousness' => 'The nature of consciousness;
+  altered states of consciousness via meditation, psychedelics and dreams;  
+  the placebo effect;  
+  the unconscious',
+  'Shamanism and magick' => %Q{
+  Plant medicines;
+  song;
+  technoshamanism;
+  breathwork;
+  prayer;
+  ritual magic including chaos magick, sex magick and metamagic;
+  tantra and sexual shamanism;
+  mythology
+  },
+  'The body' => 'Bodywork including somatic experiencing, yoga and dance;
+  neuro/biohacking; ayurveda',
+  'Technology and systems' => %Q{<a href="https://www.goodreads.com/book/show/20787425-reinventing-organizations">Teal organisations</a>; Holocracy; workers' co-operatives;
+  blockchain technology and decentralisation; Holochain; Scuttlebutt; solarpunk; digital nomadism},
+  'Politics' => '<a href="https://www.goodreads.com/book/show/36107916-the-listening-society">Metamodernism</a>'
+  }
+
+%>
+
+<h2 class="mt-5">Current areas of interest</h2>
+
+<% topics.each { |topic,desc| %>
+  <h4><%=topic%></h4>
+  <p><%=desc%></p>   
+<% } %>    
 
 <h2 class="mt-5">Previous affiliations</h2>
 
