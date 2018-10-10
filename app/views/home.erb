@@ -34,6 +34,38 @@
 
 <%= partial :podcast_appearances %>
 
+
+
+<h2 class="mt-5">Speaking engagements</h2>
+
+<ul>
+  <% %Q{Nov 2014, Conway Hall: Mainstreaming Psychedelics (launch of the Psychedelic Society) https://www.facebook.com/events/579511348820249/
+Apr 2015: Launch of the Psychedelic Society of Edinburgh https://www.facebook.com/events/469141256573445/
+Jun 2015: Launch of the Psychedelic Society of Manchester https://www.facebook.com/events/1441441909485474/
+Jul 2015: Launch of the Psychedelic Society of Bristol https://www.facebook.com/events/680897688721957/
+Feb 2016, Cambridge Union:  This House believes that taking recreational drugs is worth the risk https://cus.org/civicrm/event/info?reset=1&id=1193
+Jul 2016, Conway Hall: Psychedelics and Nonduality https://www.youtube.com/watch?v=iIFkSIfbObA
+Sep 2016, Beyond Psychedelics: Growing A Psychedelic Society http://beyondpsychedelics.cz/wp-content/uploads/2016/09/program.pdf
+Nov 2016: Launch of the Psychedelic Society of Brighton https://www.facebook.com/events/1825383351076287/
+Dec 2016, Conway Hall: The Legal Regulation of Psychedelics https://www.youtube.com/watch?v=nSz2AhQr52k
+Oct 2017, New Unity: Psychedelics and Mystical Experience https://www.new-unity.org/eventslist/2017/10/22/psychedelics-and-mystical-experience
+Apr 2018, LSD75: Growing A Psychedelic Society https://www.lsd75.ch/reid
+May 2018, HowTheLightGetsIn: A Long Strange Trip https://hay.htlgi.iai.tv/events/a-long-strange-trip-2144
+Jun 2018, Beyond Psychedelics: Psychedelics, Democracy and Reform http://beyondpsychedelics.cz/
+Jul 2018: Launch of the Psychedelics for Mental Health campaign https://www.independent.co.uk/news/long_reads/psychedelic-drugs-new-class-antidepressant-albert-hofmann-lsd-a8437201.html
+Jul 2018, Noisily Festival: Psychedelics, Nonduality and the Nature of Consciousness http://www.noisilyfestival.com/mind-body-and-soul/talks-and-workshops/
+Jul 2018, Boom Festival: Psychedelic Integration https://www.boomfestival.org/boom2018/program/ngo-django/psychedelic-society/
+Oct 2018: Grand Opening of the Psychedelic Society's new space in London https://www.facebook.com/events/1091865520971010/}.split("\n").reverse.each { |line| info, title = line.split(': ')
+    parts = title.split(' '); title = parts[0..-2].join(' '); link = parts[-1]
+  %>
+    <li><%=info%>: <a href="<%=link%>"><%=title%></a></li>
+  <% } %>
+</ul>
+
+
+
+
+
 <%
 topics = {'Consciousness' => 'The nature of consciousness;
   altered states of consciousness via meditation, psychedelics and dreams;  
@@ -89,29 +121,4 @@ topics = {'Consciousness' => 'The nature of consciousness;
 <ul>
   <li>University of Oxford, MPhys (First Class) in <a href="http://www2.physics.ox.ac.uk/">Physics</a> (<a href="/reid_report_final.pdf">dissertation</a>)</li>
   <li>University of Bristol, MRes (Distinction) in <a href="http://www.bristol.ac.uk/bccs/">Complexity Sciences</a></li>
-</ul>
-
-<h2 class="mt-5">Speaking engagements</h2>
-
-<ul>
-  <% %Q{Nov 2014, Conway Hall: Mainstreaming Psychedelics (launch of the Psychedelic Society) https://www.facebook.com/events/579511348820249/
-Apr 2015: Launch of the Psychedelic Society of Edinburgh https://www.facebook.com/events/469141256573445/
-Jun 2015: Launch of the Psychedelic Society of Manchester https://www.facebook.com/events/1441441909485474/
-Jul 2015: Launch of the Psychedelic Society of Bristol https://www.facebook.com/events/680897688721957/
-Feb 2016, Cambridge Union:  This House believes that taking recreational drugs is worth the risk https://cus.org/civicrm/event/info?reset=1&id=1193
-Jul 2016, Conway Hall: Psychedelics and Nonduality https://www.youtube.com/watch?v=iIFkSIfbObA
-Sep 2016, Beyond Psychedelics: Growing A Psychedelic Society http://beyondpsychedelics.cz/wp-content/uploads/2016/09/program.pdf
-Nov 2016: Launch of the Psychedelic Society of Brighton https://www.facebook.com/events/1825383351076287/
-Dec 2016, Conway Hall: The Legal Regulation of Psychedelics https://www.youtube.com/watch?v=nSz2AhQr52k
-Oct 2017, New Unity: Psychedelics and Mystical Experience https://www.new-unity.org/eventslist/2017/10/22/psychedelics-and-mystical-experience
-Apr 2018, LSD75: Growing A Psychedelic Society https://www.lsd75.ch/reid
-May 2018, HowTheLightGetsIn: A Long Strange Trip https://hay.htlgi.iai.tv/events/a-long-strange-trip-2144
-Jun 2018, Beyond Psychedelics: Psychedelics, Democracy and Reform http://beyondpsychedelics.cz/
-Jul 2018: Launch of the Psychedelics for Mental Health campaign https://www.independent.co.uk/news/long_reads/psychedelic-drugs-new-class-antidepressant-albert-hofmann-lsd-a8437201.html
-Jul 2018, Noisily Festival: Psychedelics, Nonduality and the Nature of Consciousness http://www.noisilyfestival.com/mind-body-and-soul/talks-and-workshops/
-Jul 2018, Boom Festival: Psychedelic Integration https://www.boomfestival.org/boom2018/program/ngo-django/psychedelic-society/}.split("\n").reverse.each { |line| info, title = line.split(': ')
-    parts = title.split(' '); title = parts[0..-2].join(' '); link = parts[-1]
-  %>
-    <li><%=info%>: <a href="<%=link%>"><%=title%></a></li>
-  <% } %>
 </ul>
