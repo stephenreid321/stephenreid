@@ -37,8 +37,8 @@ class Organisation
   def self.categories
     {
       "" => '',
-      "Plans for the future" => 'upcoming',      
       "Key places and processes" => 'key',
+      "Plans for the future" => 'upcoming',            
       "Academic study" => 'academic',
       "Organisations I've worked with" => 'work',      
       "Communities I've spent time at" => 'communities',

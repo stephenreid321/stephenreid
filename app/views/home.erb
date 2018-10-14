@@ -1,12 +1,32 @@
 
 <p class="lead">
   Welcome to my personal site.
-  If you've come this far, I'd love to stay in touch. Join my mailing list using the form below,
-  <a href="http://facebook.com/stephenreid321">follow me on Facebook</a> or
-  <a href="mailto:stephen@stephenreid.net">send me an email</a>.
+  If you've come this far, I'd love to stay in touch. Join my mailing list using the form below.
 </p>
 
 <%= partial :mailing_list %>
+
+
+
+
+<div class="row mt-5">
+  <div class="col-sm-4">
+
+    <figure class="figure">
+      <img src="/images/grand-opening.jpg" class="figure-img img-fluid w-100" />
+      <figcaption class="figure-caption">Speaking at the 
+        <a target="_blank" href="https://www.facebook.com/events/1091865520971010/">Grand Opening of the Psychedelic Society's Homerton space</a>
+      </figcaption>
+    </figure>
+
+
+  </div>
+  <div class="col-sm-8">
+    <%= eval(f('bio')) %>
+  </div>  
+</div>
+
+
 
 <h2 class="mt-5">Current affiliations</h2>
 
