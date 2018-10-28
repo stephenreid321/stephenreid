@@ -11,11 +11,12 @@
   <span style="display: none"><%=text%></span>
   <span style="display: none"><%=t.description.gsub("\n",'<br />')%></span>
 <% else %>
-    <% if t.is_a? TarotCard %>
-      <img src="<%= t.image.url %>" style="opacity: 0.3" />
-    <% else %>
-      <%=text%>
-    <% end %>        
+  <% if t.is_a? TarotCard %>
+    <img src="/images/tarot/card-back.jpg" onmouseover="$(this).hide().next().show()" />
+    <img src="<%= t.image.url %>" style="display: none" onmouseout="$(this).hide().prev().show()" />
+  <% else %>
+    <%=text%>
+  <% end %>        
 <% end %>
 <% if current_account %>
   <a style="opacity: 0.3" target="_blank" href="<%=t.teachmetarot_url%>"><i class="fas fa-link"></i></a>
