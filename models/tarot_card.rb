@@ -6,6 +6,7 @@ class TarotCard
   field :name, :type => String
   field :description, :type => String
   field :teachmetarot_url, :type => String
+  field :image_uid, :type => String
   
   belongs_to :tarot_number
   belongs_to :tarot_suit, optional: true  
