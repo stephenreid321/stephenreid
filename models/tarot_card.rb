@@ -34,7 +34,8 @@ class TarotCard
       :tarot_number_id => :lookup,
       :tarot_suit_id => :lookup,      
       :teachmetarot_url => :url,
-      :description => :text_area
+      :description => :text_area,
+      :image => :image
     }
   end 
     
