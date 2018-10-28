@@ -3,7 +3,7 @@
 <% if t.description %>
   <a href="javascript:;" data-toggle="popover">
     <% if t.is_a? TarotCard %>
-      <img src="<%= t.image_url %>" />
+      <img src="<%= t.image.url %>" />
     <% else %>
       <%=text%>
     <% end %>
