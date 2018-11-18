@@ -50,7 +50,7 @@
 
 <h2 class="mt-5">Speaking engagements</h2>
 
-<ul>
+<dl class="row">
   <% %Q{Nov 2014, Conway Hall: Mainstreaming Psychedelics (launch of the Psychedelic Society) https://www.facebook.com/events/579511348820249/
 Apr 2015: Launch of the Psychedelic Society of Edinburgh https://www.facebook.com/events/469141256573445/
 Jun 2015: Launch of the Psychedelic Society of Manchester https://www.facebook.com/events/1441441909485474/
@@ -67,12 +67,14 @@ Jun 2018, Beyond Psychedelics: Psychedelics, Democracy and Reform http://beyondp
 Jul 2018: Launch of the Psychedelics for Mental Health campaign https://www.independent.co.uk/news/long_reads/psychedelic-drugs-new-class-antidepressant-albert-hofmann-lsd-a8437201.html
 Jul 2018, Noisily Festival: Psychedelics, Nonduality and the Nature of Consciousness http://www.noisilyfestival.com/mind-body-and-soul/talks-and-workshops/
 Jul 2018, Boom Festival: Psychedelic Integration https://www.boomfestival.org/boom2018/program/ngo-django/psychedelic-society/
-Oct 2018: Grand Opening of the Psychedelic Society's new space in London https://www.facebook.com/events/1091865520971010/}.split("\n").reverse.each { |line| info, title = line.split(': ')
+Oct 2018: Grand Opening of the Psychedelic Society's new space in London https://www.facebook.com/events/1091865520971010/
+Nov 2018: Extinction Magic: A Grief Ritual for Rebellion https://www.facebook.com/events/281776239130479/  }.split("\n").reverse.each { |line| info, *title = line.split(': '); title = title.join(': ')
     parts = title.split(' '); title = parts[0..-2].join(' '); link = parts[-1]
   %>
-    <li><%=info%>: <a href="<%=link%>"><%=title%></a></li>
+    <dt class="col-sm-3 font-weight-normal"><%=info%></dt>
+    <dd class="col-sm-9"><a href="<%=link%>"><%=title%></a></dd>
   <% } %>
-</ul>
+</dl>
 
 
 
