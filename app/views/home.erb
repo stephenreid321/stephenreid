@@ -1,49 +1,39 @@
 
+<%= eval(f('bio')) %>
 
 <div class="row justify-content-center">
-  <div class="col-sm-auto">
+  <div class="col-sm-auto text-center">
     <p class="lead">
-      Welcome to my personal site.
       Since you've come this far, I'd love to stay in touch. Join my mailing list:
     </p>
     <%= partial :mailing_list %>
   </div>
 </div>
 
-
-<div class="row mt-5">
-  <div class="col-sm-4">
-
-    <figure class="figure">
-      <img src="/images/grand-opening.jpg" class="figure-img img-fluid w-100" />
-      <figcaption class="figure-caption">Speaking at the 
-        <a target="_blank" href="https://www.facebook.com/events/1091865520971010/">Grand Opening of the Psychedelic Society's Homerton space</a>
-      </figcaption>
-    </figure>
-
-
-  </div>
-  <div class="col-sm-8">
-    <%= eval(f('bio')) %>
-  </div>  
-</div>
-
-
-
 <h2 class="mt-5">Current affiliations</h2>
 
 <div class="row align-items-center justify-content-center"> 
   <%[
-    ['The Psychedelic Society', 'Founder and co-director', 'http://psychedelicsociety.org.uk', 'http://psychedelicsociety.org.uk/images/logo.png'],
-    ['Autopo Collective', 'Founder and co-director', 'https://app.autopo.co', 'https://app.autopo.co/images/autopo-link-inverse.png'],
-    ['Alter Ego', 'Co-director', 'https://anchor.fm/alterego', '/images/ae-logo.png'],
-    # ['Breaking Convention Conference on Psychedelic Consciousness', 'Press officer', 'http://breakingconvention.co.uk', '/images/bc.png'],
-    # ['psychedelic.community', 'Creator', 'https://psychedelic.community', '/images/psycom.png'],
-    # ['La Botica Exótica', 'Co-founder', 'https://www.facebook.com/cosmicpotions/', '/images/la-botica.png'],
-  # ['Metamonastery', 'Initiator', 'http://metamonastery.net/', 'http://metamonastery.net/images/share.png'],
+    ['The Psychedelic Society', 'Founder and co-director', 'http://psychedelicsociety.org.uk', '/images/ps-bg.png'],
+    ['Extinction Magic', 'Co-creator', 'facebook.com/extinctionmagic', '/images/xm-black.png'],
     ].each_with_index { |org, i| name, title, url, src  = *org
   %>
-    <div class="col-sm-4 text-center">
+    <div class="col-sm-3 text-center">
+      <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=name%>" href="<%=url%>">        
+        <img class="w-100 mb-2" src="<%=src%>">
+        <strong><%= name %></strong><br /><%= title %>
+      </a>
+    </div>
+  <% } %>
+</div>
+
+<div class="row mt-3 align-items-center justify-content-center"> 
+  <%[
+    ['Autopo Collective', 'Founder and co-director', 'https://app.autopo.co', 'https://app.autopo.co/images/autopo-link-inverse.png'],
+    ['Alter Ego', 'Co-director', 'https://anchor.fm/alterego', '/images/ae-logo.png'],    
+    ].each_with_index { |org, i| name, title, url, src  = *org
+  %>
+    <div class="col-sm-3 text-center">
       <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=name%>" href="<%=url%>">        
         <img class="w-100 mb-2" src="<%=src%>">
         <strong><%= name %></strong><br /><%= title %>
