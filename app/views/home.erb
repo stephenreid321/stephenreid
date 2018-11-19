@@ -15,20 +15,6 @@
 <div class="row align-items-center justify-content-center"> 
   <%[
     ['The Psychedelic Society', 'Founder and co-director', 'http://psychedelicsociety.org.uk', '/images/ps-sq2.png'],
-    ['Extinction Magic', 'Co-creator', 'http://facebook.com/extinctionmagic', '/images/xm-black.png'],
-    ].each_with_index { |org, i| name, title, url, src  = *org
-  %>
-    <div class="col-sm-3 text-center py-3 px-5">
-      <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=name%>" href="<%=url%>">        
-        <img class="w-100 mb-3" src="<%=src%>">
-        <strong><%= name %></strong><br /><%= title %>
-      </a>
-    </div>
-  <% } %>
-</div>
-
-<div class="row mt-3 align-items-center justify-content-center"> 
-  <%[
     ['Autopo Collective', 'Founder and co-director', 'https://app.autopo.co', '/images/autopo.png'],
     ['Alter Ego', 'Co-director', 'https://anchor.fm/alterego', '/images/ae-logo.png'],    
     ].each_with_index { |org, i| name, title, url, src  = *org
