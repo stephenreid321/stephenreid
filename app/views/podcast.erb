@@ -13,18 +13,3 @@
 <h2 class="mt-5">Podcast appearances</h2>
 
 <%= partial :podcast_appearances %>
-
-
-<h2 class="mt-5">
-  Some of my current favourite podcasts
-</h2>
-
-<div class="row no-gutters">
-  <% Organisation.where(podcast: true).shuffle.each_with_index { |organisation,i| %>
-    <div class="col-md-4 mb-3">
-      <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
-        <%= partial :organisation, :object => organisation %>
-      </div>
-    </div>
-  <% } %>
-</div>
