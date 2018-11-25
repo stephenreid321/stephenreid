@@ -31,3 +31,4 @@ gem 'mail'
 # Interacting with other websites
 gem 'airbrake', '~> 5.0'
 gem 'mechanize'
+gem 'airtable'

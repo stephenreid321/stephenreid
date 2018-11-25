@@ -35,6 +35,8 @@ GEM
     airbrake (5.8.1)
       airbrake-ruby (~> 1.8)
     airbrake-ruby (1.8.0)
+    airtable (0.0.9)
+      httparty
     bcrypt (3.1.11)
     bson (4.3.0)
     builder (3.2.3)
@@ -77,6 +79,8 @@ GEM
     hashie (3.5.7)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     ipaddress (0.8.3)
@@ -200,6 +204,7 @@ DEPENDENCIES
   activate-tools!
   activemodel
   airbrake (~> 5.0)
+  airtable
   bcrypt
   delayed_job_mongoid
   dragonfly
@@ -221,4 +226,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.15.4
+   1.16.2
