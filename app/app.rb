@@ -58,6 +58,10 @@ module ActivateApp
     get :home, :map => '/' do
       erb :home
     end
+    
+    get '/ig' do
+      redirect Fragment.find_by(slug: 'ig').body
+    end
 
     get '/bio' do
       redirect '/'
