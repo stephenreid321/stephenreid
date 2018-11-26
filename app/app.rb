@@ -59,8 +59,8 @@ module ActivateApp
       erb :home
     end
     
-    get '/ig' do
-      redirect Fragment.find_by(slug: 'ig').body
+    get '/link' do
+      redirect Fragment.find_by(slug: 'link').body
     end
 
     get '/bio' do
