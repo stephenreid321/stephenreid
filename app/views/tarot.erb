@@ -44,13 +44,13 @@
           <% end %>
         </th>
         <td>
-          <% if t = TarotCard.all(filter: "AND({Tarot suit} = '', {Tarot number} = '#{TarotNumber.all(filter: "{Name} = '#{n}'").first['Name']}')").first %>
+          <% if t = TarotCard.all(filter: "AND({Tarot suit} = '', {Tarot number} = '#{n}')").first %>
             <%= partial :tarot_card, :locals => {:t => t} %>                 
           <% end %>
         </td>
         <% TarotSuit.suits.each { |suit_name| %>
           <td>
-            <% if t = TarotCard.all(filter: "AND({Tarot suit} = '#{suit_name}', {Tarot number} = '#{TarotNumber.all(filter: "{Name} = '#{n}'").first['Name']}')").first %>
+            <% if t = TarotCard.all(filter: "AND({Tarot suit} = '#{suit_name}', {Tarot number} = '#{n}')").first %>
               <%= partial :tarot_card, :locals => {:t => t} %>                               
             <% end %>
           </td>
