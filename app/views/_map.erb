@@ -16,7 +16,7 @@
   });
   var bounds = new google.maps.LatLngBounds();
   var points = []
-<% Organisation.all(filter: "AND({Latitude} != '', {Longitude} != '')").each { |organisation| %>
+<% @organisations.each { |organisation| %>
     points.push({
       lat: <%=organisation['Latitude']%>,
       lng: <%=organisation['Longitude']%>,
