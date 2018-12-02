@@ -20,6 +20,7 @@
     points.push({
       lat: <%=organisation['Latitude']%>,
       lng: <%=organisation['Longitude']%>,
+      color: 'CE2828',
       name: "<%=js_escape_html(organisation['Name'])%>",
       content: '<%=js_escape_html(partial :organisation, :object => organisation)%>'
     })
