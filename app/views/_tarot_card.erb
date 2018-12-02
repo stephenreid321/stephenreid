@@ -12,7 +12,7 @@
   <span style="display: none"><%=t['Description'].gsub("\n",'<br />')%></span>
 <% else %>
   <% if t.is_a? TarotCard %>
-    <img src="/images/tarot/card-back.jpg" onmouseover="$(this).hide().next().show()" />
+    <img src="/images/card-back.jpg" onmouseover="$(this).hide().next().show()" />
     <img src="<%= t['Image'].first['url'] %>" style="display: none" onmouseout="$(this).hide().prev().show()" />
   <% else %>
     <%=text%>
