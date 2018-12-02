@@ -108,6 +108,11 @@ module ActivateApp
       end
     end      
     
+    get '/clear-cache' do
+      ActivateApp::App.cache.clear
+      redirect '/'
+    end
+    
     get '/link' do
       redirect Fragment.find_by(slug: 'link').body
     end
