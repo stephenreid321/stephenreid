@@ -6,24 +6,11 @@ gem 'padrino'
 gem 'puma'
 gem 'rake'
 gem 'sass'
+gem 'activesupport'
 
 # Admin
 gem 'will_paginate', github: 'mislav/will_paginate'
 gem 'activate-tools', github: 'wordsandwriting/activate-tools'
-gem 'activate-admin', github: 'wordsandwriting/activate-admin'
-
-# Data storage
-gem 'activemodel'
-gem 'mongoid'
-gem 'delayed_job_mongoid'
-gem 'dragonfly'
-gem 'dragonfly-s3_data_store'
-
-# Authentication
-gem 'bcrypt'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
 
 # Email
 gem 'mail'

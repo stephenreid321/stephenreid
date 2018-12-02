@@ -1,5 +1,5 @@
 
-<%= eval(f('bio')) %>
+<%= Fragment.all(filter: "{Name} = 'bio'").first['Body'] %>
 
 <div class="row justify-content-center">
   <div class="col-sm-auto text-center">
@@ -10,21 +10,16 @@
   </div>
 </div>
 
-<%= eval(f('third-person')) %>
+<%= Fragment.all(filter: "{Name} = 'third-person'").first['Body'] %>
 
 <h2 class="mt-5">Current affiliations</h2>
 
-<div class="row align-items-center justify-content-center"> 
-  <%[
-    ['The Psychedelic Society', 'Founder and co-director', 'http://psychedelicsociety.org.uk', '/images/ps-sq2.png'],
-    ['Autopo Collective', 'Founder and co-director', 'https://app.autopo.co', '/images/autopo.png'],
-    ['Alter Ego', 'Co-director', 'https://anchor.fm/alterego', '/images/ae-logo.png'],    
-    ].each_with_index { |org, i| name, title, url, src  = *org
-  %>
+<div class="row align-items-center justify-content-center">   
+  <% Affiliation.all(filter: "{Current} = 1", sort: { "Order" => "asc" }).each { |affiliation| %>
     <div class="col-sm-3 text-center py-3 px-5">
-      <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=name%>" href="<%=url%>">        
-        <img class="w-100 mb-3" src="<%=src%>">
-        <strong><%= name %></strong><br /><%= title %>
+      <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
+        <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
+        <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
       </a>
     </div>
   <% } %>
@@ -39,88 +34,36 @@
 <h2 class="mt-5">Speaking engagements</h2>
 
 <dl class="row">
-  <% %Q{Nov 2014, Conway Hall: Mainstreaming Psychedelics (launch of the Psychedelic Society) https://www.facebook.com/events/579511348820249/
-Apr 2015: Launch of the Psychedelic Society of Edinburgh https://www.facebook.com/events/469141256573445/
-Jun 2015: Launch of the Psychedelic Society of Manchester https://www.facebook.com/events/1441441909485474/
-Jul 2015: Launch of the Psychedelic Society of Bristol https://www.facebook.com/events/680897688721957/
-Feb 2016, Cambridge Union:  This House believes that taking recreational drugs is worth the risk https://cus.org/civicrm/event/info?reset=1&id=1193
-Jul 2016, Conway Hall: Psychedelics and Nonduality https://www.youtube.com/watch?v=iIFkSIfbObA
-Sep 2016, Beyond Psychedelics: Growing A Psychedelic Society http://beyondpsychedelics.cz/wp-content/uploads/2016/09/program.pdf
-Nov 2016: Launch of the Psychedelic Society of Brighton https://www.facebook.com/events/1825383351076287/
-Dec 2016, Conway Hall: The Legal Regulation of Psychedelics https://www.youtube.com/watch?v=nSz2AhQr52k
-Oct 2017, New Unity: Psychedelics and Mystical Experience https://www.new-unity.org/eventslist/2017/10/22/psychedelics-and-mystical-experience
-Apr 2018, LSD75: Growing A Psychedelic Society https://www.lsd75.ch/reid
-May 2018, HowTheLightGetsIn: A Long Strange Trip https://hay.htlgi.iai.tv/events/a-long-strange-trip-2144
-Jun 2018, Beyond Psychedelics: Psychedelics, Democracy and Reform http://beyondpsychedelics.cz/
-Jul 2018: Launch of the Psychedelics for Mental Health campaign https://www.independent.co.uk/news/long_reads/psychedelic-drugs-new-class-antidepressant-albert-hofmann-lsd-a8437201.html
-Jul 2018, Noisily Festival: Psychedelics, Nonduality and the Nature of Consciousness http://www.noisilyfestival.com/mind-body-and-soul/talks-and-workshops/
-Jul 2018, Boom Festival: Psychedelic Integration https://www.boomfestival.org/boom2018/program/ngo-django/psychedelic-society/
-Oct 2018: Grand Opening of the Psychedelic Society's new space in London https://www.facebook.com/events/1091865520971010/
-Nov 2018, Parliament Square: Extinction Magic: A Grief Ritual for Rebellion https://www.facebook.com/events/281776239130479/  }.split("\n").reverse.each { |line| info, *title = line.split(': '); title = title.join(': ')
-    parts = title.split(' '); title = parts[0..-2].join(' '); link = parts[-1]
+  <% SpeakingEngagement.all(sort: { "Month" => "desc" }).each { |speaking_engagement|
   %>
-    <dt class="col-sm-3 font-weight-normal"><%=info%></dt>
-    <dd class="col-sm-9"><a href="<%=link%>"><%=title%></a></dd>
+    <dt class="col-sm-3 font-weight-normal"><%=date = Date.parse(speaking_engagement['Month']); date.strftime('%b %Y')%><% if speaking_engagement['Location']%>, <%=speaking_engagement['Location']%><% end %></dt>
+    <dd class="col-sm-9"><a href="<%=speaking_engagement['URL']%>"><%=speaking_engagement['Name']%></a></dd>
   <% } %>
 </dl>
 
-
-
-
-
-<%
-topics = {'Consciousness' => 'The nature of consciousness;
-  altered states of consciousness via meditation, psychedelics and dreams;  
-  the placebo effect;  
-  the unconscious',
-  'Shamanism and magick' => %Q{
-  Plant medicines;
-  song;
-  technoshamanism;
-  breathwork;
-  prayer;
-  ritual magic including chaos magick, sex magick, metamagic and extinction magic;
-  tantra and sexual shamanism;
-  mythology
-  },
-  'The body' => 'Bodywork including somatic experiencing, yoga and dance;
-  neuro/biohacking; ayurveda',
-  'Technology and systems' => %Q{<a href="https://www.goodreads.com/book/show/20787425-reinventing-organizations">Teal organisations</a>; Holocracy; workers' co-operatives;
-  blockchain technology and decentralisation; Holochain; DAOstack; Native; Aragon; Colony; <a href="https://www.scuttlebutt.nz/">Scuttlebutt</a>; digital nomadism},
-  'Politics' => '<a href="https://www.goodreads.com/book/show/36107916-the-listening-society">Metamodernism</a>; solarpunk'
-  }
-
-%>
-
 <h2 class="mt-5">Current areas of interest</h2>
 
-<% topics.each { |topic,desc| %>
-  <h4><%=topic%></h4>
-  <p><%=desc%></p>   
+<% Metainterest.all(sort: { "Order" => "asc" }).each { |metainterest| %>
+  <h4><%=metainterest['Name']%></h4>
+  <p><%=metainterest.interests.shuffle.map { |interest| %Q{<span class="badge badge-primary">#{interest['Name']}</span>} }.join(' ') %></p>   
 <% } %>    
 
 <h2 class="mt-5">Previous affiliations</h2>
 
 <ul>
-  <li><a href="http://breakingconvention.co.uk/">Breaking Convention Conference on Psychedelic Consciousness</a>, press officer</li>
-  <li><a href="http://www.greenpeace.org.uk">Greenpeace UK</a>, board member</li>
-  <li><a href="http://www.neweconomyorganisers.org/">New Economy Organisers Network</a>, co-founder</li>
-  <li><a href="http://facebook.com/ukuncut">UK Uncut</a>, co-founder</li>
-  <li><a href="https://www.youtube.com/user/WeAreTheIntruders/videos">The Intruders</a>, co-founder</li>  
-  <li>I've completed digital consultancy work for organisations including
-    38 Degrees,
-    the Labour Party,
-    the Green Party,
-    350.org,
-    the Living Wage Foundation,
-    Positive Money,
-    SumOfUs,
-    10:10
-    and Brandalism.</li>
+  <% Affiliation.all(filter: "{Current} = 0", sort: { "Order" => "asc" }).each { |affiliation| %>
+    <li>
+      <% if affiliation.fields['Organisation'] %>
+        <a href="<%=affiliation.organisation['URL']%>"><%=affiliation.organisation['Name']%></a>,
+      <% end %>
+      <%=affiliation['Position']%>
+    </li>
+  <% } %>  
 </ul>
 
 <h2 class="mt-5">Education</h2>
 <ul>
-  <li>University of Oxford, MPhys (First Class) in <a href="http://www2.physics.ox.ac.uk/">Physics</a> (<a href="/reid_report_final.pdf">dissertation</a>)</li>
-  <li>University of Bristol, MRes (Distinction) in <a href="http://www.bristol.ac.uk/bccs/">Complexity Sciences</a></li>
+  <% Qualification.all(sort: { "Order" => "asc" }).each { |qualification| %>
+    <li><%=qualification.organisation['Name']%>, <%=qualification['Name']%> in <%=qualification['Subject']%></li>
+  <% } %> 
 </ul>

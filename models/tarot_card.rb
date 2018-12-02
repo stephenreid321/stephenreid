@@ -1,42 +1,8 @@
-class TarotCard
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  extend Dragonfly::Model   
+class TarotCard < Airrecord::Table
+  self.base_key = "app4hoAsMWepL2a7D"
+  self.table_name = "Tarot cards"  
   
-  field :name, :type => String
-  field :description, :type => String
-  field :teachmetarot_url, :type => String
-  field :image_uid, :type => String
-  
-  belongs_to :tarot_number
-  belongs_to :tarot_suit, optional: true  
-  
-  # Dragonfly
-  dragonfly_accessor :image
-  before_validation do
-    if self.image
-      begin
-        self.image.format
-      rescue        
-        errors.add(:image, 'must be an image')
-      end
-    end
-  end     
-  
-  def self.majors
-    ['fool', 'magician', 'high priestess', 'empress', 'emperor', 'hierophant', 'lovers', 'chariot', 'strength', 'hermit', 'wheel of fortune',
-      'justice', 'hanged man', 'death', 'temperance', 'devil', 'tower', 'star', 'moon', 'sun', 'judgement', 'world']
-  end
-  
-  def self.admin_fields
-    {
-      :name => :text,
-      :tarot_number_id => :lookup,
-      :tarot_suit_id => :lookup,      
-      :teachmetarot_url => :url,
-      :description => :text_area,
-      :image => :image
-    }
-  end 
-    
+  belongs_to :tarot_suit, class: "TarotSuit", column: "Tarot suit"   
+  belongs_to :tarot_number, class: "TarotNumber", column: "Tarot number"
+      
 end

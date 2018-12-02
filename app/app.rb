@@ -6,23 +6,13 @@ module ActivateApp
     helpers Activate::DatetimeHelpers
     helpers Activate::ParamHelpers
     helpers Activate::NavigationHelpers
-
-
-
-        
+      
     require 'sass/plugin/rack'
     Sass::Plugin.options[:template_location] = Padrino.root('app', 'assets', 'stylesheets')
     Sass::Plugin.options[:css_location] = Padrino.root('app', 'assets', 'stylesheets')
     use Sass::Plugin::Rack
 
-    use Dragonfly::Middleware
     use Airbrake::Rack::Middleware
-    use OmniAuth::Builder do
-      provider :account
-    end
-    OmniAuth.config.on_failure = Proc.new { |env|
-      OmniAuth::FailureEndpoint.new(env).redirect_to_failure
-    }
 
     set :sessions, :expire_after => 1.year
     set :public_folder, Padrino.root('app', 'assets')
@@ -39,10 +29,9 @@ module ActivateApp
 
     before do
       redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
-      Time.zone = current_account.time_zone if current_account and current_account.time_zone
       fix_params!
       @og_desc = 'Social entrepreneur, activist and public speaker'
-      @og_image = (Preview.find_by(url: "http://#{ENV['DOMAIN']}#{request.path}") || Preview.find_by(url: "http://#{ENV['DOMAIN']}/")).try(:image).try(:url)
+      @og_image = "http://#{ENV['DOMAIN']}/images/grand-opening-wide.jpg"
       @eth = '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324'
     end
 

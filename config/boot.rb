@@ -6,11 +6,9 @@ PADRINO_ROOT = File.expand_path('../..', __FILE__) unless defined?(PADRINO_ROOT)
 require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 require 'open-uri'
+require 'active_support/all'
 Bundler.require(:default, RACK_ENV)
 
 Padrino.load!
-
-Mongoid.load!("#{PADRINO_ROOT}/config/mongoid.yml")
-Mongoid.raise_not_found_error = false
 
 Airrecord.api_key = "keymT9WM0zzs2Yb8h"
