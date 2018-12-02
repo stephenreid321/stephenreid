@@ -99,8 +99,7 @@ module ActivateApp
     get '/places-plans' do
       @title = 'Places & Plans'
       if params[:map]
-        @organisations = Organisation.all
-        @organisations = @organisations.where(category: 'upcoming') if params[:plans]
+        @organisations = params[:plans] ? Organisation.all(filter: "{Interest} = 'upcoming'") : Organisation.all
         @view = 'map'
         erb :map
       else
