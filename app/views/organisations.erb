@@ -2,14 +2,7 @@
 
 <div id="accordion" role="tablist">
 
-  <% {"Key places and processes" => 'key',
-    "Plans for the future" => 'upcoming',            
-    "Academic study" => 'academic',
-    "Organisations I've worked with" => 'work',      
-    "Communities I've spent time at" => 'communities',
-    "Landscapes that have inspired me" => 'landscapes',
-    "Favourite shops and restaurants" => 'shops'
-    }.each { |k,v| %>    
+  <% Organisation.categories.each { |k,v| %>    
 
       <div class="card mb-1">
         <div class="card-header" role="tab" id="heading-<%=v%>">

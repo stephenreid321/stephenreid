@@ -7,5 +7,17 @@ class Organisation < Airrecord::Table
   has_many :podcast_appearances, :class => 'PodcastAppearance', :column => 'Podcast appearances'
   has_many :affiliations, :class => 'Affiliation', :column => 'Affiliations'
   has_many :qualifications, :class => 'Qualification', :column => 'Qualifications'
+  
+  def self.categories
+    {
+      "Key places and processes" => 'key',
+      "Plans for the future" => 'upcoming',            
+      "Academic study" => 'academic',
+      "Organisations I've worked with" => 'work',      
+      "Communities I've spent time at" => 'communities',
+      "Landscapes that have inspired me" => 'landscapes',
+      "Favourite shops and restaurants" => 'shops'
+    }    
+  end
     
 end

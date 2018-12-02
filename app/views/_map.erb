@@ -16,14 +16,12 @@
   });
   var bounds = new google.maps.LatLngBounds();
   var points = []
-<% @organisations.select(&:coordinates).each { |point| f = (point.is_a?(Account) ? (1 + (rand-0.5)/5000) : 1) %>
+<% Organisation.all(filter: "AND({Latitude} != '', {Longitude} != '')").each { |organisation| %>
     points.push({
-      id: '<%=point.id%>',
-      lat: <%=f*point.lat%>,
-      lng: <%=f*point.lng%>,
-      color: '<%=point.class.marker_color%>',
-      name: "<%=js_escape_html(point.try(:name) || point.try(:title))%>",
-      content: '<%=js_escape_html(partial "#{point.class.to_s.underscore}".to_sym, :object => point)%>'
+      lat: <%=organisation['Latitude']%>,
+      lng: <%=organisation['Longitude']%>,
+      name: "<%=js_escape_html(organisation['Name'])%>",
+      content: '<%=js_escape_html(partial :organisation, :object => organisation)%>'
     })
 <% } %>
 

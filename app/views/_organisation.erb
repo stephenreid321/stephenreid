@@ -3,7 +3,7 @@
   <div style="position: absolute; bottom: 0;" class="p-2">
     <h3 style="color: white;" class="mb-0"><%=organisation['Name']%></h3>
     <% if @view == 'map' %>
-      <p style="color: white; font-size: 0.9rem" class="mb-0"><%=Organisation.categories.invert[organisation.category]%></p>
+      <p style="color: white; font-size: 0.9rem" class="mb-0"><%=Organisation.categories.invert[organisation['Interest']]%></p>
     <% end %>
   </div>
 </a>
