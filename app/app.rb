@@ -6,6 +6,9 @@ module ActivateApp
     helpers Activate::DatetimeHelpers
     helpers Activate::ParamHelpers
     helpers Activate::NavigationHelpers
+    
+    register Padrino::Cache
+    enable :caching
       
     require 'sass/plugin/rack'
     Sass::Plugin.options[:template_location] = Padrino.root('app', 'assets', 'stylesheets')
