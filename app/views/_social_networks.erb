@@ -1,37 +1,7 @@
-<%
-[
-  ['Autopo', 'https://app.autopo.co/accounts/586d2eb3cc88ff00093f21e5'],
-  ['Scuttlebutt', 'https://viewer.scuttlebot.io/@o2BZUubGaIcRBVb68V/5T9wE5aOMgcduDh9rEl3iYAA=.ed25519'],
-  ['Github', 'http://github.com/stephenreid321'],  
-  ['Ethereum', 'https://etherscan.io/address/stephenreid.eth'],
-  ['Steem', 'https://steemit.com/@stephenreid321'],
-[],
-  ['Anchor', 'http://anchor.fm/stephenreid321'],
-  ['Youtube', 'https://www.youtube.com/channel/UCHv6VkfPWq-Rkk2HKZ8A2BA'],                
-[],
-  # ['Spotify', ''],
-  ['Bandlab', 'http://bandlab.com/stephenreid321'],
-  ['Soundcloud', 'https://soundcloud.com/stephenreid321/sets/stephen-reid'],
-[],
-  ['Medium', 'https://medium.com/@stephenreid321'],  
-  ['Google Maps', 'https://www.google.co.uk/maps/contrib/102982136084858811312/reviews/'],
-  ['Goodreads', 'http://goodreads.com/stephenreid321'],
-  ['IMDb', 'https://www.imdb.com/user/ur85653381/'],
-[],    
-  ['Reddit', 'https://reddit.com//user/stephenreid321'],                    
-  ['Facebook', 'http://facebook.com/stephenreid321'],  
-  ['Twitter', 'http://twitter.com/stephenreid321'],
-  ['Instagram', 'http://instagram.com/stephenreid321'],
-  ['LinkedIn', 'https://www.linkedin.com/in/stephenreid321'],  
-  ].each { |network,url|
-%>
-  <% if network %>
-    <div class="col-auto">
-      <a style="text-decoration:none" class="text-white" data-toggle="tooltip" title="<%=url.starts_with?('http') ? url.split('/')[3..-1].join('/')  : url%>" target="_blank" href="<%=url%>">
-        <%=network%>
-      </a>                  
-    </div>                  
-  <% else %>
-    
-  <% end %>
+<% SocialNetwork.all(sort: { "Order" => "asc" }).each { |social_network| url = social_network['URL'] %>
+  <div class="col-auto">
+    <a style="text-decoration:none" class="text-white" data-toggle="tooltip" title="<%=url.starts_with?('http') ? url.split('/')[3..-1].join('/')  : url%>" target="_blank" href="<%=url%>">
+      <%=social_network['Name']%>
+    </a>                  
+  </div>                  
 <% } %>
