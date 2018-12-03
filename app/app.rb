@@ -113,7 +113,7 @@ module ActivateApp
     end
     
     get '/link' do
-      redirect Fragment.find_by(slug: 'link').body
+      redirect Fragment.all(filter: "{Slug} = 'link'").first['Body']
     end
 
     get '/bio' do
@@ -131,14 +131,6 @@ module ActivateApp
     get '/ps' do
       redirect 'https://www.google.com/maps/place/The+Psychedelic+Society/@51.547382,-0.0449452,17z/data=!4m12!1m6!3m5!1s0x48761dff684f311b:0xa492a62a16335e19!2sThe+Psychedelic+Society!8m2!3d51.547382!4d-0.0427565!3m4!1s0x48761dff684f311b:0xa492a62a16335e19!8m2!3d51.547382!4d-0.0427565'
     end    
-
-    get '/:slug' do
-      if @fragment = Fragment.find_by(slug: params[:slug], page: true)
-        erb :page
-      else
-        pass
-      end
-    end
 
   end
 end
