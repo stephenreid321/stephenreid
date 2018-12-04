@@ -66,10 +66,6 @@ module ActivateApp
       erb :habits
     end
 
-    get '/music', :cache => true do
-      erb :music
-    end
-
     get '/tarot', :cache => true do
       @title = 'Tarot'
       @og_image = "http://#{ENV['DOMAIN']}/images/tarotcards.jpg"
@@ -113,7 +109,7 @@ module ActivateApp
     end
     
     get '/link' do
-      redirect Fragment.all(filter: "{Slug} = 'link'").first['Body']
+      redirect Fragment.all(filter: "{Name} = 'link'").first['Body']
     end
 
     get '/bio' do
@@ -123,11 +119,7 @@ module ActivateApp
     get '/podcasts' do
       redirect '/podcast'
     end
-        
-    get '/gh' do
-      redirect 'https://www.google.co.uk/maps/place/Greenhouse/@51.5529027,-0.0879017,15z/data=!4m2!3m1!1s0x0:0x9850520d11f22809'
-    end
-    
+            
     get '/ps' do
       redirect 'https://www.google.com/maps/place/The+Psychedelic+Society/@51.547382,-0.0449452,17z/data=!4m12!1m6!3m5!1s0x48761dff684f311b:0xa492a62a16335e19!2sThe+Psychedelic+Society!8m2!3d51.547382!4d-0.0427565!3m4!1s0x48761dff684f311b:0xa492a62a16335e19!8m2!3d51.547382!4d-0.0427565'
     end    
