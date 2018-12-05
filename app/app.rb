@@ -35,7 +35,6 @@ module ActivateApp
       fix_params!
       @og_desc = 'Social entrepreneur, activist and public speaker'
       @og_image = "http://#{ENV['DOMAIN']}/images/grand-opening-wide.jpg"
-      @eth = '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324'
     end
 
     error do

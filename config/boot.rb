@@ -11,4 +11,4 @@ Bundler.require(:default, RACK_ENV)
 
 Padrino.load!
 
-Airrecord.api_key = "keymT9WM0zzs2Yb8h"
+Airrecord.api_key = ENV['AIRTABLE_API_KEY']
