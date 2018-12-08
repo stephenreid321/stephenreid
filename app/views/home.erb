@@ -29,7 +29,29 @@
 
 <%= partial :podcast_appearances %>
 
+<h2 class="mt-5">Media appearances</h2>
 
+<div class="row no-gutters">
+  <% MediaAppearance.all.shuffle.each_with_index { |media_appearance,i| %>
+    <div class="col-md-4 mb-3">
+      <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
+        <%= partial :media_appearance, :object => media_appearance %>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<h2 class="mt-5">Writing</h2>
+
+<div class="row no-gutters">
+  <% Writing.all.shuffle.each_with_index { |writing,i| %>
+    <div class="col-md-4 mb-3">
+      <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
+        <%= partial :writing, :object => writing %>
+      </div>
+    </div>
+  <% } %>
+</div>
 
 <h2 class="mt-5">Speaking engagements</h2>
 
@@ -40,6 +62,17 @@
     <dd class="col-sm-9"><a href="<%=speaking_engagement['URL']%>"><%=speaking_engagement['Name']%></a></dd>
   <% } %>
 </dl>
+
+<h2 class="mt-5">Peer-reviewed research</h2>
+
+<dl class="row">
+  <% Paper.all.shuffle.each { |paper|
+  %>
+    <dt class="col-sm-3 font-weight-normal"><%=date = Date.parse(paper['Date']); date.strftime('%b %Y')%>, <%=paper['Journal']%></dt>
+    <dd class="col-sm-9"><a href="<%=paper['URL']%>"><%=paper['Name']%></a></dd>
+  <% } %>
+</dl>
+
 
 <h2 class="mt-5">Current areas of interest</h2>
 
