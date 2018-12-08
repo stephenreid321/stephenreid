@@ -4,30 +4,4 @@
 <iframe class="mb-3" src="https://app.autopo.co/accounts/586d2eb3cc88ff00093f21e5/habits" style="border:0; width: 100%; height: 500px"></iframe>
 
 <h2>Diet</h2>
-<ul>  
-  <li>Plant-based vegetarian<br></li>
-  <li>Low dairy<br><ul>
-      <li>Cheese → <a href="http://www.onegreenplanet.org/vegan-food/how-to-add-umami-flavor-to-vegan-dishes/" target="_blank">Vegan umami flavours</a><br></li>
-      <li>Milk/yoghurt → Soy/rice/nut/coconut alternatives<br></li>
-      <li>Butter → Oil<br></li>
-    </ul>
-  </li>  
-  <li>Few eggs</li>
-  <li>Low sugar, complex over simple carbs</li>
-  <li>Top breakfast: muesli (oats + nuts + seeds + fruit)</li>
-  <li>Top complete food: <a href="http://bertrand.bio">Bertrand</a></li>
-  <li>Fast from time to time</li>
-  <li>Drink plenty of water & tea, some fresh juice</li>
-  <li>Coffee and alcohol only on special occasions</li>
-  <li>Medicinal foods: turmeric + black pepper, mushroom extract, lemon, ginger, garlic, green tea, cayenne</li>
-  <li>Living foods: probiotic yoghurt, kombucha</li>
-  <li>Natural soaps</li>
-  <li>Mindful use of smartphone</li>
-  <li>Supplements:
-    <ul>
-      <li><a href="https://hostdefense.com/products/mycommunity-capsules">MyCommunity</a> blend of 17 mushroom species</li>
-      <li><a href="https://neurohacker.com/cognition">Qualia</a> nootropic</li>
-      <li><a href="https://www.amazon.co.uk/gp/product/B01N4A5DH6">High strength turmeric with black pepper and ginger</a></li>
-    </ul>
-  </li>
-</ul>
+<%= Fragment.all(filter: "{Name} = 'diet'").first['Body'] %>
