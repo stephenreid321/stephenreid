@@ -78,8 +78,8 @@
 
 <dl class="row">
   <% Metainterest.all(sort: { "Order" => "asc" }).each { |metainterest| %>
-    <dt class="col-sm-3 font-weight-normal"><%=metainterest['Name']%></dt>
-    <dd class="col-sm-9">  <p><%=metainterest.interests.shuffle.map { |interest| interest['Name'] }.join('; ') %></p>   </dd>
+    <dt class="col-sm-3 font-weight-normal"><%=metainterest['Name'].upcase_first %></dt>
+    <dd class="col-sm-9">  <p><%=metainterest.interests.shuffle.sort_by { |interest| interest['URL'] || '' } .reverse.each_with_index.map { |interest,i| t = (i == 0 ? interest['Name'].upcase_first : interest['Name']); interest['URL'] ? %Q{<a target="_blank" href="#{interest['URL']}">#{t}</a>} : t  }.join('; ') %></p>   </dd>
   <% } %>    
 </dl>
 
