@@ -76,10 +76,12 @@
 
 <h2 class="mt-5">Current areas of interest</h2>
 
-<% Metainterest.all(sort: { "Order" => "asc" }).each { |metainterest| %>
-  <h4><%=metainterest['Name']%></h4>
-  <p><%=metainterest.interests.shuffle.map { |interest| %Q{<span class="badge badge-primary">#{interest['Name']}</span>} }.join(' ') %></p>   
-<% } %>    
+<dl class="row">
+  <% Metainterest.all(sort: { "Order" => "asc" }).each { |metainterest| %>
+    <dt class="col-sm-3 font-weight-normal"><%=metainterest['Name']%></dt>
+    <dd class="col-sm-9">  <p><%=metainterest.interests.shuffle.map { |interest| interest['Name'] }.join('; ') %></p>   </dd>
+  <% } %>    
+</dl>
 
 <h2 class="mt-5">Previous affiliations</h2>
 
