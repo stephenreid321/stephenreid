@@ -14,15 +14,19 @@
 
 <h2 class="mt-5">Current affiliations</h2>
 
-<div class="row align-items-center justify-content-center">   
-  <% Affiliation.all(filter: "{Current} = 1", sort: { "Order" => "asc" }).each { |affiliation| %>
-    <div class="col-sm-3 text-center py-3 px-5">
-      <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
-        <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
-        <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
-      </a>
+<div class="row justify-content-center">   
+  <div class="col-md-9">
+    <div class="row align-items-center justify-content-center">   
+      <% Affiliation.all(filter: "{Current} = 1", sort: { "Order" => "asc" }).each { |affiliation| %>
+        <div class="col-6 col-sm-4 text-center py-3 px-5">
+          <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
+            <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
+            <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
+          </a>
+        </div>
+      <% } %>
     </div>
-  <% } %>
+  </div>
 </div>
 
 <h2 class="mt-5">Podcast appearances</h2>
