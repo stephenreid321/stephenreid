@@ -1,7 +1,7 @@
-<% SocialNetwork.all(sort: { "Order" => "asc" }).each { |social_network| url = social_network['URL'] %>
-  <div class="col-auto">
-    <a style="text-decoration:none" class="text-white" data-toggle="tooltip" title="<%=url.starts_with?('http') ? url.split('/')[3..-1].join('/')  : url%>" target="_blank" href="<%=url%>">
-      <%=social_network['Name']%>
-    </a>                  
-  </div>                  
-<% } %>
+<% SocialNetwork.all(sort: { "Order" => "asc" }).each { |social_network| if profile_url = social_network['Profile URL'] %>
+    <div class="col-auto">
+      <a style="text-decoration:none" class="text-white" data-toggle="tooltip" title="<%=profile_url.starts_with?('http') ? profile_url.split('/')[3..-1].join('/')  : profile_url%>" target="_blank" href="<%=profile_url%>">
+        <%=social_network['Name']%>
+      </a>                  
+    </div>                  
+  <% end } %>

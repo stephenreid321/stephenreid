@@ -96,7 +96,7 @@ module ActivateApp
     get '/places-plans' do
       @title = 'Places & Plans'
       if params[:map]
-        @organisations = params[:plans] ? Organisation.all(filter: "AND({Interest} = 'upcoming', {Latitude} != '', {Longitude} != '')") : Organisation.all(filter: "AND({Latitude} != '', {Longitude} != '')")
+        @organisations = params[:plans] ? Organisation.all(filter: "AND({Interest} = 'future', {Latitude} != '', {Longitude} != '')") : Organisation.all(filter: "AND({Latitude} != '', {Longitude} != '')")
         @view = 'map'                
         erb :map
       else

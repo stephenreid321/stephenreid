@@ -11,7 +11,7 @@ class Organisation < Airrecord::Table
   def self.categories
     {
       "Key places and processes" => 'key',
-      "Plans for the future" => 'upcoming',            
+      "Plans for the future" => 'future',            
       "Academic study" => 'academic',
       "Organisations I've worked with" => 'work',      
       "Communities I've spent time at" => 'communities',
