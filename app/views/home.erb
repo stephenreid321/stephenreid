@@ -12,7 +12,7 @@
 
 <%= Fragment.all(filter: "{Name} = 'third-person'").first['Body'] %>
 
-<h2 class="mt-5">Current affiliations</h2>
+<h2 class="mt-5" id="affiliations">Current affiliations</h2>
 
 <div class="row justify-content-center">   
   <div class="col-md-9">
@@ -29,11 +29,11 @@
   </div>
 </div>
 
-<h2 class="mt-5">Podcast appearances</h2>
+<h2 class="mt-5" id="podcast-appearances">Podcast appearances</h2>
 
 <%= partial :podcast_appearances %>
 
-<h2 class="mt-5">Media appearances</h2>
+<h2 class="mt-5" id="media-appearances">Media appearances</h2>
 
 <div class="row no-gutters">
   <% MediaAppearance.all.shuffle.each_with_index { |media_appearance,i| %>
@@ -45,7 +45,7 @@
   <% } %>
 </div>
 
-<h2 class="mt-5">Writing</h2>
+<h2 class="mt-5" id="writing">Writing</h2>
 
 <div class="row no-gutters">
   <% Writing.all.shuffle.each_with_index { |writing,i| %>
@@ -57,7 +57,7 @@
   <% } %>
 </div>
 
-<h2 class="mt-5">Speaking engagements</h2>
+<h2 class="mt-5" id="speaking">Speaking engagements</h2>
 
 <dl class="row">
   <% SpeakingEngagement.all(sort: { "Month" => "desc" }).each { |speaking_engagement|
@@ -67,7 +67,7 @@
   <% } %>
 </dl>
 
-<h2 class="mt-5">Peer-reviewed research</h2>
+<h2 class="mt-5" id="research">Peer-reviewed research</h2>
 
 <dl class="row">
   <% Paper.all.shuffle.each { |paper|
@@ -78,14 +78,14 @@
 </dl>
 
 
-<h2 class="mt-5">Current areas of interest</h2>
+<h2 class="mt-5" id="interests">Current areas of interest</h2>
 
 <dl class="row">
 
   <dt class="col-sm-3 font-weight-normal">Technology</dt>
   <dd class="col-sm-9">
     <p>
-      <%= Platform.all(filter: "{Open source?} = 1", sort: { "Type" => "asc" }).map { |platform|
+      <%= (Platform.all(filter: "AND({Featured} = 1, {Open source} = 1)", sort: { "Type" => "asc", "Name" => "asc" }) + Platform.all(filter: "AND({Featured} = 1, {Open source} = 0)", sort: { "Type" => "asc", "Name" => "asc" })).map { |platform|
         %Q{<a target="_blank" href="#{platform['URL']}">#{platform['Name']}</a>}
         }.join('; ') %>     
     </p>
@@ -97,7 +97,7 @@
   <% } %>    
 </dl>
 
-<h2 class="mt-5">Previous affiliations</h2>
+<h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 
 <ul>
   <% Affiliation.all(filter: "{Current} = 0", sort: { "Order" => "asc" }).each { |affiliation| %>
@@ -110,7 +110,7 @@
   <% } %>  
 </ul>
 
-<h2 class="mt-5">Education</h2>
+<h2 class="mt-5" id="education">Education</h2>
 <ul>
   <% Qualification.all(sort: { "Order" => "asc" }).each { |qualification| %>
     <li><%=qualification.organisation['Name']%>, <%=qualification['Name']%> in <%=qualification['Subject']%></li>
