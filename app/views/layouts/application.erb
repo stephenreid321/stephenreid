@@ -6,6 +6,7 @@
 
     <% {            
       'jquery/3.2.0' => 'jquery.min.js',
+      'jqueryui/1.12.1' => 'jquery-ui.min.js',
       'popper.js/1.11.0' => 'umd/popper.min.js',
       'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
       'select2/3.5.2' => 'select2.min.js select2.min.css',
@@ -84,13 +85,31 @@
         }    
       </style>
       <div style="text-align: center">
-        <h1 id="title" style="display: inline-block;" class="rainbow mt-4 mb-0">
-          <a style="text-decoration: none" href="/">
-            STEPHEN<span style="font-family: sans-serif"> </span>Reid
+        <h1 id="title" style="display: inline-block;" class="mt-4 mb-0">
+          <a style="text-decoration: none;" class="text-dark" href="/">
+            <% 'Stephen Reid'.split('').each { |letter| %><span style="position: relative;" class="letter"><%=letter%></span><% } %>
           </a>
         </h1>
       </div>
+      <script>
+        var animateLetter = function (targetElement, speed) {
+          var r = 8
+          $(targetElement).animate(                  
+                  {
+                    'top': (Math.random() * r) - (r/2),
+                    'left': (Math.random() * r) - (r/2)
+                  },
+                  {
+                    duration: Math.random() * 2000,
+                    complete: function () {
+                      animateLetter(this);
+                    }
+                  }
+          );
 
+        };
+        $('.letter').each(function() { animateLetter(this) })
+      </script>
 
       <div id="key-info" class="my-2 text-center">
         <a class="btn btn-outline-primary" href="mailto:stephen@stephenreid.net"><i class="fas fa-envelope"></i> stephen@stephenreid.net</a>        
