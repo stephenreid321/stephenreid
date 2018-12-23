@@ -66,6 +66,11 @@ module ActivateApp
       @title = 'Habits'
       erb :habits
     end
+    
+    get '/diet', :cache => true do
+      @title = 'Diet'
+      erb :diet
+    end    
 
     get '/tarot', :cache => true do
       @title = 'Tarot'
