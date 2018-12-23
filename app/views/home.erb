@@ -18,7 +18,7 @@
   <div class="col-md-9">
     <div class="row align-items-center justify-content-center">   
       <% Affiliation.all(filter: "{Current} = 1", sort: { "Order" => "asc" }).each { |affiliation| %>
-        <div class="col-6 col-sm-4 text-center py-3 px-5">
+        <div class="col-8 col-sm-4 text-center py-3 px-5">
           <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
             <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
             <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
@@ -81,6 +81,16 @@
 <h2 class="mt-5">Current areas of interest</h2>
 
 <dl class="row">
+
+  <dt class="col-sm-3 font-weight-normal">Technology</dt>
+  <dd class="col-sm-9">
+    <p>
+      <%= Platform.all(filter: "{Open source?} = 1", sort: { "Type" => "asc" }).map { |platform|
+        %Q{<a target="_blank" href="#{platform['URL']}">#{platform['Name']}</a>}
+        }.join('; ') %>     
+    </p>
+  </dd>
+
   <% Metainterest.all(sort: { "Order" => "asc" }).each { |metainterest| %>
     <dt class="col-sm-3 font-weight-normal"><%=metainterest['Name'].upcase_first %></dt>
     <dd class="col-sm-9">  <p><%=metainterest.interests.shuffle.sort_by { |interest| interest['Order'].blank? ? 999 : interest['Order'] }.each_with_index.map { |interest,i| t = (i == 0 ? interest['Name'].upcase_first : interest['Name']); interest['URL'] ? %Q{<a target="_blank" href="#{interest['URL']}">#{t}</a>} : t  }.join('; ') %></p>   </dd>
