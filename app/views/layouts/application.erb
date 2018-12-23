@@ -85,19 +85,24 @@
         }    
       </style>
       <div style="text-align: center">
-        <h1 id="title" style="display: inline-block;" class="mt-4 mb-0">
-          <a style="text-decoration: none;" class="text-dark" href="/">
-            <% 'Stephen Reid'.split('').each { |letter| %><span style="position: relative;" class="letter"><%=letter%></span><% } %>
+        <h1 id="title" style="display: inline-block;" class="rainbow mt-4 mb-0">
+          <a style="text-decoration: none;" href="/">
+            Stephen Reid
+            <% if false %>
+              <% 'Stephen Reid'.split('').each { |letter| %>
+                <span style="position: relative;" class="letter"><%=letter%></span>
+              <% } %>
+            <% end %>
           </a>
         </h1>
       </div>
       <script>
         var animateLetter = function (targetElement, speed) {
           var r = 8
-          $(targetElement).animate(                  
+          $(targetElement).animate(
                   {
-                    'top': (Math.random() * r) - (r/2),
-                    'left': (Math.random() * r) - (r/2)
+                    'top': (Math.random() * r) - (r / 2),
+                    'left': (Math.random() * r) - (r / 2)
                   },
                   {
                     duration: Math.random() * 2000,
@@ -108,7 +113,7 @@
           );
 
         };
-        $('.letter').each(function() { animateLetter(this) })
+        // $('.letter').each(function() { animateLetter(this) })
       </script>
 
       <div id="key-info" class="my-2 text-center">
