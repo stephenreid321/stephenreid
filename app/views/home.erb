@@ -16,16 +16,18 @@
 
 <div class="row justify-content-center">   
   <div class="col-md-9">
-    <div class="row align-items-center justify-content-center">   
-      <% Affiliation.all(filter: "{Current} = 1", sort: { "Order" => "asc" }).each { |affiliation| %>
-        <div class="col-8 col-sm-4 text-center py-3 px-5">
-          <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
-            <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
-            <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
-          </a>
-        </div>
-      <% } %>
-    </div>
+    <% %w{Primary Secondary}.each { |current| %>
+      <div class="row align-items-center justify-content-center">   
+        <% Affiliation.all(filter: "{Current} = '#{current}'", sort: { "Order" => "asc" }).each { |affiliation| %>
+          <div class="col-8 col-sm-4 text-center py-3 px-5">
+            <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
+              <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
+              <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
+            </a>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
   </div>
 </div>
 
@@ -82,7 +84,7 @@
 
 <dl class="row">
 
-  <dt class="col-sm-3 font-weight-normal">Technology</dt>
+  <dt class="col-sm-3 font-weight-normal">Software</dt>
   <dd class="col-sm-9">
     <p>
       <%= (Platform.all(filter: "AND({Featured} = 1, {Open source} = 1)", sort: { "Type" => "asc", "Name" => "asc" }) + Platform.all(filter: "AND({Featured} = 1, {Open source} = 0)", sort: { "Type" => "asc", "Name" => "asc" })).map { |platform|
