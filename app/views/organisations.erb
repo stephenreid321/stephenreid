@@ -16,7 +16,7 @@
         <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'key' %>" role="tabpanel" data-parent="#accordion">
           <div class="card-body pb-0">
             <div class="row no-gutters">
-              <% Organisation.all(filter: "{Interest} = '#{v}'").shuffle.each_with_index { |organisation,i| %>
+              <% Organisation.all(filter: "{Interests} = '#{v}'").shuffle.each_with_index { |organisation,i| %>
                 <div class="col-md-4 mb-3">
                   <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
                     <%= partial :organisation, :object => organisation %>
