@@ -16,7 +16,21 @@
     height: 160px;
     padding: 0px 0px;
     overflow: hidden;
+    margin-right: 14px;
   }
+  
+  .gr_grid_branding { display: none }
 </style>
+
+<% opts= 'cover_size=medium&hide_link=&hide_title=true&num_books=8' %>
+
+<h2>Featured</h2>
+
+<div id="gr_grid_widget_1547403801"></div>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=featured&sort=random&widget_id=1547403801" type="text/javascript" charset="utf-8"></script>
+
+
+<h2>Recently read</h2>
+
 <div id="gr_grid_widget_1535721300"></div>
-<script src="https://www.goodreads.com/review/grid_widget/55629816.Stephen's%20bookshelf:%20read?cover_size=medium&hide_link=&hide_title=true&num_books=8&order=d&shelf=read&sort=date_read&widget_id=1535721300" type="text/javascript" charset="utf-8"></script>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=read&sort=date_read&order=d&widget_id=1535721300" type="text/javascript" charset="utf-8"></script>
