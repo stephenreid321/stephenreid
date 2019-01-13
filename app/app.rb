@@ -78,9 +78,13 @@ module ActivateApp
       erb :tarot
     end
     
-    get '/books', :cache => true do
-      @title = 'Books'
-      erb :books
+    get '/books' do
+      redirect '/books-videos'
+    end
+    
+    get '/books-videos', :cache => true do
+      @title = 'Books & Videos'
+      erb :books_videos
     end
 
     get '/darknet', :cache => true do
