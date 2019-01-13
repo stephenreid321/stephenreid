@@ -11,6 +11,22 @@
   <% } %>
 </div>
 
+
+
+
+<h2>Featured podcasts</h2>
+
+<ul>
+  <% Podcast.all.shuffle.each_with_index { |podcast,i| %>
+  <li><a target="_blank" href="<%=podcast['URL']%>"><%=podcast['Name']%></a> (<%=podcast.organisation['Name']%>)</li>
+  <% } %>
+</ul>
+
+
+
+
+<h2 class="mt-5">Featured books</h2>
+
 <style type="text/css" media="screen">
   .gr_grid_container {
     /* customize grid container div here. eg: width: 500px; */
@@ -32,7 +48,6 @@
 
 <% opts= 'cover_size=medium&hide_link=&hide_title=true&num_books=20' %>
 
-<h2>Featured books</h2>
 <div id="gr_grid_widget_1547403801"></div>
 <script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=featured&sort=avg_rating&order=d&widget_id=1547403801" type="text/javascript" charset="utf-8"></script>
 
