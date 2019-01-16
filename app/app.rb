@@ -79,16 +79,20 @@ module ActivateApp
     end
     
     get '/books' do
-      redirect '/featured'
+      redirect '/recommended'
     end
     
     get '/books-videos' do
-      redirect '/featured'
+      redirect '/recommended'
     end    
     
-    get '/featured', :cache => true do
-      @title = 'Featured content'
-      erb :featured
+    get '/featured' do
+      redirect '/recommended'
+    end
+    
+    get '/recommended', :cache => true do
+      @title = 'Recommended'
+      erb :recommended
     end
 
     get '/darknet', :cache => true do
