@@ -40,16 +40,3 @@
 <div id="gr_grid_widget_1535721300"></div>
 <script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=read&num_books=9&sort=date_read&order=d&widget_id=1535721300" type="text/javascript" charset="utf-8"></script>
 
-
-
-<h2>Recommended videos</h2>
-
-<div class="row mb-5">
-  <% Video.all.shuffle.each_with_index { |video,i| %>
-    <div class="col-12 col-sm-6 mb-4">
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="responsive-embed-item" src="https://www.youtube.com/embed/<%=video['YouTube ID']%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>        
-      </div>
-    </div>
-  <% } %>
-</div>
