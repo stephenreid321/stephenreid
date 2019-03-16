@@ -1,0 +1,17 @@
+<% Post.all.each { |post| %>
+  <p>
+    <a href="<%=post['Link']%>"><%=post['Title']%></a>
+    <br />
+    <%=
+    d = URI(post['Link']).host.gsub('www.','')
+    named_domains = {
+      'youtube.com' => 'YouTube',
+      'open.spotify.com' => 'Spotify',
+      'stitcher.com' => 'Stitcher',
+      'medium.com' => 'Medium',
+      'theguardian.com' => 'The Guardian'
+      }
+    named_domains[d] || d 
+  %> 
+  </p>
+<% } %>
