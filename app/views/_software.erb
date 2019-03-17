@@ -1,0 +1,7 @@
+<h2 class="mt-5" id="interests">Recommended software</h2>
+
+<p>
+  <%= (Platform.all(filter: "AND({Featured} = 1, {Open source} = 1)", sort: { "Type" => "asc", "Name" => "asc" }) + Platform.all(filter: "AND({Featured} = 1, {Open source} = 0)", sort: { "Type" => "asc", "Name" => "asc" })).map { |platform|
+    %Q{<a class="badge badge-primary" target="_blank" href="#{platform['URL']}">#{platform['Name']}</a>}
+    }.join(' ') %>     
+</p>

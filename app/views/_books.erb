@@ -1,0 +1,34 @@
+
+<style type="text/css" media="screen">
+  .gr_grid_container {
+    /* customize grid container div here. eg: width: 500px; */
+  }
+
+  .gr_grid_book_container {
+    /* customize book cover container div here */
+    float: left;
+    width: 98px;
+    height: 160px;
+    padding: 0px 0px;
+    overflow: hidden;
+    margin-right: 14px;
+    margin-bottom: 14px;
+  }
+
+  .gr_grid_branding { display: none }
+</style>
+
+<% opts= 'cover_size=medium&hide_link=&hide_title=true' %>
+
+<h2 class="mt-5">Recommended books</h2>
+<div id="gr_grid_widget_1547403801"></div>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=featured&num_books=100&sort=avg_rating&order=d&widget_id=1547403801" type="text/javascript" charset="utf-8"></script>
+
+<h2 class="mt-5">Currently reading</h2>
+<div id="gr_grid_widget_1548123832"></div>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=currently-reading&num_books=100&sort=date_read&order=d&widget_id=1548123832" type="text/javascript" charset="utf-8"></script>
+
+<h2 class="mt-5">Recently read</h2>
+<div id="gr_grid_widget_1535721300"></div>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=read&num_books=9&sort=date_read&order=d&widget_id=1535721300" type="text/javascript" charset="utf-8"></script>
+

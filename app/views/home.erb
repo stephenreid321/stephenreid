@@ -50,17 +50,7 @@
 
 <%= partial :podcast_appearances %>
 
-<h2 class="mt-5" id="media-appearances">Media appearances</h2>
-
-<div class="row no-gutters">
-  <% MediaAppearance.all.shuffle.each_with_index { |media_appearance,i| %>
-    <div class="col-md-4 mb-3">
-      <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
-        <%= partial :media_appearance, :object => media_appearance %>
-      </div>
-    </div>
-  <% } %>
-</div>
+<%= partial :books %>
 
 <h2 class="mt-5" id="writing">Writing</h2>
 
@@ -94,25 +84,7 @@
   <% } %>
 </dl>
 
-
-<h2 class="mt-5" id="interests">Current areas of interest</h2>
-
-<dl class="row">
-
-  <dt class="col-sm-3">Software</dt>
-  <dd class="col-sm-9">
-    <p>
-      <%= (Platform.all(filter: "AND({Featured} = 1, {Open source} = 1)", sort: { "Type" => "asc", "Name" => "asc" }) + Platform.all(filter: "AND({Featured} = 1, {Open source} = 0)", sort: { "Type" => "asc", "Name" => "asc" })).map { |platform|
-        %Q{<a target="_blank" href="#{platform['URL']}">#{platform['Name']}</a>}
-        }.join('; ') %>     
-    </p>
-  </dd>
-
-  <% Metainterest.all(sort: { "Order" => "asc" }).each { |metainterest| %>
-    <dt class="col-sm-3"><%=metainterest['Name'].upcase_first %></dt>
-    <dd class="col-sm-9">  <p><%=metainterest.interests.shuffle.sort_by { |interest| interest['Order'].blank? ? 999 : interest['Order'] }.each_with_index.map { |interest,i| t = (i == 0 ? interest['Name'].upcase_first : interest['Name']); interest['URL'] ? %Q{<a target="_blank" href="#{interest['URL']}">#{t}</a>} : t  }.join('; ') %></p>   </dd>
-  <% } %>    
-</dl>
+<%= partial :software  %>
 
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 
