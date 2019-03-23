@@ -67,9 +67,9 @@
 <h2 class="mt-5" id="speaking">Speaking engagements</h2>
 
 <dl class="row">
-  <% SpeakingEngagement.all(sort: { "Month" => "desc" }).each { |speaking_engagement|
+  <% SpeakingEngagement.all(sort: { "Date" => "desc" }).each { |speaking_engagement|
   %>
-    <dt class="col-sm-3"><%=date = Date.parse(speaking_engagement['Month']); date.strftime('%b %Y')%><% if speaking_engagement['Location']%>, <%=speaking_engagement['Location']%><% end %></dt>
+    <dt class="col-sm-3"><%=date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y')%><% if speaking_engagement['Location']%>, <%=speaking_engagement['Location']%><% end %></dt>
     <dd class="col-sm-9"><a href="<%=speaking_engagement['URL']%>"><%=speaking_engagement['Name']%></a></dd>
   <% } %>
 </dl>

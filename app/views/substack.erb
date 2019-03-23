@@ -1,8 +1,10 @@
-<% Post.all.each { |post| %>
-  <p>
+<h1>What I've been listening to</h1>
+
+<ul>
+<% Post.all(filter: "{Created at} != ''", sort: { "Created at" => "desc"}).each { |post| %>
+  <li>
     <a href="<%=post['Link']%>"><%=post['Title']%></a>
-    <br />
-    <%=
+    <%
     d = URI(post['Link']).host.gsub('www.','')
     named_domains = {
       'youtube.com' => 'YouTube',
@@ -13,5 +15,6 @@
       }
     named_domains[d] || d 
   %> 
-  </p>
+  </li>
 <% } %>
+</ul>
