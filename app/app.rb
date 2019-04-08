@@ -145,6 +145,10 @@ module ActivateApp
     get '/substack' do
       erb :substack
     end
+    
+    get '/gh' do
+      redirect 'https://www.google.com/maps/place/Greenhouse/@51.5529027,-0.0879017,15z/data=!4m2!3m1!1s0x0:0x9850520d11f22809?sa=X&ved=2ahUKEwjDvsas2MDhAhVlRRUIHS9_B5MQ_BIwDnoECA0QCA'
+    end
 
   end
 end
