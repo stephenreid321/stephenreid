@@ -77,7 +77,7 @@ module ActivateApp
       @og_image = "http://#{ENV['DOMAIN']}/images/tarotcards.jpg"
       erb :tarot
     end
-    
+        
     get '/books' do
       redirect '/recommended'
     end

@@ -28,7 +28,7 @@
         <th>
           <% if t = TarotNumber.all(filter: "{Name} = '#{n}'").first %>
             <% if t['URL'] %>
-              <%= partial :tarot_card, :locals => {:t => t, :text => "#{t['Name']} #{TarotNumber.numerals[i]}"} %>
+              <%= partial :tarot_card, :locals => {:t => t, :title => "#{t['Name']} #{TarotNumber.numerals[i]}"} %>
             <% else %>
               <%=t['Name']%> <%=TarotNumber.numerals[i]%>
             <% end %>
