@@ -95,11 +95,12 @@ module ActivateApp
       erb :recommended
     end
 
-    get '/darknet', :cache => true do
-      @title = 'Step-by-step guide to the darknet'
-      @og_desc = 'A step-by-step guide to using a darknet marketplace. Start to finish, it takes a couple of hours.'
-      @og_image = "http://#{ENV['DOMAIN']}/images/marketplace/tor.png"
-      erb :darknet
+    get '/darknet' do #, :cache => true do
+      redirect '/'
+#      @title = 'Step-by-step guide to the darknet'
+#      @og_desc = 'A step-by-step guide to using a darknet marketplace. Start to finish, it takes a couple of hours.'
+#      @og_image = "http://#{ENV['DOMAIN']}/images/marketplace/tor.png"
+#      erb :darknet
     end
 
     get '/why-use-the-darknet', :cache => true do
