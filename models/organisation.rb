@@ -5,7 +5,6 @@ class Organisation < Airrecord::Table
   belongs_to :interest, :class => 'Interest', :column => 'Interest'
   
   has_many :podcast_appearances, :class => 'PodcastAppearance', :column => 'Podcast appearances'
-  has_many :podcast_appearances, :class => 'Podcast', :column => 'Podcasts'
   has_many :affiliations, :class => 'Affiliation', :column => 'Affiliations'
   has_many :qualifications, :class => 'Qualification', :column => 'Qualifications'
   

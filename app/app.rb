@@ -77,41 +77,7 @@ module ActivateApp
       @og_image = "http://#{ENV['DOMAIN']}/images/tarotcards.jpg"
       erb :tarot
     end
-        
-    get '/books' do
-      redirect '/recommended'
-    end
-    
-    get '/books-videos' do
-      redirect '/recommended'
-    end    
-    
-    get '/featured' do
-      redirect '/recommended'
-    end
-    
-    get '/recommended', :cache => true do
-      @title = 'Recommended'
-      erb :recommended
-    end
-
-    get '/darknet' do #, :cache => true do
-      redirect '/'
-      #      @title = 'Step-by-step guide to the darknet'
-      #      @og_desc = 'A step-by-step guide to using a darknet marketplace. Start to finish, it takes a couple of hours.'
-      #      @og_image = "http://#{ENV['DOMAIN']}/images/marketplace/tor.png"
-      #      erb :darknet
-    end
-
-    get '/why-use-the-darknet' do #, :cache => true do
-      redirect '/'
-      #      @title = 'Why use the darknet to obtain psychedelics?'
-      #      @og_desc = 'Why using the darknet to obtain psychedelics is better for you and better for society'
-      #      erb :why_use_the_darknet
-    end
-    
-    
-    
+                   
     get '/places-plans' do
       @title = 'Places & Plans'
       if params[:map]
@@ -131,25 +97,59 @@ module ActivateApp
     get '/link' do
       redirect Fragment.all(filter: "{Name} = 'link'").first['Body']
     end
-
-    get '/bio' do
-      redirect '/'
-    end
-
-    get '/podcasts' do
-      redirect '/podcast'
-    end
+    
+    get '/substack' do
+      erb :substack
+    end    
             
     get '/ps' do
       redirect 'https://www.google.com/maps/place/The+Psychedelic+Society/@51.547382,-0.0449452,17z/data=!4m12!1m6!3m5!1s0x48761dff684f311b:0xa492a62a16335e19!2sThe+Psychedelic+Society!8m2!3d51.547382!4d-0.0427565!3m4!1s0x48761dff684f311b:0xa492a62a16335e19!8m2!3d51.547382!4d-0.0427565'
     end    
-    
-    get '/substack' do
-      erb :substack
-    end
-    
+        
     get '/gh' do
       redirect 'https://www.google.com/maps/place/Greenhouse/@51.5529027,-0.0879017,15z/data=!4m2!3m1!1s0x0:0x9850520d11f22809?sa=X&ved=2ahUKEwjDvsas2MDhAhVlRRUIHS9_B5MQ_BIwDnoECA0QCA'
+    end
+    
+    
+    
+    
+    get '/darknet' do #, :cache => true do
+      redirect '/'
+      #      @title = 'Step-by-step guide to the darknet'
+      #      @og_desc = 'A step-by-step guide to using a darknet marketplace. Start to finish, it takes a couple of hours.'
+      #      @og_image = "http://#{ENV['DOMAIN']}/images/marketplace/tor.png"
+      #      erb :darknet
+    end
+
+    get '/why-use-the-darknet' do #, :cache => true do
+      redirect '/'
+      #      @title = 'Why use the darknet to obtain psychedelics?'
+      #      @og_desc = 'Why using the darknet to obtain psychedelics is better for you and better for society'
+      #      erb :why_use_the_darknet
+    end
+    
+    get '/books' do
+      redirect '/'
+    end
+    
+    get '/podcasts' do
+      redirect '/podcast'
+    end        
+        
+    get '/bio' do
+      redirect '/'
+    end
+    
+    get '/books-videos' do
+      redirect '/'
+    end    
+    
+    get '/featured' do
+      redirect '/'
+    end
+    
+    get '/recommended' do
+      redirect '/'
     end
 
   end
