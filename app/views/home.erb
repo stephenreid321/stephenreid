@@ -6,9 +6,9 @@
 
 <div class="row justify-content-center">   
   <div class="col-md-9">
-    <% %w{Primary Secondary}.each { |current| %>
+    <% [1,2,3].each { |tier| %>
       <div class="row align-items-center justify-content-center">   
-        <% Affiliation.all(filter: "{Current} = '#{current}'", sort: { "Order" => "asc" }).each { |affiliation| %>
+        <% Affiliation.all(filter: "{Tier} = '#{tier}'", sort: { "Order" => "asc" }).each { |affiliation| %>
           <div class="col-6 col-sm-4 text-center py-3 px-5">
             <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
               <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
@@ -87,7 +87,7 @@
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 
 <ul>
-  <% Affiliation.all(filter: "{Current} = 0", sort: { "Order" => "asc" }).each { |affiliation| %>
+  <% Affiliation.all(filter: "{Tier} = ''", sort: { "Order" => "asc" }).each { |affiliation| %>
     <li>
       <% if affiliation.fields['Organisation'] %>
         <a href="<%=affiliation.organisation['URL']%>"><%=affiliation.organisation['Name']%></a>,
