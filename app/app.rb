@@ -33,6 +33,10 @@ module ActivateApp
     end
 
     before do
+      if params[:r]
+        ActivateApp::App.cache.clear
+        redirect request.path
+      end
       redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
       fix_params!
       @og_desc = 'Social entrepreneur, activist and public speaker'
@@ -88,12 +92,7 @@ module ActivateApp
         erb :organisations
       end
     end      
-    
-    get '/clear-cache' do
-      ActivateApp::App.cache.clear
-      redirect '/'
-    end
-    
+        
     get '/link' do
       redirect Fragment.all(filter: "{Name} = 'link'").first['Body']
     end
