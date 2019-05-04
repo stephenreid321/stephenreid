@@ -99,7 +99,7 @@
 
 <h2 class="mt-5" id="education">Education</h2>
 <ul>
-  <% Qualification.all(sort: { "Order" => "asc" }).each { |qualification| %>
+  <% Qualification.all(filter: "{Completed} = '1'", sort: { "Order" => "asc" }).each { |qualification| %>
     <li><%=qualification.organisation['Name']%>, <%=qualification['Name']%> in <%=qualification['Subject']%></li>
   <% } %> 
 </ul>
