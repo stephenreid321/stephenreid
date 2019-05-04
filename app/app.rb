@@ -33,7 +33,7 @@ module ActivateApp
     end
 
     before do
-      if params[:r]
+      if request.env['rack.request.query_hash']['r']
         ActivateApp::App.cache.clear
         redirect request.path
       end
