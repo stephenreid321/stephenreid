@@ -33,11 +33,11 @@ module ActivateApp
     end
 
     before do
-      if request.env['rack.request.query_hash']['r']
+      redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
+      if params[:r]
         ActivateApp::App.cache.clear
         redirect request.path
-      end
-      redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
+      end      
       fix_params!
       @og_desc = 'Social entrepreneur, activist and public speaker'
       @og_image = "http://#{ENV['DOMAIN']}/images/grand-opening-wide.jpg"
