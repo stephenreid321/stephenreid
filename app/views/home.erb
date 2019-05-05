@@ -9,7 +9,7 @@
     <% [1,2,3].each { |tier| %>
       <div class="row align-items-top justify-content-center">   
         <% Affiliation.all(filter: "{Tier} = '#{tier}'", sort: { "Order" => "asc" }).each { |affiliation| %>
-          <div class="col-4 text-center py-3 px-5 py-sm-3 px-sm-5">
+          <div class="col-4 text-center py-2 px-2 py-sm-3 px-sm-5">
             <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
               <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
               <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
