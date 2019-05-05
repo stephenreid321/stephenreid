@@ -7,7 +7,7 @@
 <div class="row justify-content-center">   
   <div class="col-md-9">
     <% [1,2,3].each { |tier| %>
-      <div class="row align-items-center justify-content-center">   
+      <div class="row align-items-top justify-content-center">   
         <% Affiliation.all(filter: "{Tier} = '#{tier}'", sort: { "Order" => "asc" }).each { |affiliation| %>
           <div class="col-4 text-center py-3 px-5">
             <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
