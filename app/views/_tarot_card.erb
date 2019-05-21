@@ -10,7 +10,7 @@
   </a>    
 <% else %>
   <% if t.is_a? TarotCard %>
-    <img src="/images/card-back.jpg" onmouseover="$(this).hide().next().show()" />
+    <img src="/images/card-back.png" onmouseover="$(this).hide().next().show()" />
     <img src="<%= t['Image'].first['url'] %>" style="display: none" onmouseout="$(this).hide().prev().show()" />
   <% else %>
     <%=title%>
