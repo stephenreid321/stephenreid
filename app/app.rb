@@ -40,7 +40,7 @@ module ActivateApp
       end      
       fix_params!
       @og_desc = 'Social entrepreneur, activist and public speaker'
-      @og_image = "http://#{ENV['DOMAIN']}/images/grand-opening-wide.jpg"
+      @og_image = "http://#{ENV['DOMAIN']}/images/the-magician.jpg"
     end
 
     error do
@@ -78,7 +78,7 @@ module ActivateApp
 
     get '/tarot', :cache => true do
       @title = 'Tarot'
-      @og_image = "http://#{ENV['DOMAIN']}/images/tarotcards.jpg"
+      @og_image = "http://#{ENV['DOMAIN']}/images/the-magician.jpg"
       erb :tarot
     end
                    
