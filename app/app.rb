@@ -98,6 +98,7 @@ module ActivateApp
     end
     
     get '/substack' do
+      @from = params[:from] ? Date.parse(params[:from]) : Date.today
       erb :substack
     end    
             
