@@ -83,7 +83,8 @@ module ActivateApp
     end
     
     get '/p/:slug' do
-      redirect Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
+      @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
+      erb :redirect
     end
                    
     get '/places-plans' do
