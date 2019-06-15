@@ -83,7 +83,7 @@ module ActivateApp
     end
     
     get '/p/:slug' do
-      redirect Product.all(filter: "{Slug} = '#{slug}'").first['URL']
+      redirect Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
     end
                    
     get '/places-plans' do
