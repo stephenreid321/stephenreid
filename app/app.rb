@@ -81,6 +81,10 @@ module ActivateApp
       @og_image = "http://#{ENV['DOMAIN']}/images/the-magician.jpg"
       erb :tarot
     end
+    
+    get '/mindlabpro' do
+      redirect 'https://mindlabpro.com'
+    end
                    
     get '/places-plans' do
       @title = 'Places & Plans'
