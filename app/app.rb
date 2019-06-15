@@ -82,7 +82,7 @@ module ActivateApp
       erb :tarot
     end
     
-    get '/products' do
+    get '/products', :cache => true do
       @title = 'Recommended products'
       erb :products
     end    
