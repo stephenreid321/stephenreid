@@ -1,5 +1,5 @@
 <p class="lead my-3">
-  I'm studying tarot by drawing cards from time to time and writing about them here.
+  My notes on the Rider Waite (Smith) tarot deck
 </p>
 
 <style>
@@ -59,3 +59,7 @@
     <% } %>
   </tbody>
 </table>
+
+<h2 class="mt-5 mb-5" id="products">Recommended decks</h2>
+
+<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Tarot'", sort: {'Order' => 'asc'})} %>

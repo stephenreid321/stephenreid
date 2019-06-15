@@ -2,7 +2,7 @@
   <% products.each { |product|
   %>
     <div class="col-12 col-sm-4 text-center mb-5">
-      <a title="<%=product['Name']%>" target="_blank" href="<%=product['URL']%>"><img style="max-height: 300px" src="<%=product['Images'].first['url']%>"></a>
+      <a title="<%=product['Name']%>" target="_blank" href="<%=product['URL']%>"><img style="max-height: 300px; max-width: 100%" src="<%=product['Images'].first['url']%>"></a>
     </div>
   <% } %>
 </div>

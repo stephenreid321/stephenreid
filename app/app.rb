@@ -82,6 +82,11 @@ module ActivateApp
       erb :tarot
     end
     
+    get '/products' do
+      @title = 'Recommended products'
+      erb :products
+    end    
+    
     get '/p/:slug' do
       @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
       erb :redirect
