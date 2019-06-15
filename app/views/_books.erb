@@ -32,3 +32,10 @@
 <div id="gr_grid_widget_1535721300"></div>
 <script src="https://www.goodreads.com/review/grid_widget/55629816?<%=opts%>&shelf=read&num_books=9&sort=date_read&order=d&widget_id=1535721300" type="text/javascript" charset="utf-8"></script>
 
+<script>
+  $(function () {
+    $('.gr_grid_book_container a').each(function () {
+      $(this).attr('href', 'https://www.amazon.co.uk/s/ref=as_li_ss_tl?k=' + $(this).attr('title') + '&i=stripbooks&tag=stephenreid-21')
+    })
+  })
+</script>
