@@ -82,8 +82,8 @@ module ActivateApp
       erb :tarot
     end
     
-    get '/mindlabpro' do
-      redirect 'https://mindlabpro.com'
+    get '/p/:slug' do
+      redirect Product.all(filter: "{Slug} = '#{slug}'").first['URL']
     end
                    
     get '/places-plans' do
