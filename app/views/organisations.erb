@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="col-sm-6">
-    <div id="sticky">
+    <div id="map">
       <% form_tag '', :method => :get, :class => 'mb-1 form-inline' do %>
         <%= hidden_field_tag :map, value: 1 %>
         <div class="form-check">    
@@ -45,6 +45,10 @@
           </div>
         <% end %>
 
+        <style>
+          #map .organisation { width: 250px; height: 130px !important; margin-bottom: 10px }
+        </style>      
+
         <%= partial :map %>
       </div>
     </div>
@@ -52,6 +56,6 @@
 
   <style>
     @media(min-width: 768px) {
-      #sticky { position: sticky; top: 1rem; }
+      #map { position: sticky; top: 1rem; }
     }
   </style>
