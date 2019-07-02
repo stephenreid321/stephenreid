@@ -1,32 +1,57 @@
-<p><a class="btn btn-sm btn-secondary" href="/places-plans?map=1"><i class="fas fa-map-marker"></i> Switch to map view</a></p>
+<div class="row">
 
-<div id="accordion" role="tablist">
+  <div class="col-sm-6 mb-3">
 
-  <% Organisation.categories.each { |k,v| %>    
+    <div id="accordion" role="tablist">
 
-      <div class="card mb-1">
-        <div class="card-header" role="tab" id="heading-<%=v%>">
-          <h4 class="mb-0">
-            <a class="text-dark" data-toggle="collapse" href="#collapse-<%=v%>" role="button">
-              <%=k%>
-            </a>
-          </h4>
-        </div>      
+      <% Organisation.categories.each { |k,v| %>    
 
-        <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'key' %>" role="tabpanel" data-parent="#accordion">
-          <div class="card-body pb-0">
-            <div class="row no-gutters">
-              <% Organisation.all(filter: "{Interests} = '#{v}'").shuffle.each_with_index { |organisation,i| %>
-                <div class="col-md-4 mb-3">
-                  <div class="<% if i % 3 == 1 %> mx-md-3 <% end %> ">
-                    <%= partial :organisation, :object => organisation %>
+        <div class="card mb-1">
+          <div class="card-header" role="tab" id="heading-<%=v%>">
+            <h4 class="mb-0">
+              <a class="text-dark" data-toggle="collapse" href="#collapse-<%=v%>" role="button">
+                <%=k%>
+              </a>
+            </h4>
+          </div>      
+
+          <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'key' %>" role="tabpanel" data-parent="#accordion">
+            <div class="card-body pb-0">
+              <div class="row no-gutters">
+                <% Organisation.all(filter: "{Interests} = '#{v}'").shuffle.each_with_index { |organisation,i| %>
+                  <div class="col-md-6 mb-3">
+                    <div class="<% if i % 2 == 1 %> mx-md-3 <% end %> ">
+                      <%= partial :organisation, :object => organisation %>
+                    </div>
                   </div>
-                </div>
-              <% } %>
+                <% } %>
+              </div>
             </div>
           </div>
-        </div>
-      </div>          
+        </div>          
 
-    <% } %>
-</div>
+      <% } %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div id="sticky">
+      <% form_tag '', :method => :get, :class => 'mb-1 form-inline' do %>
+        <%= hidden_field_tag :map, value: 1 %>
+        <div class="form-check">    
+          <%= check_box_tag :plans, class: 'form-check-input', id: 'plans', onchange: 'this.form.submit()', checked: params[:plans] %>
+            <label class="form-check-label" for="plans">
+              Show only plans for the future
+            </label>
+          </div>
+        <% end %>
+
+        <%= partial :map %>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @media(min-width: 768px) {
+      #sticky { position: sticky; top: 1rem; }
+    }
+  </style>
