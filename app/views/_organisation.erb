@@ -2,7 +2,7 @@
   <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
   <div style="position: absolute; bottom: 0;" class="p-2">
     <h3 style="color: white;" class="mb-0"><%=organisation['Name']%></h3>
-    <% if defined? include_category %>
+    <% if false && defined? include_category %>
       <p style="color: white; font-size: 0.9rem" class="mb-0"><%=Organisation.categories.invert[organisation.interest['Name']]%></p>
     <% end %>
   </div>
