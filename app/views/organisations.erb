@@ -15,7 +15,7 @@
             </h4>
           </div>      
 
-          <div id="collapse-<%=v%>" class="collapse <%='show' if v == 'key' %>" role="tabpanel" data-parent="#accordion">
+          <div id="collapse-<%=v%>" class="collapse" role="tabpanel" data-parent="#accordion">
             <div class="card-body pb-0">
               <div class="row no-gutters">
                 <% Organisation.all(filter: "{Interest} = '#{v}'").shuffle.each_with_index { |organisation,i| %>
