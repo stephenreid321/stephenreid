@@ -16,7 +16,7 @@
     points.push({
       lat: <%=organisation['Latitude']%>,
       lng: <%=organisation['Longitude']%>,
-      color: 'CE2828',
+      color: '<%=organisation['Interest name'] == 'future' ? 'green' : 'red' %>',
       name: "<%=js_escape_html(organisation['Name'])%>",
       content: '<%=js_escape_html(partial :organisation, :object => organisation, :locals => {:include_category => true})%>'
     })
@@ -27,17 +27,10 @@
   var markers = []
   for (i = 0; i < points.length; i++) {
     var point = points[i];
-    var pinColor = point.color;
-    var pinImage = new google.maps.MarkerImage(
-            "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-            new google.maps.Size(21, 34),
-            new google.maps.Point(0, 0),
-            new google.maps.Point(10, 34)
-            );
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(point.lat, point.lng),
       title: point.name,
-      icon: pinImage,
+      icon: { url: 'http://maps.google.com/mapfiles/ms/icons/'+ point.color +'-dot.png' }, 
       content: point.content
     });
     google.maps.event.addListener(marker, 'click', function (marker) {
