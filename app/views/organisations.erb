@@ -4,51 +4,49 @@
 
     <div id="accordion" role="tablist">
 
-      <% Organisation.categories.each { |k,v| %>    
+      <% form_tag '', :method => :get do %>
+        <% Organisation.categories.each { |k,v| %>    
 
-        <div class="card mb-1">
-          <div class="card-header" role="tab" id="heading-<%=v%>">
-            <h4 class="mb-0">
-              <a class="text-dark" data-toggle="collapse" href="#collapse-<%=v%>" role="button">
-                <%=k%>
-              </a>
-            </h4>
-          </div>      
+          <div class="card mb-1">
 
-          <div id="collapse-<%=v%>" class="collapse" role="tabpanel" data-parent="#accordion">
-            <div class="card-body pb-0">
-              <div class="row no-gutters">
-                <% Organisation.all(filter: "{Interest} = '#{v}'").shuffle.each_with_index { |organisation,i| %>
-                  <div class="col-md-6 mb-3">
-                    <div class="<% if i % 2 == 1 %> mx-md-3 <% end %> ">
-                      <%= partial :organisation, :object => organisation %>
-                    </div>
+
+            <div class="card-header" role="tab" id="heading-<%=v%>">
+              <h4 class="mb-0">
+                <a class="text-dark" data-toggle="collapse" href="#collapse-<%=v%>" role="button">
+                  <%=k%>
+                </a>
+                <div class="float-right">
+                  <%= check_box_tag :"categories[]", value: v, class: 'form-check-input', onchange: 'this.form.submit()', checked: (!params[:categories] or params[:categories].include?(v)) %>
                   </div>
-                <% } %>
+                </h4>
+              </div>      
+
+
+              <div id="collapse-<%=v%>" class="collapse" role="tabpanel" data-parent="#accordion">
+                <div class="card-body pb-0">
+                  <div class="row no-gutters">
+                    <% Organisation.all(filter: "{Interest} = '#{v}'").shuffle.each_with_index { |organisation,i| %>
+                      <div class="col-md-6 mb-3">
+                        <div class="<% if i % 2 == 1 %> mx-md-3 <% end %> ">
+                          <%= partial :organisation, :object => organisation %>
+                        </div>
+                      </div>
+                    <% } %>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>          
+            </div>          
 
-      <% } %>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div id="map">
-      <% form_tag '', :method => :get, :class => 'mb-1 form-inline' do %>
-        <%= hidden_field_tag :map, value: 1 %>
-        <div class="form-check">    
-          <%= check_box_tag :plans, class: 'form-check-input', id: 'plans', onchange: 'this.form.submit()', checked: params[:plans] %>
-            <label class="form-check-label" for="plans">
-              Show only plans for the future
-            </label>
-          </div>
+          <% } %>
         <% end %>
-
+      
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div id="map">
         <style>
           #map .organisation { width: 250px; height: 130px !important; }
         </style>      
-
         <%= partial :map %>
       </div>
     </div>
