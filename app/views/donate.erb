@@ -1,7 +1,9 @@
 <dl class="row">
   <% Crypto.all(sort: { "Order" => "asc" }).each { |crypto|
   %>
-    <dt class="col-sm-3"><%=crypto['Name']%></dt>
-    <dd class="col-sm-9"><%=crypto['Address']%></dd>
+    <dt class="col-sm-2"><%=crypto['Name']%></dt>
+    <dd class="col-sm-10"><small><%=crypto['Address']%></small></dd>
   <% } %>
+  <dt class="col-sm-2">Paypal</dt>
+  <dd class="col-sm-10"><small><a href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a> or <a href="https://paypal.me/stephenreid321">paypal.me/stephenreid321</a></small></dd>    
 </dl>
