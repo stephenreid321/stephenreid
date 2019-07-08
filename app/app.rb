@@ -120,18 +120,11 @@ module ActivateApp
     
     
     get '/darknet' do #, :cache => true do
-      redirect '/'
-      #      @title = 'Step-by-step guide to the darknet'
-      #      @og_desc = 'A step-by-step guide to using a darknet marketplace. Start to finish, it takes a couple of hours.'
-      #      @og_image = "http://#{ENV['DOMAIN']}/images/marketplace/tor.png"
-      #      erb :darknet
+      redirect 'https://dark.fail/'
     end
 
     get '/why-use-the-darknet' do #, :cache => true do
-      redirect '/'
-      #      @title = 'Why use the darknet to obtain psychedelics?'
-      #      @og_desc = 'Why using the darknet to obtain psychedelics is better for you and better for society'
-      #      erb :why_use_the_darknet
+      redirect 'https://dark.fail/'
     end
     
     get '/books' do
