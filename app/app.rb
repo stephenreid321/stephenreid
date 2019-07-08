@@ -55,6 +55,10 @@ module ActivateApp
     get '/', :cache => true do
       erb :home
     end
+    
+    get '/donate', :cache => true do
+      erb :donate
+    end
 
     get '/podcast', :cache => true do
       @title = 'Podcast'

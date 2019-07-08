@@ -8,7 +8,7 @@
   <%=submit_tag 'Submit', :class => 'btn btn-primary'%>
 <% end %>
 
-<% posts = Post.all(filter: "IS_AFTER({Created at}, '#{@from.to_s(:db)}')") %>
+<% posts = Post.all(filter: "IS_AFTER({Created at}, '#{@from.to_s(:db)}')", sort: { "Created at" => "desc" }) %>
 <%
 named_domains = {
   'youtube.com' => 'YouTube',

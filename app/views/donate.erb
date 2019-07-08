@@ -1,0 +1,7 @@
+<dl class="row">
+  <% Crypto.all(sort: { "Order" => "asc" }).each { |crypto|
+  %>
+    <dt class="col-sm-3"><%=crypto['Name']%></dt>
+    <dd class="col-sm-9"><%=crypto['Address']%></dd>
+  <% } %>
+</dl>
