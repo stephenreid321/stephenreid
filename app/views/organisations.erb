@@ -16,7 +16,7 @@
                   <%=k%>
                 </a>
                 <div class="float-right">
-                  <%= check_box_tag :"categories[]", value: v, class: 'form-check-input', onchange: 'this.form.submit()', checked: (!params[:categories] or params[:categories].include?(v)) %>
+                  <%= radio_button_tag :category, value: v, class: 'form-check-input', onchange: 'this.form.submit()', checked: (params[:category] == v) %>
                   </div>
                 </h4>
               </div>      

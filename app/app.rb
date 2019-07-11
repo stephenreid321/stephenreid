@@ -98,8 +98,7 @@ module ActivateApp
                    
     get '/places-plans' do
       @title = 'Places & Plans'
-      @organisations = Organisation.all(filter: "AND({Latitude} != '', {Longitude} != '')")
-      @organisations = @organisations.select { |organisation| params[:categories].include?(organisation['Interest name']) } if params[:categories]
+      @organisations = params[:category] ? Organisation.all(filter: "AND({Interest name} = '#{params[:category]}', {Latitude} != '', {Longitude} != '')") : Organisation.all(filter: "AND({Latitude} != '', {Longitude} != '')")
       erb :organisations
     end      
         
