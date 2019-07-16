@@ -17,3 +17,7 @@
 <h2 class="mt-5 mb-5" id="foods">Foods</h2>
 
 <%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Food'", sort: {'Order' => 'asc'})} %>
+
+<h2 class="mt-5 mb-5" id="everything-else">Everything else</h2>
+
+<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Everything else'", sort: {'Order' => 'asc'})} %>
