@@ -98,8 +98,7 @@ module ActivateApp
                    
     get '/places-plans' do
       @title = 'Places & Plans'
-      @organisations = params[:category] ? Organisation.all(filter: "AND({Interest name} = '#{params[:category]}', {Latitude} != '', {Longitude} != '')") : Organisation.all(filter: "AND({Latitude} != '', {Longitude} != '')")
-      erb :organisations
+      erb :places
     end      
         
     get '/link' do
