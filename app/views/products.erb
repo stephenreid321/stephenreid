@@ -1,4 +1,4 @@
-<h2 class="mt-5 mb-5" id="banking">Banking</h2>
+<h2 class="mt-5 mb-5" id="banking">Investing & banking</h2>
 
 <%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Bank'", sort: {'Order' => 'asc'})} %>
 
