@@ -81,7 +81,7 @@
       <div style="text-align: center">
         <h1 id="title" style="display: inline-block;" class="mb-0">
           <a class="rainbow" style="text-decoration: none;" href="/">
-              <% 'Stephen Reid'.split('').each { |letter| %><span class="letter"><%=letter%></span><% } %>
+            <% 'Stephen Reid'.split('').each { |letter| %><span class="letter"><%=letter%></span><% } %>
           </a>
         </h1>
       </div>
@@ -102,13 +102,15 @@
           );
 
         };
-        $('#title a').hover(function() {
+        $('#title a').hover(function () {
           $(this).removeClass('rainbow').addClass('text-dark')
-          $('.letter').css('position', 'relative').each(function() { animateLetter(this) })
-        }, function() {
+          $('.letter').css('position', 'relative').each(function () {
+            animateLetter(this)
+          })
+        }, function () {
           $(this).removeClass('text-dark').addClass('rainbow')
           $('.letter').css('position', 'static').stop()
-        })        
+        })
       </script>
 
       <div id="key-info" class="my-2 text-center">
@@ -142,13 +144,11 @@
     <div class="bg-dark p-3 mt-5">
       <div class="container">
 
-        <% unless request.path == '/' %>    
-          <div class="row justify-content-center mb-3">
-            <div class="col-sm-auto text-center">
-              <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
-            </div>          
-          </div>
-        <% end %>
+        <div class="row justify-content-center mb-3">
+          <div class="col-sm-auto text-center">
+            <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
+          </div>          
+        </div>
 
         <div class="row justify-content-center">        
           <%= partial :social_networks %>        
@@ -162,7 +162,7 @@
 
       </div>
     </div>
- 
+
 
   </body>
 </html>

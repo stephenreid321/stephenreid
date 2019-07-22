@@ -31,25 +31,55 @@
   </div>
 </div>
 
+<div id="bio">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <style>
+        #bio {
+          max-height: 19em;
+          position: relative;
+          overflow: hidden;
+        }
+        #bio .fader { 
+          position: absolute; 
+          bottom: 0; 
+          left: 0;
+          width: 100%; 
+          text-align: center; 
+          margin: 0;
+          padding: 5em 0; 
+          background-image: linear-gradient(to bottom, transparent, white);
+        }
+      </style>    
+
+      <%= Fragment.all(filter: "{Name} = 'bio'").first['Body'] %>
+
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-sm-auto text-center">
+      <p class="lead">
+        Since you've come this far, I'd love to stay in touch.
+      </p>
+      <p>
+        <a target="_blank" class="btn btn-primary btn-lg" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="fader"></div>
+</div>
+<p class="text-center"><a href="javascript:;" onclick="$(this).hide();
+    $('#bio').css('max-height', 'none');
+    $('#bio .fader').hide()">Read more</a></p>
+
 <div class="row justify-content-center">
   <div class="col-md-9">
-    <%= Fragment.all(filter: "{Name} = 'bio'").first['Body'] %>
-
-    <div class="row justify-content-center">
-      <div class="col-sm-auto text-center">
-        <p class="lead">
-          Since you've come this far, I'd love to stay in touch.
-        </p>
-        <p>
-          <a target="_blank" class="btn btn-primary btn-lg" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
-        </p>
-      </div>
-    </div>
-
     <%= Fragment.all(filter: "{Name} = 'third-person'").first['Body'] %>
-
-  </div>
-</div>
+  </div>  
+</div>  
 
 <div class="row justify-content-center mt-5">
   <div class="col-auto">
@@ -74,10 +104,10 @@
 
 <div class="mt-5 row justify-content-center">
   <div class="col-12 col-sm-7">    
-      <p class="text-center lead">
-        Read my blog series about my samá (dieta) with Noya Rao in Dec 2017
-      </p>
-      <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad"><img class="w-100" src="https://miro.medium.com/max/1400/1*X7fjKFABhypYds7hLaHeaw.jpeg" /></a>
+    <p class="text-center lead">
+      Read my blog series about my samá (dieta) with Noya Rao in Dec 2017
+    </p>
+    <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad"><img class="w-100" src="https://miro.medium.com/max/1400/1*X7fjKFABhypYds7hLaHeaw.jpeg" /></a>
   </div>
 </div>
 
