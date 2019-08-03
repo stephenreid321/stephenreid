@@ -4,7 +4,7 @@
     <div class="col-12 <% unless product['Featured'] %> col-sm-4 <% end %> text-center mb-5">
       <a title="<%=product['Name']%>"
       <% if product['Featured'] %>
-           href="<%=product['URL']%>"
+           href="<%=product['URL']%>" target="_blank"
          <% else %>
            href="javascript:;" data-toggle="modal" data-target="#product-<%=product['Name'].parameterize%>"
          <% end %>
