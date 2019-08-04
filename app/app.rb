@@ -95,6 +95,11 @@ module ActivateApp
       @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
       erb :redirect
     end
+    
+    get '/r/:slug' do
+      @url = Link.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
+      erb :redirect
+    end    
                    
     get '/places-plans' do
       @title = 'Places & Plans'
