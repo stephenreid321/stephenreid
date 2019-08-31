@@ -1,6 +1,6 @@
-<h2 class="mt-5 mb-5" id="banking">Investing, banking & travel</h2>
+<h2 class="mt-5 mb-5" id="banking">Services</h2>
 
-<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Bank'", sort: {'Order' => 'asc'})} %>
+<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Services'", sort: {'Order' => 'asc'})} %>
 
 <h2 class="mt-5 mb-5" id="products">Supplements & soaps</h2>
 
