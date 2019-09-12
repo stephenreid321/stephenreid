@@ -56,6 +56,10 @@ module ActivateApp
       erb :home
     end
     
+    get '/', :cache => true do
+      erb :totnes
+    end
+    
     get '/donate', :cache => true do
       erb :donate
     end

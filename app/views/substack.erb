@@ -30,8 +30,7 @@ named_domains = {
 <ul>
   <% posts.reject { |post| named_domains.keys.include?(URI(post['Link']).host.gsub('www.','')) }.sort_by { |post| URI(post['Link']).host.gsub('www.','') }.each { |post| %>
     <li>
-      <a href="<%=post['Link']%>"><%=post['Title']%></a>
-      <em><%= URI(post['Link']).host.gsub('www.','') %></em>
+      <a href="<%=post['Link']%>"><%=post['Title']%></a> <em><%= URI(post['Link']).host.gsub('www.','') %></em>
     </li>
   <% } %>
 </ul>
