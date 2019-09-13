@@ -40,7 +40,7 @@ module ActivateApp
       end      
       fix_params!
       @og_desc = 'Social entrepreneur, activist and public speaker'
-      @og_image = "http://#{ENV['DOMAIN']}/images/fifth.jpg"
+      @og_image = "http://#{ENV['DOMAIN']}/images/link.jpg"
     end
 
     error do
