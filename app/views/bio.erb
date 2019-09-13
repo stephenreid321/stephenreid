@@ -1,0 +1,59 @@
+<div class="row justify-content-center">   
+  <div class="col-md-9">
+    <div class="row align-items-top justify-content-center">   
+      <div class="col-9 col-sm-6 col-md-4 text-center py-3 px-3 py-sm-3 px-sm-5">
+        <a href="https://facebook.com/stephenreid321" target="_blank"><img src="/images/me.jpg" class="rounded-circle w-100" /></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="bio">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <style>
+        #bio {
+          max-height: 19em;
+          position: relative;
+          overflow: hidden;
+        }
+        #bio .fader { 
+          position: absolute; 
+          bottom: 0; 
+          left: 0;
+          width: 100%; 
+          text-align: center; 
+          margin: 0;
+          padding: 5em 0; 
+          background-image: linear-gradient(to bottom, transparent, white);
+        }
+      </style>    
+
+      <%= Fragment.all(filter: "{Name} = 'bio'").first['Body'] %>
+
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-sm-auto text-center">
+      <p class="lead">
+        Since you've come this far, I'd love to stay in touch.
+      </p>
+      <p>
+        <a target="_blank" class="btn btn-primary btn-lg" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="fader"></div>
+</div>
+<p class="text-center"><a href="javascript:;" onclick="$(this).hide();
+    $('#bio').css('max-height', 'none');
+    $('#bio .fader').hide()">Read more</a></p>
+
+<div class="row justify-content-center">
+  <div class="col-md-9">
+    <%= Fragment.all(filter: "{Name} = 'third-person'").first['Body'] %>
+  </div>  
+</div> 
