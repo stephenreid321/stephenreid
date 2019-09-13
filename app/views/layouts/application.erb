@@ -67,31 +67,28 @@
 
       <%= partial :alert %>  
 
+      <h1 class="text-center d-block d-sm-none mt-3">
+        <img src="/images/logo.png" style="width: 200px" class="d-inline-block d-sm-none"/>
+      </h1>      
+
       <style>
         #title {
-          font-size: 4rem;
+          font-size: 6rem;
           font-family: 'chancelaresca';
           text-transform: none;
-        }
-        @media(min-width: 768px) {
-          #title {
-            font-size: 6rem;
-          }
         }    
-      </style>
-      <div style="text-align: center">
-        <h1 id="title" class="mt-3 mb-3 mb-sm-0 text-center ">
-          <img src="/images/logo.png" style="width: 200px" class="d-inline-block d-sm-none"/>
-          <a class="text-dark d-none d-sm-block" style="text-decoration: none;" href="/">
-            <% name = 'stephen reid'; name.split('').each_with_index { |letter,i| %><span class="letter"
-              <% if name[i+1] == 'e' %>style="letter-spacing: -0.05em"<% end %>
-              <% if name[i+1] == 'p' %>style="letter-spacing: -0.05em"<% end %>
-              <% if name[i+1] == 'i' %>style="letter-spacing: -0.05em"<% end %>
-              <% if name[i+1] == 'd' %>style="letter-spacing: 0.05em"<% end %>
-              ><%=letter%></span><% } %>
-          </a>
-        </h1>
-      </div>
+      </style>      
+      <h1 id="title" class="d-none d-sm-block my-3 text-center">          
+        <a class="text-dark d-block" style="text-decoration: none;" href="/">
+          <% name = 'stephen reid'; name.split('').each_with_index { |letter,i| %><span class="letter"
+                  <% if name[i+1] == 'e' %>style="letter-spacing: -0.05em"<% end %>
+                  <% if name[i+1] == 'p' %>style="letter-spacing: -0.05em"<% end %>
+                  <% if name[i+1] == 'i' %>style="letter-spacing: -0.05em"<% end %>
+                  <% if name[i+1] == 'd' %>style="letter-spacing: 0.05em"<% end %>
+                  ><%=letter%></span><% } %>
+        </a>
+      </h1>
+
       <script>
         var animateLetter = function (targetElement, speed) {
           var r = 2
