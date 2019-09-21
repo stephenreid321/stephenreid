@@ -1,13 +1,11 @@
-@import url('/fonts/zilap_marine/stylesheet.css');
-@import url('/fonts/murmur/stylesheet.css');
-@import url('/fonts/chancelaresca/stylesheet.css');
+@import url('/fonts/pf_stamps_pro_rough/stylesheet.css');
 @import url('https://fonts.googleapis.com/css?family=Unica+One');
 
 $font-weight-normal: 300;
 
 @import "bootstrap/bootstrap";
 
-h1,h2,h3,h4,h5,h6 { font-family: 'Unica One'; font-weight: normal; text-transform: uppercase; }
+h1,h2,h3,h4,h5,h6 { font-family: 'pf_stamps_prorough'; font-weight: normal; text-transform: uppercase; }
 h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 .badge-warning { color: white }
 
