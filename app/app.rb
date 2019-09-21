@@ -63,6 +63,10 @@ module ActivateApp
     get '/donate', :cache => true do
       erb :donate
     end
+    
+    get '/training', :cache => true do
+      erb :training
+    end    
 
     get '/podcast', :cache => true do
       @title = 'Podcast'

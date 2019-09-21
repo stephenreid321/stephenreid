@@ -25,8 +25,8 @@
         <img src="/images/sheepstor.jpg" class="w-100" />    
       </div>
     </div>
-    <p class="mt-3 lead text-center">
-      You can <a target="_blank" href="https://tinyurl.com/cider-warehouse">request to stay in a room in my apartment for days or weeks at a time</a>.
+    <p class="mt-3 text-center">
+      Visiting Totnes? You can <a target="_blank" href="https://tinyurl.com/cider-warehouse">request to stay in a room in my apartment for days or weeks at a time</a>.
     </p> 
   </div>  
 </div> 
@@ -56,87 +56,5 @@
 </div>
 
 
-
-<div class="row justify-content-center mt-5">
-  <div class="col-auto">
-    <p class="lead">If you only read one thing...</p>
-  </div>
-</div>
-
-<div class="row justify-content-center">
-  <div class="col-10 col-sm-4">
-    <a target="_blank" href="https://www.goodreads.com/book/show/2001800.Tao_Te_Ching"><img class="w-100" src="/images/tao.jpg"/></a>
-    <p class="mt-3">
-      Eyes look but cannot see it<br />
-      Ears listen but cannot hear it<br />
-      Hands grasp but cannot touch it<br/>
-      Beyond the senses lies this great Unity–<br />
-      <span style="margin-left: 1rem">invisible, inaudible, intangible</span>
-    </p>
-  </div>
-</div>
-
 <%= partial :books %>
 
-<div class="mt-5 row justify-content-center">
-  <div class="col-12 col-sm-7">    
-    <p class="text-center lead">
-      Read about my <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad">samá (dieta) with Noya Rao</a> in Dec 2017
-    </p>
-    <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad"><img class="w-100" src="https://miro.medium.com/max/1400/1*X7fjKFABhypYds7hLaHeaw.jpeg" /></a>
-  </div>
-</div>
-
-<h2 class="mt-5" id="speaking">Speaking engagements</h2>
-
-
-
-<dl class="row">
-  <% SpeakingEngagement.all(sort: { "Date" => "desc" }).each { |speaking_engagement|
-  %>
-    <dt class="col-sm-3"><%=date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y')%><% if speaking_engagement['Location']%>, <%=speaking_engagement['Location']%><% end %></dt>
-    <dd class="col-sm-9"><a href="<%=speaking_engagement['URL']%>"><%=speaking_engagement['Name']%></a></dd>
-  <% } %>
-</dl>
-
-<h2 class="mt-5" id="research">Peer-reviewed research</h2>
-
-<dl class="row">
-  <% Paper.all.shuffle.each { |paper|
-  %>
-    <dt class="col-sm-3"><%=date = Date.parse(paper['Date']); date.strftime('%b %Y')%>, <%=paper['Journal']%></dt>
-    <dd class="col-sm-9"><a href="<%=paper['URL']%>"><%=paper['Name']%></a></dd>
-  <% } %>
-</dl>
-
-
-<h2 class="mt-5" id="writing">Previous writing</h2>
-
-<div class="row no-gutters">
-  <% Writing.all(sort: { "Date" => "desc" }).each_with_index { |writing,i| %>
-    <dt class="col-sm-3"><%=date = Date.parse(writing['Date']); date.strftime('%b %Y')%>, <%=URI(writing['URL']).host.gsub('www.','')%></dt>
-    <dd class="col-sm-9"><a href="<%=writing['URL']%>"><%=writing['Name']%></a></dd>
-  <% } %>
-</div>
-
-
-
-<h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
-
-<ul>
-  <% Affiliation.all(filter: "{Tier} = ''", sort: { "Order" => "asc" }).each { |affiliation| %>
-    <li>
-      <% if affiliation.fields['Organisation'] %>
-        <a href="<%=affiliation.organisation['URL']%>"><%=affiliation.organisation['Name']%></a>,
-      <% end %>
-      <%=affiliation['Position']%>
-    </li>
-  <% } %>  
-</ul>
-
-<h2 class="mt-5" id="education">Education</h2>
-<ul>
-  <% Qualification.all(filter: "{Completed} = 1", sort: { "Order" => "asc" }).each { |qualification| %>
-    <li><%=qualification.organisation['Name']%>, <%=qualification['Name']%> in <%=qualification['Subject']%></li>
-  <% } %> 
-</ul>
