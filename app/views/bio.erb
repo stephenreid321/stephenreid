@@ -8,6 +8,12 @@
   </div>
 </div>
 
+<div class="row justify-content-center">
+  <div class="col-md-9">
+    <%= Fragment.all(filter: "{Name} = 'third-person'").first['Body'] %>
+  </div>  
+</div> 
+
 <div id="bio">
   <div class="row justify-content-center">
     <div class="col-md-9">
@@ -51,12 +57,6 @@
 <p class="text-center"><a href="javascript:;" onclick="$(this).hide();
     $('#bio').css('max-height', 'none');
     $('#bio .fader').hide()">Read more</a></p>
-
-<div class="row justify-content-center">
-  <div class="col-md-9">
-    <%= Fragment.all(filter: "{Name} = 'third-person'").first['Body'] %>
-  </div>  
-</div> 
 
 
 
