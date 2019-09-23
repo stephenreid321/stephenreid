@@ -1,5 +1,10 @@
 <%= Fragment.all(filter: "{Name} = 'diet'").first['Body'] %>
 
+<h2 class="mt-5" id="products">Habits</h2>
+<p class="my-3"><a href="https://autopia.co/u/stephenreid321">Check out my Autopia profile</a></p>
+
+<iframe class="mb-3" src="https://autopia.co/u/stephenreid321/habits" style="border:0; width: 100%; height: 500px"></iframe>
+
 <h2 class="mt-5 mb-5" id="products">Recommended supplements & soaps</h2>
 
 <%= partial :products, :locals => {:products => Product.all(filter: "OR({Category} = 'Supplement', {Category} = 'Soap')", sort: {'Order' => 'asc'})} %>
