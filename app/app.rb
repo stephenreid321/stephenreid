@@ -99,6 +99,11 @@ module ActivateApp
       erb :products
     end    
     
+    get '/to/:slug' do
+      @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
+      redirect @url
+    end
+    
     get '/p/:slug' do
       @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
       erb :redirect
