@@ -7,6 +7,7 @@ class Organisation < Airrecord::Table
   has_many :podcast_appearances, :class => 'PodcastAppearance', :column => 'Podcast appearances'
   has_many :affiliations, :class => 'Affiliation', :column => 'Affiliations'
   has_many :qualifications, :class => 'Qualification', :column => 'Qualifications'
+  has_many :speaking_engagements, :class => 'SpeakingEngagement', :column => 'Organisation'
   
   def self.categories
     {
