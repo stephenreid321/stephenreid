@@ -5,16 +5,20 @@ result = agent.get("https://iframe.ly/api/iframely?url=#{post['Link']}&api_key=d
 json = JSON.parse(result.body)
 %>
 
-<div class="card">
-  <a href="/posts/<%=post.id%>">
-    <img class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] %>">
-  </a>
-  <div class="card-body">
-    <h5 class="card-title">
-      <a href="/posts/<%=post.id%>" class="text-dark">
-        <%= json['meta']['title'] %>
-      </a>
-    </h5>
-    <p class="card-text"><%= json['meta']['description'] %></p>
+<% if json['links']['thumbnail'] %>
+  <div class="card">
+    <a href="/posts/<%=post.id%>">
+      <img class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] %>">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">
+        <a href="/posts/<%=post.id%>" class="text-dark">
+          <%= json['meta']['title'] %>
+        </a>
+      </h5>
+      <p class="card-text"><%= json['meta']['description'] %></p>
+    </div>
   </div>
-</div>
+<% else %>
+  <%= json['html'] %>
+<% end %>
