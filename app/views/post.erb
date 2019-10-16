@@ -4,7 +4,7 @@ post = Post.find(params[:id])
 json = JSON.parse(post['Iframely'])
 %>
 
-<div class="row align-items-center">
+<div class="row justify-content-center">
   <div class="col-sm-4">
 
     <% if json['links']['player'] %>
@@ -21,7 +21,9 @@ json = JSON.parse(post['Iframely'])
     <% end %>
 
   </div>
-  <div class="col-sm-8 justify-content-center">
+</div>
+
+
 
     <div class="text-center">
       <h2>Discuss</h2>
@@ -31,5 +33,3 @@ json = JSON.parse(post['Iframely'])
       </div>
     </div>
 
-  </div>
-</div>
