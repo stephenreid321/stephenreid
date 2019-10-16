@@ -40,9 +40,10 @@
 <div class="row">
 
   <%  
-  Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { "Created at" => "desc" }).each { |post|
+  Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" }).each { |post|
+    next if post['Iframely'].include?('"status": 404')
   %>
-    <div class="col-4 mb-3">
+    <div class="col-md-4 mb-3">
       <%= partial :post, :object => post %>
     </div>
   <% } %>
