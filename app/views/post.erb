@@ -6,7 +6,7 @@ result = agent.get("https://iframe.ly/api/iframely?url=#{post['Link']}&api_key=d
 json = JSON.parse(result.body)
 %>
 
-<div class="row">
+<div class="row align-items-center">
   <div class="col-sm-4">
 
     <%= partial :post, :object => post %>
@@ -20,9 +20,17 @@ json = JSON.parse(result.body)
     </a>    
 
   </div>
-  <div class="col-sm-8">
+  <div class="col-sm-8 justify-content-center">
 
-    <div class="fb-comments" data-href="<%=request.url%>"></div>
+
+
+    <div class="text-center">
+      <h2>Discuss this post</h2>
+      <div style="font-size: 3rem">
+        <a target="_blank" class="text-dark p-3" href="<%=post['Stephen Reid In Dialogue URL']%>"><i class="fab fa-facebook"></i></a>
+        <a target="_blank" class="text-dark p-3" href="<%=post['Twitter URL']%>"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
 
   </div>
 </div>
