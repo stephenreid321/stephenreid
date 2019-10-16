@@ -11,7 +11,7 @@ json = JSON.parse(result.body)
 
     <%= partial :post, :object => post %>
 
-    <a href="<%=json['url']%>" class="text-dark d-block text-center my-5" style="text-decoration: none">
+    <a href="<%=json['url']%>" target="_blank" class="text-dark d-block text-center my-5" style="text-decoration: none">
       <p>Read the full article on</p>
       <p>
         <img style="max-height: 50px" src="<%= json['links']['icon'].first['href'] %>">
@@ -25,7 +25,7 @@ json = JSON.parse(result.body)
 
 
     <div class="text-center">
-      <h2>Discuss this post</h2>
+      <h2>Discussion</h2>
       <div style="font-size: 3rem">
         <a target="_blank" class="text-dark p-3" href="<%=post['Stephen Reid In Dialogue URL']%>"><i class="fab fa-facebook"></i></a>
         <a target="_blank" class="text-dark p-3" href="<%=post['Twitter URL']%>"><i class="fab fa-twitter"></i></a>
