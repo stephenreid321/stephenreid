@@ -1,9 +1,7 @@
 
 <%
 post = Post.find(params[:id]) 
-agent = Mechanize.new
-result = agent.get("https://iframe.ly/api/iframely?url=#{post['Link']}&api_key=d17340ff4312936660549e")
-json = JSON.parse(result.body)
+json = JSON.parse(post['Iframely'])
 %>
 
 <div class="row align-items-center">
