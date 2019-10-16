@@ -1,60 +1,57 @@
-<div class="row justify-content-center">   
-  <div class="col-md-9">
-    <div class="row align-items-top justify-content-center">   
-      <div class="col-9 col-sm-6 col-md-4 text-center py-3 px-3 py-sm-3 px-sm-5">
+<div class="row my-5">   
+  <div class="col-md-3">
+    <div class="row justify-content-center">   
+      <div class="col-9 col-sm-12 mb-3 mb-sm-0 text-center">
         <a href="https://facebook.com/stephenreid321" target="_blank"><img src="/images/me.jpg" class="rounded-circle w-100" /></a>
       </div>
     </div>
   </div>
-</div>
-
-<div class="row justify-content-center">
   <div class="col-md-9">
-    <p class="lead text-center">
-      Hi! I'm Stephen Reid. I live in Totnes, Devon, UK...
-    </p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20333.93339144475!2d-3.7062682695333327!3d50.42728447589537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486ce021982f9593%3A0x895d67431611ba78!2sTotnes!5e0!3m2!1sen!2suk!4v1568382029320!5m2!1sen!2suk" width="100%" height="350" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-    <p class="mt-3 lead text-center">
-      ...half an hour from the South Devon coast, and half an hour from Dartmoor.
-    </p>    
+
     <div class="row">
-      <div class="col-sm-6 mb-3 mb-sm-0">
-        <img src="/images/soar.jpg" class="w-100" />    
-      </div>      
-      <div class="col-sm-6">
-        <img src="/images/sheepstor.jpg" class="w-100" />    
-      </div>
-    </div>
-    <p class="mt-3 text-center">
-      Visiting Totnes? You can <a target="_blank" href="https://tinyurl.com/cider-warehouse">request to stay in a room in my apartment</a>
-    </p> 
-  </div>  
-</div> 
-
-
-<div class="row justify-content-center mt-5">
-  <div class="col-auto">
-    <h2 id="affiliations" style="border: none">Current affiliations</h2>
-  </div>
-</div>
-
-<div class="row justify-content-center">   
-  <div class="col-md-9">
-    <% [1,2,3].each { |tier| %>
-      <div class="row align-items-top justify-content-center">   
+      <% [1,2,3].each { |tier| %>
         <% Affiliation.all(filter: "{Tier} = '#{tier}'", sort: { "Order" => "asc" }).each { |affiliation| %>
-          <div class="col-4 text-center py-3 px-3 py-sm-3 px-sm-5">
+          <div class="col-4 col-sm-2 mb-3 mb-sm-0 text-center">
             <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
               <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
               <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
             </a>
           </div>
         <% } %>
-      </div>
-    <% } %>
-  </div>
+      <% } %>
+    </div>
+
+  </div>  
 </div>
 
 
-<%= partial :books %>
 
+<div id="key-info" class="my-5 text-center">
+
+    <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" target="_blank" href="https://stephenreid.substack.com/"><i class="fas fa-envelope-open-text"></i> Subscribe</a>
+    <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" target="_blank" href="https://facebook.com/stephenreid321"><i class="fab fa-facebook-square"></i> Follow</a>
+    <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" target="_blank" href="https://www.facebook.com/groups/stephen.reid.in.dialogue/"><i class="fas fa-users"></i> Join the group</a>          
+    <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" target="_blank" href="https://tinyurl.com/cider-warehouse"><i class="fas fa-home"></i> Stay</a>                    
+    <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="/donate"><i class="fab fa-btc"></i> Donate</a>                              
+
+</div> 
+
+
+<h2>What I'm reading, watching & listening to</h2>
+
+
+<div class="row">
+
+  <%
+  agent = Mechanize.new
+  posts = Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { "Created at" => "desc" })
+  posts.each { |post|
+    result = agent.get("https://iframe.ly/api/iframely?url=#{post['Link']}&api_key=d17340ff4312936660549e")
+    json = JSON.parse(result.body)
+  %>
+    <div class="col-4 mb-3">
+      <%= json['html'] %>
+    </div>
+  <% } %>
+
+</div>

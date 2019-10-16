@@ -6,15 +6,71 @@
 </script>       
 
 
-<div class="row justify-content-center my-3">
-  <div class="col col-sm-auto" id="nav">
-    <%= ul_nav [    
-      ['Home', '/'],
-      ['Bio', '/bio'],
-      ['Diet', '/diet'],        
-      ['Podcast', '/podcast'],      
-      ['Tarot', '/tarot'],
-      ['Recommended products', '/products']
-      ], ul_class: 'nav nav-pills mb-2', li_class: 'nav-item', a_class: 'nav-link' %>
-  </div>
+<script>
+  $(function () {
+    var animateLetter = function (targetElement, speed) {
+      var r = 1.5
+      $(targetElement).animate(
+              {
+                'top': (Math.random() * r) - (r / 2),
+                'left': (Math.random() * r) - (r / 2)
+              },
+              {
+                duration: Math.random() * 500,
+                complete: function () {
+                  animateLetter(this);
+                }
+              }
+      );
+
+    };
+    $('#title').hover(function () {
+      // $(this).removeClass('rainbow').addClass('text-dark')
+      $('.letter').css('position', 'relative').each(function () {
+        animateLetter(this)
+      })
+    }, function () {
+      // $(this).removeClass('text-dark').addClass('rainbow')
+      $('.letter').css('position', 'static').stop()
+    })
+  });
+</script>
+
+<style>       
+  #title {
+    font-family: 'pf_stamps_prorough';
+    text-transform: none;
+    font-size: 150%;
+  }            
+  #nav .nav-item { padding-right: 1rem; }
+  #nav .nav-link.active { font-weight: bold }
+</style>      
+
+<div id="nav">
+  <nav class="navbar navbar-expand-lg navbar-light my-3">
+    <a class="navbar-brand pr-0 pr-sm-5" href="/" id="title">
+      <% name = 'stephen reid'; name.split('').each_with_index { |letter,i| %><span class="letter"
+              ><%=letter%></span><% } %>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <%= ul_nav [    
+        ['Bio', '/bio'],      
+        ['Diet', '/diet'],        
+        ['Podcast', '/podcast'],      
+        ['Books', '/books'],
+        ['Tarot', '/tarot'],
+        ['Recommended products', '/products']
+        ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link text-primary' %>   
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a>       
+        </li>
+      </ul>      
+    </div>
+  </nav>
 </div>

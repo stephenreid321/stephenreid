@@ -99,6 +99,14 @@ module ActivateApp
       erb :products
     end    
     
+    get '/books', :cache => true do
+      erb :books
+    end 
+
+
+
+    
+    
     get '/to/:slug' do
       @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
       redirect @url
@@ -126,7 +134,12 @@ module ActivateApp
     get '/substack' do
       @from = params[:from] ? Date.parse(params[:from]) : Date.today
       erb :substack
-    end    
+    end   
+           
+    
+    
+    
+    
             
     get '/ps' do
       redirect 'https://www.google.com/maps/place/The+Psychedelic+Society/@51.547382,-0.0449452,17z/data=!4m12!1m6!3m5!1s0x48761dff684f311b:0xa492a62a16335e19!2sThe+Psychedelic+Society!8m2!3d51.547382!4d-0.0427565!3m4!1s0x48761dff684f311b:0xa492a62a16335e19!8m2!3d51.547382!4d-0.0427565'
@@ -146,11 +159,7 @@ module ActivateApp
     get '/why-use-the-darknet' do #, :cache => true do
       redirect 'https://dark.fail/'
     end
-    
-    get '/books' do
-      redirect '/'
-    end
-    
+        
     get '/podcasts' do
       redirect '/podcast'
     end        
