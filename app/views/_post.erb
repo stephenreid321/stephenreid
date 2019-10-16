@@ -15,7 +15,7 @@ json = JSON.parse(post['Iframely'])
         </a>
       </h5>
       <% if json['meta']['description'] %>
-        <p class="card-text"><%= json['meta']['description'].truncate(100) %></p>
+        <p class="card-text"><%= json['meta']['description'].truncate(150) %></p>
       <% end %>
     </div>
   </div>

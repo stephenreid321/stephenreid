@@ -14,7 +14,7 @@ json = JSON.parse(post['Iframely'])
   <% else %>
     <div class="col-sm-4">
       <%= partial :post, :object => post %>
-      <a href="<%=json['url']%>" target="_blank" class="text-dark d-block text-center my-5" style="text-decoration: none">
+      <a href="<%=json['url']%>" target="_blank" class="text-dark d-block text-center mt-5" style="text-decoration: none">
         <p>Read the full article on</p>
         <p>
           <img style="max-height: 50px" src="<%= json['links']['icon'].first['href'] %>">
