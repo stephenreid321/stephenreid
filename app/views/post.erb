@@ -5,11 +5,14 @@ json = JSON.parse(post['Iframely'])
 %>
 
 <div class="row justify-content-center">
-  <div class="col-sm-4">
 
-    <% if json['links']['player'] %>
+
+  <% if json['links']['player'] %>
+    <div class="col-sm-9">
       <%= json['html'] %>
-    <% else %>
+    </div>
+  <% else %>
+    <div class="col-sm-4">
       <%= partial :post, :object => post %>
       <a href="<%=json['url']%>" target="_blank" class="text-dark d-block text-center my-5" style="text-decoration: none">
         <p>Read the full article on</p>
@@ -17,19 +20,18 @@ json = JSON.parse(post['Iframely'])
           <img style="max-height: 50px" src="<%= json['links']['icon'].first['href'] %>">
           <%= json['meta']['site'] %>
         </p>
-      </a>    
-    <% end %>
+      </a>   
+    </div>
+  <% end %>
 
-  </div>
+
 </div>
 
-
-
-    <div class="text-center">
-      <h2>Discuss</h2>
-      <div style="font-size: 3rem;">
-        <a target="_blank" class="text-dark p-3" href="<%=post['Stephen Reid In Dialogue URL']%>"><i class="fab fa-facebook"></i></a>
-        <a target="_blank" class="text-dark p-3" href="<%=post['Twitter URL']%>"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
+<div class="text-center mt-5">
+  <h2>Discuss</h2>
+  <div style="font-size: 3rem;">
+    <a target="_blank" class="text-dark p-3" href="<%=post['Stephen Reid In Dialogue URL']%>"><i class="fab fa-facebook"></i></a>
+    <a target="_blank" class="text-dark p-3" href="<%=post['Twitter URL']%>"><i class="fab fa-twitter"></i></a>
+  </div>
+</div>
 
