@@ -9,15 +9,18 @@ json = JSON.parse(result.body)
 <div class="row align-items-center">
   <div class="col-sm-4">
 
-    <%= partial :post, :object => post %>
-
-    <a href="<%=json['url']%>" target="_blank" class="text-dark d-block text-center my-5" style="text-decoration: none">
-      <p>Read the full article on</p>
-      <p>
-        <img style="max-height: 50px" src="<%= json['links']['icon'].first['href'] %>">
-        <%= json['meta']['site'] %>
-      </p>
-    </a>    
+    <% if json['links']['player'] %>
+      <%= json['html'] %>
+    <% else %>
+      <%= partial :post, :object => post %>
+      <a href="<%=json['url']%>" target="_blank" class="text-dark d-block text-center my-5" style="text-decoration: none">
+        <p>Read the full article on</p>
+        <p>
+          <img style="max-height: 50px" src="<%= json['links']['icon'].first['href'] %>">
+          <%= json['meta']['site'] %>
+        </p>
+      </a>    
+    <% end %>
 
   </div>
   <div class="col-sm-8 justify-content-center">
