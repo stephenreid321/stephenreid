@@ -1,0 +1,28 @@
+
+<%
+post = Post.find(params[:id]) 
+agent = Mechanize.new
+result = agent.get("https://iframe.ly/api/iframely?url=#{post['Link']}&api_key=d17340ff4312936660549e")
+json = JSON.parse(result.body)
+%>
+
+<div class="row">
+  <div class="col-sm-4">
+
+    <%= partial :post, :object => post %>
+
+    <a href="<%=json['url']%>" class="text-dark d-block text-center my-5" style="text-decoration: none">
+      <p>Read the full article on</p>
+      <p>
+        <img style="max-height: 50px" src="<%= json['links']['icon'].first['href'] %>">
+        <%= json['meta']['site'] %>
+      </p>
+    </a>    
+
+  </div>
+  <div class="col-sm-8">
+
+    <div class="fb-comments" data-href="<%=request.url%>"></div>
+
+  </div>
+</div>

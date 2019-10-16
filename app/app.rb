@@ -102,6 +102,10 @@ module ActivateApp
     get '/books', :cache => true do
       erb :books
     end 
+    
+    get '/posts/:id', :cache => true do
+      erb :post
+    end 
 
 
 
