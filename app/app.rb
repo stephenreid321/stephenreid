@@ -53,6 +53,7 @@ module ActivateApp
     end
 
     get '/', :cache => true do
+      expires 1.day
       erb :home
     end
     
