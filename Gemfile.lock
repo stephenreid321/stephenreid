@@ -101,6 +101,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    rss (0.2.8)
     sass (3.7.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -134,6 +135,7 @@ DEPENDENCIES
   padrino
   puma
   rake
+  rss
   sass
   sinatra (= 2.0.0)
   will_paginate!
@@ -142,4 +144,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.2
+   1.16.6

@@ -54,7 +54,28 @@ module ActivateApp
 
     get '/', :cache => true do
       expires 1.day
+      @posts = Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" })       
       erb :home
+    end
+    
+    get '/feed', :provides => :rss, :cache => true do
+      expires 1.day
+      @posts = Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" })       
+      RSS::Maker.make("atom") do |maker|
+        maker.channel.author = "Stephen Reid"
+        maker.channel.updated = Time.now.to_s
+        maker.channel.about = "http://stephenreid.net"
+        maker.channel.title = "Stephen Reid"
+
+        @posts.each { |post|
+          maker.items.new_item do |item|
+            item.link = post['Link']
+            item.title = post['Title']
+            item.description = post['Body']
+            item.updated = post['Created at']
+          end
+        }
+      end.to_s            
     end
     
     get '/bio', :cache => true do
