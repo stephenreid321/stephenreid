@@ -126,6 +126,13 @@ module ActivateApp
     end 
     
     get '/posts/:id', :cache => true do
+      @post = Post.find(params[:id]) 
+      @json = JSON.parse(@post['Iframely'])
+      @title = @post['Title']
+      @og_desc = @post['Body']
+      if @json['links'] && @json['links']['thumbnail']
+        @og_image = @json['links']['thumbnail'].first['href']
+      end
       erb :post
     end 
 
