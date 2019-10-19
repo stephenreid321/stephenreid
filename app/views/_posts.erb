@@ -13,13 +13,17 @@
 
 <div class="row">
 
-  <%  
-  @posts.each { |post|
-    next if post['Iframely'].include?('"status": 404')
-  %>
-    <div class="col-md-4 mb-3">
-      <%= partial :post, :object => post %>
-    </div>
-  <% } %>
-
+  <% if @posts.empty? %>
+    <em>No results</em>
+  <% else %>
+    <%  
+    @posts.each { |post|
+      next if post['Iframely'].include?('"status": 404')
+    %>
+      <div class="col-md-4 mb-3">
+        <%= partial :post, :object => post %>
+      </div>
+    <% } %>
+  <% end %>
+    
 </div>
