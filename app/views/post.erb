@@ -8,25 +8,19 @@
   <% else %>
     <div class="col-sm-4">
       <%= partial :post, :object => @post %>
-      <a href="<%=@json['url']%>" target="_blank" class="text-dark d-block text-center mt-5" style="text-decoration: none">
-        <p>Read the full article on</p>
-        <p>
-          <% if @json['links']['icon'] %>
-            <img style="max-height: 50px" src="<%= @json['links']['icon'].first['href'] %>">
-          <% end %>
-          <%= @json['meta']['site'] %>
-        </p>
-      </a>   
     </div>
   <% end %>
 
 </div>
 
 <div class="text-center mt-5">
-  <h2>Discuss</h2>
-  <div style="font-size: 3rem;">
-    <a target="_blank" class="text-dark p-3" href="<%=@post['Stephen Reid In Dialogue URL']%>"><i class="fab fa-facebook"></i></a>
-    <a target="_blank" class="text-dark p-3" href="<%=@post['Twitter URL']%>"><i class="fab fa-twitter"></i></a>
-  </div>
+  <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=@json['url']%>">
+    <i class="fas fa-book-open"></i> Read the full article 
+  </a>   
+  <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=@post['Stephen Reid In Dialogue URL']%>">
+    <i class="fab fa-facebook"></i> Discuss on Facebook
+  </a>
+  <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=@post['Twitter URL']%>">
+    <i class="fab fa-twitter"></i> Discuss on Twitter
+  </a>        
 </div>
-

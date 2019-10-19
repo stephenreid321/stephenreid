@@ -15,8 +15,39 @@ json = JSON.parse(post['Iframely'])
         </a>
       </h5>
       <% if json['meta']['description'] %>
-        <p class="card-text"><%= json['meta']['description'].truncate(150) %></p>
+        <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
       <% end %>
+      <div class="row justify-content-between">
+        <div class="col">
+          <p class="m-0">
+            <small>
+              <a class="text-muted" style="text-decoration: none" href="<%=post['Link']%>" target="_blank">
+                <% if json['links']['icon'] %>
+                  <img style="max-height: 20px" src="<%= json['links']['icon'].first['href'] %>">
+                <% end %>
+                <% if json['meta']['site'] %>
+                  <% case json['meta']['site']; when 'the Guardian'; %>
+                    The Guardian
+                  <% else %>
+                    <%= json['meta']['site'].gsub('_', ' ') %>
+                  <% end %>
+                <% else %>
+                  <%= URI(post['Link']).host.gsub('www.','') %>
+                <% end %>
+              </a>
+            </small>
+          </p>            
+        </div>          
+        <div class="col-auto showOnHover d-none">
+          <a target="_blank" class="text-dark" style="text-decoration: none" href="<%=post['Stephen Reid In Dialogue URL']%>">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <span style="opacity: 0.3">·</span>
+          <a target="_blank" class="text-dark" style="text-decoration: none" href="<%=post['Twitter URL']%>">
+            <i class="fab fa-twitter"></i>
+          </a>                    
+        </div>          
+      </div>
     </div>
   </div>
 <% else %>
