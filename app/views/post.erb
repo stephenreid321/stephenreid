@@ -11,7 +11,9 @@
       <a href="<%=@json['url']%>" target="_blank" class="text-dark d-block text-center mt-5" style="text-decoration: none">
         <p>Read the full article on</p>
         <p>
-          <img style="max-height: 50px" src="<%= @json['links']['icon'].first['href'] %>">
+          <% if @json['links']['icon'] %>
+            <img style="max-height: 50px" src="<%= @json['links']['icon'].first['href'] %>">
+          <% end %>
           <%= @json['meta']['site'] %>
         </p>
       </a>   
