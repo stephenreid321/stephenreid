@@ -59,6 +59,7 @@ module ActivateApp
     end
     
     get '/search' do
+      @title = params[:q]
       if params[:q]
         @posts = Post.all(filter: "AND(
         OR(
@@ -95,14 +96,17 @@ module ActivateApp
     end
     
     get '/bio', :cache => true do
+      @title = 'Biography'
       erb :bio
     end
     
     get '/donate', :cache => true do
+      @title = 'Donate'
       erb :donate
     end
     
     get '/training', :cache => true do
+      @title = 'Training'
       erb :training
     end    
 
@@ -138,6 +142,7 @@ module ActivateApp
     end    
     
     get '/books', :cache => true do
+      @title = 'Books'
       erb :books
     end 
     
