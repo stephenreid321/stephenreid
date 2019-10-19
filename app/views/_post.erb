@@ -27,9 +27,11 @@ json = JSON.parse(post['Iframely'])
                 <% end %>
                 <% if json['meta']['site'] %>
                   <% case json['meta']['site']; when 'the Guardian'; %>
-                    The Guardian
+                    The Guardian                    
+                  <% when 'BBC_Future' %>
+                    BBC Future
                   <% else %>
-                    <%= json['meta']['site'].gsub('_', ' ') %>
+                    <%= json['meta']['site'] %>
                   <% end %>
                 <% else %>
                   <%= URI(post['Link']).host.gsub('www.','') %>
