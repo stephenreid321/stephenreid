@@ -58,6 +58,22 @@ module ActivateApp
       erb :home
     end
     
+    get '/search' do
+      if params[:q]
+        @posts = Post.all(filter: "AND(
+        OR(
+          FIND(LOWER('#{params[:q]}'), LOWER({Title})) > 0,
+          FIND(LOWER('#{params[:q]}'), LOWER({Body})) > 0,
+          FIND(LOWER('#{params[:q]}'), LOWER({Iframely})) > 0
+        ),
+        {Twitter URL} != '')
+          ", sort: { "Created at" => "desc" })       
+      else
+        @posts = Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" })       
+      end
+      erb :search            
+    end
+    
     get '/feed', :provides => :rss, :cache => true do
       expires 3.hours.to_i
       @posts = Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" })       
