@@ -20,10 +20,11 @@
   <% else %>
     <%  
     @posts.each { |post|
+      json = JSON.parse(post['Iframely'])
       next unless json['links'] && json['links']['thumbnail']
     %>
       <div class="col-sm-4 mb-3">
-        <%= partial :post, :object => post %>
+        <%= partial :post, :locals => {:post => post, :json => json} %>
       </div>
     <% } %>
   <% end %>
