@@ -51,6 +51,10 @@ module ActivateApp
     not_found do
       erb :not_found, :layout => :application
     end
+    
+    get '/empty' do
+      erb :empty
+    end
 
     get '/', :cache => true do
       expires 3.hours.to_i

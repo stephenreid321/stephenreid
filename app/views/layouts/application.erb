@@ -11,7 +11,8 @@
       'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
       'select2/3.5.2' => 'select2.min.js select2.min.css',
       'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',      
-      'Chart.js/2.7.0' => 'Chart.bundle.min.js'
+      'Chart.js/2.7.0' => 'Chart.bundle.min.js',
+      'js-cookie/2.2.1' => 'js.cookie.min.js'
       }.each { |k,v| %>    
       <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
         <% case f.split('.').last.to_sym; when :js %>
@@ -102,10 +103,10 @@
     <script>
       $(function () {
         if ($(window).width() > 992)
-          if (!document.cookie) {
+          if (!Cookies.get('shownModal')) {
             setTimeout(function () {
               $('#modal').modal('show')
-              document.cookie = "shownModal=true";
+              Cookies.set('shownModal', true)
             }, 10000)
           }
       })
