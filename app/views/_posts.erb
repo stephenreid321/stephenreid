@@ -2,7 +2,7 @@
   <div class="col-sm-6">
     <% form_tag '/search', :method => :get do %>
       <div class="input-group input-group-lg mb-3">
-        <%= search_field_tag :q, :class => 'form-control', :value => params[:q] %>
+        <%= search_field_tag :q, :class => 'form-control', :value => params[:q], :placeholder => "Search content I've shared" %>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
         </div>

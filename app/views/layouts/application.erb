@@ -67,9 +67,9 @@
     <div class="container">
 
       <%= partial :alert %>  
-         
+
       <%= partial :nav %>
-      
+
       <div>
         <%= yield %>
       </div>
@@ -99,6 +99,42 @@
       </div>
     </div>
 
+    <% if !session[:shown_modal]; session[:shown_modal] = true %>
+      <script>
+        $(function () {
+          if ($(window).width() > 992)
+            setTimeout(function () {
+              $('#modal').modal('show')
+            }, 10000)
+        })
+      </script>
+      <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Let's stay in touch!</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>          
+            </div>
+            <div class="modal-body">
+              <p class="lead">
+                Join 1,200+ others receiving my monthly newsletter:
+              </p>  
+              <p class="text-center">
+                <a class="btn btn-lg btn-primary" target="_blank" href="https://stephenreid.substack.com/">Subscribe on Substack</a>
+              </p>
+              <p>
+                You can also
+                <a target="_blank" href="https://facebook.com/stephenreid321">follow me on Facebook</a>,
+                <a target="_blank" href="https://t.me/stephenreid">join the Telegram channel</a>
+                and
+                <a target="_blank" href="https://www.facebook.com/groups/stephen.reid.in.dialogue/">join the Facebook group</a>.
+              </p>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->  
+
+    <% end %>
 
   </body>
 </html>
