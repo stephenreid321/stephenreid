@@ -156,10 +156,18 @@ module ActivateApp
       end
       erb :post
     end 
-
-
-
     
+    get '/posts/:id/iframely' do
+      @post = Post.find(params[:id])
+      agent = Mechanize.new
+      result = agent.get("https://iframe.ly/api/iframely?url=#{@post['Link'].split('#').first}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+      @post['Iframely'] = result.body.force_encoding("UTF-8")
+      @post.save
+      redirect "/posts/#{params[:id]}"
+    end
+
+
+
     
     get '/to/:slug' do
       @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
