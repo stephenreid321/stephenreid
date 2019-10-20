@@ -20,7 +20,7 @@
   <% else %>
     <%  
     @posts.each { |post|
-      next if post['Iframely'].include?('"status": 404')
+      next unless json['links'] && json['links']['thumbnail']
     %>
       <div class="col-sm-4 mb-3">
         <%= partial :post, :object => post %>
