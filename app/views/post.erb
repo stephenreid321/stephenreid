@@ -14,9 +14,11 @@
 </div>
 
 <div class="text-center mt-5">
-  <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=@json['url']%>">
-    <i class="fas fa-book-open"></i> Read the full article 
-  </a>   
+  <% unless @json['links']['player'] %>
+    <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=@json['url']%>">
+      <i class="fas fa-book-open"></i> Read the full article 
+    </a>   
+  <% end %>
   <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=@post['Stephen Reid In Dialogue URL']%>">
     <i class="fab fa-facebook"></i> Discuss on Facebook
   </a>
