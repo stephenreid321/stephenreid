@@ -54,7 +54,11 @@ module ActivateApp
 
     get '/', :cache => true do
       expires 3.hours.to_i
-      @posts = Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" })       
+      @posts = Post.all(filter: "AND(
+        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
+        FIND('\"url\": ', {Iframely}) > 0,
+        {Twitter URL} != ''
+      )", sort: { "Created at" => "desc" })       
       erb :home
     end
     
