@@ -74,14 +74,22 @@ module ActivateApp
         {Twitter URL} != '')
           ", sort: { "Created at" => "desc" })       
       else
-        @posts = Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" })       
+        @posts = Post.all(filter: "AND(
+        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
+        FIND('\"url\": ', {Iframely}) > 0,
+        {Twitter URL} != ''
+      )", sort: { "Created at" => "desc" })       
       end
       erb :search            
     end
     
     get '/feed', :provides => :rss, :cache => true do
       expires 3.hours.to_i
-      @posts = Post.all(filter: "AND(IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'), {Twitter URL} != '')", sort: { "Created at" => "desc" })       
+      @posts = Post.all(filter: "AND(
+        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
+        FIND('\"url\": ', {Iframely}) > 0,
+        {Twitter URL} != ''
+      )", sort: { "Created at" => "desc" })       
       RSS::Maker.make("atom") do |maker|
         maker.channel.author = "Stephen Reid"
         maker.channel.updated = Time.now.to_s
