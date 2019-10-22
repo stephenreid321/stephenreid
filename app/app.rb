@@ -53,7 +53,7 @@ module ActivateApp
     end
 
     get '/', :cache => true do
-      expires 3.hours.to_i
+      expires 1.hour.to_i
       @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0,
@@ -84,7 +84,7 @@ module ActivateApp
     end
     
     get '/feed', :provides => :rss, :cache => true do
-      expires 3.hours.to_i
+      expires 1.hour.to_i
       @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0,
