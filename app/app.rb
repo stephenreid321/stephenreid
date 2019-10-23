@@ -39,7 +39,7 @@ module ActivateApp
         redirect request.path
       end      
       fix_params!
-      @og_desc = 'Social entrepreneur, activist and public speaker'
+      @og_desc = 'Transdisciplinary thinker, cultural changemaker and metamodern mystic'
       @og_image = "http://#{ENV['DOMAIN']}/images/link4.png"
     end
 
@@ -58,7 +58,7 @@ module ActivateApp
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0,
         {Twitter URL} != ''
-      )", sort: { "Created at" => "desc" })       
+      )", sort: { "Created at" => "desc" }, paginate: false)       
       erb :home
     end
     
@@ -78,7 +78,7 @@ module ActivateApp
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0,
         {Twitter URL} != ''
-      )", sort: { "Created at" => "desc" })       
+      )", sort: { "Created at" => "desc" }, paginate: false)    
       end
       erb :search            
     end
@@ -89,7 +89,7 @@ module ActivateApp
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0,
         {Twitter URL} != ''
-      )", sort: { "Created at" => "desc" })       
+      )", sort: { "Created at" => "desc" }, paginate: false)     
       RSS::Maker.make("atom") do |maker|
         maker.channel.author = "Stephen Reid"
         maker.channel.updated = Time.now.to_s
