@@ -202,7 +202,7 @@ module ActivateApp
     end      
         
     get '/link' do
-      redirect Fragment.all(filter: "{Name} = 'link'").first['Body']
+      redirect 'http://stephenreid.net'
     end
     
     get '/substack' do
