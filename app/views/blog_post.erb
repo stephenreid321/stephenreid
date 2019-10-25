@@ -4,14 +4,16 @@
     <%= partial :blog_post, :object => @blog_post %>
 
     <% if @blog_post.post; post = @blog_post.post %>
-      <div class="text-center mt-5">
-        <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=post['Facebook URL'] || post['Stephen Reid In Dialogue URL']%>">
-          <i class="fab fa-facebook"></i> Discuss on Facebook
-        </a>
-        <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=post['Twitter URL']%>">
-          <i class="fab fa-twitter"></i> Discuss on Twitter
-        </a>   
-      </div>
+      <% if post['Twitter URL'] %>
+        <div class="text-center mt-5">
+          <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=post['Facebook URL'] || post['Stephen Reid In Dialogue URL']%>">
+            <i class="fab fa-facebook"></i> Discuss on Facebook
+          </a>
+          <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=post['Twitter URL']%>">
+            <i class="fab fa-twitter"></i> Discuss on Twitter
+          </a>   
+        </div>
+      <% end %>
     <% end %>
 
   </div>
