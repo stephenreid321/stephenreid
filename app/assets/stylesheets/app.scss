@@ -17,3 +17,6 @@ h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.blog_post img { max-width: 100% }
+.blog_post h2 { display: block; border: none }

@@ -39,6 +39,7 @@ module ActivateApp
         redirect request.path
       end      
       fix_params!
+      Time.zone = 'London'
       @og_desc = 'Transdisciplinary thinker, cultural changemaker and metamodern mystic'
       @og_image = "http://#{ENV['DOMAIN']}/images/link4.png"
     end
@@ -177,7 +178,36 @@ module ActivateApp
       @post.save
       redirect "/posts/#{params[:id]}"
     end
+    
+    get '/blog', :cache => true do
+      @blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
+      erb :blog
+    end   
+    
+    get '/blog/feed', :provides => :rss, :cache => true do
+      @blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
+      RSS::Maker.make("atom") do |maker|
+        maker.channel.author = "Stephen Reid"
+        maker.channel.updated = Time.now.to_s
+        maker.channel.about = "http://stephenreid.net"
+        maker.channel.title = "Stephen Reid"
 
+        @blog_posts.each { |blog_post|
+          maker.items.new_item do |item|
+            item.link = "https://#{ENV['DOMAIN']}/blog/#{blog_post['Slug']}"
+            item.title = blog_post['Title']
+            item.description = blog_post['Body']
+            item.updated = blog_post['Published at']
+          end
+        }
+      end.to_s            
+    end    
+
+    get '/blog/:slug', :cache => true do
+      @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first
+      erb :blog_post
+    end    
+    
 
 
     

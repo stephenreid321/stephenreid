@@ -1,0 +1,8 @@
+
+<div class="row justify-content-center">
+  <div class="col-sm-9">
+    <% @blog_posts.each { |blog_post| %>
+      <%= partial :blog_post, :object => blog_post %>
+    <% } %>
+  </div>
+</div>
