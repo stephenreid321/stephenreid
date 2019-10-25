@@ -129,13 +129,12 @@
 
     <script>
       $(function () {
-        if ($(window).width() > 992)
-          if (!Cookies.get('shownModal')) {
-            setTimeout(function () {
-              $('#modal').modal('show')
-              Cookies.set('shownModal', true)
-            }, 10000)
-          }
+        if (!Cookies.get('shownModal')) {
+          setTimeout(function () {
+            $('#modal').modal('show')
+            Cookies.set('shownModal', true)
+          }, 10000)
+        }
       })
     </script>
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
@@ -149,9 +148,9 @@
             <p class="lead">
               Join 1,200+ others receiving my monthly newsletter:
             </p>  
-            <p class="text-center">
-              <a class="btn btn-lg btn-primary" target="_blank" href="https://stephenreid.substack.com/">Subscribe on Substack</a>
-            </p>
+
+            <iframe width="100%" height="200" src="https://stephenreid.substack.com/embed" frameborder="0" scrolling="no"></iframe>
+
             <p>
               You can also
               <a target="_blank" href="https://facebook.com/stephenreid.net">follow me on Facebook</a>,
