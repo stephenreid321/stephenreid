@@ -192,12 +192,11 @@ module ActivateApp
         maker.channel.about = "http://stephenreid.net"
         maker.channel.title = "Stephen Reid"
 
-        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true);  
         @blog_posts.each { |blog_post|
           maker.items.new_item do |item|
             item.link = "https://#{ENV['DOMAIN']}/blog/#{blog_post['Slug']}"
             item.title = blog_post['Title']
-            item.description = markdown.render(blog_post['Body'])
+            item.description = blog_post['Summary']
             item.updated = blog_post['Published at']
           end
         }
