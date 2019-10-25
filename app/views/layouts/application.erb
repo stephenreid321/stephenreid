@@ -95,16 +95,15 @@
 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0&appId=1498399346894704&autoLogAppEvents=1"></script>
 
-    <div class="container">
-
-      <%= partial :alert %>  
-
-      <%= partial :nav %>
-
-      <div>
-        <%= yield %>
+    <div class="mb-4 shadow-sm">
+      <div class="container">
+        <%= partial :nav %>
       </div>
+    </div>
 
+    <div class="container">
+      <%= partial :alert %>       
+      <%= yield %>
     </div> 
 
 

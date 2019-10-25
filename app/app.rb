@@ -205,6 +205,9 @@ module ActivateApp
 
     get '/blog/:slug', :cache => true do
       @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first
+      @title = @blog_post['Title']
+      @og_desc = @blog_post['Summary']
+      @og_image = @blog_post['Attachments'].first['url']
       erb :blog_post
     end    
     
