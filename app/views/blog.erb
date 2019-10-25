@@ -1,23 +1,14 @@
 
 <div class="row justify-content-center">
-  <div class="col-sm-9">
+  <div class="col-sm-8">
     <% @blog_posts.each { |blog_post| %>
       <div class="card mb-4 shadow-sm">          
         <div class="card-body">
           <a class="d-block text-dark" href="/blog/<%=blog_post['Slug']%>" style="text-decoration: none">
-            <div class="mb-3" style="height: 250px; background-image: url(<%=blog_post['Attachments'].first['url']%>); background-size: cover; background-position: center"></div>                
-            <div class="row justify-content-sm-between">
-              <div class="col-12 col-sm">                
-                <h1><%=blog_post['Title']%></h1>
-              </div>
-              <div class="col-12 col-sm-auto">
-                
-              </div>
-            
-            </div>
             <p class="text-muted"><%=Time.zone.parse(blog_post['Published at']).to_date.to_s(:blog)%></p>          
+            <div class="mb-3" style="height: 250px; background-image: url(<%=blog_post['Attachments'].first['url']%>); background-size: cover; background-position: center"></div>                              
+            <h1><%=blog_post['Title']%></h1>
             <p class="lead text-muted mb-0"><%=blog_post['Summary']%></p>
-            
           </a>
         </div>
       </div>
