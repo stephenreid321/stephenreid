@@ -18,7 +18,7 @@ h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
   -webkit-text-fill-color: transparent;
 }
 
-.blog_post p { font-size: 1.15rem; line-height: 1.8rem }
+.blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
 .blog_post p strong { font-weight: 700 }
 .blog_post img { max-width: 100% }
 .blog_post h2 { display: block; border: none }
