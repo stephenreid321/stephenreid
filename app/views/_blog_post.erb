@@ -2,7 +2,13 @@
   <h1><a class="text-dark" href="/blog/<%=blog_post['Slug']%>"><%=blog_post['Title']%></a></h1>
   <p class="text-muted"><%=Time.zone.parse(blog_post['Published at']).to_date.to_s(:blog)%></p>
 
-  <img class="mb-3" style="max-width: 100%" src="<%=blog_post['Attachments'].first['url']%>" />
+  <% if blog_post['Embed'] %>
+    <div class="mb-3">
+      <%= blog_post['Embed'] %>
+    </div>
+  <% else %>
+    <img class="mb-3" style="max-width: 100%" src="<%=blog_post['Attachments'].first['url']%>" />
+  <% end %>
 
   <%=
   markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true);
