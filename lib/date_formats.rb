@@ -7,5 +7,6 @@ Time::DATE_FORMATS.merge!(
 )
 
 Date::DATE_FORMATS.merge!(
-  :default => lambda { |date| date.strftime("%a #{date.day.ordinalize} %b %Y") }
+  :default => lambda { |date| date.strftime("%a #{date.day.ordinalize} %b %Y") },
+  :blog => lambda { |date| date.strftime("%b #{date.day} #{date.year == Date.today.year ? '' : '%Y'}") }
 )
