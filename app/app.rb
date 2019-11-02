@@ -160,18 +160,18 @@ module ActivateApp
     end 
     
     get '/posts/:id', :cache => true do
-      @post = Post.find(params[:id]) 
+      @post = begin; Post.find(params[:id]); rescue; not_found; end
       @json = JSON.parse(@post['Iframely'])
       @title = @post['Title']
       @og_desc = @post['Body']
       if @json['links'] && @json['links']['thumbnail']
         @og_image = @json['links']['thumbnail'].first['href']
       end
-      erb :post
+      erb :post    
     end 
     
     get '/posts/:id/iframely' do
-      @post = Post.find(params[:id])
+      @post = begin; Post.find(params[:id]); rescue; not_found; end
       agent = Mechanize.new
       result = agent.get("https://iframe.ly/api/iframely?url=#{@post['Link'].split('#').first}&api_key=#{ENV['IFRAMELY_API_KEY']}")
       @post['Iframely'] = result.body.force_encoding("UTF-8")
