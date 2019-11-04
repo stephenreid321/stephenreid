@@ -2,17 +2,19 @@
 <html lang="en">
   <head>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151445443-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
+    <% if Padrino.env == :production %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151445443-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-      gtag('config', 'UA-151445443-1');
-    </script>
+        gtag('config', 'UA-151445443-1');
+      </script>
+    <% end %>
 
 
     <meta charset="utf-8">
@@ -28,18 +30,18 @@
       'Chart.js/2.7.0' => 'Chart.bundle.min.js',
       'js-cookie/2.2.1' => 'js.cookie.min.js'
       }.each { |k,v| %>    
-  <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
+      <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
         <% case f.split('.').last.to_sym; when :js %>
           <script src="<%=u%>"></script>      
         <% when :css %>
           <link rel="stylesheet" href="<%=u%>" />
         <% end %>
-  <% } %>
+      <% } %>
     <% } %>
 
     <% [
       '/stylesheets/share.css',
-  "/stylesheets/app.css?#{Time.now.to_i}",
+      "/stylesheets/app.css?#{Time.now.to_i}",
       ].each { |f| %> 
       <link rel="stylesheet" href="<%=f%>" />    
     <% } %>
@@ -51,12 +53,12 @@
       '//use.fontawesome.com/releases/v5.9.0/js/all.js',
       '//cdn.rawgit.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
       "//cdn.rawgit.com/wordsandwriting/activate-tools/7a73525b76c8234a4803e3196b4403ec6fd6ded7/js/textboxio/textboxio.js",
-  "/javascripts/app.js?#{Time.now.to_i}"
+      "/javascripts/app.js?#{Time.now.to_i}"
       ].each { |f| %>
       <script src="<%=f%>"></script>
     <% } %>  
 
-<%= favicon_tag 's.png' %>
+    <%= favicon_tag 's.png' %>
     <title><%=if @title; "#{@title} · Stephen Reid"; else; "Stephen Reid"; end %></title>
     <meta name="description" content="<%=@og_desc%>">
     <meta property="og:image" content="<%=@og_image%>" />
@@ -110,12 +112,12 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0&appId=1498399346894704&autoLogAppEvents=1"></script>
 
     <div class="mb-4 shadow-sm">      
-<%= partial :nav %>      
+      <%= partial :nav %>      
     </div>
 
     <div class="container">
-<%= partial :alert %>       
-<%= yield %>
+      <%= partial :alert %>       
+      <%= yield %>
     </div> 
 
 
@@ -129,7 +131,7 @@
         </div>
 
         <div class="row justify-content-center">        
-<%= partial :social_networks %>        
+          <%= partial :social_networks %>        
         </div>   
 
         <div class="text-center mt-3">
