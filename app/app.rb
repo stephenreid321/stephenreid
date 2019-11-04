@@ -118,11 +118,6 @@ module ActivateApp
       erb :donate
     end
     
-    get '/training', :cache => true do
-      @title = 'Training'
-      erb :training
-    end    
-
     get '/podcast', :cache => true do
       @title = 'Podcast'
       erb :podcast
@@ -258,6 +253,9 @@ module ActivateApp
     
     
     
+    get '/training' do
+      redirect '/bio'
+    end        
     
     get '/darknet' do #, :cache => true do
       redirect 'https://dark.fail/'
@@ -270,11 +268,7 @@ module ActivateApp
     get '/podcasts' do
       redirect '/podcast'
     end        
-        
-    get '/bio' do
-      redirect '/'
-    end
-    
+            
     get '/books-videos' do
       redirect '/'
     end    
