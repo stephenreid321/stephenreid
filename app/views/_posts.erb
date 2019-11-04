@@ -1,12 +1,20 @@
 <div class="my-5 row justify-content-center">
   <div class="col-sm-6">
     <% form_tag '/search', :method => :get do %>
-      <div class="input-group input-group-lg mb-3">
+      <div class="input-group input-group-lg">
         <%= search_field_tag :q, :class => 'form-control', :value => params[:q], :placeholder => "Search content I've shared" %>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
         </div>
       </div>
+      <p class="text-center">
+        <small>
+          Examples:
+          <% ['spotify.com', 'youtube.com', 'DAO', 'Extinction Rebellion', 'psychedelics'].each { |term| %>
+            <a class="text-dark" style="text-decoration: none; border-bottom: 1px dotted" href="/search?q=<%=term%>"><%=term%></a>
+          <% } %>
+        </small>
+      </p>
     <% end %>
   </div>
 </div>
