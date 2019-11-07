@@ -10,8 +10,5 @@
     <img class="mb-3" style="max-width: 100%" src="<%=blog_post['Attachments'].first['url']%>" />
   <% end %>
 
-  <%=
-  markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true);
-  markdown.render(blog_post['Body'])
-%>
+  <%= md(blog_post['Body']) %>
 </div>
