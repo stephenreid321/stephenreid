@@ -246,6 +246,7 @@ module ActivateApp
         if json['meta']
           post_words += "#{json['meta']['title']} " if json['meta']['title']
           post_words += "#{json['meta']['description']} " if json['meta']['description']
+          post_words += "#{json['meta']['category']} " if json['meta']['category']
           post_words += "#{json['meta']['keywords'].split(',').join(' ')} " if json['meta']['keywords']
         end
         words += post_words.gsub('. ','' ).gsub(', ',' ').gsub('! ',' ').split(' ').uniq.join(' ')
