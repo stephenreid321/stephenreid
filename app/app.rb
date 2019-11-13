@@ -239,7 +239,16 @@ module ActivateApp
       words = ''
       hosts = []
       Post.all.each { |post|
-        words += "#{post['Title']} #{post['Body'] if post['Body'] && !post['Body'].include?('use cookies') && !post['Body'].include?('use of cookies')} "
+        post_words = ''
+        json = JSON.parse(post['Iframely'])
+        post_words += "#{post['Title']} "
+        post_words += "#{post['Body']} " if post['Body'] && !post['Body'].include?('use cookies') && !post['Body'].include?('use of cookies')
+        if json['meta']
+          post_words += "#{json['meta']['title']} " if json['meta']['title']
+          post_words += "#{json['meta']['description']} " if json['meta']['description']
+          post_words += "#{json['meta']['keywords'].split(',').join(' ')} " if json['meta']['keywords']
+        end
+        words += post_words.gsub('. ','' ).gsub(', ',' ').gsub('! ',' ').split(' ').uniq.join(' ')
         hosts << URI(post['Link']).host.gsub('www.','')                
       }      
       @frequency = words.scan(/\w+/).reduce(Hash.new(0)){|res,w| res[w.downcase]+=1;res}      
