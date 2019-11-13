@@ -63,7 +63,7 @@ class Post < Airrecord::Table
     facebook_add.uniq.each { |x| facebook = "#{facebook} #{x}" }
     
     post.terms = (additions + replacements).uniq            
-    post['Twitter text']= twitter
+    post['Twitter text'] = twitter
     post['Facebook text'] = facebook
     post.save             
   end
