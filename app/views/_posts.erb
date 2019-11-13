@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<%= cache("tags", :expires => 1.hour.to_i) do; partial :tags; end %>
+<%= Padrino.env == :production ? cp('tags') : partial(:tags) %>
 
 <div class="row">
 
