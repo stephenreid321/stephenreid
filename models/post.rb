@@ -11,7 +11,7 @@ class Post < Airrecord::Table
     json = JSON.parse(post['Iframely'])
     twitter = post['Title']
     facebook = post['Title']            
-    replacements, additions = [], []
+    replacements, additions = [], [] 
       
     Term.all(sort: { "Priority" => "desc" }).each { |term|                  
       i = term['Case sensitive'] ? false : true
