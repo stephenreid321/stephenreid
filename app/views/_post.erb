@@ -13,9 +13,9 @@
       <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
     <% end %>
     <p>        
-      <% post.terms.each { |term| %>
+      <% post.terms.each { |term| unless term['Hidden'] %>
         <a class="badge badge-primary" href="/search?term=<%=term['Name']%>"><%=term['Name']%></a>
-      <% } %>
+      <% end } %>
       <% if post.organisation %>
         <a class="badge badge-primary" href="/search?organisation=<%=post.organisation['Name']%>">@<%=post.organisation['Name']%></a>
       <% end %>  
