@@ -1,7 +1,0 @@
-<% @frequency.sort_by { |w,f| -f }.each { |w,f| if w.length > 5 && f > (x=10) && !@stops.include?(w) %>
-    <a href="/search?q=<%=w%>" class="text-dark" title="<%= f %>" style="font-size: <%=f.to_f/x%>em">  <%= w %> </a>
-  <% end } %>
-
-<% @host_frequency.sort_by { |h,f| -f }.each { |h,f| if f > (x=25) %>
-  <a href="/search?q=<%=h%>" class="text-dark" title="<%= f %>" style="font-size: <%=f.to_f/x%>em">  <%= h %> </a>
-<% end } %>

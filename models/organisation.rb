@@ -7,7 +7,9 @@ class Organisation < Airrecord::Table
   has_many :podcast_appearances, :class => 'PodcastAppearance', :column => 'Podcast appearances'
   has_many :affiliations, :class => 'Affiliation', :column => 'Affiliations'
   has_many :qualifications, :class => 'Qualification', :column => 'Qualifications'
-  has_many :speaking_engagements, :class => 'SpeakingEngagement', :column => 'Organisation'
+  has_many :speaking_engagements, :class => 'SpeakingEngagement', :column => 'Speaking engagements'
+  has_many :terms, :class => 'Term', :column => 'Terms'
+  has_many :posts, :class => 'Post', :column => 'Posts'
   
   def self.categories
     {
@@ -20,5 +22,12 @@ class Organisation < Airrecord::Table
       "Favourite shops and restaurants" => 'shops'
     }    
   end
+  
+
+  def tagify
+    organisation = self
+    posts = Post.all(filter: "FIND('#{organisation['Domain']}', {Link}) > 0", sort: { "Created at" => "desc" })
+    posts.each { |post| puts post['Title']; post.tagify }
+  end  
     
 end

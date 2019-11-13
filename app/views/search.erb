@@ -1,1 +1,11 @@
+
+
+<% if params[:term] %>
+  <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> tagged <a class="badge badge-primary" href="/search?term=<%=params[:term]%>"><%=params[:term]%></a></p>
+<% end %>
+
+<% if params[:organisation] %>
+  <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> published by <a class="badge badge-primary" href="/search?organisation=<%=params[:organisation]%>"><%=params[:organisation]%></a></p>
+  <% end %>  
+
 <%= partial :posts %>
