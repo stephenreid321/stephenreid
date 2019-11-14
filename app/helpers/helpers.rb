@@ -10,7 +10,7 @@ ActivateApp::App.helpers do
   end
   
   def cp(slug)
-    cache(slug, :expires => 1.hour.to_i) do; partial :"#{slug}"; end
+    cache(slug, :expires => 6.hours.to_i) do; partial :"#{slug}"; end
   end
          
 end
