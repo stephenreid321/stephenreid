@@ -18,4 +18,24 @@ class Term < Airrecord::Table
     posts.each { |post| puts post['Title']; post.tagify }
   end
   
+  def create_edges
+    source = self
+    TermLink.all({filter: "OR({Source} = '#{source['Name']}', {Sink}  = '#{source['Name']}')"}).each { |term_link|
+      term_link.posts = []
+      term_link.save
+    }
+    source.posts.each { |post|
+      post.terms.each { |sink|
+        if source.id != sink.id
+          if !(term_link = TermLink.all({filter: "AND({Source} = '#{source['Name']}', {Sink}  = '#{sink['Name']}')"}).first) && !(term_link = TermLink.all({filter: "AND({Source} = '#{sink['Name']}', {Sink}  = '#{source['Name']}')"}).first)
+            term_link = TermLink.create("Source" => [source.id], "Sink" => [sink.id])
+          end
+          term_link.posts = term_link.posts + [post]
+          term_link.posts = term_link.posts.uniq
+          term_link.save
+        end
+      }
+    }
+  end
+  
 end

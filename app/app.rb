@@ -55,17 +55,18 @@ module ActivateApp
 
     get '/', :cache => true do
       expires 1.hour.to_i
+      @full_network = true
       @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0,
         {Twitter URL} != ''
-      )", sort: { "Created at" => "desc" }, paginate: false)       
+      )", sort: { "Created at" => "desc" }, paginate: false)    
       erb :home
     end
     
-    get '/search' do
-      @title = params[:q]
+    get '/search' do      
       if params[:q]
+        @title = params[:q]
         @posts = Post.all(filter: "AND(
         OR(
           FIND(LOWER('#{params[:q]}'), LOWER({Title})) > 0,
@@ -75,16 +76,27 @@ module ActivateApp
         {Twitter URL} != '')
           ", sort: { "Created at" => "desc" })       
       elsif params[:term]
+        # TODO
         @posts = Post.all(filter: "AND(
         FIND(LOWER('#{params[:term]}'), LOWER({Terms})) > 0,
         {Twitter URL} != '')
-          ", sort: { "Created at" => "desc" })           
+          ", sort: { "Created at" => "desc" })
+      elsif params[:source] && params[:sink]
+        # TODO
+        @source = Term.find(params[:source])
+        @sink = Term.find(params[:sink])
+        @posts = Post.all(filter: "AND(
+        FIND(LOWER('#{@source['Name']}'), LOWER({Terms})) > 0,
+        FIND(LOWER('#{@sink['Name']}'), LOWER({Terms})) > 0,
+        {Twitter URL} != '')
+          ", sort: { "Created at" => "desc" })        
       elsif params[:organisation]
         @posts = Post.all(filter: "AND(
         {Organisation} = '#{params[:organisation]}',
         {Twitter URL} != '')
           ", sort: { "Created at" => "desc" })            
       else
+        @full_network = true
         @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0,
@@ -302,12 +314,12 @@ module ActivateApp
       @from = params[:from] ? Date.parse(params[:from]) : Date.today
       erb :substack
     end   
-           
     
     
     
     
-            
+    
+               
     get '/ps' do
       redirect 'https://www.google.com/maps/place/The+Psychedelic+Society/@51.547382,-0.0449452,17z/data=!4m12!1m6!3m5!1s0x48761dff684f311b:0xa492a62a16335e19!2sThe+Psychedelic+Society!8m2!3d51.547382!4d-0.0427565!3m4!1s0x48761dff684f311b:0xa492a62a16335e19!8m2!3d51.547382!4d-0.0427565'
     end    

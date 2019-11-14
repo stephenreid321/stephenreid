@@ -4,10 +4,14 @@
   <% if params[:term] %>
     <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> tagged <a class="badge badge-primary" href="/search?term=<%=params[:term]%>"><%=params[:term]%></a></p>
   <% end %>
+    
+  <% if params[:source] && params[:sink] %>
+    <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> tagged <a class="badge badge-primary" href="/search?source=<%=@source['Name']%>"><%=@source['Name']%></a> and <a class="badge badge-primary" href="/search?term=<%=@sink['Name']%>"><%=@sink['Name']%></a></p>
+  <% end %>    
 
   <% if params[:organisation] %>
     <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> published by <a class="badge badge-primary" href="/search?organisation=<%=params[:organisation]%>"><%=params[:organisation]%></a></p>
     <% end %>  
 
-  <%= partial :posts %>
+  <%= partial :search %>
 </div>
