@@ -76,18 +76,16 @@ module ActivateApp
         {Twitter URL} != '')
           ", sort: { "Created at" => "desc" })       
       elsif params[:term]
-        # TODO
         @posts = Post.all(filter: "AND(
-        FIND(LOWER('#{params[:term]}'), LOWER({Terms})) > 0,
+        FIND(', #{params[:term]},', {Terms joined}) > 0,
         {Twitter URL} != '')
           ", sort: { "Created at" => "desc" })
       elsif params[:source] && params[:sink]
-        # TODO
         @source = Term.find(params[:source])
         @sink = Term.find(params[:sink])
         @posts = Post.all(filter: "AND(
-        FIND(LOWER('#{@source['Name']}'), LOWER({Terms})) > 0,
-        FIND(LOWER('#{@sink['Name']}'), LOWER({Terms})) > 0,
+        FIND(', #{@source['Name']},'), {Terms joined}) > 0,
+        FIND(', #{@sink['Name']},'), {Terms joined}) > 0,
         {Twitter URL} != '')
           ", sort: { "Created at" => "desc" })        
       elsif params[:organisation]

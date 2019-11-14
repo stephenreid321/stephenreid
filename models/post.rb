@@ -65,7 +65,12 @@ class Post < Airrecord::Table
     post.terms = (additions + replacements).uniq            
     post['Twitter text'] = twitter
     post['Facebook text'] = facebook
-    post.save             
+    post.save   
+    
+    post.terms.each { |term|
+      term.create_edges 
+    }
+    
   end
   
 end
