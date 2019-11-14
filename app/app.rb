@@ -84,8 +84,8 @@ module ActivateApp
         @source = Term.find(params[:source])
         @sink = Term.find(params[:sink])
         @posts = Post.all(filter: "AND(
-        FIND(', #{@source['Name']},'), {Terms joined}) > 0,
-        FIND(', #{@sink['Name']},'), {Terms joined}) > 0,
+        FIND(', #{@source['Name']},', {Terms joined}) > 0,
+        FIND(', #{@sink['Name']},', {Terms joined}) > 0,
         {Twitter URL} != '')
           ", sort: { "Created at" => "desc" })        
       elsif params[:organisation]
