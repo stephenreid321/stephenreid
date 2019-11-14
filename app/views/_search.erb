@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<% Padrino.env == :production ? cp('tags') : partial(:tags) %>
+<%= Padrino.env == :production ? cp('tags') : partial(:tags) %>
 
 
 <% if @full_network %>

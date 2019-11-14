@@ -63,6 +63,61 @@ module ActivateApp
       erb :home
     end
     
+    
+    
+    
+    get '/posts/:id/iframely' do
+      @post = begin; Post.find(params[:id]); rescue; not_found; end
+      agent = Mechanize.new
+      result = agent.get("https://iframe.ly/api/iframely?url=#{@post['Link'].split('#').first}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+      @post['Iframely'] = result.body.force_encoding("UTF-8")
+      @post.save
+      200
+    end
+    
+    get '/posts/:id/tagify' do
+      @post = begin; Post.find(params[:id]); rescue; not_found; end      
+      if !@post['Title']
+        @json = JSON.parse(post['Iframely'])
+        @post['Title'] = @json['meta']['title']
+        @post['Body'] = @json['meta']['description']
+        @post.save
+      end
+      @post.tagify   
+      200
+    end   
+    
+    get '/terms/tagify' do
+      Term.all.each { |term|
+        if !term['Posts']
+          term.tagify
+        end
+      }
+      200
+    end
+        
+    get '/terms/:id/tagify' do
+      @term = begin; Term.find(params[:id]); rescue; not_found; end      
+      @term.tagify   
+      200
+    end
+    
+    get '/terms/:id/create_edges' do
+      @term = begin; Term.find(params[:id]); rescue; not_found; end      
+      @term.create_edges
+      200
+    end              
+       
+    get '/organisations/:id/update' do
+      @organisation = begin; Organisation.find(params[:id]); rescue; not_found; end      
+      @organisation.tagify   
+      200
+    end      
+    
+
+
+    
+    
     get '/search' do      
       if params[:q]
         @title = params[:q]
@@ -188,51 +243,7 @@ module ActivateApp
       end
       erb :post    
     end 
-    
-    get '/posts/:id/iframely' do
-      @post = begin; Post.find(params[:id]); rescue; not_found; end
-      agent = Mechanize.new
-      result = agent.get("https://iframe.ly/api/iframely?url=#{@post['Link'].split('#').first}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-      @post['Iframely'] = result.body.force_encoding("UTF-8")
-      @post.save
-      redirect "/posts/#{params[:id]}"
-    end
-    
-    get '/posts/:id/tagify' do
-      @post = begin; Post.find(params[:id]); rescue; not_found; end      
-      if !@post['Title']
-        @json = JSON.parse(post['Iframely'])
-        @post['Title'] = @json['meta']['title']
-        @post['Body'] = @json['meta']['description']
-        @post.save
-      end
-      @post.tagify   
-      redirect "/posts/#{params[:id]}"
-    end   
-    
-    get '/terms/update' do
-      Term.all.each { |term|
-        if !term['Posts']
-          term.tagify
-          term.create_edges
-        end
-      }
-      200
-    end
-        
-    get '/terms/:id/update' do
-      @term = begin; Term.find(params[:id]); rescue; not_found; end      
-      @term.tagify   
-      @term.create_edges
-      redirect "/terms/#{@term['Name']}"
-    end
-       
-    get '/organisations/:id/update' do
-      @organisation = begin; Organisation.find(params[:id]); rescue; not_found; end      
-      @organisation.tagify   
-      redirect "/organisations/#{@organisation['Name']}"
-    end      
-    
+
     
     
       
