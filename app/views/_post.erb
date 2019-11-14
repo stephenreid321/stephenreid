@@ -13,11 +13,11 @@
       <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
     <% end %>
     <p>        
-      <% post.terms.each { |term| unless term['Hidden'] %>
-        <a class="badge badge-primary" href="/terms/<%=term['Name']%>"><%=term['Name']%></a>
-      <% end } %>
-      <% if post.organisation %>
-        <a class="badge badge-primary" href="/organisations/<%=post.organisation['Name']%>">@<%=post.organisation['Name']%></a>
+      <% post['Terms joined'].split(', ').each { |term| %>
+        <a class="badge badge-primary" href="/terms/<%=term%>"><%=term%></a>
+      <% } %>
+      <% if post['Organisation name']%>
+        <a class="badge badge-primary" href="/organisations/<%=post['Organisation name']%>">@<%=post['Organisation name']%></a>
       <% end %>  
     </p>      
     <div class="row justify-content-between">
