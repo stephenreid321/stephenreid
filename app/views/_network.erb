@@ -54,10 +54,10 @@
 
           });
   cy.on('tap', 'node', function(){
-  window.location.href = '/search?term=' + this.data('name');
+  window.location.href = '/terms/' + this.data('name');
   });
   cy.on('tap', 'edge', function(){
-  window.location.href = '/search?source=' + this.data('source') + '&sink=' + this.data('target');
+  window.location.href = '/terms/' + this.data('source') + '/' + this.data('target');
   });
   //cy.$('[weight < 2]').hide()
   cy.minZoom(0.5)

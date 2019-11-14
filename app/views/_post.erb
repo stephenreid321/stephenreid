@@ -14,10 +14,10 @@
     <% end %>
     <p>        
       <% post.terms.each { |term| unless term['Hidden'] %>
-        <a class="badge badge-primary" href="/search?term=<%=term['Name']%>"><%=term['Name']%></a>
+        <a class="badge badge-primary" href="/terms/<%=term['Name']%>"><%=term['Name']%></a>
       <% end } %>
       <% if post.organisation %>
-        <a class="badge badge-primary" href="/search?organisation=<%=post.organisation['Name']%>">@<%=post.organisation['Name']%></a>
+        <a class="badge badge-primary" href="/organisations/<%=post.organisation['Name']%>">@<%=post.organisation['Name']%></a>
       <% end %>  
     </p>      
     <div class="row justify-content-between">
