@@ -81,12 +81,14 @@ module ActivateApp
       erb :search
     end
     
-    get '/terms/:term' do      
+    get '/terms/:term', :cache => true do
+      expires 1.hour.to_i      
       @posts = Post.all(filter: "FIND(', #{params[:term]},', {Terms joined}) > 0", sort: { "Created at" => "desc" })
       erb :search
     end
     
-    get '/terms/:source_id/:sink_id' do
+    get '/terms/:source_id/:sink_id', :cache => true do
+      expires 1.hour.to_i
       @source = Term.find(params[:source_id])
       @sink = Term.find(params[:sink_id])
       @posts = Post.all(filter: "AND(
@@ -96,7 +98,8 @@ module ActivateApp
       erb :search
     end
     
-    get '/organisations/:organisation' do
+    get '/organisations/:organisation', :cache => true do
+      expires 1.hour.to_i
       @posts = Post.all(filter: "{Organisation} = '#{params[:organisation]}'", sort: { "Created at" => "desc" })                        
       erb :search
     end
