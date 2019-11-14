@@ -206,22 +206,24 @@ module ActivateApp
       redirect "/posts/#{params[:id]}"
     end    
     
-    get '/terms/tagify' do
+    get '/terms/update' do
       Term.all.each { |term|
         if !term['Posts']
           term.tagify
+          term.create_edges
         end
       }
       200
     end
-    
-    get '/terms/:id' do
+        
+    get '/terms/:id/update' do
       @term = begin; Term.find(params[:id]); rescue; not_found; end      
       @term.tagify   
+      @term.create_edges
       redirect "/search?term=#{@term['Name']}"
     end
-    
-    get '/organisations/:id' do
+       
+    get '/organisations/:id/update' do
       @organisation = begin; Organisation.find(params[:id]); rescue; not_found; end      
       @organisation.tagify   
       redirect "/search?organisation=#{@organisation['Name']}"
