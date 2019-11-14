@@ -7,18 +7,6 @@
           <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
         </div>
       </div>
-      <p class="text-center mb-0">
-        <small>
-          <strong style="font-weight: 700">Examples</strong>
-          <% ['spotify.com', 'youtube.com', 'whatisemerging.com', 'medium.com'].each { |term| %>
-            <a class="text-dark" style="text-decoration: none; border-bottom: 1px dotted" href="/search?q=<%=term%>"><%=term%></a>
-          <% } %>
-          <br />
-          <% ['DAO', 'Extinction Rebellion', 'psychedelics'].each { |term| %>
-            <a class="text-dark" style="text-decoration: none; border-bottom: 1px dotted" href="/search?q=<%=term%>"><%=term%></a>
-          <% } %>            
-        </small>
-      </p>
     <% end %>
   </div>
 </div>

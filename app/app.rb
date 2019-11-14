@@ -108,7 +108,7 @@ module ActivateApp
       200
     end              
        
-    get '/organisations/:id/update' do
+    get '/organisations/:id/tagify' do
       @organisation = begin; Organisation.find(params[:id]); rescue; not_found; end      
       @organisation.tagify   
       200
