@@ -54,7 +54,7 @@ module ActivateApp
     end
 
     get '/', :cache => true do
-      expires 6.hours.to_i
+      expires 1.hour.to_i
       @full_network = true
       @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
@@ -82,13 +82,13 @@ module ActivateApp
     end
     
     get '/terms/:term', :cache => true do
-      expires 6.hours.to_i
+      expires 1.hour.to_i
       @posts = Post.all(filter: "FIND(', #{params[:term]},', {Terms joined}) > 0", sort: { "Created at" => "desc" })
       erb :search
     end
     
     get '/terms/:source_id/:sink_id', :cache => true do
-      expires 6.hours.to_i
+      expires 1.hour.to_i
       @source = Term.find(params[:source_id])
       @sink = Term.find(params[:sink_id])
       @posts = Post.all(filter: "AND(
@@ -99,13 +99,13 @@ module ActivateApp
     end
     
     get '/organisations/:organisation', :cache => true do
-      expires 6.hours.to_i
+      expires 1.hour.to_i
       @posts = Post.all(filter: "{Organisation} = '#{params[:organisation]}'", sort: { "Created at" => "desc" })                        
       erb :search
     end
     
     get '/feed', :provides => :rss, :cache => true do
-      expires 6.hours.to_i
+      expires 1.hour.to_i
       @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
