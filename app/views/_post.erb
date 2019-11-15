@@ -6,11 +6,11 @@
   <div class="card-body">
     <h5 class="card-title">
       <a href="/posts/<%=post.id%>" class="text-dark">
-        <%= json['meta']['title'] %>
+        <%= post['Title'] %>
       </a>
     </h5>
-    <% if json['meta']['description'] %>
-      <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
+    <% if post['Body'] %>
+      <p class="mb-1 card-text"><%= post['Body'].truncate(150) %></p>
     <% end %>
     <p>        
       <% post['Terms joined'].split(', ').each { |term| %>
