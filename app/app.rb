@@ -236,7 +236,7 @@ module ActivateApp
     get '/posts/:id', :cache => true do
       @post = begin; Post.find(params[:id]); rescue; not_found; end
       @json = JSON.parse(@post['Iframely'])
-      @title = @post['Title']
+      @full_title = @post['Title']
       @og_desc = @post['Body']
       if @json['links'] && @json['links']['thumbnail']
         @og_image = @json['links']['thumbnail'].first['href']
@@ -273,7 +273,7 @@ module ActivateApp
 
     get '/blog/:slug', :cache => true do
       @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first
-      @title = @blog_post['Title']
+      @full_title = @blog_post['Title']
       @og_desc = @blog_post['Summary']
       @og_image = @blog_post['Attachments'].first['url']
       erb :blog_post

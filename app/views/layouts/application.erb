@@ -62,7 +62,7 @@
     <% } %>  
 
     <%= favicon_tag 's.png' %>
-    <title><%=if @title; "#{@title} · Stephen Reid"; else; "Stephen Reid"; end %></title>
+    <title><%=if @full_title; @full_title; elsif @title; "#{@title} · Stephen Reid"; else; "Stephen Reid"; end %></title>
     <meta name="description" content="<%=@og_desc%>">
     <meta property="og:image" content="<%=@og_image%>" />
     <link rel="alternate" type="application/atom+xml" title="Stephen Reid" href="/feed.rss" />
@@ -151,7 +151,7 @@
         if (!Cookies.get('shownModal')) {
           setTimeout(function () {
             $('#modal').modal('show')
-            Cookies.set('shownModal', true, { expires: 90 })
+            Cookies.set('shownModal', true, {expires: 90})
           }, 5000)
         }
       })
