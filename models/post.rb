@@ -30,7 +30,7 @@ class Post < Airrecord::Table
     replacements.each { |term|
       i = term['Case sensitive'] ? false : true
       t = term['Name']
-      hashtag = t.include?(' ') ? t.gsub(' ','_').camelize : t
+      hashtag = t.include?(' ') ? t.gsub(' ','_').gsub('-','_').camelize : t
       if term['Organisation']
         twitter = twitter.gsub(i ? /\b#{t}\b/i : /\b#{t}\b/, "@#{term.organisation['Twitter username']}")
         # facebook = facebook.gsub(i ? /#{t}/i : /#{t}/, "@[#{term.organisation['Facebook page username']}]")             
@@ -43,7 +43,7 @@ class Post < Airrecord::Table
     twitter_add, facebook_add = [], []
     (additions - replacements).each { |term|
       t = term['Name']
-      hashtag = t.include?(' ') ? t.gsub(' ','_').camelize : t
+      hashtag = t.include?(' ') ? t.gsub(' ','_').gsub('-','_').camelize : t
       if term['Organisation']
         twitter_add << "@#{term.organisation['Twitter username']}"
         # facebook_add << "@[#{term.organisation['Facebook page username']}]"
