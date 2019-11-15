@@ -9,8 +9,8 @@
         <%= post['Title'] %>
       </a>
     </h5>
-    <% if post['Body'] %>
-      <p class="mb-1 card-text"><%= post['Body'].truncate(150) %></p>
+    <% if json['meta']['description'] %>
+      <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
     <% end %>
     <p>        
       <% post['Terms joined'].split(', ').each { |term| %>
