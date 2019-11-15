@@ -151,7 +151,7 @@
         if (!Cookies.get('shownModal')) {
           setTimeout(function () {
             $('#modal').modal('show')
-            Cookies.set('shownModal', true)
+            Cookies.set('shownModal', true, { expires: 90 })
           }, 5000)
         }
       })
