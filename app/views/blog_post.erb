@@ -3,7 +3,7 @@
   <div class="col-sm-8">
     <%= partial :blog_post, :object => @blog_post %>
 
-    <% if @blog_post.post; post = @blog_post.post %>
+    <% if post = @blog_post.post %>
       <% if post['Twitter URL'] %>
         <div class="text-center mt-5">
           <a target="_blank" class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" href="<%=post['Facebook URL'] || post['Stephen Reid In Dialogue URL']%>">
@@ -15,6 +15,10 @@
         </div>
       <% end %>
     <% end %>
+
+    <div class="my-5">
+      <%= Padrino.env == :production ? cp('full_network') : partial(:full_network) %>
+    </div>
 
   </div>
 </div>

@@ -28,3 +28,7 @@
     </a>  
   <% end %>
 </div>
+
+<div class="my-5">
+  <%= Padrino.env == :production ? cp('full_network') : partial(:full_network) %>
+</div>
