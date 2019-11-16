@@ -18,14 +18,50 @@ class Term < Airrecord::Table
     posts.each { |post| puts post['Title']; post.tagify }
   end
   
+  def self.create_edges
+    checked = []
+    Term.all.each_with_index { |source,i|
+      Term.all.each_with_index { |sink,j|
+        if source.id != sink.id && !checked.include?([source.id,sink.id]) && !checked.include?([sink.id,source.id])
+                              
+          puts "#{source['Name']} <-> #{sink['Name']} (#{i},#{j})"
+          checked << [source.id, sink.id]
+          
+          posts = Post.all(filter: "AND(
+            FIND(', #{ source['Name']},', {Terms joined}) > 0,
+            FIND(', #{ sink['Name']},', {Terms joined}) > 0
+          )")
+          
+          if posts.length > 0
+            puts "found #{posts.length} posts"
+                      
+            if !(term_link = TermLink.all(filter: "AND({Source} = '#{source['Name']}', {Sink}  = '#{sink['Name']}')").first) && !(term_link = TermLink.all({filter: "AND({Source} = '#{sink['Name']}', {Sink}  = '#{source['Name']}')"}).first)
+              term_link = TermLink.create("Source" => [source.id], "Sink" => [sink.id])
+            end                                
+          
+            post_ids = posts.map(&:id)
+          
+            if missing = post_ids - (term_link['Posts'] || [])
+              missing.each { |post_id|
+                puts "missing: #{post_id}"
+                term_link['Posts'] = (term_link['Posts'] + [post_id])
+              }
+            end    
+            if superfluous = (term_link['Posts'] || []) - post_ids
+              superfluous.each { |post_id|
+                puts "superfluous: #{post_id}"
+                term_link['Posts'] = (term_link['Posts'] - [post_id])
+              }
+            end
+            term_link.save
+          end
+        end
+      }
+    }    
+  end
+  
   def create_edges
-    source = self
-    puts "wiping edges connected to #{source['Name']}"
-    TermLink.all({filter: "OR({Source} = '#{source['Name']}', {Sink}  = '#{source['Name']}')"}).each { |term_link|
-      term_link.posts = []
-      term_link.save
-    }
-    
+    source = self    
     puts "collecting sinks for #{source['Name']}"
     sink_ids = []
     source.posts.each { |post|
@@ -40,11 +76,8 @@ class Term < Airrecord::Table
         if !(term_link = TermLink.all(filter: "AND({Source} = '#{source['Name']}', {Sink}  = '#{sink['Name']}')").first) && !(term_link = TermLink.all({filter: "AND({Source} = '#{sink['Name']}', {Sink}  = '#{source['Name']}')"}).first)
           term_link = TermLink.create("Source" => [source.id], "Sink" => [sink.id])
         end
-        puts "adding posts for #{source['Name']} <-> #{sink['Name']}"
-        term_link.posts = Post.all(filter: "AND(
-        FIND(', #{ source['Name']},', {Terms joined}) > 0,
-        FIND(', #{ sink['Name']},', {Terms joined}) > 0
-        )")
+        puts "setting posts for #{source['Name']} <-> #{sink['Name']}"
+        term_link.posts = term_link.get_posts
         term_link.save
       end
     }
