@@ -6,7 +6,7 @@ class Post < Airrecord::Table
   
   belongs_to :organisation, :class => 'Organisation', :column => 'Organisation'    
   
-  def tagify
+  def tagify(skip_linking: false)
     post = self
     json = JSON.parse(post['Iframely'])
     twitter = post['Title']
@@ -67,24 +67,26 @@ class Post < Airrecord::Table
     post['Facebook text'] = facebook
     post.save       
     
-    checked = []
-    post.terms.each { |source|
-      post.terms.each { |sink|
-        if source.id != sink.id && !checked.include?([source.id,sink.id]) && !checked.include?([sink.id,source.id])
+    unless skip_linking
+      checked = []
+      post.terms.each { |source|
+        post.terms.each { |sink|
+          if source.id != sink.id && !checked.include?([source.id,sink.id]) && !checked.include?([sink.id,source.id])
                    
-          puts "#{source['Name']} <-> #{sink['Name']}"
-          checked << [source.id, sink.id]
+            puts "#{source['Name']} <-> #{sink['Name']}"
+            checked << [source.id, sink.id]
           
-          term_link = TermLink.find_or_create(source,sink)
+            term_link = TermLink.find_or_create(source,sink)
           
-          unless (term_link['Posts'] || []).include?(post.id)
-            term_link['Posts'] = ((term_link['Posts'] || []) + [post.id])
-            term_link.save         
-          end
+            unless (term_link['Posts'] || []).include?(post.id)
+              term_link['Posts'] = ((term_link['Posts'] || []) + [post.id])
+              term_link.save         
+            end
 
-        end
+          end
+        }
       }
-    }
+    end
     
     self['Twitter text']
   end
