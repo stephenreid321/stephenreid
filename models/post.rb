@@ -65,7 +65,28 @@ class Post < Airrecord::Table
     post.terms = (additions + replacements).uniq            
     post['Twitter text'] = twitter
     post['Facebook text'] = facebook
-    post.save        
+    post.save       
+    
+    checked = []
+    post.terms.each { |source|
+      post.terms.each { |sink|
+        if source.id != sink.id && !checked.include?([source.id,sink.id]) && !checked.include?([sink.id,source.id])
+                   
+          puts "#{source['Name']} <-> #{sink['Name']}"
+          checked << [source.id, sink.id]
+          
+          term_link = TermLink.find_or_create(source,sink)
+          
+          unless (term_link['Posts'] || []).include?(post.id)
+            term_link['Posts'] = ((term_link['Posts'] || []) + [post.id])
+            term_link.save         
+          end
+
+        end
+      }
+    }
+    
+    self['Twitter text']
   end
   
 end

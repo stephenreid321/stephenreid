@@ -27,17 +27,12 @@ class Term < Airrecord::Table
           puts "#{source['Name']} <-> #{sink['Name']} (#{i},#{j})"
           checked << [source.id, sink.id]
           
-          posts = Post.all(filter: "AND(
-            FIND(', #{ source['Name']},', {Terms joined}) > 0,
-            FIND(', #{ sink['Name']},', {Terms joined}) > 0
-          )")
+          posts = TermLink.get_posts(source['Name'], sink['Name'])
           
           if posts.length > 0
             puts "found #{posts.length} posts"
                       
-            if !(term_link = TermLink.all(filter: "AND({Source} = '#{source['Name']}', {Sink}  = '#{sink['Name']}')").first) && !(term_link = TermLink.all({filter: "AND({Source} = '#{sink['Name']}', {Sink}  = '#{source['Name']}')"}).first)
-              term_link = TermLink.create("Source" => [source.id], "Sink" => [sink.id])
-            end                                
+            term_link = TermLink.find_or_create(source, sink)                                
           
             post_ids = posts.map(&:id)
           
@@ -67,19 +62,15 @@ class Term < Airrecord::Table
     source.posts.each { |post|
       sink_ids += post['Terms']
     }
-    sink_ids = sink_ids.uniq
-    puts "found #{sink_ids.count} unique sink IDs: #{sink_ids}"
+    sink_ids = sink_ids.uniq - [source.id]
+    puts "sinks: #{sink_ids.count}"
     
     sink_ids.each { |sink_id|
-      if source.id != sink_id
-        sink = Term.find(sink_id)
-        if !(term_link = TermLink.all(filter: "AND({Source} = '#{source['Name']}', {Sink}  = '#{sink['Name']}')").first) && !(term_link = TermLink.all({filter: "AND({Source} = '#{sink['Name']}', {Sink}  = '#{source['Name']}')"}).first)
-          term_link = TermLink.create("Source" => [source.id], "Sink" => [sink.id])
-        end
-        puts "setting posts for #{source['Name']} <-> #{sink['Name']}"
-        term_link.posts = term_link.get_posts
-        term_link.save
-      end
+      sink = Term.find(sink_id)
+      term_link = TermLink.find_or_create(source, sink)
+      puts "#{source['Name']} <-> #{sink['Name']}"
+      term_link.posts = term_link.get_posts
+      term_link.save
     }
   end
   
