@@ -52,12 +52,17 @@ class Post < Airrecord::Table
         facebook_add << "##{hashtag}"
       end        
     }
-    
+        
     if organisation = Organisation.all(filter: "{Domain} = '#{URI(post['Link']).host.gsub('www.','')}'").first
       post.organisation = organisation
       twitter_add << "@#{organisation['Twitter username']}"
       # facebook_add << "@[#{organisation['Facebook page username']}]"
     end
+    
+    (additions + replacements).map { |term| term['Emoji'] }.compact.each { |emoji|
+      twitter_add << emoji
+      facebook_add << emoji
+    }    
     
     twitter_add.uniq.each { |x| twitter = "#{twitter} #{x}" }
     facebook_add.uniq.each { |x| facebook = "#{facebook} #{x}" }
