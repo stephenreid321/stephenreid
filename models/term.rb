@@ -15,7 +15,7 @@ class Term < Airrecord::Table
           FIND(LOWER('#{term['Name']}'), LOWER({Iframely})) > 0
         )
       ", sort: { "Created at" => "desc" })
-    posts.each { |post| puts post['Title']; post.tagify }
+    posts.each { |post| puts post['Title']; post.tagify(skip_linking: true) }
   end
   
   def self.create_edges

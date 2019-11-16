@@ -34,7 +34,7 @@ namespace :posts do
       post.save
 
       if post['Title']
-        post.tagify
+        post.tagify(skip_linking: true)
         term_ids += post['Terms'] if post['Terms']
       end
 

@@ -88,17 +88,40 @@ module ActivateApp
     end   
     
     get '/terms/tagify' do
+      post_ids = []
       Term.all.each { |term|
         if !term['Posts']
-          term.tagify
+          post_ids += Post.all(filter: "
+        OR(
+          FIND(LOWER('#{term['Name']}'), LOWER({Title})) > 0,
+          FIND(LOWER('#{term['Name']}'), LOWER({Body})) > 0,
+          FIND(LOWER('#{term['Name']}'), LOWER({Iframely})) > 0
+        )
+            ", sort: { "Created at" => "desc" }).map(&:id)
         end
       }
+      post_ids = post_ids.uniq
+      if post_ids.length > 0
+        puts "#{c = post_ids.length} posts"
+        Post.find_many(post_ids).each_with_index { |post,i|
+          puts "#{post['Title']} (#{i}/#{c})"
+          post.tagify(skip_linking: true)      
+        }    
+      end
       200
     end
         
     get '/terms/:id/tagify' do
       @term = begin; Term.find(params[:id]); rescue; not_found; end      
       @term.tagify   
+      200
+    end
+    
+    get'/terms/create_edges' do
+      Term.all(filter: "AND({Sources} = '', {Sinks} = '')").each { |term|
+        puts term['Name']
+        term.create_edges
+      }
       200
     end
     
