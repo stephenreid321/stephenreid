@@ -41,7 +41,7 @@ module ActivateApp
       fix_params!
       Time.zone = 'London'
       @og_desc = 'Transdisciplinary thinker, cultural changemaker and metamodern mystic'
-      @og_image = "http://#{ENV['DOMAIN']}/images/link4.png"
+      @og_image = "http://#{ENV['DOMAIN']}/images/link5.png"
     end
 
     error do
