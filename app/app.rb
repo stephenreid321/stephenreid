@@ -78,7 +78,7 @@ module ActivateApp
     get '/posts/:id/tagify' do
       @post = begin; Post.find(params[:id]); rescue; not_found; end      
       if !@post['Title']
-        @json = JSON.parse(post['Iframely'])
+        @json = JSON.parse(@post['Iframely'])
         @post['Title'] = @json['meta']['title']
         @post['Body'] = @json['meta']['description']
         @post.save
