@@ -44,7 +44,7 @@ class Post < Airrecord::Table
     (additions - replacements).each { |term|
       t = term['Name']
       hashtag = t.include?(' ') ? t.gsub(' ','_').gsub('-','_').camelize : t
-      if term['Organisation']
+      if term['Organisation'] && !term.organisation["Don't add tag"]
         twitter_add << "@#{term.organisation['Twitter username']}"
         # facebook_add << "@[#{term.organisation['Facebook page username']}]"
       else
