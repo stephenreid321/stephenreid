@@ -44,7 +44,7 @@ class Post < Airrecord::Table
     (additions - replacements).each { |term|
       t = term['Name']
       hashtag = t.include?(' ') ? t.gsub(' ','_').gsub('-','_').camelize : t
-      if term['Organisation'] && !term.organisation["Don't add tag"]
+      if term['Organisation']
         twitter_add << "@#{term.organisation['Twitter username']}"
         # facebook_add << "@[#{term.organisation['Facebook page username']}]"
       else
@@ -55,8 +55,10 @@ class Post < Airrecord::Table
         
     if organisation = Organisation.all(filter: "{Domain} = '#{URI(post['Link']).host.gsub('www.','')}'").first
       post.organisation = organisation
-      twitter_add << "@#{organisation['Twitter username']}"
-      # facebook_add << "@[#{organisation['Facebook page username']}]"
+      unless organisation['No domain tag']
+        twitter_add << "@#{organisation['Twitter username']}"
+        # facebook_add << "@[#{organisation['Facebook page username']}]"
+      end
     end
     
     (additions + replacements).map { |term| term['Emoji'] }.compact.each { |emoji|
