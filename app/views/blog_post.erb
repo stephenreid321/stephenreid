@@ -16,6 +16,18 @@
       <% end %>
     <% end %>
 
+    <%     
+    blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
+    i = blog_posts.index(@blog_post)
+    next_blog_post = blog_posts[i-1]
+  %>
+
+    <div class="mt-5 p-1 text-center card shadow-sm">
+      <div class="card-body p-1">
+        Next post: <a href="/blog/<%=next_blog_post['Slug']%>"><%=next_blog_post['Title']%></a>
+      </div>
+    </div>
+
     <div class="my-5">
       <%= Padrino.env == :production ? cp('full_network') : partial(:full_network) %>
     </div>

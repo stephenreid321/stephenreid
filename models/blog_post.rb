@@ -6,4 +6,9 @@ class BlogPost < Airrecord::Table
     Post.all(filter: "{Link} = 'https://stephenreid.net/blog/#{self['Slug']}'").first
   end
   
+  def next_blog_post
+
+    
+  end
+  
 end
