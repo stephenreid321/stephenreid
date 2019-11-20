@@ -294,7 +294,7 @@ module ActivateApp
       end.to_s            
     end    
 
-    get '/blog/:slug', :cache => true do
+    get '/blog/:slug' do
       @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first
       @full_title = @blog_post['Title']
       @og_desc = @blog_post['Summary']
