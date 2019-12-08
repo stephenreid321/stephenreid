@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/stephenreid321
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://stephenreid.net
+  * I am stephenreid321 (https://keybase.io/stephenreid321) on keybase.
+  * I have a public key ASDqPU8p5Tqwp90bCqkaykmoB-nMGghZ3pmbziJmjl6T4wo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120ea3d4f29e53ab0a7dd1b0aa91aca49a807e9cc1a0859de999bce22668e5e93e30a",
+      "host": "keybase.io",
+      "kid": "0120ea3d4f29e53ab0a7dd1b0aa91aca49a807e9cc1a0859de999bce22668e5e93e30a",
+      "uid": "a8f9d064693714e07874685e833b3419",
+      "username": "stephenreid321"
+    },
+    "merkle_root": {
+      "ctime": 1575835752,
+      "hash": "5153e13ddef3b4b8ffc1e9a2a4fea5cdc52807209eaccfe87737d4440240fd29366da37d4ff1f7d2cc09df06ff93d4730744be4bef8f894b481784f319c845c4",
+      "hash_meta": "49fe0271ff66b5be7e2f2ecd1c1ecbd264cb1e64a6de447c9444052d6518c6e2",
+      "seqno": 12897539
+    },
+    "service": {
+      "entropy": "kEIff7UzvYcTrSpqJRS17GY/",
+      "hostname": "stephenreid.net",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.0.0"
+  },
+  "ctime": 1575835757,
+  "expire_in": 504576000,
+  "prev": "4f842b0f5032ee461db51ab8f2be3c116e498e544a2eca1232a3e3d159387b42",
+  "seqno": 11,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg6j1PKeU6sKfdGwqpGspJqAfpzBoIWd6Zm84iZo5ek+MKp3BheWxvYWTESpcCC8QgT4QrD1Ay7kYdtRq48r48EW5JjlRKLsoSMqPj0Vk4e0LEIDO/a/Q7ckoCJo9Z11X9c0NZenJJlrXjI47SGbAwjanZAgHCo3NpZ8RAQVKRMOjueDHlwxV+sGUEJz0HpRBlLa2eIyRT5zy4YweLmQwPVkjbb9gdXCRHsIsynydsHks7XXysqyPLzO0GAqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIDnBN3n04idgZAidOXCgHQZKadZfShqriecbxIUpBH6bo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/stephenreid321
+
+==================================================================
