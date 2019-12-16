@@ -11,7 +11,7 @@
     <div class="row">
       <% [1,2,3].each { |tier| %>
         <% Affiliation.all(filter: "{Tier} = '#{tier}'", sort: { "Order" => "asc" }).each { |affiliation| %>
-          <div class="col-4 col-sm-2 mb-3 mb-sm-0 text-center">
+          <div class="col-3 col-sm-3 mb-3 mb-sm-0 text-center">
             <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
               <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
               <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
