@@ -1,10 +1,11 @@
 <script>
-  $(function () {
+
+  function drawNetwork() {
 
   scale = chroma.scale(['blue', 'red']);
   scale(0.5).hex(); // #FF7F7F
 
-          node_min_width = 10
+  node_min_width = 10
           node_min_color = 0.1
           node_color_scale = 50
           edge_min_color = 0.1
@@ -61,6 +62,12 @@
   });
   //cy.$('[weight < 2]').hide()
   cy.minZoom(0.5)
+
+  }
+
+  $(function() {
+  drawNetwork()
+          $(window).one('focus', function() { drawNetwork() })
   })
 </script>    
 <div id="cy" class="card shadow-sm" style="height: 500px"></div>
