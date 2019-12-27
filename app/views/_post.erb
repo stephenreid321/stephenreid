@@ -1,7 +1,7 @@
 
 <div class="card shadow-sm">
   <a href="/posts/<%=post.id%>">
-    <img class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] %>">
+    <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
@@ -23,7 +23,7 @@
     <div class="row justify-content-between">
       <div class="col">
         <p class="mb-0">
-          <small>
+          <small class="text-muted">
             <a class="text-muted" style="text-decoration: none" href="<%=post['Link']%>" target="_blank">
               <% if json['links']['icon'] %>
                 <img onerror="this.style.display='none'" style="max-height: 20px" src="<%= json['links']['icon'].first['href'] %>">
@@ -42,6 +42,8 @@
                 <%= URI(post['Link']).host.gsub('www.','') %>
               <% end %>
             </a>
+            &middot;
+            <%=Time.zone.parse(post['Created at']).to_date.to_s(:post)%>
           </small>
         </p>
       </div>          
