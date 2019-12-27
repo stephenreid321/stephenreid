@@ -269,6 +269,10 @@ module ActivateApp
 
     
     
+    
+    get '/blog/totnes-convergence' do
+      redirect 'https://convergence.so/totnes'
+    end
       
     get '/blog', :cache => true do
       @blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
@@ -420,6 +424,8 @@ module ActivateApp
     get '/recommended' do
       redirect '/'
     end
+    
+    
 
   end
 end
