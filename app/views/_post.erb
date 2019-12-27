@@ -42,8 +42,10 @@
                 <%= URI(post['Link']).host.gsub('www.','') %>
               <% end %>
             </a>
-            &middot;
-            <%=Time.zone.parse(post['Created at']).to_date.to_s(:post)%>
+            <% if post['Created at'] %>
+              &middot;
+              <%=Time.zone.parse(post['Created at']).to_date.to_s(:post)%>
+            <% end %>
           </small>
         </p>
       </div>          
