@@ -1,3 +1,5 @@
+<%= partial :totnes_convergence %>
+
 <div class="mt-5">
   <% if params[:term] %>
     <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> tagged <a class="badge badge-primary" href="/terms/<%=params[:term]%>"><%=params[:term]%></a></p>
