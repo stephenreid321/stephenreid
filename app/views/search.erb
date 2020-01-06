@@ -1,8 +1,3 @@
-
-<% if @tc %>
-  <%= partial :totnes_convergence %>
-<% end %>
-
 <div class="mt-5">
   <% if params[:term] %>
     <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> tagged <a class="badge badge-primary" href="/terms/<%=params[:term]%>"><%=params[:term]%></a></p>
@@ -15,6 +10,6 @@
   <% if params[:organisation] %>
     <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> published by <a class="badge badge-primary" href="/organisations/<%=params[:organisation]%>"><%=params[:organisation]%></a></p>
     <% end %>  
-
+  
   <%= partial :search %>
 </div>
