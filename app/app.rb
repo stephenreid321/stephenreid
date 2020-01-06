@@ -115,7 +115,7 @@ module ActivateApp
       200
     end
         
-    get '/terms/:id/tagify' do
+    get '/terms/:id/tagify' do 
       @term = begin; Term.find(params[:id]); rescue; not_found; end      
       @term.tagify   
       200
