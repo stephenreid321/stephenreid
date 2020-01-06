@@ -63,6 +63,10 @@ module ActivateApp
       erb :home
     end
     
+    get '/diff' do
+      erb :diff
+    end
+    
     
     
     
