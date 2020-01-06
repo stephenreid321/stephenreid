@@ -239,6 +239,11 @@ module ActivateApp
       erb :diet
     end    
 
+    get '/facilitation', :cache => true do
+      @title = 'Facilitation'
+      erb :facilitation
+    end    
+
     get '/tarot', :cache => true do
       @title = 'Tarot'
       @og_image = "http://#{ENV['DOMAIN']}/images/the-magician.jpg"
