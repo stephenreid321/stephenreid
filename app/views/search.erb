@@ -1,11 +1,13 @@
 
-<%= partial :totnes_convergence %>
+<% if @tc %>
+  <%= partial :totnes_convergence %>
+<% end %>
 
 <div class="mt-5">
   <% if params[:term] %>
     <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> tagged <a class="badge badge-primary" href="/terms/<%=params[:term]%>"><%=params[:term]%></a></p>
   <% end %>
-    
+
   <% if params[:source_id] && params[:sink_id] %>
     <p class="lead text-center">Showing <%= pluralize @posts.count, 'article'%> tagged <a class="badge badge-primary" href="/terms/<%=@source['Name']%>"><%=@source['Name']%></a> and <a class="badge badge-primary" href="/terms/<%=@sink['Name']%>"><%=@sink['Name']%></a></p>
   <% end %>    

@@ -160,6 +160,7 @@ module ActivateApp
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { "Created at" => "desc" }, paginate: false)    
       end
+      @tc = true
       erb :search
     end
     
