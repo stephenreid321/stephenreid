@@ -364,17 +364,19 @@ module ActivateApp
 
    
     get '/to/:slug' do
-      @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
-      redirect @url
+      @product = begin; Product.all(filter: "{Slug} = '#{params[:slug]}'").first; rescue; not_found; end      
+      redirect @product['URL']
     end
     
     get '/p/:slug' do
-      @url = Product.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
+      @product = begin; Product.all(filter: "{Slug} = '#{params[:slug]}'").first; rescue; not_found; end      
+      @url = @product['URL']
       erb :redirect
     end
     
     get '/r/:slug' do
-      @url = Link.all(filter: "{Slug} = '#{params[:slug]}'").first['URL']
+      @link = begin; Link.all(filter: "{Slug} = '#{params[:slug]}'").first; rescue; not_found; end      
+      @url = @link['URL']
       erb :redirect
     end    
                    
