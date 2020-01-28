@@ -1,7 +1,7 @@
 
 <div class="card shadow-sm">
   <a href="<%=software['URL']%>">
-    <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] %>">
+    <img onerror="this.style.display='none'" class="card-img-top" src="<%= software['Image URL'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
@@ -9,8 +9,9 @@
         <%= software['Name'] %>
       </a>
     </h5>
-    <% if json['meta']['description'] %>
-      <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
+    <% if software['Description'] %>
+      <p class="mb-1 card-text"><%= software['Description'].truncate(150) %></p>
     <% end %>
   </div>
 </div>
+

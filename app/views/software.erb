@@ -1,13 +1,16 @@
-<p class="lead">Recommended software</p>
+<% types = Software.all(filter: "{Featured} = 1").map { |software| software['Type'] || '' }
+(types.uniq.select { |t| t != '' }.sort + ['']).each { |type| %>
 
-<div class="row">
-<%  
-@softwares.each { |software|
-  json = JSON.parse(software['Iframely'])
-  next unless json['links'] && json['links']['thumbnail']
-%>
-  <div class="col-sm-4 mb-3">
-    <%= partial :software, :locals => {:software => software, :json => json} %>
+  <h2 class="mt-5"><%=type.blank? ? 'Everything else' : type %></h2>
+
+  <div class="row">
+    <%  
+    Software.all(filter: "AND({Featured} = 1, {Type} = '#{type}')", sort: {'Name' => 'asc'}).each { |software|
+    %>
+      <div class="col-sm-4 mb-3">
+        <%= partial :software, :locals => {:software => software} %>
+      </div>
+    <% } %>
   </div>
+
 <% } %>
-</div>

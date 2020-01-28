@@ -28,3 +28,7 @@ h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 .superstrong strong { font-weight: 700 }
 
 blockquote { border-left: 0.3em solid #ccc; padding-left: 1em; font-style: italic }
+
+@media(min-width: 992px) {
+  #nav .nav-item { font-size: 0.85rem }
+}

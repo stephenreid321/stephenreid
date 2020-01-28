@@ -216,16 +216,17 @@ module ActivateApp
     end
     
     get '/software', :cache => true do
-      @title = 'Software'
-      @softwares = Software.all(filter: '{Featured} = 1', sort: {'Name' => 'asc'})
+      @title = 'Software'     
       erb :software
     end    
     
     get '/software/update' do
       agent = Mechanize.new
-      Software.all(filter: "AND({Featured} = 1, {Iframely} = '')").each { |software|
+      Software.all(filter: "AND({Featured} = 1, {Description} = '')").each { |software|
         result = agent.get("https://iframe.ly/api/iframely?url=#{software['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-        software['Iframely'] = result.body.force_encoding("UTF-8")
+        json = JSON.parse(result.body.force_encoding("UTF-8"))
+        software['Description'] = json['meta']['description']        
+        software['Image URL'] = json['links']['thumbnail'].first['href'] if json['links']['thumbnail']
         software.save
       }
       redirect '/software?r=1'      
