@@ -226,7 +226,9 @@ module ActivateApp
         result = agent.get("https://iframe.ly/api/iframely?url=#{software['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
         json = JSON.parse(result.body.force_encoding("UTF-8"))
         software['Description'] = json['meta']['description']        
-        software['Image URL'] = json['links']['thumbnail'].first['href'] if json['links']['thumbnail']
+        if json['links']['thumbnail'] && !software['Image URL']
+          software['Image URL'] = json['links']['thumbnail'].first['href'] 
+        end
         software.save
       }
       redirect '/software?r=1'      
