@@ -1,4 +1,4 @@
-<% Platform.all(sort: { "Order" => "asc" }).each { |platform| if profile_url = platform['Profile URL'] %>
+<% Software.all(sort: { "Order" => "asc" }).each { |platform| if profile_url = platform['Profile URL'] %>
     <div class="col-auto">
       <a style="text-decoration:none" class="text-white" data-toggle="tooltip" title="<%=profile_url.starts_with?('http') ? profile_url.split('/')[3..-1].join('/')  : profile_url%>" target="_blank" href="<%=profile_url%>">
         <%=platform['Name']%>

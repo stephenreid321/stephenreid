@@ -34,7 +34,7 @@ module ActivateApp
 
     before do
       redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
-      if params[:r]
+      if Padrino.env == :production && params[:r]
         ActivateApp::App.cache.clear
         redirect request.path
       end      
@@ -213,6 +213,22 @@ module ActivateApp
     get '/bio', :cache => true do
       @title = 'Biography'
       erb :bio
+    end
+    
+    get '/software', :cache => true do
+      @title = 'Software'
+      @softwares = Software.all(filter: '{Featured} = 1', sort: {'Name' => 'asc'})
+      erb :software
+    end    
+    
+    get '/software/update' do
+      agent = Mechanize.new
+      Software.all(filter: "AND({Featured} = 1, {Iframely} = '')").each { |software|
+        result = agent.get("https://iframe.ly/api/iframely?url=#{software['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+        software['Iframely'] = result.body.force_encoding("UTF-8")
+        software.save
+      }
+      redirect '/software?r=1'      
     end
     
     get '/donate', :cache => true do

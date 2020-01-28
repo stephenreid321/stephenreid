@@ -1,7 +1,16 @@
-<h2 class="mt-5" id="interests">Recommended software</h2>
 
-<p>
-  <%= (Platform.all(filter: "AND({Featured} = 1, {Open source} = 1)", sort: { "Type" => "asc", "Name" => "asc" }) + Platform.all(filter: "AND({Featured} = 1, {Open source} = 0)", sort: { "Type" => "asc", "Name" => "asc" })).map { |platform|
-    %Q{<a class="badge badge-primary" target="_blank" href="#{platform['URL']}">#{platform['Name']}</a>}
-    }.join(' ') %>     
-</p>
+<div class="card shadow-sm">
+  <a href="<%=software['URL']%>">
+    <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] %>">
+  </a>
+  <div class="card-body">
+    <h5 class="card-title">
+      <a href="<%=software['URL']%>" class="text-dark">
+        <%= software['Name'] %>
+      </a>
+    </h5>
+    <% if json['meta']['description'] %>
+      <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
+    <% end %>
+  </div>
+</div>
