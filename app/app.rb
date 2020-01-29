@@ -210,9 +210,9 @@ module ActivateApp
       end.to_s            
     end
     
-    get '/bio', :cache => true do
-      @title = 'Biography'
-      erb :bio
+    get '/about', :cache => true do
+      @title = 'About'
+      erb :about
     end
     
     get '/software', :cache => true do
@@ -226,13 +226,37 @@ module ActivateApp
         result = agent.get("https://iframe.ly/api/iframely?url=#{software['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
         json = JSON.parse(result.body.force_encoding("UTF-8"))
         software['Description'] = json['meta']['description']        
-        if json['links']['thumbnail'] && !software['Image URL']
-          software['Image URL'] = json['links']['thumbnail'].first['href'] 
+        if json['links']['thumbnail'] && !software['Images']
+          software['Images'] = [{url: json['links']['thumbnail'].first['href']}]
         end
         software.save
       }
       redirect '/software?r=1'      
     end
+    
+    get '/groups', :cache => true do
+      @title = 'Groups'     
+      erb :groups
+    end
+    
+    get '/groups/update' do
+      agent = Mechanize.new
+      agent.user_agent_alias = 'Android'
+      Group.all(filter: "AND(
+        FIND(', key,', {Interests joined}) > 0,
+        {Facebook URL} != ''
+      )").each { |group|        
+        if !group['Images']
+          begin
+          page = agent.get(group['Facebook URL'])             
+          image_url = page.search('._3m1l i.img')[0]['style'].split("('")[1].split("')")[0].gsub('\3a ',':').gsub('\3d ','=').gsub('\26 ','&')
+          group['Images'] = [{url: image_url }]
+          group.save
+          rescue; end
+        end        
+      }
+      redirect '/groups?r=1'         
+    end    
     
     get '/donate', :cache => true do
       @title = 'Donate'
@@ -429,7 +453,7 @@ module ActivateApp
     
     
     get '/training' do
-      redirect '/bio'
+      redirect '/about'
     end        
     
     get '/darknet' do #, :cache => true do
@@ -456,6 +480,9 @@ module ActivateApp
       redirect '/'
     end
     
+    get '/bio' do
+      redirect '/about'
+    end    
     
 
   end

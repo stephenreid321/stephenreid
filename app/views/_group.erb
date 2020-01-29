@@ -1,0 +1,14 @@
+
+<div class="card shadow-sm">
+  <a href="<%=group['Facebook URL']%>">
+    <img onerror="this.style.display='none'" class="card-img-top" src="<%= group['Images'].first['url'] if group['Images']%>">
+  </a>
+  <div class="card-body">
+    <h5 class="card-title mb-0">
+      <a href="<%=group['Facebook URL']%>" class="text-dark">
+        <%= group['Name'] %>
+      </a>
+    </h5>
+  </div>
+</div>
+
