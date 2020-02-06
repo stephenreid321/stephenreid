@@ -1,7 +1,9 @@
 @import url('/fonts/pf_stamps_pro_rough/stylesheet.css');
 @import url('/fonts/ZilapEvolution/stylesheet.css');
 @import url('https://fonts.googleapis.com/css?family=Unica+One');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
 
+$font-family-sans-serif: 'Roboto';
 $font-weight-normal: 300;
 $h1-font-size: 2.3rem;
 
@@ -21,11 +23,11 @@ h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 }
 
 .blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
-.blog_post strong { font-weight: 700 }
+.blog_post strong { font-weight: 500 }
 .blog_post img { max-width: 100% }
 .blog_post h2 { display: block; border: none }
 
-.superstrong strong { font-weight: 700 }
+.superstrong strong { font-weight: 500 }
 
 blockquote { border-left: 0.3em solid #ccc; padding-left: 1em; font-style: italic }
 
