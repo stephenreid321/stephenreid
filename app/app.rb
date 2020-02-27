@@ -352,7 +352,7 @@ module ActivateApp
     end    
 
     get '/blog/:slug' do
-      @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first
+      @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
       @full_title = @blog_post['Title']
       @og_desc = @blog_post['Summary']
       @og_image = @blog_post['Attachments'].first['url']
