@@ -5,7 +5,7 @@
   </a>
   <div class="card-body">
     <h5 class="card-title">
-      <a href="/posts/<%=post.id%>" class="text-dark">
+      <a href="<%=post['Link']%>" target="_blank" class="text-dark">
         <%= post['Title'] %>
       </a>
     </h5>
@@ -50,6 +50,10 @@
         </p>
       </div>          
       <div class="col-auto showOnHover d-none">
+        <a target="_blank" class="text-dark" style="text-decoration: none" href="/posts/<%=post.id%>">
+          <i class="fas fa-link"></i>
+        </a>
+        <span style="opacity: 0.3">·</span>        
         <a target="_blank" class="text-dark" style="text-decoration: none" href="<%=post['Facebook URL'] || post['Stephen Reid In Dialogue URL']%>">
           <i class="fab fa-facebook"></i>
         </a>
