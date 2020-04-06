@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.4.2'
-gem 'sinatra', '2.0.0'
+ruby '2.5.7'
+gem 'sinatra', '2.0.2'
 gem 'padrino'
 gem 'puma'
 gem 'rake'
