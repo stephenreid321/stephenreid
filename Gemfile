@@ -16,7 +16,7 @@ gem 'activate-tools', github: 'wordsandwriting/activate-tools'
 gem 'mail'
 
 # Interacting with other websites
-gem 'airbrake', '~> 5.0'
+gem 'airbrake-ruby'
 gem 'mechanize'
 gem 'airrecord'
 gem 'rss'
