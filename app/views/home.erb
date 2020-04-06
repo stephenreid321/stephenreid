@@ -1,34 +1,8 @@
-<div class="row my-3 my-sm-5">   
-  <div class="col-sm-3">
-    <div class="row justify-content-center">   
-      <div class="col-9 col-sm-12 mb-3 mb-sm-0 text-center">
-        <a href="https://facebook.com/stephenreid321" target="_blank"><img src="/images/me.jpg" class="rounded-circle w-100" /></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-9">
-
-    <div class="row justify-content-center">
-      <% [1,2,3].each { |tier| %>
-        <% Affiliation.all(filter: "{Tier} = '#{tier}'", sort: { "Order" => "asc" }).each { |affiliation| %>
-          <div class="col-6 col-sm mb-3 mb-sm-0 text-center">
-            <a style="text-decoration: none" class="text-dark" target="_blank" title="<%=affiliation.organisation['Name']%>" href="<%=affiliation.organisation['URL']%>">                
-              <img class="w-100 mb-3" src="<%=affiliation.organisation['Image'].last['url']%>">
-              <strong><%=affiliation.organisation['Name']%></strong><br /><%=affiliation['Position']%>
-            </a>
-          </div>
-        <% } %>
-      <% } %>
-    </div>
-
-  </div>  
-</div>
-
 <div id="key-info" class="my-5 text-center">
 
-  <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" target="_blank" href="https://stephenreid.substack.com/"><i class="fas fa-envelope-open-text"></i> Subscribe</a>
-  <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" target="_blank" href="https://facebook.com/stephenreid.net"><i class="fab fa-facebook-square"></i> Like</a>
-  <a class="btn btn-lg btn-outline-primary mb-1 mb-sm-0" target="_blank" href="https://twitter.com/stephenreid321"><i class="fab fa-twitter"></i> Follow</a>
+  <a class="btn btn-lg btn-primary mb-1 mb-sm-0" target="_blank" href="https://stephenreid.substack.com/"><i class="fas fa-envelope-open-text"></i> Subscribe</a>
+  <a class="btn btn-lg btn-primary mb-1 mb-sm-0" target="_blank" href="https://facebook.com/stephenreid.net"><i class="fab fa-facebook-square"></i> Like</a>
+  <a class="btn btn-lg btn-primary mb-1 mb-sm-0" target="_blank" href="https://twitter.com/stephenreid321"><i class="fab fa-twitter"></i> Follow</a>
 
 </div> 
 
