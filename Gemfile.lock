@@ -22,6 +22,8 @@ GEM
       zeitwerk (~> 2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrake (10.0.2)
+      airbrake-ruby (~> 4.13)
     airbrake-ruby (4.13.3)
       rbtree3 (~> 0.5)
     airrecord (1.0.5)
@@ -145,7 +147,7 @@ PLATFORMS
 DEPENDENCIES
   activate-tools!
   activesupport
-  airbrake-ruby
+  airbrake
   airrecord
   koala
   mail
