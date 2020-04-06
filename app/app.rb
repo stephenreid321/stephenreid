@@ -17,8 +17,6 @@ module ActivateApp
     Sass::Plugin.options[:css_location] = Padrino.root('app', 'assets', 'stylesheets')
     use Sass::Plugin::Rack
 
-    use Airbrake::Rack::Middleware
-
     set :sessions, :expire_after => 1.year
     set :public_folder, Padrino.root('app', 'assets')
     set :default_builder, 'ActivateFormBuilder'
