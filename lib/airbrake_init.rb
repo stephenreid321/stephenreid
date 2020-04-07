@@ -6,7 +6,7 @@ Airbrake.configure do |config|
 end
 
 Airbrake.add_filter do |notice|
-  if notice[:errors].any? { |error| error[:type] == 'Sinatra::NotFound' }
+  if notice[:errors].any? { |error| %w{Sinatra::NotFound SignalException}.include?(error[:type]) }
     notice.ignore!
   end
 end  
