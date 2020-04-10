@@ -1,7 +1,7 @@
 @import url('/fonts/pf_stamps_pro_rough/stylesheet.css');
 
 $primary: rgb(0, 185, 99); // #00B963
-$font-family-sans-serif: 'Barlow';
+$font-family-sans-serif: 'Barlow', sans-serif;
 
 @import "bootstrap/bootstrap";
 
