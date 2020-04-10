@@ -19,6 +19,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400;1,700&display=fallback" rel="stylesheet">
+
     <% {            
       'jquery/3.2.0' => 'jquery.min.js',
       'jqueryui/1.12.1' => 'jquery-ui.min.js',
@@ -65,15 +68,15 @@
     <title><%=if @full_title; t = @full_title; elsif @title; t = "#{@title} · Stephen Reid"; else; t = "Stephen Reid"; end %></title>        
     <meta property="og:title" content="<%=t%>" />
     <meta name="twitter:title" content="<%=t%>">
-    
+
     <meta name="twitter:description" content="<%=@og_desc%>">
     <meta name="description" content="<%=@og_desc%>">    
-    
+
     <meta property="og:image" content="<%= @og_image%>" />
     <meta name="twitter:image" content="<%=@og_image%>">    
-    
+
     <meta name="twitter:card" content="summary_large_image">
-        
+
     <link rel="alternate" type="application/atom+xml" title="Stephen Reid" href="/feed.rss" />
     <link rel="alternate" type="application/atom+xml" title="Stephen Reid's blog posts" href="/blog/feed.rss" />
 
