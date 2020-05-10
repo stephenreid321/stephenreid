@@ -31,6 +31,7 @@ module ActivateApp
     end
 
     before do
+      @cachebuster = (Padrino.env == :development) ? SecureRandom.uuid : ENV['HEROKU_SLUG_COMMIT']
       redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
       if Padrino.env == :production && params[:r]
         ActivateApp::App.cache.clear
