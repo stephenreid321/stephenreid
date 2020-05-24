@@ -27,6 +27,6 @@
   </div>
 <% end %>
 
-<div class="row mt-5">
+<div class="row mt-5 <% if params[:images_only] %>no-gutters<% end %>">
   <%= partial :posts %>
 </div>

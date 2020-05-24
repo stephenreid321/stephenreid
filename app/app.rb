@@ -32,7 +32,7 @@ module ActivateApp
 
     before do
       @cachebuster = (Padrino.env == :development) ? SecureRandom.uuid : ENV['HEROKU_SLUG_COMMIT']
-      redirect "http://#{ENV['DOMAIN']}#{request.path}" if ENV['DOMAIN'] and request.env['HTTP_HOST'] != ENV['DOMAIN']
+      redirect "#{ENV['BASE_URI']}#{request.path}" if ENV['BASE_URI'] && (ENV['BASE_URI'] != "#{request.scheme}://#{request.env['HTTP_HOST']}")
       if Padrino.env == :production && params[:r]
         ActivateApp::App.cache.clear
         redirect request.path
@@ -40,7 +40,7 @@ module ActivateApp
       fix_params!
       Time.zone = 'London'
       @og_desc = 'Transdisciplinary thinker, cultural changemaker and metamodern mystic'
-      @og_image = "http://#{ENV['DOMAIN']}/images/link6.jpeg"
+      @og_image = "#{ENV['BASE_URI']}/images/link6.jpeg"
     end
 
     error do
@@ -289,7 +289,6 @@ module ActivateApp
 
     get '/tarot', :cache => true do
       @title = 'Tarot'
-      @og_image = "http://#{ENV['DOMAIN']}/images/the-magician.jpg"
       erb :tarot
     end
     
@@ -341,7 +340,7 @@ module ActivateApp
 
         @blog_posts.each { |blog_post|
           maker.items.new_item do |item|
-            item.link = "https://#{ENV['DOMAIN']}/blog/#{blog_post['Slug']}"
+            item.link = "#{ENV['BASE_URI']}/blog/#{blog_post['Slug']}"
             item.title = blog_post['Title']
             item.description = blog_post['Summary']
             item.updated = blog_post['Published at']
