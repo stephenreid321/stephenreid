@@ -145,7 +145,10 @@ module ActivateApp
       200
     end      
     
-
+    get '/tao-te-ching' do
+      @title = 'Tao Te Ching'
+      erb :tao
+    end
 
     
     
@@ -252,10 +255,10 @@ module ActivateApp
       )").each { |group|        
         if !group['Images']
           begin
-          page = agent.get(group['Facebook URL'])             
-          image_url = page.search('._3m1l i.img')[0]['style'].split("('")[1].split("')")[0].gsub('\3a ',':').gsub('\3d ','=').gsub('\26 ','&')
-          group['Images'] = [{url: image_url }]
-          group.save
+            page = agent.get(group['Facebook URL'])             
+            image_url = page.search('._3m1l i.img')[0]['style'].split("('")[1].split("')")[0].gsub('\3a ',':').gsub('\3d ','=').gsub('\26 ','&')
+            group['Images'] = [{url: image_url }]
+            group.save
           rescue; end
         end        
       }

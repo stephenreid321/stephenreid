@@ -1,0 +1,27 @@
+
+
+
+<div class="row justify-content-center mb-5">
+  <div class="col-10 col-sm-4">
+    <a target="_blank" href="https://www.goodreads.com/book/show/2001800.Tao_Te_Ching"><img class="w-100" src="/images/tao.jpg"/></a>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-sm-9">
+    <% Verse.all(sort: { 'Verse' => 'asc'}).each_with_index { |verse,i| %>
+      <div class="row mb-5">
+        <div class="col-sm-6 <% if i%2 == 1 %> order-sm-1 <% end %> mb-3 mb-sm-0">
+          <h2 style="border: 0" class="mb-3">Verse <%=verse['Verse']%></h2>
+          <div>
+            <%= verse['Text'].gsub("\n",'<br />') %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <img style="max-width: 100%" src="<%= verse['Images'].first['url']%>">      
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
