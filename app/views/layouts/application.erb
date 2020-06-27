@@ -60,7 +60,7 @@
       <script src="<%=f%>"></script>
     <% } %>  
 
-    <%= favicon_tag 'me.jpg' %>
+    <%= favicon_tag @favicon || 'me.jpg' %>
     <title><%=if @full_title; t = @full_title; elsif @title; t = "#{@title} · Stephen Reid"; else; t = "Stephen Reid"; end %></title>        
     <meta property="og:title" content="<%=t%>" />
     <meta name="twitter:title" content="<%=t%>">
