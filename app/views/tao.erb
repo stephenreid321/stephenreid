@@ -1,27 +1,54 @@
 
-
-
-<div class="row justify-content-center mb-5">
-  <div class="col-10 col-sm-4">
-    <a target="_blank" href="https://www.goodreads.com/book/show/2001800.Tao_Te_Ching"><img class="w-100" src="/images/tao.jpg"/></a>
+<% if !params[:i] %>
+  <div class="row justify-content-center mb-5">
+    <div class="col-10 col-sm-4">
+      <a target="_blank" href="https://www.goodreads.com/book/show/2001800.Tao_Te_Ching"><img class="w-100" src="/images/tao.jpg"/></a>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="row justify-content-center">
   <div class="col-sm-9">
-    <% Verse.all(sort: { 'Verse' => 'asc'}).each_with_index { |verse,i| %>
+    <% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| %>
       <div class="row mb-5">
         <div class="col-sm-6 <% if i%2 == 1 %> order-sm-1 <% end %> mb-3 mb-sm-0">
-          <h2 style="border: 0" class="mb-3">Verse <%=verse['Verse']%></h2>
+          <h2 style="border: 0" class="mb-3"><a class="text-dark" href="/tao-te-ching/<%=verse['Verse']%>">Verse <%=verse['Verse']%></a></h2>
           <div>
             <%= verse['Text'].gsub("\n",'<br />') %>
           </div>
         </div>
         <div class="col-sm-6">
-          <img style="max-width: 100%" src="<%= verse['Images'].first['url']%>">      
+          <a href="/tao-te-ching/<%=verse['Verse']%>"><img style="max-width: 100%" src="<%= verse['Images'].first['url']%>"></a>
         </div>
       </div>
     <% } %>
+
+    <% if params[:i] %>
+      <div class="row justify-content-between">
+        <div class="col-auto">
+          <% if params[:i].to_i == 1 %>
+            <a href="/tao-te-ching">All chapters</a>
+          <% else %>
+            <a href="/tao-te-ching/<%=params[:i].to_i - 1 %>">&lArr; Verse <%=params[:i].to_i - 1 %></a>
+          <% end %>
+        </div>
+        <div class="col-auto">
+          <% if params[:i].to_i == Verse.all(sort: { 'Verse' => 'desc'}).first['Verse'].to_i %>
+            <a href="/tao-te-ching">All chapters</a>            
+          <% else %>
+            <a href="/tao-te-ching/<%=params[:i].to_i + 1 %>">Verse <%=params[:i].to_i + 1 %> &rArr;</a>
+          <% end %>
+        </div>    
+      </div>
+    <% end %>    
+
   </div>
 </div>
 
+<% if params[:i] %>
+  <div class="row justify-content-center mt-5">
+    <div class="col-10 col-sm-4">
+      <a target="_blank" href="https://www.goodreads.com/book/show/2001800.Tao_Te_Ching"><img class="w-100" src="/images/tao.jpg"/></a>
+    </div>
+  </div>
+<% end %>

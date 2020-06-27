@@ -149,6 +149,11 @@ module ActivateApp
       @title = 'Tao Te Ching'
       erb :tao
     end
+    
+    get '/tao-te-ching/:i' do
+      @title = "Verse #{params[:i]} · Tao Te Ching"
+      erb :tao
+    end    
 
     
     
