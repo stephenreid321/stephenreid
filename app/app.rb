@@ -147,13 +147,13 @@ module ActivateApp
     
     get '/tao-te-ching' do
       @title = 'Tao Te Ching'
-      @favicon = 'tao.jpg'
+      @favicon = 'tao-sq.jpg'
       erb :tao
     end
     
     get '/tao-te-ching/:i' do
       @title = "Verse #{params[:i]} · Tao Te Ching"
-      @favicon = 'tao.jpg'
+      @favicon = 'tao-sq.jpg'
       erb :tao
     end    
 
