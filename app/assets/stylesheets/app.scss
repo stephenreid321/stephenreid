@@ -5,6 +5,8 @@ $font-family-sans-serif: 'Overpass', sans-serif;
 
 @import "bootstrap/bootstrap";
 
+body { font-weight: 300 }
+
 h1,h2,h3 { font-family: 'pf_stamps_prorough'; font-weight: normal; text-transform: uppercase; }
 h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 .badge-warning { color: white }
