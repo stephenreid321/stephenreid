@@ -20,13 +20,13 @@
       <%= ul_nav [    
         ['Home', '/'],      
         ['About', '/about'],      
-        ['Blog', '/blog'],            
+        ['Blog', '/blog'],      
+        ['Newsletter', 'http://stephenreid.substack.com/'],      
         ['Podcast', '/podcast'],      
         ['Books', '/books'],
         ['Software', '/software'],
         ['Groups', '/groups'],
         ['Diet', '/diet'],
-        ['Facilitation', '/facilitation'],
         ['Tao Te Ching', '/tao-te-ching'],
         ['Recommendations', '/products'],
         ['Donate', '/donate']
@@ -40,3 +40,10 @@
     </div>
   </nav>
 </div>
+
+<script>
+  $(function () {
+    if (window.location.href.includes('/blog'))
+      $("#nav a[href='/blog']").css('font-weight', 'bold')
+  })
+</script>

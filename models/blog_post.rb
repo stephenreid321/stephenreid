@@ -12,15 +12,20 @@ class BlogPost < Airrecord::Table
       slug, ext = f.text.split('.')
       if !BlogPost.all(filter: "{Slug} = '#{slug}'").first
         blog_post = BlogPost.new('Slug' => slug)
-        url = "https://stephenreid321.keybase.pub/stephenreid.net/blog/#{slug}.md"
-        text = open(url).read.force_encoding('utf-8')      
-        YAML.load(text).each { |k,v|
-          blog_post[k] = v
-          blog_post.save
-        }
+        blog_post.save        
+        blog_post.update_metadata!
       end
     }
     
+  end
+  
+  def update_metadata!
+    url = "https://stephenreid321.keybase.pub/stephenreid.net/blog/#{self['Slug']}.md"
+    text = open(url).read.force_encoding('utf-8')      
+    YAML.load(text).each { |k,v|
+      self[k] = v
+      self.save
+    }
   end
   
 end

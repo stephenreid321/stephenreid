@@ -1,5 +1,3 @@
-@import url('/fonts/pf_stamps_pro_rough/stylesheet.css');
-
 $primary: rgb(0, 185, 99); // #00B963
 $font-family-sans-serif: 'Overpass', sans-serif;
 
@@ -7,8 +5,8 @@ $font-family-sans-serif: 'Overpass', sans-serif;
 
 body { font-weight: 300 }
 .form-control { font-weight: 300 }
+b, strong { font-weight: 600 }
 
-h1,h2,h3 { font-family: 'pf_stamps_prorough'; font-weight: normal; text-transform: uppercase; }
 h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 .badge-warning { color: white }
 
@@ -22,11 +20,8 @@ h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 }
 
 .blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
-.blog_post strong { font-weight: 500 }
 .blog_post img, .blog_post video { max-width: 100% }
 .blog_post h2 { display: block; border: none }
-
-.superstrong strong { font-weight: 500 }
 
 blockquote { border-left: 0.3em solid #ccc; padding-left: 1em; font-style: italic }
 

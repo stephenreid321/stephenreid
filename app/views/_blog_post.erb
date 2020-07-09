@@ -7,7 +7,9 @@
       <%= blog_post['Embed'] %>
     </div>
   <% elsif blog_post['Header image URL'] %>
-    <img class="mb-3" style="max-width: 100%" src="<%=blog_post['Header image URL']%>" />
+    <div class="mb-3 text-center">
+      <img style="max-width: 100%" src="<%=blog_post['Header image URL']%>" />
+    </div>
   <% end %>
 
   <%= md("https://stephenreid321.keybase.pub/stephenreid.net/blog/#{blog_post['Slug']}.md") %>

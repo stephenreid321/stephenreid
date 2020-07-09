@@ -216,11 +216,12 @@ module ActivateApp
         maker.channel.about = "http://stephenreid.net"
         maker.channel.title = "Stephen Reid"
 
-        @posts.each { |post|
+        @posts.each { |post|          
+          json = JSON.parse(post['Iframely'])      
           maker.items.new_item do |item|
             item.link = post['Link']
             item.title = post['Title']
-            item.description = post['Body']
+            item.description = json['meta']['description'].truncate(150)
             item.updated = post['Created at']
           end
         }
@@ -329,7 +330,7 @@ module ActivateApp
       @post = begin; Post.find(params[:id]); rescue; not_found; end
       @json = JSON.parse(@post['Iframely'])
       @full_title = @post['Title']
-      @og_desc = @post['Body']
+      @og_desc = @json['meta']['description']        
       if @json['links'] && @json['links']['thumbnail']
         @og_image = @json['links']['thumbnail'].first['href']
       end
@@ -370,8 +371,8 @@ module ActivateApp
     end    
 
     get '/blog/:slug' do
-      BlogPost.load!
       @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
+      @blog_post.update_metadata!
       @full_title = @blog_post['Title']
       @og_desc = @blog_post['Summary']
       @og_image = @blog_post['Header image URL']
