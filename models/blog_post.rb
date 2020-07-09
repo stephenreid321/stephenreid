@@ -22,10 +22,12 @@ class BlogPost < Airrecord::Table
   def update_metadata!
     url = "https://stephenreid321.keybase.pub/stephenreid.net/blog/#{self['Slug']}.md"
     text = open(url).read.force_encoding('utf-8')      
-    YAML.load(text).each { |k,v|
-      self[k] = v
-      self.save
-    }
+    begin
+      YAML.load(text).each { |k,v|
+        self[k] = v
+        self.save
+      }
+    rescue; end
   end
   
 end
