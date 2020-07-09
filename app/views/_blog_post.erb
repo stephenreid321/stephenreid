@@ -12,5 +12,25 @@
     </div>
   <% end %>
 
-  <%= md("https://stephenreid321.keybase.pub/stephenreid.net/blog/#{blog_post['Slug']}.md") %>
+  <%= client = DropboxApi::Client.new; md("blog/#{blog_post['Slug']}.md")
+  .gsub('{gallery}', begin; %Q{
+  <div class="grid" id="lightgallery">
+  #{ client.list_folder("/stephenreid.net/blog/#{blog_post['Slug']}").entries.map(&:name).shuffle.map { |image|
+
+    path = "blog/#{blog_post['Slug']}/#{image}"
+    shared_link = client.list_shared_links(path: "/stephenreid.net/#{path}").links.find { |link| link.is_a?(DropboxApi::Metadata::FileLinkMetadata) }
+    if !shared_link
+    shared_link = client.create_shared_link_with_settings("/stephenreid.net/#{path}")
+    end
+    url = shared_link.url.gsub('dl=0','dl=1')
+
+    %Q{<div class="grid-sizer"></div>
+    <a class="grid-item" href="#{url}">
+    <img class="w-100" src="#{url}" />
+    </a>
+    }}.join
+  }
+  </div>     
+    }; rescue; ''; end
+    ) %>
 </div>

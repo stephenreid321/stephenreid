@@ -3,7 +3,6 @@ module ActivateApp
     register Padrino::Rendering
     register Padrino::Helpers
     register WillPaginate::Sinatra
-    helpers Activate::DatetimeHelpers
     helpers Activate::ParamHelpers
     helpers Activate::NavigationHelpers
     
@@ -72,7 +71,7 @@ module ActivateApp
     end
     
     get '/master-lover-course' do
-      open('https://stephenreid321.keybase.pub/stephenreid.net/master-lover-course.html').read
+      open('https://www.dropbox.com/s/1v1fukxiv8jztw3/master-lover-course.html?dl=1').read
     end
     
     

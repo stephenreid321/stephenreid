@@ -1,6 +1,12 @@
 
 $(function () {
-  
+
+  $("#lightgallery").lightGallery({
+    showAfterLoad: false,
+    thumbnail: true,
+    selector: 'a'
+  }).css({opacity: 0});
+
   $(".blog_post a[href^=http]").attr('target', '_blank')
 
   $('[data-toggle="tooltip"]').tooltip()
