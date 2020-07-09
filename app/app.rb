@@ -370,7 +370,7 @@ module ActivateApp
       end.to_s            
     end    
 
-    get '/blog/:slug' do
+    get '/blog/:slug', :cache => true do
       @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
       @blog_post.update_metadata!
       @full_title = @blog_post['Title']
