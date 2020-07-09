@@ -71,9 +71,12 @@ module ActivateApp
       erb :diff
     end
     
+    get '/master-lover-course' do
+      open('https://www.dropbox.com/s/1v1fukxiv8jztw3/master-lover-course.html?dl=1').read
+    end
     
     
-    
+       
     get '/posts/:id/iframely' do
       @post = begin; Post.find(params[:id]); rescue; not_found; end
       agent = Mechanize.new
