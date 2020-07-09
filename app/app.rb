@@ -72,7 +72,7 @@ module ActivateApp
     end
     
     get '/master-lover-course' do
-      open('https://www.dropbox.com/s/1v1fukxiv8jztw3/master-lover-course.html?dl=1').read
+      open('https://stephenreid321.keybase.pub/stephenreid.net/master-lover-course.html').read
     end
     
     
@@ -344,11 +344,13 @@ module ActivateApp
     end
       
     get '/blog', :cache => true do
+      BlogPost.load!
       @blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
       erb :blog
     end   
     
     get '/blog/feed', :provides => :rss, :cache => true do
+      BlogPost.load!
       @blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
       RSS::Maker.make("atom") do |maker|
         maker.channel.author = "Stephen Reid"
@@ -368,10 +370,11 @@ module ActivateApp
     end    
 
     get '/blog/:slug' do
+      BlogPost.load!
       @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
       @full_title = @blog_post['Title']
       @og_desc = @blog_post['Summary']
-      @og_image = @blog_post['Attachments'].first['url']
+      @og_image = @blog_post['Header image URL']
       erb :blog_post
     end   
     

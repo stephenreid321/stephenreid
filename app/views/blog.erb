@@ -5,10 +5,15 @@
       <div class="card mb-4 shadow-sm">          
         <div class="card-body">
           <a class="d-block text-dark" href="/blog/<%=blog_post['Slug']%>" style="text-decoration: none">
-            <p class="text-muted"><%=Time.zone.parse(blog_post['Published at']).to_date.to_s(:blog)%></p>          
-            <div class="mb-3" style="height: 250px; background-image: url(<%=blog_post['Attachments'].first['url']%>); background-size: cover; background-position: center"></div>                              
+            <p class="text-muted"><%=Date.parse(blog_post['Published at']).to_s(:blog)%></p>          
+            
+            <% if blog_post['Header image URL'] %>
+              <div class="mb-3" style="height: 250px; background-image: url(<%=blog_post['Header image URL']%>); background-size: cover; background-position: center"></div>
+            <% end %>
+              
             <h1><%=blog_post['Title']%></h1>
             <p class="lead text-muted mb-0"><%=blog_post['Summary']%></p>
+            
           </a>
         </div>
       </div>

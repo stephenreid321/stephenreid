@@ -11,6 +11,7 @@ ActivateApp::App.helpers do
       end
       text = open(text).read.force_encoding('utf-8')
     end    
+    text = text.gsub(/\A---(.|\n)*?---/,'')
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     markdown.render(text)      
   end
