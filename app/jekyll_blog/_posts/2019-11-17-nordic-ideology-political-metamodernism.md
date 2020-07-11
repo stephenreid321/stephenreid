@@ -2,7 +2,7 @@
 layout: post
 title: "The Nordic Ideology: political metamodernism"
 excerpt: We can go ahead to create a Green Social Liberalism 2.0, working non-linearly, co-developing ourselves towards a listening society. We go ahead with pragmatic idealism, with magical realism and informed naivety. At the crossroads of fact and fiction, we work and play with religious fervor, keeping an ironic smile at our own self-importance.
-header_image_url: /blog/assets/images/2019-11-17-nordic-ideology-political-metamodernism/16299369_118018438713133_1442708474160533573_n28129.jpg
+header_image_url: /blog/assets/2019-11-17-nordic-ideology-political-metamodernism/16299369_118018438713133_1442708474160533573_n28129.jpg
 ---
 
 *A couple of sections from the introduction of [Nordic Ideology](https://www.goodreads.com/book/show/47157252-nordic-ideology) (sequel to [The Listening Society](https://www.goodreads.com/book/show/36107916-the-listening-society)) by Hanzi Freinacht of [Metamoderna](https://metamoderna.org/), which act as a decent teaser/summary*

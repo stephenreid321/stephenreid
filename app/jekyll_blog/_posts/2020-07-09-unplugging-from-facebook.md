@@ -2,7 +2,7 @@
 layout: post
 title: "Unplugging from Facebook"
 excerpt: I'm significantly changing how I use Facebook and other corporate social media
-header_image_url: /blog/assets/images/2020-07-09-unplugging-from-facebook/aac97bc5.jpeg
+header_image_url: /blog/assets/2020-07-09-unplugging-from-facebook/aac97bc5.jpeg
 ---
 
 Hi friends,

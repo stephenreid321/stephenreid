@@ -2,7 +2,7 @@
 layout: post
 title: "A Manifesto of Apocalyptic Witchcraft"
 excerpt: ""
-header_image_url: /blog/assets/images/2019-10-17-a-manifesto-of-apocalyptic-witchcraft/1_wJZR5U-_CtPNpiIZ1em32w.jpeg
+header_image_url: /blog/assets/2019-10-17-a-manifesto-of-apocalyptic-witchcraft/1_wJZR5U-_CtPNpiIZ1em32w.jpeg
 ---
 
 1. If the land is poisoned, the witchcraft must respond.
