@@ -24,6 +24,14 @@ baseurl: "/blog" # the subpath of your site, e.g. /blog
 theme: minima
 plugins:
   - jekyll-feed
+  
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      excerpt: ""
 
 # Exclude from processing.
 # The following items will not be processed, by default.

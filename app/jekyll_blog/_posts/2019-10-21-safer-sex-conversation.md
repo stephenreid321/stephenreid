@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "The Safer Sex Conversation"
-excerpt: ""
 header_image_url: /blog/assets/2019-10-21-safer-sex-conversation/1__lrcvVcdNCV0vLeyQowv_A.jpeg
 ---
 

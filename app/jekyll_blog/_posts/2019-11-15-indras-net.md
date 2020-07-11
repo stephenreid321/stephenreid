@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Indra's Net"
 excerpt: Far away in the heavenly abode of the great god Indra, there is a wonderful net which has been hung by some cunning artificer in such a manner that it stretches out infinitely in all directions.
 header_image_url: /blog/assets/2019-11-15-indras-net/photo-1446582186851-3fe172f6acb9.jpeg

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Whirlpools in consciousness"
 excerpt: When I talk of the brain being a structure in consciousness that reflects the self-limitation of consciousness, I mean something very analogous to the whirlpool in a water stream.
 header_image_url: /blog/assets/2019-11-15-consciousness-as-a-stream/2004-09-05_14-53-56.jpg

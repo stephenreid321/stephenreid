@@ -68,7 +68,6 @@ module ActivateApp
       file_path = File.join(File.dirname(__FILE__), 'jekyll_blog/_site',  request.path.gsub('/blog',''))
       file_path = File.join(file_path, 'index.html') unless file_path =~ /\.[a-z]+$/i  
       redirect('/blog') if !File.exist?(file_path)
-      ext = File.extname(file_path)
       content = File.open(file_path, "rb").read
       content_type = MIME::Types.type_for(file_path).first.content_type
       if content_type == 'text/html'

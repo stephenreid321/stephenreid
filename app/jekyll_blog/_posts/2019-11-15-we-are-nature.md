@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Nature is not something separate from us"
 excerpt: When we say that we have lost our connection to nature, we have lost our connection to ourselves.
 header_image_url: /blog/assets/2019-11-15-we-are-nature/photo-1482355347028-ff60443f60fe.jpeg

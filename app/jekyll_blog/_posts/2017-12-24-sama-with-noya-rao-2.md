@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Samá with Noya Rao, part 2: The first two ceremonies"
-excerpt: ""
 ---
 
 *Read* [*Part 1: Welcome to the jungle*](https://medium.com/@stephenreid_/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad)

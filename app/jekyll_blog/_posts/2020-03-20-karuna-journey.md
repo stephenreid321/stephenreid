@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "My journey through life"
 excerpt: I didn't think I'd share this, but somehow in these strange times it feels appropriate.
 header_image_url: /blog/assets/2020-03-20-karuna-journey/me.png

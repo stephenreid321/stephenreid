@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Ethics is responsibility for the lively relationalities of becoming"
 excerpt: The very nature of materiality is an entanglement. Matter itself is always already open to, or rather entangled with, the "Other." The intra-actively emergent "parts" of phenomena are co-constituted.
 header_image_url: /blog/assets/2019-11-19-relationalities-of-becoming/photo-1517083885098-29acf9acb99c.jpeg

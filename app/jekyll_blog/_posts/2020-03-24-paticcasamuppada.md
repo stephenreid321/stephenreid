@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Key concepts from Seeing That Frees"
 excerpt: Paticcasamuppada and related concepts
 header_image_url: /blog/assets/2020-03-24-paticcasamuppada/IMG_20200324_0834062.jpg

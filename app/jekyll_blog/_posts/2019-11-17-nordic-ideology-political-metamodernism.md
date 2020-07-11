@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "The Nordic Ideology: political metamodernism"
 excerpt: We can go ahead to create a Green Social Liberalism 2.0, working non-linearly, co-developing ourselves towards a listening society. We go ahead with pragmatic idealism, with magical realism and informed naivety. At the crossroads of fact and fiction, we work and play with religious fervor, keeping an ironic smile at our own self-importance.
 header_image_url: /blog/assets/2019-11-17-nordic-ideology-political-metamodernism/16299369_118018438713133_1442708474160533573_n28129.jpg

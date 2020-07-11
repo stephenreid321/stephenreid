@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Samá with Noya Rao, part 1: Welcome to the jungle"
-excerpt: ""
 ---
 
 I’ve just emerged from a 10 day Noya Rao samá (dieta) in the Amazon via [Noya Nete](http://noyanete.com/), which was recommended to me by my friends India Banks and Caro Luna.

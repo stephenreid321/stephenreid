@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Samá with Noya Rao, part 4: The fourth and fifth ceremonies and closing thoughts"
-excerpt: ""
 ---
 
 *Read* [*Part 1*](https://medium.com/@stephenreid_/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad)*,* [*Part 2*](https://medium.com/@stephenreid_/samá-with-noya-rao-part-2-the-first-two-ceremonies-83da3bf18ab2) *or* [*Part 3*](https://medium.com/@stephenreid_/samá-with-noya-rao-part-3-the-third-ceremony-1ba07ca9c871)

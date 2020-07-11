@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Every individual is a unique manifestation of the Whole"
 excerpt: Every individual is a unique manifestation of the Whole, as every branch is a particular outreaching of the tree.
 header_image_url: /blog/assets/2019-11-15-manifestation-of-the-whole/photo-1542448491-515005a365d3.jpeg
