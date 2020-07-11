@@ -1,0 +1,23 @@
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    {% for post in site.posts %}
+    <div class="card mb-4 shadow-sm">          
+      <div class="card-body">
+        <a class="d-block text-dark" href="{{ post.url | relative_url }}" style="text-decoration: none">
+          <p class="text-muted">{% include date.html date=post.date format='%o %B %Y' %}</p>          
+
+          {% if post.header_image_url %}
+          <div class="mb-3" style="height: 250px; background-image: url('{{ post.header_image_url }}'); background-size: cover; background-position: center"></div>
+          {% endif %}
+
+          <h1>{{ post.title }}</h1>
+          {% if post.excerpt %}
+          <p class="lead text-muted mb-0">{{ post.excerpt }}</p>
+          {% endif %}
+
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

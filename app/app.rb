@@ -56,6 +56,33 @@ module ActivateApp
       erb :not_found, :layout => :application
     end
 
+    get '/blog/feed' do
+      redirect '/blog/feed.xml'
+    end
+    
+    get '/blog/feed.rss' do
+      redirect '/blog/feed.xml'
+    end    
+    
+    get '/blog/?*' do
+      file_path = File.join(File.dirname(__FILE__), 'jekyll_blog/_site',  request.path.gsub('/blog',''))
+      file_path = File.join(file_path, 'index.html') unless file_path =~ /\.[a-z]+$/i  
+      redirect('/blog') if !File.exist?(file_path)
+      ext = File.extname(file_path)
+      content = File.open(file_path, "rb").read
+      content_type = MIME::Types.type_for(file_path).first.content_type
+      if content_type == 'text/html'
+        html = Nokogiri::HTML.parse(content)
+        @title = html.search('.post-title').text
+        @og_desc = html.search('.post-excerpt').text
+        src = html.search('.post-header-image').attr('src').to_s
+        @og_image = src.starts_with?('/') ? "#{ENV['BASE_URI']}#{src}" : src 
+        erb content
+      else
+        send_file file_path, content_type: content_type, layout: false
+      end
+    end    
+    
     get '/', :cache => true do
       expires 1.hour.to_i
       @full_network = true
@@ -339,44 +366,7 @@ module ActivateApp
     
     
     
-    get '/blog/totnes-convergence' do
-      redirect 'https://convergence.so/totnes'
-    end
-      
-    get '/blog', :cache => true do
-      BlogPost.load!
-      @blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
-      erb :blog
-    end   
-    
-    get '/blog/feed', :provides => :rss, :cache => true do
-      BlogPost.load!
-      @blog_posts = BlogPost.all(sort: { "Published at" => "desc" })
-      RSS::Maker.make("atom") do |maker|
-        maker.channel.author = "Stephen Reid"
-        maker.channel.updated = Time.now.to_s
-        maker.channel.about = "http://stephenreid.net"
-        maker.channel.title = "Stephen Reid"
-
-        @blog_posts.each { |blog_post|
-          maker.items.new_item do |item|
-            item.link = "#{ENV['BASE_URI']}/blog/#{blog_post['Slug']}"
-            item.title = blog_post['Title']
-            item.description = blog_post['Summary']
-            item.updated = blog_post['Published at']
-          end
-        }
-      end.to_s            
-    end    
-
-    get '/blog/:slug', :cache => true do
-      @blog_post = BlogPost.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
-      @blog_post.update_metadata!
-      @full_title = @blog_post['Title']
-      @og_desc = @blog_post['Summary']
-      @og_image = @blog_post['Header image URL']
-      erb :blog_post
-    end   
+  
     
     
     

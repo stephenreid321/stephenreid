@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+
+    <div class="blog_post">
+      <h1 class="post-title"><a class="text-dark" href="{{ page.url | relative_url }}">{{ page.title }}</a></h1>
+
+      {% if page.excerpt %}
+      <p class="d-none post-excerpt">{{ page.excerpt }}</p>
+      {% endif %}
+
+      <p class="text-muted">{% include date.html date=page.date format='%o %B %Y' %}</p>
+
+      <div class="mb-3 text-center">
+        <img class="post-header-image" style="max-width: 100%" src="{{ page.header_image_url }}" />
+      </div>
+
+      <div>
+        {{ content }}
+      </div>        
+
+      <div class="mt-5 p-1">
+
+        <div class="row justify-content-between">
+          {% if page.previous.url %}
+          <div class="col-auto">
+            <a href="{{ page.previous.url | relative_url }}" class="card text-center shadow-sm mb-1">
+              <div class="card-body py-1 px-3">
+                <span class="text-dark">&larr;</span>              
+                {{ page.previous.title }}
+              </div>            
+            </a>       
+          </div>
+          {% endif %}
+          {% if page.next.url %}
+          <div class="col-auto">
+            <a href="{{ page.next.url | relative_url }}" class="card text-center shadow-sm mb-1">
+              <div class="card-body py-1 px-3">
+                {{ page.next.title }}
+                <span class="text-dark">&rarr;</span>
+              </div>            
+            </a>       
+          </div> 
+          {% endif %}
+        </div>
+      </div>      
+
+    </div>
+  </div>
+</div>
+
