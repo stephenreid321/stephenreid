@@ -1,15 +1,15 @@
 {% assign date = include.date %}
-    {% assign format = include.format %}
+{% assign format = include.format %}
 
-    {% assign day = date | date: "%-d" %}
+{% assign day = date | date: "%-d" %}
 
-    {% capture day_ordinal %}
-      {% case day %}
-        {% when '1' or '21' or '31' %}{{ day }}st
-        {% when '2' or '22'         %}{{ day }}nd
-        {% when '3' or '23'         %}{{ day }}rd
-        {% else                     %}{{ day }}th
-      {% endcase %}
-    {% endcapture %}
+{% capture day_ordinal %}
+{% case day %}
+{% when '1' or '21' or '31' %}{{ day }}st
+{% when '2' or '22'         %}{{ day }}nd
+{% when '3' or '23'         %}{{ day }}rd
+{% else                     %}{{ day }}th
+{% endcase %}
+{% endcapture %}
 
-    {{ date | date: format | replace: '%o', day_ordinal }}
+{{ date | date: format | replace: '%o', day_ordinal }}
