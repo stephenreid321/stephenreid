@@ -73,10 +73,15 @@ module ActivateApp
       content_type = MIME::Types.type_for(file_path).first.content_type
       if content_type == 'text/html'
         html = Nokogiri::HTML.parse(content)
-        @title = html.search('.post-title').text
-        @og_desc = html.search('.post-excerpt').text
+        @title = (t = html.search('.post-title').text; t.empty? ? 'Blog' : t)
+        d = html.search('.post-excerpt').text
+        if !d.empty?
+          @og_desc = d
+        end
         src = html.search('.post-header-image').attr('src').to_s
-        @og_image = src.starts_with?('/') ? "#{ENV['BASE_URI']}#{src}" : src 
+        if !src.empty?
+          @og_image = src.starts_with?('/') ? "#{ENV['BASE_URI']}#{src}" : (src if !src.empty?)
+        end
         erb content
       else
         send_file file_path, content_type: content_type, layout: false
