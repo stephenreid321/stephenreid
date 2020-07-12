@@ -1,0 +1,626 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>master-lover-course</title><link href='https://fonts.loli.net/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext' rel='stylesheet' type='text/css' /><link href='https://fonts.loli.net/css?family=Lato:900,300&subset=latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; tab-size: 4; background-position: inherit inherit; background-repeat: inherit inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) { 
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; background-color: inherit; }
+.CodeMirror-linenumber { }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit inherit; background-repeat: inherit inherit; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; background-position: 0px 0px; background-repeat: initial initial; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print { 
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; overflow-x: hidden; background-position: initial initial; background-repeat: initial initial; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) { 
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background-color: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; background-position: initial initial; background-repeat: initial initial; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; }
+a.md-print-anchor { white-space: pre !important; border: none !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; text-shadow: initial !important; background-position: 0px 0px !important; background-repeat: initial initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background-color: rgb(255, 255, 0); color: rgb(0, 0, 0); background-position: initial initial; background-repeat: initial initial; }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+
+
+@include-when-export url(https://fonts.loli.net/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext);
+@include-when-export url(https://fonts.loli.net/css?family=Lato:900,300&subset=latin-ext);
+
+:root {
+	--control-text-color: #777;
+}
+
+/**
+ * forked from pixyll.com
+ * MIT license
+ */
+
+h1,
+.h1,
+.f1 {
+	font-size: 2rem;
+	line-height: 2.5rem;
+}
+h2,
+.h2,
+.f2 {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+h3,
+.h3,
+.f3 {
+	font-size: 1.25rem;
+	line-height: 1.5rem;
+}
+p,
+.p,
+.f4,
+h4,
+h5,
+h6,
+dl,
+ol,
+ul,
+pre[cid],
+div[cid],
+#typora-source {
+	font-size: 1.125rem;
+	line-height: 1.5rem;
+}
+
+h4 {
+	font-size: 1.13rem;
+}
+/*
+ Pixyll
+ A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.
+ Best served with BASSCSS (http://jxnblk.github.io/basscss)
+ Crafted with <3 by John Otander (@4lpine) - ©2015 John Otander MIT License http://opensource.org/licenses/MIT
+
+*/
+
+body {
+	font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", "STSong", Serif;
+	line-height: 1.5rem;
+	font-weight: 400;
+}
+
+#write {
+	max-width: 914px;
+	color: #333;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1100px;
+	}
+}
+
+@media only screen and (min-width: 1700px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+img {
+	width: auto;
+	max-width: 100%;
+}
+body {
+	font-size: 1.5rem;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.ty-table-edit {
+	background: #ededed;
+}
+
+table {
+	width: 100%;
+	font-size: 1.125rem;
+}
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td,
+table > tfoot > tr > th,
+table > tfoot > tr > td {
+	padding: 12px;
+	line-height: 1.2;
+	vertical-align: top;
+	border-top: 1px solid #333;
+}
+table > thead > tr > th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #333;
+}
+table > caption + thead > tr:first-child > th,
+table > caption + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > td,
+table > thead:first-child > tr:first-child > th,
+table > thead:first-child > tr:first-child > td {
+	border-top: 0;
+}
+table > tbody + tbody {
+	border-top: 2px solid #333;
+}
+p {
+	font-weight: 300;
+	line-height: 1.5;
+}
+abbr {
+	border-bottom: 1px black dotted;
+	cursor: help;
+}
+pre,
+code {
+	font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+code,
+.md-fences  {
+	color: #7a7a7a;
+}
+
+.md-fences {
+	padding: 1.125em;
+	margin-bottom: 0.88em;
+	font-size: 1rem;
+	border: 1px solid #7a7a7a;
+	padding-bottom: 0.5rem;
+	padding-top: 0.5rem;
+}
+
+blockquote {
+	padding: 1.33em;
+	font-style: italic;
+	border-left: 5px solid #7a7a7a;
+	color: #555;
+}
+blockquote em {
+	color: #000;
+}
+blockquote footer {
+	font-size: .85rem;
+	font-style: normal;
+	background-color: #fff;
+	color: #7a7a7a;
+	border-color: transparent;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+	font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: bold;
+	line-height: 1.2;
+	margin: 1em 0 0.5em;
+}
+@media screen and (min-width: 48em) {
+	.h1,
+	h1 {
+		font-size: 3.250rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.298rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.625rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+	#write>h4.md-focus:before,
+	#write>h5.md-focus:before,
+	#write>h6.md-focus:before{
+		top: 1px;
+	}
+	.p,
+	p,
+	li {
+		font-size: 1.25rem;
+		line-height: 1.8;
+	}
+	table {
+		font-size: 1.25rem;
+	}
+}
+@media (max-width: 48em) {
+	blockquote {
+		margin-left: 1rem;
+		margin-right: 0;
+		padding: 0.5em;
+	}
+	.h1,
+	h1 {
+		font-size: 2.827rem;
+	}
+	.h2,
+	h2 {
+		font-size: 1.999rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.413rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+}
+@media screen and (min-width: 64em) {
+	.h1,
+	h1 {
+		font-size: 4.498rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.29rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.9rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.591rem;
+	}
+	#write>h4.md-focus:before{
+		top:4px;
+	}
+}
+a {
+	color: #463F5C;
+	text-decoration: underline;
+}
+
+#write {
+	padding-top: 2rem;
+}
+
+#write pre.md-meta-block {
+	min-height: 35px;
+	padding: 0.5em 1em;
+	white-space: pre;
+	border: 0px;
+
+	border-left: 30px #f8f8f8 solid;
+	border-right: 30px #f8f8f8 solid;
+	width: 100vw;
+	max-width: calc(100% + 60px);
+
+	margin-left: -30px;
+	margin-bottom: 2em;
+	margin-top: -2010px;
+	padding-top: 2000px;
+	padding-bottom: 10px;
+	line-height: 1.5em;
+	color: #7a7a7a;
+	background-color: #fafafa;
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: 300;
+	clear: both;
+	padding-left: 0;
+	font-size:1.125rem;
+}
+.md-image>.md-meta {
+	color: #463F5C
+}
+.footnotes {
+	font-size:1.1rem;
+}
+.md-tag {
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+}
+.code-tooltip {
+	background: white;
+}
+.code-tooltip-content {
+	font-size: 1.1rem;
+}
+
+.task-list{
+	padding-left: 0;
+}
+
+.md-task-list-item {
+	padding-left:34px;
+}
+
+.md-task-list-item > input{
+	width: 1.25rem;
+	height: 1.25rem;
+	display: block;
+	-webkit-appearance: initial;
+	top: -0.2rem;
+	margin-left: -1.6em;
+	margin-top: calc(1rem - 7px);
+	border: none;
+}
+
+.md-task-list-item > input:focus{
+	outline: none;
+	box-shadow: none;
+}
+
+.md-task-list-item > input:before{
+	border: 1px solid #555;
+	border-radius: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: #fff;
+	content: ' ';
+	transition: background-color 200ms ease-in-out;
+	display: block;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	background: #333;
+	border-width: 2px;
+	display:inline-block;
+	transition: background-color 200ms ease-in-out;
+}
+
+.md-task-list-item > input:checked:after,
+.md-task-list-item > input[checked]:after {
+	opacity: 1;
+}
+
+.md-task-list-item > input:after {
+	opacity: 1;
+	-webkit-transition: opacity 0.05s ease-in-out;
+	-moz-transition: opacity 0.05s ease-in-out;
+	transition: opacity 0.05s ease-in-out;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	position: absolute;
+	top: 0.4375rem;
+	left: 0.28125rem;
+	width: 0.9375rem;
+	height: 0.5rem;
+	border: 3px solid #fff;
+	border-top: 0;
+	border-right: 0;
+	content: ' ';
+	opacity: 0;
+}
+
+.md-tag {
+	color:inherit;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+#typora-sidebar {
+	font-size:1rem !important;
+}
+
+.html-for-mac #typora-sidebar {
+	background-color:white;
+}
+
+.outline-content li, .outline-content ul {
+	font-size:1rem !important;
+}
+
+.outline-title {
+	line-height: inherit;
+	margin-top: 10px;
+}
+
+.outline-expander {
+	width: 18px;
+}
+
+.outline-expander:before {
+ 	content: "+";
+	font-family: inherit;
+	color: rgb(108, 108, 108); 
+  	font-size: 1.5rem;
+ 	top: 0.1rem;
+}
+
+.outline-expander:hover:before {
+	content: "+";
+}
+
+.outline-item-open>.outline-item>.outline-expander:before{
+	content: "-";
+}
+
+/** source code mode */
+#typora-source {
+	font-family: Courier, monospace;
+    color: #6A6A6A;
+}
+
+.os-windows #typora-source {
+	font-family: inherit;
+}
+
+.cm-s-typora-default .cm-header, 
+.cm-s-typora-default .cm-property,
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+	color: #428bca;
+}
+
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number {
+	color: #777777;
+}
+
+.md-diagram-panel {
+	margin-top: 24px;
+	margin-left: -1.2em;
+}
+
+.md-mathjax-midline {
+	background: #fafafa;
+}
+
+.enable-diagrams pre.md-fences[lang="sequence"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="flow"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="mermaid"] .code-tooltip {
+    bottom: -3.4em;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+}
+
+
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-mac'><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n3"><a class="md-toc-inner" href="#welcome">Welcome</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n10"><a class="md-toc-inner" href="#frequently-asked-questions">Frequently Asked Questions</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n62"><a class="md-toc-inner" href="#sexual-anatomy-for-women">Sexual Anatomy for Women</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n68"><a class="md-toc-inner" href="#sexual-anatomy-for-men">Sexual Anatomy for Men</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n74"><a class="md-toc-inner" href="#practice-sensorial-awakening-meditation">Practice: Sensorial Awakening Meditation</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n84"><a class="md-toc-inner" href="#interview-deva-on-sexual-dysfunctions--intimacy">Interview: Deva on Sexual Dysfunctions &amp; Intimacy</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n87"><a class="md-toc-inner" href="#chakra-system">Chakra System</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n94"><a class="md-toc-inner" href="#chakra-dance">Chakra Dance</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n115"><a class="md-toc-inner" href="#practice-chakra-dance-meditation">Practice: Chakra Dance Meditation</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n126"><a class="md-toc-inner" href="#lecture-female-self-pleasuring">Lecture: Female Self-Pleasuring</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n134"><a class="md-toc-inner" href="#lecture-male-self-pleasuring">Lecture: Male Self-Pleasuring</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n140"><a class="md-toc-inner" href="#demo-female-self-pleasure">Demo: Female Self-Pleasure</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n166"><a class="md-toc-inner" href="#demo-male-self-pleasure">Demo: Male Self-Pleasure</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n195"><a class="md-toc-inner" href="#practice-self-pleasure---women">Practice: Self-Pleasure - Women</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n209"><a class="md-toc-inner" href="#practice-self-pleasure---men">Practice: Self-Pleasure - Men</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n222"><a class="md-toc-inner" href="#interview-self-pleasure-with-deva">Interview: Self-pleasure with Deva</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n227"><a class="md-toc-inner" href="#interview-self-pleasure-with-dovile">Interview: Self-pleasure with Dovile</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n230"><a class="md-toc-inner" href="#lecture-ambience--ritual">Lecture: Ambience &amp; Ritual</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n248"><a class="md-toc-inner" href="#bathing-ritual">Bathing Ritual</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n252"><a class="md-toc-inner" href="#pink-smoothie-ritual">Pink Smoothie Ritual</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n301"><a class="md-toc-inner" href="#romantic-dance">Romantic Dance</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n306"><a class="md-toc-inner" href="#sensual-dance">Sensual Dance</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n310"><a class="md-toc-inner" href="#tantra-tea--flower-ritual">Tantra Tea &amp; Flower Ritual</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n314"><a class="md-toc-inner" href="#practice-tantra-initiation-ritual">Practice: Tantra Initiation Ritual</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n332"><a class="md-toc-inner" href="#lecture-spiral-to-heaven">Lecture: Spiral to Heaven</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n339"><a class="md-toc-inner" href="#lecture-spiral-to-heaven-for-her">Lecture: Spiral to Heaven for Her</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n344"><a class="md-toc-inner" href="#lecture-spiral-to-heaven-for-him">Lecture: Spiral to Heaven for Him</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n349"><a class="md-toc-inner" href="#demo-spiral-to-heaven-for-her">Demo: Spiral to Heaven for Her</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n352"><a class="md-toc-inner" href="#demo-spiral-to-heaven-for-him">Demo: Spiral to Heaven for Him</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n355"><a class="md-toc-inner" href="#practice-spiral-to-heaven-step-by-step">Practice: Spiral to Heaven Step by Step</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n365"><a class="md-toc-inner" href="#interview-spiral-to-heaven-with-deva--dovile---woman-receiving">Interview: Spiral to Heaven with Deva &amp; Dovile - Woman Receiving</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n368"><a class="md-toc-inner" href="#interview-spiral-to-heaven-with-deva--dovile---man-receiving">Interview: Spiral to Heaven with Deva &amp; Dovile - Man Receiving</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n371"><a class="md-toc-inner" href="#the-art-of-fulfilment-in-sexual-union">The Art of Fulfilment in Sexual Union</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n410"><a class="md-toc-inner" href="#demo-peaks-and-valleys">Demo: Peaks and Valleys</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n413"><a class="md-toc-inner" href="#practice-peaks--valleys-step-by-step">Practice: Peaks &amp; Valleys Step by Step</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n418"><a class="md-toc-inner" href="#interview-peaks--valleys-with-deva--dovile">Interview: Peaks &amp; Valleys with Deva &amp; Dovile</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n421"><a class="md-toc-inner" href="#interview-tips--tricks-for-sexual-fulfilment-with-deva">Interview: Tips &amp; Tricks for Sexual Fulfilment with Deva</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n424"><a class="md-toc-inner" href="#congratulation-on-completing-your-journey-whats-next">Congratulation on completing your journey. What's next?</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n427"><a class="md-toc-inner" href="#what-is-tantra">What is Tantra?</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n430"><a class="md-toc-inner" href="#tantra--tachyon-technology">Tantra &amp; Tachyon Technology</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n436"><a class="md-toc-inner" href="#acknowledgement">Acknowledgement</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n489"><a class="md-toc-inner" href="#master-lover-questions--answers">Master Lover Questions &amp; Answers</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n491"><a class="md-toc-inner" href="#recorded-live-qa-sessions-with-sarita">Recorded Live Q&amp;A Sessions with Sarita</a></span></p></div><p>&nbsp;</p><h2><a name="welcome" class="md-header-anchor"></a><span>Welcome</span></h2><iframe src="https://player.vimeo.com/video/225809499" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Welcome to you Tantric journey of becoming a Master Lover :)</span></p><p><span>Imagine a tree of life. Each branch represents one part of the teaching for the Master Lover On-Line Course.</span></p><p><span>The Master Lover project is answering a deep need of people everywhere.</span></p><p><span>Whether you are a teenager or an adult, or a long term/married couple this will answer questions about how to deeply live your sexual energy in a way that is expanding your potential for inner ecstasy.</span></p><p><span>Watch the video above to learn secrets from the Tantra lineages that existed in the past and applying that into todays world and how you experience yourself in here &amp; now.</span></p><h2><a name="frequently-asked-questions" class="md-header-anchor"></a><span>Frequently Asked Questions</span></h2><ul><li><h3><a name="when-does-the-course-start-and-finish" class="md-header-anchor"></a><span>When does the course start and finish?</span></h3></li></ul><p><span>You can start the course immediately after signing up. It’s always available, so you can learn at your own pace. And it never disappears – you get lifelong access.</span></p><p><span>This means you can study with your current partner or alone, plus with any future soul-mates that might appear.</span></p><p><span>“Lifelong access?” you might say, “what happens when you stop offering this?”. Here’s my promise: If we ever shut my course down for any reasons, you will get an opportunity to download all the materials beforehand. We want those teachings to stick around forever. So yes, lifelong it is!</span></p><ul><li><h3><a name="how-long-will-i-have-access-to-the-course" class="md-header-anchor"></a><span>How long will I have access to the course?</span></h3></li></ul><p><span>How does lifetime access sound? After enrolling, you will have unlimited access to this course for as long as you like – across any and all devices you own.</span></p><ul><li><h3><a name="what-if-i-join-and-then-decide-its-not-for-me" class="md-header-anchor"></a><span>What if I join and then decide it’s not for me?</span></h3></li></ul><p><span>Some decisions in life are irreversible. This is not one of them. If you are super excited and join the course now, but realize in a few days that you don’t like what you bought… no problem. Just shoot us an email within 30 days, and we’ll refund you 100%. No hard feelings!!</span></p><p><span>If you are unsure, we encourage you to simply give it a try. If you don’t like it, the money will be back on your Credit Card before you even notice.</span></p><ul><li><h3><a name="will-this-work-on-my-computertabletphone" class="md-header-anchor"></a><span>Will this work on my computer/tablet/phone?</span></h3></li></ul><p><span>Yes, this course works on any device that has a web browser. All you need is internet access that is capable of streaming videos. That means it works great on smartphones (iPhone, Android and more), tablets, laptops, etc.</span></p><ul><li><h3><a name="what-shows-up-on-my-credit-card-statement" class="md-header-anchor"></a><span>What shows up on my credit card statement?</span></h3></li></ul><p><span>Of course we want your purchase to be discreet. The credit card (or PayPal) statement simply says “Omooni Courses – Teachable”.</span></p><ul><li><h3><a name="why-do-i-have-to-pay-vat" class="md-header-anchor"></a><span>Why do I have to pay VAT?</span></h3></li></ul><p><span>It´s important for us to be transparent, therefore I would like to share with you some information about the VAT.</span></p><p><span>The EU passed a law that requires companies to charge VAT for products (including digital ones), which is our case since we offer the online courses. You should see the amount adjusted on the checkout page before you complete your purchase, so you can see the extent of the VAT.</span></p><p><span>Please bear in mind, we can’t estimate the VAT Amount before since it depends on the location of the buyer.</span></p><ul><li><h3><a name="the-video-doesnt-work-on-my-device" class="md-header-anchor"></a><span>The video doesn’t work on my device</span></h3></li></ul><p><span>Sorry to hear you have trouble watching the videos on your device.</span></p><p><span>Our Courses and Workshops replays can be watched on all devices. The only exception are Live Workshops which don´t work with iOS devices.</span></p><p><span>Please try the following:</span></p><p><span>-</span><span> Make sure to access them with an fast internet connection that is capable of streaming videos</span></p><p><span>-</span><span> Make sure that your browser is up to date: </span><a href='https://www.whatismybrowser.com/' target='_blank' class='url'>https://www.whatismybrowser.com/</a><span> (we recommend using latest Firefox or Chrome)</span></p><p><span>I hope that helps, let us know how it goes.</span></p><ul><li><h3><a name="i-cant-log-in-the-live-session" class="md-header-anchor"></a><span>I can’t log in the Live Session</span></h3></li></ul><p><span>If you can’t log in or the “magic” link is not working, you have to either change the browser or refresh the page. And to make sure you are logged in or you are using the right log in details.</span></p><p><span>Also, make sure you select Returning customer when putting in your details.</span></p><p><img src="https://www.filepicker.io/api/file/jfAT4NRfRc29tvPeAprZ" referrerpolicy="no-referrer" alt="img"></p><p><span>These details are the ones you used when you first registered for the Q&amp;A session (if you didn&#39;t use the same email as your Omooni account then you won&#39;t be able to log in). Do make sure you use the right email and password.</span></p><p><span>If you didn&#39;t registered already then select New User and add an email and password. After you will see a welcome screen.</span></p><p><img src="https://www.filepicker.io/api/file/HWYzacODQGbpBJMQYWwA" referrerpolicy="no-referrer" alt="img"></p><p><span>If you forgot your password select forgot password and when you are in click on the left side of the screen and select Joined Events to see the Q&amp;A session. Do not check My events as that is only if you created your own event.</span></p><p><img src="https://www.filepicker.io/api/file/2hyyOYOTCuh5pbvpUnfz" referrerpolicy="no-referrer" alt="img"></p><p><span>If for any reason the page is blank return to the course and click on the session once again to make sure you are registers in it. The session will play within the course and/or on the crowdcast page as soon as you are registered.</span></p><p><span>We hope we will see you soon in the next session.</span></p><h2><a name="sexual-anatomy-for-women" class="md-header-anchor"></a><span>Sexual Anatomy for Women</span></h2><iframe src="https://player.vimeo.com/video/226120615" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Welcome to an exploration of the Female Sexual Anatomy.</span></p><p><span>This is a very valuable subject as you get to discover your body and your capacity for pleasure as a woman but also from a male perspective to learn how a woman functions sexually.</span></p><p><span>There is a lot of lack of information on the subject so my in depth research and studies will give you a profound knowledge that you can apply in your self-love session or your love making practices.</span></p><p><span>Please watch the video above to learn more.</span></p><h2><a name="sexual-anatomy-for-men" class="md-header-anchor"></a><span>Sexual Anatomy for Men</span></h2><iframe src="https://player.vimeo.com/video/250820001" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Welcome to an exploration of the Male Sexual Anatomy.</span></p><p><span>Tantra Teacher Dr. Dharmaraj will help you broaden your understanding about male sexual anatomy.</span></p><p><span>Very often there is a very simplistic view out there on this topic so in the video above you will discover there is an entire universe to explore.</span></p><p><span>Please watch the video above to learn more.</span></p><h2><a name="practice-sensorial-awakening-meditation" class="md-header-anchor"></a><span>Practice: Sensorial Awakening Meditation</span></h2><p><img src="https://www.filepicker.io/api/file/qWFbhcYVQdi7SOkC1Xg1" referrerpolicy="no-referrer" alt="MAl"></p><p><em><span>“Here in this body are the sacred rivers. Here are the sun and the moon, as well as all the pilgrimage places. I have not encountered another temple as blissful as my own body.”</span></em><span> - Saraha Doha (Tantra Scripture)</span></p><p><strong><span>Welcome to your practice :)</span></strong></p><p><span>One of the best ways to initiate the experience of a Tantra lifestyle is to open our senses to the maximum. You can achieve this by practicing a series of sensorial awakening meditations.</span></p><p><span>In Tantra practices, as we open fully and totally to this present moment we discover eternity. Lovers in deep orgasmic flow know this sublime state of being. The best way to dive into present moment awareness is through the body and the senses. This is so because the body is always in the here and now. The heart is beating now. Blood is flowing now. The pleasure of a caress happens in the present. By becoming attuned to our body and to our senses, we awaken a quality of spiritual aliveness and sensitivity.</span></p><p><span>When we are at ease about being immersed in this sensorial moment, it is then natural to take this total immersion into love relationship and into our sexual explorations. Being a Master Lover is all about the ability of being total and in the moment with whatever you are engaged in.</span></p><p><span>Try these powerful sensorial awakening meditations as a way to jump-start your Master Lover Exploration. You may be amazed just how easy it is to activate your sensual aliveness through immersing yourself in these practices. Each of the meditations listed here will activate not only physical sensitivity but also soul alignment, tapping into your intuition and psychic sensitivity as well</span></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/eqOBaRxFTzyU6fUaS4I5'><span>Sensorial Awakening Meditations.pdf</span></a></p><h2><a name="interview-deva-on-sexual-dysfunctions--intimacy" class="md-header-anchor"></a><span>Interview: Deva on Sexual Dysfunctions &amp; Intimacy</span></h2><iframe src="https://player.vimeo.com/video/230912619" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Check the video above to hear Deva speak about sexual dysfunctions and how to create more intimacy in your life.</span></p><h2><a name="chakra-system" class="md-header-anchor"></a><span>Chakra System</span></h2><iframe src="https://player.vimeo.com/video/225809529" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>The ancient map of the chakra system is a great way to discover our human energy system.</span></p><p><strong><span>Let us explore our beautiful energy centers.</span></strong></p><p><span>This map it describes how Universal life force energy is reflected in our human body and energy system.</span></p><p><span>This discourse includes precise information on the opposite and yet complimentary polarities in the male and female chakras and how this impacts sexuality and male female relations.</span></p><p><span>I invite you to watch the video above to tune into your chakras alongside of me.</span></p><h2><a name="chakra-dance" class="md-header-anchor"></a><span>Chakra Dance</span></h2><iframe src="https://player.vimeo.com/video/225809552" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Welcome to the Chakra Dance meditation in the couple.</span></p><p><span>We can open the chakra system through dance &amp; breath or even visualization, and in this case, we will open it by working with the positive polarities of male &amp; female.</span></p><p><span>When you dance or breathe into a particular chakra with a positive polarity, the receptive polarity will automatically open as a result.</span></p><p><span>Watch the video above to learn how to practice this meditation.</span></p><p><strong><span>Note for Singles:</span></strong></p><p><span>In regards to the chakra system:</span></p><p><span>We all have an inner man or inner woman. The positive polarities in the chakra system are a description of a typical male gender body or female gender body. Our physicality does determine many things, including how energy flows in the chakra system. Our gender type influences brain development, hormonal system, emotional flow, psychology, physical strength, sexual attraction or repulsion, etc.</span></p><p><span>These things are hard-wired into our physicality.</span></p><p><span>Our environment in which we are raised also plays an important role and can create changes in our mindset or in biology.</span></p><p><span>About being single and practicing the chakra dance; you have two different ways you could practice it.</span></p><p><span>1) you can dance the positive poles in front of your projected inner man. In other words, you can imagine your inner man sitting in front of you and you can dance your positive poles in front of him. And you can sit down and imagine him dancing his positive poles in front of you. This can be very powerful.</span></p><p><span>The imprint of the man we carry within is what will manifest as an outer man at some point, i.e. the type of man you will attract towards yourself. By working with your inner man, it can help you to slowly, slowly transform the type of man you will draw towards you.</span></p><p><span>2) you can become your inner man and dance the first chakra / become your outer woman and dance the 2nd chakra / become your inner man and dance the third chakra / become your outer woman and dance the 4th chakra, and so on. This is also very powerful, as you will be stimulating the merging and melting of your inner man outer woman.</span></p><p><span>I suggest you experiment with both of these and find out what works for you.</span></p><p><span>About various sexual orientations:</span></p><p><span>Nature always seeks balance between yin and yang. So even in a same-sex couple, the polarities of yin and yang will play out. In general, one of the partners will tend to be more feminine while one will tend to be more masculine. In such a case, the couple can simply decide who wishes to play the masculine role and who wishes to play the feminine role.</span></p><p><span>If you look around you, there is always polarity at every turn: day and night, summer and winter, cold and hot, peaks and valleys, yin and yang. Tantra plays with these polarities and through them, discovers alchemical magic when both polarities meet.</span></p><p><span>Tantra is valuable no matter what one’s sexual orientation is just as it can be practiced whether you are in a relationship or single.</span></p><p><span>If you are single, as I said, you can work with your inner man or inner woman. If you are in a relationship, you can work with your beloved. Through this beloved, your inner man or inner woman will be mirrored in the outer man / outer woman.</span></p><h2><a name="practice-chakra-dance-meditation" class="md-header-anchor"></a><span>Practice: Chakra Dance Meditation</span></h2><p><img src="https://www.filepicker.io/api/file/g2w71OYfQs6eCuO5ItIF" referrerpolicy="no-referrer" alt="Chakra"></p><p><span>Welcome to your practice.</span></p><p><span>Make sure you watched the previous video on how to practice the Chakra Dance Meditation before you start your own.</span></p><p><span>Below you will find a guide of the practice and a playlist suggestion.</span></p><p><span>Enjoy!</span></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/sbijxKk6TsGmjQHiGlZA'><span>Chakra Dance - Alone or with your Beloved.pdf</span></a></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/sFEoRK7yQUayppC4eudQ'><span>Chakra Dance Meditation - Playlist suggestion.pdf</span></a></p><p><span>Playlist: </span><a href='https://open.spotify.com/playlist/47YzdgJyPjqGeie1TD1sQE' target='_blank' class='url'>https://open.spotify.com/playlist/47YzdgJyPjqGeie1TD1sQE</a></p><h2><a name="lecture-female-self-pleasuring" class="md-header-anchor"></a><span>Lecture: Female Self-Pleasuring</span></h2><iframe src="https://player.vimeo.com/video/225809911" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Why is self-pleasuring for a woman important to cultivate?</span></p><p><strong><span>When we self-pleasure as a woman we tap into our own innate wisdom which we can then share with our lover.</span></strong></p><p><span>A woman&#39;s sexual energy has to do with love in all it&#39;s form so the more we can cultivate self love, the more we can love all beings.</span></p><p><span>You need to be able to love yourself first and then share that as an empress with your lover as an overflowing delight.</span></p><p><span>Watch the video above to learn more.</span></p><p><span>PS: If you would like to learn more about the Tachyonized Wand used during this practice check the </span><a href='http://courses.omooni.com/courses/master-lover/lectures/3034578'><span>bonus section</span></a><span> for more info.</span></p><h2><a name="lecture-male-self-pleasuring" class="md-header-anchor"></a><span>Lecture: Male Self-Pleasuring</span></h2><iframe src="https://player.vimeo.com/video/225809621" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>The way sexual energy moves and the duration sexual pleasure lasts is largely dependent on how we have programmed ourselves through self-pleasuring, (masturbation) When a boy is growing up, there is a tendency to go into self-pleasuring furtively and quickly so as not to be discovered while in the act. Habitual repetition of this will eventually program the body to follow this well-trodden path, in any sexual situation, whether that be alone or with a lover.</span></p><p><strong><span>Self-pleasuring is such an important practice to cultivate.</span></strong></p><p><span>Other reasons why a man may tend to ejaculate quickly could be trauma associated with the genitals, such as having been genitally mutilated through circumcision or a very painful ending of a relationship, which included insults towards him about his manhood. The good news is, if you are not happy with how your sexuality has been programmed, you can deprogram yourself and install a new programming which is more in tune with your Tantra oriented lifestyle.</span></p><p><span>Watch the video above to learn more.</span></p><h2><a name="demo-female-self-pleasure" class="md-header-anchor"></a><span>Demo: Female Self-Pleasure</span></h2><iframe src="https://player.vimeo.com/video/225809952" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><em><span>“How delicious an instrument is woman, when artfully played upon; how capable is she of producing the most exquisite harmonies, of executing the most complicated variations of love, and of giving the most divine of erotic pleasures.” -</span></em><span> </span><em><span>Ananga Ranga</span></em></p><p><span>Before you move into your own self-pleasure do watch the demo above for inspiration :)</span></p><p><span>Take aways:</span></p><ol start='' ><li><span>Dress up</span></li><li><span>Go on a date with yourself</span></li><li><span>Have a sensual shower</span></li><li><span>Dance</span></li><li><span>Discover your body &amp; warm up</span></li><li><span>Self-pleasuring</span></li><li><span>Move into full body orgasmic waves</span></li><li><span>Meditate</span></li><li><span>Bow down to the Love inside you</span></li></ol><p><span>Enjoy.</span></p><p><span>PS: If you would like to learn more about the Tachyonized wand used during this practice check the </span><a href='http://courses.omooni.com/courses/master-lover/lectures/3034578'><span>bonus section</span></a><span> for more info.</span></p><h2><a name="demo-male-self-pleasure" class="md-header-anchor"></a><span>Demo: Male Self-Pleasure</span></h2><iframe src="https://player.vimeo.com/video/225809929" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><em><span>“Behold the Shiva Lingam</span></em></p><p><em><span>beautiful as molten gold</span></em></p><p><em><span>firm as the Himalayan mountain</span></em></p><p><em><span>tender as a folded leaf</span></em></p><p><em><span>Life giving like the solar orb</span></em></p><p><em><span>Behold the charm of his sparkling jewels!”</span></em></p><p><em><span>Linga Purana</span></em></p><p><span>Before you move to your own self-pleasure practice watch the video above for inspiration :)</span></p><p><span>Take aways:</span></p><ol start='' ><li><span>Warm up</span></li><li><span>Bond with nature</span></li><li><span>Self-pleasuring time</span></li><li><span>Dance</span></li><li><span>Raise your Kundalini</span></li><li><span>Have a swim</span></li><li><span>Become a multi-orgasmic man</span></li><li><span>Meditate</span></li></ol><p><span>Enjoy.</span></p><h2><a name="practice-self-pleasure---women" class="md-header-anchor"></a><span>Practice: Self-Pleasure - Women</span></h2><p><img src="https://www.filepicker.io/api/file/j5i6HQCTgaZAfxDu7XrA" referrerpolicy="no-referrer" alt="Self"></p><p><span>I have been teaching Tantra groups to women all over the world for many years. One of the important things I have discovered is that as a general rule, those women who do not practice self-pleasuring have difficulty to experience orgasm with a partner. This is so because our sexual response is programmed according to how we self-pleasure.</span></p><p><span>A woman who has self-pleasured in her childhood by lying face-down on a rolled-up blanket or long pillow, and then rubbing her body forward and backward, will need a similar kind of stimulation while having sex. A woman who has gotten into the habit of self-pleasuring by laying on her back, opening her legs and playing with her yoni with her hands and fingers, will need a similar kind of stimulation while with a lover.</span></p><p><span>In general, I have also found that many women have erroneous ideas about how a woman functions sexually and needs to let go of outdated ideas that are holding her back from being in her full ecstatic potential.</span></p><p><span>Being in a woman’s body means that we need to move from the exterior of the body and slowly, teasingly and progressively move towards the sex center taking at least 20 minutes for this slow approach.</span></p><p><span>In addition to this, ambiance and romance are really important for our entire sexual response. We need to feel loved, adored and even worshiped in order to open up fully and completely.</span></p><p><strong><span>A woman’s greatest ecstasy happens when she can be in a completely surrendered state of being.</span></strong></p><p><span>Instead of waiting for Mr. Right to offer us all of this on a golden platter, we are best served by offering what we need to ourselves. When a woman is able to truly love and pleasure herself, she will be able to truly love and enjoy being with a lover. And because she is living in a fulfilled state of being through her self-pleasure practice, she will simultaneously attract a complimentary lover, just as a flower emitting a sweet nectar attracts the bees and butterflies.</span></p><p><span>So now it&#39;s time for your own self-pleasure practice. You can check the previous video again for inspiration or use the document below for the guided step-by-step process.</span></p><p><span>Enjoy.</span></p><p><span>PS: If you would like to learn more about the Tachyonized wand used during this practice check the </span><a href='http://courses.omooni.com/courses/master-lover/lectures/3034578'><span>bonus section</span></a><span> for more info.</span></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/7fEwAkVR9SgSNe5Ahzc6'><span>Female Self-Pleasuring.pdf</span></a></p><h2><a name="practice-self-pleasure---men" class="md-header-anchor"></a><span>Practice: Self-Pleasure - Men</span></h2><p><img src="https://www.filepicker.io/api/file/VYI9nntRRgWCrPAiPLIc" referrerpolicy="no-referrer" alt="Him"></p><p><span>Many men are engaged in enthusiastic research to find out how to last longer in sex and how to experience full body orgasm without any loss of energy through ejaculation. According to ancient Tantra Texts from India and China, when a man ejaculates he loses his vital life force and if he can learn the art of moving his energy in and up rather than down and out, he can increase pleasure, sexual stamina and his longevity</span><strong><span>.</span></strong></p><p><span>The way to train ourselves to last longer and to move our vital orgasmic energy in and up is by awakening the subtle energy channel running through the center of the body from the perineum in the root of the pelvic floor to the crown of the head. Our instinctual nature asks us to move our energy down and out for the purposes of procreation. But we don’t have sex only for procreation. Sex feels so good and is so fulfilling that there is an urge to go into it for pleasure. Tantrics found it is also possible to have sex for the purposes of spiritual rebirth, discovering cosmic orgasm.</span></p><p><strong><span>Take yourself on the adventure of discovering an entirely new way of approaching self-pleasuring.</span></strong></p><p><span>This methodology can liberate you from sexual dysfunction and open up new vistas in the landscape of your sexual experience. Once your central channel is open, you will easily and naturally begin experiencing inward and upward orgasmic flow, which some people refer to as </span><em><span>Injaculation.</span></em><span> When it happens the first time, it feels like a miracle. And yet, it is simply an invitation to yourself, to know all the ecstasy your body and soul are capable of. Once you have mastered doing this on your own, it will be time to explore your new found discovery with a lover.</span></p><p><span>I asked a friend who is a master of injaculation to describe to me exactly his technique if we can call it that. He said something, which I have noticed to be very true when I am making love with a man who has mastered this art. He said: </span><em><span>“it is like walking a tightrope between let go and relaxation and will and control. Sometimes I lean towards relaxation, and sometimes I lean towards control, and between these two, I find balance.”</span></em><span> By creating two banks, control and relaxation, the river of your life force is invited into an inward and upward flow.</span></p><p><span>Some men are concerned and think that they should master their ejaculatory urge to such an extent that they should never ejaculate. This is an unhealthy direction and indeed can be considered as a sexual dysfunction known as </span><em><span>Retarded Ejaculation</span></em><span>. Ejaculation is an involuntary reflex and is necessary for the health of the body from time to time. The only thing in question is the </span><em><span>frequency</span></em><span> of ejaculation. If ejaculation is used as a form of emotional release to get rid of emotional tensions or as a sleeping pill, this over use of the ejaculatory reflex will gradually diminish your physical strength. I know a man who was porn addicted and masturbated so often that eventually he became completely impotent.</span></p><p><span>It is important to learn the art of cultivating sexual energy and eventually mastering it. You can learn to become the master of your own energy, sometimes choosing to ejaculate and sometimes choosing to send your vital energy in and up into full body orgasmic states without the need to ejaculate. You have a full spectrum of possibilities inside of you and it is great to learn how to celebrate the whole rainbow of who you are!</span></p><p><span>So now it&#39;s time for your own self-pleasure practice. You can check the previous video again for inspiration or use the document below for the guided step-by-step process.</span></p><p><span>Enjoy.</span></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/N8Sj7YLCQVW2CeeduSRo'><span>Whole Body Orgasm Exercise For Men.pdf</span></a></p><h2><a name="interview-self-pleasure-with-deva" class="md-header-anchor"></a><span>Interview: Self-pleasure with Deva</span></h2><iframe src="https://player.vimeo.com/video/230912707" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Watch the video above to hear Deva&#39;s insights on self-pleasure.</span></p><p><span>Note: We&#39;re sorry that it cuts off in the end. Here&#39;s the last part:</span></p><p><span>&quot;Start accepting yourself. Loving where you&#39;re at. Loving who you are and things will change on their own. Especially when you go through this Tantric work and practice - and try these new things. Be open to these new things.&quot;</span></p><h2><a name="interview-self-pleasure-with-dovile" class="md-header-anchor"></a><span>Interview: Self-pleasure with Dovile</span></h2><iframe src="https://player.vimeo.com/video/236055072" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Watch the video above to hear Dovile&#39;s insights on self-pleasure.</span></p><h2><a name="lecture-ambience--ritual" class="md-header-anchor"></a><span>Lecture: Ambience &amp; Ritual</span></h2><iframe src="https://player.vimeo.com/video/226121141" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>This module consists of five scenes dedicated to offering ideas on how a couple can transition from ordinary daily life into quality time and intimacy.</span></p><p><strong><span>The key is coming into the present moment together.</span></strong></p><p><span>When you come from work or from some other daily activity and you want to connect with your lover, it is important to create a special ambience in which to connect with each other.</span></p><p><span>The following qualities listed below are important when establishing Ambience:</span></p><ul><li><span>Sacred Space</span></li><li><span>Present Moment Communication</span></li><li><span>Quality time</span></li><li><span>Conscious, loving connection</span></li><li><span>Equal honouring of masculine and feminine approaches to sexuality and intimacy.</span></li></ul><p><span>Watch the video above to learn more.</span></p><h2><a name="bathing-ritual" class="md-header-anchor"></a><span>Bathing Ritual</span></h2><iframe src="https://player.vimeo.com/video/225810693" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>With eyes blindfolded all of our senses awaken to the maximum. Women get more aroused when there is an element of loving surprise offered by their man.</span></p><p><span>Watch the video above for some inspiration.</span></p><h2><a name="pink-smoothie-ritual" class="md-header-anchor"></a><span>Pink Smoothie Ritual</span></h2><iframe src="https://player.vimeo.com/video/225810771" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Sharing only in the present tense.</span></p><p><span>Watch the video above for some inspiration.</span></p><p><strong><span>The Sexy Smoothie Recipe Suggestion</span></strong></p><p><strong><span>Organic Ingredients:</span></strong></p><ul><li><span>1 ripe banana</span></li><li><span>1 ripe avocado</span></li><li><span>½ large dragon fruit (if you can’t find dragon fruit where you live, you can substitute this with one mango or two peaches or 4 apricots or 6 strawberries)</span></li><li><span>1/2 hand full of soaked almonds</span></li><li><span>1 tablespoon of coconut oil</span></li><li><span>1 teaspoon of raw cacao</span></li><li><span>2 teaspoons Maca root powder</span></li><li><span>1 half teaspoon of Ashwagandha</span></li><li><span>Pinch of cinnamon</span></li><li><span>A bit of ‘real’ honey to taste</span></li></ul><p><strong><span>What Else do You Need?</span></strong></p><ul><li><span>Blender or hand blender</span></li></ul><p><strong><span>How to do it?</span></strong></p><ul><li><span>Peel the banana</span></li><li><span>Spoon the avocado out</span></li><li><span>Add the other fruits after taking out the pits</span></li><li><span>Pour everything into the blender</span></li><li><span>Add 1 or 1&amp; ½ cups of high quality water</span></li><li><span>Blend everything together</span></li><li><span>Pour into two large glasses</span></li><li><span>Decorate with cinnamon</span></li></ul><h2><a name="romantic-dance" class="md-header-anchor"></a><span>Romantic Dance</span></h2><iframe src="https://player.vimeo.com/video/225810714" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Guide your partner and help them enjoy being in deep surrender.</span></p><p><span>In general, a woman will have a much more fulfilling experience during sex if she is able to deeply surrender with her man.</span></p><p><span>Watch the video above for some inspiration.</span></p><h2><a name="sensual-dance" class="md-header-anchor"></a><span>Sensual Dance</span></h2><iframe src="https://player.vimeo.com/video/225810735" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>A man’s sexuality is directly connected to his eyes. With this visual titillation, you are offering him the opportunity to get really turned on!</span></p><p><span>Watch the video above for some inspiration.</span></p><h2><a name="tantra-tea--flower-ritual" class="md-header-anchor"></a><span>Tantra Tea &amp; Flower Ritual</span></h2><iframe src="https://player.vimeo.com/video/225810752" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Inviting a quality of the sacred into intimacy will bring a heightened experience of communion and ecstasy.</span></p><p><span>Watch the video above for some inspiration.</span></p><h2><a name="practice-tantra-initiation-ritual" class="md-header-anchor"></a><span>Practice: Tantra Initiation Ritual</span></h2><p><img src="https://www.filepicker.io/api/file/GEpT7Fj7RsyUNY34wnHJ" referrerpolicy="no-referrer" alt="Tea"></p><p><span>Practice as many rituals as possible, get some inspiration from the previous videos or create your own.</span></p><p><span>The following practice is a great Tantra Initiation Ritual</span><strong><em><span>*</span><span>.</span><span>*</span></em></strong></p><p><span>You will need:</span></p><ul><li><span>A private place with optional, candles, soft music and natural non-chemical incense or scent lamp</span></li><li><span>Your feet should be freshly washed.</span></li><li><span>Two small cups of herbal tea (yogi tea classic works well)</span></li><li><span>Two lovely smelling flowers</span></li><li><span>Some body butter and two small towels</span></li></ul><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/tetI4qr3SeOwMV9X26cU'><span>Tantra Initiation Ritual.pdf</span></a></p><h2><a name="lecture-spiral-to-heaven" class="md-header-anchor"></a><span>Lecture: Spiral to Heaven</span></h2><iframe src="https://player.vimeo.com/video/225812158" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><em><span>“As between heaven and earth, movement must be balanced between the male and female elements. The male element absorbs the female one and is converted; the female element receives the male one and is transformed. The female and male elements must operate in complimentary ways. If the Jade stalk feels firm and strong and the precious grotto moves open and extended, two life forces exchange emissions and flowing liquids penetrate mutually.” -</span></em><span> Taoist Tantra Classic from the ‘Exalted Girl’</span></p><p><strong><span>Welcome to a unique technique I call Spiral to Heaven.</span></strong></p><p><span>This is a recipe of how to open your lover sexually through erotic Tantra methodology. It is good to remember that you have already practiced warming up through ambiance and seduction phases.</span></p><p><span>It is fine to practice these as separate parts the first times you do this sequence but once you have mastered these different parts, it will be important to try all the various aspects of the Spiral to Heaven as one flow, ambience, seduction and the </span><strong><span>Spiral to Heaven</span></strong><span> exchange.</span></p><p><span>Watch the video above to learn more.</span></p><h2><a name="lecture-spiral-to-heaven-for-her" class="md-header-anchor"></a><span>Lecture: Spiral to Heaven for Her</span></h2><iframe src="https://player.vimeo.com/video/225812324" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>For the woman&#39;s pleasure, her man begins by placing his hands on her shoulder and knee, establishing trust. Then, cradle her lower belly between your two hands, back and front and simply be in pure presence.</span></p><p><strong><span>Just be there as a pilar of light &amp; consciousness for her.</span></strong></p><p><span>Watch the video below to learn how to take your woman through the spiral to heaven.</span></p><h2><a name="lecture-spiral-to-heaven-for-him" class="md-header-anchor"></a><span>Lecture: Spiral to Heaven for Him</span></h2><iframe src="https://player.vimeo.com/video/225812341" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>The recipe here is very simple.</span></p><p><strong><span>With the man you begin by honoring his lingam.</span></strong></p><p><span>Watch the video above to see in detail how to take your man through the spiral to heaven.</span></p><h2><a name="demo-spiral-to-heaven-for-her" class="md-header-anchor"></a><span>Demo: Spiral to Heaven for Her</span></h2><iframe src="https://player.vimeo.com/video/226112803" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Before moving into your practice watch the video above to see how a woman should receive the Spiral to Heaven technique.</span></p><h2><a name="demo-spiral-to-heaven-for-him" class="md-header-anchor"></a><span>Demo: Spiral to Heaven for Him</span></h2><iframe src="https://player.vimeo.com/video/225812362" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Before moving into your practice watch the video above to see the protocol for a man receiving the Spiral to Heaven technique.</span></p><h2><a name="practice-spiral-to-heaven-step-by-step" class="md-header-anchor"></a><span>Practice: Spiral to Heaven Step by Step</span></h2><p><img src="https://www.filepicker.io/api/file/ljXXOJ1SSWfFgfNDCc8c" referrerpolicy="no-referrer" alt="STH"></p><p><span>The Spiral to Heaven is a recipe of how to open your Beloved sexually through erotic Tantra methodology.</span></p><p><span>Each session should last somewhere around 40 minutes for each partner. (It is good to remember that you have already practiced warming up through ambiance and seduction phases).</span></p><p><span>It is fine to practice these as separate parts the first times you do this sequence but once you have mastered these different parts, it will be important to try all the various aspects of the Spiral to Heaven as one flow, ambiance, seduction and the Spiral to Heaven exchange.</span></p><p><span>Do make sure you watched the previous videos before you start your practice.</span></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/PAlxWaD1SMyhvLioG6Rn'><span>Spiral to Heaven for Women Receiving.pdf</span></a></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/0b2bvwHTRRiowVEogHIe'><span>Spiral to Heaven For Men Receiving.pdf</span></a></p><h2><a name="interview-spiral-to-heaven-with-deva--dovile---woman-receiving" class="md-header-anchor"></a><span>Interview: Spiral to Heaven with Deva &amp; Dovile - Woman Receiving</span></h2><iframe src="https://player.vimeo.com/video/228651608" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Dovile is sharing with us her experience of receiving the Spiral to Heave.</span></p><h2><a name="interview-spiral-to-heaven-with-deva--dovile---man-receiving" class="md-header-anchor"></a><span>Interview: Spiral to Heaven with Deva &amp; Dovile - Man Receiving</span></h2><iframe src="https://player.vimeo.com/video/226456359" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Deva shares with us his experience on receiving the Spiral to Heaven.</span></p><h2><a name="the-art-of-fulfilment-in-sexual-union" class="md-header-anchor"></a><span>The Art of Fulfilment in Sexual Union</span></h2><iframe src="https://player.vimeo.com/video/226116365" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Welcome to a transmission of the Tantra Method Peaks and Valleys.</span></p><p><span>Included in this transmission:</span></p><ul><li><span>Opening and Closing Ritual for Couple’s Tantric Sexual Union.</span></li><li><span>Completion Ritual to be done after Tantric Sexual Union.</span></li><li><span>Sexual Positions.</span></li></ul><p><span>There are many possible sexual positions and the ones we are showing here, are helpful in balancing yin and yang in sexual union.</span></p><p><strong><span>Yang Positions</span></strong></p><ul><li><span>Lion</span></li><li><span>Standing</span></li><li><span>Woman on top</span></li><li><span>Man on top</span></li><li><span>Deep Heaven</span></li><li><span>Fellatio</span></li></ul><p><strong><span>Yin Positions</span></strong></p><ul><li><span>Scissors</span></li><li><span>Lover’s Embrace</span></li><li><span>Spooning</span></li></ul><p><strong><span>Merging of Yin and Yang</span></strong></p><ul><li><span>Yab Yum</span></li></ul><p><span>Watch the video above to learn more.</span></p><h2><a name="demo-peaks-and-valleys" class="md-header-anchor"></a><span>Demo: Peaks and Valleys</span></h2><iframe src="https://player.vimeo.com/video/226112851" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Before moving into the Peaks &amp; Valleys practice watch the video above for inspiration.</span></p><h2><a name="practice-peaks--valleys-step-by-step" class="md-header-anchor"></a><span>Practice: Peaks &amp; Valleys Step by Step</span></h2><p><img src="https://www.filepicker.io/api/file/F9q5JIxQPi53Czx8B6IH" referrerpolicy="no-referrer" alt="PAV"></p><p><span>Prepare your space and move into your Peaks &amp; Valleys practice after you watched the previous demo.</span></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/eaYB7dE6TxWEz6ELL72h'><span>Peaks &amp; Valleys step by step process.pdf</span></a></p><h2><a name="interview-peaks--valleys-with-deva--dovile" class="md-header-anchor"></a><span>Interview: Peaks &amp; Valleys with Deva &amp; Dovile</span></h2><iframe src="https://player.vimeo.com/video/228651948" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Deva &amp; Dovile are sharing with us their experience after Peaks &amp; Valley.</span></p><h2><a name="interview-tips--tricks-for-sexual-fulfilment-with-deva" class="md-header-anchor"></a><span>Interview: Tips &amp; Tricks for Sexual Fulfilment with Deva</span></h2><iframe src="https://player.vimeo.com/video/236061170" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Deva is sharing with us his tips on how to experience a more fulfilled sexual experience and how to use your energy to feel more and have more orgasmic moments.</span></p><h2><a name="congratulation-on-completing-your-journey-whats-next" class="md-header-anchor"></a><span>Congratulation on completing your journey. What&#39;s next?</span></h2><iframe src="https://player.vimeo.com/video/236714033" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>Congratulations on completing the Master Lover journey. Enjoy Sarita&#39;s message to you.</span></p><h2><a name="what-is-tantra" class="md-header-anchor"></a><span>What is Tantra?</span></h2><iframe src="https://player.vimeo.com/video/226462097" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>I would like to share with you the elixir that is Tantra.</span></p><h2><a name="tantra--tachyon-technology" class="md-header-anchor"></a><span>Tantra &amp; Tachyon Technology</span></h2><iframe src="https://player.vimeo.com/video/227220554" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><span>To order Tachyon / Tantra products go to shops at </span><a href='http://tantra.healing-energy.com/#a_aid=omooni'><span>www.tantra-essence.com</span></a><span>. Click on and use the code: omooni to receive a 10% discount or simply click this </span><a href='http://tantra.healing-energy.com/#a_aid=omooni'><span>link</span></a><span>.</span></p><p><span>You can read more about the Tachyon Technologies in the document below.</span></p><p><span>Download</span></p><p><a href='https://cdn.fs.teachablecdn.com/5EzLrFRgCFasLPPUa8lg'><span>Tachyon Technologies a Portal Into Ecstasy Angels and Healing.pdf</span></a></p><h2><a name="acknowledgement" class="md-header-anchor"></a><span>Acknowledgement</span></h2><p><span>We want to take a minute and introduce to you &amp; acknowledge all those who made Master Lover happen:</span></p><ul><li><span>Ma Ananda Sarita - Director, Storyline and Content, Teacher &amp; Expert</span></li><li><span>Martin Vrabko - Director of Photography</span></li><li><span>Deva Presense (Marcus Thomson) - Actor</span></li><li><span>Dovile Balinskaite - Actress</span></li><li><span>Oana Stoianovici - Script Supervisor, Make-Up Artist</span></li><li><span>Lucia Pajszerová - Sound and Assistant to DP</span></li><li><span>Jakub Šipoš - 2nd Camera Unit</span></li><li><a href='https://www.airbnb.com/rooms/5839932'><span>Ki Ma Ya Retreat</span></a><span>, Bali - main filming location</span></li><li><span>Maitreya Prem - owner of Ki Ma Ya Retreat</span></li><li><a href='http://www.newearthhaven.com/'><span>Akasha Restaurant &amp; New Earth Haven</span></a><span>, Bali - secondary filming location</span></li><li><span>Waiter in Akasha Resturant: Ngakan Putu Modiana</span></li><li><span>Sonya Eberhard (Chef) and </span><a href='http://www.sayurihealingfood.com/'><span>Sayuri Healing Food</span></a><span> (Caterers)</span></li><li><span>Jimmy - Hairdresser/Stylist</span></li><li><span>Sonya Emmerson - Hairdresser/Stylist</span></li><li><span>Gusti Raka - Driver/Chauffeur (62 812-3958-2175)</span></li><li><span>Eleni Alexandridou - Graphic Artist</span></li><li><span>Music: AudioJungle.net</span></li></ul><p><span>Post production support:</span></p><ul><li><span>Supragya Bartlam (Sarita’s Personal Business Manager)</span></li><li><span>Tameer Self (Web Manager for </span><a href='http://www.tantra-essence.com/'><span>www.tantra-essence.com</span></a></li><li><span>Dovile Balinskaite (Social Media Manager for Sarita)</span></li><li><span>Dr. Dharmaraj (or Dr. Dharmaraj Hu) - Project Manager during filming</span></li><li><span>Tantra Essence Faculty, </span><a href='http://www.tantra-essence.com/'><span>www.Tantra-Essence.com</span></a></li><li><span>Edited by Martin Vrabko and Jakub Sipos</span></li><li><span>Crystal Pleasure Wand courtesy of Tantra.Healing-Energy.com</span></li></ul><h2><a name="master-lover-questions--answers" class="md-header-anchor"></a><span>Master Lover Questions &amp; Answers</span></h2><iframe src="https://player.vimeo.com/video/279841733" frameborder="0" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><h2><a name="recorded-live-qa-sessions-with-sarita" class="md-header-anchor"></a><span>Recorded Live Q&amp;A Sessions with Sarita</span></h2><p><span>Welcome!</span></p><p><span>Sarita did a few QA sessions since we made the course available to all of you so here you can find all her sessions:</span></p><ol start='' ><li><a href='https://www.crowdcast.io/e/68ph9f6r/1'><span>First Session</span></a></li><li><a href='https://www.crowdcast.io/e/68ph9f6r/2'><span>Second Session</span></a></li><li><a href='https://www.crowdcast.io/e/68ph9f6r/3'><span>Third Session</span></a></li><li><a href='https://www.crowdcast.io/e/master-lover-qa-sessions/1'><span>Forth Session</span></a></li><li><a href='https://www.crowdcast.io/e/master-lover-qa-sessions/2'><span>Fifth Session</span></a></li><li><a href='https://www.crowdcast.io/e/master-lover-qa-sessions/3'><span>Sixth Session</span></a></li></ol><p><span>Keep an eye on your email as Sarita does new live QAs as soon as her schedule clears so do make sure when that happens that you register and attend so you get a chance to ask Sarita any question you may have.</span></p><p><span>Enjoy</span></p><p><strong><span>Watch the recording from the fifth Q&amp;A call</span></strong></p><iframe src="https://player.vimeo.com/video/292929016" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe><p><strong><span>Watch the recording from the fourth Q&amp;A call</span></strong></p><iframe src="https://player.vimeo.com/video/292936448" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="box-sizing: inherit;  width: 720px; height: 405px;"></iframe></div>
+</body>
+</html>

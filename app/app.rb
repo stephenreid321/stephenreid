@@ -102,7 +102,7 @@ module ActivateApp
     end
     
     get '/master-lover-course' do
-      open('https://www.dropbox.com/s/1v1fukxiv8jztw3/master-lover-course.html?dl=1').read
+      send_file "#{Padrino.root}/app/views/markdown/master-lover-course.html"
     end
     
     
