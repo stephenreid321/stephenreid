@@ -7,7 +7,7 @@ body { font-weight: 300 }
 .form-control { font-weight: 300 }
 b, strong { font-weight: 600 }
 
-h2 { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
+h2:not(.regular) { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 .badge-warning { color: white }
 
 .bgo:hover { opacity: 0 !important }

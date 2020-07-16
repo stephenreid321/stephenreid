@@ -88,12 +88,6 @@ module ActivateApp
     end    
     
     get '/', :cache => true do
-      expires 1.hour.to_i
-      @full_network = true
-      @posts = Post.all(filter: "AND(
-        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
-        FIND('\"url\": ', {Iframely}) > 0
-      )", sort: { "Created at" => "desc" }, paginate: false)    
       erb :home
     end
     
@@ -102,7 +96,7 @@ module ActivateApp
     end
     
     get '/master-lover-course' do
-      send_file "#{Padrino.root}/app/views/markdown/master-lover-course.html"
+      send_file "#{Padrino.root}/app/markdown/master-lover-course.html"
     end
     
     
@@ -325,17 +319,18 @@ module ActivateApp
       @title = 'Habits'
       erb :habits
     end
+        
+    get '/knowledgegraph', :cache => true do
+      @title = 'Knowledgegraph'
+      expires 1.hour.to_i
+      @full_network = true
+      @posts = Post.all(filter: "AND(
+        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
+        FIND('\"url\": ', {Iframely}) > 0
+      )", sort: { "Created at" => "desc" }, paginate: false)          
+      erb :links
+    end   
     
-    get '/diet', :cache => true do
-      @title = 'Diet'
-      erb :diet
-    end    
-
-    get '/facilitation', :cache => true do
-      @title = 'Facilitation'
-      erb :facilitation
-    end    
-
     get '/tarot', :cache => true do
       @title = 'Tarot'
       erb :tarot
@@ -482,15 +477,15 @@ module ActivateApp
     end        
             
     get '/books-videos' do
-      redirect '/'
+      redirect '/knowledgegraph'
     end    
     
     get '/featured' do
-      redirect '/'
+      redirect '/knowledgegraph'
     end
     
     get '/recommended' do
-      redirect '/'
+      redirect '/knowledgegraph'
     end
     
     get '/bio' do

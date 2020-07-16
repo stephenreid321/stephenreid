@@ -1,21 +1,68 @@
 
-<div class="row justify-content-center">
-  <div class="col-md-10">
-    <%= md :intro %>           
+<h1 class="regular text-center">
+  Technology & Co-operative Business<br />
+  <small class="text-muted">Coaching, Consulting, Coding & Facilitation</small>
+</h1>
+
+<div class="row justify-content-center mb-3">   
+  <div class="col-sm-9">
+    <div class="row align-items-top justify-content-center">   
+      <div class="col-9 col-sm-6 col-sm-4 text-center py-3 px-3 py-sm-3 px-sm-5">
+        <img src="/images/me.jpg" class="rounded-circle w-100" />
+      </div>
+    </div>
   </div>
 </div>
 
+<div class="row">
+  <% %w{coaching consulting coding facilitation}.each { |slug| service = front_matter(:"services_#{slug}") %>
+    <div class="col-md-3 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <h4 class="mb-3 text-center"><%=service['title']%></h4>
+          </div>    
+          <div style="font-size: 0.9rem">
+            <%= md :"services_#{slug}" %>          
+          </div>
+          <p class="text-center">
+            From <strong><%= service['price'] %></strong> 
+          </p>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
 
-<div class="row justify-content-center my-5">
-  <div class="col-md-6">
-    <a target="_blank" href="https://dontgobacktonormal.uk"><img class="w-100" src="https://dontgobacktonormal.uk/images/header.png" /></a>
-    <p class="text-center mt-2 mb-0">One of my current projects: <a target="_blank" href="https://dontgobacktonormal.uk">Don't Go Back To Normal</a></p>
-  </div>
+<p class="lead text-center">Discounts for co-ops and non-profits</p>
+
+<div class="mb-5">
+  <%= partial :book_a_call %>
+</div>
+
+<h2 class="mt-5 text-center regular">Clients include</h2>
+<div class="row align-items-center justify-content-center">   
+  <% Organisation.all(filter: "AND({Logo} != '', {Client} = 1)", sort: { 'Client order' => 'asc'}).select { |organisation| organisation['Client order'] }.each { |organisation| %>
+    <div class="col-4 col-sm-2 text-center">     
+      <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+           filter: grayscale(100%);" class="w-100 mb-3" src="<%= organisation['Logo'].first['url'] %>">     
+    </div>
+  <% } %>
 </div>
 
 
-<div id="key-info" class="my-5 text-center">
-  <a class="btn btn-lg btn-primary mb-1 mb-sm-0" target="_blank" href="https://stephenreid.substack.com/"><i class="fas fa-envelope-open-text"></i> Subscribe</a>
-</div> 
+<h2 class="mt-5 mb-3 text-center regular">Software I work with</h2>
+<% types = Software.all(filter: "{Featured} = 1").map { |software| software['Type'] || '' }
+(types.uniq.select { |t| t != '' }.sort + ['']).each { |type| %>
 
-<%= partial :search %>
+  <dl class="text-center">
+    <dt><%=type.blank? ? 'Everything else' : type %></dt>
+    <dd><%= Software.all(filter: "AND({Featured} = 1, {Type} = '#{type}')", sort: {'Name' => 'asc'}).map { |software| software['Name'] }.join(' &middot; ') %></dd>
+  </dl>
+
+<% } %>
+
+<div class="my-5">
+  <%= partial :book_a_call %>
+</div>
+

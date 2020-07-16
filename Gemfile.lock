@@ -36,6 +36,7 @@ GEM
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
+    front_matter_parser (0.2.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (1.8.3)
@@ -149,6 +150,7 @@ DEPENDENCIES
   activesupport
   airbrake
   airrecord
+  front_matter_parser
   koala
   mail
   mechanize
