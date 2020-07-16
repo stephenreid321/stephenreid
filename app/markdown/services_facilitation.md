@@ -3,7 +3,7 @@ title: Facilitation
 price: £500/day
 ---
 
-Good facilitators have excellent technical knowledge, fine-tuned intuition and wide life experience.
+Great facilitators have excellent technical knowledge, fine-tuned intuition and wide life experience.
 
 * I facilitate team processes in visioning, conflict resolution, change management and more
 * I have [uniquely wide training](/about) across the fields of physics, complexity science, software development, meditation, psychotherapy, plant medicine, sacred sexuality and political activism
