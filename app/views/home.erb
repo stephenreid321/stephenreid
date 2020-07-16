@@ -42,7 +42,7 @@
 
 <h2 class="mt-5 text-center regular">Clients include</h2>
 <div class="row align-items-center justify-content-center">   
-  <% Organisation.all(filter: "AND({Logo} != '', {Client} = 1)", sort: { 'Client order' => 'asc'}).select { |organisation| organisation['Client order'] }.each { |organisation| %>
+  <% Organisation.all(filter: "AND({Logo} != '', {Client} = 1)").shuffle.each { |organisation| %>
     <div class="col-4 col-sm-2 text-center">     
       <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
            filter: grayscale(100%);" class="w-100 mb-3" src="<%= organisation['Logo'].first['url'] %>">     
