@@ -18,10 +18,10 @@
   <% %w{coaching consulting coding facilitation}.each { |slug| service = front_matter(:"services_#{slug}") %>
     <div class="col-md-3 mb-3">
       <div class="card">
+          <div class="card-title mb-0 bg-primary">
+            <h4 class="p-3 m-0 text-center text-white"><%=service['title']%></h4>
+          </div>            
         <div class="card-body">
-          <div class="card-title">
-            <h4 class="mb-3 text-center"><%=service['title']%></h4>
-          </div>    
           <div style="font-size: 0.9rem">
             <%= md :"services_#{slug}" %>          
           </div>
