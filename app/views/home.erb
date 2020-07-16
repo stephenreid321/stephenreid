@@ -52,6 +52,9 @@
 
 
 <h2 class="mt-5 mb-3 text-center regular">Software I work with</h2>
+
+<p class="text-center"><a href="/software">View all</a></p>
+
 <% types = Software.all(filter: "{Featured} = 1").map { |software| software['Type'] || '' }
 (types.uniq.select { |t| t != '' }.sort + ['']).each { |type| %>
 
