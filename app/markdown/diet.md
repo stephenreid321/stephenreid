@@ -14,5 +14,5 @@
 *   Digital health  
     *   No smartphone in bedroom
     *   Notifications off for most apps
-    *   [Unplugged from Facebook](https://stephenreid.net/blog/2020/07/09/unplugging-from-facebook.html)
+    *   [Unplugged from social media](https://stephenreid.net/blog/2020/07/09/unplugging-from-facebook.html)
 
