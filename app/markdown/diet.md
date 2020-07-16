@@ -14,5 +14,5 @@
 *   Digital health  
     *   No smartphone in bedroom
     *   Notifications off for most apps
-    *   Facebook newsfeed hidden on desktop using [Stylish](https://www.facebook.com/stephenreid.net/posts/198161831610249)
+    *   [Unplugged from Facebook](https://stephenreid.net/blog/2020/07/09/unplugging-from-facebook.html)
 
