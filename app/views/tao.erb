@@ -27,16 +27,34 @@
       <div class="row justify-content-between">
         <div class="col-auto">
           <% if params[:i].to_i == 1 %>
-            <a href="/tao-te-ching">All chapters</a>
+            <a href="/tao-te-ching" class="card text-center shadow-sm mb-1">
+              <div class="card-body py-1 px-3">
+                All chapters
+              </div>            
+            </a>           
           <% else %>
-            <a href="/tao-te-ching/<%=params[:i].to_i - 1 %>">&lArr; Verse <%=params[:i].to_i - 1 %></a>
+            <a href="/tao-te-ching/<%=params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
+              <div class="card-body py-1 px-3">                
+                <span class="text-dark">&lArr;</span>
+                Verse <%=params[:i].to_i - 1 %>
+              </div>            
+            </a>          
           <% end %>
         </div>
         <div class="col-auto">
           <% if params[:i].to_i == Verse.all(sort: { 'Verse' => 'desc'}).first['Verse'].to_i %>
-            <a href="/tao-te-ching">All chapters</a>            
-          <% else %>
-            <a href="/tao-te-ching/<%=params[:i].to_i + 1 %>">Verse <%=params[:i].to_i + 1 %> &rArr;</a>
+            <a href="/tao-te-ching" class="card text-center shadow-sm mb-1">
+              <div class="card-body py-1 px-3">
+                All chapters
+              </div>            
+            </a>           
+          <% else %>            
+            <a href="/tao-te-ching/<%=params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
+              <div class="card-body py-1 px-3">                                
+                Verse <%=params[:i].to_i + 1 %>
+                <span class="text-dark">&rArr;</span>
+              </div>            
+            </a>    
           <% end %>
         </div>    
       </div>
@@ -46,6 +64,38 @@
 </div>
 
 <% if params[:i] %>
+
+  <style>
+    .grid-sizer, .grid-item {  width: 100% }
+    @media(min-width: 768px) {
+      .grid-sizer, .grid-item {  width: 25% }        
+    }
+    .grid-item img { padding: 0.1rem }
+  </style>
+
+  <script>
+    $(window).on('load', function () {
+      $('.grid').masonry({
+        // set itemSelector so .grid-sizer is not used in layout
+        itemSelector: '.grid-item',
+        // use element for option
+        columnWidth: '.grid-sizer',
+        percentPosition: true
+      })
+      $('.grid').animate({opacity: 1});
+    })
+  </script>   
+
+  <div class="grid mt-5" style="opacity: 0">
+    <% Verse.all(sort: { 'Verse' => 'asc'}).shuffle.each { |verse| next if verse['Verse'] == params[:i].to_i %>
+      <div class="grid-sizer"></div>
+      <a class="grid-item" href="/tao-te-ching/<%=verse['Verse']%>">
+        <img class="w-100" src="<%= verse['Images'].first['url']%>" />
+      </a>
+    <% } %>
+  </div>
+
+
   <div class="row justify-content-center mt-5">
     <div class="col-10 col-sm-4">
       <a href="/tao-te-ching"><img class="w-100" src="/images/tao.jpg"/></a>
