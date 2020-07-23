@@ -14,7 +14,7 @@
         <div class="col-sm-6 <% if i%2 == 1 %> order-sm-1 <% end %> mb-3 mb-sm-0">
           <h2 style="border: 0" class="mb-3"><a class="text-dark" href="/tao-te-ching/<%=verse['Verse']%>">Verse <%=verse['Verse']%></a></h2>
           <div>
-            <%= verse['Text'].gsub("\n",'<br />') %>
+            <%= verse['Text'].gsub('  ','&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n",'<br />') %>
           </div>
         </div>
         <div class="col-sm-6">
