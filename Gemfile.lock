@@ -29,6 +29,7 @@ GEM
     airrecord (1.0.5)
       faraday (>= 0.10, < 2.0)
       net-http-persistent (>= 2.9)
+    chroma (0.2.0)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.3)
     domain_name (0.5.20190701)
@@ -150,6 +151,7 @@ DEPENDENCIES
   activesupport
   airbrake
   airrecord
+  chroma
   front_matter_parser
   koala
   mail

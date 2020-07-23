@@ -1,15 +1,12 @@
 <div class="row justify-content-center">   
   <div class="col-sm-9">
     <div class="row align-items-top justify-content-center">   
-      <div class="col-9 col-sm-6 col-sm-4 text-center py-3 px-3 py-sm-3 px-sm-5">
+      <div class="col-9 col-sm-6 text-center py-3 px-3 py-sm-3 px-sm-5">
         <img src="/images/me.jpg" class="rounded-circle w-100" />
       </div>
     </div>
   </div>
 </div>
-
-
-
 
 <div class="row justify-content-center">
   <div class="col-sm-9">
@@ -53,6 +50,59 @@
     </p>
   </div>
 </div>
+
+<div class="text-center">
+  <h2 class="mt-5" id="ancestry">Ancestry</h2>
+</div>
+<script>
+  $(function () {
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+            data: <%= Ancestry.all(sort: { "Autonumber" => "asc" }).map { |ancestry| ancestry['Percentage'] } %>,
+            backgroundColor: <%=  spin = 60/Ancestry.all.count; {'European' => 0, 'Jewish' => 210, 'Central & South Asian' => 120, 'Unknown' => 0}.map { |k,v| 
+  n = Ancestry.all(filter: "{Region} = '#{k}'", sort: { "Autonumber" => "asc" }).count; 0.upto(n-1).map { |i| "#{k == 'Unknown' ? '#666' : '#00B963'.paint.spin(v + i*spin)}" }
+  }.sum
+%>
+          }],
+        labels: <%= Ancestry.all(sort: { "Autonumber" => "asc" }).map { |ancestry| ancestry['Name'] } %>,
+      },
+      options: {
+        responsive: true,
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem, data) {
+              try {
+                let label = ' ' + data.labels[tooltipItem.index] || '';
+
+                if (label) {
+                  label += ': ';
+                }
+
+                const sum = data.datasets[0].data.reduce((accumulator, curValue) => {
+                  return accumulator + curValue;
+                });
+                const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+                label += Number((value / sum) * 100).toFixed(1) + '%';
+                return label;
+              } catch (error) {
+                console.log(error);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    window.onload = function () {
+      var ctx = document.getElementById('chart-area').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+  })
+</script>
+<canvas id="chart-area"></canvas>
 
 <h2 class="mt-5" id="speaking">Training and teachers</h2>
 
