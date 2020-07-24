@@ -61,7 +61,7 @@
 <script>
   $(function () {
     var config = {
-      type: 'pie',
+      type: 'doughnut',
       data: {
         datasets: [{
             data: <%= Ancestry.all(sort: { "Autonumber" => "asc" }).map { |ancestry| ancestry['Percentage'] } %>,
