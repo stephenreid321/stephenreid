@@ -38,7 +38,7 @@ module ActivateApp
       end      
       fix_params!
       Time.zone = 'London'
-      @og_desc = 'Transdisciplinary thinker, cultural changemaker and metamodern mystic'
+      @og_desc = 'Co-operative technologist and cultural changemaker'
       @og_image = "#{ENV['BASE_URI']}/images/link6.jpeg"
     end
 
