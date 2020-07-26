@@ -55,7 +55,7 @@ module ActivateApp
     not_found do
       erb :not_found, :layout => :application
     end
-
+    
     get '/blog/feed' do
       redirect '/blog/feed.xml'
     end
@@ -184,6 +184,10 @@ module ActivateApp
       erb :tao
     end    
 
+    get '/iconomi/:password' do
+      halt 400 unless params[:password] == ENV['ICN_PASSWORD']
+      erb :iconomi
+    end
     
     
     get '/search' do      

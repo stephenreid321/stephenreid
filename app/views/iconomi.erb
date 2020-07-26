@@ -1,0 +1,116 @@
+
+<% reference_amount = 20000 %>
+<% minimum_period = 'SIX_MONTH' %>
+<%# minimum_period = 'YEAR' %>
+
+
+<% balances = JSON.parse(Strategy.iconomi('/v1/user/balance'))['daaList'] %>
+<% balanceTotal = balances.sum { |b| b['value'].to_i} %>
+<% n = (balanceTotal/reference_amount).round %>
+
+<% strategies = Strategy.all(filter: "AND({monthlyRebalancedCount} > 1, {#{minimum_period}} != BLANK())", sort: { "Score" => "desc" })[0..(n-1)] %>
+<% total = strategies.sum { |strategy| strategy['Score'] } %>
+
+<% offset = 0 %>
+<% spin = 180/n; %>
+
+
+<h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
+
+<table class="table" style="font-size: 0.85rem">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Current position</th>     
+      <th>Suggested position</th>    
+      <th>Score</th>    
+      <% %w{management performance entry exit numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
+        <th><%=x%></th>
+      <% } %>
+    </tr>
+  </thead>
+  <% (strategies + balances.reject { |b| strategies.map { |s| s['ticker']}.include?(b['ticker']) }).each_with_index { |strategy, i| %>
+    <tr>
+      <td>
+        <% if strategy.is_a?(Strategy) %>
+          <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>"><%=number_to_percentage((strategy['Score']/total)*100, :precision => 0)%></div></td>
+      <% end %>
+      <td><%= strategy['name'] %></td>          
+      <td>
+        <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy['ticker'] }['value'], precision: 0; rescue; end %>
+      </td>
+      <td>
+        <% if strategy.is_a?(Strategy) %>
+          <%= number_to_currency (strategy['Score']/total)*balanceTotal, precision: 0 %>
+        <% end %>
+      </td>      
+      <% if !strategy.is_a?(Strategy); strategy = Strategy.all(filter: "{ticker} = '#{strategy['ticker']}'").first; end %>
+      <td>
+        <%= number_with_precision strategy['Score'], precision: 2 %>
+      </td>        
+      <% %w{management performance entry exit}.each { |fee| %>
+        <td>
+          <%= number_to_percentage strategy["#{fee}Fee"]*100, precision: 0 %>
+        </td>
+      <% } %>
+      <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
+        <td>
+          <% if x == 'lastRebalanced' %>
+            <%= time_ago_in_words strategy[x] %> ago
+          <% else %>
+            <%= strategy[x] %>
+          <% end %>
+        </td>            
+      <% } %>
+    </tr>
+  <% } %> 
+</table>
+
+
+<script>
+  $(function () {
+    var config = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+            data: <%= strategies.map { |strategy| strategy['Score']/total } %>,
+            backgroundColor: <%= strategies.each_with_index.map { |strategy,i| "#{'#00B963'.paint.spin(offset + i*spin)}" } %>
+          }],
+        labels: <%= strategies.map { |strategy| strategy['name'] } %>
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        responsive: true,
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem, data) {
+              try {
+                let label = ' ' + data.labels[tooltipItem.index] || '';
+                if (label) {
+                  label += ': ';
+                }
+
+                const sum = data.datasets[0].data.reduce((accumulator, curValue) => {
+                  return accumulator + curValue;
+                });
+                const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                label += Number((value / sum) * 100).toFixed(0) + '%';
+                return label;
+              } catch (error) {
+                console.log(error);
+              }
+            }
+          }
+        }
+      }
+    };
+    window.onload = function () {
+      var ctx = document.getElementById('chart-area').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+  })
+</script>
+<canvas id="chart-area"></canvas>

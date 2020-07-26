@@ -1,3 +1,10 @@
+namespace :strategies do  
+  task :update => :environment do
+    Strategy.import
+    Strategy.update    
+  end  
+end
+
 namespace :terms do
   
   task :create_edges => :environment do
