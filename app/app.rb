@@ -184,7 +184,7 @@ module ActivateApp
       erb :tao
     end    
 
-    get '/iconomi/:password' do
+    get '/iconomi/:password', :cache => true do
       halt 400 unless params[:password] == ENV['ICN_PASSWORD']
       erb :iconomi
     end
