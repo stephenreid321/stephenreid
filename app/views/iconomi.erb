@@ -22,7 +22,7 @@
       <th>Current position</th>     
       <th>Suggested position</th>    
       <th>Score</th>    
-      <% %w{management performance entry exit numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
+      <% %w{management performance exit numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <th><%=x%></th>
       <% } %>
     </tr>
@@ -33,7 +33,9 @@
         <% if strategy.is_a?(Strategy) %>
           <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>"><%=number_to_percentage((strategy['Score']/total)*100, :precision => 0)%></div></td>
       <% end %>
-      <td><%= strategy['name'] %></td>          
+      <td>
+        <a target="_blank" href="https://my.iconomi.com/asset/<%=strategy['ticker']%>"><%= strategy['name'] %></a>
+      </td>          
       <td>
         <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy['ticker'] }['value'], precision: 0; rescue; end %>
       </td>
@@ -46,9 +48,9 @@
       <td>
         <%= number_with_precision strategy['Score'], precision: 2 %>
       </td>        
-      <% %w{management performance entry exit}.each { |fee| %>
+      <% %w{management performance exit}.each { |fee| %>
         <td>
-          <%= number_to_percentage strategy["#{fee}Fee"]*100, precision: 0 %>
+          <%= number_to_percentage strategy["#{fee}Fee"]*100, precision: 2 %>
         </td>
       <% } %>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
