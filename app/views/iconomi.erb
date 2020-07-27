@@ -24,7 +24,7 @@
       <th>Current position</th>     
       <th>Suggested position</th>    
       <th>Score</th>    
-      <% %w{management performance exit numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
+      <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <th><%=x%></th>
       <% } %>
     </tr>
@@ -50,11 +50,6 @@
       <td>
         <%= number_with_precision strategy['Score'], precision: 2 %>
       </td>        
-      <% %w{management performance exit}.each { |fee| %>
-        <td>
-          <%= number_to_percentage strategy["#{fee}Fee"]*100, precision: 2 %>
-        </td>
-      <% } %>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <td>
           <% if x == 'lastRebalanced' %>
