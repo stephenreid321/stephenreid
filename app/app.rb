@@ -184,8 +184,8 @@ module ActivateApp
       erb :tao
     end    
 
-    get '/iconomi/:password' do
-      halt 400 unless params[:password] == ENV['ICN_PASSWORD']
+    get '/iconomi' do
+      halt unless Padrino.env == :development
       erb :iconomi
     end
     
