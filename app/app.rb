@@ -99,8 +99,11 @@ module ActivateApp
       send_file "#{Padrino.root}/app/markdown/master-lover-course.html"
     end
     
+    get '/pocket' do
+      erb :pocket
+    end
     
-       
+           
     get '/posts/:id/iframely' do
       @post = begin; Post.find(params[:id]); rescue; not_found; end
       agent = Mechanize.new

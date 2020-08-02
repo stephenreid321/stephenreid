@@ -34,13 +34,16 @@ GEM
     connection_pool (2.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    faraday (1.0.0)
+    faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.14.0)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.13.1)
     front_matter_parser (0.2.1)
+    hashie (4.1.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     json (2.3.1)
     koala (3.0.0)
@@ -65,6 +68,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     moneta (1.1.1)
+    multi_json (1.15.0)
     multipart-post (2.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -106,6 +110,11 @@ GEM
       mime-types (< 4)
       padrino-core (= 0.15.0)
     padrino-support (0.15.0)
+    pocket-ruby (0.0.6)
+      faraday (>= 0.7)
+      faraday_middleware (~> 0.9)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0, >= 1.0.3)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -141,7 +150,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     webrobots (0.1.2)
-    zeitwerk (2.3.1)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
@@ -157,6 +166,7 @@ DEPENDENCIES
   mail
   mechanize
   padrino
+  pocket-ruby
   puma
   rake
   redcarpet
