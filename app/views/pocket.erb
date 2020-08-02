@@ -7,14 +7,16 @@
   hosts[domain] << item
   } %>
 
+<h1 class="text-center"><%= pluralize items.count, 'unread item' %></h1>
+
 <% hosts.sort_by { |domain, items| -items.count }.each { |domain, items| %>
-  <h1><%=domain%> <span class="badge badge-primary"><%=items.count%></span></h1>
+  <h3><%=domain%> <span class="badge badge-primary"><%=items.count%></span></h3>
   <ul class="list-unstyled">
-    <% items.each { |item| %>
+    <% items.sort_by { |item| item['resolved_title'].parameterize }.each { |item| %>
       <li>
-        <h3>
-          <a href="<%= item['resolved_url'] %>"><%= item['resolved_title'] %></a>
-        </h3>
+        <h4>
+          <a href="<%= item['resolved_url'] %>"><%= !item['resolved_title'].blank? ? item['resolved_title'] : item['resolved_url']  %></a>
+        </h4>
       </li>
     <% } %>
   </ul>
