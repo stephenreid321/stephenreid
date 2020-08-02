@@ -9,13 +9,15 @@
 
 <h1 class="text-center"><%= pluralize items.count, 'unread item' %></h1>
 
+<p><%= items.first[1].keys.join(' ') %></p>
+
 <% hosts.sort_by { |domain, items| -items.count }.each { |domain, items| %>
   <h3><%=domain%> <span class="badge badge-primary"><%=items.count%></span></h3>
   <ul class="list-unstyled">
-    <% items.sort_by { |item| item['resolved_title'].parameterize }.each { |item| %>
+    <% items.sort_by { |item| params[:order] ? item[params[:order]] : item['resolved_title'].parameterize }.each { |item| %>
       <li>
         <h4>
-          <a href="<%= item['resolved_url'] %>"><%= !item['resolved_title'].blank? ? item['resolved_title'] : item['resolved_url']  %></a>
+          <a onclick="$(this).closest('li').remove()" href="/pocket/<%=item['item_id']%>"><%= !item['resolved_title'].blank? ? item['resolved_title'] : item['resolved_url']  %></a>
         </h4>
       </li>
     <% } %>

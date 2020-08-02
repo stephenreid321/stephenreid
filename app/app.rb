@@ -100,10 +100,19 @@ module ActivateApp
     end
     
     get '/pocket' do
+      # code = Pocket.get_code(:redirect_uri => 'https://stephenreid.net')
+      # redirect Pocket.authorize_url(:code => code, :redirect_uri => 'https://stephenreid.net')
+      # Pocket.get_result(code, :redirect_uri => 'https://stephenreid.net')      
       erb :pocket
     end
     
-           
+    get '/pocket/:id' do
+      client = Pocket.client(:access_token => ENV['POCKET_ACCESS_TOKEN'])
+      url = client.retrieve(:detailType => :complete)['list'][params[:id]]['resolved_url']
+      client.modify([{action: 'delete', item_id: params[:id]}])
+      redirect url 
+    end
+              
     get '/posts/:id/iframely' do
       @post = begin; Post.find(params[:id]); rescue; not_found; end
       agent = Mechanize.new
