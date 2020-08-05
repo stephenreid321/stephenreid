@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <a href="/tao-te-ching/<%=verse['Verse']%>"><img style="max-width: 100%" src="<%= verse['Images'].first['url']%>"></a>
+          <a href="/tao-te-ching/<%=verse['Verse']%>"><img style="max-width: 100%" src="<%= verse['Images'].first['thumbnails']['full']['url'] %>"></a>
         </div>
       </div>
     <% } %>
@@ -90,7 +90,7 @@
     <% Verse.all(sort: { 'Verse' => 'asc'}).shuffle.each { |verse| next if verse['Verse'] == params[:i].to_i %>
       <div class="grid-sizer"></div>
       <a class="grid-item" href="/tao-te-ching/<%=verse['Verse']%>">
-        <img class="w-100" src="<%= verse['Images'].first['url']%>" />
+        <img class="w-100" src="<%= verse['Images'].first['thumbnails']['large']['url']%>" />
       </a>
     <% } %>
   </div>
