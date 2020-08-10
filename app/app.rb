@@ -147,7 +147,8 @@ module StephenReid
     
 
 
-    get '/iconomi' do
+    get '/iconomi/:password' do
+      halt unless params[:password] == ENV['ICN_PASSWORD']
       erb :iconomi
     end
     
