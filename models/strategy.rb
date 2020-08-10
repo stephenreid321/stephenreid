@@ -135,7 +135,13 @@ class Strategy
     end
     
     t = assets.map { |k,v| v }.sum
-    raise Strategy::RoundingError unless t == 1
+    
+    begin
+      raise Strategy::RoundingError unless t == 1
+    rescue => e
+      Airbrake.notify(e)      
+      raise e
+    end
     
     assets
   end
