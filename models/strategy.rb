@@ -83,7 +83,7 @@ class Strategy
     }    
     j = JSON.parse(Iconomi.get("/v1/strategies/#{self.ticker}/structure"))
     %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |r|            
-      self.send("#{r}=", (r == 'lastRebalanced' ? Time.at(j[r]).to_date : j[r]))
+      self.send("#{r}=", (r == 'lastRebalanced' ? Time.at(j[r]) : j[r]))
     }
     holdings.destroy_all
     j['values'].each { |v|      
