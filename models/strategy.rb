@@ -1,6 +1,7 @@
 class Strategy
   include Mongoid::Document
   include Mongoid::Timestamps
+  class RoundingError < StandardError; end
   
   field :ticker, :type => String
   field :name, :type => String
@@ -130,8 +131,11 @@ class Strategy
     if min_btc_eth
       assets = assets.map { |k,v| [k, (v*0.9).floor(4)] }
       t = assets.map { |k,v| v }.sum
-      assets = assets + [['ETH', (1 - t).round(4)]]      
+      assets = assets + [['ETH', (1 - t).round(4)]]
     end
+    
+    puts t = assets.map { |k,v| v }.sum
+    raise Strategy::RoundingError unless t == 1
     
     assets
   end
