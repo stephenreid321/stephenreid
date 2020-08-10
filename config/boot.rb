@@ -11,6 +11,11 @@ Bundler.require(:default, RACK_ENV)
 
 Padrino.load!
 
+Mongoid.load!("#{PADRINO_ROOT}/config/mongoid.yml")
+Mongoid.raise_not_found_error = false
+
+Delayed::Worker.max_attempts = 1
+
 Airrecord.api_key = ENV['AIRTABLE_API_KEY']
 
 Pocket.configure do |config|

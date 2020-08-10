@@ -1,55 +1,58 @@
+<style>
+  table { font-size: 0.9rem }
+</style>
 
-<% reference_amount = 20000 %>
-<% minimum_period = 'SIX_MONTH' %>
-<%# minimum_period = 'YEAR' %>
-
-
-<% balances = JSON.parse(Strategy.iconomi('/v1/user/balance'))['daaList'] %>
+<% reference_amount = 30000 %>
+<% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
 <% n = (balanceTotal/reference_amount).round %>
+<% # or %>
+<% # n = 5 %>
 
-<% strategies = Strategy.all(filter: "AND({monthlyRebalancedCount} > 1, {#{minimum_period}} != BLANK())", sort: { "Score" => "desc" })[0..(n-1)] %>
-<% total = strategies.sum { |strategy| strategy['Score'] } %>
+<% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
+<% total = strategies.sum { |strategy| strategy.score_fee_weighted } %>
 
 <% offset = 0 %>
 <% spin = 180/n; %>
 
-<!-- <h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1> -->
+<h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
 
-<table class="table" style="font-size: 0.85rem">
+<table class="table">
   <thead>
     <tr>
       <th></th>
       <th></th>
+      <th>Score (fee weighted)</th>       
       <th>Current position</th>     
-      <th>Suggested position</th>    
-      <th>Score</th>    
+      <th>Proposed position</th>       
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <th><%=x%></th>
       <% } %>
     </tr>
   </thead>
-  <% (strategies + balances.reject { |b| strategies.map { |s| s['ticker']}.include?(b['ticker']) }).each_with_index { |strategy, i| %>
+  <% (strategies + balances.reject { |b| strategies.map { |s| s.ticker }.include?(b['ticker']) }).each_with_index { |strategy, i| %>
+
     <tr>
       <td>
         <% if strategy.is_a?(Strategy) %>
-          <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>"><%=number_to_percentage((strategy['Score']/total)*100, :precision => 0)%></div></td>
+          <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>"><%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%></div></td>
+      <% else %>
+        <% strategy = Strategy.find_by(ticker: strategy['ticker']) %>
       <% end %>
       <td>
-        <a target="_blank" href="https://my.iconomi.com/asset/<%=strategy['ticker']%>"><%= strategy['name'] %></a>
-      </td>          
+        <a target="_blank" href="https://my.iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
+      </td>    
       <td>
-        <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy['ticker'] }['value'], precision: 0; rescue; end %>
+        <%= number_with_precision strategy.score_fee_weighted, precision: 2 %>
+      </td>      
+      <td>
+        <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy.ticker }['value'], precision: 0; rescue; end %>
       </td>
       <td>
         <% if strategy.is_a?(Strategy) %>
-          <%= number_to_currency (strategy['Score']/total)*balanceTotal, precision: 0 %>
+          <%= number_to_currency (strategy.score_fee_weighted/total)*balanceTotal, precision: 0 %>
         <% end %>
-      </td>      
-      <% if !strategy.is_a?(Strategy); strategy = Strategy.all(filter: "{ticker} = '#{strategy['ticker']}'").first; end %>
-      <td>
-        <%= number_with_precision strategy['Score'], precision: 2 %>
-      </td>        
+      </td>              
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <td>
           <% if x == 'lastRebalanced' %>
@@ -63,50 +66,43 @@
   <% } %> 
 </table>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Current weight</th>
+      <th>Proposed weight</th>
+    </tr>
+  </thead>
+  <% proposed = Hash[Strategy.proposed(5, min_btc_eth: true)] %>
+  <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
 
-<script>
-  $(function () {
-    var config = {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-            data: <%= strategies.map { |strategy| strategy['Score']/total } %>,
-            backgroundColor: <%= strategies.each_with_index.map { |strategy,i| "#{'#00B963'.paint.spin(offset + i*spin)}" } %>
-          }],
-        labels: <%= strategies.map { |strategy| strategy['name'] } %>
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        responsive: true,
-        tooltips: {
-          callbacks: {
-            label: function (tooltipItem, data) {
-              try {
-                let label = ' ' + data.labels[tooltipItem.index] || '';
-                if (label) {
-                  label += ': ';
-                }
-
-                const sum = data.datasets[0].data.reduce((accumulator, curValue) => {
-                  return accumulator + curValue;
-                });
-                const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                label += Number((value / sum) * 100).toFixed(0) + '%';
-                return label;
-              } catch (error) {
-                console.log(error);
-              }
-            }
-          }
-        }
-      }
-    };
-    window.onload = function () {
-      var ctx = document.getElementById('chart-area').getContext('2d');
-      window.myPie = new Chart(ctx, config);
-    };
-  })
-</script>
-<canvas id="chart-area"></canvas>
+  <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
+    <tr>
+      <td>
+        <%= k %>
+      </td>
+      <td>
+        <% if actual.keys.include?(k) %>
+          <%= number_to_percentage (actual[k]*100), precision: 2 %>
+        <% end %>
+      </td>      
+      <td>
+        <% if proposed.keys.include?(k) %>
+          <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+        <% end %>
+      </td>
+    </tr>
+  <% } %>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th>
+        <%= number_to_percentage (actual.map { |k,v| v }.sum*100), precision: 2 %>
+      </th>
+      <th>
+        <%= number_to_percentage (proposed.map { |k,v| v }.sum*100), precision: 2 %>
+      </th>
+    </tr>
+  </tfoot>
+</table>

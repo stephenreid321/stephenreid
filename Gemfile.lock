@@ -5,6 +5,15 @@ GIT
     will_paginate (3.3.0)
 
 GIT
+  remote: git://github.com/stephenreid321/activate-admin.git
+  revision: 96fba7fdffed273ece9310a68985b857ded37acf
+  specs:
+    activate-admin (0.0.5)
+      activate-tools
+      padrino
+      will_paginate
+
+GIT
   remote: git://github.com/wordsandwriting/activate-tools.git
   revision: f8e580db12c90b87143bca0eba34dcc54df10790
   specs:
@@ -14,6 +23,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    activemodel (6.0.3.2)
+      activesupport (= 6.0.3.2)
     activesupport (6.0.3.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -29,9 +40,17 @@ GEM
     airrecord (1.0.5)
       faraday (>= 0.10, < 2.0)
       net-http-persistent (>= 2.9)
+    bcrypt (3.1.13)
+    bson (4.9.4)
     chroma (0.2.0)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.3)
+    delayed_job (4.1.8)
+      activesupport (>= 3.0, < 6.1)
+    delayed_job_mongoid (2.3.1)
+      delayed_job (>= 3.0, < 5)
+      mongoid (>= 3.0, < 8)
+      mongoid-compatibility (>= 0.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     faraday (0.17.3)
@@ -68,6 +87,14 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     moneta (1.1.1)
+    mongo (2.12.1)
+      bson (>= 4.8.2, < 5.0.0)
+    mongoid (7.1.2)
+      activemodel (>= 5.1, < 6.1)
+      mongo (>= 2.7.0, < 3.0.0)
+    mongoid-compatibility (0.5.1)
+      activesupport
+      mongoid (>= 2.0)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     mustermann (1.1.1)
@@ -156,15 +183,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activate-admin!
   activate-tools!
   activesupport
   airbrake
   airrecord
+  bcrypt
   chroma
+  delayed_job_mongoid
   front_matter_parser
   koala
   mail
   mechanize
+  mongoid
   padrino
   pocket-ruby
   puma

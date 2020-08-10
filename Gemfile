@@ -25,3 +25,8 @@ gem 'koala'
 gem 'front_matter_parser'
 gem 'chroma'
 gem 'pocket-ruby'
+
+gem 'mongoid'
+gem 'delayed_job_mongoid'
+gem 'activate-admin', github: 'stephenreid321/activate-admin'
+gem 'bcrypt'
