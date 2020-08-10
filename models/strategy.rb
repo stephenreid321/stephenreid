@@ -134,7 +134,7 @@ class Strategy
       assets = assets + [['ETH', (1 - t).round(4)]]
     end
     
-    puts t = assets.map { |k,v| v }.sum
+    t = assets.map { |k,v| v }.sum
     raise Strategy::RoundingError unless t == 1
     
     assets
