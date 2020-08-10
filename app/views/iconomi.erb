@@ -48,10 +48,8 @@
       <td>
         <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy.ticker }['value'], precision: 0; rescue; end %>
       </td>
-      <td>
-        <% if strategy.is_a?(Strategy) %>
-          <%= number_to_currency (strategy.score_fee_weighted/total)*balanceTotal, precision: 0 %>
-        <% end %>
+      <td>        
+        <%= number_to_currency (strategy.score_fee_weighted/total)*balanceTotal, precision: 0 %>
       </td>              
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <td>
