@@ -3,6 +3,11 @@ namespace :strategies do
     Strategy.import
     Strategy.update    
   end  
+  
+  task :set => :environment do
+    Strategy.set(5)
+  end
+  
 end
 
 namespace :terms do
