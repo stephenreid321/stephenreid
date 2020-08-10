@@ -148,7 +148,6 @@ module StephenReid
 
 
     get '/iconomi' do
-      halt unless Padrino.env == :development
       erb :iconomi
     end
     
