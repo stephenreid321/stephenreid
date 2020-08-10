@@ -133,15 +133,9 @@ class Strategy
       t = assets.map { |k,v| v }.sum
       assets = assets + [['ETH', (1 - t).round(4)]]
     end
-    
+         
     t = assets.map { |k,v| v }.sum
-    
-    begin
-      raise Strategy::RoundingError unless t == 1
-    rescue => e
-      Airbrake.notify(e)      
-      raise e
-    end
+    raise Strategy::RoundingError unless t == 1
     
     assets
   end
@@ -151,9 +145,16 @@ class Strategy
     success = nil
     until success
       
+      begin
+        proposed = Strategy.proposed(n, min_btc_eth: true)
+      rescue => e
+        Airbrake.notify(e)      
+        raise e
+      end
+    
       data = {
         ticker: 'DECENTCOOP',
-        values: Strategy.proposed(n, min_btc_eth: true).map { |ticker, p|
+        values: proposed.map { |ticker, p|
           { assetTicker: ticker, rebalancedWeight: p }
         },
         speedType: 'MEDIUM'
