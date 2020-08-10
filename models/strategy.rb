@@ -131,7 +131,7 @@ class Strategy
     if min_btc_eth
       assets = assets.map { |k,v| [k, (v*0.9).floor(4)] }
       t = assets.map { |k,v| v }.sum
-      assets = assets + [['ETH', (1 - t).round(4)]]
+      # assets = assets + [['ETH', (1 - t).round(4)]]
     end
     
     t = assets.map { |k,v| v }.sum
