@@ -5,7 +5,7 @@ StephenReid::App.controller do
     expires 1.hour.to_i
     @full_network = true
     @posts = Post.all(filter: "AND(
-        IS_AFTER({Created at}, '#{(1.month.ago - 1).to_s(:db)}'),
+        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { "Created at" => "desc" }, paginate: false)
     erb :links
@@ -19,7 +19,7 @@ StephenReid::App.controller do
       end
       @title = @q.empty? ? "Posts since #{@after}" : @q
       @posts = Post.all(filter: "AND(
-        #{%Q{IS_AFTER({Created at}, '#{(Date.parse(@after) - 1).to_s(:db)}'),} if @after}
+        #{%Q{IS_AFTER({Created at}, '#{Date.parse(@after).to_s(:db)}'),} if @after}
           OR(
             FIND(LOWER('#{@q}'), LOWER({Title})) > 0,
             FIND(LOWER('#{@q}'), LOWER({Body})) > 0,
@@ -29,7 +29,7 @@ StephenReid::App.controller do
     else
       @full_network = true
       @posts = Post.all(filter: "AND(
-        IS_AFTER({Created at}, '#{(1.month.ago - 1).to_s(:db)}'),
+        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { "Created at" => "desc" }, paginate: false)    
     end
@@ -39,7 +39,7 @@ StephenReid::App.controller do
   get '/feed', :provides => :rss, :cache => true do
     expires 1.hour.to_i
     @posts = Post.all(filter: "AND(
-        IS_AFTER({Created at}, '#{(1.month.ago - 1).to_s(:db)}'),
+        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { "Created at" => "desc" }, paginate: false)     
     RSS::Maker.make("atom") do |maker|
