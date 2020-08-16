@@ -99,24 +99,8 @@ StephenReid::App.controller do
   
   
   
-  
-  get '/terms/:term', :cache => true do
-    expires 1.hour.to_i
-    @posts = Post.all(filter: "FIND(', #{params[:term]},', {Terms joined}) > 0", sort: { "Created at" => "desc" })
-    erb :search
-  end
-    
-  get '/terms/:source_id/:sink_id', :cache => true do
-    expires 1.hour.to_i
-    @source = Term.find(params[:source_id])
-    @sink = Term.find(params[:sink_id])
-    @posts = Post.all(filter: "AND(
-        FIND(', #{@source['Name']},', {Terms joined}) > 0,
-        FIND(', #{@sink['Name']},', {Terms joined}) > 0
-        )", sort: { "Created at" => "desc" })        
-    erb :search
-  end      
-  
+      
+     
   get '/terms/tagify' do
     post_ids = []
     Term.all.each { |term|
@@ -161,6 +145,23 @@ StephenReid::App.controller do
     200
   end  
   
+  get '/terms/:source_id/:sink_id', :cache => true do
+    expires 1.hour.to_i
+    @source = Term.find(params[:source_id])
+    @sink = Term.find(params[:sink_id])
+    @posts = Post.all(filter: "AND(
+        FIND(', #{@source['Name']},', {Terms joined}) > 0,
+        FIND(', #{@sink['Name']},', {Terms joined}) > 0
+        )", sort: { "Created at" => "desc" })        
+    erb :search
+  end    
+  
+  get '/terms/:term', :cache => true do
+    expires 1.hour.to_i
+    @posts = Post.all(filter: "FIND(', #{params[:term]},', {Terms joined}) > 0", sort: { "Created at" => "desc" })
+    erb :search
+  end  
+  
   
   
     
@@ -179,7 +180,7 @@ StephenReid::App.controller do
 
   
   
- get '/stats' do
+  get '/stats' do
     text = []
     hosts = []
     Post.all.each { |post|
