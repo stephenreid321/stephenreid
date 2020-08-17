@@ -108,7 +108,7 @@ class Strategy
     where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil).order(fee_weighted ? 'score_fee_weighted desc' : 'score desc')
   end
   
-  def self.proposed(n: 5, min_btc_eth: false)
+  def self.proposed(n: 5)
     
     assets = {}
     Strategy.active_mature.each { |strategy|
@@ -119,20 +119,20 @@ class Strategy
       }
     }
     
-    if min_btc_eth
-      assets = assets.reject { |k,v| %w{BTC ETH}.include?(k) }
-    end
+    # remove BTC and ETH
+    assets = assets.reject { |k,v| %w{BTC ETH}.include?(k) }
     
+    # add top n assets
     assets = assets.sort_by { |k,v| -v }[0..(n-1)]
     total = assets.map { |k,v| v }.sum
     assets = assets.map { |k,v| [k, v/total] }
     assets = assets.map { |k,v| [k, v] }
     
-    if min_btc_eth
-      assets = assets.map { |k,v| [k, (v*0.9).floor(4)] }
-      t = assets.map { |k,v| v }.sum
-      assets = assets + [['ETH', (1 - t).round(4)]]
-    end
+    # custom assets
+    assets = assets.map { |k,v| [k, (v*0.8).floor(4)] }
+    assets = assets + [['MLN', 0.1]]
+    t = assets.map { |k,v| v }.sum  
+    assets = assets + [['ETH', (1 - t).round(4)]]
          
     t = assets.map { |k,v| v }.sum
     raise Strategy::RoundingError unless t == 1
@@ -146,7 +146,7 @@ class Strategy
     until success
       
       begin
-        proposed = Strategy.proposed(n: n, min_btc_eth: true)
+        proposed = Strategy.proposed(n: n)
       rescue => e
         Airbrake.notify(e)      
         raise e
