@@ -108,7 +108,7 @@ class Strategy
     where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil).order(fee_weighted ? 'score_fee_weighted desc' : 'score desc')
   end
   
-  def self.proposed(n: 10, min_btc_eth: false)
+  def self.proposed(n: 5, min_btc_eth: false)
     
     assets = {}
     Strategy.active_mature.each { |strategy|
@@ -140,7 +140,7 @@ class Strategy
     assets
   end
   
-  def self.set(n: 10)
+  def self.set(n: 5)
     
     success = nil
     until success
