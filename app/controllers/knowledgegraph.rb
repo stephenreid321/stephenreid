@@ -53,7 +53,7 @@ StephenReid::App.controller do
         maker.items.new_item do |item|
           item.link = post['Link']
           item.title = post['Title']
-          item.description = json['meta']['description'].truncate(150)
+          item.description = (json['meta']['description'].truncate(150) if json['meta']['description'])
           item.updated = post['Created at']
         end
       }
