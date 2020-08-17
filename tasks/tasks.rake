@@ -5,7 +5,7 @@ namespace :strategies do
   end  
   
   task :set => :environment do
-    Strategy.set(5)
+    Strategy.set
   end
   
 end
