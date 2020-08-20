@@ -10,8 +10,6 @@
 <% n = 10 %>
 
 <% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
-<% total = strategies.sum { |strategy| strategy.score_fee_weighted } %>
-
 <% offset = 0 %>
 <% spin = 180/n; %>
 
@@ -23,7 +21,7 @@
   <thead>
     <tr>
       <th></th>
-      <th colspan="2">Score (fee weighted)</th>       
+      <th>Score (fee weighted)</th>       
       <% if @p %>
         <th>Current position</th>     
       <% end %>
@@ -32,12 +30,12 @@
       <% } %>
     </tr>
   </thead>
+  <% max_score = 0 %>
   <% (strategies + balances.reject { |b| @p ? strategies.map { |s| s.ticker }.include?(b['ticker']) : true }).each_with_index { |strategy, i| %>
 
-    <% if strategy.is_a?(Strategy) %>
-      <% s = true %>
-    <% else %>
-      <% s = false %>
+    <% if i == 0; max_score = strategy.score_fee_weighted; end %>
+
+    <% if !strategy.is_a?(Strategy) %>
       <% strategy = Strategy.find_by(ticker: strategy['ticker']) %>
     <% end %>
 
@@ -48,15 +46,11 @@
           (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
         <% end %>
       </td>    
-
       <td>
-        <%= number_with_precision strategy.score_fee_weighted, precision: 2 %>
+        <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>">
+          <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>
+        </div>
       </td>     
-      <td>
-                <% if s %>
-          <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>"><%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%></div></td>
-      <% end %>
-      </td>
       <% if @p %>
         <td>
           <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy.ticker }['value'], precision: 0; rescue; end %>
