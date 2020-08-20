@@ -7,7 +7,7 @@
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
 <% n = (balanceTotal/reference_amount).round %>
 <% # or %>
-<% # n = 5 %>
+<% n = 10 %>
 
 <% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
 <% total = strategies.sum { |strategy| strategy.score_fee_weighted } %>
@@ -15,42 +15,50 @@
 <% offset = 0 %>
 <% spin = 180/n; %>
 
-<h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
+<% if @p %>
+  <h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
+<% end %>
 
 <table class="table">
   <thead>
     <tr>
       <th></th>
-      <th></th>
       <th>Score (fee weighted)</th>       
-      <th>Current position</th>     
-      <th>Proposed position</th>       
+      <% if @p %>
+        <th>Current position</th>     
+        <th>Proposed position</th>   
+      <% end %>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <th><%=x%></th>
       <% } %>
     </tr>
   </thead>
-  <% (strategies + balances.reject { |b| strategies.map { |s| s.ticker }.include?(b['ticker']) }).each_with_index { |strategy, i| %>
+  <% (strategies + balances.reject { |b| @p ? strategies.map { |s| s.ticker }.include?(b['ticker']) : true }).each_with_index { |strategy, i| %>
+
+    <% if !strategy.is_a?(Strategy) %>
+      <% strategy = Strategy.find_by(ticker: strategy['ticker']) %>
+    <% end %>
 
     <tr>
       <td>
-        <% if strategy.is_a?(Strategy) %>
-          <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>"><%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%></div></td>
-      <% else %>
-        <% strategy = Strategy.find_by(ticker: strategy['ticker']) %>
-      <% end %>
-      <td>
         <a target="_blank" href="https://my.iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
+        <% if !@p && strategy.name == 'Metastrategy' %>
+          (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
+        <% end %>
       </td>    
+
       <td>
         <%= number_with_precision strategy.score_fee_weighted, precision: 2 %>
-      </td>      
-      <td>
-        <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy.ticker }['value'], precision: 0; rescue; end %>
-      </td>
-      <td>        
-        <%= number_to_currency (strategy.score_fee_weighted/total)*balanceTotal, precision: 0 %>
-      </td>              
+        <!-- <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>"><%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%></div></td> -->
+      </td>     
+      <% if @p %>
+        <td>
+          <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy.ticker }['value'], precision: 0; rescue; end %>
+        </td>      
+        <td>        
+          <%= number_to_currency (strategy.score_fee_weighted/total)*balanceTotal, precision: 0 %>
+        </td>    
+      <% end %>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <td>
           <% if x == 'lastRebalanced' %>
@@ -64,45 +72,49 @@
   <% } %> 
 </table>
 
-<h3 class="mt-5">Metastrategy</h3>
+<% if @p %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Asset</th>
-      <th>Current weight</th>
-      <th>Proposed weight</th>
-    </tr>
-  </thead>
-  <% proposed = Hash[Strategy.proposed] %>
-  <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
+  <h3 class="mt-5">Metastrategy</h3>
 
-  <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
-    <tr>
-      <td>
-        <%= k %>
-      </td>
-      <td>
-        <% if actual.keys.include?(k) %>
-          <%= number_to_percentage (actual[k]*100), precision: 2 %>
-        <% end %>
-      </td>      
-      <td>
-        <% if proposed.keys.include?(k) %>
-          <%= number_to_percentage (proposed[k]*100), precision: 2 %>
-        <% end %>
-      </td>
-    </tr>
-  <% } %>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th>
-        <%= number_to_percentage (actual.map { |k,v| v }.sum*100), precision: 2 %>
-      </th>
-      <th>
-        <%= number_to_percentage (proposed.map { |k,v| v }.sum*100), precision: 2 %>
-      </th>
-    </tr>
-  </tfoot>
-</table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Asset</th>
+        <th>Current weight</th>
+        <th>Proposed weight</th>
+      </tr>
+    </thead>
+    <% proposed = Hash[Strategy.proposed] %>
+    <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
+
+    <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
+      <tr>
+        <td>
+          <%= k %>
+        </td>
+        <td>
+          <% if actual.keys.include?(k) %>
+            <%= number_to_percentage (actual[k]*100), precision: 2 %>
+          <% end %>
+        </td>      
+        <td>
+          <% if proposed.keys.include?(k) %>
+            <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+          <% end %>
+        </td>
+      </tr>
+    <% } %>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th>
+          <%= number_to_percentage (actual.map { |k,v| v }.sum*100), precision: 2 %>
+        </th>
+        <th>
+          <%= number_to_percentage (proposed.map { |k,v| v }.sum*100), precision: 2 %>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+
+<% end %>

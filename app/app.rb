@@ -147,8 +147,8 @@ module StephenReid
     
 
 
-    get '/iconomi/:password' do
-      halt unless params[:password] == ENV['ICN_PASSWORD']
+    get '/iconomi' do
+      @p = (params[:p] == ENV['ICN_PASSWORD'])
       @favicon = 'moon.png'
       erb :iconomi
     end

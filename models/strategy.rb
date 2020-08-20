@@ -126,11 +126,9 @@ class Strategy
     assets = assets.sort_by { |k,v| -v }[0..(n-1)]
     total = assets.map { |k,v| v }.sum
     assets = assets.map { |k,v| [k, v/total] }
-    assets = assets.map { |k,v| [k, v] }
     
     # custom assets
-    assets = assets.map { |k,v| [k, (v*0.8).floor(4)] }
-    assets = assets + [['MLN', 0.1]]
+    assets = assets.map { |k,v| [k, (v*0.9).floor(4)] }
     t = assets.map { |k,v| v }.sum  
     assets = assets + [['ETH', (1 - t).round(4)]]
          
