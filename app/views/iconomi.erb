@@ -61,7 +61,7 @@
       <th></th>
       <th>Score (fee weighted)</th>        
       <% if @p %>
-        <th>Current position</th>     
+        <th colspan="2">Current position</th>     
       <% end %>
       <th colspan="2">Proposed position</th>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
@@ -88,21 +88,36 @@
       <td>       
         <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>        
       </td>    
-      <% if @p %>
+      <% if @p %>   
+        <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
+        <% v = f['value'] if f %>
+        <% v = v.to_f if v %>
         <td>
-          <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy.ticker }['value'], precision: 0; rescue; end %>
-        </td>      
-      <% end %>
+          <% if v %>
+            <%=number_to_percentage((v/balanceTotal)*100, :precision => 0)%>
+          <% end %>
+        </td>   
+        <td>
+          <%= number_to_currency v, precision: 0 %>
+        </td>         
+      <% end %> 
+      <td>
+        <% if i < n && i < funds %>
+          <% if @p %>        
+            <% if v %>
+              <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
+              <span style="color: <%= d > 0 ? '#2DB963' : '#B92D2D' %>">
+                <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 0)%>
+              </span>
+            <% end %>
+          <% else %>
+            <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
+          <% end %>        
+        <% end %>
+      </td> 
       <td>
         <% if i < n && i < funds %>
           <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
-        <% end %>
-      </td>   
-      <td>
-        <% if i < n && i < funds %>
-          <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>">
-            <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
-          </div>
         <% end %>
       </td>        
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
