@@ -8,7 +8,7 @@
 <% n = 10 %>
 <% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
 
-<% if funds = (params[:funds].try(:to_i) || 5) %>
+<% if funds = (params[:funds].try(:to_i) || (@p ? 3 : 5)) %>
   <% funds = 1 if funds < 1 %>
   <% funds = 10 if funds > 10 %>
   <% total = strategies[0..(funds-1)].sum { |strategy| strategy.score_fee_weighted } %>
