@@ -2,27 +2,59 @@
   table { font-size: 0.9rem }
 </style>
 
-<% reference_amount = 30000 %>
 <% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
-<% n = (balanceTotal/reference_amount).round %>
-<% # or %>
-<% n = 10 %>
 
+<% n = 10 %>
 <% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
 
-<% if @p %>
-  <h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
+<% if funds = (params[:funds].try(:to_i) || 5) %>
+  <% funds = 1 if funds < 1 %>
+  <% funds = 10 if funds > 10 %>
+  <% total = strategies[0..(funds-1)].sum { |strategy| strategy.score_fee_weighted } %>
+  <% offset = 0 %>
+  <% spin = 180/funds %>
 <% end %>
+
+<% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
+
+<div class="row justify-content-center mb-3">   
+  <div class="col-md-6 col-lg-4 text-center">
+    <% form_tag '', :method => 'get' do %>
+
+      <%= hidden_field_tag :p, :value => params[:p] %>
+
+      <label>Number of funds</label>
+      <div class="range-slider">
+        <input name="funds" class="range-slider__range" type="range" value="<%=funds%>" min="1" max="10" step="1" onchange="$(this.form).submit()">
+        <span class="range-slider__value">0</span>
+      </div>      
+
+      <label>Investment</label>
+      <div class="row justify-content-center">   
+        <div class="col-auto">
+          <div class="input-group" style="width: 10rem">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <%= number_field_tag :investment, :class => 'form-control-lg form-control', :value => investment, :onchange => '$(this.form).submit()' %>      
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
 
 <table class="table">
   <thead>
     <tr>
       <th></th>
-      <th>Score (fee weighted)</th>       
+      <th>Score (fee weighted)</th>        
       <% if @p %>
         <th>Current position</th>     
       <% end %>
+      <th colspan="2">Proposed position</th>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <th><%=x%></th>
       <% } %>
@@ -46,12 +78,24 @@
       </td>    
       <td>       
         <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>        
-      </td>     
+      </td>    
       <% if @p %>
         <td>
           <%= begin; number_to_currency balances.find { |b| b['ticker'] == strategy.ticker }['value'], precision: 0; rescue; end %>
         </td>      
       <% end %>
+      <td>
+        <% if funds && i < funds %>
+          <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
+        <% end %>
+      </td>   
+      <td>
+        <% if funds && i < funds %>
+          <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>">
+            <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
+          </div>
+        <% end %>
+      </td>        
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
         <td>
           <% if x == 'lastRebalanced' %>
@@ -65,49 +109,4 @@
   <% } %> 
 </table>
 
-<% if @p %>
-
-  <h3 class="mt-5">Metastrategy</h3>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Asset</th>
-        <th>Current weight</th>
-        <th>Proposed weight</th>
-      </tr>
-    </thead>
-    <% proposed = Hash[Strategy.proposed] %>
-    <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
-
-    <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
-      <tr>
-        <td>
-          <%= k %>
-        </td>
-        <td>
-          <% if actual.keys.include?(k) %>
-            <%= number_to_percentage (actual[k]*100), precision: 2 %>
-          <% end %>
-        </td>      
-        <td>
-          <% if proposed.keys.include?(k) %>
-            <%= number_to_percentage (proposed[k]*100), precision: 2 %>
-          <% end %>
-        </td>
-      </tr>
-    <% } %>
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>
-          <%= number_to_percentage (actual.map { |k,v| v }.sum*100), precision: 2 %>
-        </th>
-        <th>
-          <%= number_to_percentage (proposed.map { |k,v| v }.sum*100), precision: 2 %>
-        </th>
-      </tr>
-    </tfoot>
-  </table>
-
-<% end %>
+<%= partial :metastrategy %>
