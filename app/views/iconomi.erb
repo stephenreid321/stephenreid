@@ -18,6 +18,13 @@
 
 <% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
 
+<div class="text-center mb-3">
+  <big>
+    score = month + three_month + six_month + year<br />
+    score_fee_weighted = score*(1-managementFee)*(1-performanceFee)*(1-entryFee)*(1-exitFee)    
+  </big>
+</div>
+
 <div class="row justify-content-center mb-3">   
   <div class="col-md-6 col-lg-4 text-center">
     <% form_tag '', :method => 'get' do %>
@@ -110,3 +117,27 @@
 </table>
 
 <%= partial :metastrategy %>
+
+<script>
+  $(function () {
+    var rangeSlider = function () {
+      var slider = $('.range-slider'),
+              range = $('.range-slider__range'),
+              value = $('.range-slider__value');
+
+      slider.each(function () {
+
+        value.each(function () {
+          var value = $(this).prev().attr('value');
+          $(this).html(value);
+        });
+
+        range.on('input', function () {
+          $(this).next(value).html(this.value);
+        });
+      });
+    };
+
+    rangeSlider();
+  })
+</script>
