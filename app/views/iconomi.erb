@@ -107,8 +107,8 @@
           <% if @p %>             
             <% if v %>
               <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
-              <span style="color: <%= d > 0 ? '#2DB963' : '#B92D2D' %>">
-                <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 0)%>
+              <span style="color: <%= if d > 0; '#2DB963'; elsif d < 0; '#B92D2D'; end %>">
+                <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 2)%>
               </span>
             <% end %>
           <% end %>        
