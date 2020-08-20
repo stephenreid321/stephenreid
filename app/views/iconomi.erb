@@ -101,17 +101,16 @@
           <%= number_to_currency v, precision: 0 %>
         </td>         
       <% end %> 
-      <td>
+      <td nowrap>
         <% if i < n && i < funds %>
-          <% if @p %>        
+          <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
+          <% if @p %>             
             <% if v %>
               <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
               <span style="color: <%= d > 0 ? '#2DB963' : '#B92D2D' %>">
                 <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 0)%>
               </span>
             <% end %>
-          <% else %>
-            <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
           <% end %>        
         <% end %>
       </td> 
