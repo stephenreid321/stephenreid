@@ -18,7 +18,9 @@
 
 <% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
 
-<% if !@p %>
+<% if @p %>
+  <h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
+<% else %>
   <div class="text-center mb-3">
     <big>
       score = month + three_month + six_month + year<br />
