@@ -92,12 +92,12 @@
         </td>      
       <% end %>
       <td>
-        <% if funds && i < funds %>
+        <% if i < n && i < funds %>
           <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
         <% end %>
       </td>   
       <td>
-        <% if funds && i < funds %>
+        <% if i < n && i < funds %>
           <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= '#00B963'.paint.spin(offset + i*spin) %>">
             <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
           </div>
