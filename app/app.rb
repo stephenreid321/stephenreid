@@ -148,10 +148,16 @@ module StephenReid
 
 
     get '/iconomi' do
-      @p = (params[:p] == ENV['ICN_PASSWORD'])
+      @p = false
       @favicon = 'moon.png'
       erb :iconomi
     end
+    
+    get '/iconomi/:p' do
+      @p = (params[:p] == ENV['ICN_PASSWORD'])
+      @favicon = 'moon.png'
+      erb :iconomi
+    end    
     
     get '/substack' do
       @from = params[:from] ? Date.parse(params[:from]) : Date.today
