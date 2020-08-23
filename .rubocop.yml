@@ -2,9 +2,9 @@ Layout/EndAlignment:
   AutoCorrect: true
 Style/SymbolArray:
   MinSize: 3
-  
+
 Metrics:
-  Enabled: false  
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/SafeNavigation:
@@ -16,4 +16,8 @@ Style/Documentation:
 Layout/LineLength:
   Enabled: false
 Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+Lint/Debugger:
+  Enabled: false
+Lint/UriEscapeUnescape:
   Enabled: false
