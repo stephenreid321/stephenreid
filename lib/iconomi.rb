@@ -1,5 +1,4 @@
 class Iconomi
-  
   def self.get(path)
     t = DateTime.now.strftime('%Q')
 
@@ -12,7 +11,7 @@ class Iconomi
         ENV['ICN_SECRET'],
         message
       )
-    ).split.join # to remove newlines introduced by base64 encoding
+    ).split.join #  to remove newlines introduced by base64 encoding
 
     agent = Mechanize.new
     agent.request_headers = {
@@ -20,9 +19,9 @@ class Iconomi
       'ICN-SIGN' => signature,
       'ICN-TIMESTAMP' => t
     }
-    return agent.get('https://api.iconomi.com'+path).body   
+    agent.get('https://api.iconomi.com' + path).body
   end
-  
+
   def self.post(path, request_body)
     t = DateTime.now.strftime('%Q')
 
@@ -35,7 +34,7 @@ class Iconomi
         ENV['ICN_SECRET'],
         message
       )
-    ).split.join # to remove newlines introduced by base64 encoding
+    ).split.join #  to remove newlines introduced by base64 encoding
 
     agent = Mechanize.new
     agent.request_headers = {
@@ -43,8 +42,6 @@ class Iconomi
       'ICN-SIGN' => signature,
       'ICN-TIMESTAMP' => t
     }
-    return agent.post('https://api.iconomi.com'+path, request_body, {'Content-Type' => 'application/json'}).body
-    
+    agent.post('https://api.iconomi.com' + path, request_body, { 'Content-Type' => 'application/json' }).body
   end
-  
 end

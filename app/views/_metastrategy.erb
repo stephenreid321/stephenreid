@@ -35,10 +35,10 @@
       <tr>
         <th></th>
         <th>
-          <%= number_to_percentage (actual.map { |k,v| v }.sum*100), precision: 2 %>
+          <%= number_to_percentage (actual.map { |_k,v| v }.sum*100), precision: 2 %>
         </th>
         <th>
-          <%= number_to_percentage (proposed.map { |k,v| v }.sum*100), precision: 2 %>
+          <%= number_to_percentage (proposed.map { |_k,v| v }.sum*100), precision: 2 %>
         </th>
       </tr>
     </tfoot>

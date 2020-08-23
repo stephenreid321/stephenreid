@@ -1,32 +1,32 @@
 source 'https://rubygems.org'
 
 ruby '2.5.7'
-gem 'sinatra', '2.0.2'
+gem 'activesupport'
 gem 'padrino'
 gem 'puma'
 gem 'rake'
 gem 'sass'
-gem 'activesupport'
+gem 'sinatra', '2.0.2'
 
 # Admin
-gem 'will_paginate', github: 'mislav/will_paginate'
 gem 'activate-tools', github: 'wordsandwriting/activate-tools'
+gem 'will_paginate', github: 'mislav/will_paginate'
 
 # Email
 gem 'mail'
 
 # Interacting with other websites
 gem 'airbrake'
-gem 'mechanize'
 gem 'airrecord'
-gem 'rss'
-gem 'redcarpet'
-gem 'koala'
-gem 'front_matter_parser'
 gem 'chroma'
+gem 'front_matter_parser'
+gem 'koala'
+gem 'mechanize'
 gem 'pocket-ruby'
+gem 'redcarpet'
+gem 'rss'
 
-gem 'mongoid'
-gem 'delayed_job_mongoid'
 gem 'activate-admin', github: 'stephenreid321/activate-admin'
 gem 'bcrypt'
+gem 'delayed_job_mongoid'
+gem 'mongoid'

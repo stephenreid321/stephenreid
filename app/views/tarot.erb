@@ -14,7 +14,7 @@
       <th>major arcana</th>
       <% TarotSuit.suits.each { |suit_name| %>
         <th>
-          <% if t = TarotSuit.all(filter: "{Name} = '#{suit_name}'").first %>
+          <% if (t = TarotSuit.all(filter: "{Name} = '#{suit_name}'").first) %>
             <%= partial :tarot_card, :locals => {:t => t} %>
           <% end %>
           <i data-toggle="tooltip" title="<%= TarotSuit.icons[suit_name.to_sym][0] %>" class="fas fa-<%= TarotSuit.icons[suit_name.to_sym][1] %>"></i>                    
@@ -26,7 +26,7 @@
     <% TarotNumber.numbers.each_with_index { |n,i| %>
       <tr>
         <th>
-          <% if t = TarotNumber.all(filter: "{Name} = '#{n}'").first %>
+          <% if (t = TarotNumber.all(filter: "{Name} = '#{n}'").first) %>
             <% if t['URL'] %>
               <%= partial :tarot_card, :locals => {:t => t, :title => "#{t['Name']} #{TarotNumber.numerals[i]}"} %>
             <% else %>
@@ -44,13 +44,13 @@
           <% end %>
         </th>
         <td>
-          <% if t = TarotCard.all(filter: "AND({Tarot suit} = '', {Tarot number} = '#{n}')").first %>
+          <% if (t = TarotCard.all(filter: "AND({Tarot suit} = '', {Tarot number} = '#{n}')").first) %>
             <%= partial :tarot_card, :locals => {:t => t} %>                 
           <% end %>
         </td>
         <% TarotSuit.suits.each { |suit_name| %>
           <td>
-            <% if t = TarotCard.all(filter: "AND({Tarot suit} = '#{suit_name}', {Tarot number} = '#{n}')").first %>
+            <% if (t = TarotCard.all(filter: "AND({Tarot suit} = '#{suit_name}', {Tarot number} = '#{n}')").first) %>
               <%= partial :tarot_card, :locals => {:t => t} %>                               
             <% end %>
           </td>

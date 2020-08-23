@@ -1,8 +1,10 @@
-Lint/EndAlignment:
+Layout/EndAlignment:
   AutoCorrect: true
 Style/SymbolArray:
   MinSize: 3
   
+Metrics:
+  Enabled: false  
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/SafeNavigation:
@@ -12,8 +14,6 @@ Style/RedundantBegin:
 Style/Documentation:
   Enabled: false
 Layout/LineLength:
-  Enabled: false
-Metrics:
   Enabled: false
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
