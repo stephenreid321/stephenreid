@@ -1,8 +1,5 @@
-
 <% if @p %>
-
   <h3 class="mt-5">Metastrategy</h3>
-
   <table class="table">
     <thead>
       <tr>
@@ -13,23 +10,22 @@
     </thead>
     <% proposed = Hash[Strategy.proposed] %>
     <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
-
     <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
-      <tr>
-        <td>
-          <%= k %>
-        </td>
-        <td>
-          <% if actual.keys.include?(k) %>
-            <%= number_to_percentage (actual[k]*100), precision: 2 %>
-          <% end %>
-        </td>      
-        <td>
-          <% if proposed.keys.include?(k) %>
-            <%= number_to_percentage (proposed[k]*100), precision: 2 %>
-          <% end %>
-        </td>
-      </tr>
+    <tr>
+      <td>
+        <%= k %>
+      </td>
+      <td>
+        <% if actual.keys.include?(k) %>
+          <%= number_to_percentage (actual[k]*100), precision: 2 %>
+        <% end %>
+      </td>
+      <td>
+        <% if proposed.keys.include?(k) %>
+          <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+        <% end %>
+      </td>
+    </tr>
     <% } %>
     <tfoot>
       <tr>
@@ -43,5 +39,4 @@
       </tr>
     </tfoot>
   </table>
-
 <% end %>

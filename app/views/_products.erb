@@ -1,47 +1,41 @@
 <div class="row">
   <% products.each { |product|
   %>
-    <div class="col-12 <% unless product['Featured'] %> col-sm-4 <% end %> text-center mb-5">
-      <a title="<%=product['Name']%>"
+  <div class="col-12 <% unless product['Featured'] %> col-sm-4 <% end %> text-center mb-5">
+    <a title="<%=product['Name']%>"
       <% if product['Notes'] %>
            href="javascript:;" data-toggle="modal" data-target="#product-<%=product['Name'].parameterize%>"           
          <% else %>
            href="<%=product['URL']%>" target="_blank"
          <% end %>
          >
-        <img style="max-height: 300px; max-width: 100%" src="<%=product['Images'].first['url']%>">
-      </a>
-
-      <% if product['Notes'] %>
-        <div class="modal fade" id="product-<%=product['Name'].parameterize%>" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title"><%=product['Name']%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+      <img style="max-height: 300px; max-width: 100%" src="<%=product['Images'].first['url']%>">
+    </a>
+    <% if product['Notes'] %>
+      <div class="modal fade" id="product-<%=product['Name'].parameterize%>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><%=product['Name']%></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body font-weight-normal">
+              <div class="mb-3 text-center">
+                <a href="<%= product['URL'] %>" target="_blank"><img style="max-height: 300px; max-width: 100%" src="<%=product['Images'].first['url']%>"/></a>
               </div>
-              <div class="modal-body font-weight-normal">
-
-                <div class="mb-3 text-center">
-                  <a href="<%= product['URL'] %>" target="_blank"><img style="max-height: 300px; max-width: 100%" src="<%=product['Images'].first['url']%>"/></a>
-                </div>
-
-                <p class="mb-0">
-                  <% if product['Notes'] %>
-                    <%= product['Notes'].gsub("\n",'<br />')  %><br />
-                  <% end %>                              
-                  <a href="<%= product['URL'] %>" target="_blank"><%= product['URL'] %></a>
-                </p>
-
-              </div>
+              <p class="mb-0">
+                <% if product['Notes'] %>
+                  <%= product['Notes'].gsub("\n",'<br />')  %><br />
+                <% end %>
+                <a href="<%= product['URL'] %>" target="_blank"><%= product['URL'] %></a>
+              </p>
             </div>
           </div>
-        </div>   
-      <% end %>
-
-
-    </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <% } %>
 </div>

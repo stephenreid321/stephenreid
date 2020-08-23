@@ -8,14 +8,14 @@
     json = JSON.parse(post['Iframely'])
     next unless json['links']
   %>
-    <% if params[:images_only] %>
-      <% if json['links']['thumbnail'] %>
-        <div class="col-sm-3" style="background-image: url('<%= json['links']['thumbnail'].first['href'] %>'); background-position: center; background-size: cover; height: 200px"></div>
-      <% end %>
-    <% else %>      
-      <div class="col-sm-4 mb-3">
-        <%= partial :post, :locals => {:post => post, :json => json} %>
-      </div>
+  <% if params[:images_only] %>
+    <% if json['links']['thumbnail'] %>
+      <div class="col-sm-3" style="background-image: url('<%= json['links']['thumbnail'].first['href'] %>'); background-position: center; background-size: cover; height: 200px"></div>
     <% end %>
+  <% else %>
+    <div class="col-sm-4 mb-3">
+      <%= partial :post, :locals => {:post => post, :json => json} %>
+    </div>
+  <% end %>
   <% } %>
 <% end %>

@@ -1,73 +1,60 @@
-
 <h1 class="regular text-center">
-  Technology & <br class="d-sm-none" /> Co-operative Business<br />
+  Technology & <br class="d-sm-none" />
+   Co-operative Business<br />
   <small class="text-muted">Coaching, Consulting, Coding & Facilitation</small>
 </h1>
-
-<div class="row justify-content-center mb-3">   
+<div class="row justify-content-center mb-3">
   <div class="col-sm-9">
-    <div class="row align-items-top justify-content-center">   
+    <div class="row align-items-top justify-content-center">
       <div class="col-9 col-sm-6 col-sm-4 text-center py-3 px-3 py-sm-3 px-sm-5">
         <img src="/images/me.jpg" class="rounded-circle w-100" />
       </div>
     </div>
   </div>
 </div>
-
 <div class="row">
   <% %w{coaching consulting coding facilitation}.each { |slug| service = front_matter(:"services_#{slug}") %>
-    <div class="col-md-3 mb-3">
-      <div class="card">
-        <div class="card-title mb-0 bg-primary">
-          <h4 class="p-3 m-0 text-center text-white"><%=service['title']%></h4>
-        </div>            
-        <div class="card-body">
-          <div style="font-size: 0.9rem">
-            <%= md :"services_#{slug}" %>          
-          </div>
-          <p class="text-center mb-0">
-            From <strong><%= service['price'] %></strong> 
-          </p>
+  <div class="col-md-3 mb-3">
+    <div class="card">
+      <div class="card-title mb-0 bg-primary">
+        <h4 class="p-3 m-0 text-center text-white"><%=service['title']%></h4>
+      </div>
+      <div class="card-body">
+        <div style="font-size: 0.9rem">
+          <%= md :"services_#{slug}" %>
         </div>
+        <p class="text-center mb-0">
+          From <strong><%= service['price'] %></strong>
+        </p>
       </div>
     </div>
+  </div>
   <% } %>
 </div>
-
 <p class="lead text-center">Discounts for co-ops and non-profits</p>
-
 <div class="mb-5">
   <%= partial :book_a_call %>
 </div>
-
 <h2 class="mt-5 text-center regular">Clients include</h2>
-<div class="row align-items-center justify-content-center">   
+<div class="row align-items-center justify-content-center">
   <% Organisation.all(filter: "AND({Logo} != '', {Client} = 1)").shuffle.each { |organisation| %>
-    <div class="col-4 col-sm-2 text-center">     
-      <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-           filter: grayscale(100%);" class="w-100 mb-3" src="<%= organisation['Logo'].first['url'] %>">     
-    </div>
+  <div class="col-4 col-sm-2 text-center">
+    <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+           filter: grayscale(100%);" class="w-100 mb-3" src="<%= organisation['Logo'].first['url'] %>">
+  </div>
   <% } %>
 </div>
-
-
 <h2 class="mt-5 mb-3 text-center regular">Some of the software I work with</h2>
-
 <p class="text-center"><a href="/software">View as grid</a></p>
-
 <% types = Software.all(filter: "{Featured} = 1").map { |software| software['Type'] || '' }
 (types.uniq.select { |t| t != '' }.sort).each { |type| %>
-
-  <% softwares = Software.all(filter: "AND({Featured} = 1, {Type} = '#{type}')", sort: {'Name' => 'asc'}); if softwares.count > 0 %>
-    <dl class="text-center">
-      <dt><%=type.blank? ? 'Everything else' : type %></dt>
-      <dd><%= softwares.map { |software| software['Name'] }.join(' &middot; ') %></dd>
-    </dl>
-  <% end %>
-
+<% softwares = Software.all(filter: "AND({Featured} = 1, {Type} = '#{type}')", sort: {'Name' => 'asc'}); if softwares.count > 0 %>
+<dl class="text-center">
+  <dt><%=type.blank? ? 'Everything else' : type %></dt>
+  <dd><%= softwares.map { |software| software['Name'] }.join(' &middot; ') %></dd>
+</dl>
+<% end %>
 <% } %>
-
 <div class="my-5">
   <%= partial :book_a_call %>
 </div>
-

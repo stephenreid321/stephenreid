@@ -1,9 +1,6 @@
-
 <style>
   textarea { height: 20em }
 </style>
-
-
 <script>
   $(function () {
     $('textarea').keyup(function () {
@@ -12,13 +9,12 @@
       var intersection = a.filter(x => b.includes(x));
       $('#i').html(intersection.join('<br />'))
       var aNotB = a.filter(x => !b.includes(x));
-      $('#aNotB').html(aNotB.join('<br />'))      
+      $('#aNotB').html(aNotB.join('<br />'))
       var bNotA = b.filter(x => !a.includes(x));
-      $('#bNotA').html(bNotA.join('<br />'))      
+      $('#bNotA').html(bNotA.join('<br />'))
     })
   })
 </script>
-
 <div class="row mb-3">
   <div class="col-6">
     <h2>A</h2>
@@ -32,14 +28,14 @@
 <div class="row">
   <div class="col-4">
     <h2>A not B</h2>
-    <div id="aNotB"></div>    
-  </div>    
+    <div id="aNotB"></div>
+  </div>
   <div class="col-4">
     <h2>B not A</h2>
-    <div id="bNotA"></div>    
-  </div>  
+    <div id="bNotA"></div>
+  </div>
   <div class="col-4">
     <h2>Intersection</h2>
     <div id="i"></div>
-  </div>  
+  </div>
 </div>

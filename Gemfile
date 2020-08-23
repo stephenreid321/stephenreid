@@ -30,3 +30,5 @@ gem 'activate-admin', github: 'stephenreid321/activate-admin'
 gem 'bcrypt'
 gem 'delayed_job_mongoid'
 gem 'mongoid'
+
+gem 'htmlbeautifier', github: 'trileuco/htmlbeautifier'

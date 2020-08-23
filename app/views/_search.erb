@@ -10,23 +10,19 @@
     <% end %>
   </div>
 </div>
-
 <%= Padrino.env == :production ? cp('tags') : partial(:tags) %>
-
-
 <% if @full_network %>
   <div class="my-5">
     <%= partial :network, locals: {terms: Term.all, term_links: TermLink.all} %>
   </div>
-<% elsif (terms = Term.find_many(@posts.map { |post| post['Terms']}.flatten)).length > 1 %>      
+<% elsif (terms = Term.find_many(@posts.map { |post| post['Terms']}.flatten)).length > 1 %>
   <div class="my-5">
     <%= partial :network, locals: {
       term_links: TermLink.find_many(@posts.map { |post| post['Term Links']}.flatten),
       terms: terms
-      }, edge_labels: true %>   
+      }, edge_labels: true %>
   </div>
 <% end %>
-
 <div class="row mt-5 <% if params[:images_only] %>no-gutters<% end %>">
   <%= partial :posts %>
 </div>

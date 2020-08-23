@@ -1,25 +1,21 @@
-
 <script>
   $(function () {
     $("#nav a[href^=http]").attr('target', '_blank')
   })
-</script>       
-
-<style>                 
+</script>
+<style>
   @media(min-width: 992px) {
     #nav .nav-item { font-size: 0.8rem }
-  }  
+  }
   #nav .nav-item { padding-right: 1rem; }
   #nav .nav-link.active { font-weight: bold }
   a[href='https://calendly.com/stephenreid321'] span { text-decoration: underline }
-</style>      
-
+</style>
 <div id="nav">
   <nav class="navbar navbar-expand-lg navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%= ul_nav [    
         ['<i class="fa fa-home"></i>', '/'],      
@@ -33,17 +29,15 @@
         ['Groups', '/groups'],
         ['Tao Te Ching', '/tao-te-ching'],
         ['Recommendations', '/products'],
-        ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link text-primary' %>   
-
+        ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link text-primary' %>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link text-dark" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a>       
+          <a class="nav-link text-dark" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a>
         </li>
-      </ul>      
+      </ul>
     </div>
   </nav>
 </div>
-
 <script>
   $(function () {
     if (window.location.href.includes('/blog'))

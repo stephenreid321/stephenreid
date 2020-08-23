@@ -1,13 +1,10 @@
 <style>
   table { font-size: 0.9rem }
 </style>
-
 <% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
-
 <% n = 10 %>
 <% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
-
 <% if funds = (params[:funds].try(:to_i) || (@p ? 3 : 5)) %>
   <% funds = 1 if funds < 1 %>
   <% funds = 10 if funds > 10 %>
@@ -15,9 +12,7 @@
   <% offset = 0 %>
   <% spin = 180/funds %>
 <% end %>
-
 <% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
-
 <% if @p %>
   <h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
 <% else %>
@@ -28,69 +23,60 @@
     </big>
   </div>
 <% end %>
-
-<div class="row justify-content-center mb-3">   
+<div class="row justify-content-center mb-3">
   <div class="col-md-6 col-lg-4 text-center">
     <% form_tag '', :method => 'get' do %>
-
       <%= hidden_field_tag :p, :value => params[:p] %>
-
       <label>Number of funds</label>
       <div class="range-slider">
         <input name="funds" class="range-slider__range" type="range" value="<%=funds%>" min="1" max="10" step="1" onchange="$(this.form).submit()">
         <span class="range-slider__value">0</span>
-      </div>      
-
+      </div>
       <label>Investment</label>
-      <div class="row justify-content-center">   
+      <div class="row justify-content-center">
         <div class="col-auto">
           <div class="input-group" style="width: 10rem">
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
             </div>
-            <%= number_field_tag :investment, :class => 'form-control-lg form-control', :value => investment, :onchange => '$(this.form).submit()' %>      
+            <%= number_field_tag :investment, :class => 'form-control-lg form-control', :value => investment, :onchange => '$(this.form).submit()' %>
           </div>
         </div>
       </div>
-
     <% end %>
   </div>
 </div>
-
 <table class="table">
   <thead>
     <tr>
       <th></th>
-      <th>Score (fee weighted)</th>        
+      <th>Score (fee weighted)</th>
       <% if @p %>
-        <th colspan="2">Current position</th>     
+        <th colspan="2">Current position</th>
       <% end %>
       <th colspan="2">Proposed position</th>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
-        <th><%=x%></th>
+      <th><%=x%></th>
       <% } %>
     </tr>
   </thead>
   <% max_score = 0 %>
   <% (strategies + balances.reject { |b| @p ? strategies.map { |s| s.ticker }.include?(b['ticker']) : true }).each_with_index { |strategy, i| %>
-
-    <% if i == 0; max_score = strategy.score_fee_weighted; end %>
-
+  <% if i == 0; max_score = strategy.score_fee_weighted; end %>
     <% if !strategy.is_a?(Strategy) %>
       <% strategy = Strategy.find_by(ticker: strategy['ticker']) %>
     <% end %>
-
     <tr>
       <td>
         <a target="_blank" href="https://my.iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
         <% if !@p && strategy.name == 'Metastrategy' %>
           (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
         <% end %>
-      </td>    
-      <td>       
-        <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>        
-      </td>    
-      <% if @p %>   
+      </td>
+      <td>
+        <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>
+      </td>
+      <% if @p %>
         <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
         <% v = f['value'] if f %>
         <% v = v.to_f if v %>
@@ -98,15 +84,15 @@
           <% if v %>
             <%=number_to_percentage((v/balanceTotal)*100, :precision => 0)%>
           <% end %>
-        </td>   
+        </td>
         <td>
           <%= number_to_currency v, precision: 0 %>
-        </td>         
-      <% end %> 
+        </td>
+      <% end %>
       <td nowrap>
         <% if i < n && i < funds %>
           <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
-          <% if @p %>             
+          <% if @p %>
             <% if v %>
               <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
               <% if (d*100).round != 0 %>
@@ -115,49 +101,47 @@
                 </span>
               <% end %>
             <% end %>
-          <% end %>        
+          <% end %>
         <% end %>
-      </td> 
+      </td>
       <td>
         <% if i < n && i < funds %>
           <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
         <% end %>
-      </td>        
+      </td>
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
-        <td>
-          <% if x == 'lastRebalanced' %>
-            <%= time_ago_in_words strategy[x] %> ago
-          <% else %>
-            <%= strategy[x] %>
-          <% end %>
-        </td>            
+      <td>
+        <% if x == 'lastRebalanced' %>
+          <%= time_ago_in_words strategy[x] %> ago
+        <% else %>
+          <%= strategy[x] %>
+        <% end %>
+      </td>
       <% } %>
     </tr>
-  <% } %> 
-</table>
+    <% } %>
+  </table>
+  <%= partial :metastrategy %>
+  <script>
+    $(function () {
+      var rangeSlider = function () {
+        var slider = $('.range-slider'),
+                range = $('.range-slider__range'),
+                value = $('.range-slider__value');
 
-<%= partial :metastrategy %>
+        slider.each(function () {
 
-<script>
-  $(function () {
-    var rangeSlider = function () {
-      var slider = $('.range-slider'),
-              range = $('.range-slider__range'),
-              value = $('.range-slider__value');
+          value.each(function () {
+            var value = $(this).prev().attr('value');
+            $(this).html(value);
+          });
 
-      slider.each(function () {
-
-        value.each(function () {
-          var value = $(this).prev().attr('value');
-          $(this).html(value);
+          range.on('input', function () {
+            $(this).next(value).html(this.value);
+          });
         });
+      };
 
-        range.on('input', function () {
-          $(this).next(value).html(this.value);
-        });
-      });
-    };
-
-    rangeSlider();
-  })
-</script>
+      rangeSlider();
+    })
+  </script>

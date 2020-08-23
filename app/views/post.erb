@@ -1,6 +1,4 @@
-
 <div class="row justify-content-center">
-
   <% if @json['links']['player'] %>
     <div class="col-sm-9">
       <%= @json['html'] %>
@@ -10,17 +8,14 @@
       <%= partial :post, :locals => {:post => @post, :json => @json} %>
     </div>
   <% end %>
-
 </div>
-
 <div class="text-center mt-5">
   <% unless @json['links']['player'] %>
     <a target="_blank" class="btn btn-lg btn-primary mb-1 mb-sm-0" href="<%=@json['url']%>">
       <i class="fas fa-book-open"></i> Read the full article 
-    </a>   
+    </a>
   <% end %>
 </div>
-
 <div class="my-5">
   <%= Padrino.env == :production ? cp('full_network') : partial(:full_network) %>
 </div>
