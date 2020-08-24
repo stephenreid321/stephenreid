@@ -118,15 +118,18 @@ class Strategy
       end
     end
 
-    # remove BTC and ETH
-    assets = assets.reject { |k, _v| %w[BTC ETH].include?(k) }
+    usd = 0
+    usd += assets['TUSD'] if assets['TUSD']
+    usd += assets['USDC'] if assets['USDC']
+    usd += assets['USDT'] if assets['USDT']
+    assets = assets.reject { |k, _v| %w[BTC ETH TUSD USDC USDT].include?(k) }
 
     # add top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
+    assets << ['TUSD', usd]
     total = assets.map { |_k, v| v }.sum
     assets = assets.map { |k, v| [k, v / total] }
 
-    # custom assets
     assets = assets.map { |k, v| [k, (v * 0.9).floor(4)] }
     t = assets.map { |_k, v| v }.sum
     assets += [['ETH', (1 - t).round(4)]]
