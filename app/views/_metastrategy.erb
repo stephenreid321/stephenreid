@@ -1,5 +1,20 @@
 <% if @p %>
-  <h3 class="mt-5">Metastrategy</h3>
+  <% if assets = (params[:assets].try(:to_i) || 5) %>
+    <% assets = 1 if assets < 1 %>
+    <% assets = 20 if assets > 20 %>
+  <% end %>
+  <h1 class="text-center mt-5 mb-3">Metastrategy</h1>
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-6 col-lg-4 text-center">
+      <% form_tag '', :method => 'get' do %>
+        <label>Number of assets</label>
+        <div class="range-slider">
+          <input name="assets" class="range-slider__range" type="range" value="<%=assets%>" min="1" max="20" step="1" onchange="$(this.form).submit()">
+          <span class="range-slider__value">0</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -8,7 +23,7 @@
         <th>Proposed weight</th>
       </tr>
     </thead>
-    <% proposed = Hash[Strategy.proposed] %>
+    <% proposed = Hash[Strategy.proposed(n: assets)] %>
     <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
     <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
     <tr>

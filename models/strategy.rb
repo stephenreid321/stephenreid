@@ -124,7 +124,6 @@ class Strategy
     usd += assets['USDT'] if assets['USDT']
     assets = assets.reject { |k, _v| %w[BTC ETH TUSD USDC USDT].include?(k) }
 
-    # add top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
     assets << ['TUSD', usd]
     total = assets.map { |_k, v| v }.sum
