@@ -38,7 +38,7 @@
 *   Self-directed psilocybin ceremonies in preparation for creating the Psychedelic Society's [Psychedelic Experience Retreats](https://psychedelicsociety.org.uk/experience-retreats) (2014-2016)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/) (Jan 2018)
 
-### Tantra and sacred sexuality
+### Conscious sexuality
 
 *   [ISTA 1](https://www.schooloftemplearts.org/) with [Elaine Young](https://www.thetantricshaman.com/), [Binoy Milton D'souza](https://lovemovementevolution.com/) & [Frank Mondeose](https://frankmondeose.com/) (Sep 2019)
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/) (Nov 2017)
