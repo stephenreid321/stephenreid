@@ -28,7 +28,7 @@
     <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
     <tr>
       <td>
-        <%= k %>
+        <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>"><%= k %></a>
       </td>
       <td>
         <% if actual.keys.include?(k) %>
