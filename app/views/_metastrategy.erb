@@ -1,5 +1,5 @@
 <% if @p %>
-  <% if assets = (params[:assets].try(:to_i) || 5) %>
+  <% if assets = (params[:assets].try(:to_i) || 10) %>
     <% assets = 1 if assets < 1 %>
     <% assets = 20 if assets > 20 %>
   <% end %>
