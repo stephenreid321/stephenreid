@@ -28,7 +28,9 @@
     <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
     <tr>
       <td>
-        <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>"><%= k %></a>
+        <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
+          <%= Asset.find_by(ticker: k).name %> (<%= k %>)
+        </a>
       </td>
       <td>
         <% if actual.keys.include?(k) %>
