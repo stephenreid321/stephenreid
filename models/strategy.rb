@@ -146,7 +146,7 @@ class Strategy
   end
 
   def self.bail
-    set(bail: true)
+    # set(bail: true)
   end
 
   def self.set(n: 10, bail: false)

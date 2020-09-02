@@ -140,7 +140,7 @@ module StephenReid
       erb :iconomi
     end
 
-    get '/iconomi/bail' do
+    post '/iconomi/bail' do
       Strategy.bail
       redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
     end
