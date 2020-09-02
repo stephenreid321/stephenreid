@@ -5,7 +5,6 @@
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
 <% n = 10 %>
 <% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
-<% strategies = strategies.where(:ticker.ne => 'RISKYBISCUITS') if @p %>
 <% if funds = (params[:funds].try(:to_i) || (@p ? 3 : 5)) %>
   <% funds = 1 if funds < 1 %>
   <% funds = 10 if funds > 10 %>
