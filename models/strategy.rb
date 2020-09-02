@@ -71,13 +71,19 @@ class Strategy
 
   def self.update
     Strategy.all.each do |strategy|
-      puts strategy['ticker']
       strategy.update
     end
   end
 
   def update
-    j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
+    begin
+      j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
+      puts self['ticker']
+    rescue StandardError
+      destroy
+      puts "not found: #{self['ticker']}"
+      return
+    end
     %w[management performance entry exit].each do |r|
       send("#{r}Fee=", j["#{r}Fee"])
     end
@@ -139,15 +145,23 @@ class Strategy
     assets
   end
 
-  def self.set(n: 10)
+  def self.bail
+    set(bail: true)
+  end
+
+  def self.set(n: 10, bail: false)
     success = nil
     until success
 
-      begin
-        proposed = Strategy.proposed(n: n)
-      rescue StandardError => e
-        Airbrake.notify(e)
-        raise e
+      if bail
+        proposed = [['TUSD', 0.9], ['ETH', 0.1]]
+      else
+        begin
+          proposed = Strategy.proposed(n: n)
+        rescue StandardError => e
+          Airbrake.notify(e)
+          raise e
+        end
       end
 
       data = {

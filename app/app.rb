@@ -140,6 +140,11 @@ module StephenReid
       erb :iconomi
     end
 
+    get '/iconomi/bail' do
+      Strategy.bail
+      redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
+    end
+
     get '/iconomi/:p' do
       @p = (params[:p] == ENV['ICN_PASSWORD'])
       @favicon = 'moon.png'
