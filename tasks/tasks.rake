@@ -4,8 +4,8 @@ namespace :strategies do
     Strategy.update
   end
 
-  task set: :environment do
-    Strategy.set
+  task post_structure: :environment do
+    Strategy.post_structure
   end
 end
 

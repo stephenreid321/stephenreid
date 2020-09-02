@@ -146,10 +146,10 @@ class Strategy
   end
 
   def self.bail
-    # set(bail: true)
+    post_structure(bail: true)
   end
 
-  def self.set(n: 10, bail: false)
+  def self.post_structure(n: 10, bail: false)
     success = nil
     until success
 
