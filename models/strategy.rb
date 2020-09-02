@@ -15,7 +15,7 @@ class Strategy
   field :numberOfAssets, type: Integer
   field :lastRebalanced, type: Time
   field :monthlyRebalancedCount, type: Integer
-  %w[MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
+  %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
     field :"#{r.downcase}", type: Float
   end
 
@@ -49,6 +49,8 @@ class Strategy
       numberOfAssets: :number,
       lastRebalanced: :datetime,
       monthlyRebalancedCount: :number,
+      day: :number,
+      week: :number,
       month: :number,
       three_month: :number,
       six_month: :number,
@@ -100,7 +102,7 @@ class Strategy
       end
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/statistics"))
-    %w[MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
+    %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
       send("#{r.downcase}=", j['returns'][r])
     end
     save

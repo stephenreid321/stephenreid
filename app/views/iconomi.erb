@@ -1,6 +1,3 @@
-<style>
-  table { font-size: 0.9rem }
-</style>
 <% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
 <% n = 10 %>

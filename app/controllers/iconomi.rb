@@ -27,4 +27,8 @@ StephenReid::App.controller do
     Strategy.post_structure
     redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
   end
+
+  get '/loopring' do
+    erb :loopring
+  end
 end
