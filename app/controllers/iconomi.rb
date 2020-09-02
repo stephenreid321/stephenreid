@@ -18,7 +18,7 @@ StephenReid::App.controller do
 
   get '/iconomi/:p/bail' do
     halt unless params[:p] == ENV['ICN_PASSWORD']
-    # Strategy.bail
+    Strategy.bail
     redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
   end
 
