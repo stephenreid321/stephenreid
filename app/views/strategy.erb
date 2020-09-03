@@ -10,14 +10,14 @@
     <% if (multiplied = Asset.where(:multiplier.ne => nil)).count > 0 %>
       <div class="mb-3">
         <% multiplied.each { |asset| %>
-        <span class="badge badge-primary">
+        <a target="_blank" href="https://www.iconomi.com/asset/<%=asset.ticker%>" class="badge badge-primary">
           <%=asset.name%> (<%=asset.ticker%>)
           <%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x
-        </span>
+        </a>
         <% } %>
       </div>
     <% end %>
-    <% form_tag '#meta', :method => 'get' do %>
+    <% form_tag '', :method => 'get' do %>
       <label>Number of assets</label>
       <div class="range-slider">
         <input name="assets" class="range-slider__range" type="range" value="<%=assets%>" min="1" max="20" step="1" onchange="$(this.form).submit()">
