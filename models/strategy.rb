@@ -157,36 +157,54 @@ class Strategy
     end
   end
 
-  def self.post_structure(n: 10, bail: false)
-    success = nil
-    until success
+  def self.post_structure(n: 10, bail: false, force: false)
+    tusd_weight = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'TUSD' }['rebalancedWeight']
+    unless force
+      if tusd_weight == 0.9
+        puts 'Strategy is in bailed state, exiting'
+        return
+      end
+    end
 
-      if bail
-        proposed = [['TUSD', 0.9], ['ETH', 0.1]]
-      else
+    if bail
+      puts 'bailing!'
+      proposed = [['TUSD', 0.9], ['ETH', 0.1]]
+      data = {
+        ticker: 'DECENTCOOP',
+        values: proposed.map do |ticker, p|
+          { assetTicker: ticker, rebalancedWeight: p }
+        end,
+        speedType: 'FAST'
+      }
+      Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
+    else
+      puts 'setting strategy'
+      success = nil
+      until success
+
         begin
           proposed = Strategy.proposed(n: n)
         rescue StandardError => e
           Airbrake.notify(e)
           raise e
         end
-      end
 
-      data = {
-        ticker: 'DECENTCOOP',
-        values: proposed.map do |ticker, p|
-          { assetTicker: ticker, rebalancedWeight: p }
-        end,
-        speedType: (bail ? 'FAST' : 'MEDIUM')
-      }
+        data = {
+          ticker: 'DECENTCOOP',
+          values: proposed.map do |ticker, p|
+            { assetTicker: ticker, rebalancedWeight: p }
+          end,
+          speedType: 'MEDIUM'
+        }
 
-      puts n
-      puts data.to_json
-      begin
-        Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
-        success = true
-      rescue StandardError
-        n -= 1
+        puts n
+        puts data.to_json
+        begin
+          Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
+          success = true
+        rescue StandardError
+          n -= 1
+        end
       end
     end
   end
