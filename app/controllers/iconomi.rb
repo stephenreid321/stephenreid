@@ -28,6 +28,22 @@ StephenReid::App.controller do
     redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
   end
 
+  get '/iconomi/:p/ccowl' do
+    halt unless params[:p] == ENV['ICN_PASSWORD']
+    alerts = JSON.parse(Mechanize.new.get('https://ccowl.com/getAlerts?page=0&coins=BTC,ETH&alertType=1').body)['data']
+    alerts.each do |alert|
+      Alert.create(
+        ccowl_id: alert['alert_id'],
+        text: alert['text'],
+        ticker: alert['ticker'],
+        value: alert['value'],
+        rule_id: alert['rule_id'],
+        created_at: alert['created']
+      )
+    end
+    redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
+  end
+
   get '/loopring' do
     erb :loopring
   end
