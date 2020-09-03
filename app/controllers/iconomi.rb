@@ -24,7 +24,7 @@ StephenReid::App.controller do
 
   get '/iconomi/:p/post_structure' do
     halt unless params[:p] == ENV['ICN_PASSWORD']
-    Strategy.post_structure
+    Strategy.post_structure(force: params[:force])
     redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
   end
 

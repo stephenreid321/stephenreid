@@ -168,10 +168,10 @@ class Strategy
 
     if bail
       puts 'bailing!'
-      proposed = [['USDT', 0.9], ['ETH', 0.1]]
+      weights = [['USDT', 0.9], ['ETH', 0.1]]
       data = {
         ticker: 'DECENTCOOP',
-        values: proposed.map do |ticker, p|
+        values: weights.map do |ticker, p|
           { assetTicker: ticker, rebalancedWeight: p }
         end,
         speedType: 'FAST'
@@ -183,7 +183,7 @@ class Strategy
       until success
 
         begin
-          proposed = Strategy.proposed(n: n)
+          weights = Strategy.proposed(n: n)
         rescue StandardError => e
           Airbrake.notify(e)
           raise e
@@ -191,7 +191,7 @@ class Strategy
 
         data = {
           ticker: 'DECENTCOOP',
-          values: proposed.map do |ticker, p|
+          values: weights.map do |ticker, p|
             { assetTicker: ticker, rebalancedWeight: p }
           end,
           speedType: 'MEDIUM'
