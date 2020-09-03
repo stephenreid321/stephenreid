@@ -41,7 +41,7 @@ $(function() {
     });
 
     $('.range-slider__range', this).on('input', function() {
-      $(this).next(value).html(this.value);
+      $(this).next().html(this.value);
     });
   });
 
