@@ -149,6 +149,11 @@ class Strategy
 
   def self.bail
     post_structure(bail: true)
+    Mail.deliver do
+      from     'notifications@stephenreid.net'
+      to       'stephen@stephenreid.net'
+      subject  'Strategy#bail'
+    end
   end
 
   def self.post_structure(n: 10, bail: false)
