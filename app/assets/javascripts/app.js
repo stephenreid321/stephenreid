@@ -33,24 +33,16 @@ $(function() {
     $('.showOnHover', this).removeClass('d-sm-inline')
   })
 
-  var rangeSlider = function() {
-    var slider = $('.range-slider'),
-      range = $('.range-slider__range'),
-      value = $('.range-slider__value');
+  $('.range-slider').each(function() {
 
-    slider.each(function() {
-
-      value.each(function() {
-        var value = $(this).prev().attr('value');
-        $(this).html(value);
-      });
-
-      range.on('input', function() {
-        $(this).next(value).html(this.value);
-      });
+    $('.range-slider__value', this).each(function() {
+      var value = $(this).prev().attr('value');
+      $(this).html(value);
     });
-  };
 
-  rangeSlider();
+    $('.range-slider__range', this).on('input', function() {
+      $(this).next(value).html(this.value);
+    });
+  });
 
 });
