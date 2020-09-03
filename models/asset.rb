@@ -4,6 +4,7 @@ class Asset
 
   field :ticker, type: String
   field :name, type: String
+  field :multiplier, type: Float
 
   validates_presence_of :ticker
 
@@ -13,6 +14,7 @@ class Asset
     {
       ticker: :text,
       name: :text,
+      multiplier: :number,
       holdings: :collection
     }
   end

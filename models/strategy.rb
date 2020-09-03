@@ -122,7 +122,7 @@ class Strategy
       strategy.holdings.each do |holding|
         ticker = holding.asset.ticker
         assets[ticker] = 0 unless assets[ticker]
-        assets[ticker] += holding.weight * strategy.score
+        assets[ticker] += holding.weight * strategy.score * (holding.asset.multiplier || 1)
       end
     end
 
