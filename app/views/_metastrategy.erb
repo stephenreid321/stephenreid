@@ -49,6 +49,12 @@
         <% if actual.keys.include?(k) %>
           <%= number_to_percentage (actual[k]*100), precision: 2 %>
         <% end %>
+        <% d = actual[k]-proposed[k] %>
+        <small>
+          <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
+            <%= '+' if d > 0 %><%=number_to_percentage(d*100, precision: 2)%>
+          </span>
+        </small>
       </td>
       <td>
         <% if proposed.keys.include?(k) %>
