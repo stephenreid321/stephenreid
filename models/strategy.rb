@@ -158,7 +158,7 @@ class Strategy
   end
 
   def self.post_structure(n: 10, bail: false, force: false)
-    usd_weight = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'TUSD' }['rebalancedWeight']
+    usd_weight = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'USDT' }['rebalancedWeight']
     unless force
       if usd_weight == 0.9
         puts 'Strategy is in bailed state, exiting'
