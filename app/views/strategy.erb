@@ -26,10 +26,12 @@
     <% end %>
   </div>
 </div>
-<table class="table">
+<table class="table" style="width: auto">
   <thead>
     <tr>
+      <th></th>
       <th>Asset</th>
+      <th></th>
       <th>Current weight</th>
       <th>Proposed weight</th>
     </tr>
@@ -40,7 +42,15 @@
   <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
   <tr>
-    <td>
+    <td style="vertical-align: middle; text-align: right">
+      <% if actual[k] %>
+        <% d = actual[k] - rebalanced[k] %>
+        <% if d < 0 %>
+          <div style="display: inline-block; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{-d*100000}px"%>"></div>
+        <% end %>
+      <% end %>
+    </td>
+    <td style="width: 1px; white-space: nowrap;">
       <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
         <%= asset.name %> (<%= k %>)
       </a>
@@ -48,15 +58,21 @@
         <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
       <% end %>
     </td>
-    <td>
-      <% if actual.keys.include?(k) %>
-        <%= number_to_percentage (actual[k]*100), precision: 2 %>
-      <% end %>
+    <td style="vertical-align: middle">
       <% if actual[k] %>
+        <% d = actual[k] - rebalanced[k] %>
+        <% if d > 0 %>
+          <div style="display: inline-block; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{d*100000}px"%>"></div>
+        <% end %>
+      <% end %>
+    </td>
+    <td style="width: 1px; white-space: nowrap; padding-left: 0; padding-right: 0;">
+      <% if actual[k] %>
+        <%= number_to_percentage (actual[k]*100), precision: 2 %>
         <% d = actual[k] - rebalanced[k] %>
         <small>
           <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
-            <%= '+' if d > 0 %><%=number_to_percentage(d*100, precision: 2)%>
+            <%= '+' if d > 0 %><%=(d*10000).round%>
           </span>
         </small>
       <% end %>
@@ -71,9 +87,11 @@
   <tfoot>
     <tr>
       <th></th>
+      <th></th>
       <th>
         <%= number_to_percentage (actual.map { |_k,v| v }.sum*100), precision: 2 %>
       </th>
+      <th></th>
       <th>
         <%= number_to_percentage (proposed.map { |_k,v| v }.sum*100), precision: 2 %>
       </th>
