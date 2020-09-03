@@ -35,14 +35,15 @@ $(function() {
 
   $('.range-slider').each(function() {
 
+    $('.range-slider__range', this).on('input', function() {
+      $(this).next().html(this.value);
+    });
+
     $('.range-slider__value', this).each(function() {
       var value = $(this).prev().attr('value');
       $(this).html(value);
     });
 
-    $('.range-slider__range', this).on('input', function() {
-      $(this).next().html(this.value);
-    });
   });
 
 });
