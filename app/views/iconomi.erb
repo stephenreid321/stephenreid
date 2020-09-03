@@ -46,12 +46,6 @@
   <thead>
     <tr>
       <th></th>
-      <th>24H</th>
-      <th>7D</th>
-      <th>1M</th>
-      <th>3M</th>
-      <th>6M</th>
-      <th>1Y</th>
       <th>Score (fee weighted)</th>
       <% if @p %>
         <th colspan="2">Current position</th>
@@ -60,6 +54,12 @@
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
       <th><%=x%></th>
       <% } %>
+      <th>24H</th>
+      <th>7D</th>
+      <th>1M</th>
+      <th>3M</th>
+      <th>6M</th>
+      <th>1Y</th>
     </tr>
   </thead>
   <% max_score = 0 %>
@@ -75,83 +75,85 @@
           (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
         <% end %>
       </td>
-      <% %w[day week month three_month six_month year].each { |t| %>
       <td>
-        <% x = strategy.send(t); if x %>
-        <span style="color: <%= if x > 0; 'green'; elsif x < 0; 'red'; end %>">
-          <%=number_to_percentage(x*100, :precision => 1)%>
-        </span>
+        <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>
       </td>
-    <% end; } %>
-    <td>
-      <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>
-    </td>
-    <% if @p %>
-      <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
-      <% v = f['value'] if f %>
-      <% v = v.to_f if v %>
-      <td>
-        <% if v %>
-          <%=number_to_percentage((v/balanceTotal)*100, :precision => 0)%>
-        <% end %>
-      </td>
-      <td>
-        <%= number_to_currency v, precision: 0 %>
-      </td>
-    <% end %>
-    <td nowrap>
-      <% if i < n && i < funds %>
-        <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
-        <% if @p %>
+      <% if @p %>
+        <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
+        <% v = f['value'] if f %>
+        <% v = v.to_f if v %>
+        <td>
           <% if v %>
-            <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
-            <% if (d*100).round != 0 %>
-              <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
-                <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 0)%>
-              </span>
+            <%=number_to_percentage((v/balanceTotal)*100, :precision => 0)%>
+          <% end %>
+        </td>
+        <td>
+          <%= number_to_currency v, precision: 0 %>
+        </td>
+      <% end %>
+      <td nowrap>
+        <% if i < n && i < funds %>
+          <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
+          <% if @p %>
+            <% if v %>
+              <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
+              <% if (d*100).round != 0 %>
+                <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
+                  <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 0)%>
+                </span>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-      <% end %>
-    </td>
-    <td>
-      <% if i < n && i < funds %>
-        <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
-      <% end %>
-    </td>
-    <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
-    <td>
-      <% if x == 'lastRebalanced' %>
-        <%= time_ago_in_words strategy[x] %> ago
-      <% else %>
-        <%= strategy[x] %>
-      <% end %>
-    </td>
+      </td>
+      <td>
+        <% if i < n && i < funds %>
+          <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
+        <% end %>
+      </td>
+      <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
+      <td>
+        <% if x == 'lastRebalanced' %>
+          <%= time_ago_in_words strategy[x] %> ago
+        <% else %>
+          <%= strategy[x] %>
+        <% end %>
+      </td>
+      <% } %>
+      <% %w[day week month three_month six_month year].each { |t| %>
+      <td>
+        <% x = strategy.send(t) %>
+        <% if x %>
+          <span style="color: <%= if x > 0; 'green'; elsif x < 0; 'red'; end %>">
+            <%=number_to_percentage(x*100, :precision => 1)%>
+          </span>
+        <% end %>
+      </td>
+      <% } %>
+    </tr>
     <% } %>
-  </tr>
-  <% } %>
-</table>
-<%= partial :metastrategy %>
-<script>
-  $(function () {
-    var rangeSlider = function () {
-      var slider = $('.range-slider'),
-              range = $('.range-slider__range'),
-              value = $('.range-slider__value');
+  </table>
+  <%= partial :metastrategy %>
+  <script>
+    $(function () {
+      var rangeSlider = function () {
+        var slider = $('.range-slider'),
+                range = $('.range-slider__range'),
+                value = $('.range-slider__value');
 
-      slider.each(function () {
+        slider.each(function () {
 
-        value.each(function () {
-          var value = $(this).prev().attr('value');
-          $(this).html(value);
+          value.each(function () {
+            var value = $(this).prev().attr('value');
+            $(this).html(value);
+          });
+
+          range.on('input', function () {
+            $(this).next(value).html(this.value);
+          });
         });
+      };
 
-        range.on('input', function () {
-          $(this).next(value).html(this.value);
-        });
-      });
-    };
-
-    rangeSlider();
-  })
-</script>
+      rangeSlider();
+    })
+  </script>
