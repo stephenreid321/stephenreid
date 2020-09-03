@@ -38,7 +38,6 @@ $(function() {
   });
 
   $('.range-slider__value').each(function() {
-    alert($(this).prev().val())
     $(this).html($(this).prev().val());
   });
 
