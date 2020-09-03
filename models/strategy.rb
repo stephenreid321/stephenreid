@@ -133,7 +133,7 @@ class Strategy
     assets = assets.reject { |k, _v| %w[BTC ETH TUSD USDC USDT].include?(k) }
 
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
-    assets << ['TUSD', usd]
+    assets << ['USDT', usd]
     total = assets.map { |_k, v| v }.sum
     assets = assets.map { |k, v| [k, v / total] }
 
@@ -158,9 +158,9 @@ class Strategy
   end
 
   def self.post_structure(n: 10, bail: false, force: false)
-    tusd_weight = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'TUSD' }['rebalancedWeight']
+    usd_weight = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'USDT' }['rebalancedWeight']
     unless force
-      if tusd_weight == 0.9
+      if usd_weight == 0.9
         puts 'Strategy is in bailed state, exiting'
         return
       end
@@ -168,7 +168,7 @@ class Strategy
 
     if bail
       puts 'bailing!'
-      proposed = [['TUSD', 0.9], ['ETH', 0.1]]
+      proposed = [['USDT', 0.9], ['ETH', 0.1]]
       data = {
         ticker: 'DECENTCOOP',
         values: proposed.map do |ticker, p|
