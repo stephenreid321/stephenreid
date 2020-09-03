@@ -1,0 +1,82 @@
+<% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
+<% balanceTotal = balances.sum { |b| b['value'].to_i} %>
+<h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
+<% if assets = (params[:assets].try(:to_i) || 10) %>
+  <% assets = 1 if assets < 1 %>
+  <% assets = 20 if assets > 20 %>
+<% end %>
+<div class="row justify-content-center mb-3">
+  <div class="col-md-6 col-lg-4 text-center">
+    <% if (multiplied = Asset.where(:multiplier.ne => nil)).count > 0 %>
+      <div class="mb-3">
+        <% multiplied.each { |asset| %>
+        <span class="badge badge-primary">
+          <%=asset.name%> (<%=asset.ticker%>)
+          <%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x
+        </span>
+        <% } %>
+      </div>
+    <% end %>
+    <% form_tag '#meta', :method => 'get' do %>
+      <label>Number of assets</label>
+      <div class="range-slider">
+        <input name="assets" class="range-slider__range" type="range" value="<%=assets%>" min="1" max="20" step="1" onchange="$(this.form).submit()">
+        <span class="range-slider__value">0</span>
+      </div>
+    <% end %>
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Current weight</th>
+      <th>Proposed weight</th>
+    </tr>
+  </thead>
+  <% proposed = Hash[Strategy.proposed(n: assets)] %>
+  <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
+  <% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
+  <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
+  <% asset = Asset.find_by(ticker: k) %>
+  <tr>
+    <td>
+      <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
+        <%= asset.name %> (<%= k %>)
+      </a>
+      <% if asset.multiplier %>
+        <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+      <% end %>
+    </td>
+    <td>
+      <% if actual.keys.include?(k) %>
+        <%= number_to_percentage (actual[k]*100), precision: 2 %>
+      <% end %>
+      <% if actual[k] %>
+        <% d = actual[k] - rebalanced[k] %>
+        <small>
+          <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
+            <%= '+' if d > 0 %><%=number_to_percentage(d*100, precision: 2)%>
+          </span>
+        </small>
+      <% end %>
+    </td>
+    <td>
+      <% if proposed.keys.include?(k) %>
+        <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+      <% end %>
+    </td>
+  </tr>
+  <% } %>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th>
+        <%= number_to_percentage (actual.map { |_k,v| v }.sum*100), precision: 2 %>
+      </th>
+      <th>
+        <%= number_to_percentage (proposed.map { |_k,v| v }.sum*100), precision: 2 %>
+      </th>
+    </tr>
+  </tfoot>
+</table>
