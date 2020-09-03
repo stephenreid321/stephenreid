@@ -34,6 +34,7 @@
     </thead>
     <% proposed = Hash[Strategy.proposed(n: assets)] %>
     <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
+    <% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
     <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
     <% asset = Asset.find_by(ticker: k) %>
     <tr>
@@ -50,7 +51,7 @@
           <%= number_to_percentage (actual[k]*100), precision: 2 %>
         <% end %>
         <% if actual[k] %>
-          <% d = actual[k] - proposed[k] %>
+          <% d = actual[k] - rebalanced[k] %>
           <small>
             <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
               <%= '+' if d > 0 %><%=number_to_percentage(d*100, precision: 2)%>
