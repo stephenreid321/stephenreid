@@ -165,7 +165,11 @@ class Strategy
         return
       end
     end
-
+    Mail.deliver do
+      from 'notifications@stephenreid.net'
+      to 'stephen@stephenreid.net'
+      subject "Rebalanced at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
+    end
     if bail
       puts 'bailing!'
       weights = [['USDT', 0.9], ['ETH', 0.1]]
