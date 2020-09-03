@@ -33,17 +33,12 @@ $(function() {
     $('.showOnHover', this).removeClass('d-sm-inline')
   })
 
-  $('.range-slider').each(function() {
+  $('.range-slider__range').on('input', function() {
+    $(this).next().html($(this).val());
+  });
 
-    $('.range-slider__range', this).on('input', function() {
-      $(this).next().html(this.value);
-    });
-
-    $('.range-slider__value', this).each(function() {
-      var value = $(this).prev().attr('value');
-      $(this).html(value);
-    });
-
+  $('.range-slider__value').each(function() {
+    $(this).html($(this).prev().val());
   });
 
 });
