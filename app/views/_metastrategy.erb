@@ -26,11 +26,15 @@
     <% proposed = Hash[Strategy.proposed(n: assets)] %>
     <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
     <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
+    <% asset = Asset.find_by(ticker: k) %>
     <tr>
       <td>
         <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
-          <%= Asset.find_by(ticker: k).name %> (<%= k %>)
+          <%= asset.name %> (<%= k %>)
         </a>
+        <% if asset.multiplier %>
+          <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+        <% end %>
       </td>
       <td>
         <% if actual.keys.include?(k) %>
