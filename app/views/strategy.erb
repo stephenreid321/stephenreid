@@ -32,82 +32,78 @@
     <% end %>
   </div>
 </div>
-<div class="row justify-content-center">
-  <div class="col-auto">
-    <table class="table" style="width: auto">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Asset</th>
-          <th></th>
-          <th>Current weight</th>
-          <th>Proposed weight</th>
-        </tr>
-      </thead>
-      <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
-      <% asset = Asset.find_by(ticker: k) %>
-      <tr>
-        <td style="vertical-align: middle; text-align: right">
-          <% if actual[k] %>
-            <% d = actual[k] - rebalanced[k] %>
-            <% if d < 0 %>
-              <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{-d*y}px"%>"></div>
-            <% end %>
-          <% end %>
-        </td>
-        <td class="assetName" style="white-space: nowrap;">
-          <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
-            <%= asset.name %> (<%= k %>)
-          </a>
-          <% if asset.multiplier %>
-            <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
-          <% end %>
-        </td>
-        <td style="vertical-align: middle">
-          <% if actual[k] %>
-            <% d = actual[k] - rebalanced[k] %>
-            <% if d > 0 %>
-              <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{d*y}px"%>"></div>
-            <% end %>
-          <% end %>
-        </td>
-        <td class="actual" style="white-space: nowrap;">
-          <% if actual[k] %>
-            <%= number_to_percentage (actual[k]*100), precision: 2 %>
-            <% d = actual[k] - rebalanced[k] %>
-            <small>
-              <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
-                <%= '+' if d > 0 %><%=(d*10000).round%>
-              </span>
-            </small>
-          <% end %>
-        </td>
-        <td>
-          <% if proposed.keys.include?(k) %>
-            <%= number_to_percentage (proposed[k]*100), precision: 2 %>
-          <% end %>
-        </td>
-      </tr>
-      <% } %>
-      <tfoot>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-            <%= number_to_percentage (actual.map { |_k,v| v }.sum*100), precision: 2 %>
-          </th>
-          <th>
-            <%= number_to_percentage (proposed.map { |_k,v| v }.sum*100), precision: 2 %>
-          </th>
-        </tr>
-      </tfoot>
-    </table>
-    <style>
-      @media(min-width: 768px) {
-      td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
-      td.actual { width: 1px;  }
-      }
-    </style>
-  </div>
-</div>
+<table class="table" style="width: auto; margin: auto">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Asset</th>
+      <th></th>
+      <th>Current weight</th>
+      <th>Proposed weight</th>
+    </tr>
+  </thead>
+  <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
+  <% asset = Asset.find_by(ticker: k) %>
+  <tr>
+    <td style="vertical-align: middle; text-align: right">
+      <% if actual[k] %>
+        <% d = actual[k] - rebalanced[k] %>
+        <% if d < 0 %>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{-d*y}px"%>"></div>
+        <% end %>
+      <% end %>
+    </td>
+    <td class="assetName" style="white-space: nowrap;">
+      <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
+        <%= asset.name %> (<%= k %>)
+      </a>
+      <% if asset.multiplier %>
+        <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+      <% end %>
+    </td>
+    <td style="vertical-align: middle">
+      <% if actual[k] %>
+        <% d = actual[k] - rebalanced[k] %>
+        <% if d > 0 %>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{d*y}px"%>"></div>
+        <% end %>
+      <% end %>
+    </td>
+    <td class="actual" style="white-space: nowrap;">
+      <% if actual[k] %>
+        <%= number_to_percentage (actual[k]*100), precision: 2 %>
+        <% d = actual[k] - rebalanced[k] %>
+        <small>
+          <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
+            <%= '+' if d > 0 %><%=(d*10000).round%>
+          </span>
+        </small>
+      <% end %>
+    </td>
+    <td>
+      <% if proposed.keys.include?(k) %>
+        <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+      <% end %>
+    </td>
+  </tr>
+  <% } %>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>
+        <%= number_to_percentage (actual.map { |_k,v| v }.sum*100), precision: 2 %>
+      </th>
+      <th>
+        <%= number_to_percentage (proposed.map { |_k,v| v }.sum*100), precision: 2 %>
+      </th>
+    </tr>
+  </tfoot>
+</table>
+<style>
+  @media(min-width: 768px) {
+  td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
+  td.actual { width: 1px;  }
+  }
+</style>
