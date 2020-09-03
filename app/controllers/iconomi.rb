@@ -19,13 +19,13 @@ StephenReid::App.controller do
   get '/iconomi/:p/bail' do
     halt unless params[:p] == ENV['ICN_PASSWORD']
     Strategy.bail
-    redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
+    200
   end
 
   get '/iconomi/:p/post_structure' do
     halt unless params[:p] == ENV['ICN_PASSWORD']
     Strategy.post_structure(force: params[:force])
-    redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
+    200
   end
 
   get '/iconomi/:p/ccowl' do
