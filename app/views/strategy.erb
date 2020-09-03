@@ -51,7 +51,7 @@
           <% if actual[k] %>
             <% d = actual[k] - rebalanced[k] %>
             <% if d < 0 %>
-              <div class="d-none d-sm-inline-block" style="height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{-d*y}px"%>"></div>
+              <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{-d*y}px"%>"></div>
             <% end %>
           <% end %>
         </td>
@@ -67,7 +67,7 @@
           <% if actual[k] %>
             <% d = actual[k] - rebalanced[k] %>
             <% if d > 0 %>
-              <div class="d-none d-sm-inline-block" style="display: inline-block; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{d*y}px"%>"></div>
+              <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{d*y}px"%>"></div>
             <% end %>
           <% end %>
         </td>
@@ -105,8 +105,8 @@
     </table>
     <style>
       @media(min-width: 768px) {
-      td.assetName { width: 1px; }
-      td.actual { width: 1px; padding-left: 0; padding-right: 0; }
+      td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
+      td.actual { width: 1px;  }
       }
     </style>
   </div>
