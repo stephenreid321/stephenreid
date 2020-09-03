@@ -147,12 +147,13 @@ class Strategy
     assets
   end
 
-  def self.bail
+  def self.bail(text: nil)
     post_structure(bail: true)
     Mail.deliver do
-      from     'notifications@stephenreid.net'
-      to       'stephen@stephenreid.net'
-      subject  'Strategy#bail'
+      from 'notifications@stephenreid.net'
+      to 'stephen@stephenreid.net'
+      subject 'Strategy#bail'
+      body text
     end
   end
 
@@ -176,7 +177,7 @@ class Strategy
         values: proposed.map do |ticker, p|
           { assetTicker: ticker, rebalancedWeight: p }
         end,
-        speedType: 'MEDIUM'
+        speedType: (bail ? 'FAST' : 'MEDIUM')
       }
 
       puts n
