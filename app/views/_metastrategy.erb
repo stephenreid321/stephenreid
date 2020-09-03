@@ -3,9 +3,18 @@
     <% assets = 1 if assets < 1 %>
     <% assets = 20 if assets > 20 %>
   <% end %>
-  <h1 class="text-center mt-5 mb-3" id="meta">Metastrategy</h1>
   <div class="row justify-content-center mb-3">
     <div class="col-md-6 col-lg-4 text-center">
+      <% if (multiplied = Asset.where(:multiplier.ne => nil)).count > 0 %>
+        <div class="mb-3">
+          <% multiplied.each { |asset| %>
+          <span class="badge badge-primary">
+            <%=asset.name%> (<%=asset.ticker%>)
+            <%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x
+          </span>
+          <% } %>
+        </div>
+      <% end %>
       <% form_tag '#meta', :method => 'get' do %>
         <label>Number of assets</label>
         <div class="range-slider">

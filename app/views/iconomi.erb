@@ -12,6 +12,7 @@
 <% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
 <% if @p %>
   <h1 class="text-center mb-4"><%=number_to_currency balanceTotal, precision: 0%></h1>
+  <%= partial :metastrategy %>
 <% else %>
   <div class="text-center mb-3">
     <big>
@@ -22,7 +23,7 @@
 <% end %>
 <div class="row justify-content-center mb-3">
   <div class="col-md-6 col-lg-4 text-center">
-    <% form_tag '', :method => 'get' do %>
+    <% form_tag '#funds', :method => 'get', :id => 'funds' do %>
       <label>Number of funds</label>
       <div class="range-slider">
         <input name="funds" class="range-slider__range" type="range" value="<%=funds%>" min="1" max="10" step="1" onchange="$(this.form).submit()">
@@ -133,7 +134,6 @@
     </tr>
     <% } %>
   </table>
-  <%= partial :metastrategy %>
   <script>
     $(function () {
       var rangeSlider = function () {
