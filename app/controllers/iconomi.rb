@@ -41,7 +41,7 @@ StephenReid::App.controller do
         created_at: alert['created']
       )
     end
-    redirect "/iconomi/#{ENV['ICN_PASSWORD']}"
+    200
   end
 
   get '/loopring' do
