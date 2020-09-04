@@ -5,6 +5,7 @@
 <% proposed = Hash[Strategy.proposed(n: assets)] %>
 <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
 <% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
+<% diff = Hash[actual.map { |k,v| [k, actual[k] - rebalanced[k]] }] %>
 <% strategy = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% statistics = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/statistics')) %>
 <% y = 50000 %>
@@ -63,11 +64,10 @@
   <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).pluck(:ticker)).uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
   <tr>
-    <td style="vertical-align: middle; text-align: right">
+    <td style="vertical-align: middle; text-align: right; width: 10vw">
       <% if actual[k] %>
-        <% d = actual[k] - rebalanced[k] %>
-        <% if d < 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{-d*y}px"%>"></div>
+        <% if diff[k] < 0 %>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*diff[k]/diff.values.min}%"%>"></div>
         <% end %>
       <% end %>
     </td>
@@ -79,21 +79,19 @@
         <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
       <% end %>
     </td>
-    <td style="vertical-align: middle">
+    <td style="vertical-align: middle; width: 10vw">
       <% if actual[k] %>
-        <% d = actual[k] - rebalanced[k] %>
-        <% if d > 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>; width: <%="#{d*y}px"%>"></div>
+        <% if diff[k] > 0 %>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*diff[k]/diff.values.max}%"%>"></div>
         <% end %>
       <% end %>
     </td>
     <td class="actual" style="white-space: nowrap;">
       <% if actual[k] %>
         <%= number_to_percentage (actual[k]*100), precision: 2 %>
-        <% d = actual[k] - rebalanced[k] %>
         <small>
-          <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
-            <%= '+' if d > 0 %><%=(d*10000).round%>
+          <span style="color: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>">
+            <%= '+' if diff[k] > 0 %><%=(diff[k]*10000).round%>
           </span>
         </small>
       <% end %>
