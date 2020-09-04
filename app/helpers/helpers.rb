@@ -18,4 +18,8 @@ StephenReid::App.helpers do
   def cp(slug)
     cache(slug, expires: 6.hours.to_i) { ; partial :"#{slug}"; }
   end
+
+  def sign_in_required!
+    halt(403) unless current_account
+  end
 end

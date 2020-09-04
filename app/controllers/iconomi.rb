@@ -26,9 +26,9 @@ StephenReid::App.controller do
     200
   end
 
-  get '/strategy/:p/post_structure' do
+  get '/strategy/:p/rebalance' do
     halt unless params[:p] == ENV['ICN_PASSWORD']
-    Strategy.post_structure(force: params[:force])
+    Strategy.rebalance(force: params[:force])
     200
   end
 

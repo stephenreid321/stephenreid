@@ -154,10 +154,12 @@ class Strategy
       subject 'Strategy#bail'
       body text
     end
-    post_structure(bail: true)
+    rebalance(bail: true)
+    Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
+    delay(run_at: 3.hours.from_now).rebalance(force: true)
   end
 
-  def self.post_structure(n: 10, bail: false, force: false)
+  def self.rebalance(n: 10, bail: false, force: false)
     usd_weight = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'USDT' }['rebalancedWeight']
     unless force
       if usd_weight == 0.9

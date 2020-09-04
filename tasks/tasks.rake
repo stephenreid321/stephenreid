@@ -4,8 +4,8 @@ namespace :strategies do
     Strategy.update
   end
 
-  task post_structure: :environment do
-    Strategy.post_structure
+  task rebalance: :environment do
+    Strategy.rebalance
   end
 end
 
