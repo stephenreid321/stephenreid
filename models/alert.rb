@@ -21,7 +21,7 @@ class Alert
       text: :text,
       ticker: :text,
       value: :number,
-      rule_id: :integer
+      rule_id: :number
     }
   end
 end

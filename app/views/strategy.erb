@@ -44,28 +44,11 @@
 <!-- Alerts -->
 <% Alert.order('created_at desc').limit(5).each { |alert| %>
 <p class="text-center">
-  <%= alert.text %>
+  ⚡
+  <%= alert.ticker %>
   <small><%=timeago alert.created_at%></small>
 </p>
 <% } %>
-<!-- Boosts -->
-<div class="row justify-content-center mb-3">
-  <div class="col-auto text-center">
-    <% if (multiplied = Asset.where(:multiplier.ne => nil)).count > 0 %>
-      <div class="card mb-3" style="width: auto; margin: auto">
-        <h5 class="card-header">Boosts</h5>
-        <div class="card-body">
-          <% multiplied.each { |asset| %>
-          <a target="_blank" href="https://www.iconomi.com/asset/<%=asset.ticker%>" class="badge badge-primary">
-            <%=asset.name%> (<%=asset.ticker%>)
-            <%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x
-          </a>
-          <% } %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
 <!-- Assets -->
 <table class="table" style="width: auto; margin: auto">
   <thead>
@@ -77,7 +60,7 @@
       <th>Proposed weight</th>
     </tr>
   </thead>
-  <% (proposed.keys + actual.keys.reject { |k| proposed.keys.include?(k) }).each { |k| %>
+  <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).pluck(:ticker)).uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
   <tr>
     <td style="vertical-align: middle; text-align: right">

@@ -155,8 +155,7 @@ class Strategy
       body text
     end
     rebalance(bail: true)
-    Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
-    delay(run_at: 3.hours.from_now).rebalance(force: true)
+    delay(run_at: 1.hours.from_now).rebalance(force: true)
   end
 
   def self.rebalance(n: 10, bail: false, force: false)
@@ -173,6 +172,9 @@ class Strategy
       to 'stephen@stephenreid.net'
       subject "Rebalancing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
     end
+
+    Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
+    Strategy.update
 
     if bail
       puts 'bailing!'
