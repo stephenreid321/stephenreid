@@ -10,30 +10,30 @@ StephenReid::App.controller do
   end
 
   get '/strategy/:p' do
-    @p = (params[:p] == ENV['ICN_PASSWORD'])
+    @p = (params[:p] == ENV['SITE_SECRET'])
     @favicon = 'moon.png'
     erb :strategy
   end
 
   post '/strategy/:p/bail' do
-    halt unless params[:p] == ENV['ICN_PASSWORD']
-    redirect "/iconomi/#{ENV['ICN_PASSWORD']}/bail"
+    halt unless params[:p] == ENV['SITE_SECRET']
+    redirect "/iconomi/#{ENV['SITE_SECRET']}/bail"
   end
 
   get '/strategy/:p/bail' do
-    halt unless params[:p] == ENV['ICN_PASSWORD']
+    halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.bail
     200
   end
 
   get '/strategy/:p/rebalance' do
-    halt unless params[:p] == ENV['ICN_PASSWORD']
+    halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.rebalance(force: params[:force])
     200
   end
 
   get '/ccowl/:p' do
-    halt unless params[:p] == ENV['ICN_PASSWORD']
+    halt unless params[:p] == ENV['SITE_SECRET']
     alerts = JSON.parse(Mechanize.new.get('https://ccowl.com/getAlerts?page=0&coins=BTC,ETH&alertType=1').body)['data']
     alerts.each do |alert|
       Alert.create(
