@@ -22,7 +22,7 @@ class Strategy
   validates_presence_of :ticker
 
   def calculate_score
-    ((month || 0) + (three_month || 0) + (six_month || 0) + (year || 0))
+    (4 * (month || 0) + 3 * (three_month || 0) + 2 * (six_month || 0) + 1 * (year || 0))
   end
 
   def calculate_score_fee_weighted
