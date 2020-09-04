@@ -67,7 +67,7 @@
     <td style="vertical-align: middle; text-align: right; width: 10vw">
       <% if actual[k] %>
         <% if diff[k] < 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*diff[k]/diff.values.min}%"%>"></div>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*-diff[k]/diff.values.map(&:abs).max}%"%>"></div>
         <% end %>
       <% end %>
     </td>
@@ -82,7 +82,7 @@
     <td style="vertical-align: middle; width: 10vw">
       <% if actual[k] %>
         <% if diff[k] > 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*diff[k]/diff.values.max}%"%>"></div>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*diff[k]/diff.values.map(&:abs).max}%"%>"></div>
         <% end %>
       <% end %>
     </td>
