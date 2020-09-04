@@ -10,7 +10,7 @@ StephenReid::App.controller do
   end
 
   get '/strategy/:p' do
-    @p = (params[:p] == ENV['SITE_SECRET'])
+    halt unless params[:p] == ENV['SITE_SECRET']
     @favicon = 'moon.png'
     erb :strategy
   end
