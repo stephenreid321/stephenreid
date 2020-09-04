@@ -9,8 +9,7 @@ StephenReid::App.controller do
     erb :loopring
   end
 
-  get '/strategy/:p' do
-    halt unless params[:p] == ENV['SITE_SECRET']
+  get '/strategy' do
     @favicon = 'moon.png'
     erb :strategy
   end
