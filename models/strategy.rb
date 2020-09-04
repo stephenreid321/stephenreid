@@ -174,7 +174,6 @@ class Strategy
     end
 
     Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
-    Strategy.update
 
     if bail
       puts 'bailing!'
@@ -189,6 +188,7 @@ class Strategy
       Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
     else
       puts 'setting strategy'
+      Strategy.update
       success = nil
       until success
 
