@@ -43,7 +43,7 @@
   <% } %>
 </p>
 <!-- Alerts -->
-<% Alert.order('created_at desc').limit(5).each { |alert| %>
+<% Alert.where(:value.lt => 0).order('created_at desc').limit(5).each { |alert| %>
 <p class="text-center">
   ⚡
   <%= alert.ticker %>
