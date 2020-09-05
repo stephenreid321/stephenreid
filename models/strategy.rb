@@ -154,8 +154,8 @@ class Strategy
       subject 'Strategy#bail'
       body text
     end
-    rebalance(bail: true)
-    delay(run_at: 1.hours.from_now).rebalance(force: true)
+    # rebalance(bail: true)
+    # delay(run_at: 1.hours.from_now).rebalance(force: true)
   end
 
   def self.rebalance(n: 10, bail: false, force: false)
