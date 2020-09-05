@@ -148,12 +148,7 @@ class Strategy
   end
 
   def self.bail(text: nil)
-    Mail.deliver do
-      from 'notifications@stephenreid.net'
-      to 'stephen@stephenreid.net'
-      subject 'Strategy#bail'
-      body text
-    end
+    # Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
     # rebalance(bail: true)
     # delay(run_at: 1.hours.from_now).rebalance(force: true)
   end
@@ -167,16 +162,14 @@ class Strategy
       end
     end
 
-    Mail.deliver do
-      from 'notifications@stephenreid.net'
-      to 'stephen@stephenreid.net'
-      subject "Rebalancing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
-    end
-
     Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
 
     if bail
-      puts 'bailing!'
+      Mail.deliver do
+        from 'notifications@stephenreid.net'
+        to 'stephen@stephenreid.net'
+        subject "Bailing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
+      end
       weights = [['USDT', 0.9], ['ETH', 0.1]]
       data = {
         ticker: 'DECENTCOOP',
@@ -187,7 +180,11 @@ class Strategy
       }
       Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
     else
-      puts 'setting strategy'
+      Mail.deliver do
+        from 'notifications@stephenreid.net'
+        to 'stephen@stephenreid.net'
+        subject "Rebalancing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
+      end
       Strategy.update
       success = nil
       until success
