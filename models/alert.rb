@@ -12,7 +12,7 @@ class Alert
   validates_uniqueness_of :ccowl_id
 
   after_create do
-    Strategy.bail(text: text) if value.negative?
+    # Strategy.bail if value.negative?
   end
 
   def self.admin_fields

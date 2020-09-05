@@ -147,9 +147,9 @@ class Strategy
     assets
   end
 
-  def self.bail(text: nil)
-    # Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
-    # rebalance(bail: true)
+  def self.bail
+    Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
+    rebalance(bail: true)
     # delay(run_at: 1.hours.from_now).rebalance(force: true)
   end
 
