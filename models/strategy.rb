@@ -2,6 +2,7 @@ class Strategy
   include Mongoid::Document
   include Mongoid::Timestamps
   class RoundingError < StandardError; end
+  class RebalancingError < StandardError; end
 
   field :ticker, type: String
   field :name, type: String
@@ -209,8 +210,10 @@ class Strategy
         begin
           Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
           success = true
-        rescue StandardError
+        rescue StandardError => e
+          puts e
           n -= 1
+          raise Strategy::RebalancingError if n < 3
         end
       end
     end
