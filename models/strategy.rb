@@ -4,6 +4,11 @@ class Strategy
   class RoundingError < StandardError; end
   class RebalancingError < StandardError; end
 
+  MONTH_FACTOR = 4
+  THREE_MONTH_FACTOR = 3
+  SIX_MONTH_FACTOR = 2
+  YEAR_FACTOR = 1
+
   field :ticker, type: String
   field :name, type: String
   field :score, type: Float
@@ -23,7 +28,7 @@ class Strategy
   validates_presence_of :ticker
 
   def calculate_score
-    (4 * (month || 0) + 3 * (three_month || 0) + 2 * (six_month || 0) + 1 * (year || 0))
+    ((MONTH_FACTOR * (month || 0)) + (THREE_MONTH_FACTOR * (three_month || 0)) + (SIX_MONTH_FACTOR * (six_month || 0)) + (YEAR_FACTOR * (year || 0)))
   end
 
   def calculate_score_fee_weighted

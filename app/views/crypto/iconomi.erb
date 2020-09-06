@@ -1,7 +1,6 @@
 <% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
-<% n = params[:n] ? params[:n].to_i : 20 %>
-<% strategies = Strategy.active_mature(fee_weighted: true).limit(n) %>
+<% strategies = Strategy.active_mature(fee_weighted: true) %>
 <% if funds = (params[:funds].try(:to_i) || (@p ? 3 : 5)) %>
   <% funds = 1 if funds < 1 %>
   <% funds = 10 if funds > 10 %>
@@ -12,7 +11,7 @@
 <% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
 <div class="text-center mb-3">
   <big>
-    score = 4*month + 3*three_month + 2*six_month + 1*year<br />
+    score = <%=Strategy::MONTH_FACTOR%>*month + <%=Strategy::THREE_MONTH_FACTOR%>*three_month + <%=Strategy::SIX_MONTH_FACTOR%>*six_month + <%=Strategy::YEAR_FACTOR%>*year<br />
     score_fee_weighted = score*(1-managementFee)*(1-performanceFee)*(1-entryFee)*(1-exitFee)
   </big>
 </div>
@@ -92,7 +91,7 @@
         </td>
       <% end %>
       <td nowrap>
-        <% if i < n && i < funds %>
+        <% if i < funds %>
           <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
           <% if @p %>
             <% if v %>
@@ -107,7 +106,7 @@
         <% end %>
       </td>
       <td>
-        <% if i < n && i < funds %>
+        <% if i < funds %>
           <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
         <% end %>
       </td>
