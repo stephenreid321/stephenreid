@@ -2,16 +2,16 @@ StephenReid::App.controller do
   get '/iconomi' do
     @p = params[:p]
     @favicon = 'moon.png'
-    erb :iconomi
+    erb :'crypto/iconomi'
   end
 
   get '/loopring' do
-    erb :loopring
+    erb :'crypto/loopring'
   end
 
   get '/strategy' do
     @favicon = 'moon.png'
-    erb :strategy
+    erb :'crypto/strategy'
   end
 
   get '/ccowl/:p' do

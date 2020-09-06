@@ -1,8 +1,5 @@
-<% if assets = (params[:assets].try(:to_i) || 10) %>
-  <% assets = 1 if assets < 1 %>
-  <% assets = 20 if assets > 20 %>
-<% end %>
-<% proposed = Hash[Strategy.proposed(n: assets)] %>
+<% n = (params[:n].try(:to_i) || 10) %>
+<% proposed = Hash[Strategy.proposed(n: n)] %>
 <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
 <% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
 <% diff = Hash[actual.map { |k,v| [k, actual[k] - rebalanced[k]] }] %>
