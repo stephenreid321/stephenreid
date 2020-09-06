@@ -46,9 +46,15 @@ GEM
     airrecord (1.0.5)
       faraday (>= 0.10, < 2.0)
       net-http-persistent (>= 2.9)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.13)
     bson (4.9.4)
     chroma (0.2.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.3)
     delayed_job (4.1.8)
@@ -57,8 +63,11 @@ GEM
       delayed_job (>= 3.0, < 5)
       mongoid (>= 3.0, < 8)
       mongoid-compatibility (>= 0.4.0)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    equalizer (0.0.11)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.14.0)
@@ -70,6 +79,8 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
+    inflecto (0.0.2)
     json (2.3.1)
     koala (3.0.0)
       addressable
@@ -174,6 +185,10 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.2)
       tilt (~> 2.0)
+    telegram-bot-ruby (0.12.0)
+      faraday
+      inflecto
+      virtus
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -182,6 +197,11 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     webrobots (0.1.2)
     zeitwerk (2.4.0)
 
@@ -211,6 +231,7 @@ DEPENDENCIES
   rss
   sass
   sinatra (= 2.0.2)
+  telegram-bot-ruby
   will_paginate!
 
 RUBY VERSION

@@ -32,3 +32,4 @@ gem 'delayed_job_mongoid'
 gem 'mongoid'
 
 gem 'htmlbeautifier', github: 'trileuco/htmlbeautifier'
+gem 'telegram-bot-ruby'

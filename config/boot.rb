@@ -7,6 +7,7 @@ require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 require 'open-uri'
 require 'active_support/all'
+require 'telegram/bot'
 Bundler.require(:default, RACK_ENV)
 
 Padrino.load!
