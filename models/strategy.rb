@@ -124,7 +124,7 @@ class Strategy
 
   def self.proposed(n: 10)
     assets = {}
-    Strategy.active_mature.where(:ticker.ne => 'RISKYBISCUITS').each do |strategy|
+    Strategy.active_mature.each do |strategy|
       strategy.holdings.each do |holding|
         ticker = holding.asset.ticker
         assets[ticker] = 0 unless assets[ticker]
