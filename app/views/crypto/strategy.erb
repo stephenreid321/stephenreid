@@ -6,8 +6,10 @@
 <% strategy = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% statistics = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/statistics')) %>
 <% y = 50000 %>
+
+
 <h1 class="text-center">Metastrategy</h1>
-<!-- Performance -->
+
 <table class="table" style="width: auto; margin: auto">
   <thead>
     <tr>
@@ -32,22 +34,22 @@
     <% } %>
   </tr>
 </table>
-<!-- Rebalancing -->
+
+
 <p class="lead text-center">
   Rebalanced <%= time_ago_in_words strategy['lastRebalanced'] %> ago
   <% Delayed::Job.where(handler: /method_name: :rebalance/).each { |delayed_job| %>
   &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%=delayed_job.run_at%>"><%=time_ago_in_words delayed_job.run_at %></abbr>
   <% } %>
 </p>
-<!-- Alerts -->
-<% Alert.where(:value.lt => 0).order('created_at desc').limit(5).each { |alert| %>
-<p class="text-center">
-  ⚡
-  <%= alert.ticker %>
-  <small><%=timeago alert.created_at%></small>
-</p>
-<% } %>
-<!-- Assets -->
+
+
+<style>
+  @media(min-width: 768px) {
+  td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
+  td.actual { width: 1px;  }
+  }
+</style>
 <table class="table" style="width: auto; margin: auto">
   <thead>
     <tr>
@@ -114,9 +116,3 @@
     </tr>
   </tfoot>
 </table>
-<style>
-  @media(min-width: 768px) {
-  td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
-  td.actual { width: 1px;  }
-  }
-</style>
