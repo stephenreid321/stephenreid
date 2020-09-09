@@ -9,6 +9,16 @@ StephenReid::App.controller do
     erb :'crypto/loopring'
   end
 
+  get '/coingecko' do
+    erb :'crypto/coingecko'
+  end
+
+  get '/coins/:slug/twitter_followers' do
+    coin = Coin.find_by(slug: params[:slug])
+    coin.update unless coin.twitter_followers
+    coin.twitter_followers.to_s
+  end
+
   get '/strategy' do
     @favicon = 'moon.png'
     erb :'crypto/strategy'

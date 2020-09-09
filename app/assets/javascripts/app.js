@@ -41,4 +41,12 @@ $(function() {
     $(this).html($(this).prev().val());
   });
 
+  $('.rg').each(function() {
+    var d = parseFloat($(this).text())
+    if (d > 0)
+      $(this).css('color', 'green')
+    else if (d < 0)
+      $(this).css('color', 'red')
+  })
+
 });
