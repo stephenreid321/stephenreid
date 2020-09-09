@@ -43,7 +43,12 @@
 </div>
 
 
-<table class="table" style="font-size: 0.9rem">
+<script>
+  $(function () {
+        $('#iconomi').dataTable({paging: false, searching: false, order: [[1, "desc"]]})
+  })
+</script>
+<table id="iconomi" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
   <thead>
     <tr>
       <th></th>
@@ -71,7 +76,7 @@
       <% strategy = Strategy.find_by(ticker: strategy['ticker']) %>
     <% end %>
     <tr>
-      <td>
+      <td data-sort="<%=i+1%>">
         #<%=i+1%>
       </td>
       <td>
