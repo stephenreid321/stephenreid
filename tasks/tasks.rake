@@ -9,6 +9,12 @@ namespace :strategies do
   end
 end
 
+namespace :coins do
+  task import: :environment do
+    Coin.import
+  end
+end
+
 namespace :terms do
   task create_edges: :environment do
     term_ids = []

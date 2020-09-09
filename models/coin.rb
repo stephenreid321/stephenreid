@@ -14,6 +14,7 @@ class Coin
   field :price_change_percentage_7d_in_currency, type: Float
   field :twitter_username, type: String
   field :twitter_followers, type: Integer
+  field :hidden, type: Boolean
 
   def self.admin_fields
     {
