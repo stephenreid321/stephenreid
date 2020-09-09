@@ -16,8 +16,11 @@
   <% if coin.eth? %>
     <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
   <% end %>
-  <% if Asset.find_by(name: coin.name) || Asset.find_by(ticker: coin.symbol) %>
+  <% if (asset = (Asset.find_by(name: coin.name) || Asset.find_by(ticker: coin.symbol))) %>
     <small>ICONOMI</small>
+    <% if asset.multiplier %>
+      <span class="badge badge-secondary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+    <% end %>
   <% end %>
 </td>
 <td>
