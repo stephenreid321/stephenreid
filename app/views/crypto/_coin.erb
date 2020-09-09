@@ -9,17 +9,13 @@
   <% end %>
 </td>
 <td>
-  <div>
-    <a target="_blank" href="<%=coin.website%>"><%=coin.name%></a>
-  </div>
-  <div>
-    <a class="text-secondary" target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
-      <i data-toggle="tooltip" title="Coingecko" class="fas fa-chart-line"></i>
-    </a>
-    <% if coin.eth? %>
-      <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
-    <% end %>
-  </div>
+  <a target="_blank" href="<%=coin.website%>"><%=coin.name%></a>
+  <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
+    <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
+  </a>
+  <% if coin.eth? %>
+    <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
+  <% end %>
 </td>
 <td>
   <% if coin.twitter_followers %>
