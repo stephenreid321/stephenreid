@@ -22,9 +22,7 @@
         ICONOMI
       </a>
     </small>
-    <% if asset.multiplier %>
-      <span class="badge badge-secondary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
-    <% end %>
+    <div style="display: inline" data-pagelet-url="/assets/<%=asset.id%>/multiplier?badge_class=badge-secondary"></div>
   <% end %>
 </td>
 <td>
