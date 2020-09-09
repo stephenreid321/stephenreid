@@ -3,14 +3,17 @@
 </td>
 <td>
   <% if !coin.bought %>
-    <a class="pagelet-trigger btn btn-sm btn-secondary" href="/coins/<%=coin.slug%>/bought"><i class="fas fa-store"></i></a>
+    <a class="pagelet-trigger btn btn-sm btn-outline-primary" href="/coins/<%=coin.slug%>/bought"><i class="fas fa-shopping-basket"></i></a>
   <% else %>
-    <a class="pagelet-trigger btn btn-sm btn-success" href="/coins/<%=coin.slug%>/sold"><i class="fas fa-store"></i></a>
+    <a class="pagelet-trigger btn btn-sm btn-primary" href="/coins/<%=coin.slug%>/sold"><i class="fas fa-shopping-basket"></i></a>
   <% end %>
 </td>
 <td>
   <a target="_blank" href="<%=coin.website%>"><%=coin.name%></a>
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>"><i class="fas fa-coins"></i></a>
+  <% if coin.eth? %>
+    <i style="color: #A68DFB" class="fab fa-ethereum"></i>
+  <% end %>
 </td>
 <td>
   <% if coin.twitter_followers %>

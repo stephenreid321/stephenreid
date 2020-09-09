@@ -5,6 +5,7 @@ class Coin
   field :slug, type: String
   field :symbol, type: String
   field :name, type: String
+  field :platform, type: String
   field :current_price, type: Float
   field :market_cap, type: Integer
   field :market_cap_rank, type: Integer
@@ -23,6 +24,7 @@ class Coin
       slug: :text,
       symbol: :text,
       name: :text,
+      platform: :text,
       current_price: :number,
       market_cap: :number,
       market_cap_rank: :number,
@@ -36,6 +38,10 @@ class Coin
       hidden: :check_box,
       bought: :check_box
     }
+  end
+
+  def eth?
+    platform == 'ethereum'
   end
 
   def self.import
@@ -68,6 +74,7 @@ class Coin
   def update
     agent = Mechanize.new
     c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
+    self.platform = c['asset_platform_id']
     self.website = c['links']['homepage'].first
     self.twitter_username = c['links']['twitter_screen_name']
     self.twitter_followers = c['community_data']['twitter_followers']
