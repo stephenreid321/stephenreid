@@ -8,10 +8,16 @@
 <% y = 50000 %>
 
 
-<h1 class="text-center">Metastrategy</h1>
+<p class="lead text-center">
+  Rebalanced <%= timeago Time.at(strategy['lastRebalanced']) %>
+  <% Delayed::Job.where(handler: /method_name: :rebalance/).each { |delayed_job| %>
+  &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%=delayed_job.run_at%>"><%=time_ago_in_words delayed_job.run_at %></abbr>
+  <% } %>
+</p>
 
-<table class="table" style="width: auto; margin: auto">
-  <thead>
+
+<table class="table mt-3" style="width: auto; margin: auto">
+  <thead style="border-top: none">
     <tr>
       <th>24h</th>
       <th>7d</th>
@@ -36,21 +42,14 @@
 </table>
 
 
-<p class="lead text-center">
-  Rebalanced <%= time_ago_in_words strategy['lastRebalanced'] %> ago
-  <% Delayed::Job.where(handler: /method_name: :rebalance/).each { |delayed_job| %>
-  &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%=delayed_job.run_at%>"><%=time_ago_in_words delayed_job.run_at %></abbr>
-  <% } %>
-</p>
-
-
 <style>
   @media(min-width: 768px) {
   td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
   td.actual { width: 1px;  }
+  #assets th { border-top: none }
   }
 </style>
-<table class="table" style="width: auto; margin: auto">
+<table id="assets" class="table" style="width: auto; margin: auto">
   <thead>
     <tr>
       <th></th>
