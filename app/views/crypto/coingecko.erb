@@ -1,6 +1,9 @@
 <script>
   $(function () {
-    $('#coins').dataTable({paging: false, searching: false, order: [[7, "desc"]]});
+    $(document).ajaxStop(function() {
+      if (!$('#coins').hasClass('datatabled'))
+        $('#coins').dataTable({paging: false, searching: false, order: [[7, "desc"]]}).addClass('datatabled');
+    })
   })
 </script>
 <table class="table" id="coins">
@@ -16,54 +19,16 @@
       <th>24h</th>
       <th>7d</th>
       <th>Twitter followers</th>
+      <th></th>
     </tr>
   </thead>
   <% Coin.where(
+    :hidden.ne => true,
     :market_cap_rank.ne => nil,
     :market_cap.gte => 1000000,
-    :total_volume.gte => 1000000
-  ).order('price_change_percentage_24h_in_currency desc').limit(20).each { |coin| %>
-  <tr>
-    <td data-sort="<%=coin.market_cap_rank%>">
-      #<%=coin.market_cap_rank%>
-    </td>
-    <td>
-      <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>"><%=coin.name%></a>
-    </td>
-    <td>
-      <%=number_to_currency coin.current_price%>
-    </td>
-    <td>
-      <%=number_to_currency coin.market_cap, precision: 0%>
-    </td>
-    <td>
-      <%=number_to_currency coin.total_volume, precision: 0%>
-    </td>
-    <td>
-      <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
-    </td>
-    <td class="rg">
-      <% if coin.price_change_percentage_1h_in_currency %>
-        <%=number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2%>%
-      <% end %>
-    </td>
-    <td class="rg">
-      <% if coin.price_change_percentage_24h_in_currency %>
-        <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
-      <% end %>
-    </td>
-    <td class="rg">
-      <% if coin.price_change_percentage_7d_in_currency %>
-        <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
-      <% end %>
-    </td>
-    <td>
-      <% if coin.twitter_followers %>
-        <a target="_blank" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
-      <% else %>
-        <div data-pagelet-url="/coins/<%=coin.slug%>/twitter_followers"></div>
-      <% end %>
-    </td>
-  </tr>
+    :total_volume.gte => 1000000,
+    :price_change_percentage_24h_in_currency.gt => 20
+  ).order('price_change_percentage_24h_in_currency desc').each { |coin| %>
+  <tr data-pagelet-url="/coins/<%=coin.slug%>"></tr>
   <% } %>
 </table>

@@ -13,10 +13,16 @@ StephenReid::App.controller do
     erb :'crypto/coingecko'
   end
 
-  get '/coins/:slug/twitter_followers' do
+  get '/coins/:slug' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.update unless coin.twitter_followers
-    coin.twitter_followers.to_s
+    coin.update
+    partial :'crypto/coin', locals: { coin: coin }
+  end
+
+  get '/coins/:slug/hide' do
+    coin = Coin.find_by(slug: params[:slug])
+    coin.update_attribute(:hidden, true)
+    200
   end
 
   get '/strategy' do

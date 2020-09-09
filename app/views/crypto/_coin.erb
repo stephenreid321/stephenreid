@@ -1,0 +1,41 @@
+<td data-sort="<%=coin.market_cap_rank%>">
+  #<%=coin.market_cap_rank%>
+</td>
+<td>
+  <a target="_blank" href="<%=coin.website%>"><%=coin.name%></a>
+</td>
+<td>
+  <%=number_to_currency coin.current_price%>
+</td>
+<td>
+  <%=number_to_currency coin.market_cap, precision: 0%>
+</td>
+<td>
+  <%=number_to_currency coin.total_volume, precision: 0%>
+</td>
+<td>
+  <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
+</td>
+<td class="rg">
+  <% if coin.price_change_percentage_1h_in_currency %>
+    <%=number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2%>%
+  <% end %>
+</td>
+<td class="rg">
+  <% if coin.price_change_percentage_24h_in_currency %>
+    <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
+  <% end %>
+</td>
+<td class="rg">
+  <% if coin.price_change_percentage_7d_in_currency %>
+    <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
+  <% end %>
+</td>
+<td>
+  <% if coin.twitter_followers %>
+    <a target="_blank" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
+  <% end %>
+</td>
+<td>
+  <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.slug%>/hide');$(this).closest('tr').remove()"><i class="fa fa-times"></i></a>
+</td>

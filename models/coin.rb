@@ -12,6 +12,7 @@ class Coin
   field :price_change_percentage_1h_in_currency, type: Float
   field :price_change_percentage_24h_in_currency, type: Float
   field :price_change_percentage_7d_in_currency, type: Float
+  field :website, type: String
   field :twitter_username, type: String
   field :twitter_followers, type: Integer
   field :hidden, type: Boolean
@@ -28,8 +29,10 @@ class Coin
       price_change_percentage_1h_in_currency: :number,
       price_change_percentage_24h_in_currency: :number,
       price_change_percentage_7d_in_currency: :number,
+      website: :url,
       twitter_username: :text,
-      twitter_followers: :number
+      twitter_followers: :number,
+      hidden: :check_box
     }
   end
 
@@ -58,6 +61,7 @@ class Coin
   def update
     agent = Mechanize.new
     c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
+    self.website = c['links']['homepage'].first
     self.twitter_username = c['links']['twitter_screen_name']
     self.twitter_followers = c['community_data']['twitter_followers']
     save
