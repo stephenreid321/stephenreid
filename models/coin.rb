@@ -45,8 +45,8 @@ class Coin
   end
 
   def self.import
-    hidden = Coin.where(hidden: true).pluck(:slug)
-    bought = Coin.where(bought: true).pluck(:slug)
+    hidden_slugs = Coin.where(hidden: true).pluck(:slug)
+    bought_slugs = Coin.where(bought: true).pluck(:slug)
     Coin.delete_all
     agent = Mechanize.new
     i = 1
@@ -58,11 +58,11 @@ class Coin
         %w[symbol name current_price market_cap market_cap_rank total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
           coin.send("#{r}=", c[r])
         end
+        coin.hidden = hidden_slugs.include?(coin.slug)
+        coin.bought = bought_slugs.include?(coin.slug)
         coin.save
       end
     end
-    Coin.where(:slug.in => hidden).set(hidden: true)
-    Coin.where(:slug.in => bought).set(bought: true)
   end
 
   def self.update
