@@ -9,7 +9,7 @@
 
 <p class="lead text-center">Updated <%=timeago @coins.first.created_at%></p>
 
-<table class="table" id="coins">
+<table class="table" style="border-collapse: collapse !important" id="coins">
   <thead>
     <tr>
       <th></th>
@@ -27,6 +27,6 @@
     </tr>
   </thead>
   <% @coins.each { |coin| %>
-  <tr data-pagelet-url="/coins/<%=coin.slug%>"></tr>
+  <tr <% if coin.eth? %>style="background-color: #F5F2FA"<% end %> data-pagelet-url="/coins/<%=coin.slug%>"></tr>
   <% } %>
 </table>
