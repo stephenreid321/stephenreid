@@ -76,15 +76,13 @@ StephenReid::App.controller do
 
   get '/strategy/:p/bail' do
     halt unless params[:p] == ENV['SITE_SECRET']
-    Strategy.bail
-    sleep 5
+    Strategy.delay.bail
     redirect "/iconomi/#{ENV['SITE_SECRET']}"
   end
 
   get '/strategy/:p/rebalance' do
     halt unless params[:p] == ENV['SITE_SECRET']
-    Strategy.rebalance(force: params[:force])
-    sleep 5
+    Strategy.delay.rebalance(force: params[:force])
     redirect "/iconomi/#{ENV['SITE_SECRET']}"
   end
 end
