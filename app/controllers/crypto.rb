@@ -14,9 +14,8 @@ StephenReid::App.controller do
       :hidden.ne => true,
       :market_cap_rank.ne => nil,
       :market_cap.gte => 1_000_000,
-      :total_volume.gte => 1_000_000,
-      :price_change_percentage_24h_in_currency.gt => 20
-    ).order('price_change_percentage_24h_in_currency desc')
+      :total_volume.gte => 1_000_000
+    ).order('price_change_percentage_24h_in_currency desc').limit(20)
     erb :'crypto/coins'
   end
 
