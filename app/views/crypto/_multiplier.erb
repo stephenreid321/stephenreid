@@ -1,0 +1,10 @@
+<a href="javascript:;" onclick="$(this).hide().next().css('display', 'inline').find('input').focus()">
+  <% if asset.multiplier %>
+    <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+  <% else %>
+    <span class="text-dark">&hellip;</span>
+  <% end %>
+</a>
+<% form_tag "/assets/#{asset.id}/multiplier", style: 'display: none', class: 'form-inline' do %>
+  <%= number_field_tag :multiplier, :class => 'form-control', :style => 'width: 5em', :onchange => '$(this.form).submit()' %>
+<% end %>

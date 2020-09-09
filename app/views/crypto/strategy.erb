@@ -61,6 +61,7 @@
   </thead>
   <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).pluck(:ticker)).uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
+  <% coin = Coin.find_by(symbol: k.downcase) %>
   <tr>
     <td style="vertical-align: middle; text-align: right; width: 10vw">
       <% if actual[k] %>
@@ -73,9 +74,12 @@
       <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
         <%= asset.name %> (<%= k %>)
       </a>
-      <% if asset.multiplier %>
-        <span class="badge badge-primary"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+      <% if coin %>
+        <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
+          <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
+        </a>
       <% end %>
+      <div style="display: inline" data-pagelet-url="/assets/<%=asset.id%>/multiplier"></div>
     </td>
     <td style="vertical-align: middle; width: 10vw">
       <% if actual[k] %>
