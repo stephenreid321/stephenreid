@@ -47,7 +47,6 @@ StephenReid::App.controller do
   end
 
   get '/strategy' do
-    @favicon = 'moon.png'
     erb :'crypto/strategy'
   end
 
@@ -71,18 +70,18 @@ StephenReid::App.controller do
 
   post '/strategy/:p/bail' do
     halt unless params[:p] == ENV['SITE_SECRET']
-    redirect "/iconomi/#{ENV['SITE_SECRET']}/bail"
+    redirect "/strategy/#{ENV['SITE_SECRET']}/bail"
   end
 
   get '/strategy/:p/bail' do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.bail
-    redirect "/iconomi/#{ENV['SITE_SECRET']}"
+    redirect '/strategy'
   end
 
   get '/strategy/:p/rebalance' do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.rebalance(force: params[:force])
-    redirect "/iconomi/#{ENV['SITE_SECRET']}"
+    redirect '/strategy'
   end
 end
