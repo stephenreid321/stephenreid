@@ -6,5 +6,5 @@
   <% end %>
 </a>
 <% form_tag "/assets/#{asset.id}/multiplier", style: 'display: none', class: 'form-inline' do %>
-  <%= number_field_tag :multiplier, :class => 'form-control', :style => 'width: 5em', :onchange => '$(this.form).submit()' %>
+  <%= number_field_tag :multiplier, :class => 'form-control', :style => 'width: 5em', :onblur => '$(this.form).submit()' %>
 <% end %>
