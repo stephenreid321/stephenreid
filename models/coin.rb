@@ -37,6 +37,7 @@ class Coin
   end
 
   def self.import
+    hidden = Coin.where(hidden: true).pluck(:slug)
     agent = Mechanize.new
     i = 1
     until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&price_change_percentage=1h,24h,7d&page=#{i}").body)).empty?
@@ -50,6 +51,7 @@ class Coin
         coin.save
       end
     end
+    Coin.where(:slug.in => hidden).set(hidden: true)
   end
 
   def self.update

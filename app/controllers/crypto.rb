@@ -9,8 +9,8 @@ StephenReid::App.controller do
     erb :'crypto/loopring'
   end
 
-  get '/coingecko' do
-    erb :'crypto/coingecko'
+  get '/coins' do
+    erb :'crypto/coins'
   end
 
   get '/coins/:slug' do
