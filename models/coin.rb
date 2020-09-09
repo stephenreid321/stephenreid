@@ -40,6 +40,7 @@ class Coin
 
   def self.import
     hidden = Coin.where(hidden: true).pluck(:slug)
+    bought = Coin.where(bought: true).pluck(:slug)
     Coin.delete_all
     agent = Mechanize.new
     i = 1
@@ -55,6 +56,7 @@ class Coin
       end
     end
     Coin.where(:slug.in => hidden).set(hidden: true)
+    Coin.where(:slug.in => bought).set(bought: true)
   end
 
   def self.update
