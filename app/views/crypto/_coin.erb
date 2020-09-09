@@ -2,6 +2,13 @@
   #<%=coin.market_cap_rank%>
 </td>
 <td>
+  <% if !coin.bought %>
+    <a class="pagelet-trigger btn btn-sm btn-secondary" href="/coins/<%=coin.slug%>/bought"><i class="fas fa-store"></i></a>
+  <% else %>
+    <a class="pagelet-trigger btn btn-sm btn-success" href="/coins/<%=coin.slug%>/sold"><i class="fas fa-store"></i></a>
+  <% end %>
+</td>
+<td>
   <a target="_blank" href="<%=coin.website%>"><%=coin.name%></a>
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>"><i class="fas fa-coins"></i></a>
 </td>
@@ -38,5 +45,5 @@
   <% end %>
 </td>
 <td>
-  <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.slug%>/hide');$(this).closest('tr').remove()"><i class="fa fa-times"></i></a>
+  <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.slug%>/hide');$(this).closest('tr').remove()"><i class="fas fa-times"></i></a>
 </td>

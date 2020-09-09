@@ -16,6 +16,7 @@ class Coin
   field :twitter_username, type: String
   field :twitter_followers, type: Integer
   field :hidden, type: Boolean
+  field :bought, type: Boolean
 
   def self.admin_fields
     {
@@ -32,7 +33,8 @@ class Coin
       website: :url,
       twitter_username: :text,
       twitter_followers: :number,
-      hidden: :check_box
+      hidden: :check_box,
+      bought: :check_box
     }
   end
 

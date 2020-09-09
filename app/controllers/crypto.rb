@@ -32,6 +32,18 @@ StephenReid::App.controller do
     200
   end
 
+  get '/coins/:slug/bought' do
+    coin = Coin.find_by(slug: params[:slug])
+    coin.update_attribute(:bought, true)
+    200
+  end
+
+  get '/coins/:slug/sold' do
+    coin = Coin.find_by(slug: params[:slug])
+    coin.update_attribute(:bought, nil)
+    200
+  end
+
   get '/strategy' do
     @favicon = 'moon.png'
     erb :'crypto/strategy'

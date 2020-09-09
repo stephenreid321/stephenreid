@@ -2,7 +2,7 @@
   $(function () {
     $(document).ajaxStop(function() {
       if (!$('#coins').hasClass('datatabled'))
-        $('#coins').dataTable({paging: false, searching: false, order: [[6, "desc"]]}).addClass('datatabled');
+        $('#coins').dataTable({paging: false, searching: false, order: [[7, "desc"]]}).addClass('datatabled');
     })
   })
 </script>
@@ -12,6 +12,7 @@
 <table class="table" id="coins">
   <thead>
     <tr>
+      <th></th>
       <th></th>
       <th>Name</th>
       <th>Twitter followers</th>
