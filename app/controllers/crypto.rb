@@ -10,6 +10,13 @@ StephenReid::App.controller do
   end
 
   get '/coins' do
+    @coins = Coin.where(
+      :hidden.ne => true,
+      :market_cap_rank.ne => nil,
+      :market_cap.gte => 1_000_000,
+      :total_volume.gte => 1_000_000,
+      :price_change_percentage_24h_in_currency.gt => 20
+    ).order('price_change_percentage_24h_in_currency desc')
     erb :'crypto/coins'
   end
 

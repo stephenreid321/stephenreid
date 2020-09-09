@@ -2,10 +2,13 @@
   $(function () {
     $(document).ajaxStop(function() {
       if (!$('#coins').hasClass('datatabled'))
-        $('#coins').dataTable({paging: false, searching: false, order: [[7, "desc"]]}).addClass('datatabled');
+        $('#coins').dataTable({paging: false, searching: false, order: [[5, "desc"]]}).addClass('datatabled');
     })
   })
 </script>
+
+<p class="lead text-center">Updated <%=timeago @coins.first.created_at%></p>
+
 <table class="table" id="coins">
   <thead>
     <tr>
@@ -22,13 +25,7 @@
       <th></th>
     </tr>
   </thead>
-  <% Coin.where(
-    :hidden.ne => true,
-    :market_cap_rank.ne => nil,
-    :market_cap.gte => 1000000,
-    :total_volume.gte => 1000000,
-    :price_change_percentage_24h_in_currency.gt => 20
-  ).order('price_change_percentage_24h_in_currency desc').each { |coin| %>
+  <% @coins.each { |coin| %>
   <tr data-pagelet-url="/coins/<%=coin.slug%>"></tr>
   <% } %>
 </table>
