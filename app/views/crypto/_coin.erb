@@ -16,6 +16,9 @@
   <% if coin.eth? %>
     <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
   <% end %>
+  <% if Asset.find_by(name: coin.name) || Asset.find_by(ticker: coin.symbol) %>
+    <small>ICONOMI</small>
+  <% end %>
 </td>
 <td>
   <% if coin.twitter_followers %>
