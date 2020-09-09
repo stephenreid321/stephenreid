@@ -12,8 +12,6 @@ $(function() {
 
   $("abbr.timeago").timeago()
 
-  $('[data-toggle="tooltip"]').tooltip()
-
   $(document).on('click', 'a[data-confirm]', function(e) {
     var message = $(this).data('confirm');
     if (!confirm(message)) {
@@ -42,6 +40,8 @@ $(function() {
   });
 
   function ajaxCompleted() {
+
+    $('[data-toggle="tooltip"]').tooltip()
 
     $('.rg').each(function() {
       var d = parseFloat($(this).text())
