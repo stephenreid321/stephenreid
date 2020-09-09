@@ -1,7 +1,10 @@
 StephenReid::App.controller do
+  before do
+    @favicon = 'moon.png'
+  end
+
   get '/iconomi' do
     @p = params[:p]
-    @favicon = 'moon.png'
     erb :'crypto/iconomi'
   end
 
