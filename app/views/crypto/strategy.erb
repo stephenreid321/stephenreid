@@ -32,30 +32,34 @@
     </tr>
   </thead>
   <tr>
-    <td>
+    <td style="text-align: center">
       <%
       i = Strategy.active_mature.order('score_fee_weighted desc').pluck(:ticker).index('DECENTCOOP') + 1
       offset = Strategy.active_mature.pluck(:score_fee_weighted).min.abs
       max_score = Strategy.active_mature.pluck(:score_fee_weighted).max
       score = 100*((strategy.score_fee_weighted + offset)/(max_score + offset))
       %>
-      <span data-toggle="tooltip" title="<%= i %>/<%=Strategy.active_mature.count%>">
-        <%= number_with_precision score, precision: 1 %>
-      </span>
+      <%= number_with_precision score, precision: 1 %>
+      <br />
+      <small>
+        <%= i %>/<%=Strategy.active_mature.count%>
+      </small>
     </td>
-    <td>
+    <td style="text-align: center">
       <%
       i = Strategy.active_mature.order('score desc').pluck(:ticker).index('DECENTCOOP') + 1
       offset = Strategy.active_mature.pluck(:score).min.abs
       max_score = Strategy.active_mature.pluck(:score).max
       score = 100*((strategy.score + offset)/(max_score + offset))
       %>
-      <span data-toggle="tooltip" title="<%= i %>/<%=Strategy.active_mature.count%>">
-        <%= number_with_precision score, precision: 1 %>
-      </span>
+      <%= number_with_precision score, precision: 1 %>
+      <br />
+      <small>
+        <%= i %>/<%=Strategy.active_mature.count%>
+      </small>
     </td>
     <% %w[day week month three_month six_month year].each { |t| %>
-    <td>
+    <td style="text-align: center">
       <% if (x = strategy.send(t)) %>
         <%
         i = Strategy.active_mature.order("#{t} desc").pluck(:ticker).index('DECENTCOOP') + 1
@@ -63,9 +67,11 @@
         max_score = Strategy.active_mature.pluck(t).compact.max
         score = 100*((strategy.send(t) + offset)/(max_score + offset))
         %>
-        <span data-toggle="tooltip" title="<%= i %>/<%=Strategy.active_mature.count%>">
-          <%= number_with_precision score, precision: 1 %>
-        </span>
+        <%= number_with_precision score, precision: 1 %>
+        <br />
+        <small>
+          <%= i %>/<%=Strategy.active_mature.count%>
+        </small>
       <% end %>
     </td>
     <% } %>
