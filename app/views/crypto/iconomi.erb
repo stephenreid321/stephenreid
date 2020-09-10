@@ -61,12 +61,14 @@
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
       <th><%=x%></th>
       <% } %>
+      <!--
       <th>24h</th>
       <th>7d</th>
       <th>1M</th>
       <th>3M</th>
       <th>6M</th>
       <th>1Y</th>
+      -->
     </tr>
   </thead>
   <% offset = strategies.pluck(:score_fee_weighted).min.abs %>
@@ -127,6 +129,8 @@
       <% end %>
     </td>
     <% } %>
+    <!--
+    <th>24h</th>
     <% %w[day week month three_month six_month year].each { |t| %>
     <td>
       <% x = strategy.send(t) %>
@@ -137,6 +141,7 @@
       <% end %>
     </td>
     <% } %>
+    -->
   </tr>
   <% } %>
 </table>
