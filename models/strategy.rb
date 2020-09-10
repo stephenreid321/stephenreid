@@ -1,8 +1,18 @@
 class Strategy
   include Mongoid::Document
   include Mongoid::Timestamps
-  class RoundingError < StandardError; end
-  class RebalancingError < StandardError; end
+
+  class RoundingError < StandardError
+    def initialize(message = nil)
+      super(message)
+    end
+  end
+
+  class RebalancingError < StandardError
+    def initialize(message = nil)
+      super(message)
+    end
+  end
 
   MONTH_FACTOR = 4
   THREE_MONTH_FACTOR = 3
@@ -151,7 +161,7 @@ class Strategy
     assets += [['ETH', (1 - t).round(4)]]
 
     t = assets.map { |_k, v| v }.sum
-    raise Strategy::RoundingError unless t == 1
+    raise Strategy::RoundingError(assets.to_json) unless t == 1
 
     assets
   end
