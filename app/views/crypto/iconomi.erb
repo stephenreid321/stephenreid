@@ -1,6 +1,6 @@
 <% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
-<% strategies = Strategy.active_mature(fee_weighted: true) %>
+<% strategies = Strategy.active_mature.order('score_fee_weighted desc') %>
 <% if funds = (params[:funds].try(:to_i) || (@p ? 3 : 5)) %>
   <% funds = 1 if funds < 1 %>
   <% funds = 10 if funds > 10 %>
@@ -70,11 +70,8 @@
     </tr>
   </thead>
   <% max_score = 0 %>
-  <% (strategies + balances.reject { |b| @p ? strategies.map { |s| s.ticker }.include?(b['ticker']) : true }).each_with_index { |strategy, i| %>
+  <% strategies.each_with_index { |strategy, i| %>
   <% if i == 0; max_score = strategy.score_fee_weighted; end %>
-    <% if !strategy.is_a?(Strategy) %>
-      <% strategy = Strategy.find_by(ticker: strategy['ticker']) %>
-    <% end %>
     <tr>
       <td data-sort="<%=i+1%>">
         #<%=i+1%>

@@ -3,13 +3,13 @@
 <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
 <% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
 <% diff = Hash[actual.map { |k,v| [k, actual[k] - rebalanced[k]] }] %>
-<% strategy = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
-<% statistics = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/statistics')) %>
+<% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
+<% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
 <% y = 50000 %>
 
 
 <p class="lead text-center">
-  Rebalanced <%= timeago Time.at(strategy['lastRebalanced']) %>
+  Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <a href="/strategy/<%=ENV['SITE_SECRET']%>/rebalance">
     <i class="fas fa-sync"></i>
   </a>
@@ -18,10 +18,11 @@
   <% } %>
 </p>
 
-
 <table class="table mt-3" style="width: auto; margin: auto">
   <thead style="border-top: none">
     <tr>
+      <th>SFW</th>
+      <th>S</th>
       <th>24h</th>
       <th>7d</th>
       <th>1M</th>
@@ -31,13 +32,25 @@
     </tr>
   </thead>
   <tr>
+    <td class="rg 50">
+      <% i = Strategy.active_mature.order("score_fee_weighted desc").pluck(:ticker).index('DECENTCOOP') + 1 %>
+      <abbr data-toggle="tooltip" title="<%= i %>/<%=Strategy.active_mature.count%>">
+        <%= number_to_percentage 100*(1 - i.to_f/Strategy.active_mature.count), precision: 0 %>
+      </abbr>
+    </td>
+    <td class="rg 50">
+      <% i = Strategy.active_mature.order("score desc").pluck(:ticker).index('DECENTCOOP') + 1 %>
+      <abbr data-toggle="tooltip" title="<%= i %>/<%=Strategy.active_mature.count%>">
+        <%= number_to_percentage 100*(1 - i.to_f/Strategy.active_mature.count), precision: 0 %>
+      </abbr>
+    </td>
     <% %w[day week month three_month six_month year].each { |t| %>
-    <td>
-      <% x = statistics['returns'][t.upcase] %>
-      <% if x %>
-        <span style="color: <%= if x > 0; 'green'; elsif x < 0; 'red'; end %>">
-          <%=number_to_percentage(x*100, :precision => 1)%>
-        </span>
+    <td class="rg 50">
+      <% if (x = strategy.send(t)) %>
+        <% i = Strategy.active_mature.order("#{t} desc").pluck(:ticker).index('DECENTCOOP') + 1 %>
+        <abbr data-toggle="tooltip" title="<%= i %>/<%=Strategy.active_mature.count%>">
+          <%= number_to_percentage 100*(1 - i.to_f/Strategy.active_mature.count), precision: 0 %>
+        </abbr>
       <% end %>
     </td>
     <% } %>

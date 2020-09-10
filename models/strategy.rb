@@ -118,8 +118,8 @@ class Strategy
     'SIX_MONTH'
   end
 
-  def self.active_mature(fee_weighted: false)
-    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil).order(fee_weighted ? 'score_fee_weighted desc' : 'score desc')
+  def self.active_mature
+    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil)
   end
 
   def self.proposed(n: 10)
