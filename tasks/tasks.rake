@@ -7,6 +7,11 @@ namespace :strategies do
   task rebalance: :environment do
     Strategy.rebalance
   end
+
+  task rebalance_x4: :environment do
+    Time.zone = 'London'
+    Strategy.rebalance if (Time.zone.now.hour % 6).zero?
+  end
 end
 
 namespace :coins do
