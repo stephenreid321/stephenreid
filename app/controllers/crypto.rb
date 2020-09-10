@@ -34,15 +34,15 @@ StephenReid::App.controller do
     200
   end
 
-  get '/coins/:slug/bought' do
+  get '/coins/:slug/star' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:bought, true)
+    coin.update_attribute(:starred, true)
     200
   end
 
-  get '/coins/:slug/sold' do
+  get '/coins/:slug/unstar' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:bought, nil)
+    coin.update_attribute(:starred, nil)
     200
   end
 

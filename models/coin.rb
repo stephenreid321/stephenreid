@@ -17,7 +17,7 @@ class Coin
   field :twitter_username, type: String
   field :twitter_followers, type: Integer
   field :hidden, type: Boolean
-  field :bought, type: Boolean
+  field :starred, type: Boolean
 
   def self.admin_fields
     {
@@ -36,7 +36,7 @@ class Coin
       twitter_username: :text,
       twitter_followers: :number,
       hidden: :check_box,
-      bought: :check_box
+      starred: :check_box
     }
   end
 
@@ -46,7 +46,7 @@ class Coin
 
   def self.import
     hidden_slugs = Coin.where(hidden: true).pluck(:slug)
-    bought_slugs = Coin.where(bought: true).pluck(:slug)
+    starred_slugs = Coin.where(starred: true).pluck(:slug)
     Coin.delete_all
     agent = Mechanize.new
     i = 1
@@ -59,7 +59,7 @@ class Coin
           coin.send("#{r}=", c[r])
         end
         coin.hidden = hidden_slugs.include?(coin.slug)
-        coin.bought = bought_slugs.include?(coin.slug)
+        coin.starred = starred_slugs.include?(coin.slug)
         coin.save
       end
     end

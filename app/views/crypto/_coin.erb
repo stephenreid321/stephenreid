@@ -2,10 +2,10 @@
   #<%=coin.market_cap_rank%>
 </td>
 <td>
-  <% if !coin.bought %>
-    <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/bought"><i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i></a>
+  <% if !coin.starred %>
+    <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/star"><i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i></a>
   <% else %>
-    <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/sold"><i class="fas fa-star" style="color: #FAC84F"></i></a>
+    <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/unstar"><i class="fas fa-star" style="color: #FAC84F"></i></a>
   <% end %>
 </td>
 <td style="white-space: nowrap">
