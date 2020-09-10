@@ -210,7 +210,7 @@ class Strategy
           values: weights.map do |ticker, p|
             { assetTicker: ticker, rebalancedWeight: p }
           end,
-          speedType: 'MEDIUM'
+          speedType: 'SLOW'
         }
 
         puts n
