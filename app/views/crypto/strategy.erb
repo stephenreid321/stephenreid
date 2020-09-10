@@ -62,7 +62,7 @@
       <th>Proposed weight</th>
     </tr>
   </thead>
-  <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).pluck(:ticker)).uniq.each { |k| %>
+  <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)).uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
   <% coin = Coin.find_by(symbol: k.downcase) %>
   <tr>
@@ -108,17 +108,4 @@
     </td>
   </tr>
   <% } %>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>
-        <%= number_to_percentage (actual.map { |_k,v| v }.sum*100), precision: 2 %>
-      </th>
-      <th>
-        <%= number_to_percentage (proposed.map { |_k,v| v }.sum*100), precision: 2 %>
-      </th>
-    </tr>
-  </tfoot>
 </table>
