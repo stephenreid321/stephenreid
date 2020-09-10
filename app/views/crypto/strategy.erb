@@ -32,7 +32,7 @@
     </tr>
   </thead>
   <tr>
-    <td style="text-align: center">
+    <td class="rg" data-rg="50" style="text-align: center">
       <%
       i = Strategy.active_mature.order('score_fee_weighted desc').pluck(:ticker).index('DECENTCOOP') + 1
       offset = Strategy.active_mature.pluck(:score_fee_weighted).min.abs
@@ -45,7 +45,7 @@
         <%= i %>/<%=Strategy.active_mature.count%>
       </small>
     </td>
-    <td style="text-align: center">
+    <td class="rg" data-rg="50" style="text-align: center">
       <%
       i = Strategy.active_mature.order('score desc').pluck(:ticker).index('DECENTCOOP') + 1
       offset = Strategy.active_mature.pluck(:score).min.abs
@@ -59,7 +59,7 @@
       </small>
     </td>
     <% %w[day week month three_month six_month year].each { |t| %>
-    <td style="text-align: center">
+    <td class="rg" data-rg="50" style="text-align: center">
       <% if (x = strategy.send(t)) %>
         <%
         i = Strategy.active_mature.order("#{t} desc").pluck(:ticker).index('DECENTCOOP') + 1
