@@ -45,9 +45,10 @@ $(function() {
 
     $('.rg').each(function() {
       var d = parseFloat($(this).text())
-      if (d > ($(this).hasClass('50') ? 50 : 0))
+      var b = $(this).attr('data-rg') || 0
+      if (d > b)
         $(this).css('color', 'green')
-      else if (d < ($(this).hasClass('50') ? 50 : 0))
+      else if (d < b)
         $(this).css('color', 'red')
     })
 

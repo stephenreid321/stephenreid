@@ -69,74 +69,74 @@
       <th>1Y</th>
     </tr>
   </thead>
-  <% max_score = 0 %>
+  <% offset = strategies.pluck(:score_fee_weighted).min.abs %>
+  <% max_score = strategies.pluck(:score_fee_weighted).max %>
   <% strategies.each_with_index { |strategy, i| %>
-  <% if i == 0; max_score = strategy.score_fee_weighted; end %>
-    <tr>
-      <td data-sort="<%=i+1%>">
-        #<%=i+1%>
-      </td>
+  <tr>
+    <td data-sort="<%=i+1%>">
+      #<%=i+1%>
+    </td>
+    <td>
+      <a target="_blank" href="https://my.iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
+      <% if !@p && strategy.name == 'Metastrategy' %>
+        (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
+      <% end %>
+    </td>
+    <td>
+      <%= number_with_precision 100*(strategy.score_fee_weighted + offset)/(max_score + offset), precision: 1 %>
+    </td>
+    <% if @p %>
+      <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
+      <% v = f['value'] if f %>
+      <% v = v.to_f if v %>
       <td>
-        <a target="_blank" href="https://my.iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
-        <% if !@p && strategy.name == 'Metastrategy' %>
-          (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
+        <% if v %>
+          <%=number_to_percentage((v/balanceTotal)*100, :precision => 0)%>
         <% end %>
       </td>
       <td>
-        <%= number_with_precision strategy.score_fee_weighted/max_score*100, precision: 1 %>
+        <%= number_to_currency v, precision: 0 %>
       </td>
-      <% if @p %>
-        <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
-        <% v = f['value'] if f %>
-        <% v = v.to_f if v %>
-        <td>
+    <% end %>
+    <td nowrap>
+      <% if i < funds %>
+        <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
+        <% if @p %>
           <% if v %>
-            <%=number_to_percentage((v/balanceTotal)*100, :precision => 0)%>
-          <% end %>
-        </td>
-        <td>
-          <%= number_to_currency v, precision: 0 %>
-        </td>
-      <% end %>
-      <td nowrap>
-        <% if i < funds %>
-          <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
-          <% if @p %>
-            <% if v %>
-              <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
-              <% if (d*100).round != 0 %>
-                <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
-                  <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 0)%>
-                </span>
-              <% end %>
+            <% d = strategy.score_fee_weighted/total - v/balanceTotal %>
+            <% if (d*100).round != 0 %>
+              <span style="color: <%= if d > 0; 'green'; elsif d < 0; 'red'; end %>">
+                <%= '+' if d > 0 %><%=number_to_percentage(d*100, :precision => 0)%>
+              </span>
             <% end %>
           <% end %>
         <% end %>
-      </td>
-      <td>
-        <% if i < funds %>
-          <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
-        <% end %>
-      </td>
-      <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
-      <td>
-        <% if x == 'lastRebalanced' %>
-          <%= time_ago_in_words strategy[x] %> ago
-        <% else %>
-          <%= strategy[x] %>
-        <% end %>
-      </td>
-      <% } %>
-      <% %w[day week month three_month six_month year].each { |t| %>
-      <td>
-        <% x = strategy.send(t) %>
-        <% if x %>
-          <span style="color: <%= if x > 0; 'green'; elsif x < 0; 'red'; end %>">
-            <%=number_to_percentage(x*100, :precision => 1)%>
-          </span>
-        <% end %>
-      </td>
-      <% } %>
-    </tr>
+      <% end %>
+    </td>
+    <td>
+      <% if i < funds %>
+        <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
+      <% end %>
+    </td>
+    <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
+    <td>
+      <% if x == 'lastRebalanced' %>
+        <%= time_ago_in_words strategy[x] %> ago
+      <% else %>
+        <%= strategy[x] %>
+      <% end %>
+    </td>
     <% } %>
-  </table>
+    <% %w[day week month three_month six_month year].each { |t| %>
+    <td>
+      <% x = strategy.send(t) %>
+      <% if x %>
+        <span style="color: <%= if x > 0; 'green'; elsif x < 0; 'red'; end %>">
+          <%=number_to_percentage(x*100, :precision => 1)%>
+        </span>
+      <% end %>
+    </td>
+    <% } %>
+  </tr>
+  <% } %>
+</table>

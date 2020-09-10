@@ -143,7 +143,8 @@ class Strategy
     end
 
     # offset to take into account possibility of negative scores
-    assets = Hash[assets.map { |k, v| [k, v + assets.values.min.abs] }]
+    offset = assets.values.min.abs
+    assets = Hash[assets.map { |k, v| [k, v + offset] }]
 
     usd = 0
     usd += assets['TUSD'] if assets['TUSD']
