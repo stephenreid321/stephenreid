@@ -35,9 +35,9 @@
     <td style="text-align: center">
       <%
       i = Strategy.active_mature.order('score_fee_weighted desc').pluck(:ticker).index('DECENTCOOP') + 1
-      offset = Strategy.active_mature.pluck(:score_fee_weighted).min.abs
+      offset = Strategy.active_mature.pluck(:score_fee_weighted).min
       max_score = Strategy.active_mature.pluck(:score_fee_weighted).max
-      score = 100*((strategy.score_fee_weighted + offset)/(max_score + offset))
+      score = 100*((strategy.score_fee_weighted - offset)/(max_score - offset))
       %>
       <span class="rg" data-rg="50">
         <%= number_with_precision score, precision: 1 %>
@@ -50,9 +50,9 @@
     <td style="text-align: center">
       <%
       i = Strategy.active_mature.order('score desc').pluck(:ticker).index('DECENTCOOP') + 1
-      offset = Strategy.active_mature.pluck(:score).min.abs
+      offset = Strategy.active_mature.pluck(:score).min
       max_score = Strategy.active_mature.pluck(:score).max
-      score = 100*((strategy.score + offset)/(max_score + offset))
+      score = 100*((strategy.score - offset)/(max_score - offset))
       %>
       <span class="rg" data-rg="50">
         <%= number_with_precision score, precision: 1 %>
@@ -67,9 +67,9 @@
       <% if (x = strategy.send(t)) %>
         <%
         i = Strategy.active_mature.order("#{t} desc").pluck(:ticker).index('DECENTCOOP') + 1
-        offset = Strategy.active_mature.pluck(t).compact.min.abs
+        offset = Strategy.active_mature.pluck(t).compact.min
         max_score = Strategy.active_mature.pluck(t).compact.max
-        score = 100*((strategy.send(t) + offset)/(max_score + offset))
+        score = 100*((strategy.send(t) - offset)/(max_score - offset))
         %>
         <span class="rg" data-rg="50">
           <%= number_with_precision score, precision: 1 %>
