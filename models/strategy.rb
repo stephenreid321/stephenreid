@@ -50,6 +50,14 @@ class Strategy
     self.score_fee_weighted = calculate_score_fee_weighted
   end
 
+  def score_index(x, strategies: Strategy.active_mature)
+    index = strategies.order("#{x} desc").pluck(:ticker).index(ticker) + 1
+    min = strategies.pluck(x).compact.min
+    max = strategies.pluck(x).compact.max
+    score = 100 * ((send(x) - min) / (max - min))
+    [score, index]
+  end
+
   def self.admin_fields
     {
       ticker: :text,

@@ -61,18 +61,14 @@
       <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
       <th><%=x%></th>
       <% } %>
-      <!--
       <th>24h</th>
       <th>7d</th>
       <th>1M</th>
       <th>3M</th>
       <th>6M</th>
       <th>1Y</th>
-      -->
     </tr>
   </thead>
-  <% offset = strategies.pluck(:score_fee_weighted).min.abs %>
-  <% max_score = strategies.pluck(:score_fee_weighted).max %>
   <% strategies.each_with_index { |strategy, i| %>
   <tr>
     <td data-sort="<%=i+1%>">
@@ -84,8 +80,9 @@
         (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
       <% end %>
     </td>
-    <td>
-      <%= number_with_precision 100*(strategy.score_fee_weighted + offset)/(max_score + offset), precision: 1 %>
+    <td data-sort="<%=strategy.score_fee_weighted%>">
+      <% score, index = strategy.score_index('score_fee_weighted') %>
+      <%= number_with_precision score, precision: 1 %>
     </td>
     <% if @p %>
       <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
@@ -129,19 +126,22 @@
       <% end %>
     </td>
     <% } %>
-    <!--
-    <th>24h</th>
     <% %w[day week month three_month six_month year].each { |t| %>
-    <td>
-      <% x = strategy.send(t) %>
-      <% if x %>
-        <span style="color: <%= if x > 0; 'green'; elsif x < 0; 'red'; end %>">
-          <%=number_to_percentage(x*100, :precision => 1)%>
+    <% if strategy.send(t) %>
+      <% score, index = strategy.score_index(t) %>
+      <td data-sort="<%=score%>">
+        <span class="rg" data-rg="50">
+          <%= number_with_precision score, precision: 1 %>
         </span>
-      <% end %>
-    </td>
+        <br />
+        <small>
+          <%= index %>/<%=Strategy.active_mature.count%>
+        </small>
+      </td>
+    <% else %>
+      <td data-sort="0"></td>
+    <% end %>
     <% } %>
-    -->
   </tr>
   <% } %>
 </table>
