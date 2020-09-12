@@ -82,7 +82,9 @@
     </td>
     <td data-sort="<%=strategy.score_fee_weighted%>">
       <% score, index = strategy.score_index('score_fee_weighted') %>
-      <%= number_with_precision score, precision: 1 %>
+      <span class="score">
+        <%= number_with_precision score, precision: 1 %>
+      </span>
     </td>
     <% if @p %>
       <% f = balances.find { |b| b['ticker'] == strategy.ticker } %>
@@ -130,7 +132,7 @@
     <% if strategy.send(t) %>
       <% score, index = strategy.score_index(t) %>
       <td data-sort="<%=score%>">
-        <span class="rg" data-rg="50">
+        <span class="score">
           <%= number_with_precision score, precision: 1 %>
         </span>
         <br />

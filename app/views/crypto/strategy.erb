@@ -31,7 +31,7 @@
     <td style="text-align: center">
       <% if strategy.send(t) %>
         <% score, index = strategy.score_index(t) %>
-        <span class="rg" data-rg="50">
+        <span class="score">
           <%= number_with_precision score, precision: 1 %>
         </span>
         <br />

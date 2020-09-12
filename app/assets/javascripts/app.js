@@ -45,11 +45,17 @@ $(function() {
 
     $('.rg').each(function() {
       var d = parseFloat($(this).text())
-      var b = $(this).attr('data-rg') || 0
+      var b = 0
       if (d > b)
         $(this).css('color', 'green')
       else if (d < b)
         $(this).css('color', 'red')
+    })
+
+    $('.score').each(function() {
+      var d = parseFloat($(this).text())
+      scale = chroma.scale(['white', '#00B963']);
+      $(this).closest('td').css('background-color', scale(d / 100).hex())
     })
 
   }
