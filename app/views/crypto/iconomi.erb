@@ -11,12 +11,7 @@
 <% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
 
 
-<div class="text-center mb-3">
-  <big>
-    score = <%=Strategy::MONTH_FACTOR%>*month + <%=Strategy::THREE_MONTH_FACTOR%>*three_month + <%=Strategy::SIX_MONTH_FACTOR%>*six_month + <%=Strategy::YEAR_FACTOR%>*year<br />
-    score_fee_weighted = score*(1-managementFee)*(1-performanceFee)*(1-entryFee)*(1-exitFee)
-  </big>
-</div>
+<%= md :iconomi %>
 
 
 <div class="row justify-content-center mb-3">
