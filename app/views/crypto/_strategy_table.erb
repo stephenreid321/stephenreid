@@ -1,0 +1,71 @@
+<% n = (params[:n].try(:to_i) || 10) %>
+<% proposed = Hash[Strategy.proposed(n: n)] %>
+<% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
+<% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
+<% diff = Hash[actual.map { |k,v| [k, actual[k] - rebalanced[k]] }] %>
+<% y = 50000 %>
+
+<style>
+  @media(min-width: 768px) {
+  td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
+  td.actual { width: 1px;  }
+  #assets th { border-top: none }
+  }
+</style>
+<table id="assets" class="table" style="width: auto; margin: auto">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Asset</th>
+      <th></th>
+      <th>Current weight</th>
+      <th>Proposed weight</th>
+    </tr>
+  </thead>
+  <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)).uniq.each { |k| %>
+  <% asset = Asset.find_by(ticker: k) %>
+  <% coin = Coin.find_by(symbol: k.downcase) %>
+  <tr>
+    <td style="vertical-align: middle; text-align: right; width: 10vw">
+      <% if actual[k] %>
+        <% if diff[k] < 0 %>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*-diff[k]/diff.values.map(&:abs).max}%"%>"></div>
+        <% end %>
+      <% end %>
+    </td>
+    <td class="assetName" style="white-space: nowrap;">
+      <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
+        <%= asset.name %> (<%= k %>)
+      </a>
+      <% if coin %>
+        <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
+          <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
+        </a>
+      <% end %>
+      <%= partial :'crypto/multiplier', locals: {asset: asset} %>
+    </td>
+    <td style="vertical-align: middle; width: 10vw">
+      <% if actual[k] %>
+        <% if diff[k] > 0 %>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*diff[k]/diff.values.map(&:abs).max}%"%>"></div>
+        <% end %>
+      <% end %>
+    </td>
+    <td class="actual" style="white-space: nowrap;">
+      <% if actual[k] %>
+        <%= number_to_percentage (actual[k]*100), precision: 2 %>
+        <small>
+          <span style="color: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>">
+            <%= '+' if diff[k] > 0 %><%=(diff[k]*10000).round%>
+          </span>
+        </small>
+      <% end %>
+    </td>
+    <td>
+      <% if proposed.keys.include?(k) %>
+        <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+      <% end %>
+    </td>
+  </tr>
+  <% } %>
+</table>

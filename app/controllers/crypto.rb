@@ -50,6 +50,10 @@ StephenReid::App.controller do
     erb :'crypto/strategy'
   end
 
+  get '/strategy/table' do
+    partial :'crypto/strategy_table'
+  end
+
   get '/assets/:id/multiplier' do
     asset = Asset.find(params[:id])
     partial :'crypto/multiplier', locals: { asset: asset }
