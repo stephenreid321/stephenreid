@@ -11,7 +11,9 @@
 <% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
 
 
-<%= md :iconomi %>
+<div class="text-center">
+  <%= md :iconomi %>
+</div>
 
 
 <div class="row justify-content-center mb-3">
