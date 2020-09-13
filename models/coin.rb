@@ -44,6 +44,14 @@ class Coin
     platform == 'ethereum'
   end
 
+  def score_index(x, coins)
+    index = coins.order("#{x} desc").pluck(:symbol).index(symbol) + 1
+    min = coins.pluck(x).compact.min
+    max = coins.pluck(x).compact.max
+    score = 100 * ((send(x) - min) / (max - min))
+    [score, index]
+  end
+
   def self.import
     hidden_slugs = Coin.where(hidden: true).pluck(:slug)
     starred_slugs = Coin.where(starred: true).pluck(:slug)

@@ -24,12 +24,12 @@
       <th></th>
       <th>Current weight</th>
       <th>Proposed weight</th>
-      <th>1h</th>
       <th>24h</th>
       <th>7d</th>
     </tr>
   </thead>
-  <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)).uniq.each { |k| %>
+  <% tickers = (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
+  <% tickers.uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
   <% coin = Coin.find_by(symbol: k.downcase) %>
   <tr>
@@ -73,21 +73,18 @@
         <%= number_to_percentage (proposed[k]*100), precision: 2 %>
       <% end %>
     </td>
-    <td class="rg">
-      <% if coin && coin.price_change_percentage_1h_in_currency %>
-        <%=number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2%>%
-      <% end %>
-    </td>
-    <td class="rg">
-      <% if coin && coin.price_change_percentage_24h_in_currency %>
-        <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
-      <% end %>
-    </td>
-    <td class="rg">
-      <% if coin && coin.price_change_percentage_7d_in_currency %>
-        <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
-      <% end %>
-    </td>
+    <% %w[24h 7d].each { |t| %>
+    <% if coin && coin.send("price_change_percentage_#{t}_in_currency") %>
+      <% score, index = coin.score_index("price_change_percentage_#{t}_in_currency", Coin.where(:symbol.in => tickers.map(&:downcase))) %>
+      <td data-sort="<%=score%>">
+        <span class="score">
+          <%= number_with_precision score, precision: 1 %>
+        </span>
+      </td>
+    <% else %>
+      <td data-sort="0"></td>
+    <% end %>
+    <% } %>
   </tr>
   <% } %>
 </table>
