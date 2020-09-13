@@ -9,16 +9,16 @@
   <% end %>
 </td>
 <td style="white-space: nowrap">
-  <a target="_blank" href="<%=coin.website%>"><%=coin.name%> (<%=coin.symbol.upcase%>)</a>
+  <a target="_blank" href="<%=coin.website%>"><%=coin.name%> (<%=coin.symbol%>)</a>
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
   </a>
   <% if coin.eth? %>
     <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
   <% end %>
-  <% if (asset = Asset.find_by(ticker: coin.symbol.upcase)) %>
+  <% if (asset = Asset.find_by(ticker: coin.symbol)) %>
     <small>
-      <a class="text-dark" target="_blank" href="https://www.iconomi.com/asset/<%=coin.symbol.upcase%>">
+      <a class="text-dark" target="_blank" href="https://www.iconomi.com/asset/<%=coin.symbol%>">
         ICONOMI
       </a>
     </small>

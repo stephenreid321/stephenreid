@@ -31,7 +31,7 @@
   <% tickers = (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
   <% tickers.uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
-  <% coin = Coin.find_by(symbol: k.downcase) %>
+  <% coin = Coin.find_by(symbol: k) %>
   <tr>
     <td style="vertical-align: middle; text-align: right; width: 10vw">
       <% if actual[k] %>
@@ -75,7 +75,7 @@
     </td>
     <% %w[24h 7d].each { |t| %>
     <% if coin && coin.send("price_change_percentage_#{t}_in_currency") %>
-      <% score, index = coin.score_index("price_change_percentage_#{t}_in_currency", Coin.where(:symbol.in => tickers.map(&:downcase))) %>
+      <% score, index = coin.score_index("price_change_percentage_#{t}_in_currency", Coin.where(:symbol.in => tickers)) %>
       <td data-sort="<%=score%>">
         <span class="score">
           <%= number_with_precision score, precision: 1 %>

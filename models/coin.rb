@@ -19,6 +19,10 @@ class Coin
   field :hidden, type: Boolean
   field :starred, type: Boolean
 
+  before_validation do
+    self.symbol = symbol.upcase
+  end
+
   def self.admin_fields
     {
       slug: :text,
