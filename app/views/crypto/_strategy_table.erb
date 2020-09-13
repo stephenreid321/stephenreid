@@ -8,11 +8,15 @@
 <style>
   @media(min-width: 768px) {
   td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
-  td.actual { width: 1px;  }
   #assets th { border-top: none }
   }
 </style>
-<table id="assets" class="table" style="width: auto; margin: auto">
+<script>
+  $(function () {
+        $('#assets').dataTable({paging: false, searching: false, order: [[4, "desc"]]})
+  })
+</script>
+<table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important" >
   <thead>
     <tr>
       <th></th>
@@ -20,6 +24,9 @@
       <th></th>
       <th>Current weight</th>
       <th>Proposed weight</th>
+      <th>1h</th>
+      <th>24h</th>
+      <th>7d</th>
     </tr>
   </thead>
   <% (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)).uniq.each { |k| %>
@@ -51,7 +58,7 @@
         <% end %>
       <% end %>
     </td>
-    <td class="actual" style="white-space: nowrap;">
+    <td data-sort="<%=actual[k] || 0%>" style="white-space: nowrap;">
       <% if actual[k] %>
         <%= number_to_percentage (actual[k]*100), precision: 2 %>
         <small>
@@ -61,9 +68,24 @@
         </small>
       <% end %>
     </td>
-    <td>
-      <% if proposed.keys.include?(k) %>
+    <td data-sort="<%=proposed[k] || 0%>" style="white-space: nowrap;">
+      <% if proposed[k] %>
         <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+      <% end %>
+    </td>
+    <td class="rg">
+      <% if coin && coin.price_change_percentage_1h_in_currency %>
+        <%=number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2%>%
+      <% end %>
+    </td>
+    <td class="rg">
+      <% if coin && coin.price_change_percentage_24h_in_currency %>
+        <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
+      <% end %>
+    </td>
+    <td class="rg">
+      <% if coin && coin.price_change_percentage_7d_in_currency %>
+        <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
       <% end %>
     </td>
   </tr>
