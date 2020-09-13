@@ -20,7 +20,7 @@ class Coin
   field :starred, type: Boolean
 
   before_validation do
-    self.symbol = symbol.upcase
+    self.symbol = symbol.try(:upcase)
   end
 
   def self.admin_fields
