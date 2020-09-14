@@ -43,10 +43,10 @@
             }
           }
         };
-        window.onload = function () {
+        $(function() {
           var ctx = document.getElementById('chart-area').getContext('2d');
           window.myPie = new Chart(ctx, config);
-        };
+        })
       })
     </script>
     <canvas id="chart-area"></canvas>
@@ -56,7 +56,7 @@
     <% n = Ancestry.all(filter: "{Region} = '#{k}'", sort: { "Autonumber" => "asc" }).count;
       Ancestry.all(filter: "{Region} = '#{k}'", sort: { "Autonumber" => "asc" }).each_with_index { |ancestry, i| %>
     <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= "#{k == 'Unknown' ? '#666' : '#00B963'.paint.spin(v + i*spin)}" %>"><%=ancestry['Percentage'].to_s+'%'%></div>
- <%= ancestry['Name'] %> <br />
+    <%= ancestry['Name'] %> <br />
     <% } %>
     <% } %>
   </div>
