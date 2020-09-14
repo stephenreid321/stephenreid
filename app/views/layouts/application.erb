@@ -35,7 +35,7 @@
       'chroma-js/2.0.6' => 'chroma.min.js',
       'lightgallery/1.7.2' => 'js/lightgallery.min.js css/lightgallery.min.css',
       'lg-thumbnail/1.2.1' => 'lg-thumbnail.min.js',
-      'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css',
+      'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css'         
       }.each { |k,v| %>
     <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
     <% case f.split('.').last.to_sym; when :js %>

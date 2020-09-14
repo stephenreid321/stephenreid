@@ -65,14 +65,25 @@ GEM
       mongoid-compatibility (>= 0.4.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    digest-sha3 (1.1.0)
+    digest-sha3-patched (1.1.1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     equalizer (0.0.11)
+    eth (0.4.12)
+      digest-sha3-patched (~> 1.1)
+      ffi (~> 1.0)
+      money-tree (~> 0.10.0)
+      rlp (~> 0.7.3)
+      scrypt (~> 3.0.6)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.14.0)
       faraday (>= 0.7.4, < 1.0)
     ffi (1.13.1)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     front_matter_parser (0.2.1)
     hashie (4.1.0)
     http-cookie (1.0.3)
@@ -104,6 +115,8 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     moneta (1.1.1)
+    money-tree (0.10.0)
+      ffi
     mongo (2.12.1)
       bson (>= 4.8.2, < 5.0.0)
     mongoid (7.1.2)
@@ -172,6 +185,7 @@ GEM
     rbtree3 (0.6.0)
     redcarpet (3.5.0)
     rexml (3.2.4)
+    rlp (0.7.3)
     rss (0.2.9)
       rexml
     ruby2_keywords (0.0.2)
@@ -180,6 +194,8 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    scrypt (3.0.7)
+      ffi-compiler (>= 1.0, < 2.0)
     sinatra (2.0.2)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -217,6 +233,8 @@ DEPENDENCIES
   bcrypt
   chroma
   delayed_job_mongoid
+  digest-sha3
+  eth
   front_matter_parser
   htmlbeautifier!
   koala

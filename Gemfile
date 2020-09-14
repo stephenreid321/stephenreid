@@ -31,5 +31,7 @@ gem 'bcrypt'
 gem 'delayed_job_mongoid'
 gem 'mongoid'
 
+gem 'digest-sha3'
+gem 'eth'
 gem 'htmlbeautifier', github: 'trileuco/htmlbeautifier'
 gem 'telegram-bot-ruby'
