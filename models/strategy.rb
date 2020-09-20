@@ -167,9 +167,9 @@ class Strategy
 
     if !assets['ETH'] || assets['ETH'] < 0.1
       assets.delete('ETH')
-      assets = assets.map { |k, v| [k, v * (1 - 0.1)] }
+      assets = Hash[assets.map { |k, v| [k, v * (1 - 0.1)] }]
       t = assets.map { |_k, v| v }.sum
-      assets += [['ETH', 1 - t]]
+      assets['ETH'] = 1 - t
     end
 
     assets = Hash[assets.map { |k, v| [k, v.floor(4)] }]
