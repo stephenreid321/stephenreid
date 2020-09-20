@@ -150,12 +150,12 @@ class Strategy
       end
     end
 
-    %w[USDC TUSD].each do |s|
-      if assets[s]
-        assets['USDT'] += assets[s]
-        assets.delete(s)
-      end
-    end
+    # %w[USDC TUSD].each do |s|
+    #   if assets[s]
+    #     assets['USDT'] += assets[s]
+    #     assets.delete(s)
+    #   end
+    # end
 
     # offset to take into account possibility of negative scores
     offset = assets.values.min
@@ -163,11 +163,19 @@ class Strategy
 
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
     t = assets.map { |_k, v| v }.sum
-    assets = assets.map { |k, v| [k, v / t] }
+    assets = Hash[assets.map { |k, v| [k, v / t] }]
+
+    if !assets['ETH'] || assets['ETH'] < 0.1
+      assets.delete('ETH')
+      assets = assets.map { |k, v| [k, (v * 0.9).floor(4)] }
+      t = assets.map { |_k, v| v }.sum
+      assets += [['ETH', (1 - t).round(4)]]
+    end
+
     t = assets.map { |_k, v| v }.sum
     raise Strategy::RoundingError(assets.to_json) unless t == 1
 
-    assets
+    assets.map { |k, v| [k, v] }
   end
 
   def self.bail
