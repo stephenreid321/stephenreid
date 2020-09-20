@@ -150,25 +150,20 @@ class Strategy
       end
     end
 
+    %w[USDC TUSD].each do |s|
+      if assets[s]
+        assets['USDT'] += assets[s]
+        assets.delete(s)
+      end
+    end
+
     # offset to take into account possibility of negative scores
     offset = assets.values.min
     assets = Hash[assets.map { |k, v| [k, v - offset] }]
 
-    usd = 0
-    usd += assets['TUSD'] if assets['TUSD']
-    usd += assets['USDC'] if assets['USDC']
-    usd += assets['USDT'] if assets['USDT']
-    assets = assets.reject { |k, _v| %w[BTC ETH TUSD USDC USDT].include?(k) }
-
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
-    assets << ['USDT', usd]
-    total = assets.map { |_k, v| v }.sum
-    assets = assets.map { |k, v| [k, v / total] }
-
-    assets = assets.map { |k, v| [k, (v * 0.9).floor(4)] }
     t = assets.map { |_k, v| v }.sum
-    assets += [['ETH', (1 - t).round(4)]]
-
+    assets = assets.map { |k, v| [k, v / t] }
     t = assets.map { |_k, v| v }.sum
     raise Strategy::RoundingError(assets.to_json) unless t == 1
 
