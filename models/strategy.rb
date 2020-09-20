@@ -150,12 +150,12 @@ class Strategy
       end
     end
 
-    # %w[USDC TUSD].each do |s|
-    #   if assets[s]
-    #     assets['USDT'] += assets[s]
-    #     assets.delete(s)
-    #   end
-    # end
+    %w[USDC TUSD].each do |s|
+      if assets[s]
+        assets['USDT'] += assets[s]
+        assets.delete(s)
+      end
+    end
 
     # offset to take into account possibility of negative scores
     offset = assets.values.min
