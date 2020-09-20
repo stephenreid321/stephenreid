@@ -1,18 +1,8 @@
 class Strategy
   include Mongoid::Document
   include Mongoid::Timestamps
-
-  class RoundingError < StandardError
-    def initialize(message = nil)
-      super(message)
-    end
-  end
-
-  class RebalancingError < StandardError
-    def initialize(message = nil)
-      super(message)
-    end
-  end
+  class RoundingError < StandardError; end
+  class RebalancingError < StandardError; end
 
   MONTH_FACTOR = 4
   THREE_MONTH_FACTOR = 3
@@ -161,10 +151,12 @@ class Strategy
     offset = assets.values.min
     assets = Hash[assets.map { |k, v| [k, v - offset] }]
 
+    # restrict to top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
     t = assets.map { |_k, v| v }.sum
     assets = Hash[assets.map { |k, v| [k, v / t] }]
 
+    # include at least 10% ETH
     if !assets['ETH'] || assets['ETH'] < 0.1
       assets.delete('ETH')
       assets = Hash[assets.map { |k, v| [k, v * (1 - 0.1)] }]
@@ -172,6 +164,7 @@ class Strategy
       assets['ETH'] = 1 - t
     end
 
+    # make sure asset weights sum to exactly 1
     assets = Hash[assets.map { |k, v| [k, v.floor(4)] }]
     t = assets.map { |_k, v| v }.sum
     assets['ETH'] += (1 - t).round(4)
