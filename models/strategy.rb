@@ -130,7 +130,7 @@ class Strategy
     where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil)
   end
 
-  def self.proposed(n: 10)
+  def self.proposed(n: 5)
     assets = {}
     Strategy.active_mature.each do |strategy|
       strategy.holdings.each do |holding|
@@ -182,7 +182,7 @@ class Strategy
     # delay(run_at: 1.hours.from_now).rebalance(force: true)
   end
 
-  def self.rebalance(n: 10, bail: false, force: false)
+  def self.rebalance(n: 5, bail: false, force: false)
     unless force
       usdt = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'USDT' }
       if usdt && usdt['rebalancedWeight'] == 0.9
