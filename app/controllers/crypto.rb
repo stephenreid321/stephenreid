@@ -3,11 +3,6 @@ StephenReid::App.controller do
     @favicon = 'moon.png'
   end
 
-  get '/iconomi' do
-    @p = params[:p]
-    erb :'crypto/iconomi'
-  end
-
   get '/loopring' do
     erb :'crypto/loopring'
   end
@@ -74,6 +69,11 @@ StephenReid::App.controller do
   end
 
   ###
+
+  get '/iconomi' do
+    @p = params[:p]
+    erb :'crypto/iconomi'
+  end
 
   # get '/strategy' do
   #   erb :'crypto/strategy'
