@@ -51,6 +51,10 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.13)
+    binance (1.2.0)
+      faraday (~> 0.12)
+      faraday_middleware (~> 0.12)
+      faye-websocket (~> 0.10)
     bson (4.9.4)
     chroma (0.2.0)
     coercible (1.0.0)
@@ -76,10 +80,14 @@ GEM
       money-tree (~> 0.10.0)
       rlp (~> 0.7.3)
       scrypt (~> 3.0.6)
+    eventmachine (1.2.7)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.14.0)
       faraday (>= 0.7.4, < 1.0)
+    faye-websocket (0.11.0)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffi (1.13.1)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -219,6 +227,9 @@ GEM
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
     webrobots (0.1.2)
+    websocket-driver (0.7.3)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -231,6 +242,7 @@ DEPENDENCIES
   airbrake
   airrecord
   bcrypt
+  binance
   chroma
   delayed_job_mongoid
   digest-sha3

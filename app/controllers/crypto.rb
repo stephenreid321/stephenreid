@@ -3,6 +3,10 @@ StephenReid::App.controller do
     @favicon = 'moon.png'
   end
 
+  get '/binance' do
+    erb :'crypto/binance'
+  end
+
   get '/loopring' do
     erb :'crypto/loopring'
   end

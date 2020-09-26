@@ -31,6 +31,7 @@ gem 'bcrypt'
 gem 'delayed_job_mongoid'
 gem 'mongoid'
 
+gem 'binance'
 gem 'digest-sha3'
 gem 'eth'
 gem 'htmlbeautifier', github: 'trileuco/htmlbeautifier'

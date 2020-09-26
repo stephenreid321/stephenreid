@@ -1,0 +1,32 @@
+<%
+client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
+%>
+
+<script>
+  $(function () {
+      $('#assets').dataTable({paging: false, searching: false, order: [[1, "desc"]]})
+  })
+</script>
+<table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important" >
+  <thead>
+    <tr>
+      <th>
+        Asset
+      </th>
+      <th>
+        Value
+      </th>
+    </tr>
+  </thead>
+  <% client.account_info['balances'].select { |b| b['free'].to_f > 0 }.each { |b| %>
+  <% coin = Coin.find_by(symbol: b['asset']) %>
+  <tr <% if coin && coin.eth? %>style="background-color: #F5F2FA"<% end %>>
+    <td>
+      <%=b['asset']%>
+    </td>
+    <td>
+      <%=number_to_currency b['free'].to_f*coin.current_price, precision: 0%>
+    </td>
+  </tr>
+  <% } %>
+</table>
