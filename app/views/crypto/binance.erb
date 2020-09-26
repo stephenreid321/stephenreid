@@ -2,6 +2,8 @@
 client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
 %>
 
+<% t = 0 %>
+
 <script>
   $(function () {
       $('#assets').dataTable({paging: false, searching: false, order: [[1, "desc"]]})
@@ -25,8 +27,12 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
       <%=b['asset']%>
     </td>
     <td>
-      <%=number_to_currency b['free'].to_f*coin.current_price, precision: 0%>
+      <% p = b['free'].to_f*coin.current_price %>
+      <% t += p %>
+      <%=number_to_currency p, precision: 0%>
     </td>
   </tr>
   <% } %>
 </table>
+
+<h1 class="text-center mt-3"><%=number_to_currency t, precision: 0%></h1>
