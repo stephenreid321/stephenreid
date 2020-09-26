@@ -67,7 +67,7 @@ class Coin
     until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&price_change_percentage=1h,24h,7d&page=#{i}").body)).empty?
       i += 1
       coins.each do |c|
-        puts c['name']
+        puts c['symbol']
         if alt = Coin.find_by(symbol: c['symbol'])
           if c['market_cap_rank'] && (!alt.market_cap_rank || c['market_cap_rank'] < alt.market_cap_rank)
             alt.destroy
