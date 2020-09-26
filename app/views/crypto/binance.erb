@@ -6,10 +6,10 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
 
 <script>
   $(function () {
-      $('#assets').dataTable({paging: false, searching: false, order: [[1, "desc"]]})
+      $('#assets').dataTable({bInfo: false, paging: false, searching: false, order: [[1, "desc"]]})
   })
 </script>
-<table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important" >
+<table id="assets" class="table" style="margin: auto; width: auto; font-size: 0.9rem; border-collapse: collapse !important" >
   <thead>
     <tr>
       <th>
@@ -24,7 +24,12 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
   <% coin = Coin.find_by(symbol: b['asset']) %>
   <tr <% if coin && coin.eth? %>style="background-color: #F5F2FA"<% end %>>
     <td>
-      <%=b['asset']%>
+      <a target="_blank" href="<%=coin.try(:website)%>">
+        <%= coin.name %> (<%= coin.symbol %>)
+      </a>
+      <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
+        <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
+      </a>
     </td>
     <td>
       <% p = b['free'].to_f*coin.current_price %>
