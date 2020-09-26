@@ -83,20 +83,20 @@ StephenReid::App.controller do
     partial :'crypto/strategy_table'
   end
 
-  # post '/strategy/:p/bail' do
-  #   halt unless params[:p] == ENV['SITE_SECRET']
-  #   redirect "/strategy/#{ENV['SITE_SECRET']}/bail"
-  # end
-  #
-  # get '/strategy/:p/bail' do
-  #   halt unless params[:p] == ENV['SITE_SECRET']
-  #   Strategy.delay.bail
-  #   redirect '/strategy'
-  # end
-  #
-  # get '/strategy/:p/rebalance' do
-  #   halt unless params[:p] == ENV['SITE_SECRET']
-  #   Strategy.delay.rebalance(force: params[:force])
-  #   redirect '/strategy'
-  # end
+  post '/strategy/:p/bail' do
+    halt unless params[:p] == ENV['SITE_SECRET']
+    redirect "/strategy/#{ENV['SITE_SECRET']}/bail"
+  end
+
+  get '/strategy/:p/bail' do
+    halt unless params[:p] == ENV['SITE_SECRET']
+    Strategy.delay.bail
+    redirect '/strategy'
+  end
+
+  get '/strategy/:p/rebalance' do
+    halt unless params[:p] == ENV['SITE_SECRET']
+    Strategy.delay.rebalance(force: params[:force])
+    redirect '/strategy'
+  end
 end
