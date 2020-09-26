@@ -42,7 +42,7 @@
       <% end %>
     </td>
     <td class="assetName" style="white-space: nowrap;">
-      <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
+      <a target="_blank" href="<%=coin.try(:website)%>">
         <%= asset.name %> (<%= k %>)
       </a>
       <% if coin %>
