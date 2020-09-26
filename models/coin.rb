@@ -67,7 +67,7 @@ class Coin
       coins.each do |c|
         puts c['name']
         if alt = Coin.find_by(symbol: c['symbol'])
-          if c['market_cap_rank'] < alt.market_cap_rank
+          if !alt.market_cap_rank || c['market_cap_rank'] < alt.market_cap_rank
             alt.destroy
           else
             next
