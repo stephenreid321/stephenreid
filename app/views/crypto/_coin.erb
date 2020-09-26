@@ -15,6 +15,11 @@
   </a>
   <% if coin.eth? %>
     <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
+    <script>
+      $(function() {
+        $('[data-pagelet-url="/coins/<%=coin.slug%>"]').css({backgroundColor: '#F5F2FA'})
+      })
+    </script>
   <% end %>
   <% if (asset = Asset.find_by(ticker: coin.symbol)) %>
     <small>

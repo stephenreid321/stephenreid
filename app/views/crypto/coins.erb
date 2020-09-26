@@ -27,6 +27,6 @@
     </tr>
   </thead>
   <% @coins.each { |coin| %>
-  <tr <% if coin.eth? %>style="background-color: #F5F2FA"<% end %> data-pagelet-url="/coins/<%=coin.slug%>"></tr>
+  <tr data-pagelet-url="/coins/<%=coin.slug%>"></tr>
   <% } %>
 </table>
