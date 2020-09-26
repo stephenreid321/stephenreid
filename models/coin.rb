@@ -19,8 +19,6 @@ class Coin
   field :hidden, type: Boolean
   field :starred, type: Boolean
 
-  validates_uniqueness_of :symbol
-
   before_validation do
     self.symbol = symbol.try(:upcase)
   end
@@ -68,7 +66,14 @@ class Coin
       i += 1
       coins.each do |c|
         puts c['name']
-        coin = Coin.create(slug: c['id'])
+        if alt = Coin.find_by(symbol: c['symbol'])
+          if c['market_cap_rank'] < alt.market_cap_rank
+            alt.destroy
+          else
+            next
+          end
+        end
+        coin = Coin.create!(slug: c['id'])
         %w[symbol name current_price market_cap market_cap_rank total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
           coin.send("#{r}=", c[r])
         end
