@@ -75,14 +75,14 @@ StephenReid::App.controller do
     erb :'crypto/iconomi'
   end
 
-  # get '/strategy' do
-  #   erb :'crypto/strategy'
-  # end
-  #
-  # get '/strategy/table' do
-  #   partial :'crypto/strategy_table'
-  # end
-  #
+  get '/strategy' do
+    erb :'crypto/strategy'
+  end
+
+  get '/strategy/table' do
+    partial :'crypto/strategy_table'
+  end
+
   # post '/strategy/:p/bail' do
   #   halt unless params[:p] == ENV['SITE_SECRET']
   #   redirect "/strategy/#{ENV['SITE_SECRET']}/bail"

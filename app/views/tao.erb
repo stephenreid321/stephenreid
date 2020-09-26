@@ -5,59 +5,63 @@
     </div>
   </div>
 <% end %>
-<div class="row justify-content-center">
-  <div class="col-sm-9">
-    <% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| %>
-    <div class="row mb-5">
-      <div class="col-sm-6 <% if i%2 == 1 %> order-sm-1 <% end %> mb-3 mb-sm-0">
-        <h2 style="border: 0" class="mb-3"><a class="text-dark" href="/tao-te-ching/<%=verse['Verse']%>">Verse <%=verse['Verse']%></a></h2>
-        <div>
-          <%= verse['Text'].gsub('  ','&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n",'<br />') %>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <a href="/tao-te-ching/<%=verse['Verse']%>"><img style="max-width: 100%" src="<%= verse['Images'].first['thumbnails']['full']['url'] %>"></a>
-      </div>
+
+<% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| %>
+<div class="row" <% unless params[:i] %>style="margin-bottom: 10rem"<% end %>>
+  <div class="col-sm-9 order-sm-2 mb-3">
+    <a href="/tao-te-ching/<%=verse['Verse']%>"><img src="<%= verse['Images'].first['thumbnails']['full']['url'] %>" class="w-100"></a>
+  </div>
+  <div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
+    <h2 class="mb-3 regular">
+      <a style="background: white" class="text-dark" href="/tao-te-ching/<%=verse['Verse']%>">Verse <%=verse['Verse']%></a>
+    </h2>
+    <div>
+      <span style="background: white">
+        <%= verse['Text'].gsub('  ','&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n","&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n",'&nbsp;<br />') %>
+        &nbsp;
+      </span>
     </div>
-    <% } %>
-    <% if params[:i] %>
-      <div class="row justify-content-between">
-        <div class="col-auto">
-          <% if params[:i].to_i == 1 %>
-            <a href="/tao-te-ching" class="card text-center shadow-sm mb-1">
-              <div class="card-body py-1 px-3">
-                All chapters
-              </div>
-            </a>
-          <% else %>
-            <a href="/tao-te-ching/<%=params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
-              <div class="card-body py-1 px-3">
-                <span class="text-dark">&lArr;</span>
-                Verse <%=params[:i].to_i - 1 %>
-              </div>
-            </a>
-          <% end %>
-        </div>
-        <div class="col-auto">
-          <% if params[:i].to_i == Verse.all(sort: { 'Verse' => 'desc'}).first['Verse'].to_i %>
-            <a href="/tao-te-ching" class="card text-center shadow-sm mb-1">
-              <div class="card-body py-1 px-3">
-                All chapters
-              </div>
-            </a>
-          <% else %>
-            <a href="/tao-te-ching/<%=params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
-              <div class="card-body py-1 px-3">
-                Verse <%=params[:i].to_i + 1 %>
-                <span class="text-dark">&rArr;</span>
-              </div>
-            </a>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>
+<% } %>
+<% if params[:i] %>
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <% if params[:i].to_i == 1 %>
+        <a href="/tao-te-ching" class="card text-center shadow-sm mb-1">
+          <div class="card-body py-1 px-3">
+            All chapters
+          </div>
+        </a>
+      <% else %>
+        <a href="/tao-te-ching/<%=params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
+          <div class="card-body py-1 px-3">
+            <span class="text-dark">&lArr;</span>
+            Verse <%=params[:i].to_i - 1 %>
+          </div>
+        </a>
+      <% end %>
+    </div>
+    <div class="col-auto">
+      <% if params[:i].to_i == Verse.all(sort: { 'Verse' => 'desc'}).first['Verse'].to_i %>
+        <a href="/tao-te-ching" class="card text-center shadow-sm mb-1">
+          <div class="card-body py-1 px-3">
+            All chapters
+          </div>
+        </a>
+      <% else %>
+        <a href="/tao-te-ching/<%=params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
+          <div class="card-body py-1 px-3">
+            Verse <%=params[:i].to_i + 1 %>
+            <span class="text-dark">&rArr;</span>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
 <% if params[:i] %>
   <style>
     .grid-sizer, .grid-item {  width: 100% }
