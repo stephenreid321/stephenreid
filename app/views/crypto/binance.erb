@@ -17,7 +17,7 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
   b['free'].to_f*coin.current_price
   } %>
 
-<h1 class="text-center mt-3"><%=number_to_currency t, precision: 0%></h1>
+<h1 class="text-center"><%=number_to_currency t, precision: 0%></h1>
 
 <table id="assets" class="table" style="margin: auto; width: auto; font-size: 0.9rem; border-collapse: collapse !important" >
   <thead>
