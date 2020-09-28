@@ -179,6 +179,9 @@ module StephenReid
     end
 
     {
+      '/calendly' => 'https://calendly.com/stephenreid321',
+      '/30' => 'https://calendly.com/stephenreid321/30-min-call',
+      '/55' => 'https://calendly.com/stephenreid321/55-min-call',
       '/about' => '/',
       '/link' => '/',
       '/training' => '/about',
