@@ -9,6 +9,16 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
       $('#assets').dataTable({bInfo: false, paging: false, searching: false, order: [[1, "desc"]]})
   })
 </script>
+
+<% balances = client.account_info['balances'].select { |b| b['free'].to_f > 0 } %>
+
+<% t = balances.sum { |b|
+  coin = Coin.find_by(symbol: b['asset'])
+  b['free'].to_f*coin.current_price
+  } %>
+
+<h1 class="text-center mt-3"><%=number_to_currency t, precision: 0%></h1>
+
 <table id="assets" class="table" style="margin: auto; width: auto; font-size: 0.9rem; border-collapse: collapse !important" >
   <thead>
     <tr>
@@ -18,9 +28,12 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
       <th>
         Value
       </th>
+      <th>
+        Share
+      </th>
     </tr>
   </thead>
-  <% client.account_info['balances'].select { |b| b['free'].to_f > 0 }.each { |b| %>
+  <% balances.each { |b| %>
   <% coin = Coin.find_by(symbol: b['asset']) %>
   <tr <% if coin && coin.eth? %>style="background-color: #F5F2FA"<% end %>>
     <td>
@@ -33,11 +46,12 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
     </td>
     <td>
       <% p = b['free'].to_f*coin.current_price %>
-      <% t += p %>
+
       <%=number_to_currency p, precision: 0%>
+    </td>
+    <td>
+      <%= number_to_percentage 100*(p / t), precision: 0 %>
     </td>
   </tr>
   <% } %>
 </table>
-
-<h1 class="text-center mt-3"><%=number_to_currency t, precision: 0%></h1>
