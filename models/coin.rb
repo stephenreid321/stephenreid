@@ -4,6 +4,8 @@ class Coin
 
   field :slug, type: String
   field :tag, type: String
+  field :units, type: Float
+  field :contract_address, type: String
   field :symbol, type: String
   field :name, type: String
   field :platform, type: String
@@ -28,6 +30,8 @@ class Coin
     {
       slug: :text,
       tag: :text,
+      units: :number,
+      contract_address: :text,
       symbol: :text,
       name: :text,
       platform: :text,
@@ -87,10 +91,20 @@ class Coin
   def update
     agent = Mechanize.new
     c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
+    self.contract_address = c['contract_address']
     self.platform = c['asset_platform_id']
     self.website = c['links']['homepage'].first
     self.twitter_username = c['links']['twitter_screen_name']
     self.twitter_followers = c['community_data']['twitter_followers']
+    if starred
+      u = 0
+      %w[0x72e1638bd8cd371bfb04cf665b749a0e4ae38324 0x81a06F24B206d420F201eC9844141Bf62804b257].each do |a|
+        u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10e17
+      end
+      self.units = u
+    else
+      self.units = nil
+    end
     save
   end
 end

@@ -31,6 +31,11 @@
   <% end %>
 </td>
 <td>
+  <% if coin.units %>
+    <%= number_to_currency coin.units * coin.current_price %>
+  <% end %>
+</td>
+<td>
   <%=number_to_currency coin.current_price%>
 </td>
 <td class="rg">
