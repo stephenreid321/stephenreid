@@ -9,9 +9,6 @@
   </div>
 <% end %>
 
-<% if coins.where(starred: true).count > 0 %>
-  <h1 class="my-3 text-center"><%=number_to_currency coins.map { |coin| (coin.units || 0) * coin.current_price }.sum %></h1>
-<% end %>
 
 <script>
   $(function () {
