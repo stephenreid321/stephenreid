@@ -11,14 +11,19 @@ StephenReid::App.controller do
     erb :'crypto/loopring'
   end
 
-  get '/coins' do
-    @coins = Coin.where(
-      :hidden.ne => true,
-      :market_cap_rank.ne => nil,
-      :market_cap.gte => 1_000_000,
-      :total_volume.gte => 1_000_000
-    ).order('price_change_percentage_24h_in_currency desc').limit(20)
-    erb :'crypto/coins'
+  get '/coingecko' do
+    erb :'crypto/coingecko'
+  end
+
+  get '/coins/table/:tag' do
+    partial :'crypto/coin_table', locals: { coins: Coin.where(
+      tag: params[:tag]
+    ).order('price_change_percentage_24h_in_currency desc').limit(20) }
+  end
+
+  post '/coins/table/:tag' do
+    Coin.find_by(symbol: params[:symbol].upcase).update_attribute(:tag, params[:tag])
+    200
   end
 
   get '/coins/:slug' do

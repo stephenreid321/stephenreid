@@ -1,0 +1,30 @@
+<% if params[:tag] %>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
+        <%= text_field_tag :symbol, :class => 'form-control mr-1' %>
+        <%= submit_tag 'Add', :class => 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Name</th>
+      <th>Current price</th>
+      <th>1h</th>
+      <th>24h</th>
+      <th>7d</th>
+      <th>Twitter followers</th>
+      <th>Volume/cap</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% coins.each { |coin| %>
+  <tr data-pagelet-url="/coins/<%=coin.slug%>"></tr>
+  <% } %>
+</table>

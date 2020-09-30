@@ -3,6 +3,7 @@ class Coin
   include Mongoid::Timestamps
 
   field :slug, type: String
+  field :tag, type: String
   field :symbol, type: String
   field :name, type: String
   field :platform, type: String
@@ -28,6 +29,7 @@ class Coin
   def self.admin_fields
     {
       slug: :text,
+      tag: :text,
       symbol: :text,
       name: :text,
       platform: :text,
@@ -59,9 +61,6 @@ class Coin
   end
 
   def self.import
-    hidden_slugs = Coin.where(hidden: true).pluck(:slug)
-    starred_slugs = Coin.where(starred: true).pluck(:slug)
-    Coin.delete_all
     agent = Mechanize.new
     i = 1
     until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&price_change_percentage=1h,24h,7d&page=#{i}").body)).empty?
@@ -75,12 +74,10 @@ class Coin
             next
           end
         end
-        coin = Coin.create!(slug: c['id'])
+        coin = Coin.find_or_create_by!(slug: c['id'])
         %w[symbol name current_price market_cap market_cap_rank total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
           coin.send("#{r}=", c[r])
         end
-        coin.hidden = hidden_slugs.include?(coin.slug)
-        coin.starred = starred_slugs.include?(coin.slug)
         coin.save
       end
     end
