@@ -17,7 +17,7 @@
     <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
     <script>
       $(function() {
-        $('[data-pagelet-url="/coins/<%=coin.slug%>"]').css({backgroundColor: '#F5F2FA'})
+        $('[data-pagelet-url^="/coins/<%=coin.slug%>"]').css({backgroundColor: '#F5F2FA'})
       })
     </script>
   <% end %>
@@ -28,6 +28,9 @@
       </a>
     </small>
     <div style="display: inline" data-pagelet-url="/assets/<%=asset.id%>/multiplier?badge_class=badge-secondary"></div>
+  <% end %>
+  <% if !params[:tag] %>
+    <span class="badge badge-primary"><%=coin.tag%></span>
   <% end %>
 </td>
 <td>

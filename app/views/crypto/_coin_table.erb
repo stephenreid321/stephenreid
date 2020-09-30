@@ -35,6 +35,6 @@
     </tr>
   </thead>
   <% coins.each { |coin| %>
-  <tr data-pagelet-url="/coins/<%=coin.slug%>"></tr>
+  <tr data-pagelet-url="/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"></tr>
   <% } %>
 </table>
