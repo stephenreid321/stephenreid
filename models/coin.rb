@@ -20,8 +20,6 @@ class Coin
   field :hidden, type: Boolean
   field :starred, type: Boolean
 
-  validates_uniqueness_of :symbol
-
   before_validation do
     self.symbol = symbol.try(:upcase)
   end
