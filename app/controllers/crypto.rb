@@ -22,7 +22,7 @@ StephenReid::App.controller do
   end
 
   post '/coins/table/:tag' do
-    Coin.find_by(symbol: params[:symbol].upcase).update_attribute(:tag, params[:tag])
+    Coin.symbol(params[:symbol]).update_attribute(:tag, params[:tag])
     200
   end
 

@@ -31,7 +31,7 @@
   <% tickers = (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
   <% tickers.uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
-  <% coin = Coin.find_by(symbol: k) %>
+  <% coin = Coin.symbol(k) %>
   <% coin.update if coin && !coin.platform %>
   <tr <% if coin && coin.eth? %>style="background-color: #F5F2FA"<% end %>>
     <td style="vertical-align: middle; text-align: right; width: 10vw">

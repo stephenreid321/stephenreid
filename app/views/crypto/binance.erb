@@ -13,7 +13,7 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
 <% balances = client.account_info['balances'].select { |b| b['free'].to_f > 0 } %>
 
 <% t = balances.sum { |b|
-  coin = Coin.find_by(symbol: b['asset'])
+  coin = Coin.symbol(b['asset'])
   b['free'].to_f*coin.current_price
   } %>
 
@@ -34,7 +34,7 @@ client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: 
     </tr>
   </thead>
   <% balances.each { |b| %>
-  <% coin = Coin.find_by(symbol: b['asset']) %>
+  <% coin = Coin.symbol(b['asset']) %>
   <tr <% if coin && coin.eth? %>style="background-color: #F5F2FA"<% end %>>
     <td>
       <a target="_blank" href="<%=coin.try(:website)%>">

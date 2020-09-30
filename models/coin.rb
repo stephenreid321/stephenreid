@@ -67,13 +67,6 @@ class Coin
       i += 1
       coins.each do |c|
         puts c['symbol'].upcase
-        if alt = Coin.find_by(symbol: c['symbol'].upcase)
-          if c['market_cap_rank'] && (!alt.market_cap_rank || c['market_cap_rank'] < alt.market_cap_rank)
-            alt.destroy
-          else
-            next
-          end
-        end
         coin = Coin.find_or_create_by!(slug: c['id'])
         %w[symbol name current_price market_cap market_cap_rank total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
           coin.send("#{r}=", c[r])
@@ -81,6 +74,10 @@ class Coin
         coin.save
       end
     end
+  end
+
+  def self.symbol(symbol)
+    Coin.where(symbol: symbol.upcase).order('market_cap_rank desc').first
   end
 
   def self.update
