@@ -79,7 +79,7 @@ class Coin
   end
 
   def self.symbol(symbol)
-    Coin.where(symbol: symbol.upcase).order('market_cap_rank desc').first
+    Coin.where(symbol: symbol.upcase).order('total_volume desc').first
   end
 
   def self.update
