@@ -12,7 +12,7 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="gainers" role="tabpanel">
+  <div class="tab-pane fade show active" id="starred" role="tabpanel">
 
     <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :starred => true
