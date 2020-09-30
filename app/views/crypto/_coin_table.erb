@@ -14,7 +14,7 @@
   $(function () {
     $(document).ajaxStop(function() {
       if (!$('#coins-<%=uuid = SecureRandom.uuid%>').hasClass('datatabled'))
-        $('#coins-<%=uuid%>').dataTable({paging: false, searching: false, order: [[5, "desc"]]}).addClass('datatabled');
+        $('#coins-<%=uuid%>').dataTable({bInfo: false, paging: false, searching: false, order: [[5, "desc"]]}).addClass('datatabled');
     })
   })
 </script>
