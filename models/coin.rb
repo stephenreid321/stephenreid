@@ -91,10 +91,10 @@ class Coin
   def update
     agent = Mechanize.new
     c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
-    %w[current_price market_cap total_volume].each do |r|
+    %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
       send("#{r}=", c['market_data'][r]['usd'])
     end
-    %w[market_cap_rank price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
+    %w[market_cap_rank].each do |r|
       send("#{r}=", c['market_data'][r])
     end
     self.contract_address = c['contract_address']
