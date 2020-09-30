@@ -9,7 +9,16 @@
   </div>
 <% end %>
 
-<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins">
+
+<script>
+  $(function () {
+    $(document).ajaxStop(function() {
+      if (!$('#coins-<%=uuid = SecureRandom.uuid%>').hasClass('datatabled'))
+        $('#coins-<%=uuid%>').dataTable({paging: false, searching: false, order: [[5, "desc"]]}).addClass('datatabled');
+    })
+  })
+</script>
+<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins-<%=uuid%>">
   <thead>
     <tr>
       <th></th>
