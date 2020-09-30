@@ -34,7 +34,7 @@ StephenReid::App.controller do
 
   get '/coins/:slug/hide' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:hidden, true)
+    coin.update_attribute(:tag, nil)
     200
   end
 
