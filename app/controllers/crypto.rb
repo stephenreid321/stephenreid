@@ -18,7 +18,7 @@ StephenReid::App.controller do
   get '/coins/table/:tag' do
     partial :'crypto/coin_table', locals: { coins: Coin.where(
       tag: params[:tag]
-    ).order('price_change_percentage_24h_in_currency desc').limit(20) }
+    ).order('price_change_percentage_24h_in_currency desc') }
   end
 
   post '/coins/table/:tag' do

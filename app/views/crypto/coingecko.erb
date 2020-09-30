@@ -1,7 +1,10 @@
 <ul class="nav nav-tabs" id="tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link" id="starred-tab" data-toggle="tab" href="#starred" role="tab">starred</a>
+  </li>
   <% (tags = Coin.pluck(:tag).compact.uniq).each_with_index { |tag, i| %>
   <li class="nav-item">
-    <a class="nav-link <%='active' if i == 0 %>" id="<%=tag%>-tab" data-toggle="tab" href="#<%=tag%>" role="tab"><%=tag%></a>
+    <a class="nav-link" id="<%=tag%>-tab" data-toggle="tab" href="#<%=tag%>" role="tab"><%=tag%></a>
   </li>
   <% } %>
   <li class="nav-item">
@@ -9,6 +12,13 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show" id="gainers" role="tabpanel">
+
+    <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+      :starred => true
+    ).order('price_change_percentage_24h_in_currency desc')} %>
+
+  </div>
   <% tags.each_with_index { |tag,i | %>
   <div class="tab-pane fade show <%='active' if i==0%>" id="<%=tag%>" role="tabpanel">
 
