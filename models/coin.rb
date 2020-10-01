@@ -4,6 +4,7 @@ class Coin
 
   field :slug, type: String
   field :tag, type: String
+  field :decimals, type: Integer
   field :units, type: Float
   field :contract_address, type: String
   field :symbol, type: String
@@ -30,6 +31,7 @@ class Coin
     {
       slug: :text,
       tag: :text,
+      decimals: :integer,
       units: :number,
       contract_address: :text,
       symbol: :text,
@@ -105,7 +107,7 @@ class Coin
     if starred
       u = 0
       %w[0x72e1638bd8cd371bfb04cf665b749a0e4ae38324 0x81a06F24B206d420F201eC9844141Bf62804b257].each do |a|
-        u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10e17
+        u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
       end
 
       client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
