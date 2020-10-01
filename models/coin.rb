@@ -117,9 +117,15 @@ class Coin
       else
 
         client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
-        balances = client.account_info['balances'].select { |b| b['free'].to_f > 0 }
-        bc = balances.find { |b| b['asset'] == symbol }
-        u += bc['free'].to_f if bc
+        balances = client.account_info['balances']
+        bc = balances.find do |b|
+          b['asset'] == if symbol == 'KAVA'
+                          'LDKAVA'
+                        else
+                          symbol
+                        end
+        end
+        u += (bc['free'].to_f + bc['locked'].to_f) if bc
 
       end
 
