@@ -14,7 +14,9 @@
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
   </a>
   <% if coin.eth? %>
-    <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
+    <a href="https://etherscan.io/token/<%=coin.contract_address%>">
+      <i data-toggle="tooltip" title="Ethereum" style="color: #A68DFB" class="fab fa-ethereum"></i>
+    </a>
     <script>
       $(function() {
         $('[data-pagelet-url^="/coins/<%=coin.slug%>"]').css({backgroundColor: '#F5F2FA'})
