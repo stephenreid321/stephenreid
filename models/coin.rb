@@ -31,7 +31,7 @@ class Coin
     {
       slug: :text,
       tag: :text,
-      decimals: :integer,
+      decimals: :number,
       units: :number,
       contract_address: :text,
       symbol: :text,
