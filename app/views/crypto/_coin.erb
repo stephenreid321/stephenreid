@@ -35,7 +35,11 @@
 </td>
 <td>
   <% if coin.units %>
-    <%= number_to_currency coin.units * coin.current_price %>
+    <% if coin.units == 0 %>
+      <i class="far fa-question-circle"></i>
+    <% else %>
+      <%= number_to_currency coin.units * coin.current_price %>
+    <% end %>
   <% end %>
 </td>
 <td>
