@@ -12,6 +12,10 @@ StephenReid::App.controller do
   end
 
   get '/coingecko' do
+    redirect '/coingecko/starred'
+  end
+
+  get '/coingecko/:tag' do
     erb :'crypto/coingecko'
   end
 

@@ -9,7 +9,7 @@ gem 'sass'
 gem 'sinatra', '2.0.2'
 
 # Admin
-gem 'activate-tools', github: 'wordsandwriting/activate-tools'
+gem 'activate-tools', github: 'stephenreid321/activate-tools'
 gem 'will_paginate', github: 'mislav/will_paginate'
 
 # Email

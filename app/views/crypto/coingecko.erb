@@ -1,39 +1,34 @@
-<ul class="nav nav-tabs" id="tabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="starred-tab" data-toggle="tab" href="#starred" role="tab">starred</a>
-  </li>
-  <% (tags = Coin.pluck(:tag).compact.uniq).each_with_index { |tag, i| %>
-  <li class="nav-item">
-    <a class="nav-link" id="<%=tag%>-tab" data-toggle="tab" href="#<%=tag%>" role="tab"><%=tag%></a>
-  </li>
-  <% } %>
-  <li class="nav-item">
-    <a class="nav-link" id="gainers-tab" data-toggle="tab" href="#gainers" role="tab">gainers</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="starred" role="tabpanel">
+  <%= ul_nav (
+      [['starred', '/coingecko/starred']] +
+      (tags = Coin.pluck(:tag).compact.uniq).map { |tag| [tag, "/coingecko/#{tag}"] } +
+      [['gainers', '/coingecko/gainers']]
+    ),
+    ul_class: 'nav nav-tabs',
+    li_class: 'nav-item',
+    li_active_class: nil,
+    a_class: 'nav-link',
+    a_active_class: 'active',
+    ul_id: nil,
+    generate_subnav_href_and_ul: false
+%>
 
-    <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<% case params[:tag]; when nil, 'starred' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :starred => true
     ).order('price_change_percentage_24h_in_currency desc')} %>
 
-  </div>
-  <% tags.each_with_index { |tag,i | %>
-  <div class="tab-pane fade" id="<%=tag%>" role="tabpanel">
+<% when 'gainers' %>
 
-    <div data-pagelet-url="/coins/table/<%=tag%>"></div>
-
-  </div>
-  <% } %>
-  <div class="tab-pane fade " id="gainers" role="tabpanel">
-
-    <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :hidden.ne => true,
       :market_cap_rank.ne => nil,
       :market_cap.gte => 1_000_000,
       :total_volume.gte => 1_000_000
     ).order('price_change_percentage_24h_in_currency desc').limit(20)} %>
 
-  </div>
-</div>
+<% else %>
+
+  <div data-pagelet-url="/coins/table/<%=params[:tag]%>?add=true"></div>
+
+<% end %>
