@@ -10,18 +10,19 @@
 <% end %>
 
 <% if coins.where(starred: true).count > 0 %>
-  <h1 class="my-3 text-center"><%=number_to_currency coins.map { |coin| (coin.units || 0) * coin.current_price }.sum %></h1>
+  <h1 id="total" class="my-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
 <% end %>
 
 <script>
   $(function () {
     $(document).ajaxStop(function() {
-      if (!$('#coins-<%=uuid = SecureRandom.uuid%>').hasClass('datatabled'))
-        $('#coins-<%=uuid%>').dataTable({bInfo: false, paging: false, searching: false, order: [[6, "desc"]]}).addClass('datatabled');
+      $('#total').html('$' + parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); })).toLocaleString(window.document.documentElement.lang))
+      if (!$('#coins').hasClass('datatabled'))
+        $('#coins').dataTable({bInfo: false, paging: false, searching: false, order: [[6, "desc"]]}).addClass('datatabled');
     })
   })
 </script>
-<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins-<%=uuid%>">
+<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins">
   <thead>
     <tr>
       <th></th>
