@@ -31,7 +31,7 @@
     </small>
     <div style="display: inline" data-pagelet-url="/assets/<%=asset.id%>/multiplier?badge_class=badge-secondary"></div>
   <% end %>
-  <% if !params[:tag] %>
+  <% if %w[starred gainers].include?(params[:tag]) %>
     <span class="badge badge-primary"><%=coin.tag%></span>
   <% end %>
 </td>
