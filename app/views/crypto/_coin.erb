@@ -1,5 +1,11 @@
-<td data-sort="<%=coin.market_cap_rank%>">
-  #<%=coin.market_cap_rank%>
+<% parent = Coin.symbol(coin.symbol[1..-1]) if coin.name.starts_with?('Aave ') %>
+<td data-sort="<%=parent ? parent.market_cap_rank : coin.market_cap_rank%>">
+  <% if coin.market_cap_rank %>
+    #<%=coin.market_cap_rank%>
+  <% end %>
+  <% if parent %>
+    (#<%=parent.market_cap_rank%>)
+  <% end %>
 </td>
 <td>
   <% if !coin.starred %>
