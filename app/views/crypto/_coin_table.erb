@@ -1,4 +1,4 @@
-<% if params[:add] %>
+<% if current_account && params[:add] %>
   <div class="row justify-content-center">
     <div class="col-auto">
       <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
@@ -9,33 +9,56 @@
   </div>
 <% end %>
 
-<% if coins.where(starred: true).count > 0 %>
-  <h1 id="total" class="my-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+<% if current_account %>
+  <% if coins.where(starred: true).count > 0 %>
+    <h1 id="total" class="my-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+  <% end %>
 <% end %>
 
 <script>
   $(function () {
     $(document).ajaxStop(function() {
-      $('#total').html('$' + parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); })).toLocaleString(window.document.documentElement.lang))
+      var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+      $('#total').html('$' + t.toLocaleString(window.document.documentElement.lang))
+      var max;
+      $('#coins td.holding').each(function() {
+        if (!max)
+          max = parseInt($(this).attr('data-sort'))
+        else if (parseInt($(this).attr('data-sort')) > max)
+          max = parseInt($(this).attr('data-sort'))
+      })
+      $('#coins td.holding').each(function() {
+        if ($(this).attr('data-sort') > 0)
+          $(this).html('<div class="text-center d-none d-sm-inline-block" style="line-height: 2; background: #00B963; width: '+ Math.round(100*parseInt($(this).attr('data-sort'))/max) +'%">'+Math.round(100*parseInt($(this).attr('data-sort'))/t)+'%</div>')
+      })
       if (!$('#coins').hasClass('datatabled'))
-        $('#coins').dataTable({bInfo: false, paging: false, searching: false, order: [[6, "desc"]]}).addClass('datatabled');
+        $('#coins').dataTable({
+          bInfo: false,
+          paging: false,
+          searching: false,
+          order: [[6, "desc"]]}).addClass('datatabled');
     })
   })
 </script>
+<style>
+  #coins th { border-top: 0; }
+</style>
 <table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins">
   <thead>
     <tr>
       <th></th>
       <th></th>
       <th>Name</th>
-      <th>Holding</th>
+      <th style="white-space: nowrap">Relative holding</th>
       <th>Current price</th>
       <th>1h</th>
       <th>24h</th>
       <th>7d</th>
       <th>Twitter followers</th>
       <th>Volume/cap</th>
-      <th></th>
+      <% if current_account %>
+        <th></th>
+      <% end %>
     </tr>
   </thead>
   <% coins.each { |coin| %>

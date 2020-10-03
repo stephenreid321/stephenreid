@@ -3,20 +3,12 @@ StephenReid::App.controller do
     @favicon = 'moon.png'
   end
 
-  get '/binance' do
-    erb :'crypto/binance'
+  get '/coins' do
+    redirect '/coins/tag/starred'
   end
 
-  get '/loopring' do
-    erb :'crypto/loopring'
-  end
-
-  get '/coingecko' do
-    redirect '/coingecko/starred'
-  end
-
-  get '/coingecko/:tag' do
-    erb :'crypto/coingecko'
+  get '/coins/tag/:tag' do
+    erb :'crypto/coins'
   end
 
   get '/coins/table/:tag' do
@@ -26,44 +18,39 @@ StephenReid::App.controller do
   end
 
   post '/coins/table/:tag' do
+    sign_in_required!
     Coin.symbol(params[:symbol]).update_attribute(:tag, params[:tag])
     200
   end
 
   get '/coins/:slug' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.update
+    coin.update if coin.updated_at < 5.minutes.ago
     partial :'crypto/coin', locals: { coin: coin }
   end
 
   get '/coins/:slug/hide' do
+    sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:tag, nil)
     200
   end
 
   get '/coins/:slug/star' do
+    sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, true)
     200
   end
 
   get '/coins/:slug/unstar' do
+    sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, nil)
     200
   end
 
-  get '/assets/:id/multiplier' do
-    asset = Asset.find(params[:id])
-    partial :'crypto/multiplier', locals: { asset: asset }
-  end
-
-  post '/assets/:id/multiplier' do
-    asset = Asset.find(params[:id])
-    asset.update_attribute(:multiplier, params[:multiplier])
-    200
-  end
+  ###
 
   get '/ccowl/:p' do
     halt unless params[:p] == ENV['SITE_SECRET']
@@ -81,7 +68,17 @@ StephenReid::App.controller do
     200
   end
 
-  ###
+  get '/assets/:id/multiplier' do
+    asset = Asset.find(params[:id])
+    partial :'crypto/multiplier', locals: { asset: asset }
+  end
+
+  post '/assets/:id/multiplier' do
+    sign_in_required!
+    asset = Asset.find(params[:id])
+    asset.update_attribute(:multiplier, params[:multiplier])
+    200
+  end
 
   get '/iconomi' do
     @p = params[:p]

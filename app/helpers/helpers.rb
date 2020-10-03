@@ -19,6 +19,10 @@ StephenReid::App.helpers do
     cache(slug, expires: 6.hours.to_i) { ; partial :"#{slug}"; }
   end
 
+  def current_account
+    @current_account ||= Account.find(session[:account_id]) if session[:account_id]
+  end
+
   def sign_in_required!
     halt(403) unless current_account
   end

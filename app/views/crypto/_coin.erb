@@ -8,10 +8,18 @@
   <% end %>
 </td>
 <td>
-  <% if !coin.starred %>
-    <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/star"><i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i></a>
+  <% if current_account %>
+    <% if !coin.starred %>
+      <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/star"><i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i></a>
+    <% else %>
+      <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/unstar"><i class="fas fa-star" style="color: #FAC84F"></i></a>
+    <% end %>
   <% else %>
-    <a class="pagelet-trigger" href="/coins/<%=coin.slug%>/unstar"><i class="fas fa-star" style="color: #FAC84F"></i></a>
+    <% if !coin.starred %>
+      <i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i>
+    <% else %>
+      <i class="fas fa-star" style="color: #FAC84F"></i>
+    <% end %>
   <% end %>
 </td>
 <td style="white-space: nowrap">
@@ -29,7 +37,7 @@
       })
     </script>
   <% end %>
-  <% if (asset = Asset.find_by(ticker: coin.symbol)) %>
+  <% if current_account && (asset = Asset.find_by(ticker: coin.symbol)) %>
     <small>
       <a class="text-dark" target="_blank" href="https://www.iconomi.com/asset/<%=coin.symbol%>">
         ICONOMI
@@ -46,7 +54,7 @@
     <% if coin.units == 0 %>
       <i class="far fa-question-circle"></i>
     <% else %>
-      <%= number_to_currency (coin.units * coin.current_price), precision: 0 %>
+      <i class="fas fa-spin fa-circle-notch"></i>
     <% end %>
   <% end %>
 </td>
@@ -74,8 +82,12 @@
   <% end %>
 </td>
 <td>
-  <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
+  <% if coin.market_cap > 0 %>
+    <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
+  <% end %>
 </td>
-<td>
-  <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.slug%>/hide');$(this).closest('tr').remove()"><i class="fas fa-times"></i></a>
-</td>
+<% if current_account %>
+  <td>
+    <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.slug%>/hide');$(this).closest('tr').remove()"><i class="fas fa-times"></i></a>
+  </td>
+<% end %>
