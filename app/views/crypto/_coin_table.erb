@@ -28,8 +28,9 @@
           max = parseInt($(this).attr('data-sort'))
       })
       $('#coins td.holding').each(function() {
-        if ($(this).attr('data-sort') > 0)
-          $(this).html('<div class="text-center d-none d-sm-inline-block" style="line-height: 2; background: #00B963; width: '+ Math.round(100*parseInt($(this).attr('data-sort'))/max) +'%">'+Math.round(100*parseInt($(this).attr('data-sort'))/t)+'%</div>')
+          var v = parseInt($(this).attr('data-sort'))
+          if (v)
+            $(this).html('<div class="text-center d-none d-sm-inline-block" style="white-space: nowrap; line-height: 2; background: #00B963; width: '+ Math.round(100*v/max) +'%">'+Math.round(100*v/t)+'%' + <% if current_account %> ' $' + v.toLocaleString(window.document.documentElement.lang) <% else %>''<% end %> +'</div>')
       })
       if (!$('#coins').hasClass('datatabled'))
         $('#coins').dataTable({
