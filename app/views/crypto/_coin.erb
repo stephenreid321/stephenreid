@@ -17,7 +17,7 @@
     <% end %>
   <% end %>
 </td>
-<td style="white-space: nowrap">
+<td style="white-space: nowrap" data-symbol="<%=coin.name.starts_with?('Aave ') ? coin.symbol[1..-1] : coin.symbol%>">
   <a target="_blank" href="<%=coin.website%>"><%=coin.name%> (<%=coin.symbol%>)</a>
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
