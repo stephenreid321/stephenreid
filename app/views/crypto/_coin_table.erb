@@ -1,18 +1,20 @@
-<% if current_account && params[:add] %>
-  <div class="row justify-content-center">
-    <div class="col-auto">
-      <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
-        <%= text_field_tag :symbol, :class => 'form-control mr-1' %>
-        <%= submit_tag 'Add', :class => 'btn btn-primary' %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
 <% if current_account %>
+
+  <% if params[:add] %>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
+          <%= text_field_tag :symbol, :class => 'form-control mr-1' %>
+          <%= submit_tag 'Add', :class => 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <% if coins.where(starred: true).count > 0 %>
     <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
   <% end %>
+
 <% end %>
 
 <style>
