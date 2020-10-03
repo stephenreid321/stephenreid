@@ -4,7 +4,7 @@ StephenReid::App.controller do
   end
 
   get '/coins' do
-    redirect '/coins/tag/starred'
+    redirect '/coins/tag/holding'
   end
 
   get '/coins/tag/:tag' do

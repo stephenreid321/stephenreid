@@ -1,5 +1,5 @@
   <%= ul_nav (
-      [['starred', '/coins/tag/starred']] +
+      [['holding', '/coins/tag/holding']] +
       (tags = Coin.pluck(:tag).compact.uniq).map { |tag| [tag, "/coins/tag/#{tag}"] } +
       [['gainers', '/coins/tag/gainers']]
     ),
@@ -12,7 +12,7 @@
     generate_subnav_href_and_ul: false
 %>
 
-<% case params[:tag]; when nil, 'starred' %>
+<% case params[:tag]; when nil, 'holding' %>
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :starred => true
