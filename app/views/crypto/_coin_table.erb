@@ -23,6 +23,7 @@
   }
 
   .back {
+    border-radius: 2.5px;
     position: relative;
     text-align: center;
     background-color: white;
@@ -37,6 +38,7 @@
   }
 
   .front {
+    border-radius: 2.5px;
     position: absolute;
     left: 0;
     top: 0;
@@ -66,7 +68,7 @@
           $('#coins td.holding').each(function() {
               var v = parseInt($(this).attr('data-sort'))
               if (v) {
-                var text = Math.round(100*v/t)+'%' + <% if current_account %> ' $' + v.toLocaleString(window.document.documentElement.lang) <% else %>''<% end %>
+                var text = Math.round(100*v/t)+'%'
                 $(this).html('\
                 <div class="p back"> \
                   <span>'+text+'</span> \
@@ -75,6 +77,9 @@
                   </div>')
                   $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
                   $(this).find('.front').width($(this).find('.back').width())
+                  <% if current_account %>
+                    $(this).find('.back').attr('title', '$' + v.toLocaleString(window.document.documentElement.lang)).tooltip()
+                  <% end %>
                 }
           })
 
