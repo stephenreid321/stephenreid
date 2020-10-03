@@ -70,7 +70,7 @@
           $('#coins td.holding').each(function() {
               var v = parseInt($(this).attr('data-sort'))
               if (v) {
-                var text = Math.round(100*v/t)+'%'
+                var text = parseFloat(100*v/t).toFixed(1)+'%'
                 $(this).html('\
                 <div class="p back"> \
                   <span>'+text+'</span> \
