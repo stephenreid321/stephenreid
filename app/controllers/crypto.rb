@@ -40,6 +40,7 @@ StephenReid::App.controller do
     sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, true)
+    coin.update
     200
   end
 
@@ -47,6 +48,7 @@ StephenReid::App.controller do
     sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, nil)
+    coin.update
     200
   end
 
