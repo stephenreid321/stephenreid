@@ -15,29 +15,69 @@
   <% end %>
 <% end %>
 
+<style>
+  .p {
+    display: block;
+    padding: 0.5rem;
+    height: 2rem;
+  }
+
+  .back {
+    position: relative;
+    text-align: center;
+    background-color: white;
+    color: black;
+  }
+
+  .boundbox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+
+  .front {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #00B963;
+    color: white;
+  }
+</style>
 <script>
   $(function () {
     $(document).ajaxStop(function() {
-      var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
-      $('#total').html('$' + t.toLocaleString(window.document.documentElement.lang))
-      var max;
-      $('#coins td.holding').each(function() {
-        if (!max)
-          max = parseInt($(this).attr('data-sort'))
-        else if (parseInt($(this).attr('data-sort')) > max)
-          max = parseInt($(this).attr('data-sort'))
-      })
-      $('#coins td.holding').each(function() {
-          var v = parseInt($(this).attr('data-sort'))
-          if (v)
-            $(this).html('<div class="text-center d-none d-sm-inline-block" style="white-space: nowrap; line-height: 2; background: #00B963; width: '+ Math.round(100*v/max) +'%">'+Math.round(100*v/t)+'%' + <% if current_account %> ' $' + v.toLocaleString(window.document.documentElement.lang) <% else %>''<% end %> +'</div>')
-      })
       if (!$('#coins').hasClass('datatabled'))
         $('#coins').dataTable({
           bInfo: false,
           paging: false,
           searching: false,
           order: [[6, "desc"]]}).addClass('datatabled');
+
+          var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+          $('#total').html('$' + t.toLocaleString(window.document.documentElement.lang))
+          var max;
+          $('#coins td.holding').each(function() {
+            if (!max)
+              max = parseInt($(this).attr('data-sort'))
+            else if (parseInt($(this).attr('data-sort')) > max)
+              max = parseInt($(this).attr('data-sort'))
+          })
+          $('#coins td.holding').each(function() {
+              var v = parseInt($(this).attr('data-sort'))
+              if (v) {
+                var text = Math.round(100*v/t)+'%' + <% if current_account %> ' $' + v.toLocaleString(window.document.documentElement.lang) <% else %>''<% end %>
+                $(this).html('\
+                <div class="p back"> \
+                  <span>'+text+'</span> \
+                  <div class="p boundbox"> \
+                    <div class="p front">'+text+'</div> \
+                  </div>')
+                  $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
+                  $(this).find('.front').width($(this).find('.back').width())
+                }
+          })
+
     })
   })
 </script>
