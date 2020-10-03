@@ -52,34 +52,6 @@ StephenReid::App.controller do
 
   ###
 
-  get '/ccowl/:p' do
-    halt unless params[:p] == ENV['SITE_SECRET']
-    alerts = JSON.parse(Mechanize.new.get('https://ccowl.com/getAlerts?page=0&coins=BTC,ETH&alertType=1').body)['data']
-    alerts.each do |alert|
-      Alert.create(
-        ccowl_id: alert['alert_id'],
-        text: alert['text'],
-        ticker: alert['ticker'],
-        value: alert['value'],
-        rule_id: alert['rule_id'],
-        created_at: alert['created']
-      )
-    end
-    200
-  end
-
-  get '/assets/:id/multiplier' do
-    asset = Asset.find(params[:id])
-    partial :'crypto/multiplier', locals: { asset: asset }
-  end
-
-  post '/assets/:id/multiplier' do
-    sign_in_required!
-    asset = Asset.find(params[:id])
-    asset.update_attribute(:multiplier, params[:multiplier])
-    200
-  end
-
   get '/iconomi' do
     @p = params[:p]
     erb :'crypto/iconomi'
@@ -108,5 +80,33 @@ StephenReid::App.controller do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.rebalance(force: params[:force])
     redirect '/strategy'
+  end
+
+  get '/assets/:id/multiplier' do
+    asset = Asset.find(params[:id])
+    partial :'crypto/multiplier', locals: { asset: asset }
+  end
+
+  post '/assets/:id/multiplier' do
+    sign_in_required!
+    asset = Asset.find(params[:id])
+    asset.update_attribute(:multiplier, params[:multiplier])
+    200
+  end
+
+  get '/ccowl/:p' do
+    halt unless params[:p] == ENV['SITE_SECRET']
+    alerts = JSON.parse(Mechanize.new.get('https://ccowl.com/getAlerts?page=0&coins=BTC,ETH&alertType=1').body)['data']
+    alerts.each do |alert|
+      Alert.create(
+        ccowl_id: alert['alert_id'],
+        text: alert['text'],
+        ticker: alert['ticker'],
+        value: alert['value'],
+        rule_id: alert['rule_id'],
+        created_at: alert['created']
+      )
+    end
+    200
   end
 end
