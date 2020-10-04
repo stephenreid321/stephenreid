@@ -46,7 +46,7 @@
     <span class="badge badge-primary"><%=coin.tag%></span>
   <% end %>
 </td>
-<td class="holding" data-sort="<%= coin.units ? (coin.units * coin.current_price) : 0 %>">
+<td class="holding" data-sort="<%= coin.units ? (coin.units * coin.current_price * ENV['PRICE_FACTOR'].to_i) : 0 %>">
   <% if coin.units %>
     <% if coin.units == 0 %>
       <i data-toggle="tooltip" title="This coin may be staked" style="cursor: pointer" class="far fa-question-circle"></i>

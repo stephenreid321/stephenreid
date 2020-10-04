@@ -65,7 +65,11 @@
           }).trigger('order.dt')
 
           var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
-          $('#total').html('$' + t.toLocaleString(window.document.documentElement.lang))
+        <% if current_account %>
+          var priceFactor = <%=ENV['PRICE_FACTOR']%>
+          $('#total').html('$' + parseInt(t/priceFactor).toLocaleString(window.document.documentElement.lang))
+        <% end %>
+
           var max;
           $('#coins td.holding').each(function() {
             if (!max)
@@ -86,10 +90,11 @@
                   $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
                   $(this).find('.front').width($(this).find('.back').width())
                   <% if current_account %>
-                    $(this).find('.back').attr('title', '$' + v.toLocaleString(window.document.documentElement.lang)).tooltip()
+                    $(this).find('.back').attr('title', '$' + parseInt(v/priceFactor).toLocaleString(window.document.documentElement.lang)).tooltip()
                   <% end %>
                 }
           })
+
 
     })
   })
