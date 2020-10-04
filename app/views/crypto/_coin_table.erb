@@ -58,7 +58,7 @@
           bInfo: false,
           paging: false,
           searching: false,
-          order: [[6, "desc"]]}).addClass('datatabled');
+          order: [[5, "desc"]]}).addClass('datatabled');
 
           $('#coins').on('order.dt', function () { 
             $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
@@ -110,9 +110,9 @@
       <th>Name</th>
       <th style="white-space: nowrap">Relative holding</th>
       <th>Current price</th>
-      <th>1h</th>
       <th>24h</th>
       <th>7d</th>
+      <th>1h</th>
       <th>Twitter followers</th>
       <th>Volume/cap</th>
       <% if current_account %>
