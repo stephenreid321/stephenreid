@@ -90,6 +90,10 @@ class Coin
     end
   end
 
+  def delegated_price
+    coin.name.starts_with?('Aave ') ? Coin.symbol(coin.symbol[1..-1]).current_price : current_price
+  end
+
   def update
     agent = Mechanize.new
     c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
