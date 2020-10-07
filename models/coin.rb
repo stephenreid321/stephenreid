@@ -91,7 +91,7 @@ class Coin
   end
 
   def delegated_price
-    coin.name.starts_with?('Aave ') ? Coin.symbol(coin.symbol[1..-1]).current_price : current_price
+    name.starts_with?('Aave ') ? Coin.symbol(symbol[1..-1]).current_price : current_price
   end
 
   def update
