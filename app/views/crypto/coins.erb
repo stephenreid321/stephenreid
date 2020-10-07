@@ -1,15 +1,15 @@
   <%= ul_nav (
       [['holding', '/coins/tag/holding']] +
       [['gainers', '/coins/tag/gainers']] +
-      (tags = Tag.order('priority desc')).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
-    ),
-    ul_class: 'nav nav-tabs',
-    li_class: 'nav-item',
-    li_active_class: nil,
-    a_class: 'nav-link',
-    a_active_class: 'active',
-    ul_id: nil,
-    generate_subnav_href_and_ul: false
+      (tags = Tag.sort { |tag| tag.holding ? -tag.holding : 0  } %>.map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
+),
+ul_class: 'nav nav-tabs',
+li_class: 'nav-item',
+li_active_class: nil,
+a_class: 'nav-link',
+a_active_class: 'active',
+ul_id: nil,
+generate_subnav_href_and_ul: false
 %>
 
 <% case params[:tag]; when nil, 'holding' %>

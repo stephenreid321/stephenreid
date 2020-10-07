@@ -1,4 +1,4 @@
-<% tags = Tag.order('priority desc').select { |tag| tag.holding > 0 } %>
+<% tags = Tag.select { |tag| tag.holding > 0 }.sort { |tag| -tag.holding } %>
 
 <div class="row">
   <div class="col-12 col-md-6 mb-3">
