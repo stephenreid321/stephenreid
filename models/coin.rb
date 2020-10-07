@@ -151,6 +151,6 @@ class Coin
       self.units = nil
     end
     save
-    coin.parent.update if coin.parent
+    parent.update if parent
   end
 end
