@@ -152,4 +152,5 @@ class Coin
     end
     save
   end
+  coin.parent.update if coin.parent
 end
