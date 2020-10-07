@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-12 col-md-6 mb-3">
+    <script>
+      $(function () {
+        var config = {
+          type: 'doughnut',
+          data: {
+            datasets: [{
+                data: <%= Tag.order('priority desc').map { |tag| tag.holding } %>,
+                backgroundColor: <%= Tag.order('priority desc').map { |tag| tag.background_color } %>
+              }],
+            labels: <%= Tag.order('priority desc').map { |tag| tag.name } %>
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            responsive: true,
+            tooltips: {
+              callbacks: {
+                label: function (tooltipItem, data) {
+                  try {
+                    let label = ' ' + data.labels[tooltipItem.index] || '';
+                    if (label) {
+                      label += ': ';
+                    }
+
+                    const sum = data.datasets[0].data.reduce((accumulator, curValue) => {
+                      return accumulator + curValue;
+                    });
+                    const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    label += Number((value / sum) * 100).toFixed(1) + '%';
+                    return label;
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }
+              }
+            }
+          }
+        };
+        $(function() {
+          var ctx = document.getElementById('chart-area').getContext('2d');
+          window.myPie = new Chart(ctx, config);
+        })
+      })
+    </script>
+    <canvas id="chart-area"></canvas>
+  </div>
+  <div class="col-12 col-md-6">
+    <%
+      Tag.order('priority desc').each_with_index { |tag, i| %>
+    <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%=tag.background_color%>">
+      <%= number_to_percentage tag.relative_holding*100, precision: 0 %>
+    </div>
+    <%= tag.name %> <br />
+    <% } %>
+  </div>
+</div>

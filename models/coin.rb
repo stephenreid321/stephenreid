@@ -59,6 +59,12 @@ class Coin
     (units || 0) + (staked_units || 0)
   end
 
+  def holding
+    if all_units
+      all_units * (parent ? parent.current_price : current_price)
+    end
+  end
+
   def parent
     name.starts_with?('Aave ') ? Coin.symbol(symbol[1..-1]) : nil
   end

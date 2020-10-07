@@ -17,4 +17,16 @@ class Tag
       priority: :number
     }
   end
+
+  def holding
+    coins.sum { |coin| coin.holding }
+  end
+
+  def self.holding
+    Tag.all.sum { |tag| tag.holding }
+  end
+
+  def relative_holding
+    holding / Tag.holding
+  end
 end
