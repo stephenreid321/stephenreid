@@ -1,3 +1,5 @@
+<% tags = Tag.order('priority desc').select { |tag| tag.holding > 0 } %>
+
 <div class="row">
   <div class="col-12 col-md-6 mb-3">
     <script>
@@ -6,10 +8,10 @@
           type: 'doughnut',
           data: {
             datasets: [{
-                data: <%= Tag.order('priority desc').map { |tag| tag.holding } %>,
-                backgroundColor: <%= Tag.order('priority desc').map { |tag| tag.background_color } %>
+                data: <%= tags.map { |tag| tag.holding } %>,
+                backgroundColor: <%= tags.map { |tag| tag.background_color } %>
               }],
-            labels: <%= Tag.order('priority desc').map { |tag| tag.name } %>
+            labels: <%= tags.map { |tag| tag.name } %>
           },
           options: {
             legend: {
@@ -49,7 +51,7 @@
   </div>
   <div class="col-12 col-md-6">
     <%
-      Tag.order('priority desc').each_with_index { |tag, i| %>
+      tags.each_with_index { |tag, i| %>
     <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%=tag.background_color%>">
       <%= number_to_percentage tag.relative_holding*100, precision: 0 %>
     </div>
