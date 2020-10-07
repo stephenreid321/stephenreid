@@ -84,7 +84,7 @@ class Coin
   def self.import
     agent = Mechanize.new
     i = 1
-    until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&price_change_percentage=1h,24h,7d&page=#{i}").body)).empty?
+    until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=eth&per_page=250&price_change_percentage=1h,24h,7d&page=#{i}").body)).empty?
       i += 1
       coins.each do |c|
         puts c['symbol'].upcase
@@ -111,7 +111,7 @@ class Coin
     agent = Mechanize.new
     c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
     %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
-      send("#{r}=", c['market_data'][r]['usd'])
+      send("#{r}=", c['market_data'][r]['eth'])
     end
     %w[market_cap_rank].each do |r|
       send("#{r}=", c['market_data'][r])

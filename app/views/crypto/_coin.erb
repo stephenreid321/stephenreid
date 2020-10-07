@@ -54,7 +54,7 @@
   <% end %>
 </td>
 <td>
-  <%=number_to_currency (coin.parent ? coin.parent.current_price : coin.current_price)%>
+  <%=number_to_currency (coin.parent ? coin.parent.current_price : coin.current_price), unit: 'Ξ' %>
 </td>
 <td class="rg">
   <% unless coin.tag == 'efi' %>
