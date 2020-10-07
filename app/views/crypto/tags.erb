@@ -5,7 +5,7 @@
     <script>
       $(function () {
         var config = {
-          type: 'doughnut',
+          type: 'pie',
           data: {
             datasets: [{
                 data: <%= tags.map { |tag| tag.holding } %>,
@@ -53,7 +53,7 @@
     <%
       tags.each_with_index { |tag, i| %>
     <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%=tag.background_color%>">
-      <%= number_to_percentage tag.relative_holding*100, precision: 0 %>
+      <%= number_to_percentage tag.relative_holding*100, precision: 1 %>
     </div>
     <%= tag.name %> <br />
     <% } %>
