@@ -15,13 +15,13 @@ StephenReid::App.controller do
 
   get '/coins/table/:tag' do
     partial :'crypto/coin_table', locals: { coins: Coin.where(
-      tag: params[:tag]
+      tag: Tag.find_by(name: params[:tag])
     ).order('price_change_percentage_24h_in_currency desc') }
   end
 
   post '/coins/table/:tag' do
     sign_in_required!
-    Coin.symbol(params[:symbol]).update_attribute(:tag, params[:tag])
+    Coin.symbol(params[:symbol]).update_attribute(:tag_id, Tag.find_or_create_by(name: params[:tag]).id)
     200
   end
 

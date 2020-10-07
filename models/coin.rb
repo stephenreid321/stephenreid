@@ -3,7 +3,6 @@ class Coin
   include Mongoid::Timestamps
 
   field :slug, type: String
-  field :tag, type: String
   field :decimals, type: Integer
   field :units, type: Float
   field :contract_address, type: String
@@ -24,6 +23,8 @@ class Coin
   field :starred, type: Boolean
   field :staked_units, type: Float
 
+  belongs_to :tag
+
   before_validation do
     self.symbol = symbol.try(:upcase)
   end
@@ -31,7 +32,6 @@ class Coin
   def self.admin_fields
     {
       slug: :text,
-      tag: :text,
       decimals: :number,
       units: :number,
       staked_units: :number,
@@ -50,7 +50,8 @@ class Coin
       twitter_username: :text,
       twitter_followers: :number,
       hidden: :check_box,
-      starred: :check_box
+      starred: :check_box,
+      tag_id: :lookup
     }
   end
 

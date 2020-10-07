@@ -1,6 +1,6 @@
   <%= ul_nav (
       [['holding', '/coins/tag/holding']] +
-      (tags = Coin.pluck(:tag).compact.uniq).map { |tag| [tag, "/coins/tag/#{tag}"] } +
+      (tags = Tag.order('priority desc').pluck(:name)).map { |tag| [tag, "/coins/tag/#{tag}"] } +
       [['gainers', '/coins/tag/gainers']]
     ),
     ul_class: 'nav nav-tabs',
