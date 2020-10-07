@@ -9,7 +9,7 @@
           data: {
             datasets: [{
                 data: <%= tags.map { |tag| tag.holding } %>,
-                backgroundColor: <%= tags.map { |tag| tag.background_color } %>
+                backgroundColor: <%= tags.map { |tag| tag.background_color || '#6C757D' } %>
               }],
             labels: <%= tags.map { |tag| tag.name } %>
           },
