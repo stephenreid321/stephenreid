@@ -151,6 +151,6 @@ class Coin
       self.units = nil
     end
     save
-    parent.update if parent
+    parent.try(:update)
   end
 end
