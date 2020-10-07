@@ -41,7 +41,7 @@
     </small>
   <% end %>
   <% if %w[holding gainers].include?(params[:tag]) %>
-    <% tag_badge coin.tag %>
+    <%= tag_badge coin.tag %>
   <% end %>
 </td>
 <td class="holding" data-sort="<%= coin.all_units ? (coin.all_units * (coin.parent ? coin.parent.current_price : coin.current_price) * ENV['PRICE_FACTOR'].to_i) : 0 %>">
