@@ -39,7 +39,6 @@
         ICONOMI
       </a>
     </small>
-    <div style="display: inline" data-pagelet-url="/assets/<%=asset.id%>/multiplier?badge_class=badge-secondary"></div>
   <% end %>
   <% if %w[holding gainers].include?(params[:tag]) %>
     <span class="badge badge-secondary" style="background-color: <%=Tag.find_by(name: coin.tag).try(:background_color)%>; color: <%=Tag.find_by(name: coin.tag).try(:color)%>"><%=coin.tag%></span>
