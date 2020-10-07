@@ -52,7 +52,7 @@
   <div class="col-12 col-md-6">
     <%
       tags.each_with_index { |tag, i| %>
-    <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%=tag.background_color%>">
+    <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%=tag.background_color || '#6C757D' %>">
       <%= number_to_percentage tag.relative_holding*100, precision: 1 %>
     </div>
     <%= tag.name %> <br />
