@@ -1,6 +1,5 @@
-<% parent = Coin.symbol(coin.symbol[1..-1]) if coin.name.starts_with?('Aave ') %>
-<td data-sort="<%=parent ? parent.market_cap_rank : coin.market_cap_rank%>">
-  <% if parent %>#<%=parent.market_cap_rank%>/<% end %><% if coin.market_cap_rank %>#<%=coin.market_cap_rank%><% end %>
+<td data-sort="<%=coin.parent ? coin.parent.market_cap_rank : coin.market_cap_rank%>">
+  <% if coin.parent %>#<%=coin.parent.market_cap_rank%>/<% end %><% if coin.market_cap_rank %>#<%=coin.market_cap_rank%><% end %>
 </td>
 <td>
   <% if current_account %>
@@ -46,9 +45,9 @@
     <span class="badge badge-primary"><%=coin.tag%></span>
   <% end %>
 </td>
-<td class="holding" data-sort="<%= coin.units ? (coin.units * (parent ? parent.current_price : coin.current_price) * ENV['PRICE_FACTOR'].to_i) : 0 %>">
-  <% if coin.units %>
-    <% if coin.units == 0 %>
+<td class="holding" data-sort="<%= coin.all_units ? (coin.all_units * (coin.parent ? coin.parent.current_price : coin.current_price) * ENV['PRICE_FACTOR'].to_i) : 0 %>">
+  <% if coin.all_units %>
+    <% if coin.all_units == 0 %>
       <i data-toggle="tooltip" title="This coin may be staked" style="cursor: pointer" class="far fa-question-circle"></i>
     <% else %>
       <i class="fas fa-spin fa-circle-notch"></i>
@@ -56,7 +55,7 @@
   <% end %>
 </td>
 <td>
-  <%=number_to_currency (parent ? parent.current_price : coin.current_price)%>
+  <%=number_to_currency (coin.parent ? coin.parent.current_price : coin.current_price)%>
 </td>
 <td class="rg">
   <% unless coin.tag == 'efi' %>

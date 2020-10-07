@@ -22,6 +22,7 @@ class Coin
   field :twitter_followers, type: Integer
   field :hidden, type: Boolean
   field :starred, type: Boolean
+  field :staked_units, type: Float
 
   before_validation do
     self.symbol = symbol.try(:upcase)
@@ -33,6 +34,7 @@ class Coin
       tag: :text,
       decimals: :number,
       units: :number,
+      staked_units: :number,
       contract_address: :text,
       symbol: :text,
       name: :text,
@@ -50,6 +52,14 @@ class Coin
       hidden: :check_box,
       starred: :check_box
     }
+  end
+
+  def all_units
+    (units || 0) + (staked_units || 0)
+  end
+
+  def parent
+    name.starts_with?('Aave ') ? Coin.symbol(symbol[1..-1]) : nil
   end
 
   def eth?
