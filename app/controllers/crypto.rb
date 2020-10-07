@@ -31,7 +31,7 @@ StephenReid::App.controller do
 
   get '/coins/:slug' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.update if coin.updated_at < 5.minutes.ago || Padrino.env == :development
+    coin.remote_update if coin.updated_at < 5.minutes.ago || Padrino.env == :development
     partial :'crypto/coin', locals: { coin: coin }
   end
 
@@ -46,7 +46,7 @@ StephenReid::App.controller do
     sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, true)
-    coin.update
+    coin.remote_update
     200
   end
 
@@ -54,7 +54,7 @@ StephenReid::App.controller do
     sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, nil)
-    coin.update
+    coin.remote_update
     200
   end
 

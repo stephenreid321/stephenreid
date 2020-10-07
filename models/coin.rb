@@ -23,7 +23,7 @@ class Coin
   field :starred, type: Boolean
   field :staked_units, type: Float
 
-  belongs_to :tag
+  belongs_to :tag, optional: true
 
   before_validation do
     self.symbol = symbol.try(:upcase)
@@ -101,13 +101,13 @@ class Coin
     Coin.where(symbol: symbol.upcase).order('total_volume desc').first
   end
 
-  def self.update
-    Coin.all.each do |coin|
-      coin.update
+  def self.remote_update
+    Coin.all.each do |_coin|
+      coin.remote_update
     end
   end
 
-  def update
+  def remote_update
     agent = Mechanize.new
     c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
     %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
@@ -150,7 +150,7 @@ class Coin
     else
       self.units = nil
     end
-    save
-    parent.try(:update)
+    save!
+    parent.try(:remote_update)
   end
 end
