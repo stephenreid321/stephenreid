@@ -1,7 +1,7 @@
   <%= ul_nav (
       [['holding', '/coins/tag/holding']] +
-      (tags = Tag.order('priority desc').pluck(:name)).map { |tag| [tag, "/coins/tag/#{tag}"] } +
-      [['gainers', '/coins/tag/gainers']]
+      [['gainers', '/coins/tag/gainers']] +
+      (tags = Tag.order('priority desc')).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
     ),
     ul_class: 'nav nav-tabs',
     li_class: 'nav-item',
