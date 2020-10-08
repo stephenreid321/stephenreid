@@ -1,7 +1,7 @@
   <%= ul_nav (
       [['holding', '/coins/tag/holding']] +
       [['gainers', '/coins/tag/gainers']] +
-      (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort { |tag| -tag.holding }).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
+      (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
     ),
     ul_class: 'nav nav-tabs',
     li_class: 'nav-item',
