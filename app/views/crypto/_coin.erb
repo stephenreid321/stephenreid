@@ -55,15 +55,15 @@
 </td>
 <td class="rg">
   <% unless coin.tag == 'efi' %>
-    <% if coin.price_change_percentage_24h_in_currency %>
-      <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
+    <% if coin.price_change_percentage_7d_in_currency %>
+      <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
     <% end %>
   <% end %>
 </td>
-<td class="rg">
+<td class="rg" style="opacity: 0.5">
   <% unless coin.tag == 'efi' %>
-    <% if coin.price_change_percentage_7d_in_currency %>
-      <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
+    <% if coin.price_change_percentage_24h_in_currency %>
+      <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
     <% end %>
   <% end %>
 </td>
