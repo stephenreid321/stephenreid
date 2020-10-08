@@ -53,6 +53,7 @@
     <% end %>
   <% end %>
 </td>
+<% coin = parent if coin.parent %>
 <td class="rg">
   <% unless coin.tag == 'efi' %>
     <% if coin.price_change_percentage_24h_in_currency %>
@@ -75,8 +76,8 @@
   <% end %>
 </td>
 <td>
-  <% if (coin.parent ? coin.parent.twitter_followers : coin.twitter_followers) %>
-    <a target="_blank" class="text-dark" href="https://twitter.com/<%=coin.parent ? coin.parent.twitter_username : coin.twitter_username%>"><%= number_with_precision (coin.parent ? coin.parent.twitter_followers : coin.twitter_followers), precision: 0, delimiter: ',' %></a>
+  <% if coin.twitter_followers %>
+    <a target="_blank" class="text-dark" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
   <% end %>
 </td>
 <td>
