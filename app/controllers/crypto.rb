@@ -5,10 +5,6 @@ StephenReid::App.controller do
     @og_image = nil
   end
 
-  get '/coins/tags' do
-    erb :'crypto/tags'
-  end
-
   get '/coins' do
     redirect '/coins/tag/holding'
   end
