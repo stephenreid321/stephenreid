@@ -67,7 +67,7 @@
           var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
         <% if current_account %>
           var priceFactor = <%=ENV['PRICE_FACTOR']%>
-          $('#total').html('Ξ' + parseInt(t/priceFactor).toLocaleString(window.document.documentElement.lang))
+          $('#total').html('Ξ' + parseFloat(t/priceFactor).toFixed(2).toLocaleString(window.document.documentElement.lang))
         <% end %>
 
           var max;
@@ -90,7 +90,7 @@
                   $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
                   $(this).find('.front').width($(this).find('.back').width())
                   <% if current_account %>
-                    $(this).find('.back').attr('title', 'Ξ' + parseInt(v/priceFactor).toLocaleString(window.document.documentElement.lang)).tooltip()
+                    $(this).find('.back').attr('title', 'Ξ' + parseFloat(v/priceFactor).toFixed(2).toLocaleString(window.document.documentElement.lang)).tooltip()
                   <% end %>
                 }
           })
@@ -109,7 +109,6 @@
       <th></th>
       <th>Name</th>
       <th style="white-space: nowrap">Relative holding</th>
-      <th>Current price</th>
       <th>24h</th>
       <th>7d</th>
       <th>1h</th>

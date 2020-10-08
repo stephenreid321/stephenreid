@@ -16,7 +16,7 @@
     <% end %>
   <% end %>
 </td>
-<td style="white-space: nowrap" data-symbol="<%=(coin.name.starts_with?('Aave ') || coin.symbol.starts_with?('$')) ? coin.symbol[1..-1] : coin.symbol%>">
+<td style="white-space: nowrap" data-symbol="<%=(coin.parent || coin.symbol.starts_with?('$')) ? coin.symbol[1..-1] : coin.symbol%>">
   <a target="_blank" href="<%=coin.parent ? coin.parent.website : coin.website%>"><%=coin.name%> (<%=coin.symbol%>)</a>
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.parent ? coin.parent.slug : coin.slug%>">
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
@@ -33,7 +33,7 @@
       })
     </script>
   <% end %>
-  <% if current_account && (asset = Asset.find_by(ticker: coin.symbol)) %>
+  <% if current_account && (asset = Asset.find_by(ticker: coin.parent ? coin.parent.symbol : coin.symbol)) %>
     <small>
       <a class="text-dark" target="_blank" href="https://www.iconomi.com/asset/<%=coin.symbol%>">
         ICONOMI
@@ -52,9 +52,6 @@
       <i class="fas fa-spin fa-circle-notch"></i>
     <% end %>
   <% end %>
-</td>
-<td>
-  <%=number_to_currency (coin.parent ? coin.parent.current_price : coin.current_price), unit: 'Ξ' %>
 </td>
 <td class="rg">
   <% unless coin.tag == 'efi' %>
@@ -78,8 +75,8 @@
   <% end %>
 </td>
 <td>
-  <% if coin.twitter_followers %>
-    <a target="_blank" class="text-dark" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
+  <% if (coin.parent ? coin.parent.twitter_followers : coin.twitter_followers) %>
+    <a target="_blank" class="text-dark" href="https://twitter.com/<%=coin.parent ? coin.parent.twitter_username : coin.twitter_username%>"><%= number_with_precision (coin.parent ? coin.parent.twitter_followers : coin.twitter_followers), precision: 0, delimiter: ',' %></a>
   <% end %>
 </td>
 <td>
