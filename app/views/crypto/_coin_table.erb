@@ -15,7 +15,7 @@
     <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
   <% end %>
 
-  <div class="text-center" id="symbols"><i class="fas fa-spin fa-circle-notch"></i></div>
+  <div id="symbols" class="text-center"><i class="fas fa-spin fa-circle-notch"></i></div>
 
 <% end %>
 
@@ -60,14 +60,14 @@
           searching: false,
           order: [[4, "desc"]]}).addClass('datatabled');
 
-          $('#coins').on('order.dt', function () { 
-            $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
-          }).trigger('order.dt')
-
           var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
         <% if current_account %>
           var priceFactor = <%=ENV['PRICE_FACTOR']%>
           $('#total').html('Ξ' + parseFloat(t/priceFactor).toFixed(2).toLocaleString(window.document.documentElement.lang))
+
+          $('#coins').on('order.dt', function () { 
+            $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
+          }).trigger('order.dt')
         <% end %>
 
           var max;
@@ -89,9 +89,6 @@
                   </div>')
                   $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
                   $(this).find('.front').width($(this).find('.back').width())
-                  <% if current_account %>
-                    $(this).find('.back').attr('title', 'Ξ' + parseFloat(v/priceFactor).toFixed(2).toLocaleString(window.document.documentElement.lang)).tooltip()
-                  <% end %>
                 }
           })
 
