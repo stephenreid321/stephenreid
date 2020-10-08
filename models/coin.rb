@@ -60,9 +60,7 @@ class Coin
   end
 
   def holding
-    if all_units > 0
-      all_units * (parent ? parent.current_price : current_price)
-    end
+    (all_units || 0) * (parent ? (parent.current_price || 0) : (current_price || 0))
   end
 
   def parent
