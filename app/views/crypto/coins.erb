@@ -28,7 +28,7 @@
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :starred => true
-    ).order('price_change_percentage_7d_in_currency desc')} %>
+    ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'gainers' %>
 
