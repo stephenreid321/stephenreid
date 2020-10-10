@@ -21,12 +21,10 @@
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.parent ? coin.parent.slug : coin.slug%>">
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
   </a>
-  <% if coin.symbol == 'ETH' || coin.eth? %>
-    <% if coin.eth? %>
-      <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
-        <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
-      </a>
-    <% end %>
+  <% if coin.eth? %>
+    <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
+      <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
+    </a>
     <script>
       $(function() {
         $('[data-pagelet-url^="/coins/<%=coin.slug%>"]').css({backgroundColor: '#F5F2FA'})
