@@ -1,8 +1,6 @@
-<style>
-  #coins-ul { font-size: 14px }
-</style>
 <%= ul_nav (
       [['holding', '/coins/tag/holding']] +
+      [['watching', '/coins/tag/watching']] +
       [['gainers', '/coins/tag/gainers']] +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
     ),
@@ -30,6 +28,12 @@
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :starred => true
     ).order('price_change_percentage_24h_in_currency desc')} %>
+
+<% when 'watching' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+          :tag_id.ne => nil
+        ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'gainers' %>
 
