@@ -4,8 +4,12 @@
     <div class="row justify-content-center">
       <div class="col-auto">
         <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
-          <%= text_field_tag :symbol, :class => 'form-control mr-1' %>
-          <%= submit_tag 'Add', :class => 'btn btn-primary' %>
+          <div class="input-group mb-3">
+            <%= text_field_tag :symbol, :class => 'form-control' %>
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary" type="submit">Add</button>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
