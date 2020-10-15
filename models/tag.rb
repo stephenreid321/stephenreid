@@ -31,6 +31,6 @@ class Tag
   def background_color
     tags = Tag.order('holding desc').where(:holding.gt => 0)
     i = tags.pluck(:id).index(id)
-    i ? '#7D2DB9'.paint.spin((i / (tags.count - 1)) * 180) : '#6C757D'
+    i ? '#7D2DB9'.paint.spin((i.to_f / (tags.count - 1)) * 180) : '#6C757D'
   end
 end
