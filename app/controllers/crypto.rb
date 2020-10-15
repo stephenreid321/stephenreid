@@ -10,6 +10,7 @@ StephenReid::App.controller do
   end
 
   get '/coins/tag/:tag' do
+    Tag.update_holdings
     erb :'crypto/coins'
   end
 
