@@ -8,7 +8,7 @@
   <% offset = 0 %>
   <% spin = 180/funds %>
 <% end %>
-<% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 100)) %>
+<% investment = (params[:investment].try(:to_i) || (@p ? balanceTotal : 1000)) %>
 
 
 <div class="text-center">
