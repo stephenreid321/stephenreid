@@ -13,24 +13,38 @@
 </style>
 <div id="nav">
   <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/">Stephen Reid</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%= ul_nav [
-        ['<i class="fa fa-home"></i>', '/'],
-        ['Services', '/services'],
-        ['Knowledgegraph', '/knowledgegraph'],
-        ['Coins', '/coins'],  
-        ['Blog', '/blog'],
-        ['Newsletter', 'https://stephenreid.substack.com/'],
-        ['Podcast', '/podcast'],
-        ['Books', '/books'],
-        ['Software', '/software'],
-        ['Groups', '/groups'],
+        ['Updates',
+          [
+            ['Newsletter', 'https://stephenreid.substack.com/'],
+            ['Blog', '/blog'],
+            ['Podcast', '/podcast'],
+          ]
+        ],
+        ['Knowledge',
+          [
+            ['Knowledgegraph', '/knowledgegraph'],
+            ['Books', '/books'],
+            ['Software', '/software'],
+            ['Groups', '/groups'],
+          ]
+        ],
+        ['Crypto',
+          [
+            ['Coins', '/coins'],
+            ['ICONOMI fund evaluator', '/iconomi'],
+            ['Introduction to Crypto & DeFi', 'https://dandelion.earth/events/5f6c9225a7863c0018cdd7b3'],
+          ]
+        ],
         ['Tao Te Ching', '/tao-te-ching'],
+        ['Services', '/services'],
         ['Recommendations', '/products'],
-        ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link text-primary' %>
+        ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link' %>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link text-dark" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a>
@@ -40,10 +54,5 @@
   </nav>
 </div>
 <script>
-  $(function () {
-    if (window.location.href.includes('/blog'))
-      $("#nav a[href='/blog']").css('font-weight', 'bold')
-    if (window.location.href.includes('/tao-te-ching'))
-      $("#nav a[href='/tao-te-ching']").css('font-weight', 'bold')
-  })
+  $('.dropdown-item.active').closest('.dropdown').find('.dropdown-toggle').css({'font-weight': 'bold', 'color': 'rgba(0, 0, 0, 0.9)'})
 </script>

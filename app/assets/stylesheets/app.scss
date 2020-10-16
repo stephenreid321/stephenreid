@@ -14,7 +14,7 @@ h2:not(.regular) { border-bottom: 3px solid rgb(33, 37, 41); display: inline-blo
 
 .rainbow  {
   margin: 0 auto;
-  background: linear-gradient(to right, #8747e6, #47a6e6, #54e645); 
+  background: linear-gradient(to right, #8747e6, #47a6e6, #54e645);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -25,6 +25,8 @@ h2:not(.regular) { border-bottom: 3px solid rgb(33, 37, 41); display: inline-blo
 
 blockquote { border-left: 0.3em solid #ccc; padding-left: 1em; font-style: italic }
 
+.dropdown-item { font-weight: 300 }
+.dropdown-item.active { font-weight: bold }
 
 
 // Range Slider
@@ -90,10 +92,10 @@ $range-label-width: 60px !default;
   &:active::-moz-range-thumb {
     background: $range-handle-color-hover;
   }
-  
+
   // Focus state
   &:focus {
-    
+
     &::-webkit-slider-thumb {
       box-shadow: 0 0 0 3px #fff,
                   0 0 0 6px $primary;
@@ -136,6 +138,6 @@ $range-label-width: 60px !default;
 }
 
 input::-moz-focus-inner,
-input::-moz-focus-outer { 
-  border: 0; 
+input::-moz-focus-outer {
+  border: 0;
 }
