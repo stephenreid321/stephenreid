@@ -10,4 +10,4 @@ score &times; (1 - management fee %) &times; (1 - performance fee %) &times; (
 
 All scores/returns on this page are normalised in the range 0&ndash;100.
 
-When using ICONOMI, I suggest you invest across a number of different top-performing funds, rather than having all your eggs in one basket 🍳 Use the controls below to receive a **proposed position** across your chosen number of funds.
+When using ICONOMI, I suggest you invest across a number of different top-performing funds, rather than having all your eggs in one basket 🍳<br />Use the controls below to receive a **proposed position** across your chosen number of funds, relative to their performance.
