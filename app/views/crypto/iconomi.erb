@@ -1,6 +1,6 @@
 <% balances = JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'] %>
 <% balanceTotal = balances.sum { |b| b['value'].to_i} %>
-<% strategies = Strategy.active_mature.order('score_fee_weighted desc') %>
+<% strategies = Strategy.active_mature.where(:ticker.ne => 'DECENTCOOP').order('score_fee_weighted desc') %>
 <% if funds = (params[:funds].try(:to_i) || (@p ? 3 : 5)) %>
   <% funds = 1 if funds < 1 %>
   <% funds = 10 if funds > 10 %>
