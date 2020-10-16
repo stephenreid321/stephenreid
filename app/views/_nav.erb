@@ -1,15 +1,9 @@
-<script>
-  $(function () {
-    $("#nav a[href^=http]").attr('target', '_blank')
-  })
-</script>
 <style>
   @media(min-width: 992px) {
     #nav .nav-item { font-size: 0.8rem }
   }
   #nav .nav-item { padding-right: 1rem; }
   #nav .nav-link.active { font-weight: bold }
-  a[href='https://calendly.com/stephenreid321'] span { text-decoration: underline }
 </style>
 <div id="nav">
   <nav class="navbar navbar-expand-lg navbar-light">
@@ -54,6 +48,7 @@
   </nav>
 </div>
 <script>
+  $("#nav a[href^=http]").attr('target', '_blank')
   $.map(['blog', 'tao-te-ching', 'coins'], function(x,i) {
     if (window.location.href.includes('/'+x))
       $("#nav a[href='/"+x+"']").addClass('active')
