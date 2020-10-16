@@ -54,11 +54,9 @@
   </nav>
 </div>
 <script>
-  if (window.location.href.includes('/blog'))
-    $("#nav a[href='/blog']").addClass('active')
-  if (window.location.href.includes('/tao-te-ching'))
-    $("#nav a[href='/tao-te-ching']").addClass('active')
-  if (window.location.href.includes('/coins'))
-    $("#nav a[href='/coins']").addClass('active')
+  $.map(['blog', 'tao-te-ching', 'coins'], function(x,i) {
+    if (window.location.href.includes('/'+x))
+      $("#nav a[href='/"+x+"']").addClass('active')
+  })
   $('.dropdown-item.active').closest('.dropdown').find('.dropdown-toggle').css({'font-weight': 'bold', 'color': 'rgba(0, 0, 0, 0.9)'})
 </script>
