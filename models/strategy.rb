@@ -168,7 +168,8 @@ class Strategy
     # make sure asset weights sum to exactly 1
     assets = Hash[assets.map { |k, v| [k, v.floor(4)] }]
     t = assets.map { |_k, v| v }.sum
-    assets['ETH'] += (1 - t).round(4)
+    assets['ETH'] += (1 - t)
+    assets['ETH'] = assets['ETH'].round(4)
 
     t = assets.map { |_k, v| v }.sum
     raise Strategy::RoundingError(assets.to_json) unless t == 1
