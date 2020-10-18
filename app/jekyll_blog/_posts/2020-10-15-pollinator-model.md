@@ -4,7 +4,7 @@ excerpt: The Pollination Model focuses on the intrinsically interdependent produ
 header_image_url: /blog/assets/2020-10-15-pollinator-model/bee.jpeg
 ---
 
-*Written by Bennet A. Zelner, first published in [MAPS Bulletin Spring 2020: Vol. 30, No. 1](https://maps.org/news/bulletin/articles/439-bulletin-spring-2020/8114-maps-bulletin-spring-2020-vol-30,-no-1)* 
+*Written by [Bennet A. Zelner](https://www.rhsmith.umd.edu/directory/bennet-zelner), first published in [MAPS Bulletin Spring 2020: Vol. 30, No. 1](https://maps.org/news/bulletin/articles/439-bulletin-spring-2020/8114-maps-bulletin-spring-2020-vol-30,-no-1). Highlights my own.*
 
 In this article I outline a novel economic approach for delivering psychedelic-assisted mental healthcare, the Pollination Approach. The Pollination Approach focuses on the intrinsically ==interdependent production of individual and community wellness==. It contrasts sharply with the current pharmaceutical-centered approach to mental healthcare, which focuses on the ==management of symptoms rather than the production of wellness==, and reflects divisive economic conceptions that have contributed to rising rates of mental distress.
 
