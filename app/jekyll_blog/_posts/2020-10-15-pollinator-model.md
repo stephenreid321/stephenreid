@@ -1,6 +1,6 @@
 ---
 title: "The Pollinator Model"
-excerpt: The Pollination Model focuses on the intrinsically interdependent production of individual and community wellness
+excerpt: The Pollinator Model focuses on the intrinsically interdependent production of individual and community wellness
 header_image_url: /blog/assets/2020-10-15-pollinator-model/bee.jpeg
 ---
 
