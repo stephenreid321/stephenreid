@@ -59,10 +59,7 @@ module StephenReid
       erb :about
     end
 
-    (
-      %w[services podcast books] +
-        %w[donate calendar habits tarot]
-    ).each do |r|
+    %w[services podcast books donate calendar habits tarot software groups].each do |r|
       get "/#{r}", cache: true do
         @title = r.capitalize
         erb :"#{r}"
@@ -91,11 +88,6 @@ module StephenReid
       erb :places
     end
 
-    get '/software', cache: true do
-      @title = 'Software'
-      erb :software
-    end
-
     get '/software/update' do
       agent = Mechanize.new
       Software.all(filter: "AND({Featured} = 1, {Description} = '')").each do |software|
@@ -106,11 +98,6 @@ module StephenReid
         software.save
       end
       redirect '/software?r=1'
-    end
-
-    get '/groups', cache: true do
-      @title = 'Groups'
-      erb :groups
     end
 
     get '/groups/update' do
