@@ -122,11 +122,11 @@ class Coin
     if starred
       u = 0
       if eth?
-        %w[0x72e1638bd8cd371bfb04cf665b749a0e4ae38324 0x81a06F24B206d420F201eC9844141Bf62804b257].each do |a|
+        ENV['ETH_ADDRESSES'].split(',').each do |a|
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
         end
       elsif symbol == 'ETH'
-        %w[0x72e1638bd8cd371bfb04cf665b749a0e4ae38324 0x81a06F24B206d420F201eC9844141Bf62804b257].each do |a|
+        ENV['ETH_ADDRESSES'].split(',').each do |a|
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
         end
       else
