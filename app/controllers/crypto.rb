@@ -11,6 +11,16 @@ StephenReid::App.controller do
 
   get '/coins/tag/:tag' do
     Tag.update_holdings
+    if params[:tag] == 'uniswap'
+      agent = Mechanize.new
+      @uniswap = []
+      JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/uniswap').body)['tickers'].each do |ticker|
+        if coin = Coin.find_by(slug: ticker['coin_id'])
+          coin.update_attribute(:uniswap_volume, ticker['converted_volume']['eth'])
+        end
+        @uniswap << ticker['coin_id']
+      end
+    end
     erb :'crypto/coins'
   end
 

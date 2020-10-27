@@ -1,6 +1,7 @@
 <%= ul_nav (
       [['holding', '/coins/tag/holding']] +
       [['watching', '/coins/tag/watching']] +
+      [['uniswap', '/coins/tag/uniswap']] +
       [['gainers', '/coins/tag/gainers']] +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
     ),
@@ -43,6 +44,12 @@
       :market_cap.gte => 1000,
       :total_volume.gte => 1000,
     ).order('price_change_percentage_24h_in_currency desc').limit(20)} %>
+
+<% when 'uniswap' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+          :slug.in => @uniswap,
+        ).order('uniswap_volume desc').limit(20)} %>
 
 <% else %>
 

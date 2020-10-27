@@ -13,6 +13,7 @@ class Coin
   field :market_cap, type: Integer
   field :market_cap_rank, type: Integer
   field :total_volume, type: Integer
+  field :uniswap_volume, type: Integer
   field :price_change_percentage_1h_in_currency, type: Float
   field :price_change_percentage_24h_in_currency, type: Float
   field :price_change_percentage_7d_in_currency, type: Float

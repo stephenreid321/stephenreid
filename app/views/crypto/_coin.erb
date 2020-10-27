@@ -80,6 +80,11 @@
     <a target="_blank" class="text-dark" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
   <% end %>
 </td>
+<td data-sort="<%= coin.uniswap_volume || 0 %>">
+  <% if coin.uniswap_volume %>
+    #<%= Coin.where(:uniswap_volume.ne => nil).order('uniswap_volume desc').pluck(:slug).index(coin.slug)+1 %>
+  <% end %>
+</td>
 <td>
   <% if coin.market_cap > 0 %>
     <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
