@@ -108,7 +108,11 @@ class Coin
 
   def remote_update
     agent = Mechanize.new
-    c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
+    begin
+      c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
+    rescue StandardError
+      return
+    end
     %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
       send("#{r}=", c['market_data'][r]['eth'])
     end
