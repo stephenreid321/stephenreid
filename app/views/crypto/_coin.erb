@@ -45,7 +45,7 @@
 <td class="holding" data-sort="<%= (coin.holding || 0) * ENV['PRICE_FACTOR'].to_i  %>">
   <% if coin.starred %>
     <% if coin.all_units %>
-      <% if coin.all_units == 0 %>
+      <% if coin.all_units < 1e-12 %>
         <i data-toggle="tooltip" title="This coin may be staked" style="cursor: pointer" class="far fa-question-circle"></i>
       <% else %>
         <i class="fas fa-spin fa-circle-notch"></i>
