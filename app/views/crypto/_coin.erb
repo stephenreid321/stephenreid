@@ -42,7 +42,7 @@
     <%= tag_badge coin.tag %>
   <% end %>
 </td>
-<td class="holding" data-sort="<%= (coin.holding || 0) * ENV['PRICE_FACTOR'].to_i  %>">
+<td class="holding" data-sort="<%= (coin.holding < 1e-6 ? 0 : coin.holding) * ENV['PRICE_FACTOR'].to_i  %>">
   <% if coin.starred %>
     <% if coin.all_units %>
       <% if coin.holding < 1e-6 %>
