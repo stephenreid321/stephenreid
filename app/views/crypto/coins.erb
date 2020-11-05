@@ -43,7 +43,7 @@
       :market_cap_rank.ne => nil,
       :market_cap.gte => 1000,
       :total_volume.gte => 1000,
-    ).order('price_change_percentage_24h_in_currency desc').limit(20)} %>
+    ).order('price_change_percentage_7d_in_currency desc').limit(20)} %>
 
 <% when 'uniswap' %>
 
