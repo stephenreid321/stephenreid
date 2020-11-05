@@ -64,6 +64,8 @@
           searching: false,
           <% if params[:tag] == 'uniswap' %>
             order: [[8, "desc"]]})
+          <% elsif params[:tag] == 'gainers' %>
+            order: [[5, "desc"]]})
           <% else %>
             order: [[4, "desc"]]})
           <% end %>
