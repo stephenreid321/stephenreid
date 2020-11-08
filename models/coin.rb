@@ -30,6 +30,11 @@ class Coin
     self.symbol = symbol.try(:upcase)
   end
 
+  def self.eth_usd
+    agent = Mechanize.new
+    JSON.parse(agent.get('https://api.coingecko.com/api/v3/coins/ethereum').body)['market_data']['current_price']['usd']
+  end
+
   def self.admin_fields
     {
       slug: :text,

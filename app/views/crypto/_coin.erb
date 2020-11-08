@@ -54,14 +54,14 @@
   <% end %>
 </td>
 <% coin = coin.parent ? coin.parent : coin %>
-<td class="rg">
+<td class="rg" <% if params[:tag] == 'gainers' %> style="opacity: 0.5" <% end %> >
   <% unless coin.tag.try(:name) == 'efi' %>
     <% if coin.price_change_percentage_24h_in_currency %>
       <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
     <% end %>
   <% end %>
 </td>
-<td class="rg" style="opacity: 0.5">
+<td class="rg" <% unless params[:tag] == 'gainers' %> style="opacity: 0.5" <% end %>>
   <% unless coin.tag.try(:name) == 'efi' %>
     <% if coin.price_change_percentage_7d_in_currency %>
       <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>

@@ -62,7 +62,9 @@
           bInfo: false,
           paging: false,
           searching: false,
-          <% if params[:tag] == 'uniswap' %>
+          <% if params[:tag] == 'holding' %>
+            order: [[3, "desc"]]})
+          <% elsif params[:tag] == 'uniswap' %>
             order: [[8, "desc"]]})
           <% elsif params[:tag] == 'gainers' %>
             order: [[5, "desc"]]})
@@ -74,7 +76,9 @@
           var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
         <% if current_account %>
           var priceFactor = <%=ENV['PRICE_FACTOR']%>
-          $('#total').html('Ξ' + parseFloat(t/priceFactor).toFixed(2).toLocaleString(window.document.documentElement.lang))
+          var eth = parseFloat(t/priceFactor).toFixed(2).toLocaleString(window.document.documentElement.lang)
+          var usd = parseFloat(eth * <%=Coin.eth_usd%>).toFixed(2).toLocaleString(window.document.documentElement.lang)
+          $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
 
           $('#coins').on('order.dt', function () { 
             $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
