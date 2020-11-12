@@ -53,6 +53,15 @@
     <% end %>
   <% end %>
 </td>
+<td>
+  <% if coin.staked_units %>
+    <% if current_account %>
+      <a target="_blank" href="/admin/edit/Coin/<%=coin.id%>"><i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i></a>
+    <% else %>
+      <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
+    <% end %>
+  <% end %>
+</td>
 <% coin = coin.parent ? coin.parent : coin %>
 <td class="rg" <% if params[:tag] == 'gainers' %> style="opacity: 0.5" <% end %> >
   <% unless coin.tag.try(:name) == 'efi' %>
