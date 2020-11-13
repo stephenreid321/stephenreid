@@ -43,23 +43,27 @@
   <% end %>
 </td>
 <td class="holding" data-sort="<%= (coin.holding < 1e-6 ? 0 : coin.holding) * ENV['PRICE_FACTOR'].to_i  %>">
-  <% if coin.starred %>
-    <% if coin.all_units %>
-      <% if coin.holding < 1e-6 %>
-        <i data-toggle="tooltip" title="This coin may be staked" style="cursor: pointer" class="far fa-question-circle"></i>
-      <% else %>
-        <i class="fas fa-spin fa-circle-notch"></i>
-      <% end %>
+  <% if current_account %>
+    <a target="_blank" href="/admin/edit/Coin/<%=coin.id%>">
     <% end %>
+    <div class="p">
+      <% if coin.starred %>
+        <% if coin.all_units %>
+          <% if coin.holding < 1e-6 %>
+            <i data-toggle="tooltip" style="cursor: pointer" class="far fa-question-circle"></i>
+          <% else %>
+            <i class="fas fa-spin fa-circle-notch"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <% if current_account %>
+    </a>
   <% end %>
 </td>
 <td>
   <% if coin.staked_units %>
-    <% if current_account %>
-      <a target="_blank" href="/admin/edit/Coin/<%=coin.id%>"><i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i></a>
-    <% else %>
-      <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
-    <% end %>
+    <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
   <% end %>
 </td>
 <% coin = coin.parent ? coin.parent : coin %>

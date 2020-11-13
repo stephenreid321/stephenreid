@@ -96,7 +96,7 @@
               var v = parseInt($(this).attr('data-sort'))
               if (v) {
                 var text = parseFloat(100*v/t).toFixed(1)+'%'
-                $(this).html('\
+                $(this).find('.p').html('\
                 <div class="p back"> \
                   <span>'+text+'</span> \
                   <div class="p boundbox"> \
