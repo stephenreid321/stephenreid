@@ -1,6 +1,6 @@
 
 
-[Metastrategy](https://www.iconomi.com/manage/DECENTCOOP) is my strategy on ICONOMI.
+[Metastrategy](https://www.iconomi.com/asset/DECENTCOOP) is my strategy on ICONOMI.
 
 The 'meta' in this strategy is that it scores *every coin* on ICONOMI according its weight across *all strategies* on the ICONOMI platform, further weighting by the performance of each strategy. It then takes the top 10 coins by score, and weights them according to their relative scores, with daily rebalancing.
 
