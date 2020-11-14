@@ -2,8 +2,8 @@
       [['holding', '/coins/tag/holding']] +
       [['watching', '/coins/tag/watching']] +
       [['uniswap', '/coins/tag/uniswap']] +
-      [['24h gainers', '/coins/tag/24h']] +
-      [['7d gainers', '/coins/tag/7d']] +
+      [['24h', '/coins/tag/24h']] +
+      [['7d', '/coins/tag/7d']] +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
     ),
     ul_class: 'nav nav-tabs',
