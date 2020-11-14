@@ -49,6 +49,11 @@
         <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
           <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
         </a>
+        <% if coin.eth? %>
+          <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
+            <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
+          </a>
+        <% end %>
       <% end %>
       <% if current_account %>
         <%= partial :'crypto/multiplier', locals: {asset: asset} %>
