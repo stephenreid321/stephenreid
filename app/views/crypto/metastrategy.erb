@@ -1,8 +1,9 @@
+<p class="lead text-center"><a href="https://www.iconomi.com/asset/DECENTCOOP">Metastrategy</a> is my strategy on ICONOMI.</p>
+
 <% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
 
-
-<p class="lead text-center">
+<p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <% if current_account %>
     <a href="/strategy/<%=ENV['SITE_SECRET']%>/rebalance">
