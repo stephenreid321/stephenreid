@@ -50,7 +50,9 @@
           <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
         </a>
       <% end %>
-      <%= partial :'crypto/multiplier', locals: {asset: asset} %>
+      <% if current_account %>
+        <%= partial :'crypto/multiplier', locals: {asset: asset} %>
+      <% end %>
     </td>
     <td style="vertical-align: middle; width: 10vw">
       <% if actual[k] %>
