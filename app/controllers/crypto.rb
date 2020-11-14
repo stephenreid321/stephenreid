@@ -77,10 +77,6 @@ StephenReid::App.controller do
     erb :'crypto/iconomi'
   end
 
-  get '/strategy' do
-    erb :'crypto/strategy'
-  end
-
   get '/strategy/table' do
     partial :'crypto/strategy_table'
   end
