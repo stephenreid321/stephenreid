@@ -1,6 +1,6 @@
-<h1 class="mb-3">ICONOMI fund evaluator</h1>
+<h1 class="mb-3">ICONOMI strategy evaluator</h1>
 
-The score of a fund is calculated as:
+The score of a strategy is calculated as:
 
 (4 &times; 1 month performance %) + (3 &times; 3 month performance %) + (2 &times; 6 month performance %) + (1 &times; 1 year performance %)
 
@@ -10,4 +10,4 @@ score &times; (1 - management fee %) &times; (1 - performance fee %) &times; (
 
 All scores/returns on this page are normalised in the range 0&ndash;100.
 
-When using ICONOMI, I suggest you invest across a number of different top-performing funds, rather than putting all your eggs in one basket 🍳<br />Use the controls below to receive a **proposed position** across your chosen number of funds, relative to their performance.
+When using ICONOMI, I suggest you invest across a number of different top-performing strategies, rather than putting all your eggs in one basket 🍳<br />Use the controls below to receive a **proposed position** across your chosen number of strategies, relative to their performance.

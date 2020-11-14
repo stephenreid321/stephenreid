@@ -68,6 +68,10 @@ StephenReid::App.controller do
 
   ###
 
+  get '/metastrategy' do
+    erb :'crypto/metastrategy'
+  end
+
   get '/iconomi' do
     @p = params[:p]
     erb :'crypto/iconomi'
