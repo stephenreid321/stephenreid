@@ -2,6 +2,7 @@
       [['holding', '/coins/tag/holding']] +
       [['watching', '/coins/tag/watching']] +
       [['uniswap', '/coins/tag/uniswap']] +
+      [['sushiswap', '/coins/tag/sushiswap']] +
       [['24h', '/coins/tag/24h']] +
       [['7d', '/coins/tag/7d']] +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
@@ -58,8 +59,14 @@
 <% when 'uniswap' %>
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
-          :slug.in => @uniswap,
-        ).order('uniswap_volume desc').limit(20)} %>
+                  :slug.in => @uniswap,
+                ).order('uniswap_volume desc').limit(20)} %>
+
+<% when 'sushiswap' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+                          :slug.in => @sushiswap,
+                        ).order('sushiswap_volume desc').limit(20)} %>
 
 <% else %>
 

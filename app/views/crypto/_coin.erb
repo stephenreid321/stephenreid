@@ -38,7 +38,7 @@
       </a>
     </small>
   <% end %>
-  <% if %w[holding watching 24h 7d uniswap].include?(params[:tag]) %>
+  <% if %w[holding watching 24h 7d uniswap sushiswap].include?(params[:tag]) %>
     <%= tag_badge coin.tag %>
   <% end %>
 </td>
@@ -96,6 +96,11 @@
 <td data-sort="<%= coin.uniswap_volume || 0 %>">
   <% if coin.uniswap_volume %>
     #<%= Coin.where(:uniswap_volume.ne => nil).order('uniswap_volume desc').pluck(:slug).index(coin.slug)+1 %>
+  <% end %>
+</td>
+<td data-sort="<%= coin.sushiswap_volume || 0 %>">
+  <% if coin.sushiswap_volume %>
+    #<%= Coin.where(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug).index(coin.slug)+1 %>
   <% end %>
 </td>
 <td>

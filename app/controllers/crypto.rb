@@ -21,6 +21,16 @@ StephenReid::App.controller do
         end
         @uniswap << ticker['coin_id']
       end
+    elsif params[:tag] == 'sushiswap'
+      agent = Mechanize.new
+      @sushiswap = []
+      Coin.where(:sushiswap_volume.ne => nil).set(sushiswap_volume: nil)
+      JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/sushiswap').body)['tickers'].each do |ticker|
+        if coin = Coin.find_by(slug: ticker['coin_id'])
+          coin.update_attribute(:sushiswap_volume, ticker['converted_volume']['eth'])
+        end
+        @sushiswap << ticker['coin_id']
+      end
     end
     erb :'crypto/coins'
   end

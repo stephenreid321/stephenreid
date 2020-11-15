@@ -66,6 +66,8 @@
             order: [[3, "desc"]]})
           <% elsif params[:tag] == 'uniswap' %>
             order: [[9, "desc"]]})
+            <% elsif params[:tag] == 'sushiswap' %>
+              order: [[10, "desc"]]})
           <% elsif params[:tag] == '7d' %>
             order: [[6, "desc"]]})
           <% else %>
@@ -127,6 +129,7 @@
       <th>1h</th>
       <th>Twitter followers</th>
       <th>Uniswap volume</th>
+      <th>Sushiswap volume</th>
       <th>Volume/cap</th>
       <% if current_account %>
         <th></th>
