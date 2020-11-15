@@ -19,7 +19,7 @@
     <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
   <% end %>
 
-  <div id="symbols" class="text-center"><i class="fas fa-spin fa-circle-notch"></i></div>
+  <div id="symbols" class="text-center mt-3"><i class="fas fa-spin fa-circle-notch"></i></div>
 
 <% end %>
 
@@ -66,8 +66,10 @@
             order: [[3, "desc"]]})
           <% elsif params[:tag] == 'uniswap' %>
             order: [[9, "desc"]]})
-            <% elsif params[:tag] == 'sushiswap' %>
-              order: [[10, "desc"]]})
+          <% elsif params[:tag] == 'sushiswap' %>
+            order: [[10, "desc"]]})
+          <% elsif params[:tag] == 'defi-pulse' %>
+            order: [[11, "desc"]]})
           <% elsif params[:tag] == '7d' %>
             order: [[6, "desc"]]})
           <% else %>
@@ -130,6 +132,7 @@
       <th>Twitter followers</th>
       <th>Uniswap volume</th>
       <th>Sushiswap volume</th>
+      <th>TVL</th>
       <th>Volume/cap</th>
       <% if current_account %>
         <th></th>

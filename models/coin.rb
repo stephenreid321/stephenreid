@@ -8,13 +8,15 @@ class Coin
   field :contract_address, type: String
   field :symbol, type: String
   field :name, type: String
+  field :defi_pulse_name, type: String
   field :platform, type: String
   field :current_price, type: Float
-  field :market_cap, type: Integer
+  field :market_cap, type: Float
   field :market_cap_rank, type: Integer
-  field :total_volume, type: Integer
-  field :uniswap_volume, type: Integer
-  field :sushiswap_volume, type: Integer
+  field :total_volume, type: Float
+  field :uniswap_volume, type: Float
+  field :sushiswap_volume, type: Float
+  field :tvl, type: Float
   field :price_change_percentage_1h_in_currency, type: Float
   field :price_change_percentage_24h_in_currency, type: Float
   field :price_change_percentage_7d_in_currency, type: Float
@@ -45,6 +47,7 @@ class Coin
       contract_address: :text,
       symbol: :text,
       name: :text,
+      defi_pulse_name: :text,
       platform: :text,
       current_price: :number,
       market_cap: :number,
@@ -53,6 +56,9 @@ class Coin
       price_change_percentage_1h_in_currency: :number,
       price_change_percentage_24h_in_currency: :number,
       price_change_percentage_7d_in_currency: :number,
+      uniswap_volume: :number,
+      sushiswap_volume: :number,
+      tvl: :number,
       website: :url,
       twitter_username: :text,
       twitter_followers: :number,

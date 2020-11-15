@@ -31,6 +31,16 @@ StephenReid::App.controller do
         end
         @sushiswap << ticker['coin_id']
       end
+    elsif params[:tag] == 'defi-pulse'
+      agent = Mechanize.new
+      @defi_pulse = []
+      Coin.where(:tvl.ne => nil).set(tvl: nil)
+      JSON.parse(agent.get('https://defipulse.com/').search('#__NEXT_DATA__').inner_html)['props']['initialState']['coin']['projects'].each do |project|
+        if coin = Coin.find_by(defi_pulse_name: project['name'])
+          coin.update_attribute(:tvl, project['value']['tvl']['ETH']['value'])
+          @defi_pulse << coin.slug
+        end
+      end
     end
     erb :'crypto/coins'
   end

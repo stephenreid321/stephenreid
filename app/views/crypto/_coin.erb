@@ -103,6 +103,11 @@
     #<%= Coin.where(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug).index(coin.slug)+1 %>
   <% end %>
 </td>
+<td data-sort="<%= coin.tvl || 0 %>">
+  <% if coin.tvl %>
+    #<%= Coin.where(:tvl.ne => nil).order('tvl desc').pluck(:slug).index(coin.slug)+1 %>
+  <% end %>
+</td>
 <td>
   <% if coin.market_cap > 0 %>
     <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
