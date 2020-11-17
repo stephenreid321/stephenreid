@@ -26,6 +26,7 @@ class Coin
   field :hidden, type: Boolean
   field :starred, type: Boolean
   field :staked_units, type: Float
+  field :notes, type: Float
 
   belongs_to :tag, optional: true
 
@@ -41,13 +42,14 @@ class Coin
   def self.admin_fields
     {
       slug: :text,
-      decimals: :number,
-      units: :number,
-      staked_units: :number,
-      contract_address: :text,
       symbol: :text,
       name: :text,
       defi_pulse_name: :text,
+      units: :number,
+      staked_units: :number,
+      notes: :text_area,
+      contract_address: :text,
+      decimals: :number,
       platform: :text,
       current_price: :number,
       market_cap: :number,
