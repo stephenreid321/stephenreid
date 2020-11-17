@@ -26,7 +26,7 @@ class Coin
   field :hidden, type: Boolean
   field :starred, type: Boolean
   field :staked_units, type: Float
-  field :notes, type: Float
+  field :notes, type: String
 
   belongs_to :tag, optional: true
 
