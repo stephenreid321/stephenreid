@@ -6,7 +6,7 @@ StephenReid::App.controller do
   end
 
   get '/crypto-investing' do
-    @og_image = "#{ENV['BASE_URI']}/images/crypto-investing.jpg"
+    @og_image = "#{ENV['BASE_URI']}/images/crypto-investing-2.jpg"
     erb :'crypto/crypto_investing'
   end
 
