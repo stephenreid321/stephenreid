@@ -13,7 +13,8 @@ I’ve struggled to make sense of what is going on. My suspicious mind wandered 
 ## Neither real nor unreal, but dreamlike
 
 > “This place is a dream. Only a sleeper considers it real. Then death comes like dawn, and you wake up laughing at what you thought was your grief.”
-> – Rumi
+>
+> <footer class="blockquote-footer">Rumi</footer>
 
 For over a hundred years, physicists and philosophers have tried to wrap their heads around the manifold wonders of quantum physics. Subatomic entities, such as electrons, they saw, behave in awe-striking and magical ways. They do not simply exist “as such,” as fixed and finished entities; they can appear as a wave in one instant or as a particle in another, depending on whether or not they are observed. This is true. ==Our perception of the world isn’t just passive, it is creative – it literally in-forms its very being and reality. Quantum physics invites us into a view of reality in which the seeming “objective” reality out there and the “subjective” experience “in here” become inseparably intertwined.== Just as the characters and events in dreams aren’t separate from the dreamer, the world, according to the great psychoanalyst Carl Jung, is but a living symbol, the embodiment of deeper parts of ourselves, which we collectively dream into existence.
 

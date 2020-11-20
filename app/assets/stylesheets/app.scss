@@ -26,6 +26,7 @@ pre code { color: #e83e8c }
 .blog_post h2 { display: block; border: none }
 
 blockquote { border-left: 0.3em solid #ccc; padding-left: 1em; font-style: italic }
+blockquote footer { font-size: 1rem !important }
 
 .dropdown-item { font-weight: 300 }
 .dropdown-item.active { font-weight: bold }
