@@ -63,7 +63,9 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
 <li><a href="https://www.tokensets.com/">TokenSets</a></li>
 <li><a href="https://melonprotocol.com/">Melon</a></li>
 </ul>
-</td>
+<p>
+  These are all early stage and I haven't yet used them myself.
+  </p></td>
   </tr>
 </table>
 
