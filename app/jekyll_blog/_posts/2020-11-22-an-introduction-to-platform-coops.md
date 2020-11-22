@@ -4,7 +4,7 @@ excerpt: Prepared as part of the Platform Co-ops Now! course
 header_image_url: /blog/assets/2020-11-22-an-introduction-to-platform-coops/header.jpg
 ---
 
-## What is a platform?
+## What does 'platform' mean here?
 
 "The word ‘platform’ is often used to describe ==an internet service which brings together suppliers and consumers in an online marketplace==. But platforms don’t necessarily provide traditional ‘products’; they often facilitate the trade of services, like taxis or temporary accommodation. Most people have heard of Uber and Airbnb, whose platforms have disrupted the minicab and short-term lettings industries while generating enormous profits for their shareholders."
 
