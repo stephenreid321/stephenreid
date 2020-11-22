@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2020-11-22T19:30:19+00:00</updated><id>/blog/feed.xml</id><entry><title type="html">An introduction to platform co-ops</title><link href="/blog/2020/11/22/an-introduction-to-platform-coops.html" rel="alternate" type="text/html" title="An introduction to platform co-ops" /><published>2020-11-22T00:00:00+00:00</published><updated>2020-11-22T00:00:00+00:00</updated><id>/blog/2020/11/22/an-introduction-to-platform-coops</id><content type="html" xml:base="/blog/2020/11/22/an-introduction-to-platform-coops.html">&lt;h2&gt;What does &amp;#39;platform&amp;#39; mean here?&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2020-11-22T19:39:49+00:00</updated><id>/blog/feed.xml</id><entry><title type="html">An introduction to platform co-ops</title><link href="/blog/2020/11/22/an-introduction-to-platform-coops.html" rel="alternate" type="text/html" title="An introduction to platform co-ops" /><published>2020-11-22T00:00:00+00:00</published><updated>2020-11-22T00:00:00+00:00</updated><id>/blog/2020/11/22/an-introduction-to-platform-coops</id><content type="html" xml:base="/blog/2020/11/22/an-introduction-to-platform-coops.html">&lt;h2&gt;What does &amp;#39;platform&amp;#39; mean here?&lt;/h2&gt;
 
 &lt;p&gt;&amp;quot;The word ‘platform’ is often used to describe &lt;mark&gt;an internet service which brings together suppliers and consumers in an online marketplace&lt;/mark&gt;. But platforms don’t necessarily provide traditional ‘products’; they often facilitate the trade of services, like taxis or temporary accommodation. Most people have heard of Uber and Airbnb, whose platforms have disrupted the minicab and short-term lettings industries while generating enormous profits for their shareholders.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://open.coop/2016/12/02/introduction-platform-co-ops/&quot;&gt;An introduction to platform co-ops&lt;/a&gt; &lt;/p&gt;
 
 &lt;h2&gt;Platform capitalism&lt;/h2&gt;
 
 &lt;p&gt;&amp;quot;The rise of the platform economy over the last decade promised to boost flexible employment, extra income, and collaborative consumption. Instead, &lt;mark&gt;the ‘disruption’ of the digital economy has removed regulations, increased precariousness of work, and created the conditions for market monopolies dominated by a handful of digital giants&lt;/mark&gt;.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://www.uk.coop/start-new-co-op/support/start-platform-co-op/why-platform-co-ops&quot;&gt;Why platform co-ops?&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;quot;More and more people are organising their work and resources through digital platforms. The marketplace for these is dominated by a small number of large corporations: be it Uber drivers, freelancers on TaskRabbit or Amazon’s Mechanical Turk marketplace, home rentals on Airbnb or food deliveries using Deliveroo.&lt;/p&gt;
@@ -18,24 +18,24 @@
 
 &lt;p&gt;As a result, this system has been described as &lt;mark&gt;platform capitalism&lt;/mark&gt;. &lt;mark&gt;In this system a large number of consumers and vendors generate profits which accrue to a comparatively small number of people&lt;/mark&gt;… Ordinary users who rely on these platforms typically find they have little control over their personal data and have no say about how they are run. It has led to the formation of monopolies that encourage financial extraction and the monetisation of personal data.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://media.nesta.org.uk/documents/Nesta_Platform_Report_FINAL-WEB_b1qZGj7.pdf&quot;&gt;Platform co-operatives – solving the capital conundrum&lt;/a&gt;, &lt;em&gt;Why we need platform co-operatives in the digital economy&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2&gt;What is a platform co-op?&lt;/h2&gt;
 
 &lt;p&gt;&amp;quot;A platform cooperative, or platform co-op, is &lt;mark&gt;a cooperatively owned, democratically governed business that establishes a computing platform, and uses a website, mobile app or a protocol to facilitate the sale of goods and services&lt;/mark&gt;. Platform cooperatives are an alternative to venture capital-funded platforms insofar as they are owned and governed by those who depend on them most—workers, users, and other relevant stakeholders.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://www.mdpi.com/2071-1050/12/20/8309&quot;&gt;Platform and Data Co-Operatives Amidst European Pandemic Citizenship&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;quot;A platform co-op is a &lt;mark&gt;digital platform&lt;/mark&gt; that is designed to provide a service or sell a product, and that is &lt;mark&gt;collectively owned and governed&lt;/mark&gt; by the people who depend on and participate in it.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://media.nesta.org.uk/documents/Nesta_Platform_Report_FINAL-WEB_b1qZGj7.pdf&quot;&gt;Platform co-operatives – solving the capital conundrum&lt;/a&gt;, &lt;em&gt;The origins of platform co-operatives&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;quot;Just like traditional co-ops, platform co-ops are organisations that are owned and managed by their members. &lt;mark&gt;While traditional co-ops are normally based around a physical community of members, platform co-ops live online and are normally populated by online communities of members&lt;/mark&gt;.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://open.coop/2016/12/02/introduction-platform-co-ops/&quot;&gt;An introduction to platform co-ops&lt;/a&gt; &lt;/p&gt;
 
 &lt;h2&gt;Two types of co-op, as platforms&lt;/h2&gt;
@@ -44,7 +44,7 @@
 
 &lt;p&gt;&amp;quot;A workers’ co-op [is] a business owned and managed collectively by its workers for their mutual benefit. It’s organised democratically and fairly by (and only by) its members.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://www.seedsforchange.org.uk/workersco-ops.pdf&quot;&gt;Seeds for Change: How to set up a Workers' Co-op&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4&gt;Stocksy United: a platform worker co-op where the members are individuals&lt;/h4&gt;
@@ -61,12 +61,12 @@
 
 &lt;p&gt;&amp;quot;&lt;mark&gt;Rather than being organised around a single class of members the way that most co-operatives are, a multi-stakeholder co-operative is any co-op that draws its membership from two or more different classes of stakeholders&lt;/mark&gt;. After two decades of local experimentation, Italy was the first country to adopt a multi-stakeholder statute in 1991. Over 14,000 ‘social co-ops’ now exist across Italy and provide social care, health and educational services to over 5 million people. In Quebec, home to one of the most productive and vibrant co-operative development sectors in the world, multi-stakeholder co-ops are now the fastest growing type of co-op, with more than 50% of all new co-ops opting to register what they refer to as ‘Solidarity Coops.’ The movement is just getting here in the UK, but there are now over 20 multi-stakeholder co-ops who have incorporated using the Somerset Rules.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://wiki.p2pfoundation.net/Multi-Stakeholder_Cooperatives&quot;&gt;Multi-Stakeholder Cooperatives - P2P Foundation&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;quot;&lt;mark&gt;Multi-stakeholder cooperatives present a departure in ownership structure from the more familiar consumer-owned and worker-owned co-ops. Also known as solidarity co-ops, hybrid co-ops or social co-ops, multi-stakeholder cooperatives welcome a variety of groups to become owners, including employees, producers, customers and clients, and community members (including investors).&lt;/mark&gt; These co-ops may appear to operate similarly to corporations, but as Shareable’s David Boiler points out, while they have “a keen focus on profit and loss, social co-ops are committed to meeting social goals such as healthcare, eldercare, social services, and workforce integration for former prisoners. They are able to blend market activity with social services provisioning and democratic participation, all in one swoop.”&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://sustainableconsumption.usdn.org/initiatives-list/multi-stakeholder-cooperatives&quot;&gt;Multi-stakeholder co-operatives&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4&gt;Multi-stakeholder platform co-ops&lt;/h4&gt;
@@ -98,7 +98,7 @@
 
 &lt;p&gt;&amp;quot;&lt;mark&gt;Launched in 2009, the Somerset Rules were one of the UK’s first set of model rules for a multi-stakeholder co-op, and they’re arguably still the best.&lt;/mark&gt; Packed full of best practice gleaned from decades of co-operative development experience, they’re structured to closely follow co-op principles, written in relatively plain English, and are cleverly drafted to allow for a wide range of different configurations. You can define the percentage of overall control each stakeholder group has. They are also ‘social accounting ready’ and are designed to enable the widest range of options for financing. In 2012 they were fully revised and overhauled and a version for use as a Community Interest Company limited by guarantee was developed.&amp;quot;&lt;/p&gt;
 
-&lt;p style=&quot;text-align: right&quot;&gt;
+&lt;p class=&quot;attribution&quot;&gt;
 — &lt;a href=&quot;https://wiki.p2pfoundation.net/Somerset_Rules&quot;&gt;P2P Foundation: Somerset Rules&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;(Check out the latest version at &lt;a href=&quot;https://www.somerset.coop/p/somerset-rules-registrations.html&quot;&gt;Somerset Rules registrations&lt;/a&gt;)&lt;/p&gt;
