@@ -8,12 +8,11 @@ $(function() {
     opacity: 0
   });
 
-  if ($('.blog_post').html().indexOf('h2') > 0) {
+  if ($('.blog_post').length > 0 && $('.blog_post').html().indexOf('h2') > 0)
     $('#toc').toc({
       'container': '.blog_post',
       'selectors': 'h1,h2,h3,h4'
     });
-  }
 
   $(".blog_post a[href^=http]").attr('target', '_blank')
 
