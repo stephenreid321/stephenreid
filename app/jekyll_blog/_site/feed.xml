@@ -1,6 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2020-11-22T19:25:48+00:00</updated><id>/blog/feed.xml</id><entry><title type="html">An introduction to platform co-ops</title><link href="/blog/2020/11/22/an-introduction-to-platform-coops.html" rel="alternate" type="text/html" title="An introduction to platform co-ops" /><published>2020-11-22T00:00:00+00:00</published><updated>2020-11-22T00:00:00+00:00</updated><id>/blog/2020/11/22/an-introduction-to-platform-coops</id><content type="html" xml:base="/blog/2020/11/22/an-introduction-to-platform-coops.html">&lt;h2&gt;What is the &amp;#39;platform&amp;#39; in &amp;#39;platform co-op&amp;#39;?&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2020-11-22T19:28:01+00:00</updated><id>/blog/feed.xml</id><entry><title type="html">An introduction to platform co-ops</title><link href="/blog/2020/11/22/an-introduction-to-platform-coops.html" rel="alternate" type="text/html" title="An introduction to platform co-ops" /><published>2020-11-22T00:00:00+00:00</published><updated>2020-11-22T00:00:00+00:00</updated><id>/blog/2020/11/22/an-introduction-to-platform-coops</id><content type="html" xml:base="/blog/2020/11/22/an-introduction-to-platform-coops.html">&lt;h2&gt;What is the &amp;#39;platform&amp;#39; in &amp;#39;platform co-op&amp;#39;?&lt;/h2&gt;
 
 &lt;p&gt;&amp;quot;The word ‘platform’ is often used to describe &lt;mark&gt;an internet service which brings together suppliers and consumers in an online marketplace&lt;/mark&gt;. But platforms don’t necessarily provide traditional ‘products’; they often facilitate the trade of services, like taxis or temporary accommodation. Most people have heard of Uber and Airbnb, whose platforms have disrupted the minicab and short-term lettings industries while generating enormous profits for their shareholders.&amp;quot;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: right&quot;&gt;
+— &lt;a href=&quot;https://open.coop/2016/12/02/introduction-platform-co-ops/&quot;&gt;An introduction to platform co-ops&lt;/a&gt; &lt;/p&gt;
+
+&lt;h2&gt;What is a platform co-op?&lt;/h2&gt;
+
+&lt;p&gt;&amp;quot;A platform cooperative, or platform co-op, is &lt;mark&gt;a cooperatively owned, democratically governed business that establishes a computing platform, and uses a website, mobile app or a protocol to facilitate the sale of goods and services&lt;/mark&gt;. Platform cooperatives are an alternative to venture capital-funded platforms insofar as they are owned and governed by those who depend on them most—workers, users, and other relevant stakeholders.&amp;quot;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: right&quot;&gt;
+— &lt;a href=&quot;https://www.mdpi.com/2071-1050/12/20/8309&quot;&gt;Platform and Data Co-Operatives Amidst European Pandemic Citizenship&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;quot;A platform co-op is a &lt;mark&gt;digital platform&lt;/mark&gt; that is designed to provide a service or sell a product, and that is &lt;mark&gt;collectively owned and governed&lt;/mark&gt; by the people who depend on and participate in it.&amp;quot;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: right&quot;&gt;
+— &lt;a href=&quot;https://media.nesta.org.uk/documents/Nesta_Platform_Report_FINAL-WEB_b1qZGj7.pdf&quot;&gt;Platform co-operatives – solving the capital conundrum&lt;/a&gt;, &lt;em&gt;The origins of platform co-operatives&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;quot;Just like traditional co-ops, platform co-ops are organisations that are owned and managed by their members. &lt;mark&gt;While traditional co-ops are normally based around a physical community of members, platform co-ops live online and are normally populated by online communities of members&lt;/mark&gt;.&amp;quot;&lt;/p&gt;
 
 &lt;p style=&quot;text-align: right&quot;&gt;
 — &lt;a href=&quot;https://open.coop/2016/12/02/introduction-platform-co-ops/&quot;&gt;An introduction to platform co-ops&lt;/a&gt; &lt;/p&gt;
@@ -20,23 +37,6 @@
 
 &lt;p style=&quot;text-align: right&quot;&gt;
 — &lt;a href=&quot;https://media.nesta.org.uk/documents/Nesta_Platform_Report_FINAL-WEB_b1qZGj7.pdf&quot;&gt;Platform co-operatives – solving the capital conundrum&lt;/a&gt;, &lt;em&gt;Why we need platform co-operatives in the digital economy&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2&gt;What is a platform co-op?&lt;/h2&gt;
-
-&lt;p&gt;&amp;quot;A platform cooperative, or platform co-op, is &lt;mark&gt;a cooperatively owned, democratically governed business that establishes a computing platform, and uses a website, mobile app or a protocol to facilitate the sale of goods and services&lt;/mark&gt;. Platform cooperatives are an alternative to venture capital-funded platforms insofar as they are owned and governed by those who depend on them most—workers, users, and other relevant stakeholders.&amp;quot;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: right&quot;&gt;
-— &lt;a href=&quot;https://www.mdpi.com/2071-1050/12/20/8309&quot;&gt;Platform and Data Co-Operatives Amidst European Pandemic Citizenship&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&amp;quot;A platform co-op is a &lt;mark&gt;digital platform&lt;/mark&gt; that is designed to provide a service or sell a product, and that is &lt;mark&gt;collectively owned and governed&lt;/mark&gt; by the people who depend on and participate in it.&amp;quot;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: right&quot;&gt;
-— &lt;a href=&quot;https://media.nesta.org.uk/documents/Nesta_Platform_Report_FINAL-WEB_b1qZGj7.pdf&quot;&gt;Platform co-operatives – solving the capital conundrum&lt;/a&gt;, &lt;em&gt;The origins of platform co-operatives&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&amp;quot;Just like traditional co-ops, platform co-ops are organisations that are owned and managed by their members. &lt;mark&gt;While traditional co-ops are normally based around a physical community of members, platform co-ops live online and are normally populated by online communities of members&lt;/mark&gt;.&amp;quot;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: right&quot;&gt;
-— &lt;a href=&quot;https://open.coop/2016/12/02/introduction-platform-co-ops/&quot;&gt;An introduction to platform co-ops&lt;/a&gt; &lt;/p&gt;
 
 &lt;h2&gt;Two types of co-op, as platforms&lt;/h2&gt;
 

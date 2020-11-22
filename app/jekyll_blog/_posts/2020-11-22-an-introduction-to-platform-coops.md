@@ -11,22 +11,6 @@ header_image_url: /blog/assets/2020-11-22-an-introduction-to-platform-coops/head
 <p style="text-align: right">
 — <a href="https://open.coop/2016/12/02/introduction-platform-co-ops/">An introduction to platform co-ops</a> </p>
 
-## Why platform co-ops?
-
-"The rise of the platform economy over the last decade promised to boost flexible employment, extra income, and collaborative consumption. Instead, ==the ‘disruption’ of the digital economy has removed regulations, increased precariousness of work, and created the conditions for market monopolies dominated by a handful of digital giants==."
-
-<p style="text-align: right">
-— <a href="https://www.uk.coop/start-new-co-op/support/start-platform-co-op/why-platform-co-ops">Why platform co-ops?</a></p>
-
-"More and more people are organising their work and resources through digital platforms. The marketplace for these is dominated by a small number of large corporations: be it Uber drivers, freelancers on TaskRabbit or Amazon’s Mechanical Turk marketplace, home rentals on Airbnb or food deliveries using Deliveroo.
-
-These digital platforms offer people unprecedented flexibility and independence. The barriers to entry to becoming a taxi driver, a holiday apartment landlord, or freelance worker are now incredibly low, and it’s never been easier to be a consumer on the other side of these markets. But while these positives are acknowledged, ==large platform companies have also been criticised for being exploitative, monopolistic and extractivist==.
-
-As a result, this system has been described as ==platform capitalism==. ==In this system a large number of consumers and vendors generate profits which accrue to a comparatively small number of people==… Ordinary users who rely on these platforms typically find they have little control over their personal data and have no say about how they are run. It has led to the formation of monopolies that encourage financial extraction and the monetisation of personal data."
-
-<p style="text-align: right">
-— <a href="https://media.nesta.org.uk/documents/Nesta_Platform_Report_FINAL-WEB_b1qZGj7.pdf">Platform co-operatives – solving the capital conundrum</a>, <em>Why we need platform co-operatives in the digital economy</em></p>
-
 ## What is a platform co-op?
 
 "A platform cooperative, or platform co-op, is ==a cooperatively owned, democratically governed business that establishes a computing platform, and uses a website, mobile app or a protocol to facilitate the sale of goods and services==. Platform cooperatives are an alternative to venture capital-funded platforms insofar as they are owned and governed by those who depend on them most—workers, users, and other relevant stakeholders."
@@ -43,6 +27,22 @@ As a result, this system has been described as ==platform capitalism==. ==In thi
 
 <p style="text-align: right">
 — <a href="https://open.coop/2016/12/02/introduction-platform-co-ops/">An introduction to platform co-ops</a> </p>
+
+## Why platform co-ops?
+
+"The rise of the platform economy over the last decade promised to boost flexible employment, extra income, and collaborative consumption. Instead, ==the ‘disruption’ of the digital economy has removed regulations, increased precariousness of work, and created the conditions for market monopolies dominated by a handful of digital giants==."
+
+<p style="text-align: right">
+— <a href="https://www.uk.coop/start-new-co-op/support/start-platform-co-op/why-platform-co-ops">Why platform co-ops?</a></p>
+
+"More and more people are organising their work and resources through digital platforms. The marketplace for these is dominated by a small number of large corporations: be it Uber drivers, freelancers on TaskRabbit or Amazon’s Mechanical Turk marketplace, home rentals on Airbnb or food deliveries using Deliveroo.
+
+These digital platforms offer people unprecedented flexibility and independence. The barriers to entry to becoming a taxi driver, a holiday apartment landlord, or freelance worker are now incredibly low, and it’s never been easier to be a consumer on the other side of these markets. But while these positives are acknowledged, ==large platform companies have also been criticised for being exploitative, monopolistic and extractivist==.
+
+As a result, this system has been described as ==platform capitalism==. ==In this system a large number of consumers and vendors generate profits which accrue to a comparatively small number of people==… Ordinary users who rely on these platforms typically find they have little control over their personal data and have no say about how they are run. It has led to the formation of monopolies that encourage financial extraction and the monetisation of personal data."
+
+<p style="text-align: right">
+— <a href="https://media.nesta.org.uk/documents/Nesta_Platform_Report_FINAL-WEB_b1qZGj7.pdf">Platform co-operatives – solving the capital conundrum</a>, <em>Why we need platform co-operatives in the digital economy</em></p>
 
 ## Two types of co-op, as platforms
 
