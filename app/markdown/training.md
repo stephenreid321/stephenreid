@@ -25,13 +25,14 @@
 ### Psychotherapy
 
 *   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (March 2020)
+*   One-on-one Core Process Psychotherapy sessions (ongoing)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 
 ### Entheogens and plant medicines
 
 *   Noya Rao & Ayahausca dieta with [Manuela Mahua](https://noyanete.com/) near Pucallpa, Peru (Dec 2017)
 *   Peyote ceremony with Marakame Don Ramiro of the [Wixarika](https://en.wikipedia.org/wiki/Huichol) (Aug 2017)
-*   Tobacco ceremony with [Jeff Firewalker](https://www.eaglecondorcouncil.org/) of the [Eagle Condor Council](https://www.eaglecondorcouncil.org/) (Mar 2018)
+*   Tobacco ceremony with Jeff Firewalker of the [Eagle Condor Council](https://www.eaglecondorcouncil.org/) (Mar 2018)
 *   Cacao ceremonies with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/) (Nov 2017) and [Eagle's Nest](https://eaglesnestatitlan.com/), Lake Atitlán (Jan 2018)
 *   DMT neuroimaging research participant at Imperial College London (May 2018)
 *   High-dose _Bufo_ ceremony (May 2015)
