@@ -79,7 +79,7 @@ _[Up & Go](https://www.upandgo.coop/) is a platform that offers on-demand cleani
 
 _[Resonate](https://resonate.is/) is a stream-to-own music platform harnessing blockchain technology. It is a multi-stakeholder co-operative giving democratic control to artists (45%), listeners (35%) and workers (20%). Through its model, it pays up to 2.5 times more revenue to artists than other streaming services._
 
-_[Equal Care Co-op](equalcare.coop/) are building a new, co-owned social care platform that puts care givers and receivers in charge. By incorporating as a multi-stakeholder co-operative, their digital product and accompanying service is owned by and accountable to the communities using and sustaining it. They arrived at the platform co-op model as a response to systemic inequities within the social care system, seeing it as a practical route to centering choice, power and ownership with the two most important people in care – the person giving and the person getting support._
+_[Equal Care Co-op](https://equalcare.coop/) are building a new, co-owned social care platform that puts care givers and receivers in charge. By incorporating as a multi-stakeholder co-operative, their digital product and accompanying service is owned by and accountable to the communities using and sustaining it. They arrived at the platform co-op model as a response to systemic inequities within the social care system, seeing it as a practical route to centering choice, power and ownership with the two most important people in care – the person giving and the person getting support._
 
 ![](/blog/assets/2020-11-22-an-introduction-to-platform-coops/equal-care.jpg)
 
