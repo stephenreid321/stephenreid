@@ -74,7 +74,7 @@ StephenReid::App.controller do
 
   get '/coins/:slug' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.remote_update if coin.updated_at < 5.minutes.ago || Padrino.env == :development
+    coin.remote_update if coin.updated_at < 5.minutes.ago || Padrino.env == :development || !coin.units
     partial :'crypto/coin', locals: { coin: coin }
   end
 
