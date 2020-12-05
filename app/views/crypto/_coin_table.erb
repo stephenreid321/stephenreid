@@ -17,11 +17,6 @@
 
   <% if coins.where(starred: true).count > 0 %>
     <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
-    <% if params[:tag] == 'holding' %>
-      <div class="progress" id="total-progress" style="border-radius: 0; height: 2rem">
-        <div class="progress-bar" style="font-size: 1rem"></div>
-      </div>
-    <% end %>
   <% end %>
 
   <div id="symbols" class="text-center mt-3"><i class="fas fa-spin fa-circle-notch"></i></div>
@@ -90,7 +85,6 @@
           $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
 
           var target = (parseFloat(eth)/<%=ENV['ATH_ETH'].to_i%> * 100).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
-          $('#total-progress .progress-bar').css('width', target+'%').text(target+'%').attr('title', target+'% of ATH in ETH').tooltip()
 
           $('#coins').on('order.dt', function () { 
             $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
