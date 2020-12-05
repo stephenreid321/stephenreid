@@ -41,13 +41,14 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
   </li>
 </ul>
 <p>
-  <a href="https://stephenreid.net/metastrategy">Metastrategy</a> is my new strategy on ICONOMI. It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies, and is thus a great set-and-forget option.</p>
+  <a href="/metastrategy">Metastrategy</a> is my new strategy on ICONOMI. It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies, and is thus a great set-and-forget option.</p>
 <p>
-  You could also invest in 3-5 of the <a href="https://stephenreid.net/iconomi">current top performing strategies</a>. If you choose this option I recommend you manually rebalance every 3-6 months (i.e. move your money out of any strategies that are now no longer in the top 5 and into the current top 5).</p>
+  You could also invest in 3-5 of the <a href="/iconomi">current top performing strategies</a>. If you choose this option I recommend you manually rebalance every 3-6 months (i.e. move your money out of any strategies that are now no longer in the top 5 and into the current top 5).</p>
    </td>
    <td>
 <ul>
-<li><a href="https://www.indexcoop.com/dpi">DPI</a>
+<li><a href="https://www.piedao.org/">PieDAO</a> (I recommended <a href="https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14">BCP</a>)
+<li><a href="https://www.indexcoop.com">Index Coop</a>
 </li>
 </ul>
    </td>
@@ -72,8 +73,9 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
 
 You could of course pick a mix of these different options. For example,
 
-*   50% CeFi, in [Metastrategy](https://stephenreid.net/metastrategy)
-*   50% DeFi, split equally between BTC, ETH and DPI
-    *   In the case where you're buying a relatively small amount of crypto, you might choose to buy WBTC (wrapped BTC, BTC on Ethereum) rather than BTC so that all your coins can sit in the same Ethereum wallet. If you're buying a larger amount, it might be desirable to store it in a separate wallet, in which case you might opt to buy actual BTC.
+*   50% CeFi, in [Metastrategy](/metastrategy)
+*   50% DeFi, in [PieDAO's BCP](https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14)
+
+A note on BTC: In the case where you're buying a relatively small amount of crypto, you might choose to buy WBTC (wrapped BTC, BTC on Ethereum) rather than BTC so that all your coins can sit in the same Ethereum wallet. If you're buying a larger amount, it might be desirable to store it in a separate wallet, in which case you might opt to buy actual BTC.
 
 If you do choose to invest, consider [dollar-cost averaging](https://www.investopedia.com/investing/dollar-cost-averaging-pays/) (investing regular small amounts) rather than going all-in.
