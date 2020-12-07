@@ -70,10 +70,12 @@
             order: [[11, "desc"]]})
           <% elsif params[:tag] == 'defi-pulse' %>
             order: [[13, "asc"]]})
+          <% elsif params[:tag] == '24h' %>
+            order: [[6, "desc"]]})
           <% elsif params[:tag] == '7d' %>
             order: [[7, "desc"]]})
           <% else %>
-            order: [[6, "desc"]]})
+            order: [[5, "desc"]]})
           <% end %>
           .addClass('datatabled');
 
