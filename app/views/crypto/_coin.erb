@@ -67,11 +67,6 @@
   <% end %>
 </td>
 <% coin = coin.parent ? coin.parent : coin %>
-<td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
-  <% if coin.market_cap_change_percentage_24h %>
-    <%=number_with_precision coin.market_cap_change_percentage_24h, precision: 2%>%
-  <% end %>
-</td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
   <% if coin.price_change_percentage_24h_in_currency %>
     <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
@@ -85,6 +80,11 @@
 <td class="rg" style="opacity: 0.5">
   <% if coin.price_change_percentage_1h_in_currency %>
     <%=number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2%>%
+  <% end %>
+</td>
+<td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
+  <% if coin.market_cap_change_percentage_24h %>
+    <%=number_with_precision coin.market_cap_change_percentage_24h, precision: 2%>%
   <% end %>
 </td>
 <td>

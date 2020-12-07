@@ -71,11 +71,11 @@
           <% elsif params[:tag] == 'defi-pulse' %>
             order: [[13, "asc"]]})
           <% elsif params[:tag] == 'market-cap-24h' %>
-            order: [[5, "desc"]]})
+            order: [[8, "desc"]]})
           <% elsif params[:tag] == '7d' %>
-            order: [[7, "desc"]]})
-          <% else %>
             order: [[6, "desc"]]})
+          <% else %>
+            order: [[5, "desc"]]})
           <% end %>
           .addClass('datatabled');
 
@@ -130,10 +130,10 @@
       <th>Name</th>
       <th style="white-space: nowrap">Relative holding</th>
       <th></th>
-      <th>Market cap 24h</th>
       <th>24h</th>
       <th>7d</th>
       <th>1h</th>
+      <th>Market cap 24h</th>
       <th>Twitter followers</th>
       <th>Uniswap volume</th>
       <th>Sushiswap volume</th>
