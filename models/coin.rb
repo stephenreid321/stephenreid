@@ -12,6 +12,7 @@ class Coin
   field :platform, type: String
   field :current_price, type: Float
   field :market_cap, type: Float
+  field :market_cap_change_percentage_24h, type: Float
   field :market_cap_rank, type: Integer
   field :total_volume, type: Float
   field :uniswap_volume, type: Float
@@ -102,7 +103,7 @@ class Coin
       coins.each do |c|
         puts c['symbol'].upcase
         coin = Coin.find_or_create_by!(slug: c['id'])
-        %w[symbol name current_price market_cap market_cap_rank total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
+        %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
           coin.send("#{r}=", c[r])
         end
         coin.save
