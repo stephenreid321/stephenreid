@@ -59,6 +59,7 @@ class Coin
       price_change_percentage_1h_in_currency: :number,
       price_change_percentage_24h_in_currency: :number,
       price_change_percentage_7d_in_currency: :number,
+      market_cap_change_percentage_24h: :number,
       uniswap_volume: :number,
       sushiswap_volume: :number,
       tvl: :number,
