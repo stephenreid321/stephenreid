@@ -67,6 +67,11 @@
   <% end %>
 </td>
 <% coin = coin.parent ? coin.parent : coin %>
+<td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
+  <% if coin.market_cap_change_percentage_24h %>
+    <%=number_with_precision coin.market_cap_change_percentage_24h, precision: 2%>%
+  <% end %>
+</td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
   <% if coin.price_change_percentage_24h_in_currency %>
     <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
@@ -95,11 +100,6 @@
 <td data-sort="<%= coin.sushiswap_volume || 0 %>">
   <% if coin.sushiswap_volume %>
     #<%= Coin.where(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug).index(coin.slug)+1 %>
-  <% end %>
-</td>
-<td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
-  <% if coin.market_cap_change_percentage_24h %>
-    <%=number_with_precision coin.market_cap_change_percentage_24h, precision: 2%>%
   <% end %>
 </td>
 <td data-sort="<%= coin.market_cap && coin.tvl ? (coin.market_cap/coin.tvl) : 0 %>">
