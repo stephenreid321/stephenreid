@@ -6,6 +6,7 @@
       [['defi-pulse', '/coins/tag/defi-pulse']] +
       [['24h', '/coins/tag/24h']] +
       [['7d', '/coins/tag/7d']] +
+      [['market cap 24h', '/coins/tag/market-cap-24h']] +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag), "/coins/tag/#{tag.name}"] }
     ),
     ul_class: 'nav nav-tabs',
@@ -56,6 +57,15 @@
       :market_cap.gte => 1000,
       :total_volume.gte => 1000,
     ).order('price_change_percentage_7d_in_currency desc').limit(20)} %>
+
+<% when 'market-cap-24h' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+                  :hidden.ne => true,
+                  :market_cap_rank.ne => nil,
+                  :market_cap.gte => 1000,
+                  :total_volume.gte => 1000,
+                ).order('market_cap_change_percentage_24h desc').limit(20)} %>
 
 <% when 'uniswap' %>
 
