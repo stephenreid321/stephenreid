@@ -76,6 +76,4 @@ You could of course pick a mix of these different options. For example,
 *   50% CeFi, in [Metastrategy](/metastrategy)
 *   50% DeFi, in [PieDAO's BCP](https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14)
 
-A note on BTC: In the case where you're buying a relatively small amount of crypto, you might choose to buy WBTC (wrapped BTC, BTC on Ethereum) rather than BTC so that all your coins can sit in the same Ethereum wallet. If you're buying a larger amount, it might be desirable to store it in a separate wallet, in which case you might opt to buy actual BTC.
-
 If you do choose to invest, consider [dollar-cost averaging](https://www.investopedia.com/investing/dollar-cost-averaging-pays/) (investing regular small amounts) rather than going all-in.
