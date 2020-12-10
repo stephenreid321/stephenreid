@@ -109,9 +109,8 @@ StephenReid::App.controller do
     erb :'crypto/metastrategy'
   end
 
-  get '/iconomi' do
+  get '/iconomi', cache: true do
     @title = 'ICONOMI strategy evaluator'
-    expires 1.hour.to_i
     @p = params[:p]
     erb :'crypto/iconomi'
   end
