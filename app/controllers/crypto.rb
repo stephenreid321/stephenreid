@@ -109,7 +109,7 @@ StephenReid::App.controller do
     erb :'crypto/metastrategy'
   end
 
-  get '/iconomi', cache: true do
+  get '/iconomi' do
     @title = 'ICONOMI strategy evaluator'
     @p = params[:p]
     erb :'crypto/iconomi'
