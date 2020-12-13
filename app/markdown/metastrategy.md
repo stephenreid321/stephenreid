@@ -39,10 +39,9 @@ Then the score of the coins <code>x<sub>1</sub>&hellip;x<sub>4</sub></code> is:
 The performance score of a strategy  <code>p<sup>Y</sup></code> is calculated as
 
 ```
-performance_score = (4 * 1_month_performance) + (3 * three_month_performance) + (2 * six_month_performance) + (1 * year_performance) 
+performance_score = (4 * 1_month_performance) + (3 * three_month_performance) + (2 * six_month_performance) + (1 * year_performance)
 ```
 
-* [Invest in Metastrategy](https://www.iconomi.com/asset/DECENTCOOP)
+* [Invest in Metastrategy](https://iconomi.com/asset/DECENTCOOP)
 * [View the full code](https://github.com/stephenreid321/stephenreid/blob/master/models/strategy.rb) (see the `self.proposed` method)
 * See my [strategy evaluator](http://stephenreid.net/iconomi) for ranking of strategies by (fee-weighted) performance.
-

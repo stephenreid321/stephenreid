@@ -167,8 +167,12 @@ module StephenReid
 
     {
       '/calendly' => 'https://calendly.com/stephenreid321',
+      '/1' => 'https://calendly.com/stephenreid321/1-min-call',
+      '/5' => 'https://calendly.com/stephenreid321/5-min-call',
+      '/15' => 'https://calendly.com/stephenreid321/15-min-call',
       '/30' => 'https://calendly.com/stephenreid321/30-min-call',
-      '/55' => 'https://calendly.com/stephenreid321/55-min-call',
+      '/55' => 'https://calendly.com/stephenreid321/60-min-call',
+      '/60' => 'https://calendly.com/stephenreid321/60-min-call',
       '/90' => 'https://calendly.com/stephenreid321/90-min-call',
       '/120' => 'https://calendly.com/stephenreid321/120-min-call',
       '/about' => '/',
