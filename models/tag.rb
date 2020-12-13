@@ -32,7 +32,7 @@ class Tag
     tags = Tag.order('holding desc').where(:holding.gt => 0)
     i = tags.pluck(:id).index(id)
     i = (tags.count - 1) - i if i.odd?
-    i && !tags.empty? ? '#2DB963'.paint.spin(0 - (i.to_f / (tags.count - 1)) * (360 - 360 / tags.count)).lighten(20) : '#666666'
+    i && !tags.empty? ? '#2DB963'.paint.spin(0 - (i.to_f / (tags.count - 1)) * (360 - (360 / tags.count))).lighten(20) : '#666666'
   rescue StandardError
     '#666666'
   end
