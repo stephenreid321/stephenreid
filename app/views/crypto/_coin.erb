@@ -108,7 +108,7 @@
   <% end %>
 </td>
 <td>
-  <% if coin.market_cap %>
+  <% if coin.market_cap && coin.market_cap > 0 %>
     <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
   <% end %>
 </td>
