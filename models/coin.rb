@@ -28,7 +28,7 @@ class Coin
   field :starred, type: Boolean
   field :staked_units, type: Float
   field :notes, type: String
-  field :skip_remote_update, type: Float
+  field :skip_remote_update, type: Boolean
 
   belongs_to :tag, optional: true
 
