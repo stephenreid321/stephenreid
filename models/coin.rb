@@ -28,6 +28,7 @@ class Coin
   field :starred, type: Boolean
   field :staked_units, type: Float
   field :notes, type: String
+  field :skip_remote_update, type: Float
 
   belongs_to :tag, optional: true
 
@@ -46,6 +47,7 @@ class Coin
       symbol: :text,
       name: :text,
       defi_pulse_name: :text,
+      skip_remote_update: :check_box,
       units: :number,
       staked_units: :number,
       notes: :text_area,
@@ -123,6 +125,8 @@ class Coin
   end
 
   def remote_update
+    return if skip_remote_update
+
     agent = Mechanize.new
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
