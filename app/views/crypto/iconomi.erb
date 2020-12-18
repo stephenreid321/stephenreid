@@ -128,7 +128,7 @@
       <% end %>
     </td>
     <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
-    <td>
+    <td <% if x == 'lastRebalanced' %> data-sort="<%=strategy[x].to_i%>" <% end %>>
       <% if x == 'lastRebalanced' %>
         <%= time_ago_in_words strategy[x] %> ago
       <% else %>
