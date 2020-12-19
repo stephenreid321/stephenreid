@@ -6,7 +6,7 @@
   </div>
 <% end %>
 
-<% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| %>
+<% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| next if !verse['Images'] %>
 <div class="row" <% unless params[:i] %>style="margin-bottom: 10rem"<% end %>>
   <div class="col-sm-9 order-sm-2 mb-3">
     <a href="/tao-te-ching/<%=verse['Verse']%>"><img src="<%= verse['Images'].first['thumbnails']['full']['url'] %>" class="w-100"></a>
@@ -83,7 +83,7 @@
     })
   </script>
   <div class="grid mt-5" style="opacity: 0">
-    <% Verse.all(sort: { 'Verse' => 'asc'}).shuffle.each { |verse| next if verse['Verse'] == params[:i].to_i %>
+    <% Verse.all(sort: { 'Verse' => 'asc'}).shuffle.each { |verse| next if verse['Verse'] == params[:i].to_i || !verse['Images'] %>
     <div class="grid-sizer"></div>
     <a class="grid-item" href="/tao-te-ching/<%=verse['Verse']%>">
       <img class="w-100" src="<%= verse['Images'].first['thumbnails']['large']['url']%>" />
