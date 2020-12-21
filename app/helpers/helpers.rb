@@ -4,8 +4,12 @@ StephenReid::App.helpers do
   end
 
   def md(slug)
-    text = open("#{Padrino.root}/app/markdown/#{slug}.md").read.force_encoding('utf-8')
-    text = text.gsub(/\A---(.|\n)*?---/, '')
+    begin
+      text = open("#{Padrino.root}/app/markdown/#{slug}.md").read.force_encoding('utf-8')
+      text = text.gsub(/\A---(.|\n)*?---/, '')
+    rescue StandardError
+      text = slug
+    end
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
     markdown.render(text)
   end

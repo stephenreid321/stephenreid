@@ -17,7 +17,7 @@
     </h2>
     <div>
       <span style="background: white">
-        <%= verse['Text'].gsub('  ','&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n","&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n",'&nbsp;<br />') %>
+        <%= md verse['Text'].gsub('  ','&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n","&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n",'&nbsp;<br />') %>
         &nbsp;
       </span>
     </div>
