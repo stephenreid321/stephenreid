@@ -74,8 +74,17 @@ StephenReid::App.controller do
 
   get '/coins/:slug' do
     coin = Coin.find_by(slug: params[:slug])
-    coin.remote_update if coin.updated_at < 5.minutes.ago || coin.units.nil? || (coin.units && coin.units.zero?) || Padrino.env == :development
-    partial :'crypto/coin', locals: { coin: coin }
+    if Padrino.env == :development
+      coin.remote_update
+      partial :'crypto/coin', locals: { coin: coin }
+    else
+      cache_key = "coin_#{params[:slug]}"
+      expire(cache_key) if coin.units.nil? || (coin.units && coin.units.zero?)
+      cache(cache_key, expires: 5.minutes) do
+        coin.remote_update
+        partial :'crypto/coin', locals: { coin: coin }
+      end
+    end
   end
 
   get '/coins/:slug/hide' do
