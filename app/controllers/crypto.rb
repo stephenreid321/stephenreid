@@ -80,7 +80,7 @@ StephenReid::App.controller do
     else
       cache_key = "coin_#{params[:slug]}"
       expire(cache_key) if coin.units.nil? || (coin.units && coin.units.zero?)
-      cache(cache_key, expires: 5.minutes) do
+      cache(cache_key, expires: 5*60) do
         coin.remote_update
         partial :'crypto/coin', locals: { coin: coin }
       end
