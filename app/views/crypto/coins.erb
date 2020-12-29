@@ -28,9 +28,9 @@
 }.compact.join %>
 </div>
 
-<% case params[:tag]; when nil, 'holding' %>
-
 <%= md :seeds %>
+
+<% case params[:tag]; when nil, 'holding' %>
 
 <div class="mt-3">
   <%= md :holding %>

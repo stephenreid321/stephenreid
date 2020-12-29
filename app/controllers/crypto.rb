@@ -78,7 +78,7 @@ StephenReid::App.controller do
       coin.remote_update
       partial :'crypto/coin', locals: { coin: coin }
     else
-      cache_key = "coin_#{params[:slug]}"
+      cache_key = "coin_#{params[:slug]}_#{current_account ? 'signed_in' : 'not_signed_in'}"
       expire(cache_key) if coin.units.nil? || (coin.units && coin.units.zero?)
       cache(cache_key, expires: 5 * 60) do
         coin.remote_update
@@ -91,7 +91,8 @@ StephenReid::App.controller do
     sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:tag_id, nil)
-    expire("coin_#{params[:slug]}")
+    cache_key = "coin_#{params[:slug]}_#{current_account ? 'signed_in' : 'not_signed_in'}"
+    expire(cache_key)
     200
   end
 
@@ -100,7 +101,8 @@ StephenReid::App.controller do
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, true)
     coin.remote_update
-    expire("coin_#{params[:slug]}")
+    cache_key = "coin_#{params[:slug]}_#{current_account ? 'signed_in' : 'not_signed_in'}"
+    expire(cache_key)
     200
   end
 
