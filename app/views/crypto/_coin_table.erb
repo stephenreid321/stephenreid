@@ -141,7 +141,13 @@
     </tr>
   </thead>
   <% coins.each { |coin| %>
-  <tr <% if coin.symbol == 'ETH' %>style="background-color: #E4D9FA"<% elsif coin.eth? %>style="background-color: #F5F2FA"<% end %>>
+  <tr data-pagelet-url="/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"
+     <% if coin.symbol == 'ETH' %>
+     style="background-color: #E4D9FA"
+     <% elsif coin.eth? %>
+     style="background-color: #F5F2FA"
+     <% end %>
+     >
     <%= partial :'crypto/coin', locals: { coin: coin } %>
   </tr>
   <% } %>
