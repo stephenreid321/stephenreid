@@ -133,7 +133,7 @@ class Coin
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
     rescue Net::HTTPTooManyRequests => e
-      puts e
+      puts 'sleeping...'
       sleep 1
       remote_update
       return
