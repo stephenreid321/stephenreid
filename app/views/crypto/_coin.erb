@@ -50,7 +50,7 @@
       <% if coin.starred %>
         <% if coin.all_units %>
           <% if coin.holding < 1e-6 %>
-            <i data-toggle="tooltip" style="cursor: pointer" class="far fa-question-circle"></i>
+            <i data-toggle="tooltip" <% if current_account %> style="cursor: pointer" <% end %> class="far fa-question-circle"></i>
           <% else %>
             <i class="fas fa-spin fa-circle-notch"></i>
           <% end %>
