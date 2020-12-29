@@ -79,7 +79,7 @@
           <% end %>
           .addClass('datatabled');
 
-          var t = parseInt($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+          var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
         <% if current_account %>
           var priceFactor = <%=ENV['PRICE_FACTOR']%>
           var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
@@ -96,12 +96,12 @@
           var max;
           $('#coins td.holding').each(function() {
             if (!max)
-              max = parseInt($(this).attr('data-sort'))
-            else if (parseInt($(this).attr('data-sort')) > max)
-              max = parseInt($(this).attr('data-sort'))
+              max = parseFloat($(this).attr('data-sort'))
+            else if (parseFloat($(this).attr('data-sort')) > max)
+              max = parseFloat($(this).attr('data-sort'))
           })
           $('#coins td.holding').each(function() {
-              var v = parseInt($(this).attr('data-sort'))
+              var v = parseFloat($(this).attr('data-sort'))
               if (v) {
                 var text = parseFloat(100*v/t).toFixed(1)+'%'
                 $(this).find('.p').html('\
