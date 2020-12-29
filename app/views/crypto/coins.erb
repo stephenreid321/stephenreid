@@ -50,21 +50,24 @@
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
               :hidden.ne => true,
-              :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK']
+              :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+              :total_volume.gte => ENV['MIN_VOLUME']
             ).order('price_change_percentage_24h_in_currency desc').limit(20)} %>
 
 <% when '7d' %>
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :hidden.ne => true,
-      :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK']
+      :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+      :total_volume.gte => ENV['MIN_VOLUME']
     ).order('price_change_percentage_7d_in_currency desc').limit(20)} %>
 
 <% when 'market-cap-24h' %>
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
                   :hidden.ne => true,
-                  :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK']
+                  :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                  :total_volume.gte => ENV['MIN_VOLUME']
                 ).order('market_cap_change_percentage_24h desc').limit(20)} %>
 
 <% when 'uniswap' %>
