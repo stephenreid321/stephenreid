@@ -132,6 +132,10 @@ class Coin
     agent = Mechanize.new
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
+    rescue Net::HTTPTooManyRequests => e
+      sleep 1
+      remote_update
+      return
     rescue StandardError => e
       puts e
       Airbrake.notify(e)
