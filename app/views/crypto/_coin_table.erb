@@ -56,7 +56,6 @@
 </style>
 <script>
   $(function () {
-    $(document).ajaxStop(function() {
       if (!$('#coins').hasClass('datatabled'))
         $('#coins').dataTable({
           bInfo: false,
@@ -114,9 +113,6 @@
                   $(this).find('.front').width($(this).find('.back').width())
                 }
           })
-
-
-    })
   })
 </script>
 <style>
