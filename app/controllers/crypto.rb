@@ -74,25 +74,14 @@ StephenReid::App.controller do
 
   get '/coins/:slug' do
     coin = Coin.find_by(slug: params[:slug])
-    if Padrino.env == :development
-      coin.remote_update
-      partial :'crypto/coin', locals: { coin: coin }
-    else
-      cache_key = "coin_#{params[:slug]}_#{current_account ? 'signed_in' : 'not_signed_in'}"
-      expire(cache_key) if coin.units.nil? || (coin.units && coin.units.zero?)
-      cache(cache_key, expires: 5 * 60) do
-        coin.remote_update
-        partial :'crypto/coin', locals: { coin: coin }
-      end
-    end
+    coin.remote_update if coin.updated_at < 5.minutes.ago || coin.coin.units.nil? || (coin.units && coin.units.zero?)
+    partial :'crypto/coin', locals: { coin: coin }
   end
 
   get '/coins/:slug/hide' do
     sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:tag_id, nil)
-    cache_key = "coin_#{params[:slug]}_#{current_account ? 'signed_in' : 'not_signed_in'}"
-    expire(cache_key)
     200
   end
 
@@ -101,8 +90,6 @@ StephenReid::App.controller do
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, true)
     coin.remote_update
-    cache_key = "coin_#{params[:slug]}_#{current_account ? 'signed_in' : 'not_signed_in'}"
-    expire(cache_key)
     200
   end
 
