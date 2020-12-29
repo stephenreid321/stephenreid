@@ -133,6 +133,7 @@ class Coin
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
     rescue StandardError => e
+      puts e
       Airbrake.notify(e)
       self.units = nil
       save!

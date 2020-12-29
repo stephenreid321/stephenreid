@@ -141,7 +141,7 @@
     </tr>
   </thead>
   <% coins.each { |coin| %>
-  <tr <% if coin.symbol == 'ETH' %>style="background-color: #E4D9FA"<% end %>>
+  <tr <% if coin.symbol == 'ETH' ||  coin.eth? %>style="background-color: #E4D9FA"<% end %>>
     <%= partial :'crypto/coin', locals: { coin: coin } %>
   </tr>
   <% } %>
