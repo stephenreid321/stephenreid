@@ -28,6 +28,15 @@ namespace :coins do
   task import: :environment do
     Coin.import
   end
+
+  task remote_update: :environment do
+    Coin.where(:id.in =>
+      Coin.where(starred: true).pluck(:id) +
+      Coin.where(:tag_id.ne => nil).pluck(:id)).each do |coin|
+        puts coin.slug
+        coin.remote_update
+      end
+  end
 end
 
 namespace :terms do

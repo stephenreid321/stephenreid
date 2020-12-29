@@ -145,6 +145,8 @@
     </tr>
   </thead>
   <% coins.each { |coin| %>
-  <tr <% if coin.symbol == 'ETH' %>style="background-color: #E4D9FA"<% end %> data-pagelet-url="/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"></tr>
+  <tr <% if coin.symbol == 'ETH' %>style="background-color: #E4D9FA"<% end %>>
+    <%= partial :'crypto/coin', locals: { coin: coin } %>
+  </tr>
   <% } %>
 </table>

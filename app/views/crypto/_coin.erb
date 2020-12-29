@@ -25,11 +25,6 @@
     <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
       <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
     </a>
-    <script>
-      $(function() {
-        $('[data-pagelet-url^="/coins/<%=coin.slug%>"]').css({backgroundColor: '#F5F2FA'})
-      })
-    </script>
   <% end %>
   <% if current_account && (asset = Asset.find_by(ticker: coin.parent ? coin.parent.symbol : coin.symbol)) %>
     <small>
