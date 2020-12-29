@@ -72,6 +72,12 @@ StephenReid::App.controller do
     200
   end
 
+  get '/coins/:slug' do
+    coin = Coin.find_by(slug: params[:slug])
+    coin.remote_update
+    partial :'crypto/coin', locals: { coin: coin }
+  end
+
   get '/coins/:slug/hide' do
     sign_in_required!
     coin = Coin.find_by(slug: params[:slug])
