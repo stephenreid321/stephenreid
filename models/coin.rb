@@ -134,7 +134,7 @@ class Coin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
     rescue Mechanize::ResponseCodeError => e
       puts e.response_code
-      case e.response_code
+      case e.response_code.to_i
       when 404
         destroy
       when 429
