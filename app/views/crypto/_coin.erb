@@ -99,7 +99,7 @@
 </td>
 <td data-sort="<%= coin.tvl || 0 %>">
   <% if coin.tvl %>
-    <%= coin.tvl.round(2) %>
+    #<%= Coin.where(:tvl.ne => nil).order('tvl desc').pluck(:slug).index(coin.slug)+1 %>
   <% end %>
 </td>
 <td>
