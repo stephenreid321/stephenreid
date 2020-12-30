@@ -34,6 +34,7 @@ class Coin
 
   before_validation do
     self.symbol = symbol.try(:upcase)
+    self.twitter_followers = nil if twitter_followers.zero?
   end
 
   def self.eth_usd
