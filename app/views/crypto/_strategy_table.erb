@@ -33,7 +33,7 @@
   <% asset = Asset.find_by(ticker: k) %>
   <% coin = Coin.symbol(k) %>
   <% coin.remote_update if coin && !coin.platform %>
-  <tr <% if coin && coin.eth? %>style="background-color: #F5F2FA"<% end %>>
+  <tr <% if coin && coin.erc20? %>style="background-color: #F5F2FA"<% end %>>
     <td style="vertical-align: middle; text-align: right; width: 10vw">
       <% if actual[k] %>
         <% if diff[k] < 0 %>
@@ -49,7 +49,7 @@
         <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
           <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
         </a>
-        <% if coin.eth? %>
+        <% if coin.erc20? %>
           <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
             <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
           </a>

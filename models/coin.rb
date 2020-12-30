@@ -86,7 +86,7 @@ class Coin
     name.starts_with?('Aave ') ? Coin.symbol(symbol[1..-1]) : nil
   end
 
-  def eth?
+  def erc20?
     platform == 'ethereum'
   end
 
@@ -160,7 +160,7 @@ class Coin
     self.twitter_followers = c['community_data']['twitter_followers']
     if starred
       u = 0
-      if eth?
+      if erc20?
         ENV['ETH_ADDRESSES'].split(',').each do |a|
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
         end
