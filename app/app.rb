@@ -175,6 +175,8 @@ module StephenReid
       '/60' => 'https://calendly.com/stephenreid321/60-min-call',
       '/90' => 'https://calendly.com/stephenreid321/90-min-call',
       '/120' => 'https://calendly.com/stephenreid321/120-min-call',
+      '/30p' => 'https://calendly.com/stephenreid321/priority-30-min-call',
+      '/60p' => 'https://calendly.com/stephenreid321/priority-60-min-call',
       '/about' => '/',
       '/link' => '/',
       '/training' => '/about',
