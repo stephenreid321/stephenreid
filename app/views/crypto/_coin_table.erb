@@ -1,158 +1,164 @@
-<% if current_account %>
+<% if ['24h', '7d', 'market-cap-24h'].include?(params[:tag]) %>
+  <p class="text-center">
+    Showing coins with a market cap rank <= #<%=ENV['MAX_MARKET_CAP_RANK'] %> and volume >= Ξ<%=ENV['MIN_VOLUME']%>
+    </p>
+  <% end %>
 
-  <% if params[:add] %>
-    <div class="row justify-content-center">
-      <div class="col-auto">
-        <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
-          <div class="input-group mb-3">
-            <%= text_field_tag :symbol, :class => 'form-control' %>
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">Add</button>
+  <% if current_account %>
+
+    <% if params[:add] %>
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
+            <div class="input-group mb-3">
+              <%= text_field_tag :symbol, :class => 'form-control' %>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Add</button>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-
-  <% if coins.where(starred: true).count > 0 %>
-    <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
-  <% end %>
-
-  <div id="symbols" class="text-center mt-3"><i class="fas fa-spin fa-circle-notch"></i></div>
-
-<% end %>
-
-<style>
-  .p {
-    display: block;
-    padding-top: 0.1em;
-    height: 1.5em;
-  }
-
-  .back {
-    border-radius: 2.5px;
-    position: relative;
-    text-align: center;
-    background-color: white;
-    color: black;
-  }
-
-  .boundbox {
-    position: absolute;
-    left: 0;
-    top: 0;
-    overflow: hidden;
-  }
-
-  .front {
-    border-radius: 2.5px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: #00B963;
-    color: white;
-  }
-</style>
-<script>
-  $(function () {
-    function coinTable() {
-      if (!$('#coins').hasClass('datatabled'))
-        $('#coins').dataTable({
-          bInfo: false,
-          paging: false,
-          searching: false,
-          <% if params[:tag] == 'holding' %>
-            order: [[3, "desc"]]})
-          <% elsif params[:tag] == 'uniswap' %>
-            order: [[10, "desc"]]})
-          <% elsif params[:tag] == 'sushiswap' %>
-            order: [[11, "desc"]]})
-          <% elsif params[:tag] == 'defi-pulse' %>
-            order: [[13, "asc"]]})
-          <% elsif params[:tag] == 'market-cap-24h' %>
-            order: [[8, "desc"]]})
-          <% elsif params[:tag] == '7d' %>
-            order: [[6, "desc"]]})
-          <% else %>
-            order: [[5, "desc"]]})
           <% end %>
-          .addClass('datatabled');
+        </div>
+      </div>
+    <% end %>
 
-          var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
-        <% if current_account %>
-          var priceFactor = <%=ENV['PRICE_FACTOR']%>
-          var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
-          var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
-          $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
+    <% if coins.where(starred: true).count > 0 %>
+      <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+    <% end %>
 
-          var target = (parseFloat(eth)/<%=ENV['ATH_ETH'].to_i%> * 100).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+    <div id="symbols" class="text-center mt-3"><i class="fas fa-spin fa-circle-notch"></i></div>
 
-          $('#coins').on('order.dt', function () { 
-            $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
-          }).trigger('order.dt')
-        <% end %>
+  <% end %>
 
-          var max;
-          $('#coins td.holding').each(function() {
-            if (!max)
-              max = parseFloat($(this).attr('data-sort'))
-            else if (parseFloat($(this).attr('data-sort')) > max)
-              max = parseFloat($(this).attr('data-sort'))
-          })
-          $('#coins td.holding').each(function() {
-              var v = parseFloat($(this).attr('data-sort'))
-              if (v) {
-                var text = parseFloat(100*v/t).toFixed(1)+'%'
-                $(this).find('.p').html('\
-                <div class="p back"> \
-                  <span>'+text+'</span> \
-                  <div class="p boundbox"> \
-                    <div class="p front">'+text+'</div> \
-                  </div>')
-                  $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
-                  $(this).find('.front').width($(this).find('.back').width())
-                }
-          })
-        }
-        coinTable()
-        $(document).ajaxStop(function() { coinTable() })
-  })
-</script>
-<style>
-  #coins th { border-top: 0; }
-</style>
-<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>Name</th>
-      <th style="white-space: nowrap">Relative holding</th>
-      <th></th>
-      <th>24h</th>
-      <th>7d</th>
-      <th>1h</th>
-      <th>Market cap 24h</th>
-      <th>Twitter followers</th>
-      <th>Uniswap volume</th>
-      <th>Sushiswap volume</th>
-      <th>Market cap/TVL</th>
-      <th>Volume/cap</th>
-      <% if current_account %>
+  <style>
+    .p {
+      display: block;
+      padding-top: 0.1em;
+      height: 1.5em;
+    }
+
+    .back {
+      border-radius: 2.5px;
+      position: relative;
+      text-align: center;
+      background-color: white;
+      color: black;
+    }
+
+    .boundbox {
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+    }
+
+    .front {
+      border-radius: 2.5px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: #00B963;
+      color: white;
+    }
+  </style>
+  <script>
+    $(function () {
+      function coinTable() {
+        if (!$('#coins').hasClass('datatabled'))
+          $('#coins').dataTable({
+            bInfo: false,
+            paging: false,
+            searching: false,
+            <% case params[:tag]; when 'holding' %>
+              order: [[3, "desc"]]})
+            <% when 'uniswap' %>
+              order: [[10, "desc"]]})
+            <% when 'sushiswap' %>
+              order: [[11, "desc"]]})
+            <% when 'defi-pulse' %>
+              order: [[13, "asc"]]})
+            <% when 'market-cap-24h' %>
+              order: [[8, "desc"]]})
+            <% when '7d' %>
+              order: [[6, "desc"]]})
+            <% else %>
+              order: [[5, "desc"]]})
+            <% end %>
+            .addClass('datatabled');
+
+            var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+          <% if current_account %>
+            var priceFactor = <%=ENV['PRICE_FACTOR']%>
+            var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
+            var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+            $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
+
+            var target = (parseFloat(eth)/<%=ENV['ATH_ETH'].to_i%> * 100).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+
+            $('#coins').on('order.dt', function () { 
+              $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
+            }).trigger('order.dt')
+          <% end %>
+
+            var max;
+            $('#coins td.holding').each(function() {
+              if (!max)
+                max = parseFloat($(this).attr('data-sort'))
+              else if (parseFloat($(this).attr('data-sort')) > max)
+                max = parseFloat($(this).attr('data-sort'))
+            })
+            $('#coins td.holding').each(function() {
+                var v = parseFloat($(this).attr('data-sort'))
+                if (v) {
+                  var text = parseFloat(100*v/t).toFixed(1)+'%'
+                  $(this).find('.p').html('\
+                  <div class="p back"> \
+                    <span>'+text+'</span> \
+                    <div class="p boundbox"> \
+                      <div class="p front">'+text+'</div> \
+                    </div>')
+                    $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
+                    $(this).find('.front').width($(this).find('.back').width())
+                  }
+            })
+          }
+          coinTable()
+          $(document).ajaxStop(function() { coinTable() })
+    })
+  </script>
+  <style>
+    #coins th { border-top: 0; }
+  </style>
+  <table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins">
+    <thead>
+      <tr>
         <th></th>
-      <% end %>
-    </tr>
-  </thead>
-  <% coins.each { |coin| %>
-  <tr data-pagelet-url="/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"
+        <th></th>
+        <th>Name</th>
+        <th style="white-space: nowrap">Relative holding</th>
+        <th></th>
+        <th>24h</th>
+        <th>7d</th>
+        <th>1h</th>
+        <th>Market cap 24h</th>
+        <th>Twitter followers</th>
+        <th>Uniswap volume</th>
+        <th>Sushiswap volume</th>
+        <th>Market cap/TVL</th>
+        <th>Volume/cap</th>
+        <% if current_account %>
+          <th></th>
+        <% end %>
+      </tr>
+    </thead>
+    <% coins.each { |coin| %>
+    <tr data-pagelet-url="/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"
      <% if coin.symbol == 'ETH' %>
      style="background-color: #E4D9FA"
      <% elsif coin.eth? %>
      style="background-color: #F5F2FA"
      <% end %>
      >
-    <%= partial :'crypto/coin', locals: { coin: coin } %>
-  </tr>
-  <% } %>
-</table>
+      <%= partial :'crypto/coin', locals: { coin: coin } %>
+    </tr>
+    <% } %>
+  </table>
