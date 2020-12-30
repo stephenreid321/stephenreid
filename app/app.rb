@@ -70,6 +70,7 @@ module StephenReid
       @title = 'Tao Te Ching'
       @favicon = 'tao-sq.png'
       @og_image = "#{ENV['BASE_URI']}/images/fish.jpg"
+      @og_desc = ''
       erb :tao
     end
 
@@ -78,6 +79,7 @@ module StephenReid
       @favicon = 'tao-sq.png'
       verse = Verse.all(filter: "{Verse} = #{params[:i]}").first
       @og_image = verse['Images'].first['thumbnails']['full']['url']
+      @og_desc = ''
       erb :tao
     end
 
