@@ -17,7 +17,7 @@
   <% end %>
 </td>
 <td style="white-space: nowrap" data-symbol="<%=(coin.parent || coin.symbol.starts_with?('$')) ? coin.symbol[1..-1] : coin.symbol%>">
-  <a target="_blank" href="<%=coin.parent ? coin.parent.website : coin.website%>"><%=coin.name%> (<%=coin.symbol%>)</a>
+  <a target="_blank" href="<%=(coin.parent ? coin.parent.website : coin.website) || %Q{https://coingecko.com/en/coins/#{coin.parent ? coin.parent.slug : coin.slug}}%>"><%=coin.name%> (<%=coin.symbol%>)</a>
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.parent ? coin.parent.slug : coin.slug%>">
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
   </a>
