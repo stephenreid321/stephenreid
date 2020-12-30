@@ -132,16 +132,19 @@ class Coin
     agent = Mechanize.new
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
-    rescue Net::HTTPTooManyRequests => e
-      puts 'sleeping...'
-      sleep 1
-      remote_update
-      return
-    rescue StandardError => e
-      puts e
-      Airbrake.notify(e)
-      self.units = nil
-      save!
+    rescue Mechanize::ResponseCodeError => e
+      puts e.response_code
+      case e.response_code
+      when 404
+        destroy
+      when 429
+        sleep 1
+        remote_update
+      else
+        Airbrake.notify(e)
+        self.units = nil
+        save!
+      end
       return
     end
     %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
