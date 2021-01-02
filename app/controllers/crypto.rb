@@ -111,9 +111,11 @@ StephenReid::App.controller do
   end
 
   get '/iconomi', cache: true do
-    cache_key { request.path + '?' + params.select { |k, _v| %w[funds investment].include?(k) }.to_param }
+    unless Padrino.env == :development
+      cache_key { request.path + '?' + params.select { |k, _v| %w[funds investment].include?(k) }.to_param }
+      expires 1.hour.to_i
+    end
     @title = 'ICONOMI strategy evaluator'
-    expires 1.hour.to_i
     @p = params[:p]
     erb :'crypto/iconomi'
   end
