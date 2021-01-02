@@ -12,9 +12,9 @@ class Alert
   validates_uniqueness_of :ccowl_id
 
   after_create do
-    Telegram::Bot::Client.run(ENV['TELEGRAM_TOKEN']) do |bot|
-      bot.api.send_message(chat_id: ENV['TELEGRAM_CHAT_ID'], text: text)
-    end
+    # Telegram::Bot::Client.run(ENV['TELEGRAM_TOKEN']) do |bot|
+    #   bot.api.send_message(chat_id: ENV['TELEGRAM_CHAT_ID'], text: text)
+    # end
     # Strategy.bail if value.negative?
   end
 
