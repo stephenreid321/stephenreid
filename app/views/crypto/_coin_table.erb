@@ -64,26 +64,33 @@
     $(function () {
       function coinTable() {
         if (!$('#coins').hasClass('datatabled'))
-          $('#coins').dataTable({
+          var dt = $('#coins').dataTable({
             bInfo: false,
             paging: false,
             searching: false,
             <% case params[:tag]; when 'holding' %>
-              order: [[3, "desc"]]})
+              order: [[4, "desc"]]})
             <% when 'uniswap' %>
-              order: [[10, "desc"]]})
-            <% when 'sushiswap' %>
               order: [[11, "desc"]]})
-            <% when 'defi-pulse' %>
+            <% when 'sushiswap' %>
               order: [[12, "desc"]]})
+            <% when 'defi-pulse' %>
+              order: [[13, "desc"]]})
             <% when 'market-cap-24h' %>
-              order: [[8, "desc"]]})
+              order: [[9, "desc"]]})
             <% when '7d' %>
-              order: [[6, "desc"]]})
+              order: [[7, "desc"]]})
             <% else %>
-              order: [[5, "desc"]]})
+              order: [[6, "desc"]]})
             <% end %>
-            .addClass('datatabled');
+            .addClass('datatabled')
+            .on('draw.dt', function () {
+              var i = 0;
+              $("#coins td:first-child").each(function () {
+                console.log(this)
+                      $(this).html(++i);
+                  })
+            } ).trigger('draw.dt');
 
             var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
           <% if current_account %>
@@ -132,6 +139,7 @@
     <thead>
       <tr>
         <th></th>
+        <th>MC</th>
         <th></th>
         <th>Name</th>
         <th style="white-space: nowrap">Relative holding</th>
