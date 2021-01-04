@@ -2,9 +2,11 @@
 
 <% case params[:tag]; when nil, 'holding' %>
 
-<div class="mt-3">
-  <%= md :holding %>
-</div>
+<% unless current_account %>
+  <div class="mt-3">
+    <%= md :holding %>
+  </div>
+<% end %>
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
       :starred => true
