@@ -69,8 +69,6 @@
             var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
             $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
 
-            var target = (parseFloat(eth)/<%=ENV['ATH_ETH'].to_i%> * 100).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
-
             $('#coins').on('order.dt', function () { 
               $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
             }).trigger('order.dt')
