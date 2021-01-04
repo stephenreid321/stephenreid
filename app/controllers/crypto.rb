@@ -17,7 +17,7 @@ StephenReid::App.controller do
   end
 
   get '/coins' do
-    redirect '/tags'
+    redirect '/coins/tag/holding'
   end
 
   get '/coins/tag/:tag' do
