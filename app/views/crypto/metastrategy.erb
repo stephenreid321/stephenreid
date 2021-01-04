@@ -37,7 +37,7 @@
     <% %w[day week month three_month six_month year].each { |t| %>
     <td style="text-align: center">
       <% if strategy.send(t) %>
-        <% score, index = strategy.score_index(t, strategies: Strategy.active_mature(mature_period: strategy.max_maturity)) %>
+        <% score, index = strategy.score_index(t, strategies: Strategy.all) %>
         <span class="score">
           <%= number_with_precision score, precision: 1 %>
         </span>
