@@ -84,9 +84,6 @@
     </td>
     <td>
       <a target="_blank" href="https://iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
-      <% if !@p && strategy.name == 'Metastrategy' %>
-        (private, <a href="mailto:stephen@stephenreid.net">ask me for an invitation</a>)
-      <% end %>
     </td>
     <td data-sort="<%=strategy.score_fee_weighted%>">
       <% score, index = strategy.score_index('score_fee_weighted') %>
