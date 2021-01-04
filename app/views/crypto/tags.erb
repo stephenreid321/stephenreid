@@ -6,7 +6,7 @@
           bInfo: false,
           paging: false,
           searching: false,
-          order: [[4, "desc"]]})
+          order: [[5, "desc"]]})
           .addClass('datatabled')
           .on('draw.dt', function () {
             var i = 0;
@@ -16,6 +16,29 @@
                 })
           } ).trigger('draw.dt');
 
+          var t = parseFloat($('#tags td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+
+          var max;
+          $('#tags td.holding').each(function() {
+            if (!max)
+              max = parseFloat($(this).attr('data-sort'))
+            else if (parseFloat($(this).attr('data-sort')) > max)
+              max = parseFloat($(this).attr('data-sort'))
+          })
+          $('#tags td.holding').each(function() {
+              var v = parseFloat($(this).attr('data-sort'))
+              if (v) {
+                var text = parseFloat(100*v/t).toFixed(1)+'%'
+                $(this).find('.p').html('\
+                <div class="p back"> \
+                  <span>'+text+'</span> \
+                  <div class="p boundbox"> \
+                    <div class="p front">'+text+'</div> \
+                  </div>')
+                  $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
+                  $(this).find('.front').width($(this).find('.back').width())
+                }
+          })
         }
         tagTable()
         $(document).ajaxStop(function() { tagTable() })
@@ -29,6 +52,7 @@
     <tr>
       <th></th>
       <th>Name</th>
+      <th style="white-space: nowrap">Relative holding</th>
       <th>24h</th>
       <th>7d</th>
       <th>1h</th>

@@ -29,37 +29,6 @@
 
   <% end %>
 
-  <style>
-    .p {
-      display: block;
-      padding-top: 0.1em;
-      height: 1.5em;
-    }
-
-    .back {
-      border-radius: 2.5px;
-      position: relative;
-      text-align: center;
-      background-color: white;
-      color: black;
-    }
-
-    .boundbox {
-      position: absolute;
-      left: 0;
-      top: 0;
-      overflow: hidden;
-    }
-
-    .front {
-      border-radius: 2.5px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      background-color: #00B963;
-      color: white;
-    }
-  </style>
   <script>
     $(function () {
       function coinTable() {
@@ -93,6 +62,7 @@
             } ).trigger('draw.dt');
 
             var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+
           <% if current_account %>
             var priceFactor = <%=ENV['PRICE_FACTOR']%>
             var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
