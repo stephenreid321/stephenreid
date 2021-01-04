@@ -1,6 +1,7 @@
 <%= ul_nav (
       [['holding', '/coins/tag/holding']] +
       [['watching', '/coins/tag/watching']] +
+      [['watching-less-core', '/coins/tag/watching-less-core']] +
       [['uniswap', '/coins/tag/uniswap']] +
       [['sushiswap', '/coins/tag/sushiswap']] +
       [['defi-pulse', '/coins/tag/defi-pulse']] +
@@ -45,6 +46,12 @@
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
           :tag_id.ne => nil
         ).order('price_change_percentage_24h_in_currency desc')} %>
+
+<% when 'watching-less-core' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+                  :tag_id.in => Tag.all.pluck(:id) - Tag.where(name: 'core').pluck(:id),
+                ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when '24h' %>
 
