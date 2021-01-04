@@ -8,6 +8,7 @@
 
 <% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
+<% strategies = Strategy.all %>
 
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
@@ -37,13 +38,13 @@
     <% %w[day week month three_month six_month year].each { |t| %>
     <td style="text-align: center">
       <% if strategy.send(t) %>
-        <% score, index = strategy.score_index(t, strategies: Strategy.all) %>
+        <% score, index = strategy.score_index(t, strategies: strategies) %>
         <span class="score">
           <%= number_with_precision score, precision: 1 %>
         </span>
         <br />
         <small>
-          <%= index %>/<%=Strategy.active_mature.count%>
+          <%= index %>/<%=strategies.count%>
         </small>
       <% end %>
     </td>
