@@ -122,11 +122,15 @@ class Strategy
     save
   end
 
-  def self.mature_period
-    'SIX_MONTH'
+  def max_maturity
+    m = nil
+    %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
+      m = r if send(r.downcase)
+    end
+    m
   end
 
-  def self.active_mature
+  def self.active_mature(mature_period: 'SIX_MONTH')
     where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil, :ticker.ne => 'CRIPTOCONFIDENCIAL')
   end
 

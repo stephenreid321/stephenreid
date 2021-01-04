@@ -22,38 +22,36 @@
 </p>
 
 
-<% if Strategy.active_mature.find(id: strategy.id) %>
-  <table class="table mt-3" style="width: auto; margin: auto">
-    <thead style="border-top: none">
-      <tr>
-        <th>SFW</th>
-        <th>S</th>
-        <th>24h</th>
-        <th>7d</th>
-        <th>1M</th>
-        <th>3M</th>
-        <th>6M</th>
-        <th>1Y</th>
-      </tr>
-    </thead>
+<table class="table mt-3" style="width: auto; margin: auto">
+  <thead style="border-top: none">
     <tr>
-      <% %w[score_fee_weighted score day week month three_month six_month year].each { |t| %>
-      <td style="text-align: center">
-        <% if strategy.send(t) %>
-          <% score, index = strategy.score_index(t) %>
-          <span class="score">
-            <%= number_with_precision score, precision: 1 %>
-          </span>
-          <br />
-          <small>
-            <%= index %>/<%=Strategy.active_mature.count%>
-          </small>
-        <% end %>
-      </td>
-      <% } %>
+      <th>SFW</th>
+      <th>S</th>
+      <th>24h</th>
+      <th>7d</th>
+      <th>1M</th>
+      <th>3M</th>
+      <th>6M</th>
+      <th>1Y</th>
     </tr>
-  </table>
-<% end %>
+  </thead>
+  <tr>
+    <% %w[score_fee_weighted score day week month three_month six_month year].each { |t| %>
+    <td style="text-align: center">
+      <% if strategy.send(t) %>
+        <% score, index = strategy.score_index(t, strategies: Strategy.active_mature(mature_period: strategy.max_maturity)) %>
+        <span class="score">
+          <%= number_with_precision score, precision: 1 %>
+        </span>
+        <br />
+        <small>
+          <%= index %>/<%=Strategy.active_mature.count%>
+        </small>
+      <% end %>
+    </td>
+    <% } %>
+  </tr>
+</table>
 
 
 <div data-pagelet-url="/strategy/table" class="mb-3">
