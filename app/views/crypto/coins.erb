@@ -50,7 +50,7 @@
 <% when 'watching-less-core' %>
 
 <%= partial :'crypto/coin_table', locals: {coins: Coin.where(
-                  :tag_id.in => Tag.all.pluck(:id) - Tag.where(name: 'core').pluck(:id),
+                  :tag_id.in => Tag.all.pluck(:id) - Tag.where(:name.in => ['core', 'fiat-pegged']).pluck(:id),
                 ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when '24h' %>
