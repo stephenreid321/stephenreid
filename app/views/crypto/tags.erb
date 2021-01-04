@@ -1,0 +1,43 @@
+  <script>
+  $(function () {
+    function tagTable() {
+      if (!$('#tags').hasClass('datatabled'))
+        var dt = $('#tags').dataTable({
+          bInfo: false,
+          paging: false,
+          searching: false,
+          order: [[4, "desc"]]})
+          .addClass('datatabled')
+          .on('draw.dt', function () {
+            var i = 0;
+            $("#tags td:first-child").each(function () {
+              console.log(this)
+                    $(this).html(++i);
+                })
+          } ).trigger('draw.dt');
+
+        }
+        tagTable()
+        $(document).ajaxStop(function() { tagTable() })
+  })
+</script>
+<style>
+  #tags th { border-top: 0; }
+</style>
+<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="tags">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>24h</th>
+      <th>7d</th>
+      <th>1h</th>
+      <th>Market cap 24h</th>
+    </tr>
+  </thead>
+  <% Tag.all.each { |tag| %>
+  <tr data-pagelet-url="/tags/<%=tag.name%>">
+    <%= partial :'crypto/tag', locals: { tag: tag } %>
+  </tr>
+  <% } %>
+</table>

@@ -12,6 +12,10 @@ StephenReid::App.controller do
     erb :'crypto/crypto_investing'
   end
 
+  get '/tags' do
+    erb :'crypto/tags'
+  end
+
   get '/coins' do
     redirect '/coins/tag/holding'
   end

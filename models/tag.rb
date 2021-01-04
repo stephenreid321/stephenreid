@@ -28,6 +28,22 @@ class Tag
     Tag.sum { |tag| tag.holding }
   end
 
+  %w[1h 24h 7d].each do |p|
+    define_method :"price_change_percentage_#{p}_in_currency" do
+      a = coins.map(&:"price_change_percentage_#{p}_in_currency").compact
+      if (n = a.count) > 0
+        a.sum / n
+      end
+    end
+  end
+
+  def market_cap_change_percentage_24h
+    a = coins.map(&:market_cap_change_percentage_24h).compact
+    if (n = a.count) > 0
+      a.sum / n
+    end
+  end
+
   def background_color
     tags = Tag.order('holding desc').where(:holding.gt => 0)
     i = tags.pluck(:id).index(id)

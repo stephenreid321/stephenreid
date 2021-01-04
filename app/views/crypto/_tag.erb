@@ -1,0 +1,16 @@
+<td style="opacity: 0.5"></td>
+<td>
+  <a href="/coins/tag/<%=tag.name%>"><%= tag.name %></a>
+</td>
+<% %w{24h 7d 1h}.each { |p| %>
+<td class="rg">
+  <% if tag.send(:"price_change_percentage_#{p}_in_currency") %>
+    <%=number_to_percentage tag.send(:"price_change_percentage_#{p}_in_currency"), precision: 2%>
+  <% end %>
+</td>
+<% } %>
+<td class="rg">
+  <% if tag.send(:market_cap_change_percentage_24h) %>
+    <%=number_to_percentage tag.send(:market_cap_change_percentage_24h), precision: 2%>
+  <% end %>
+</td>
