@@ -30,4 +30,6 @@
 }.compact.join %>
 </div>
 
-<%= md :seeds %>
+<% unless current_account %>
+  <%= md :seeds %>
+<% end %>
