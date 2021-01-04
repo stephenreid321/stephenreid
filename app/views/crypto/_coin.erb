@@ -108,6 +108,13 @@
     <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
   <% end %>
 </td>
+<% if coin.holding && coin.market_cap > 0 %>
+  <td data-sort="<%=sprintf('%.18f', coin.holding.to_f/coin.market_cap)%>">
+    <%= BigDecimal.new(coin.holding.to_f/coin.market_cap, 2).to_f %>
+  </td>
+<% else %>
+  <td></td>
+<% end %>
 <% if current_account %>
   <td>
     <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.slug%>/hide');$(this).closest('tr').remove()"><i class="fas fa-times"></i></a>
