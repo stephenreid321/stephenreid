@@ -1,5 +1,5 @@
 <% if ['24h', '7d', 'market-cap-24h'].include?(params[:tag]) %>
-  <p class="text-center">
+  <p class="text-center mt-3">
     Showing coins with a market cap rank <= #<%=ENV['MAX_MARKET_CAP_RANK'] %> and volume >= Ξ<%=ENV['MIN_VOLUME']%>
     </p>
   <% end %>
