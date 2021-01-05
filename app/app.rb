@@ -170,6 +170,10 @@ module StephenReid
       send_file "#{Padrino.root}/app/markdown/master-lover-course.html"
     end
 
+    get '/md/:slug' do
+      erb :md
+    end
+
     {
       '/calendly' => 'https://calendly.com/stephenreid321',
       '/1' => 'https://calendly.com/stephenreid321/1-min-call',
