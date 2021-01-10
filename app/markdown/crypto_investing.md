@@ -14,10 +14,9 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
    <td>Just buy and hold BTC/ETH</td>
    <td>
 <ul>
-<li><a href="https://coinbase.com/">Coinbase</a>
-<li><a href="http://crypto.com/">Crypto.com</a>
-<li><a href="https://www.binance.com/">Binance</a>
-</li>
+  <li><a href="https://www.coinbase.com/join/reid_ie">Coinbase</a></li>
+  <li><a href="https://www.binance.com/en/register?ref=12126097">Binance</a></li>
+  <li><a href="http://crypto.com/">Crypto.com</a></li>
 </ul>
    </td>
    <td><p>
