@@ -36,8 +36,8 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
    </td>
    <td rowspan="2" >
 <ul>
-<li>
-  <a href="https://my.iconomi.com/register?ref=YGnZy">ICONOMI</a>
+  <li>
+    <a href="https://www.iconomi.com/register?ref=YGnZy">ICONOMI</a> (Do me a favour by signing up <a href="https://www.iconomi.com/register?ref=YGnZy">via this referral link</a>)
   </li>
 </ul>
 <p>
