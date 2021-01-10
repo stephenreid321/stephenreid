@@ -32,6 +32,6 @@ StephenReid::App.helpers do
   end
 
   def tag_badge(tag)
-    %(<span href="/coins/tag/#{tag.name}" class="badge badge-secondary" style="background-color: #{tag.background_color}; color: white">#{tag.name}</span>) if tag
+    %(<a href="/coins/tag/#{tag.name}" class="badge badge-secondary" style="background-color: #{tag.background_color}; color: white">#{tag.name}</a>) if tag
   end
 end
