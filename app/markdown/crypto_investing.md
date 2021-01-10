@@ -24,10 +24,10 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
      Buy BTC/ETH from one of the platforms on the left, then send it to a wallet:
      </p>
 <ul>
-<li><a href="https://metamask.io/">MetaMask</a></li>
-<li><a href="https://frontierwallet.com/">Frontier</a></li>
 <li><a href="https://trustwallet.com/">Trust Wallet</a></li>
 <li><a href="https://www.exodus.io/">Exodus</a></li>
+<li><a href="https://metamask.io/">MetaMask</a> (ETH only)</li>
+<li><a href="https://frontierwallet.com/">Frontier</a> (ETH only)</li>
 <li><a href="https://www.ledger.com/">Ledger</a> (hardware wallet, most secure)</li>
 </ul>
    </td>
