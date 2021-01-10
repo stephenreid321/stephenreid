@@ -7,7 +7,7 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
 <table class="table table-bordered">
   <tr>
 <th>Strategy</th>
-    <th style="width: 40%">CeFi option (platform risk)</th>
+    <th style="width: 40%">CeFi option</th>
     <th style="width: 40%">DeFi option (keep your private key safe!)</th>
   </tr>
   <tr>
