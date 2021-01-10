@@ -16,7 +16,7 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
 <ul>
   <li><a href="https://www.coinbase.com/join/reid_ie">Coinbase</a></li>
   <li><a href="https://www.binance.com/en/register?ref=12126097">Binance</a></li>
-  <li><a href="http://crypto.com/">Crypto.com</a></li>
+  <li><a href="https://platinum.crypto.com/r/hej37mj8vv">Crypto.com</a></li>
 </ul>
    </td>
    <td><p>
