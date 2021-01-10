@@ -31,7 +31,7 @@ StephenReid::App.helpers do
     halt(403) unless current_account
   end
 
-  def tag_badge(tag)
-    %(<a href="/coins/tag/#{tag.name}" class="badge badge-secondary" style="background-color: #{tag.background_color}; color: white">#{tag.name}</a>) if tag
+  def tag_badge(tag, html_tag: 'a')
+    %(<#{html_tag} href="/coins/tag/#{tag.name}" class="badge badge-secondary" style="background-color: #{tag.background_color}; color: white">#{tag.name}</#{html_tag}>) if tag
   end
 end
