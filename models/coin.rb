@@ -106,6 +106,8 @@ class Coin
       i += 1
       coins.each do |c|
         puts c['symbol'].upcase
+        next if c['id'] == 'MASTERSTRATEGY'
+
         coin = Coin.find_or_create_by!(slug: c['id'])
         next if coin.skip_remote_update
 
