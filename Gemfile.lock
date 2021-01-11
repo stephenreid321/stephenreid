@@ -191,7 +191,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbtree3 (0.6.0)
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     rexml (3.2.4)
     rlp (0.7.3)
     rss (0.2.9)
