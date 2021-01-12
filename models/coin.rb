@@ -35,6 +35,7 @@ class Coin
   before_validation do
     self.symbol = symbol.try(:upcase)
     self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
+    errors.add(:slug, 'is forbidden') if %w[MASTERSTRATEGY].include?(slug)
   end
 
   def self.eth_usd
@@ -106,7 +107,6 @@ class Coin
       i += 1
       coins.each do |c|
         puts c['symbol'].upcase
-        next if c['id'] == 'MASTERSTRATEGY'
 
         coin = Coin.find_or_create_by!(slug: c['id'])
         next if coin.skip_remote_update
