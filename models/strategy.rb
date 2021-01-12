@@ -134,7 +134,7 @@ class Strategy
   end
 
   def self.active_mature(mature_period: 'THREE_MONTH')
-    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil, :ticker.ne => 'CRIPTOCONFIDENCIAL')
+    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil)
   end
 
   def self.proposed(n: 10)
