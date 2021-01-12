@@ -38,6 +38,7 @@ class Strategy
   before_validation do
     self.score = calculate_score
     self.score_fee_weighted = calculate_score_fee_weighted
+    errors.add(:ticker, 'is forbidden') if %w[MASTERSTRATEGY].include?(ticker)
   end
 
   def score_index(x, strategies: Strategy.active_mature)

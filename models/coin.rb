@@ -35,7 +35,6 @@ class Coin
   before_validation do
     self.symbol = symbol.try(:upcase)
     self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
-    errors.add(:slug, 'is forbidden') if %w[MASTERSTRATEGY].include?(slug)
   end
 
   def self.eth_usd
