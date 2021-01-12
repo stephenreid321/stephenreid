@@ -9,6 +9,8 @@ class Strategy
   SIX_MONTH_FACTOR = 2
   YEAR_FACTOR = 1
 
+  EXCLUDED_STRATEGIES = %w[MASTERSTRATEGY].freeze
+
   field :ticker, type: String
   field :name, type: String
   field :score, type: Float
@@ -38,7 +40,7 @@ class Strategy
   before_validation do
     self.score = calculate_score
     self.score_fee_weighted = calculate_score_fee_weighted
-    errors.add(:ticker, 'is forbidden') if %w[MASTERSTRATEGY].include?(ticker)
+    errors.add(:ticker, 'is forbidden') if EXCLUDED_STRATEGIES.include?(ticker)
   end
 
   def score_index(x, strategies: Strategy.active_mature)
