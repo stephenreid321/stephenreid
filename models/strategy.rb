@@ -9,7 +9,7 @@ class Strategy
   SIX_MONTH_FACTOR = 2
   YEAR_FACTOR = 1
 
-  EXCLUDED_STRATEGIES = %w[MASTERSTRATEGY].freeze
+  EXCLUDED_STRATEGIES = ENV['EXCLUDED_STRATEGIES'].split(',').freeze
 
   field :ticker, type: String
   field :name, type: String
