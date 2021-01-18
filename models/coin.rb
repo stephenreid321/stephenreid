@@ -11,7 +11,6 @@ class Coin
   field :defi_pulse_name, type: String
   field :platform, type: String
   field :current_price, type: Float
-  field :manual_price, type: Boolean
   field :market_cap, type: Float
   field :market_cap_change_percentage_24h, type: Float
   field :market_cap_rank, type: Integer
@@ -57,7 +56,6 @@ class Coin
       decimals: :number,
       platform: :text,
       current_price: :number,
-      manual_price: :check_box,
       market_cap: :number,
       market_cap_rank: :number,
       total_volume: :number,
@@ -113,8 +111,6 @@ class Coin
         next if coin.skip_remote_update
 
         %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
-          next if r == 'current_price' && manual_price
-
           coin.send("#{r}=", c[r])
         end
         coin.save
@@ -154,8 +150,6 @@ class Coin
       return
     end
     %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
-      next if r == 'current_price' && manual_price
-
       send("#{r}=", c['market_data'][r]['eth'])
     end
     %w[market_cap_rank].each do |r|
