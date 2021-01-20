@@ -48,7 +48,7 @@ class Coin
   end
 
   def priority_score
-    market_cap_change_prediction / (holding.to_f / market_cap) if market_cap_change_prediction && holding && market_cap
+    market_cap_change_prediction / (holding.to_f / market_cap) if market_cap_change_prediction && holding && (holding > 0) && market_cap && (market_cap > 0)
   end
 
   def self.eth_usd
