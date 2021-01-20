@@ -97,11 +97,6 @@
     <%= coin.market_cap_change_prediction.round %>x
   <% end %>
 </td>
-<td data-sort="<%=coin.priority_score%>">
-  <% if coin.priority_score %>
-    <%= coin.priority_score.round %>
-  <% end %>
-</td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
   <% if coin.price_change_percentage_24h_in_currency %>
     <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
