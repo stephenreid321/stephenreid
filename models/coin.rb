@@ -14,6 +14,7 @@ class Coin
   field :market_cap, type: Float
   field :market_cap_change_percentage_24h, type: Float
   field :market_cap_rank, type: Integer
+  field :market_cap_rank_prediction, type: Integer
   field :total_volume, type: Float
   field :uniswap_volume, type: Float
   field :sushiswap_volume, type: Float
@@ -35,6 +36,14 @@ class Coin
   before_validation do
     self.symbol = symbol.try(:upcase)
     self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
+  end
+
+  def market_cap_at_predicted_rank
+    Coin.find_by(market_cap_rank: market_cap_rank_prediction).market_cap if market_cap_rank_prediction
+  end
+
+  def market_cap_change_prediction
+    market_cap_at_predicted_rank / market_cap if market_cap_at_predicted_rank
   end
 
   def self.eth_usd

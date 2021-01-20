@@ -40,17 +40,17 @@
             <% case params[:tag]; when 'holding' %>
               order: [[4, "desc"]]})
             <% when 'uniswap' %>
-              order: [[11, "desc"]]})
+              order: [[13 "desc"]]})
             <% when 'sushiswap' %>
-              order: [[12, "desc"]]})
+              order: [[14, "desc"]]})
             <% when 'defi-pulse' %>
-              order: [[13, "desc"]]})
+              order: [[15, "desc"]]})
             <% when 'market-cap-24h' %>
-              order: [[9, "desc"]]})
+              order: [[11, "desc"]]})
             <% when '7d' %>
-              order: [[7, "desc"]]})
+              order: [[9, "desc"]]})
             <% else %>
-              order: [[6, "desc"]]})
+              order: [[8, "desc"]]})
             <% end %>
             .addClass('datatabled')
             .on('draw.dt', function () {
@@ -101,17 +101,20 @@
     })
   </script>
   <style>
-    #coins th { border-top: 0; }
+    #coins, #coins .input-group-text, #coins input { font-size: 0.9rem; }
+      #coins th { border-top: 0; }
   </style>
-  <table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="coins">
+  <table class="table" style="border-collapse: collapse !important" id="coins">
     <thead>
       <tr>
         <th></th>
-        <th>MC</th>
+        <th>MCR</th>
         <th></th>
         <th>Name</th>
         <th style="white-space: nowrap">Relative holding</th>
         <th></th>
+        <th>MCR prediction</th>
+        <th>Price prediction</th>
         <th>24h</th>
         <th>7d</th>
         <th>1h</th>

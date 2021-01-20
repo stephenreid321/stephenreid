@@ -1,6 +1,8 @@
 <td style="opacity: 0.5"></td>
-<td data-sort="<%=coin.parent ? coin.parent.market_cap_rank : coin.market_cap_rank%>">
-  <% if coin.parent %>#<%=coin.parent.market_cap_rank%>/<% end %><% if coin.market_cap_rank %>#<%=coin.market_cap_rank%><% end %>
+<td data-sort="<%=coin.market_cap_rank%>">
+  <% if coin.market_cap_rank %>
+    #<%=coin.market_cap_rank%>
+  <% end %>
 </td>
 <td>
   <% if current_account %>
@@ -17,9 +19,9 @@
     <% end %>
   <% end %>
 </td>
-<td style="white-space: nowrap" data-symbol="<%=(coin.parent || coin.symbol.starts_with?('$')) ? coin.symbol[1..-1] : coin.symbol%>">
-  <a target="_blank" href="<%=(coin.parent ? coin.parent.website : coin.website) || %Q{https://coingecko.com/en/coins/#{coin.parent ? coin.parent.slug : coin.slug}}%>"><%=coin.name%> (<%=coin.symbol%>)</a>
-  <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.parent ? coin.parent.slug : coin.slug%>">
+<td style="white-space: nowrap" data-symbol="<%=coin.symbol.starts_with?('$') ? coin.symbol[1..-1] : coin.symbol%>">
+  <a target="_blank" href="<%=coin.website || %Q{https://coingecko.com/en/coins/#{coin.slug}}%>"><%=coin.name%> (<%=coin.symbol%>)</a>
+  <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
   </a>
   <% if coin.erc20? %>
@@ -27,7 +29,7 @@
       <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
     </a>
   <% end %>
-  <% if current_account && (asset = Asset.find_by(ticker: coin.parent ? coin.parent.symbol : coin.symbol)) %>
+  <% if current_account && (asset = Asset.find_by(ticker: coin.symbol)) %>
     <small>
       <a class="text-dark" target="_blank" href="https://iconomi.com/asset/<%=coin.symbol%>">
         ICONOMI
@@ -62,7 +64,28 @@
     <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
   <% end %>
 </td>
-<% coin = coin.parent ? coin.parent : coin %>
+<td data-sort="<%=coin.market_cap_rank_prediction%>">
+  <% if current_account %>
+    <% form_tag "/coins/#{coin.slug}/market_cap_rank_prediction" do %>
+
+      <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text">#</span>
+        </div>
+        <%= number_field_tag :p, :value => coin.market_cap_rank_prediction, :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()' %>
+      </div>
+    <% end %>
+  <% else %>
+    <% if coin.market_cap_rank_prediction %>
+      #<%=coin.market_cap_rank_prediction%>
+    <% end %>
+  <% end %>
+</td>
+<td data-sort="<%=coin.market_cap_change_prediction%>">
+  <% if coin.market_cap_change_prediction %>
+    <%= coin.market_cap_change_prediction.round %>x
+  <% end %>
+</td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
   <% if coin.price_change_percentage_24h_in_currency %>
     <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>

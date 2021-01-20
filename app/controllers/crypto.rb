@@ -102,7 +102,13 @@ StephenReid::App.controller do
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, nil)
     coin.remote_update
-    expire("coin_#{params[:slug]}")
+    expire("coin_#{params[:slug]}") unless Padrino.env == :development
+    200
+  end
+
+  post '/coins/:slug/market_cap_rank_prediction' do
+    coin = Coin.find_by(slug: params[:slug])
+    coin.update_attribute(:market_cap_rank_prediction, params[:p])
     200
   end
 
