@@ -144,7 +144,7 @@
 </td>
 <% if coin.holding && coin.holding > 1e-6 && coin.market_cap > 0 %>
   <td data-sort="<%=sprintf('%.18f', coin.holding.to_f/coin.market_cap)%>">
-    <%= BigDecimal.new(coin.holding.to_f/coin.market_cap, 2).to_f %>
+    <%= BigDecimal.new((coin.holding.to_f*100)/coin.market_cap, 2).to_f %>%
   </td>
 <% else %>
   <td></td>
