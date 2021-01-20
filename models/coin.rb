@@ -43,7 +43,7 @@ class Coin
   end
 
   def market_cap_change_prediction
-    market_cap_at_predicted_rank / market_cap if market_cap_at_predicted_rank && market_cap
+    market_cap_at_predicted_rank / market_cap if market_cap_at_predicted_rank && market_cap && (market_cap > 0)
   end
 
   def self.eth_usd
