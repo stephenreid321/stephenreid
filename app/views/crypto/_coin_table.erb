@@ -38,21 +38,21 @@
             paging: false,
             searching: false,
             <% case params[:tag]; when 'holding' %>
-              order: [[4, "desc"]]})
+              order: [[4, "desc"]]
             <% when 'uniswap' %>
-              order: [[13 "desc"]]})
+              order: [[13 "desc"]]
             <% when 'sushiswap' %>
-              order: [[14, "desc"]]})
+              order: [[14, "desc"]]
             <% when 'defi-pulse' %>
-              order: [[15, "desc"]]})
+              order: [[15, "desc"]]
             <% when 'market-cap-24h' %>
-              order: [[11, "desc"]]})
+              order: [[11, "desc"]]
             <% when '7d' %>
-              order: [[9, "desc"]]})
+              order: [[9, "desc"]]
             <% else %>
-              order: [[8, "desc"]]})
+              order: [[8, "desc"]]
             <% end %>
-            .addClass('datatabled')
+            }).addClass('datatabled')
             .on('draw.dt', function () {
               var i = 0;
               $("#coins td:first-child").each(function () {
