@@ -81,6 +81,17 @@
     <% end %>
   <% end %>
 </td>
+<td data-sort="<%=coin.market_cap_rank_prediction_conviction%>">
+  <% if current_account %>
+    <% form_tag "/coins/#{coin.slug}/market_cap_rank_prediction_conviction" do %>
+      <%= number_field_tag :p, :value => coin.market_cap_rank_prediction_conviction, :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()' %>
+    <% end %>
+  <% else %>
+    <% if coin.market_cap_rank_prediction_conviction %>
+      <%=coin.market_cap_rank_prediction_conviction%>
+    <% end %>
+  <% end %>
+</td>
 <td data-sort="<%=coin.market_cap_change_prediction%>">
   <% if coin.market_cap_change_prediction %>
     <%= coin.market_cap_change_prediction.round %>x

@@ -15,6 +15,7 @@ class Coin
   field :market_cap_change_percentage_24h, type: Float
   field :market_cap_rank, type: Integer
   field :market_cap_rank_prediction, type: Integer
+  field :market_cap_rank_prediction_conviction, type: Float
   field :total_volume, type: Float
   field :uniswap_volume, type: Float
   field :sushiswap_volume, type: Float
@@ -43,7 +44,7 @@ class Coin
   end
 
   def market_cap_change_prediction
-    market_cap_at_predicted_rank / market_cap if market_cap_at_predicted_rank && market_cap && (market_cap > 0)
+    (market_cap_at_predicted_rank / market_cap) * (market_cap_rank_prediction_conviction || 1) if market_cap_at_predicted_rank && market_cap && (market_cap > 0)
   end
 
   def self.eth_usd

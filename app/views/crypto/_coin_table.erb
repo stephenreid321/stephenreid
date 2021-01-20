@@ -40,17 +40,17 @@
             <% case params[:tag]; when 'holding' %>
               order: [[4, "desc"]]
             <% when 'uniswap' %>
-              order: [[13, "desc"]]
-            <% when 'sushiswap' %>
               order: [[14, "desc"]]
-            <% when 'defi-pulse' %>
+            <% when 'sushiswap' %>
               order: [[15, "desc"]]
+            <% when 'defi-pulse' %>
+              order: [[16, "desc"]]
             <% when 'market-cap-24h' %>
-              order: [[11, "desc"]]
+              order: [[12, "desc"]]
             <% when '7d' %>
-              order: [[9, "desc"]]
+              order: [[10, "desc"]]
             <% else %>
-              order: [[8, "desc"]]
+              order: [[9, "desc"]]
             <% end %>
             }).addClass('datatabled')
             .on('draw.dt', function () {
@@ -114,7 +114,8 @@
         <th style="white-space: nowrap">Relative holding</th>
         <th></th>
         <th>MCR prediction</th>
-        <th>Price prediction</th>
+        <th>MCR prediction uncertainty</th>
+        <th>Conviction-weighted price prediction</th>
         <th>24h</th>
         <th>7d</th>
         <th>1h</th>

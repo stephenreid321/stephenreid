@@ -112,6 +112,12 @@ StephenReid::App.controller do
     200
   end
 
+  post '/coins/:slug/market_cap_rank_prediction_conviction' do
+    coin = Coin.find_by(slug: params[:slug])
+    coin.update_attribute(:market_cap_rank_prediction_conviction, params[:p])
+    200
+  end
+
   ###
 
   get '/metastrategy', cache: true do
