@@ -32,29 +32,31 @@
   <script>
     $(function () {
       function coinTable() {
-        if (!$('#coins').hasClass('datatabled'))
+        if (!$('#coins').hasClass('datatabled')) {
+
         <% if params[:tag] %>
            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%=params[:tag]%>']")[0])
            if (colIndex == -1)
             colIndex = 6
-            <% else %>
-              var colIndex = 6
-            <% end %>
+        <% else %>
+            var colIndex = 6
+        <% end %>
+
           var dt = $('#coins').dataTable({
             bInfo: false,
             paging: false,
             searching: false,
             order: [[colIndex, "desc"]]
-            }).addClass('datatabled')
-            .on('draw.dt', function () {
+            }).addClass('datatabled').on('draw.dt', function () {
               var i = 0;
               $("#coins td:first-child").each(function () {
-                console.log(this)
-                      $(this).html(++i);
-                  })
+                $(this).html(++i);
+              })
             } ).trigger('draw.dt');
 
-            var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+          }
+
+          var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
 
           <% if current_account %>
             var priceFactor = <%=ENV['PRICE_FACTOR']%>
