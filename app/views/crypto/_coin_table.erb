@@ -35,7 +35,7 @@
         if (!$('#coins').hasClass('datatabled'))
         <% if params[:tag] %>
            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%=params[:tag]%>']")[0])
-           if (!colIndex)
+           if (colIndex == -1)
             colIndex = 6
             <% else %>
               var colIndex = 6
