@@ -43,7 +43,7 @@ StephenReid::App.controller do
         @sushiswap << ticker['coin_id']
       end
     elsif params[:tag] == 'defi-pulse'
-      agent = Mechanize.new
+      # agent = Mechanize.new
       # JSON.parse(agent.get('https://defipulse.com/').search('#__NEXT_DATA__').inner_html)['props']['initialState']['coin']['projects'].each do |p|
       #   if (coin = Coin.find_by(name: p['name'])) || (coin = Coin.find_by(defi_pulse_name: p['name']))
       #     coin.set(defi_pulse_name: p['name'])

@@ -64,39 +64,6 @@
     <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
   <% end %>
 </td>
-<td data-sort="<%=coin.market_cap_rank_prediction%>">
-  <% if current_account %>
-    <% form_tag "/coins/#{coin.slug}/market_cap_rank_prediction" do %>
-
-      <div class="input-group flex-nowrap">
-        <div class="input-group-prepend">
-          <span class="input-group-text">#</span>
-        </div>
-        <%= number_field_tag :p, :value => coin.market_cap_rank_prediction, :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()' %>
-      </div>
-    <% end %>
-  <% else %>
-    <% if coin.market_cap_rank_prediction %>
-      #<%=coin.market_cap_rank_prediction%>
-    <% end %>
-  <% end %>
-</td>
-<td data-sort="<%=coin.market_cap_rank_prediction_conviction%>">
-  <% if current_account %>
-    <% form_tag "/coins/#{coin.slug}/market_cap_rank_prediction_conviction" do %>
-      <%= number_field_tag :p, :value => coin.market_cap_rank_prediction_conviction, :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()' %>
-    <% end %>
-  <% else %>
-    <% if coin.market_cap_rank_prediction_conviction %>
-      <%=coin.market_cap_rank_prediction_conviction%>
-    <% end %>
-  <% end %>
-</td>
-<td data-sort="<%=coin.market_cap_change_prediction%>">
-  <% if coin.market_cap_change_prediction %>
-    <%= coin.market_cap_change_prediction.round %>x
-  <% end %>
-</td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
   <% if coin.price_change_percentage_24h_in_currency %>
     <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
@@ -149,6 +116,39 @@
 <% else %>
   <td></td>
 <% end %>
+<td data-sort="<%=coin.market_cap_rank_prediction%>">
+  <% if current_account %>
+    <% form_tag "/coins/#{coin.slug}/market_cap_rank_prediction" do %>
+
+      <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text">#</span>
+        </div>
+        <%= number_field_tag :p, :value => coin.market_cap_rank_prediction, :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()' %>
+      </div>
+    <% end %>
+  <% else %>
+    <% if coin.market_cap_rank_prediction %>
+      #<%=coin.market_cap_rank_prediction%>
+    <% end %>
+  <% end %>
+</td>
+<td data-sort="<%=coin.market_cap_rank_prediction_conviction%>">
+  <% if current_account %>
+    <% form_tag "/coins/#{coin.slug}/market_cap_rank_prediction_conviction" do %>
+      <%= number_field_tag :p, :value => coin.market_cap_rank_prediction_conviction, :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()' %>
+    <% end %>
+  <% else %>
+    <% if coin.market_cap_rank_prediction_conviction %>
+      <%=coin.market_cap_rank_prediction_conviction%>
+    <% end %>
+  <% end %>
+</td>
+<td data-sort="<%=coin.market_cap_change_prediction%>">
+  <% if coin.market_cap_change_prediction %>
+    <%= coin.market_cap_change_prediction.round %>x
+  <% end %>
+</td>
 <% if current_account %>
   <td>
     <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.slug%>/hide');$(this).closest('tr').remove()"><i class="fas fa-times"></i></a>
