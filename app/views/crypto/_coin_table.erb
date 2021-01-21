@@ -33,25 +33,18 @@
     $(function () {
       function coinTable() {
         if (!$('#coins').hasClass('datatabled'))
+        <% if params[:tag] %>
+           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%=params[:tag]%>']")[0])
+           if (!colIndex)
+            colIndex = 6
+            <% else %>
+              var colIndex = 6
+            <% end %>
           var dt = $('#coins').dataTable({
             bInfo: false,
             paging: false,
             searching: false,
-            <% case params[:tag]; when 'holding' %>
-              order: [[4, "desc"]]
-            <% when 'uniswap' %>
-              order: [[11, "desc"]]
-            <% when 'sushiswap' %>
-              order: [[12, "desc"]]
-            <% when 'defi-pulse' %>
-              order: [[13, "desc"]]
-            <% when 'market-cap-24h' %>
-              order: [[9, "desc"]]
-            <% when '7d' %>
-              order: [[7, "desc"]]
-            <% else %>
-              order: [[6, "desc"]]
-            <% end %>
+            order: [[colIndex, "desc"]]
             }).addClass('datatabled')
             .on('draw.dt', function () {
               var i = 0;
@@ -111,16 +104,16 @@
         <th>MCR</th>
         <th></th>
         <th>Name</th>
-        <th style="white-space: nowrap">Relative holding</th>
-        <th></th>
-        <th>24h</th>
-        <th>7d</th>
-        <th>1h</th>
-        <th>Market cap 24h</th>
-        <th>Twitter followers</th>
-        <th>Uniswap volume</th>
-        <th>SushiSwap volume</th>
-        <th>DeFi Pulse TVL</th>
+        <th data-col-name="holding" style="white-space: nowrap">Relative holding</th>
+        <th data-col-name="staked"></th>
+        <th data-col-name="24h">24h</th>
+        <th data-col-name="7d">7d</th>
+        <th data-col-name="1h">1h</th>
+        <th data-col-name="market-cap-24">Market cap 24h</th>
+        <th data-col-name="twitter-followers">Twitter followers</th>
+        <th data-col-name="uniswap">Uniswap volume</th>
+        <th data-col-name="sushiswap">SushiSwap volume</th>
+        <th data-col-name="defi-pulse">DeFi Pulse TVL</th>
         <th>Volume/cap</th>
         <th>Holding/cap</th>
         <th>MCR prediction</th>
