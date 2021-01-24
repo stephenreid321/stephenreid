@@ -44,7 +44,7 @@
     <% if Strategy::EXCLUDED_STRATEGIES.length > 0 %>
       Currently excluded strategies:
       <%= Strategy::EXCLUDED_STRATEGIES.map { |ticker|
-    s = Strategy.find(ticker: ticker)
+    s = Strategy.find_by(ticker: ticker)
     s ? %{<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{s.ticker}">#{s.name}</a>} : %{<span class="badge badge-secondary">#{ticker}</span>}
   }.join(' ')
   %>
