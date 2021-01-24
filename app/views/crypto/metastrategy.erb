@@ -28,22 +28,26 @@
 
 <p class="text-center">
 
-  Currently excluded strategies:
-  <%= Strategy::EXCLUDED_STRATEGIES.map { |ticker|
+  <% if Strategy::EXCLUDED_STRATEGIES.length > 0 %>
+    Currently excluded strategies:
+    <%= Strategy::EXCLUDED_STRATEGIES.map { |ticker|
     s = Strategy.find(ticker: ticker)
     s ? %{<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{s.ticker}">#{s.name}</a>} : %{<span class="badge badge-secondary">#{ticker}</span>}
   }.join(' ')
   %>
+    <br />
+  <% end %>
 
-  <br />
-
-  Currently excluded coins:
-  <%= Strategy::EXCLUDED_ASSETS.map { |k|
+  <% if Strategy::EXCLUDED_ASSETS.length > 0 %>
+    Currently excluded coins:
+    <%= Strategy::EXCLUDED_ASSETS.map { |k|
     asset = Asset.find_by(ticker: k)
     coin = Coin.symbol(k)
     %{<a class="badge badge-secondary" target="_blank" href="#{coin.try(:website)}">#{asset.name} (#{k})</a>}
     }.join(' ')
     %>
+  <% end %>
+
 </p>
 
 <table class="table mt-3" style="width: auto; margin: auto">
