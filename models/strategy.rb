@@ -9,7 +9,8 @@ class Strategy
   SIX_MONTH_FACTOR = 2
   YEAR_FACTOR = 1
 
-  EXCLUDED_STRATEGIES = ENV['EXCLUDED_STRATEGIES'].split(',').freeze
+  EXCLUDED_STRATEGIES = ENV['EXCLUDED_STRATEGIES'] ? ENV['EXCLUDED_STRATEGIES'].split(',').freeze : []
+  EXCLUDED_ASSETS = ENV['EXCLUDED_ASSETS'] ? ENV['EXCLUDED_ASSETS'].split(',').freeze : []
 
   field :ticker, type: String
   field :name, type: String
@@ -142,8 +143,10 @@ class Strategy
     Strategy.active_mature.where(:ticker.ne => 'DECENTCOOP').each do |strategy|
       strategy.holdings.each do |holding|
         ticker = holding.asset.ticker
-        assets[ticker] = 0 unless assets[ticker]
-        assets[ticker] += holding.weight * strategy.score * (holding.asset.multiplier || 1)
+        unless EXCLUDED_ASSETS.include?(ticker)
+          assets[ticker] = 0 unless assets[ticker]
+          assets[ticker] += holding.weight * strategy.score * (holding.asset.multiplier || 1)
+        end
       end
     end
 
