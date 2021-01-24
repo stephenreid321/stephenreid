@@ -41,7 +41,6 @@ class Strategy
   before_validation do
     self.score = calculate_score
     self.score_fee_weighted = calculate_score_fee_weighted
-    errors.add(:ticker, 'is forbidden') if EXCLUDED_STRATEGIES.include?(ticker)
   end
 
   def score_index(x, strategies: Strategy.active_mature)
@@ -135,7 +134,7 @@ class Strategy
   end
 
   def self.active_mature(mature_period: 'THREE_MONTH')
-    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil)
+    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil, :ticker.nin => EXCLUDED_STRATEGIES)
   end
 
   def self.proposed(n: 10)
