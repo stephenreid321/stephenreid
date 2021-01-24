@@ -150,9 +150,9 @@ class Strategy
       end
     end
 
-    %w[USDC TUSD].each do |s|
+    %w[USDT TUSD].each do |s|
       if assets[s]
-        assets['USDT'] += assets[s]
+        assets['USDC'] += assets[s]
         assets.delete(s)
       end
     end
@@ -195,8 +195,8 @@ class Strategy
 
   def self.rebalance(n: 10, bail: false, force: false)
     unless force
-      usdt = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'USDT' }
-      if usdt && usdt['rebalancedWeight'] == 0.9
+      usdc = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'USDC' }
+      if usdc && usdc['rebalancedWeight'] == 0.9
         puts 'Strategy is in bailed state, exiting'
         return
       end
@@ -210,7 +210,7 @@ class Strategy
       #   to 'stephen@stephenreid.net'
       #   subject "Bailing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
       # end
-      weights = [['USDT', 0.9], ['ETH', 0.1]]
+      weights = [['USDC', 0.9], ['ETH', 0.1]]
       data = {
         ticker: 'DECENTCOOP',
         values: weights.map do |ticker, p|
