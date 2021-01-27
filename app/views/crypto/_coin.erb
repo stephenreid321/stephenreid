@@ -109,7 +109,7 @@
     <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
   <% end %>
 </td>
-<% if coin.holding && coin.holding > 1e-6 && coin.market_cap > 0 %>
+<% if coin.holding && coin.holding > 1e-6 && coin.market_cap && coin.market_cap > 0 %>
   <td data-sort="<%=sprintf('%.18f', coin.holding.to_f/coin.market_cap)%>">
     <%= BigDecimal.new((coin.holding.to_f*100)/coin.market_cap, 2).to_f %>%
   </td>
