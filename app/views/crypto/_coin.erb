@@ -40,30 +40,6 @@
     <%= tag_badge coin.tag %>
   <% end %>
 </td>
-<td class="holding" data-sort="<%= (coin.holding < 1e-6 ? 0 : coin.holding) * ENV['PRICE_FACTOR'].to_i  %>">
-  <% if current_account %>
-    <a target="_blank" href="/admin/edit/Coin/<%=coin.id%>">
-    <% end %>
-    <div class="p">
-      <% if coin.starred %>
-        <% if coin.all_units %>
-          <% if coin.holding < 1e-6 %>
-            <i data-toggle="tooltip" <% if current_account %> style="cursor: pointer" <% end %> class="far fa-question-circle"></i>
-          <% else %>
-            <i class="fas fa-spin fa-circle-notch"></i>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-    <% if current_account %>
-    </a>
-  <% end %>
-</td>
-<td>
-  <% if coin.staked_units %>
-    <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
-  <% end %>
-</td>
 <td data-sort="<%=coin.market_cap_rank_prediction%>">
   <% if current_account %>
     <a href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()">#<%=coin.market_cap_rank_prediction%></a>
@@ -97,6 +73,30 @@
 <td data-sort="<%=coin.market_cap_change_prediction%>">
   <% if coin.market_cap_change_prediction; p = coin.market_cap_change_prediction.round %>
     <a href="javascript:;" style="color: #FAC84F; text-decoration: none" data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-moon"></i><% end %></a>
+  <% end %>
+</td>
+<td class="holding" data-sort="<%= (coin.holding < 1e-6 ? 0 : coin.holding) * ENV['PRICE_FACTOR'].to_i  %>">
+  <% if current_account %>
+    <a target="_blank" href="/admin/edit/Coin/<%=coin.id%>">
+    <% end %>
+    <div class="p">
+      <% if coin.starred %>
+        <% if coin.all_units %>
+          <% if coin.holding < 1e-6 %>
+            <i data-toggle="tooltip" <% if current_account %> style="cursor: pointer" <% end %> class="far fa-question-circle"></i>
+          <% else %>
+            <i class="fas fa-spin fa-circle-notch"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <% if current_account %>
+    </a>
+  <% end %>
+</td>
+<td>
+  <% if coin.staked_units %>
+    <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
   <% end %>
 </td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
