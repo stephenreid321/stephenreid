@@ -66,7 +66,7 @@
 </td>
 <td data-sort="<%=coin.market_cap_change_prediction%>">
   <% if coin.market_cap_change_prediction; p = coin.market_cap_change_prediction.round %>
-    <a href="javascript:;" style="text-decoration: none" data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-square"></i> <% end %></a>
+    <a href="javascript:;" style="color: #FAC84F; text-decoration: none" data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-moon"></i> <% end %></a>
   <% end %>
 </td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
