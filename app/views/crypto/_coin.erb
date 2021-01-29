@@ -54,7 +54,7 @@
     <% end %>
   <% else %>
     <% if coin.market_cap_rank_prediction %>
-      #<%=coin.market_cap_rank_prediction%>
+      <span data-toggle="tooltip" title="Market cap rank prediction">#<%=coin.market_cap_rank_prediction%></span>
     <% end %>
   <% end %>
 </td>
@@ -66,7 +66,7 @@
     <% end %>
   <% else %>
     <% if coin.market_cap_rank_prediction_conviction %>
-      <%=coin.market_cap_rank_prediction_conviction%>
+      <span data-toggle="tooltip" title="Market cap rank prediction convinction"><%=coin.market_cap_rank_prediction_conviction%></span>
     <% end %>
   <% end %>
 </td>
