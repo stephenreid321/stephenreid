@@ -59,6 +59,11 @@
     </a>
   <% end %>
 </td>
+<td data-sort="<%=coin.market_cap_change_prediction%>">
+  <% if coin.market_cap_change_prediction; p = coin.market_cap_change_prediction.round %>
+    <span data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-square"></i> <% end %></span>
+  <% end %>
+</td>
 <td>
   <% if coin.staked_units %>
     <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
@@ -142,11 +147,6 @@
     <% if coin.market_cap_rank_prediction_conviction %>
       <%=coin.market_cap_rank_prediction_conviction%>
     <% end %>
-  <% end %>
-</td>
-<td data-sort="<%=coin.market_cap_change_prediction%>">
-  <% if coin.market_cap_change_prediction %>
-    <%= coin.market_cap_change_prediction.round %>x
   <% end %>
 </td>
 <% if current_account %>

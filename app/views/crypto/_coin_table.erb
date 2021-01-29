@@ -37,9 +37,9 @@
         <% if params[:tag] %>
            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%=params[:tag]%>']")[0])
            if (colIndex == -1)
-            colIndex = 6
+            colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
         <% else %>
-            var colIndex = 6
+            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
         <% end %>
 
           var dt = $('#coins').dataTable({
@@ -107,6 +107,7 @@
         <th></th>
         <th>Name</th>
         <th data-col-name="holding" style="white-space: nowrap">Relative holding</th>
+        <th>Conviction-weighted price prediction</th>
         <th data-col-name="staked"></th>
         <th data-col-name="24h">24h</th>
         <th data-col-name="7d">7d</th>
@@ -120,7 +121,6 @@
         <th>Holding/cap</th>
         <th>MCR prediction</th>
         <th>MCR prediction conviction</th>
-        <th>Conviction-weighted price prediction</th>
         <% if current_account %>
           <th></th>
         <% end %>
