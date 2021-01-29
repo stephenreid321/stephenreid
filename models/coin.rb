@@ -40,7 +40,14 @@ class Coin
   end
 
   def market_cap_at_predicted_rank
-    Coin.find_by(market_cap_rank: market_cap_rank_prediction).try(:market_cap) if market_cap_rank_prediction
+    if p = market_cap_rank_prediction
+      mc = nil
+      until mc
+        mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
+        p += 1
+      end
+      mc
+    end
   end
 
   def market_cap_change_prediction
