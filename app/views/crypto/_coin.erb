@@ -1,7 +1,9 @@
 <td style="opacity: 0.5"></td>
 <td data-sort="<%=coin.market_cap_rank%>">
   <% if coin.market_cap_rank %>
-    #<%=coin.market_cap_rank%>
+    <span data-toggle="tooltip" title="Market cap rank: #<%=coin.market_cap_rank%>">
+      #<%=coin.market_cap_rank%>
+    </span>
   <% end %>
 </td>
 <td>
@@ -54,7 +56,9 @@
     <% end %>
   <% else %>
     <% if coin.market_cap_rank_prediction %>
-      <span data-toggle="tooltip" title="Market cap rank prediction">#<%=coin.market_cap_rank_prediction%></span>
+      <span data-toggle="tooltip" title="Market cap rank prediction: #<%=coin.market_cap_rank_prediction%>">
+        #<%=coin.market_cap_rank_prediction%>
+      </span>
     <% end %>
   <% end %>
 </td>
@@ -66,7 +70,9 @@
     <% end %>
   <% else %>
     <% if coin.market_cap_rank_prediction_conviction %>
-      <span data-toggle="tooltip" title="Market cap rank prediction convinction"><%=coin.market_cap_rank_prediction_conviction%></span>
+      <span data-toggle="tooltip" title="Market cap rank prediction convinction: <%=coin.market_cap_rank_prediction_conviction%>">
+        <%=coin.market_cap_rank_prediction_conviction%>
+      </span>
     <% end %>
   <% end %>
 </td>
