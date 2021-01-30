@@ -36,11 +36,13 @@ StephenReid::App.helpers do
       if tag.is_a?(Tag)
         name = tag.name
         bg = "background-color: #{tag.background_color}"
+        c = ''
       else
         name = tag
-        bg = 'background: linear-gradient(to right, #70DC99, #70DCDC);'
+        bg = 'background: none'
+        c = 'text-dark'
       end
-      %(<#{html_tag} href="/coins/tag/#{name}" class="badge badge-secondary" style="#{bg}; color: white">#{name}</#{html_tag}>)
+      %(<#{html_tag} href="/coins/tag/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white">#{name}</#{html_tag}>)
     end
   end
 end
