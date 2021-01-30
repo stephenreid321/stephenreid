@@ -97,7 +97,7 @@ class Coin
   end
 
   def holding
-    (all_units || 0) * (parent ? (parent.current_price || 0) : (current_price || 0))
+    (all_units || 0) * (current_price || 0)
   end
 
   def erc20?
@@ -199,6 +199,5 @@ class Coin
       self.units = nil
     end
     save!
-    parent.try(:remote_update)
   end
 end
