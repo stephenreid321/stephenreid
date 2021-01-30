@@ -32,6 +32,15 @@ StephenReid::App.helpers do
   end
 
   def tag_badge(tag, html_tag: 'a')
-    %(<#{html_tag} href="/coins/tag/#{tag.name}" class="badge badge-secondary" style="background-color: #{tag.background_color}; color: white">#{tag.name}</#{html_tag}>) if tag
+    if tag
+      if tag.is_a?(Tag)
+        name = tag.name
+        bg = "background-color: #{tag.background_color}"
+      else
+        name = tag
+        bg = 'background: linear-gradient(to right, #70DC99, #70DCDC);'
+      end
+      %(<#{html_tag} href="/coins/tag/#{name}" class="badge badge-secondary" style="#{bg}; color: white">#{name}</#{html_tag}>)
+    end
   end
 end
