@@ -66,7 +66,9 @@ StephenReid::App.controller do
 
   post '/coins/table/:tag' do
     sign_in_required!
-    Coin.symbol(params[:symbol]).update_attribute(:tag_id, Tag.find_or_create_by(name: params[:tag]).id)
+    if coin = Coin.symbol(params[:symbol])
+      coin.update_attribute(:tag_id, Tag.find_or_create_by(name: params[:tag]).id)
+    end
     200
   end
 
