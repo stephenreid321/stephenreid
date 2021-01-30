@@ -37,12 +37,14 @@ StephenReid::App.helpers do
         name = tag.name
         bg = "background-color: #{tag.background_color}"
         c = ''
+        s = ''
       else
         name = tag
         bg = 'background: none'
         c = 'text-dark'
+        s = 'font-weight: 500'
       end
-      %(<#{html_tag} href="/coins/tag/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white">#{name}</#{html_tag}>)
+      %(<#{html_tag} href="/coins/tag/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white; #{s}">#{name}</#{html_tag}>)
     end
   end
 end
