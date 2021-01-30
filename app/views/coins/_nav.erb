@@ -1,5 +1,5 @@
 <%= ul_nav (
-      (@virtual_tags.map { |slug| [slug.gsub('-',' '), "/coins/tag/#{slug}"] }) +
+      (@virtual_tags.map { |slug| [slug, "/coins/tag/#{slug}"] }) +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/coins/tag/#{tag.name}"] } +
       [['overview', '/tags']]
     ),
