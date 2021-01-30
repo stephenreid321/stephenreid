@@ -4,6 +4,10 @@
     </p>
   <% end %>
 
+  <% if params[:tag] == 'defi-pulse' %>
+    <%= partial :'coins/defi_pulse' %>
+  <% end %>
+
   <% if current_account %>
 
     <% unless @virtual_tags.include?(params[:tag]) %>
