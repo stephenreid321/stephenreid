@@ -104,10 +104,6 @@ class Coin
     (all_units || 0) * (parent ? (parent.current_price || 0) : (current_price || 0))
   end
 
-  def parent
-    name.starts_with?('Aave ') ? Coin.symbol(symbol[1..-1]) : nil
-  end
-
   def erc20?
     platform == 'ethereum'
   end
