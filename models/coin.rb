@@ -40,7 +40,7 @@ class Coin
   end
 
   def market_cap_at_predicted_rank
-    if p = market_cap_rank_prediction
+    if (p = market_cap_rank_prediction)
       mc = nil
       until mc
         mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
@@ -53,10 +53,6 @@ class Coin
   def market_cap_change_prediction
     (market_cap_at_predicted_rank / market_cap) * (market_cap_rank_prediction_conviction || 1) if market_cap_at_predicted_rank && market_cap && (market_cap > 0)
   end
-
-  # def priority_score
-  #   market_cap_change_prediction / (holding.to_f / market_cap) if market_cap_change_prediction && holding && (holding > 0) && market_cap && (market_cap > 0)
-  # end
 
   def self.eth_usd
     agent = Mechanize.new
