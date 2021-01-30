@@ -1,15 +1,5 @@
 <%= ul_nav (
-      [['holding', '/coins/tag/holding']] +
-      [['watching', '/coins/tag/watching']] +
-      [['watching less core', '/coins/tag/watching-less-core']] +
-      [['uniswap', '/coins/tag/uniswap']] +
-      [['sushiswap', '/coins/tag/sushiswap']] +
-      [['defi pulse', '/coins/tag/defi-pulse']] +
-      [['24h', '/coins/tag/24h']] +
-      [['7d', '/coins/tag/7d']] +
-      [['market cap 24h', '/coins/tag/market-cap-24h']] +
-      [['top 100', '/coins/tag/top-100']] +
-      [['top 100 less tagged', '/coins/tag/top-100-less-tagged']] +
+      (@virtual_tags.map { |slug| [slug.gsub('-',' '), "/coins/tag/#{slug}"] }) +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/coins/tag/#{tag.name}"] } +
       [['overview', '/tags']]
     ),

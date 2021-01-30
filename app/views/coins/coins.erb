@@ -24,30 +24,6 @@
                   :tag_id.in => Tag.all.pluck(:id) - Tag.where(:name.in => ['core', 'fiat-pegged', 'yfi']).pluck(:id),
                 ).order('price_change_percentage_24h_in_currency desc')} %>
 
-<% when '24h' %>
-
-<%= partial :'coins/coin_table', locals: {coins: Coin.where(
-              :hidden.ne => true,
-              :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
-              :total_volume.gte => ENV['MIN_VOLUME']
-            ).order('price_change_percentage_24h_in_currency desc').limit(20)} %>
-
-<% when '7d' %>
-
-<%= partial :'coins/coin_table', locals: {coins: Coin.where(
-      :hidden.ne => true,
-      :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
-      :total_volume.gte => ENV['MIN_VOLUME']
-    ).order('price_change_percentage_7d_in_currency desc').limit(20)} %>
-
-<% when 'market-cap-24h' %>
-
-<%= partial :'coins/coin_table', locals: {coins: Coin.where(
-                  :hidden.ne => true,
-                  :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
-                  :total_volume.gte => ENV['MIN_VOLUME']
-                ).order('market_cap_change_percentage_24h desc').limit(20)} %>
-
 <% when 'uniswap' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
@@ -66,6 +42,30 @@
                                                   :slug.in => @defi_pulse,
                                                 ).order('tvl desc').limit(20)} %>
 
+<% when '24h' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+                                                              :hidden.ne => true,
+                                                              :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                                                              :total_volume.gte => ENV['MIN_VOLUME']
+                                                            ).order('price_change_percentage_24h_in_currency desc').limit(20)} %>
+
+<% when '7d' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+                                                      :hidden.ne => true,
+                                                      :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                                                      :total_volume.gte => ENV['MIN_VOLUME']
+                                                    ).order('price_change_percentage_7d_in_currency desc').limit(20)} %>
+
+<% when 'market-cap-24h' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+                                                                  :hidden.ne => true,
+                                                                  :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                                                                  :total_volume.gte => ENV['MIN_VOLUME']
+                                                                ).order('market_cap_change_percentage_24h desc').limit(20)} %>
+
 <% when 'top-100' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
@@ -81,6 +81,10 @@
 
 <% else %>
 
-  <div data-pagelet-url="/coins/table/<%=params[:tag]%>?add=true"></div>
+  <div data-pagelet-url="/coins/table/<%=params[:tag]%>">
+    <%= partial :'coins/coin_table', locals: { coins: Coin.where(
+      tag: Tag.find_by(name: params[:tag])
+    ).order('price_change_percentage_24h_in_currency desc') } %>
+  </div>
 
 <% end %>

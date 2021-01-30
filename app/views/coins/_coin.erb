@@ -38,7 +38,7 @@
       </a>
     </small>
   <% end %>
-  <% if %w[holding watching watching-less-core 24h 7d market-cap-24h uniswap sushiswap defi-pulse].include?(params[:tag]) %>
+  <% if @virtual_tags.include?(params[:tag]) %>
     <%= tag_badge coin.tag %>
   <% end %>
 </td>

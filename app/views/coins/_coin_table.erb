@@ -6,7 +6,7 @@
 
   <% if current_account %>
 
-    <% if params[:add] %>
+    <% unless @virtual_tags.include?(params[:tag]) %>
       <div class="row justify-content-center">
         <div class="col-auto">
           <% form_tag "/coins/table/#{params[:tag]}", :class => 'my-3 form-inline' do %>
