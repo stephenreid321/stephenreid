@@ -34,7 +34,7 @@
       function coinTable() {
         if (!$('#coins').hasClass('datatabled')) {
 
-        <% if params[:tag].starts_with?('top-100') %>
+        <% if params[:tag] && params[:tag].starts_with?('top-100') %>
           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='market-cap-rank']")[0])
           var direction = 'asc'
         <% elsif params[:tag] %>
