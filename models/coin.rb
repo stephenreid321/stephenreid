@@ -34,31 +34,6 @@ class Coin
 
   belongs_to :tag, optional: true
 
-  before_validation do
-    self.symbol = symbol.try(:upcase)
-    self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
-  end
-
-  def market_cap_at_predicted_rank
-    if (p = market_cap_rank_prediction)
-      mc = nil
-      until mc
-        mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
-        p += 1
-      end
-      mc
-    end
-  end
-
-  def market_cap_change_prediction
-    (market_cap_at_predicted_rank / market_cap) * (market_cap_rank_prediction_conviction || 1) if market_cap_at_predicted_rank && market_cap && (market_cap > 0)
-  end
-
-  def self.eth_usd
-    agent = Mechanize.new
-    JSON.parse(agent.get('https://api.coingecko.com/api/v3/coins/ethereum').body)['market_data']['current_price']['usd']
-  end
-
   def self.admin_fields
     {
       slug: :text,
@@ -92,6 +67,26 @@ class Coin
     }
   end
 
+  before_validation do
+    self.symbol = symbol.try(:upcase)
+    self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
+  end
+
+  def market_cap_at_predicted_rank
+    if (p = market_cap_rank_prediction)
+      mc = nil
+      until mc
+        mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
+        p += 1
+      end
+      mc
+    end
+  end
+
+  def market_cap_change_prediction
+    (market_cap_at_predicted_rank / market_cap) * (market_cap_rank_prediction_conviction || 1) if market_cap_at_predicted_rank && market_cap && (market_cap > 0)
+  end
+
   def all_units
     (units || 0) + (staked_units || 0)
   end
@@ -110,6 +105,11 @@ class Coin
     max = coins.pluck(x).compact.max
     score = 100 * ((send(x) - min) / (max - min))
     [score, index]
+  end
+
+  def self.eth_usd
+    agent = Mechanize.new
+    JSON.parse(agent.get('https://api.coingecko.com/api/v3/coins/ethereum').body)['market_data']['current_price']['usd']
   end
 
   def self.import
