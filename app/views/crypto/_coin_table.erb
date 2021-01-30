@@ -34,19 +34,24 @@
       function coinTable() {
         if (!$('#coins').hasClass('datatabled')) {
 
-        <% if params[:tag] %>
+        <% if params[:tag].starts_with?('top-100') %>
+          var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='market-cap-rank']")[0])
+          var direction = 'asc'
+        <% elsif params[:tag] %>
            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%=params[:tag]%>']")[0])
-           if (colIndex == -1)
+           var direction = 'desc'
+           if (colIndex == -1) {
             colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
         <% else %>
             var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
+            var direction = 'desc'
         <% end %>
 
           var dt = $('#coins').dataTable({
             bInfo: false,
             paging: false,
             searching: false,
-            order: [[colIndex, "desc"]]
+            order: [[colIndex, direction]]
             }).addClass('datatabled').on('draw.dt', function () {
               var i = 0;
               $("#coins td:first-child").each(function () {
@@ -103,7 +108,7 @@
     <thead>
       <tr>
         <th></th>
-        <th>
+        <th data-col-name="market-cap-rank">
           <span data-toggle="tooltip" title="Market cap rank">
             MCR
           </span>

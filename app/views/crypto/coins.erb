@@ -66,6 +66,19 @@
                                                   :slug.in => @defi_pulse,
                                                 ).order('tvl desc').limit(20)} %>
 
+<% when 'top-100' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+  :market_cap_rank.lte => 100,
+).order('market_cap_rank asc').limit(100)} %>
+
+<% when 'top-100-less-tagged' %>
+
+<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+  :market_cap_rank.lte => 100,
+  :tag_id => nil
+).order('market_cap_rank asc').limit(100)} %>
+
 <% else %>
 
   <div data-pagelet-url="/coins/table/<%=params[:tag]%>?add=true"></div>
