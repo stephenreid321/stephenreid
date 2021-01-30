@@ -1,4 +1,4 @@
-<%= partial :'crypto/nav' %>
+<%= partial :'coins/nav' %>
 
 <% case params[:tag]; when nil, 'holding' %>
 
@@ -8,25 +8,25 @@
   </div>
 <% end %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
       :starred => true
     ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'watching' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
           :tag_id.ne => nil
         ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'watching-less-core' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
                   :tag_id.in => Tag.all.pluck(:id) - Tag.where(:name.in => ['core', 'fiat-pegged', 'yfi']).pluck(:id),
                 ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when '24h' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
               :hidden.ne => true,
               :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
               :total_volume.gte => ENV['MIN_VOLUME']
@@ -34,7 +34,7 @@
 
 <% when '7d' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
       :hidden.ne => true,
       :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
       :total_volume.gte => ENV['MIN_VOLUME']
@@ -42,7 +42,7 @@
 
 <% when 'market-cap-24h' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
                   :hidden.ne => true,
                   :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
                   :total_volume.gte => ENV['MIN_VOLUME']
@@ -50,31 +50,31 @@
 
 <% when 'uniswap' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
                   :slug.in => @uniswap,
                 ).order('uniswap_volume desc').limit(20)} %>
 
 <% when 'sushiswap' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
                           :slug.in => @sushiswap,
                         ).order('sushiswap_volume desc').limit(20)} %>
 
 <% when 'defi-pulse' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
                                                   :slug.in => @defi_pulse,
                                                 ).order('tvl desc').limit(20)} %>
 
 <% when 'top-100' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
   :market_cap_rank.lte => 100,
 ).order('market_cap_rank asc').limit(100)} %>
 
 <% when 'top-100-less-tagged' %>
 
-<%= partial :'crypto/coin_table', locals: {coins: Coin.where(
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
   :market_cap_rank.lte => 100,
   :tag_id => nil
 ).order('market_cap_rank asc').limit(100)} %>
