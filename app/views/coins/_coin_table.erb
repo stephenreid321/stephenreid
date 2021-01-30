@@ -40,7 +40,7 @@
         <% elsif params[:tag] %>
            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%=params[:tag]%>']")[0])
            var direction = 'desc'
-           if (colIndex == -1) {
+           if (colIndex == -1)
             colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
         <% else %>
             var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
