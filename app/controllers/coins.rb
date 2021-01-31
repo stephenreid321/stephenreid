@@ -20,7 +20,7 @@ StephenReid::App.controller do
       if current_account
         expires 30.minutes.to_i
       else
-        expires 5.minutes.to_i
+        expires 0
       end
     end
     Tag.update_holdings
@@ -98,7 +98,6 @@ StephenReid::App.controller do
     coin = Coin.find_by(slug: params[:slug])
     coin.update_attribute(:starred, nil)
     coin.remote_update
-    expire("coin_#{params[:slug]}") unless Padrino.env == :development
     200
   end
 
