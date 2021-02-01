@@ -16,6 +16,7 @@ class Asset
       ticker: :text,
       name: :text,
       multiplier: :number,
+      verified: :check_box,
       holdings: :collection
     }
   end

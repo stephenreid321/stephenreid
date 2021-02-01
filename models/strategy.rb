@@ -70,6 +70,7 @@ class Strategy
       three_month: :number,
       six_month: :number,
       year: :number,
+      verified: :check_box,
       holdings: :collection
     }
   end
