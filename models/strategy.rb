@@ -9,9 +9,6 @@ class Strategy
   SIX_MONTH_FACTOR = 2
   YEAR_FACTOR = 1
 
-  EXCLUDED_STRATEGIES = ENV['EXCLUDED_STRATEGIES'] ? ENV['EXCLUDED_STRATEGIES'].split(',').freeze : []
-  EXCLUDED_ASSETS = ENV['EXCLUDED_ASSETS'] ? ENV['EXCLUDED_ASSETS'].split(',').freeze : []
-
   field :ticker, type: String
   field :name, type: String
   field :score, type: Float
@@ -27,6 +24,7 @@ class Strategy
   %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
     field :"#{r.downcase}", type: Float
   end
+  field :verified, type: Boolean
 
   validates_presence_of :ticker
 
@@ -133,19 +131,23 @@ class Strategy
     m
   end
 
+  def self.unverified
+    where(:verified.ne => true)
+  end
+
   def self.active_mature(mature_period: 'THREE_MONTH')
-    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil, :ticker.nin => EXCLUDED_STRATEGIES)
+    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil, :verified => true)
   end
 
   def self.proposed(n: 10)
     assets = {}
     Strategy.active_mature.where(:ticker.ne => 'DECENTCOOP').each do |strategy|
       strategy.holdings.each do |holding|
+        next unless holding.asset.verified
+
         ticker = holding.asset.ticker
-        unless EXCLUDED_ASSETS.include?(ticker)
-          assets[ticker] = 0 unless assets[ticker]
-          assets[ticker] += holding.weight * strategy.score * (holding.asset.multiplier || 1)
-        end
+        assets[ticker] = 0 unless assets[ticker]
+        assets[ticker] += holding.weight * strategy.score * (holding.asset.multiplier || 1)
       end
     end
 

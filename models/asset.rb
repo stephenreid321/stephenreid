@@ -5,6 +5,7 @@ class Asset
   field :ticker, type: String
   field :name, type: String
   field :multiplier, type: Float
+  field :verified, type: Boolean
 
   validates_presence_of :ticker
 
