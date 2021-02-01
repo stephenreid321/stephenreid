@@ -13,14 +13,14 @@ I'm significantly changing how I use Facebook and other corporate social media. 
 
 Essentially I'm just going to use Facebook as an **address book/events discovery/search tool** from now on.
 
-I will also not be posting on Twitter, Instagram or YouTube. I already don't use the newsfeeds on Twitter or Instagram. I will continue to follow a handful of channels on YouTube that aren't available on Spotify.
+I will also not be posting on Twitter, Instagram or YouTube. I already don't use the newsfeeds on Twitter or Instagram. I will continue to follow a handful of channels on YouTube that aren't available on Spotify. **(Edit, Feb 2021: I have started using Twitter again to keep up with developments in the crypto space, though I rarely post there myself.) **
 
 ## Where I will be posting
 
 * ~daily: articles I read to my homepage ([web](https://stephenreid.net/), [RSS](https://stephenreid.net/feed.rss))
-* ~weekly: blog posts to my blog ([web](https://stephenreid.net/blog), [RSS](https://stephenreid.net/blog/feed)), written with [Typora](https://typora.io/)
-* ~occasionally: episodes to my [podcast](https://stephenreid.net/podcast)
+* ~monthly: blog posts to my blog ([web](https://stephenreid.net/blog), [RSS](https://stephenreid.net/blog/feed)), written with [Typora](https://typora.io/)
 * ~monthly: newsletters to my [Substack](https://stephenreid.substack.com/), which will feature a summary of content I've created since the previous newsletter
+* ~occasionally: episodes to my [podcast](https://stephenreid.net/podcast)
 
 ## How I read/listen
 
