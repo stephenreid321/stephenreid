@@ -12,9 +12,8 @@ StephenReid::App.controller do
     erb :'crypto/crypto_investing'
   end
 
-  get '/metastrategy', cache: true do
+  get '/metastrategy' do
     @title = 'Metastrategy'
-    expires 1.hour.to_i
     erb :'crypto/metastrategy'
   end
 
