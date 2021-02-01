@@ -20,7 +20,7 @@ StephenReid::App.controller do
       if current_account
         expires 30.minutes.to_i
       else
-        expires 0
+        expires 1
       end
     end
     Tag.update_holdings
