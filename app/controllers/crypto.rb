@@ -12,7 +12,7 @@ StephenReid::App.controller do
     erb :'crypto/crypto_investing'
   end
 
-  get '/metastrategy' do
+  get '/metastrategy', cache: !current_account do
     @title = 'Metastrategy'
     erb :'crypto/metastrategy'
   end
