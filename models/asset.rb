@@ -20,6 +20,10 @@ class Asset
     }
   end
 
+  def self.unverified
+    where(:verified.ne => true)
+  end
+
   def self.loopring_tickers
     agent = Mechanize.new
     JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/loopring').body)['tickers']
