@@ -14,15 +14,7 @@ StephenReid::App.controller do
     redirect '/coins/tag/holding'
   end
 
-  get '/coins/tag/:tag', cache: true do
-    unless Padrino.env == :development
-      cache_key { request.path + "?signed_in=#{current_account ? 1 : 0}" }
-      if current_account
-        expires 30.minutes.to_i
-      else
-        expires 1
-      end
-    end
+  get '/coins/tag/:tag' do
     Tag.update_holdings
     if params[:tag] == 'uniswap'
       agent = Mechanize.new
