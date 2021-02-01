@@ -48,8 +48,10 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
    </td>
    <td>
 <ul>
-<li><a href="https://www.piedao.org/">PieDAO</a> (I recommended <a href="https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14">BCP</a>)
-<li><a href="https://www.indexcoop.com">Index Coop</a>
+  <li><a href="https://www.piedao.org/">PieDAO</a> (I recommended <a href="https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14">BCP</a>)</li>
+    <li><a href="https://indexed.finance">Indexed</a></li>
+  <li><a href="https://www.indexcoop.com">Index Coop</a></li>
+    <li><a href="https://powerindex.io">Power Index</a></li>
 </li>
 </ul>
    </td>
