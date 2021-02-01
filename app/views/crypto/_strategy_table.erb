@@ -55,9 +55,7 @@
           </a>
         <% end %>
       <% end %>
-      <% if current_account %>
-        <%= partial :'crypto/multiplier', locals: {asset: asset} %>
-      <% end %>
+      <%= partial :'crypto/multiplier', locals: {asset: asset} %>
     </td>
     <td style="vertical-align: middle; width: 10vw">
       <% if actual[k] %>
