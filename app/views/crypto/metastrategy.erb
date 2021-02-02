@@ -80,9 +80,12 @@
 </table>
 
 
-<div data-pagelet-url="/strategy/table" class="mb-3">
-  <%= partial :'crypto/strategy_table' %>
-</div>
-
+<% if current_account %>
+  <div data-pagelet-url="/strategy/table" class="mb-3">
+    <%= partial :'crypto/strategy_table' %>
+  </div>
+<% else %>
+  <%= cp :'crypto/strategy_table' %>
+<% end %>
 
 <%= md :metastrategy %>
