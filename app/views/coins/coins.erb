@@ -1,4 +1,8 @@
-<%= partial :'coins/nav' %>
+<%= cp :'coins/nav', 1.hour %>
+
+<% unless current_account %>
+  <%= md :seeds %>
+<% end %>
 
 <% case params[:tag]; when nil, 'holding' %>
 

@@ -19,8 +19,8 @@ StephenReid::App.helpers do
     FrontMatterParser::Parser.new(:md).call(text)
   end
 
-  def cp(slug)
-    cache(slug, expires: 6.hours.to_i) { ; partial :"#{slug}"; }
+  def cp(slug, expires = 6.hours)
+    cache(slug, expires: expires.to_i) { ; partial :"#{slug}"; }
   end
 
   def current_account

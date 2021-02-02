@@ -1,4 +1,8 @@
-<%= partial :'coins/nav' %>
+<%= cp :'coins/nav', 1.hour %>
+
+<% unless current_account %>
+  <%= md :seeds %>
+<% end %>
 
 <% if current_account %>
   <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>

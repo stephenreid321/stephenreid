@@ -15,7 +15,6 @@ StephenReid::App.controller do
   end
 
   get '/coins/tag/:tag' do
-    # Tag.update_holdings
     if params[:tag] == 'uniswap'
       agent = Mechanize.new
       @uniswap = []
