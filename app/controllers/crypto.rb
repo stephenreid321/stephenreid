@@ -39,13 +39,13 @@ StephenReid::App.controller do
   get '/strategy/:p/bail' do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.bail
-    redirect '/strategy'
+    redirect '/metastrategy'
   end
 
   get '/strategy/:p/rebalance' do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.rebalance(force: params[:force])
-    redirect '/strategy'
+    redirect '/metastrategy'
   end
 
   get '/assets/:id/multiplier' do
