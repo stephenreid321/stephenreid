@@ -132,17 +132,17 @@
 </td>
 <td data-sort="<%= coin.uniswap_volume || 0 %>">
   <% if coin.uniswap_volume %>
-    #<%= Coin.where(:uniswap_volume.ne => nil).order('uniswap_volume desc').pluck(:slug).index(coin.slug)+1 %>
+    #<%= @uniswap_slugs.index(coin.slug)+1 %>
   <% end %>
 </td>
 <td data-sort="<%= coin.sushiswap_volume || 0 %>">
   <% if coin.sushiswap_volume %>
-    #<%= Coin.where(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug).index(coin.slug)+1 %>
+    #<%= @sushiswap_slugs.index(coin.slug)+1 %>
   <% end %>
 </td>
 <td data-sort="<%= coin.tvl || 0 %>">
   <% if coin.tvl %>
-    #<%= Coin.where(:tvl.ne => nil).order('tvl desc').pluck(:slug).index(coin.slug)+1 %>
+    #<%= @tvl_slugs.index(coin.slug)+1 %>
   <% end %>
 </td>
 <td>

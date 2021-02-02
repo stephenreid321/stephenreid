@@ -46,6 +46,9 @@ StephenReid::App.controller do
         end
       end
     end
+    @uniswap_slugs = Coin.where(:uniswap_volume.ne => nil).order('uniswap_volume desc').pluck(:slug)
+    @sushiswap_slugs = Coin.where(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug)
+    @tvl_slugs = Coin.where(:tvl.ne => nil).order('tvl desc').pluck(:slug)
     erb :'coins/coins'
   end
 
