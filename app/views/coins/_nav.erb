@@ -1,5 +1,3 @@
-<% Tag.update_holdings %>
-
 <%= ul_nav (
       (@virtual_tags.map { |slug| [tag_badge(slug, html_tag: 'span'), "/coins/tag/#{slug}"] }) +
       (tags = Tag.where(:id.in => Coin.pluck(:tag_id)).sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/coins/tag/#{tag.name}"] } +

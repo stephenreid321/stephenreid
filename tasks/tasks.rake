@@ -39,6 +39,12 @@ namespace :coins do
   end
 end
 
+namespace :tags do
+  task update_holdings: :environment do
+    Tag.update_holdings
+  end
+end
+
 namespace :terms do
   task create_edges: :environment do
     term_ids = []
