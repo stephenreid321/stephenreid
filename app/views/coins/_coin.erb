@@ -131,17 +131,17 @@
   <% end %>
 </td>
 <td data-sort="<%= coin.uniswap_volume || 0 %>">
-  <% if coin.uniswap_volume %>
+  <% if coin.uniswap_volum && @uniswap_slugs %>
     #<%= @uniswap_slugs.index(coin.slug)+1 %>
   <% end %>
 </td>
 <td data-sort="<%= coin.sushiswap_volume || 0 %>">
-  <% if coin.sushiswap_volume %>
+  <% if coin.sushiswap_volume && @sushiswap_slugs %>
     #<%= @sushiswap_slugs.index(coin.slug)+1 %>
   <% end %>
 </td>
 <td data-sort="<%= coin.tvl || 0 %>">
-  <% if coin.tvl %>
+  <% if coin.tvl && @tvl_slugs %>
     #<%= @tvl_slugs.index(coin.slug)+1 %>
   <% end %>
 </td>
