@@ -144,8 +144,8 @@
     </td>
     <% } %>
     <% %w[day week month three_month six_month year].each { |t| %>
-    <% if strategy.send(t) %>
-      <% score, index = strategy.score_index(t) %>
+    <% if strategy.send("r#{t}") %>
+      <% score, index = strategy.score_index("r#{t}") %>
       <td data-sort="<%=score%>">
         <span class="score">
           <%= number_with_precision score, precision: 1 %>

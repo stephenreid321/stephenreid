@@ -101,7 +101,7 @@
           </div>
         </div>
         <div class="row justify-content-center">
-          <%= cp :social_networks %>
+          <%= Padrino.env == :production ? cp('social_networks') : partial(:social_networks) %>
         </div>
         <div class="text-center mt-3">
           <span class="text-muted mr-3">View source</span>

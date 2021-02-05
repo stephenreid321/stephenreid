@@ -22,14 +22,14 @@ class Strategy
   field :lastRebalanced, type: Time
   field :monthlyRebalancedCount, type: Integer
   %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
-    field :"#{r.downcase}", type: Float
+    field :"r#{r.downcase}", type: Float
   end
   field :verified, type: Boolean
 
   validates_presence_of :ticker
 
   def calculate_score
-    ((MONTH_FACTOR * (month || 0)) + (THREE_MONTH_FACTOR * (three_month || 0)) + (SIX_MONTH_FACTOR * (six_month || 0)) + (YEAR_FACTOR * (year || 0)))
+    ((MONTH_FACTOR * (rmonth || 0)) + (THREE_MONTH_FACTOR * (rthree_month || 0)) + (SIX_MONTH_FACTOR * (rsix_month || 0)) + (YEAR_FACTOR * (ryear || 0)))
   end
 
   def calculate_score_fee_weighted
@@ -64,12 +64,12 @@ class Strategy
       numberOfAssets: :number,
       lastRebalanced: :datetime,
       monthlyRebalancedCount: :number,
-      day: :number,
-      week: :number,
-      month: :number,
-      three_month: :number,
-      six_month: :number,
-      year: :number,
+      rday: :number,
+      rweek: :number,
+      rmonth: :number,
+      rthree_month: :number,
+      rsix_month: :number,
+      ryear: :number,
       verified: :check_box,
       holdings: :collection
     }
@@ -119,7 +119,7 @@ class Strategy
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/statistics"))
     %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
-      send("#{r.downcase}=", j['returns'][r])
+      send("r#{r.downcase}=", j['returns'][r])
     end
     save
   end
@@ -127,7 +127,7 @@ class Strategy
   def max_maturity
     m = nil
     %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
-      m = r if send(r.downcase)
+      m = r if send("r#{r.downcase}")
     end
     m
   end
@@ -137,7 +137,7 @@ class Strategy
   end
 
   def self.active_mature(mature_period: 'THREE_MONTH')
-    where(:monthlyRebalancedCount.gte => 1, :"#{mature_period.downcase}".ne => nil, :verified => true)
+    where(:monthlyRebalancedCount.gte => 1, :"r#{mature_period.downcase}".ne => nil, :verified => true)
   end
 
   def self.proposed(n: 10)
