@@ -10,6 +10,10 @@ StephenReid::App.controller do
     erb :'coins/tags'
   end
 
+  get '/tags/update_holdings' do
+    Tag.update_holdings
+  end
+
   get '/coins' do
     redirect '/coins/tag/holding'
   end
