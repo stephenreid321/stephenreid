@@ -176,13 +176,24 @@ class Coin
     self.twitter_followers = c['community_data']['twitter_followers']
     if starred
       u = 0
-      if erc20?
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+      if platform
+        case platform
+        when 'ethereum'
+          ENV['ETH_ADDRESSES'].split(',').each do |a|
+            u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+          end
+        when 'binance-smart-chain'
+          ENV['ETH_ADDRESSES'].split(',').each do |a|
+            u += JSON.parse(agent.get("https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+          end
         end
       elsif symbol == 'ETH'
         ENV['ETH_ADDRESSES'].split(',').each do |a|
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+        end
+      elsif symbol == 'BNB'
+        ENV['ETH_ADDRESSES'].split(',').each do |a|
+          u += JSON.parse(agent.get("https://api.bscscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
         end
       else
 
