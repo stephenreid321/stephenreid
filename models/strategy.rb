@@ -94,11 +94,11 @@ class Strategy
   end
 
   def update
+    holdings.destroy_all
     begin
       j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
       puts self['ticker']
     rescue StandardError => e
-      destroy
       Airbrake.notify(e)
       puts "not found: #{self['ticker']}"
       return
@@ -110,7 +110,6 @@ class Strategy
     %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each do |r|
       send("#{r}=", (r == 'lastRebalanced' ? Time.at(j[r]) : j[r]))
     end
-    holdings.destroy_all
     j['values'].each do |v|
       asset = Asset.find_or_create_by(ticker: (v['assetTicker'] unless v['assetTicker'].blank?))
       if asset.persisted?
