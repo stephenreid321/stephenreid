@@ -7,8 +7,14 @@
 <% tarot_numbers = TarotNumber.all %>
 <% tarot_cards = TarotCard.all %>
 
+<script>
+  $(function () {
+    $('#cards').stickyTableHeaders({zIndex: 9999})
+  })
+</script>
+
 <table class="table" id="cards">
-  <thead>
+  <thead class="bg-white">
     <tr>
       <th>number</th>
       <th>major arcana</th>
