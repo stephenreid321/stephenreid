@@ -10,6 +10,10 @@ class Coinship
   field :staked_units, type: Float
   field :notes, type: String
 
+  before_validation do
+    remote_update(skip_save: true)
+  end
+
   belongs_to :account
   belongs_to :coin
   belongs_to :tag, optional: true
@@ -55,7 +59,7 @@ class Coinship
     (all_units || 0) * (coin.current_price || 0)
   end
 
-  def remote_update(skip_coin_update: nil)
+  def remote_update(skip_coin_update: nil, skip_save: nil)
     coin.remote_update unless skip_coin_update
 
     agent = Mechanize.new
@@ -92,6 +96,6 @@ class Coinship
     else
       self.units = nil
     end
-    save!
+    save! unless skip_save
   end
 end
