@@ -27,14 +27,14 @@
         <div class="modal-body font-weight-normal">
 
           <div class="row">
-            <div class="col-sm-4">
-              <div class="mb-3 text-center">
-                <% if t['Image'] %>
+            <% if t['Image'] %>
+              <div class="col-sm-4">
+                <div class="mb-3 text-center">
                   <img style="width: 100%; max-width: none" src="<%=t['Image'].first['url']%>"/>
-                <% end %>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-8">
+            <% end %>
+            <div class="<%= t['Image'] ? 'col-sm-8' : 'col-sm-12' %>">
               <% if t['Description'] %>
                 <%= t['Description'].gsub("\n",'<br />')  %>
               <% end %>
