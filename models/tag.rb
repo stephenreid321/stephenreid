@@ -6,7 +6,7 @@ class Tag
   field :holding, type: Float
 
   before_validation do
-    update_holding(skip_save: true)
+    self.holding = coinships.sum { |coinship| coinship.holding }
   end
 
   belongs_to :account
@@ -27,9 +27,8 @@ class Tag
     Tag.all.each(&:update_holding)
   end
 
-  def update_holding(skip_save: true)
-    self.holding = coinships.sum { |coinship| coinship.holding }
-    save! unless skip_save
+  def update_holding
+    update_attribute(:holding, coinships.sum { |coinship| coinship.holding })
   end
 
   def self.holding
