@@ -55,8 +55,8 @@ class Coinship
     (all_units || 0) * (coin.current_price || 0)
   end
 
-  def remote_update
-    coin.remote_update
+  def remote_update(skip_coin_update: nil)
+    coin.remote_update unless skip_coin_update
     if starred
       u = 0
       if platform == 'ethereum'

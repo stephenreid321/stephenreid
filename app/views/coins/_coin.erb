@@ -1,4 +1,4 @@
-<% coinship = Coinship.find_by(coin: coin) %>
+<% coinship = Account.first.coinships.find_by(coin: coin) %>
 
 <td style="opacity: 0.5"></td>
 <td data-sort="<%=coin.market_cap_rank%>">

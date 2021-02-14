@@ -58,7 +58,7 @@ StephenReid::App.controller do
 
   get '/coins/table/:tag' do
     partial :'coins/coin_table', locals: { coins: Coin.where(
-      :id.in => Coinship.where(tag: Tag.find_by(name: params[:tag])).pluck(:coin_id)
+      :id.in => Account.first.coinships.where(tag: Tag.find_by(name: params[:tag])).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') }
   end
 
