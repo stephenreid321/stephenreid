@@ -36,11 +36,11 @@ class Coin
 
   def self.admin_fields
     {
+      name: :text,
+      tag_id: :lookup,
       slug: :text,
       symbol: :text,
-      name: :text,
       defi_pulse_name: :text,
-      tag_id: :lookup,
       skip_remote_update: :check_box,
       units: :number,
       staked_units: :number,
