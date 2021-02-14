@@ -51,7 +51,7 @@
 
           <div class="row">
             <% if t['Image'] %>
-              <div class="col-sm-4 <%= 'offset-sm-4' unless t['Description']%>">
+              <div class=" <%= t['Description'] ? 'col-sm-4' : 'col-sm-8 offset-sm-2' %>">
                 <div class="mb-3 text-center">
                   <img style="width: 100%; max-width: none" src="<%=t['Image'].first['url']%>"/>
                 </div>
