@@ -84,8 +84,8 @@
   <% end %>
 </td>
 <td class="holding" data-sort="<%= (!coinship || coinship.holding < 1e-6 ? 0 : coinship.holding) * ENV['PRICE_FACTOR'].to_i  %>">
-  <% if current_account %>
-    <a target="_blank" href="/admin/edit/Coin/<%=coin.id%>">
+  <% if coinship && current_account %>
+    <a target="_blank" href="/admin/edit/Coinship/<%=coinship.id%>">
     <% end %>
     <div class="p">
       <% if coinship && coinship.starred && coinship.all_units %>
@@ -96,7 +96,7 @@
         <% end %>
       <% end %>
     </div>
-    <% if current_account %>
+    <% if coinship && current_account %>
     </a>
   <% end %>
 </td>
