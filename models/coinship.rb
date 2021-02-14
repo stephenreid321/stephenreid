@@ -23,11 +23,11 @@ class Coinship
       tag_id: :lookup,
       units: :number,
       staked_units: :number,
-      hidden: :check_box,
-      starred: :check_box,
+      notes: :text_area,
       market_cap_rank_prediction: :number,
       market_cap_rank_prediction_conviction: :number,
-      notes: :text_area
+      hidden: :check_box,
+      starred: :check_box
     }
   end
 
