@@ -8,7 +8,6 @@ class TarotCard < Airrecord::Table
   def update_image
     agent = Mechanize.new
     page = agent.get('https://blog.goo.ne.jp/valet_de_coupe/e/cb9361a10db2c819ee498cf250f66813')
-    page.search('.entry-body')
     srcs = page.search('.entry-body img').map { |img| img.parent.attr('href') }
     srcs.delete_at(1)
     suits = %w[wands cups swords pentacles]

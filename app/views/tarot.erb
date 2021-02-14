@@ -5,6 +5,12 @@
   #cards img { max-width: 100px }
   #cards img:hover { opacity: 1 !important }
 </style>
+
+
+<% tarot_suits = TarotSuit.all %>
+<% tarot_numbers = TarotNumber.all %>
+<% tarot_cards = TarotCard.all %>
+
 <table class="table" id="cards">
   <thead>
     <tr>
@@ -12,7 +18,7 @@
       <th>major arcana</th>
       <% TarotSuit.suits.each { |suit_name| %>
       <th>
-        <% if (t = TarotSuit.all(filter: "{Name} = '#{suit_name}'").first) %>
+        <% if (t = tarot_suits.find { |tarot_suit| tarot_suit['Name'] == suit_name }) %>
           <%= partial :tarot_card, :locals => {:t => t} %>
         <% end %>
         <i data-toggle="tooltip" title="<%= TarotSuit.icons[suit_name.to_sym][0] %>" class="fas fa-<%= TarotSuit.icons[suit_name.to_sym][1] %>"></i>
@@ -24,7 +30,7 @@
     <% TarotNumber.numbers.each_with_index { |n,i| %>
     <tr>
       <th>
-        <% if (t = TarotNumber.all(filter: "{Name} = '#{n}'").first) %>
+        <% if (t = tarot_numbers.find { |tarot_number| tarot_number['Name'] == n }) %>
           <% if t['URL'] %>
             <%= partial :tarot_card, :locals => {:t => t, :title => "#{t['Name']} #{TarotNumber.numerals[i]}"} %>
           <% else %>
@@ -42,13 +48,13 @@
       <% end %>
     </th>
     <td>
-      <% if (t = TarotCard.all(filter: "AND({Tarot suit} = '', {Tarot number} = '#{n}')").first) %>
+      <% if (t = tarot_cards.find { |tarot_card| tarot_card['Tarot suit name'].blank? && tarot_card['Tarot number name'] == [n] }) %>
         <%= partial :tarot_card, :locals => {:t => t} %>
       <% end %>
     </td>
     <% TarotSuit.suits.each { |suit_name| %>
     <td>
-      <% if (t = TarotCard.all(filter: "AND({Tarot suit} = '#{suit_name}', {Tarot number} = '#{n}')").first) %>
+      <% if (t = tarot_cards.find { |tarot_card| tarot_card['Tarot suit name'] == [suit_name] && tarot_card['Tarot number name'] == [n] }) %>
         <%= partial :tarot_card, :locals => {:t => t} %>
       <% end %>
     </td>
