@@ -58,16 +58,8 @@ StephenReid::App.controller do
 
   get '/coins/table/:tag' do
     partial :'coins/coin_table', locals: { coins: Coin.where(
-      tag: Tag.find_by(name: params[:tag])
+      :id.in => Coinship.where(tag: Tag.find_by(name: params[:tag])).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') }
-  end
-
-  post '/coins/table/:tag' do
-    sign_in_required!
-    if coin = Coin.symbol(params[:symbol])
-      coin.update_attribute(:tag_id, Tag.find_or_create_by(name: params[:tag]).id)
-    end
-    200
   end
 
   get '/coins/:slug' do
@@ -76,38 +68,50 @@ StephenReid::App.controller do
     partial :'coins/coin', locals: { coin: coin }
   end
 
-  get '/coins/:slug/hide' do
+  post '/coins/table/:tag' do
     sign_in_required!
-    coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:tag_id, nil)
+    if coin = Coin.symbol(params[:symbol])
+      coinship = current_account.coinships.find_or_create_by(coin: coin)
+      coinship.tag = current_account.tags.find_or_create_by(name: params[:tag])
+      coinship.save
+    end
     200
   end
 
-  get '/coins/:slug/star' do
+  get '/coins/:coin_id/hide' do
     sign_in_required!
-    coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:starred, true)
-    coin.remote_update
+    coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
+    coinship.update_attribute(:tag_id, nil)
     200
   end
 
-  get '/coins/:slug/unstar' do
+  get '/coins/:coin_id/star' do
     sign_in_required!
-    coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:starred, nil)
-    coin.remote_update
+    coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
+    coinship.update_attribute(:starred, true)
+    coinship.coin.remote_update
     200
   end
 
-  post '/coins/:slug/market_cap_rank_prediction' do
-    coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:market_cap_rank_prediction, params[:p])
+  get '/coins/:coin_id/unstar' do
+    sign_in_required!
+    coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
+    coinship.update_attribute(:starred, nil)
+    coinship.coin.remote_update
     200
   end
 
-  post '/coins/:slug/market_cap_rank_prediction_conviction' do
-    coin = Coin.find_by(slug: params[:slug])
-    coin.update_attribute(:market_cap_rank_prediction_conviction, params[:p])
+  post '/coins/:coin_id/market_cap_rank_prediction' do
+    sign_in_required!
+    coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
+    coinship.update_attribute(:market_cap_rank_prediction, params[:p])
+    200
+  end
+
+  post '/coins/:coin_id/market_cap_rank_prediction_conviction' do
+    sign_in_required!
+    coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
+    coinship.update_attribute(:market_cap_rank_prediction_conviction, params[:p])
     200
   end
 end

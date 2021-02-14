@@ -3,15 +3,22 @@ class Tag
   include Mongoid::Timestamps
 
   field :name, type: String
-  field :priority, type: Integer
   field :holding, type: Float
 
-  has_many :coins, dependent: :nullify
+  before_validation do
+    self.holding = coinships.sum { |coinship| coinship.holding }
+  end
+
+  belongs_to :account
+  has_many :coinships, dependent: :nullify
+  def coins
+    Coin.where(:id.in => coinships.pluck(:coin_id))
+  end
 
   def self.admin_fields
     {
       name: :text,
-      priority: :number,
+      account_id: :lookup,
       holding: :number
     }
   end
@@ -21,7 +28,7 @@ class Tag
   end
 
   def update_holding
-    update_attribute(:holding, coins.sum { |coin| coin.holding })
+    update_attribute(:holding, coinships.sum { |coinship| coinship.holding })
   end
 
   def self.holding

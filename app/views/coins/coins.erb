@@ -13,20 +13,22 @@
 <% end %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
-      :starred => true
+      :id.in => Coinship.where(:starred => true).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'watching' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
-          :tag_id.ne => nil
-        ).order('price_change_percentage_24h_in_currency desc')} %>
+        :id.in => Coinship.where(:tag_id.ne => nil).pluck(:coin_id)
+      ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'watching-less-core' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
-                  :tag_id.in => Tag.all.pluck(:id) - Tag.where(:name.in => ['core', 'fiat-pegged', 'yfi']).pluck(:id),
-                ).order('price_change_percentage_24h_in_currency desc')} %>
+        :id.in => Coinship.where(
+          :tag_id.in => Tag.all.pluck(:id) - Tag.where(:name.in => ['core', 'fiat-pegged', 'yfi']).pluck(:id)
+        ).pluck(:coin_id)
+      ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'uniswap' %>
 
@@ -87,7 +89,7 @@
 
   <div data-pagelet-url="/coins/table/<%=params[:tag]%>">
     <%= partial :'coins/coin_table', locals: { coins: Coin.where(
-      tag: Tag.find_by(name: params[:tag])
+      :id.in => Coinship.where(tag: Tag.find_by(name: params[:tag])).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
   </div>
 

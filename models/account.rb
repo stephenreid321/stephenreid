@@ -8,6 +8,9 @@ class Account
   field :time_zone, type: String
   field :crypted_password, type: String
 
+  has_many :coinships, dependent: :destroy
+  has_many :tags, dependent: :destroy
+
   def self.protected_attributes
     %w[admin]
   end

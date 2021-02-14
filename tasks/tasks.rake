@@ -30,11 +30,11 @@ namespace :coins do
   end
 
   task remote_update: :environment do
-    Coin.where(:id.in =>
-      Coin.where(starred: true).pluck(:id) +
-      Coin.where(:tag_id.ne => nil).pluck(:id)).each do |coin|
-        puts coin.slug
-        coin.remote_update
+    Coinship.where(:id.in =>
+      Coinship.where(starred: true).pluck(:id) +
+      Coinship.where(:tag_id.ne => nil).pluck(:id)).each do |coinship|
+        puts coinship.coin.slug
+        coinship.remote_update
       end
   end
 end

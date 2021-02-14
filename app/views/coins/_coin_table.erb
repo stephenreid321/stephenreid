@@ -25,7 +25,7 @@
       </div>
     <% end %>
 
-    <% if coins.where(starred: true).count > 0 %>
+    <% if current_account.coinships.where(:coin_id.in => coins.pluck(:id), starred: true).count > 0 %>
       <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
     <% end %>
 

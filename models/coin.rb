@@ -14,8 +14,6 @@ class Coin
   field :market_cap, type: Float
   field :market_cap_change_percentage_24h, type: Float
   field :market_cap_rank, type: Integer
-  field :market_cap_rank_prediction, type: Integer
-  field :market_cap_rank_prediction_conviction, type: Float
   field :total_volume, type: Float
   field :uniswap_volume, type: Float
   field :sushiswap_volume, type: Float
@@ -26,25 +24,17 @@ class Coin
   field :website, type: String
   field :twitter_username, type: String
   field :twitter_followers, type: Integer
-  field :hidden, type: Boolean
-  field :starred, type: Boolean
-  field :staked_units, type: Float
-  field :notes, type: String
   field :skip_remote_update, type: Boolean
 
-  belongs_to :tag, optional: true
+  has_many :coinships, dependent: :destroy
 
   def self.admin_fields
     {
       name: :text,
-      tag_id: :lookup,
       slug: :text,
       symbol: :text,
       defi_pulse_name: :text,
       skip_remote_update: :check_box,
-      units: :number,
-      staked_units: :number,
-      notes: :text_area,
       contract_address: :text,
       decimals: :number,
       platform: :text,
@@ -61,39 +51,13 @@ class Coin
       tvl: :number,
       website: :url,
       twitter_username: :text,
-      twitter_followers: :number,
-      hidden: :check_box,
-      starred: :check_box
+      twitter_followers: :number
     }
   end
 
   before_validation do
     self.symbol = symbol.try(:upcase)
     self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
-  end
-
-  def market_cap_at_predicted_rank
-    if (p = market_cap_rank_prediction)
-      mc = nil
-      until mc
-        mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
-        p += 1
-        break if p > market_cap_rank_prediction + 5
-      end
-      mc
-    end
-  end
-
-  def market_cap_change_prediction
-    (market_cap_at_predicted_rank / market_cap) * (market_cap_rank_prediction_conviction || 1) if market_cap_at_predicted_rank && market_cap && (market_cap > 0)
-  end
-
-  def all_units
-    (units || 0) + (staked_units || 0)
-  end
-
-  def holding
-    (all_units || 0) * (current_price || 0)
   end
 
   def erc20?
@@ -158,8 +122,6 @@ class Coin
         remote_update
       else
         Airbrake.notify(e)
-        self.units = nil
-        save!
       end
       return
     end
@@ -174,39 +136,6 @@ class Coin
     self.website = c['links']['homepage'].first
     self.twitter_username = c['links']['twitter_screen_name']
     self.twitter_followers = c['community_data']['twitter_followers']
-    if starred
-      u = 0
-      if platform == 'ethereum'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
-        end
-      elsif platform == 'binance-smart-chain'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
-        end
-      elsif symbol == 'ETH'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
-        end
-      elsif symbol == 'BNB'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.bscscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
-        end
-      else
-
-        client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
-        balances = client.account_info['balances']
-        bc = balances.find do |b|
-          b['asset'] == symbol
-        end
-        u += (bc['free'].to_f + bc['locked'].to_f) if bc
-
-      end
-
-      self.units = u
-    else
-      self.units = nil
-    end
     save!
   end
 end
