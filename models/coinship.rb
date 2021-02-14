@@ -57,30 +57,32 @@ class Coinship
 
   def remote_update(skip_coin_update: nil)
     coin.remote_update unless skip_coin_update
+
+    agent = Mechanize.new
     if starred
       u = 0
-      if platform == 'ethereum'
+      if coin.platform == 'ethereum'
         ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
-      elsif platform == 'binance-smart-chain'
+      elsif coin.platform == 'binance-smart-chain'
         ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=#{contract_address}&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+          u += JSON.parse(agent.get("https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
-      elsif symbol == 'ETH'
+      elsif coin.symbol == 'ETH'
         ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
-      elsif symbol == 'BNB'
+      elsif coin.symbol == 'BNB'
         ENV['ETH_ADDRESSES'].split(',').each do |a|
-          u += JSON.parse(agent.get("https://api.bscscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(decimals || 18).to_f
+          u += JSON.parse(agent.get("https://api.bscscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
       else
 
         client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
         balances = client.account_info['balances']
         bc = balances.find do |b|
-          b['asset'] == symbol
+          b['asset'] == coin.symbol
         end
         u += (bc['free'].to_f + bc['locked'].to_f) if bc
 

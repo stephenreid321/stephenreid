@@ -89,7 +89,7 @@ StephenReid::App.controller do
     sign_in_required!
     coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
     coinship.update_attribute(:starred, true)
-    coinship.coin.remote_update
+    coinship.remote_update
     200
   end
 
@@ -97,7 +97,7 @@ StephenReid::App.controller do
     sign_in_required!
     coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
     coinship.update_attribute(:starred, nil)
-    coinship.coin.remote_update
+    coinship.remote_update
     200
   end
 
