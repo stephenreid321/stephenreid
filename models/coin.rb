@@ -40,6 +40,7 @@ class Coin
       symbol: :text,
       name: :text,
       defi_pulse_name: :text,
+      tag_id: :lookup,
       skip_remote_update: :check_box,
       units: :number,
       staked_units: :number,
@@ -62,8 +63,7 @@ class Coin
       twitter_username: :text,
       twitter_followers: :number,
       hidden: :check_box,
-      starred: :check_box,
-      tag_id: :lookup
+      starred: :check_box
     }
   end
 
