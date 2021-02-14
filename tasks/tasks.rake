@@ -33,7 +33,7 @@ namespace :coins do
     coinships = Coinship.where(:id.in =>
       Coinship.where(starred: true).pluck(:id) + Coinship.where(:tag_id.ne => nil).pluck(:id))
     Coin.where(:id.in => coinships.pluck(:coin_id)).each do |coin|
-      puts coinship.coin.slug
+      puts coin.slug
       coin.remote_update
     end
     coinships.each do |coinship|
