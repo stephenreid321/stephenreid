@@ -40,8 +40,8 @@
       </a>
     </small>
   <% end %>
-  <% if @virtual_tags.include?(params[:tag]) %>
-    <%= tag_badge coin.tag %>
+  <% if coinship && @virtual_tags.include?(params[:tag]) %>
+    <%= tag_badge coinship.tag %>
   <% end %>
 </td>
 <td data-sort="<%=coinship.try(:market_cap_rank_prediction)%>">
