@@ -5,6 +5,10 @@ StephenReid::App.controller do
     @og_image = nil
   end
 
+  get '/coins' do
+    redirect 'https://autopia.co/u/60002edab1c0a6ce8b96a5e6/coins'
+  end
+
   get '/crypto-investing' do
     @title = 'Crypto investing: a very short introduction'
     @og_desc = 'This is not financial advice'
