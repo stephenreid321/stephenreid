@@ -24,16 +24,12 @@
       <th></th>
       <th>Current weight</th>
       <th>Next rebalance</th>
-      <th>24h</th>
-      <th>7d</th>
     </tr>
   </thead>
   <% tickers = (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
   <% tickers.uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
-  <% coin = Coin.symbol(k) %>
-  <% coin.remote_update if coin && !coin.platform %>
-  <tr <% if coin && coin.erc20? %>style="background-color: #F5F2FA"<% end %>>
+  <tr>
     <td style="vertical-align: middle; text-align: right; width: 10vw">
       <% if actual[k] %>
         <% if diff[k] < 0 %>
@@ -42,19 +38,9 @@
       <% end %>
     </td>
     <td class="assetName" style="white-space: nowrap;">
-      <a target="_blank" href="<%=coin.try(:website)%>">
+      <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
         <%= asset.name %> (<%= k %>)
       </a>
-      <% if coin %>
-        <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
-          <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
-        </a>
-        <% if coin.erc20? %>
-          <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
-            <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
-          </a>
-        <% end %>
-      <% end %>
       <%= partial :'crypto/multiplier', locals: {asset: asset} %>
     </td>
     <td style="vertical-align: middle; width: 10vw">
@@ -79,18 +65,6 @@
         <%= number_to_percentage (proposed[k]*100), precision: 2 %>
       <% end %>
     </td>
-    <% %w[24h 7d].each { |t| %>
-    <% if coin && coin.send("price_change_percentage_#{t}_in_currency") %>
-      <% score, index = coin.score_index("price_change_percentage_#{t}_in_currency", Coin.where(:symbol.in => tickers)) %>
-      <td data-sort="<%=score%>">
-        <span class="score">
-          <%= number_with_precision score, precision: 1 %>
-        </span>
-      </td>
-    <% else %>
-      <td data-sort="0"></td>
-    <% end %>
-    <% } %>
   </tr>
   <% } %>
 </table>

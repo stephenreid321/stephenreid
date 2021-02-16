@@ -24,31 +24,6 @@ namespace :strategies do
   end
 end
 
-namespace :coins do
-  task import: :environment do
-    Coin.import
-  end
-
-  task remote_update: :environment do
-    coinships = Coinship.where(:id.in =>
-      Coinship.where(starred: true).pluck(:id) + Coinship.where(:tag_id.ne => nil).pluck(:id))
-    Coin.where(:id.in => coinships.pluck(:coin_id)).each do |coin|
-      puts coin.slug
-      coin.remote_update
-    end
-    coinships.each do |coinship|
-      puts "#{coinship.account.name} ~ #{coinship.coin.slug}"
-      coinship.remote_update(skip_coin_update: true)
-    end
-  end
-end
-
-namespace :tags do
-  task update_holdings: :environment do
-    Tag.update_holdings
-  end
-end
-
 namespace :terms do
   task create_edges: :environment do
     term_ids = []
