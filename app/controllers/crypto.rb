@@ -6,7 +6,7 @@ StephenReid::App.controller do
   end
 
   get '/coins' do
-    redirect 'https://autopia.co/u/60002edab1c0a6ce8b96a5e6/coins'
+    redirect 'https://autopia.co/u/stephenreid321'
   end
 
   get '/crypto-investing' do
