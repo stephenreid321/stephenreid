@@ -25,6 +25,7 @@ class Strategy
     field :"r#{r.downcase}", type: Float
   end
   field :verified, type: Boolean
+  field :excluded, type: Boolean
 
   validates_presence_of :ticker
 
@@ -71,6 +72,7 @@ class Strategy
       rsix_month: :number,
       ryear: :number,
       verified: :check_box,
+      excluded: :check_box,
       holdings: :collection
     }
   end
