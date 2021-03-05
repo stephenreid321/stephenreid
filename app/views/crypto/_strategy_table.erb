@@ -26,7 +26,7 @@
       <th>Next rebalance</th>
     </tr>
   </thead>
-  <% tickers = (proposed.keys + actual.keys + Asset.where(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
+  <% tickers = (proposed.keys + actual.keys + Asset.and(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
   <% tickers.uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
   <tr>

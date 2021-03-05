@@ -144,7 +144,7 @@ class Strategy
 
   def self.proposed(n: 10)
     assets = {}
-    Strategy.active_mature.where(:ticker.ne => 'DECENTCOOP').each do |strategy|
+    Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each do |strategy|
       strategy.holdings.each do |holding|
         next unless holding.asset.verified
 
@@ -192,7 +192,7 @@ class Strategy
   end
 
   def self.bail
-    Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
+    Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
     rebalance(bail: true)
     # delay(run_at: 1.hours.from_now).rebalance(force: true)
   end
@@ -206,7 +206,7 @@ class Strategy
       end
     end
 
-    Delayed::Job.where(handler: /method_name: :rebalance/).destroy_all
+    Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
 
     if bail
       # Mail.deliver do

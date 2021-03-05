@@ -21,7 +21,7 @@
       <i class="fas fa-sync"></i>
     </a>
   <% end %>
-  <% Delayed::Job.where(handler: /method_name: :rebalance/).each { |delayed_job| %>
+  <% Delayed::Job.and(handler: /method_name: :rebalance/).each { |delayed_job| %>
   &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%=delayed_job.run_at%>"><%=time_ago_in_words delayed_job.run_at %></abbr>
   <% } %>
 </p>
