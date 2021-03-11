@@ -13,7 +13,7 @@ I'm significantly changing how I use Facebook and other corporate social media. 
 
 Essentially I'm just going to use Facebook as an **address book/events discovery/search tool** from now on.
 
-I will also not be posting on Twitter, Instagram or YouTube. I already don't use the newsfeeds on Twitter or Instagram. I will continue to follow a handful of channels on YouTube that aren't available on Spotify. **(Edit, Feb 2021: I have started using Twitter again to keep up with developments in the crypto space, though I rarely post there myself.) **
+I will also not be posting on Twitter, Instagram or YouTube. I already don't use the newsfeeds on Twitter or Instagram. I will continue to follow a handful of channels on YouTube that aren't available on Spotify. **(Edit, Feb 2021: I have started using Twitter again to keep up with developments in the crypto space, though I rarely post there myself.)**
 
 ## Where I will be posting
 
