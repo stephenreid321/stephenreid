@@ -6,6 +6,7 @@ class Asset
   field :name, type: String
   field :multiplier, type: Float
   field :verified, type: Boolean
+  field :excluded, type: Boolean
 
   validates_presence_of :ticker
 
@@ -17,6 +18,7 @@ class Asset
       name: :text,
       multiplier: :number,
       verified: :check_box,
+      excluded: :check_box,
       holdings: :collection
     }
   end

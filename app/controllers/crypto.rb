@@ -21,6 +21,12 @@ StephenReid::App.controller do
     erb :'crypto/metastrategy'
   end
 
+  get '/metastrategy/verify' do
+    Asset.where(:verified.ne => true, :excluded.ne => true).set(verified: true)
+    Strategy.where(:verified.ne => true, :excluded.ne => true).set(verified: true)
+    redirect '/metastrategy'
+  end
+
   get '/iconomi', cache: true do
     unless Padrino.env == :development
       cache_key { request.path + '?' + params.select { |k, _v| %w[funds investment].include?(k) }.to_param }
