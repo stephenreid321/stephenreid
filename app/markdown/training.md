@@ -56,6 +56,7 @@
 *   [Andrew Simms](https://en.wikipedia.org/wiki/Andrew_Simms) whilst working at the [New Economics Foundation](https://neweconomics.org/)
 *   [Caroline Lucas](https://www.carolinelucas.com/) and Cath Miller whilst working in Caroline's parliamentary office
 *   [John Sauven](https://en.wikipedia.org/wiki/John_Sauven) whilst serving on the board of [Greenpeace UK](https://www.greenpeace.org.uk/)
+*   [Gail Bradbrook](https://en.wikipedia.org/wiki/Gail_Bradbrook) whilst taking action with [Extinction Rebellion](https://extinctionrebellion.uk/)
 
 ### Other
 
