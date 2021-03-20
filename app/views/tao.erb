@@ -4,18 +4,18 @@
       <a target="_blank" href="https://amzn.to/30ZIpxw"><img class="w-100" src="/images/tao.jpg"/></a>
     </div>
   </div>
-<% end %>
 
-<div class="row justify-content-center mb-5">
-  <div class="col-md-7">
-    <p style="font-size: 1.4rem">
-      Following an 81-day meditation on each of the 81 chapters of the Tao Te Ching, I minted NFTs for each chapter which contain a link to a secret Telegram group.
-    </p>
-    <p style="font-size: 1.4rem" class="mb-0">
-      51% of the first sale price of each NFT will be donated to GiveWell's <a href="https://givewell.org/maximum-impact-fund">Maximum Impact Fund</a>.
-    </p>
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-7">
+      <p style="font-size: 1.4rem">
+        Following an 81-day meditation on each of the 81 chapters of the Tao Te Ching, I minted NFTs for each chapter which contain a link to a secret Telegram group.
+      </p>
+      <p style="font-size: 1.4rem" class="mb-0">
+        51% of the first sale price of each NFT will be donated to GiveWell's <a href="https://givewell.org/maximum-impact-fund">Maximum Impact Fund</a>.
+      </p>
+    </div>
   </div>
-</div>
+<% end %>
 
 <% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| next if !verse['Images'] %>
 <div class="row" <% unless params[:i] %>style="margin-bottom: 10rem"<% end %>>
