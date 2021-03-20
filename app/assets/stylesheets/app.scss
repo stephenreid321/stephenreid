@@ -31,12 +31,26 @@ p.attribution { text-align: right; font-size: 0.95rem !important }
 a.rarible {
   display: inline-block;
   background: linear-gradient(to right, #3276F7, #F76CE6);
+  background-size: 200% 200%;
   color: white;
   padding: 0.25em;
   border-radius: 0.25em;
+  animation: gradient 7s ease infinite;
 }
 a.rarible:hover {
   color: white;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
