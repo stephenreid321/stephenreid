@@ -24,6 +24,12 @@ namespace :strategies do
   end
 end
 
+namespace :verses do
+  task set_owners: :environment do
+    Verse.all.each(&:set_owner)
+  end
+end
+
 namespace :terms do
   task create_edges: :environment do
     term_ids = []

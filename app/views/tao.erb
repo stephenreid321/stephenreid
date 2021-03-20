@@ -15,6 +15,15 @@
     <h2 class="mb-3 regular">
       <a style="background: white" class="text-dark" href="/tao-te-ching/<%=verse['Verse']%>">Verse <%=verse['Verse']%></a>
     </h2>
+    <p>
+      <a target="_blank" href="<%=verse['Rarible URL']%>" class="rarible">
+        <% if (a = verse['Owner']) == '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324' %>
+          <span class="d-inline-block px-1">NFT on sale for 1 ETH</span>
+        <% else %>
+          <span class="text-dark bg-white d-inline-block px-1">NFT owned by <%="#{a[0..5]}&hellip;#{a[-4..-1]}"%></span>
+        <% end %>
+      </a>
+    </p>
     <div>
       <span style="background: white">
         <%= md(verse['Text']).gsub('<p>','').gsub('</p>','').gsub('  ','&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n","&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n",'&nbsp;<br />') %>

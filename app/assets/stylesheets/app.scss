@@ -28,6 +28,17 @@ p.attribution { text-align: right; font-size: 0.95rem !important }
   -webkit-text-fill-color: transparent;
 }
 
+a.rarible {
+  display: inline-block;
+  background: linear-gradient(to right, #3276F7, #F76CE6);
+  color: white;
+  padding: 0.25em;
+  border-radius: 0.25em;
+}
+a.rarible:hover {
+  color: white;
+}
+
 .blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
 .blog_post img:not(.post-header-image), .blog_post video { max-width: 100%; margin: 1em 0 }
 .blog_post h2 { display: block; border: none; }
