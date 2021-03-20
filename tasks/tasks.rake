@@ -25,8 +25,8 @@ namespace :strategies do
 end
 
 namespace :verses do
-  task set_owners: :environment do
-    Verse.all.each(&:set_owner)
+  task update_owners: :environment do
+    Verse.all.each(&:update_owner)
   end
 end
 
