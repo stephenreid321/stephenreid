@@ -101,7 +101,7 @@ class Strategy
       j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
       puts self['ticker']
     rescue StandardError => e
-      Airbrake.notify(e)
+      # Airbrake.notify(e)
       puts "not found: #{self['ticker']}"
       return
     end
