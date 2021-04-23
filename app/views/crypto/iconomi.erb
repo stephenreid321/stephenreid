@@ -1,4 +1,4 @@
-<% strategies = Strategy.active_mature.order('score_fee_weighted desc').limit(10) %>
+<% strategies = Strategy.active_mature.order('score_fee_weighted desc') %>
 
 <div class="text-center">
   <%= md :iconomi %>
