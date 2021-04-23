@@ -13,41 +13,37 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%= ul_nav [
-        ['Updates',
-          [
-            ['Newsletter', 'https://stephenreid.substack.com/'],
-            ['Blog', '/blog'],
-            ['Podcast', '/podcast'],
-          ]
-        ],
-        ['Knowledge',
-          [
-            ['Knowledgegraph', '/knowledgegraph'],
-            ['Books', '/books'],
-            ['Software', '/software'],
-            ['Groups', '/groups'],
-          ]
-        ],
-        ['Crypto',
-          [
-            ['Crypto investing: a very short introduction', '/crypto-investing'],
-            ['ICONOMI strategy evaluator', '/iconomi'],
-            ['Metastrategy', '/metastrategy'],
-            ["Coins I'm watching", 'https://autopia.co/u/stephenreid321'],
-            ['Introduction to Crypto & DeFi', ENV['CRYPTO_COURSE_URL']],
-            ['Bitcoin whitepaper', '/bitcoin.pdf'],
-            ['Ethereum whitepaper', 'https://ethereum.org/en/whitepaper/']
-          ]
-        ],
-        ['Wisdom',
-          [
-          ['Tao Te Ching', '/tao-te-ching'],
-          ['Tarot', '/tarot']
-        ]
-        ],
-        ['Services', '/services'],
-        ['Recommendations', '/products'],
-        ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link' %>
+            ['Updates',
+             [
+               ['Newsletter', 'https://stephenreid.substack.com/'],
+               ['Blog', '/blog'],
+               ['Podcast', '/podcast']
+             ]],
+            ['Knowledge',
+             [
+               ['Knowledgegraph', '/knowledgegraph'],
+               ['Books', '/books'],
+               ['Software', '/software'],
+               ['Groups', '/groups']
+             ]],
+            ['Crypto',
+             [
+               ['Crypto investing: a very short introduction', '/crypto-investing'],
+               ['ICONOMI strategy evaluator', '/iconomi'],
+               ['Metastrategy', '/metastrategy'],
+               ["Coins I'm watching", 'https://autopia.co/u/stephenreid321'],
+               ['Introduction to Crypto & DeFi', ENV['CRYPTO_COURSE_URL']],
+               ['Bitcoin whitepaper', '/bitcoin.pdf'],
+               ['Ethereum whitepaper', 'https://ethereum.org/en/whitepaper/']
+             ]],
+            ['Wisdom',
+             [
+               ['Tao Te Ching', '/tao-te-ching'],
+               ['Tarot', '/tarot']
+             ]],
+            ['Services', '/services'],
+            ['Recommendations', '/products']
+          ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link' %>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link text-dark" href="mailto:stephen@stephenreid.net">stephen@stephenreid.net</a>

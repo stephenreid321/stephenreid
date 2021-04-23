@@ -2,8 +2,8 @@
 <% proposed = Hash[Strategy.proposed(n: n)] %>
 <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
 <% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
-<% diff = Hash[actual.map { |k,v| [k, actual[k] - rebalanced[k]] }] %>
-<% y = 50000 %>
+<% diff = Hash[actual.map { |k, _v| [k, actual[k] - rebalanced[k]] }] %>
+<% y = 50_000 %>
 
 <style>
   @media(min-width: 768px) {
@@ -16,7 +16,7 @@
       $('#assets').dataTable({info: false, paging: false, searching: false, order: [[4, "desc"]]})
   })
 </script>
-<table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important" >
+<table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
   <thead>
     <tr>
       <th></th>
@@ -33,36 +33,48 @@
     <td style="vertical-align: middle; text-align: right; width: 10vw">
       <% if actual[k] %>
         <% if diff[k] < 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*-diff[k]/diff.values.map(&:abs).max}%"%>"></div>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
+                                                                                                                       'green'
+                                                                                                                     elsif diff[k].negative?
+                                                                                                                       'red'
+                                                                                                                     end %>; width: <%= "#{100 * -diff[k] / diff.values.map(&:abs).max}%" %>"></div>
         <% end %>
       <% end %>
     </td>
     <td class="assetName" style="white-space: nowrap;">
-      <a target="_blank" href="https://www.iconomi.com/asset/<%=k%>">
+      <a target="_blank" href="https://www.iconomi.com/asset/<%= k %>">
         <%= asset.name %> (<%= k %>)
       </a>
-      <%= partial :'crypto/multiplier', locals: {asset: asset} %>
+      <%= partial :'crypto/multiplier', locals: { asset: asset } %>
     </td>
     <td style="vertical-align: middle; width: 10vw">
       <% if actual[k] %>
         <% if diff[k] > 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>; width: <%="#{100*diff[k]/diff.values.map(&:abs).max}%"%>"></div>
+          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
+                                                                                                                       'green'
+                                                                                                                     elsif diff[k].negative?
+                                                                                                                       'red'
+                                                                                                                     end %>; width: <%= "#{100 * diff[k] / diff.values.map(&:abs).max}%" %>"></div>
         <% end %>
       <% end %>
     </td>
-    <td data-sort="<%=actual[k] || 0%>" style="white-space: nowrap;">
+    <td data-sort="<%= actual[k] || 0 %>" style="white-space: nowrap;">
       <% if actual[k] %>
-        <%= number_to_percentage (actual[k]*100), precision: 2 %>
+        <%= number_to_percentage (actual[k] * 100), precision: 2 %>
         <small>
-          <span style="color: <%= if diff[k] > 0; 'green'; elsif diff[k] < 0; 'red'; end %>">
-            <%= '+' if diff[k] > 0 %><%=(diff[k]*10000).round%>
+          <span style="color: <%= if diff[k].positive?
+                                    'green'
+                                  elsif diff[k].negative?
+                                    'red'
+                                  end %>">
+            <%= '+' if diff[k].positive? %><%= (diff[k] * 10_000).round %>
           </span>
         </small>
       <% end %>
     </td>
-    <td data-sort="<%=proposed[k] || 0%>" style="white-space: nowrap;">
+    <td data-sort="<%= proposed[k] || 0 %>" style="white-space: nowrap;">
       <% if proposed[k] %>
-        <%= number_to_percentage (proposed[k]*100), precision: 2 %>
+        <%= number_to_percentage (proposed[k] * 100), precision: 2 %>
       <% end %>
     </td>
   </tr>

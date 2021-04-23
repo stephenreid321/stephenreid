@@ -1,4 +1,4 @@
-<p class="lead">Continue to <a href="<%=@url%>"><%=URI(@url).host.gsub('www.','')%></a></p>
+<p class="lead">Continue to <a href="<%= @url %>"><%= URI(@url).host.gsub('www.', '') %></a></p>
 <script>
-  window.location = '<%=@url%>'
+  window.location = '<%= @url %>'
 </script>

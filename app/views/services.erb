@@ -1,13 +1,13 @@
 <h1 class="regular text-center">
-  Technology & <br class="d-sm-none" />
-   Co-operative Business<br />
+  Technology & <br class="d-sm-none">
+   Co-operative Business<br>
   <small class="text-muted">Coaching, Consulting, Coding & Facilitation</small>
 </h1>
 <div class="row justify-content-center mb-3">
   <div class="col-sm-9">
     <div class="row align-items-top justify-content-center">
       <div class="col-9 col-sm-6 col-sm-4 text-center py-3 px-3 py-sm-3 px-sm-5">
-        <img src="/images/me.jpg" class="rounded-circle w-100" />
+        <img src="/images/me.jpg" class="rounded-circle w-100">
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
   <div class="col-md-3 mb-3">
     <div class="card">
       <div class="card-title mb-0 bg-primary">
-        <h4 class="p-3 m-0 text-center text-white"><%=service['title']%></h4>
+        <h4 class="p-3 m-0 text-center text-white"><%= service['title'] %></h4>
       </div>
       <div class="card-body">
         <div style="font-size: 0.9rem">
@@ -46,11 +46,11 @@
 </div>
 <h2 class="mt-5 mb-3 text-center regular">Some of the software I work with</h2>
 <p class="text-center"><a href="/software">View as grid</a></p>
-<% types = Software.all(filter: "{Featured} = 1").map { |software| software['Type'] || '' }
-(types.uniq.select { |t| t != '' }.sort).each { |type| %>
+<% types = Software.all(filter: '{Featured} = 1').map { |software| software['Type'] || '' }
+   types.uniq.reject { |t| t == '' }.sort.each { |type| %>
 <% softwares = Software.all(filter: "AND({Featured} = 1, {Type} = '#{type}')", sort: {'Name' => 'asc'}); if softwares.count > 0 %>
 <dl class="text-center">
-  <dt><%=type.blank? ? 'Everything else' : type %></dt>
+  <dt><%= type.blank? ? 'Everything else' : type %></dt>
   <dd><%= softwares.map { |software| software['Name'] }.join(' &middot; ') %></dd>
 </dl>
 <% end %>

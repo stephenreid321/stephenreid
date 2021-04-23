@@ -1,38 +1,37 @@
 source 'https://rubygems.org'
 
-ruby '2.5.7'
-gem 'activesupport'
+ruby '2.7.3'
 gem 'padrino'
 gem 'puma'
 gem 'rake'
 gem 'sass'
-gem 'sinatra', '2.0.2'
+gem 'sinatra'
 
 # Admin
 gem 'activate-tools', github: 'stephenreid321/activate-tools'
 gem 'will_paginate', github: 'mislav/will_paginate'
 
-# Email
-gem 'mail'
-
-# Interacting with other websites
+gem 'activate-admin', github: 'stephenreid321/activate-admin'
 gem 'airbrake'
 gem 'airrecord'
+gem 'bcrypt'
+gem 'better_html'
+gem 'binance'
 gem 'chroma'
+gem 'delayed_job_mongoid'
+gem 'digest-sha3'
+gem 'email_address'
+gem 'erb_lint', require: false
+gem 'eth'
+gem 'factory_bot'
 gem 'front_matter_parser'
+gem 'htmlbeautifier', github: 'trileuco/htmlbeautifier'
 gem 'koala'
+gem 'mail'
 gem 'mechanize'
+gem 'mongoid'
 gem 'pocket-ruby'
 gem 'redcarpet'
 gem 'rss'
-
-gem 'activate-admin', github: 'stephenreid321/activate-admin'
-gem 'bcrypt'
-gem 'delayed_job_mongoid'
-gem 'mongoid'
-
-gem 'binance'
-gem 'digest-sha3'
-gem 'eth'
-gem 'htmlbeautifier', github: 'trileuco/htmlbeautifier'
+gem 'rubocop'
 gem 'telegram-bot-ruby'

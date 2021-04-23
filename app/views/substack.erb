@@ -1,33 +1,31 @@
 <style>
   h3 { text-transform: none !important }
 </style>
-<% form_tag '', :method => 'get', :class => 'form-inline mb-3' do%>
-  <%=date_field_tag :from, :class => 'form-control mx-sm-1', :value => @from.to_s(:db) %>
-  <%=submit_tag 'Submit', :class => 'btn btn-primary'%>
+<% form_tag '', method: 'get', class: 'form-inline mb-3' do %>
+  <%= date_field_tag :from, class: 'form-control mx-sm-1', value: @from.to_s(:db) %>
+  <%= submit_tag 'Submit', class: 'btn btn-primary' %>
 <% end %>
-<% posts = Post.all(filter: "IS_AFTER({Created at}, '#{@from.to_s(:db)}')", sort: { "Created at" => "desc" }) %>
-<%
-named_domains = {
-  'youtube.com' => 'YouTube',
-  'open.spotify.com' => 'Spotify',
-  'theguardian.com' => 'The Guardian',
-  'independent.co.uk' => 'The Independent'
-  }.each { |k,v|
-%>
-<h3><%=v%></h3>
+<% posts = Post.all(filter: "IS_AFTER({Created at}, '#{@from.to_s(:db)}')", sort: { 'Created at' => 'desc' }) %>
+<% named_domains = {
+     'youtube.com' => 'YouTube',
+     'open.spotify.com' => 'Spotify',
+     'theguardian.com' => 'The Guardian',
+     'independent.co.uk' => 'The Independent'
+   }.each { |k,v| %>
+<h3><%= v %></h3>
 <ul>
-  <% posts.select { |post| URI(post['Link']).host.gsub('www.','') == k }.each { |post| %>
+  <% posts.select { |post| URI(post['Link']).host.gsub('www.', '') == k }.each { |post| %>
   <li>
-    <a href="<%=post['Link']%>"><%=post['Title']%></a>
+    <a href="<%= post['Link'] %>"><%= post['Title'] %></a>
   </li>
   <% } %>
 </ul>
 <% } %>
 <h3>Elsewhere</h3>
 <ul>
-  <% posts.reject { |post| named_domains.keys.include?(URI(post['Link']).host.gsub('www.','')) }.sort_by { |post| URI(post['Link']).host.gsub('www.','') }.each { |post| %>
+  <% posts.reject { |post| named_domains.keys.include?(URI(post['Link']).host.gsub('www.', '')) }.sort_by { |post| URI(post['Link']).host.gsub('www.', '') }.each { |post| %>
   <li>
-    <a href="<%=post['Link']%>"><%=post['Title']%></a> <em><%= URI(post['Link']).host.gsub('www.','') %></em>
+    <a href="<%= post['Link'] %>"><%= post['Title'] %></a> <em><%= URI(post['Link']).host.gsub('www.', '') %></em>
   </li>
   <% } %>
 </ul>

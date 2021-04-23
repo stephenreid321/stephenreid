@@ -1,7 +1,7 @@
 <% if !params[:i] %>
   <div class="row justify-content-center mb-3">
     <div class="col-10 col-sm-4">
-      <a target="_blank" href="https://amzn.to/30ZIpxw"><img class="w-100" src="/images/tao.jpg"/></a>
+      <a target="_blank" href="https://amzn.to/30ZIpxw"><img class="w-100" src="/images/tao.jpg"></a>
     </div>
   </div>
 
@@ -18,26 +18,26 @@
 <% end %>
 
 <% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| next if !verse['Images'] %>
-<div class="row" <% unless params[:i] %>style="margin-bottom: 10rem"<% end %>>
+<div class="row" <% unless params[:i] %> style="margin-bottom: 10rem"<% end %>>
   <div class="col-sm-9 order-sm-2 mb-3">
-    <a href="/tao-te-ching/<%=verse['Verse']%>"><img src="<%= verse['Images'].first['thumbnails']['full']['url'] %>" class="w-100"></a>
+    <a href="/tao-te-ching/<%= verse['Verse'] %>"><img src="<%= verse['Images'].first['thumbnails']['full']['url'] %>" class="w-100"></a>
   </div>
   <div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
     <h2 class="mb-3 regular">
-      <a style="background: white" class="text-dark" href="/tao-te-ching/<%=verse['Verse']%>">Verse <%=verse['Verse']%></a>
+      <a style="background: white" class="text-dark" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
     </h2>
     <p>
-      <a target="_blank" href="<%=verse['Rarible URL']%>" class="rarible">
+      <a target="_blank" href="<%= verse['Rarible URL'] %>" class="rarible">
         <% if (a = verse['Owner']) == '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324' && verse['Verse'] != 81 %>
           <span class="d-inline-block px-1">NFT on sale for 1 ETH</span>
         <% else %>
-          <span class="text-dark bg-white d-inline-block px-1">NFT owned by <%="#{a[0..5]}&hellip;#{a[-4..-1]}"%></span>
+          <span class="text-dark bg-white d-inline-block px-1">NFT owned by <%= "#{a[0..5]}&hellip;#{a[-4..]}" %></span>
         <% end %>
       </a>
     </p>
     <div>
       <span style="background: white">
-        <%= md(verse['Text']).gsub('<p>','').gsub('</p>','').gsub('  ','&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n","&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n",'&nbsp;<br />') %>
+        <%= md(verse['Text']).gsub('<p>', '').gsub('</p>', '').gsub('  ', '&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n", "&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n", '&nbsp;<br />') %>
         &nbsp;
       </span>
     </div>
@@ -54,10 +54,10 @@
           </div>
         </a>
       <% else %>
-        <a href="/tao-te-ching/<%=params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
+        <a href="/tao-te-ching/<%= params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
           <div class="card-body py-1 px-3">
             <span class="text-dark">&lArr;</span>
-            Verse <%=params[:i].to_i - 1 %>
+            Verse <%= params[:i].to_i - 1 %>
           </div>
         </a>
       <% end %>
@@ -70,9 +70,9 @@
           </div>
         </a>
       <% else %>
-        <a href="/tao-te-ching/<%=params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
+        <a href="/tao-te-ching/<%= params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
           <div class="card-body py-1 px-3">
-            Verse <%=params[:i].to_i + 1 %>
+            Verse <%= params[:i].to_i + 1 %>
             <span class="text-dark">&rArr;</span>
           </div>
         </a>
@@ -80,7 +80,6 @@
     </div>
   </div>
 <% end %>
-
 
 <% if params[:i] %>
   <style>
@@ -105,14 +104,14 @@
   <div class="grid mt-5" style="opacity: 0">
     <% Verse.all(sort: { 'Verse' => 'asc'}).shuffle.each { |verse| next if verse['Verse'] == params[:i].to_i || !verse['Images'] %>
     <div class="grid-sizer"></div>
-    <a class="grid-item" href="/tao-te-ching/<%=verse['Verse']%>">
-      <img class="w-100" src="<%= verse['Images'].first['thumbnails']['large']['url']%>" />
+    <a class="grid-item" href="/tao-te-ching/<%= verse['Verse'] %>">
+      <img class="w-100" src="<%= verse['Images'].first['thumbnails']['large']['url'] %>">
     </a>
     <% } %>
   </div>
   <div class="row justify-content-center mt-5">
     <div class="col-10 col-sm-4">
-      <a href="/tao-te-ching"><img class="w-100" src="/images/tao.jpg"/></a>
+      <a href="/tao-te-ching"><img class="w-100" src="/images/tao.jpg"></a>
     </div>
   </div>
 <% end %>

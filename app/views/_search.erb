@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
   <div class="col-sm-6">
-    <% form_tag '/search', :method => :get do %>
+    <% form_tag '/search', method: :get do %>
       <div class="input-group input-group-lg">
-        <%= search_field_tag :q, :class => 'form-control', :value => params[:q], :placeholder => "Search knowledgegraph" %>
+        <%= search_field_tag :q, class: 'form-control', value: params[:q], placeholder: 'Search knowledgegraph' %>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
         </div>
@@ -13,14 +13,14 @@
 <%= Padrino.env == :production ? cp('tags') : partial(:tags) %>
 <% if @full_network %>
   <div class="my-5">
-    <%= partial :network, locals: {terms: Term.all, term_links: TermLink.all} %>
+    <%= partial :network, locals: { terms: Term.all, term_links: TermLink.all } %>
   </div>
 <% elsif (terms = Term.find_many(@posts.map { |post| post['Terms']}.flatten)).length > 1 %>
   <div class="my-5">
     <%= partial :network, locals: {
-      term_links: TermLink.find_many(@posts.map { |post| post['Term Links']}.flatten),
-      terms: terms
-      }, edge_labels: true %>
+          term_links: TermLink.find_many(@posts.map { |post| post['Term Links'] }.flatten),
+          terms: terms
+        }, edge_labels: true %>
   </div>
 <% end %>
 <div class="row mt-5 <% if params[:images_only] %>no-gutters<% end %>">

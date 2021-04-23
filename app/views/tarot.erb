@@ -21,7 +21,7 @@
       <% TarotSuit.suits.each { |suit_name| %>
       <th>
         <% if (t = tarot_suits.find { |tarot_suit| tarot_suit['Name'] == suit_name }) %>
-          <%= partial :tarot_card, :locals => {:t => t} %>
+          <%= partial :tarot_card, locals: { t: t } %>
         <% end %>
         <i data-toggle="tooltip" title="<%= TarotSuit.icons[suit_name.to_sym][0] %>" class="fas fa-<%= TarotSuit.icons[suit_name.to_sym][1] %>"></i>
       </th>
@@ -34,9 +34,9 @@
       <th>
         <% if (t = tarot_numbers.find { |tarot_number| tarot_number['Name'] == n }) %>
           <% if t['URL'] %>
-            <%= partial :tarot_card, :locals => {:t => t, :title => "#{t['Name']} #{TarotNumber.numerals[i]}"} %>
+            <%= partial :tarot_card, locals: { t: t, title: "#{t['Name']} #{TarotNumber.numerals[i]}" } %>
           <% else %>
-            <%=t['Name']%> <%=TarotNumber.numerals[i]%>
+            <%= t['Name'] %> <%= TarotNumber.numerals[i] %>
           <% end %>
         <% end; %>
         <% case n; when 'page/eleven' %>
@@ -51,13 +51,13 @@
     </th>
     <td>
       <% if (t = tarot_cards.find { |tarot_card| tarot_card['Tarot suit name'].blank? && tarot_card['Tarot number name'] == [n] }) %>
-        <%= partial :tarot_card, :locals => {:t => t} %>
+        <%= partial :tarot_card, locals: { t: t } %>
       <% end %>
     </td>
     <% TarotSuit.suits.each { |suit_name| %>
     <td>
       <% if (t = tarot_cards.find { |tarot_card| tarot_card['Tarot suit name'] == [suit_name] && tarot_card['Tarot number name'] == [n] }) %>
-        <%= partial :tarot_card, :locals => {:t => t} %>
+        <%= partial :tarot_card, locals: { t: t } %>
       <% end %>
     </td>
     <% } %>
@@ -66,4 +66,4 @@
 </tbody>
 </table>
 <h2 class="mt-5 mb-5" id="products">Recommended decks</h2>
-<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Tarot'", sort: {'Order' => 'asc'})} %>
+<%= partial :products, locals: { products: Product.all(filter: "{Category} = 'Tarot'", sort: { 'Order' => 'asc' }) } %>

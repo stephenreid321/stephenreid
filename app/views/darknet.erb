@@ -13,7 +13,7 @@
     <a href="/why-use-the-darknet">Why using the darknet to obtain psychedelics is better for you and better for society</a>
   </li>
 </ul>
-<% guide = %Q{Download Tor      
+<% guide = %{Download Tor
 You can only access Dream Market using a special web browser called Tor. Download it at <a href="https://www.torproject.org/">torproject.org</a>.
 /images/marketplace/tor.png
 
@@ -34,19 +34,19 @@ Go back to your product on Dream Market, pick a shipping option and click 'Add t
 /images/marketplace/dream-encrypt.png
 } %>
 <% guide.split("\n\n").each_with_index { |section, i|; lines = section.split("\n"); h2 = lines.first %>
-<h2 id="<%=h2.parameterize%>"><%=i+1%>. <%=h2%></h2>
-<% lines[1..-1].each_slice(2) { |a,b| %>
+<h2 id="<%= h2.parameterize %>"><%= i + 1 %>. <%= h2 %></h2>
+<% lines[1..].each_slice(2) { |a,b| %>
 <div class="row" style="margin-bottom: 20px">
   <% if b %>
     <div class="col-sm-6">
-      <%=a%>
+      <%= a %>
     </div>
     <div class="col-sm-6">
-      <img class="img-fluid" src="<%=b%>" />
+      <img class="img-fluid" src="<%= b %>">
     </div>
   <% else %>
     <div class="col-sm-12">
-      <%=a%>
+      <%= a %>
     </div>
   <% end %>
 </div>

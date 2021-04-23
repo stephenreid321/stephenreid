@@ -1,13 +1,11 @@
 <div class="row">
-  <%  
-  Group.all(filter: "AND(
+  <% Group.all(filter: "AND(
   FIND(', key,', {Interests joined}) > 0,
   {Facebook URL} != '',
   {Images} != ''
-  )", sort: {'Name' => 'asc'}).each { |group|
-  %>
+  )", sort: { 'Name' => 'asc' }).each { |group| %>
   <div class="col-sm-4 mb-3">
-    <%= partial :group, :locals => {:group => group} %>
+    <%= partial :group, locals: { group: group } %>
   </div>
   <% } %>
 </div>

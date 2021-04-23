@@ -1,16 +1,16 @@
 <% if current_account %>
   <a href="javascript:;" onclick="$(this).hide().next().css('display', 'inline').find('input').focus().select()">
     <% if asset.multiplier %>
-      <span class="badge <%= params[:badge_class] || ( asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary' )%>"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+      <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
     <% else %>
       <span class="text-dark">&hellip;</span>
     <% end %>
   </a>
   <% form_tag "/assets/#{asset.id}/multiplier", style: 'display: none', class: 'form-inline' do %>
-    <%= number_field_tag :multiplier, :value => (asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier), :class => 'form-control', :style => 'width: 5em', :onblur => '$(this.form).submit()', :step => :any %>
+    <%= number_field_tag :multiplier, value: (asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier), class: 'form-control', style: 'width: 5em', onblur: '$(this.form).submit()', step: :any %>
   <% end %>
 <% else %>
   <% if asset.multiplier %>
-    <span class="badge <%= params[:badge_class] || ( asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary' )%>"><%=asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier%>x</span>
+    <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
   <% end %>
 <% end %>

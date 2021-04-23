@@ -1,10 +1,10 @@
 <div class="card shadow-sm">
-  <a href="<%=post['Link']%>" target="_blank" >
+  <a href="<%= post['Link'] %>" target="_blank">
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] if json['links']['thumbnail'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
-      <a href="<%=post['Link']%>" target="_blank" class="text-dark">
+      <a href="<%= post['Link'] %>" target="_blank" class="text-dark">
         <%= post['Title'] %>
       </a>
     </h5>
@@ -13,43 +13,43 @@
     <% end %>
     <p>
       <% post['Terms joined'].split(', ').each { |term| %>
-      <a class="badge badge-primary" href="/terms/<%=term%>"><%=term%></a>
+      <a class="badge badge-primary" href="/terms/<%= term %>"><%= term %></a>
       <% } %>
-      <% if post['Organisation name']%>
-        <a class="badge badge-primary" href="/organisations/<%=post['Organisation name']%>">@<%=post['Organisation name']%></a>
+      <% if post['Organisation name'] %>
+        <a class="badge badge-primary" href="/organisations/<%= post['Organisation name'] %>">@<%= post['Organisation name'] %></a>
       <% end %>
     </p>
     <div class="row justify-content-between">
       <div class="col">
         <p class="mb-0">
           <small class="text-muted">
-            <a class="text-muted" style="text-decoration: none" href="<%=post['Link']%>" target="_blank">
+            <a class="text-muted" style="text-decoration: none" href="<%= post['Link'] %>" target="_blank">
               <% if json['links']['icon'] %>
                 <img onerror="this.style.display='none'" style="max-height: 20px" src="<%= json['links']['icon'].first['href'] %>">
               <% end %>
               <% if json['meta']['site'] %>
                 <% case json['meta']['site']; when 'the Guardian'; %>
-                The Guardian                    
+                The Guardian
                 <% when 'BBC_Future' %>
                 BBC Future
                 <% when 'whatisemerging' %>
-                Emerge       
+                Emerge
               <% else %>
                 <%= json['meta']['site'] %>
               <% end %>
             <% else %>
-              <%= URI(post['Link']).host.gsub('www.','') %>
+              <%= URI(post['Link']).host.gsub('www.', '') %>
             <% end %>
           </a>
           <% if post['Created at'] %>
             &middot;
-            <%=Time.zone.parse(post['Created at']).to_date.to_s(:post)%>
+            <%= Time.zone.parse(post['Created at']).to_date.to_s(:post) %>
           <% end %>
         </small>
       </p>
     </div>
     <div class="col-auto showOnHover d-none">
-      <a class="text-dark" style="text-decoration: none" href="/posts/<%=post.id%>">
+      <a class="text-dark" style="text-decoration: none" href="/posts/<%= post.id %>">
         <i class="fas fa-link"></i>
       </a>
     </div>

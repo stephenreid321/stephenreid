@@ -1,6 +1,6 @@
-<a target="_blank" href="<%=podcast_appearance['URL']%>" class="bgo-container organisation" style="position: relative; display: block; height: 180px; background-position: center; background-size: cover; background-image: url('<%=podcast_appearance['Image'] ? podcast_appearance['Image'].first['url'] : podcast_appearance.organisation['Image'].first['url']%>')">
+<a target="_blank" href="<%= podcast_appearance['URL'] %>" class="bgo-container organisation" style="position: relative; display: block; height: 180px; background-position: center; background-size: cover; background-image: url('<%= podcast_appearance['Image'] ? podcast_appearance['Image'].first['url'] : podcast_appearance.organisation['Image'].first['url'] %>')">
   <div class="bgo" style="background: black; opacity: 0.4; height: 100%"></div>
   <div style="position: absolute; bottom: 0;" class="p-2">
-    <h3 style="color: white;" class="mb-0"><%=podcast_appearance['Title'] || podcast_appearance.organisation['Name']%></h3>
+    <h3 style="color: white;" class="mb-0"><%= podcast_appearance['Title'] || podcast_appearance.organisation['Name'] %></h3>
   </div>
 </a>

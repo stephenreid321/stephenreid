@@ -1,10 +1,10 @@
 <div class="card shadow-sm">
-  <a href="<%=software['URL']%>">
+  <a href="<%= software['URL'] %>">
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= software['Images'].first['url'] if software['Images'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
-      <a href="<%=software['URL']%>" class="text-dark">
+      <a href="<%= software['URL'] %>" class="text-dark">
         <%= software['Name'] %>
       </a>
     </h5>

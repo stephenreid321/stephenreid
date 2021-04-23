@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-sm-6 text-center">
-    <% form_tag '', :method => 'get', :class => 'mb-3' do %>
+    <% form_tag '', method: 'get', class: 'mb-3' do %>
       <label>Number of funds</label>
       <div class="range-slider">
         <input id="funds" name="funds" class="range-slider__range" type="range" value="5" min="1" max="10" step="1" onchange="proposedPosition()">
@@ -19,7 +19,7 @@
              <div class="input-group-prepend">
                <span class="input-group-text">$</span>
              </div>
-             <%= number_field_tag :investment, :class => 'form-control-lg form-control', :value => 1000, :id => 'investment', :onchange => 'proposedPosition()' %>
+             <%= number_field_tag :investment, class: 'form-control-lg form-control', value: 1000, id: 'investment', onchange: 'proposedPosition()' %>
            </div>
          </div>
        </div>
@@ -43,7 +43,7 @@
           </mark>
         </h5>
         <p class="mb-0">
-          <a href="/metastrategy">Metastrategy</a> is my strategy on ICONOMI.<br />
+          <a href="/metastrategy">Metastrategy</a> is my strategy on ICONOMI.<br>
           It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies.
         </p>
       </div>
@@ -113,8 +113,8 @@
       <th>Score (fee weighted)</th>
       <th>Proposed position</th>
       <th></th>
-      <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
-      <th><%=x%></th>
+      <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each { |x| %>
+      <th><%= x %></th>
       <% } %>
       <th>24h</th>
       <th>7d</th>
@@ -128,11 +128,11 @@
     <% if i != strategies.length-1 && settings.cache["/iconomi/#{strategy.id}"] %>
       <tr>
       <% cache("/iconomi/#{strategy.id}", expires: 1.hour.to_i) do
-        partial :'crypto/row', locals: { strategy: strategy }
-      end %>
+           partial :'crypto/row', locals: { strategy: strategy }
+         end %>
     </tr>
     <% else %>
-    <tr data-pagelet-url="/iconomi/<%=strategy.id%>"></tr>
+    <tr data-pagelet-url="/iconomi/<%= strategy.id %>"></tr>
     <% end %>
     <% } %>
 </table>

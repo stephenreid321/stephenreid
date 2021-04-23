@@ -1,9 +1,9 @@
 <p class="lead">Products and services that I have used or investigated and can recommend</p>
 <h2 class="mb-5" id="services">Services</h2>
-<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Services'", sort: {'Order' => 'asc'})} %>
+<%= partial :products, locals: { products: Product.all(filter: "{Category} = 'Services'", sort: { 'Order' => 'asc' }) } %>
 <h2 class="mt-5 mb-5" id="products">Supplements & soaps</h2>
-<%= partial :products, :locals => {:products => Product.all(filter: "OR({Category} = 'Supplement', {Category} = 'Soap')", sort: {'Order' => 'asc'})} %>
+<%= partial :products, locals: { products: Product.all(filter: "OR({Category} = 'Supplement', {Category} = 'Soap')", sort: { 'Order' => 'asc' }) } %>
 <h2 class="mt-5 mb-5" id="products">Tarot decks</h2>
-<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Tarot'", sort: {'Order' => 'asc'})} %>
+<%= partial :products, locals: { products: Product.all(filter: "{Category} = 'Tarot'", sort: { 'Order' => 'asc' }) } %>
 <h2 class="mt-5 mb-5" id="foods">Foods</h2>
-<%= partial :products, :locals => {:products => Product.all(filter: "{Category} = 'Food'", sort: {'Order' => 'asc'})} %>
+<%= partial :products, locals: { products: Product.all(filter: "{Category} = 'Food'", sort: { 'Order' => 'asc' }) } %>

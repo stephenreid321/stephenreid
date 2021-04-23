@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-6 col-sm-2">
-    <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,0.33)" src="/images/meta-sq.jpg" /></a>
+    <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,0.33)" src="/images/meta-sq.jpg"></a>
   </div>
 </div>
 
@@ -17,34 +17,31 @@
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <% if current_account %>
-    <a href="/metastrategy/<%=ENV['SITE_SECRET']%>/rebalance">
+    <a href="/metastrategy/<%= ENV['SITE_SECRET'] %>/rebalance">
       <i class="fas fa-sync"></i>
     </a>
   <% end %>
   <% Delayed::Job.and(handler: /method_name: :rebalance/).each { |delayed_job| %>
-  &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%=delayed_job.run_at%>"><%=time_ago_in_words delayed_job.run_at %></abbr>
+  &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%= delayed_job.run_at %>"><%= time_ago_in_words delayed_job.run_at %></abbr>
   <% } %>
 </p>
-
 
 <% if Strategy.unverified.count > 0 || Asset.unverified.count > 0 %>
   <p class="text-center">
 
     <% if Asset.unverified.count > 0 %>
       Currently excluded coins:
-      <%= Asset.unverified.map { |asset|
-    %{<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}">#{asset.name} (#{asset.ticker})</a>}
-    }.join(' ')
-    %>
-      <br />
+      <%= Asset.unverified.map do |asset|
+            %{<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}">#{asset.name} (#{asset.ticker})</a>}
+          end.join(' ') %>
+      <br>
     <% end %>
 
     <% if Strategy.unverified.count > 0 %>
       Currently excluded strategies:
-      <%= Strategy.unverified.map { |strategy|
-        %{<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name}</a>}
-      }.join(' ')
-  %>
+      <%= Strategy.unverified.map do |strategy|
+            %(<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name}</a>)
+          end.join(' ') %>
     <% end %>
 
   </p>
@@ -69,16 +66,15 @@
         <span class="score">
           <%= number_with_precision score, precision: 1 %>
         </span>
-        <br />
+        <br>
         <small>
-          <%= index %>/<%=strategies.count%>
+          <%= index %>/<%= strategies.count %>
         </small>
       <% end %>
     </td>
     <% } %>
   </tr>
 </table>
-
 
 <% if Padrino.env == :development || current_account %>
   <div data-pagelet-url="/metastrategy/table" class="mb-3">

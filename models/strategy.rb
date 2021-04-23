@@ -2,6 +2,7 @@ class Strategy
   include Mongoid::Document
   include Mongoid::Timestamps
   class RoundingError < StandardError; end
+
   class RebalancingError < StandardError; end
 
   MONTH_FACTOR = 4
