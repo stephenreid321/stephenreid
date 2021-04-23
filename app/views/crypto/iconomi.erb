@@ -70,6 +70,14 @@
   function coinTable() {
 
     if (!$('#iconomi').hasClass('datatabled')) {
+
+      var i = 1;
+      $('#iconomi td:first-child').each(function () {
+        $(this).html('#'+i);
+        $(this).attr('data-sort', i);
+        i++;
+      })
+
       $('#iconomi').dataTable({
         info: false,
         paging: false,
@@ -78,11 +86,7 @@
           [0, "asc"]
         ]
       }).addClass('datatabled')
-      var i = 1;
-      $("#iconomi td:first-child").each(function () {
-        $(this).html("#"+i);
-        i++;
-      })
+
     }
   }
 
