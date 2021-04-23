@@ -1,0 +1,47 @@
+<td data-sort="<%=i+1%>">
+  #<%=i+1%>
+</td>
+<td>
+  <a target="_blank" href="https://iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
+</td>
+<td data-sort="<%=strategy.score_fee_weighted%>">
+  <% score, index = strategy.score_index('score_fee_weighted') %>
+  <span class="score">
+    <%= number_with_precision score, precision: 1 %>
+  </span>
+</td>
+<td nowrap>
+  <% if i < funds %>
+    <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
+  <% end %>
+</td>
+<td>
+  <% if i < funds %>
+    <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
+  <% end %>
+</td>
+<% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
+<td <% if x == 'lastRebalanced' %> data-sort="<%=strategy[x].to_i%>" <% end %>>
+  <% if x == 'lastRebalanced' %>
+    <%= time_ago_in_words strategy[x] %> ago
+  <% else %>
+    <%= strategy[x] %>
+  <% end %>
+</td>
+<% } %>
+<% %w[day week month three_month six_month year].each { |t| %>
+<% if strategy.send("r#{t}") %>
+  <% score, index = strategy.score_index("r#{t}") %>
+  <td data-sort="<%=score%>">
+    <span class="score">
+      <%= number_with_precision score, precision: 1 %>
+    </span>
+    <br />
+    <small>
+      <%= index %>/<%=Strategy.active_mature.count%>
+    </small>
+  </td>
+<% else %>
+  <td data-sort="0"></td>
+<% end %>
+<% } %>

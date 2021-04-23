@@ -16,6 +16,16 @@ StephenReid::App.controller do
     erb :'crypto/crypto_investing'
   end
 
+  get '/iconomi' do
+    @title = 'ICONOMI strategy evaluator'
+    erb :'crypto/iconomi'
+  end
+
+  get '/iconomi/:id', cache: true do
+    expires 1.hour.to_i
+    partial :'crypto/row', locals: { p: params[:p].to_i, f: params[:f], i: params[:i].to_i, funds: params[:funds].to_i, total: params[:total].to_f, investment: params[:investment].to_f, strategy: Strategy.find(params[:id]) }
+  end
+
   get '/metastrategy' do
     @title = 'Metastrategy'
     erb :'crypto/metastrategy'
@@ -27,32 +37,22 @@ StephenReid::App.controller do
     redirect '/metastrategy'
   end
 
-  get '/iconomi', cache: true do
-    unless Padrino.env == :development
-      cache_key { request.path + '?' + params.select { |k, _v| %w[funds investment].include?(k) }.to_param }
-      expires 1.hour.to_i
-    end
-    @title = 'ICONOMI strategy evaluator'
-    @p = params[:p]
-    erb :'crypto/iconomi'
+  get '/metastrategy/table' do
+    partial :'crypto/metastrategy'
   end
 
-  get '/strategy/table' do
-    partial :'crypto/strategy_table'
-  end
-
-  post '/strategy/:p/bail' do
+  post '/metastrategy/:p/bail' do
     halt unless params[:p] == ENV['SITE_SECRET']
-    redirect "/strategy/#{ENV['SITE_SECRET']}/bail"
+    redirect "/metastrategy/#{ENV['SITE_SECRET']}/bail"
   end
 
-  get '/strategy/:p/bail' do
+  get '/metastrategy/:p/bail' do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.bail
     redirect '/metastrategy'
   end
 
-  get '/strategy/:p/rebalance' do
+  get '/metastrategy/:p/rebalance' do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.rebalance(force: params[:force])
     redirect '/metastrategy'

@@ -17,7 +17,7 @@
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <% if current_account %>
-    <a href="/strategy/<%=ENV['SITE_SECRET']%>/rebalance">
+    <a href="/metastrategy/<%=ENV['SITE_SECRET']%>/rebalance">
       <i class="fas fa-sync"></i>
     </a>
   <% end %>
@@ -80,12 +80,12 @@
 </table>
 
 
-<% if current_account %>
-  <div data-pagelet-url="/strategy/table" class="mb-3">
-    <%= partial :'crypto/strategy_table' %>
+<% if Padrino.env == :development || current_account %>
+  <div data-pagelet-url="/metastrategy/table" class="mb-3">
+    <%= partial :'crypto/metastrategy' %>
   </div>
 <% else %>
-  <%= cp :'crypto/strategy_table' %>
+  <%= cp :'crypto/metastrategy' %>
 <% end %>
 
 <%= md :metastrategy %>
