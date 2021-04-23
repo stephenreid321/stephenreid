@@ -1,4 +1,4 @@
-<% strategies = Strategy.active_mature.order('score_fee_weighted desc') %>
+<% strategies = Strategy.active_mature.order('score_fee_weighted desc').limit(10) %>
 
 <div class="text-center">
   <%= md :iconomi %>
@@ -78,7 +78,12 @@
         order: [
           [0, "asc"]
         ]
-      }).addClass('datatabled')
+      }).addClass('datatabled').on('draw.dt', function () {
+        var i = 0;
+        $("#iconomi td:first-child").each(function () {
+          $(this).html(++i);
+        })
+      }).trigger('draw.dt');
   }
 
   $(function () {
