@@ -4,7 +4,7 @@
   <%= md :iconomi %>
 </div>
 
-<div class="row mb-3">
+<div class="row">
   <div class="col-sm-6 text-center">
     <% form_tag '', :method => 'get', :class => 'mb-3' do %>
       <label>Number of funds</label>
@@ -22,7 +22,7 @@
              <%= number_field_tag :investment, :class => 'form-control-lg form-control', :value => 1000, :id => 'investment', :onchange => 'proposedPosition()' %>
            </div>
          </div>
-         </div>
+       </div>
     <% end %>
   </div>
   <div class="col-sm-6">
@@ -69,8 +69,8 @@
   }
 
   function coinTable() {
-    console.log('coinTable')
-    if (!$('#iconomi').hasClass('datatabled'))
+
+    if (!$('#iconomi').hasClass('datatabled')) {
       $('#iconomi').dataTable({
         info: false,
         paging: false,
@@ -78,21 +78,28 @@
         order: [
           [0, "asc"]
         ]
-      }).addClass('datatabled').on('draw.dt', function () {
-        var i = 0;
-        $("#iconomi td:first-child").each(function () {
-          $(this).html(++i);
-        })
-      }).trigger('draw.dt');
+      }).addClass('datatabled')
+      var i = 1;
+      $("#iconomi td:first-child").each(function () {
+        $(this).html("#"+i);
+        i++;
+      })
+    }
   }
 
   $(function () {
       $(document).ajaxStop(function() {
         coinTable()
         proposedPosition()
+        $('#iconomi-loading').css('visibility', 'hidden')
       })
   })
 </script>
+
+<div id="iconomi-loading" class="text-center mb-1">
+  <i style="font-size: 24px" class="fas fa-spin fa-circle-notch"></i>
+</div>
+
 <table id="iconomi" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
   <thead>
     <tr>
