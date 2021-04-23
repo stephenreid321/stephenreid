@@ -51,7 +51,6 @@
   </div>
 </div>
 
-
 <script>
 
   function proposedPosition() {
@@ -88,7 +87,9 @@
   }
 
   $(function () {
+      var timeout = setTimeout(function(){ location.reload(); }, 10000);
       $(document).ajaxStop(function() {
+        clearTimeout(timeout);
         coinTable()
         proposedPosition()
         $('#iconomi-loading').css('visibility', 'hidden')
@@ -120,7 +121,15 @@
     </tr>
   </thead>
   <% strategies.each_with_index { |strategy, i| %>
+    <% if i != strategies.length-1 && settings.cache["/iconomi/#{strategy.id}"] %>
+      <tr>
+      <% cache("/iconomi/#{strategy.id}", expires: 1.hour.to_i) do
+        partial :'crypto/row', locals: { strategy: strategy }
+      end %>
+    </tr>
+    <% else %>
     <tr data-pagelet-url="/iconomi/<%=strategy.id%>"></tr>
+    <% end %>
     <% } %>
 </table>
 

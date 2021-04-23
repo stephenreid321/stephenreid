@@ -6,10 +6,8 @@ module StephenReid
     helpers Activate::ParamHelpers
     helpers Activate::NavigationHelpers
 
-    if Padrino.env == :production
-      register Padrino::Cache
-      enable :caching
-    end
+    register Padrino::Cache
+    enable :caching
 
     require 'sass/plugin/rack'
     Sass::Plugin.options[:template_location] = Padrino.root('app', 'assets', 'stylesheets')
