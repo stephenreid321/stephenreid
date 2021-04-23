@@ -21,9 +21,10 @@ StephenReid::App.controller do
     erb :'crypto/iconomi'
   end
 
-  get '/iconomi/:id', cache: true do
-    expires 1.hour.to_i
-    partial :'crypto/row', locals: { p: params[:p].to_i, f: params[:f], i: params[:i].to_i, funds: params[:funds].to_i, total: params[:total].to_f, investment: params[:investment].to_f, strategy: Strategy.find(params[:id]) }
+  get '/iconomi/:id' do
+    cache("/iconomi/#{params[:id]}?i=#{params[:i]}&funds=#{params[:funds]}&total=#{params[:total]}&investment=#{params[:investment]}", expires: 1.hour.to_i) do
+      partial :'crypto/row', locals: { i: params[:i].to_i, funds: params[:funds].to_i, total: params[:total].to_f, investment: params[:investment].to_f, strategy: Strategy.find(params[:id]) }
+    end
   end
 
   get '/metastrategy' do
