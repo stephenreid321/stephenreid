@@ -1,76 +1,91 @@
 <% strategies = Strategy.active_mature.order('score_fee_weighted desc') %>
-<% funds = params[:funds].try(:to_i) || 5 %>
-<% funds = 1 if funds < 1 %>
-<% funds = 10 if funds > 10 %>
-<% total = strategies[0..(funds-1)].sum { |strategy| strategy.score_fee_weighted } %>
-<% investment = (params[:investment].try(:to_i) || 1000) %>
-
 
 <div class="text-center">
   <%= md :iconomi %>
 </div>
 
-<div class="row justify-content-center mb-3">
-  <div class="col-md-6 col-lg-4 text-center">
-    <% form_tag '', :method => 'get' do %>
+<div class="row mb-3">
+  <div class="col-sm-6 text-center">
+    <% form_tag '', :method => 'get', :class => 'mb-3' do %>
       <label>Number of funds</label>
       <div class="range-slider">
-        <input name="funds" class="range-slider__range" type="range" value="<%=funds%>" min="1" max="10" step="1" onchange="$(this.form).submit()">
+        <input id="funds" name="funds" class="range-slider__range" type="range" value="5" min="1" max="10" step="1" onchange="proposedPosition()">
         <span class="range-slider__value">0</span>
       </div>
       <label>Investment</label>
       <div class="row justify-content-center">
-        <div class="col-auto">
-          <div class="input-group" style="width: 10rem">
-            <div class="input-group-prepend">
-              <span class="input-group-text">$</span>
-            </div>
-            <%= number_field_tag :investment, :class => 'form-control-lg form-control', :value => investment, :onchange => '$(this.form).submit()' %>
-          </div>
-        </div>
-      </div>
+         <div class="col-auto">
+           <div class="input-group" style="width: 10rem">
+             <div class="input-group-prepend">
+               <span class="input-group-text">$</span>
+             </div>
+             <%= number_field_tag :investment, :class => 'form-control-lg form-control', :value => 1000, :id => 'investment', :onchange => 'proposedPosition()' %>
+           </div>
+         </div>
+         </div>
     <% end %>
   </div>
-</div>
+  <div class="col-sm-6">
+    <div class="card mb-3 p-3">
+      <div class="card-body text-center">
+        <h5 class="card-title">
+          <mark>
+            Not yet an ICONOMI member?
+          </mark>
+        </h5>
+        <p class>
+          Do me a favour by signing up <a href="https://www.iconomi.com/register?ref=YGnZy">via this referral link</a>.
+        </p>
 
-<div class="card mb-3 p-3">
-  <div class="card-body text-center">
-    <h5 class="card-title">
-      <mark>
-        Not yet an ICONOMI member?
-      </mark>
-    </h5>
-    <p class>
-      Do me a favour by signing up <a href="https://www.iconomi.com/register?ref=YGnZy">via this referral link</a>.
-    </p>
-
-    <h5 class="card-title">
-      <mark>
-        Don't want to have to keep checking this page?
-      </mark>
-    </h5>
-    <p class="mb-0">
-      <a href="/metastrategy">Metastrategy</a> is my strategy on ICONOMI.<br />
-      It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies.
-    </p>
+        <h5 class="card-title">
+          <mark>
+            Don't want to have to keep checking this page?
+          </mark>
+        </h5>
+        <p class="mb-0">
+          <a href="/metastrategy">Metastrategy</a> is my strategy on ICONOMI.<br />
+          It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
+
 <script>
+
+  function proposedPosition() {
+    $('#iconomi tr td:nth-child(4)').text('')
+    $('#iconomi tr td:nth-child(5)').text('')
+    var total = 0
+    for(i=1; i<=$('#funds').val(); i++) {
+      total += parseFloat($('#iconomi tr').eq(i).find('td').eq(2).text())
+    }
+    for(i=1; i<=$('#funds').val(); i++) {
+      var p = parseFloat($('#iconomi tr').eq(i).find('td').eq(2).text()) / total * 100
+      $('#iconomi tr').eq(i).find('td').eq(3).text(Math.round(p, 1) + '%')
+      $('#iconomi tr').eq(i).find('td').eq(4).text('$' + Math.round($('#investment').val()*p/100, 2))
+    }
+  }
+
+  function coinTable() {
+    console.log('coinTable')
+    if (!$('#iconomi').hasClass('datatabled'))
+      $('#iconomi').dataTable({
+        info: false,
+        paging: false,
+        searching: false,
+        order: [
+          [0, "asc"]
+        ]
+      }).addClass('datatabled')
+  }
+
   $(function () {
-      function coinTable() {
-        console.log('coinTable')
-        if (!$('#iconomi').hasClass('datatabled'))
-          $('#iconomi').dataTable({
-            info: false,
-            paging: false,
-            searching: false,
-            order: [
-              [0, "asc"]
-            ]
-          }).addClass('datatabled')
-      }
-      $(document).ajaxStop(function() { coinTable() })
+      $(document).ajaxStop(function() {
+        coinTable()
+        proposedPosition()
+      })
   })
 </script>
 <table id="iconomi" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
@@ -93,7 +108,7 @@
     </tr>
   </thead>
   <% strategies.each_with_index { |strategy, i| %>
-    <tr data-pagelet-url="/iconomi/<%=strategy.id%>?i=<%=i%>&funds=<%=funds%>&total=<%=total%>&investment=<%=investment%>"></tr>
+    <tr data-pagelet-url="/iconomi/<%=strategy.id%>"></tr>
     <% } %>
 </table>
 

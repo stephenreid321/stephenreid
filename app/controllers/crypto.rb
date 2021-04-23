@@ -22,8 +22,12 @@ StephenReid::App.controller do
   end
 
   get '/iconomi/:id' do
-    cache("/iconomi/#{params[:id]}?i=#{params[:i]}&funds=#{params[:funds]}&total=#{params[:total]}&investment=#{params[:investment]}", expires: 1.hour.to_i) do
-      partial :'crypto/row', locals: { i: params[:i].to_i, funds: params[:funds].to_i, total: params[:total].to_f, investment: params[:investment].to_f, strategy: Strategy.find(params[:id]) }
+    if Padrino.env == :development
+      partial :'crypto/row', locals: { strategy: Strategy.find(params[:id]) }
+    else
+      cache("/iconomi/#{params[:id]}", expires: 1.hour.to_i) do
+        partial :'crypto/row', locals: { strategy: Strategy.find(params[:id]) }
+      end
     end
   end
 

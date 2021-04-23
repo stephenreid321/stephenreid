@@ -1,5 +1,4 @@
-<td data-sort="<%=i+1%>">
-  #<%=i+1%>
+<td>
 </td>
 <td>
   <a target="_blank" href="https://iconomi.com/asset/<%=strategy.ticker%>"><%= strategy.name %></a>
@@ -10,15 +9,9 @@
     <%= number_with_precision score, precision: 1 %>
   </span>
 </td>
-<td nowrap>
-  <% if i < funds %>
-    <%=number_to_percentage((strategy.score_fee_weighted/total)*100, :precision => 0)%>
-  <% end %>
+<td>
 </td>
 <td>
-  <% if i < funds %>
-    <%= number_to_currency investment*(strategy.score_fee_weighted/total), precision: 0 %>
-  <% end %>
 </td>
 <% %w{numberOfAssets lastRebalanced monthlyRebalancedCount}.each { |x| %>
 <td <% if x == 'lastRebalanced' %> data-sort="<%=strategy[x].to_i%>" <% end %>>
