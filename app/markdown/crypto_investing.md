@@ -47,10 +47,12 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
   You could also invest in 3-5 of the <a href="/iconomi">current top performing strategies</a>. If you choose this option I recommend you manually rebalance every 3-6 months (i.e. move your money out of any strategies that are now no longer in the top 5 and into the current top 5).</p>
    </td>
    <td>
-<ul>
-    <li><a href="https://www.piedao.org/">PieDAO</a> (I recommended <a href="https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14">BCP</a>)</li>
-    <li><a href="https://indexed.finance">Indexed</a></li>
+<ul>    
+    <li><a href="https://indexed.finance">Indexed</a>
+    (<a href="https://ndxfi.medium.com/new-buying-defi5-on-quickswap-polygon-with-minimal-transaction-fees-6909dfac63be">check this guide for a great way of onboarding from fiat</a>)
+    </li>
     <li><a href="https://www.indexcoop.com">Index Coop</a></li>
+    <li><a href="https://www.piedao.org/">PieDAO</a></li>
     <li><a href="https://powerindex.io">Power Index</a></li>
     <li><a href="https://http://basketdao.org/">BasketDAO</a></li>
 </li>
