@@ -48,11 +48,11 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
    </td>
    <td>
 <ul>
+    <li><a href="https://indexed.finance">Indexed</a>
+    (<a href="https://ndxfi.medium.com/new-buying-defi5-on-quickswap-polygon-with-minimal-transaction-fees-6909dfac63be">check this guide for a great way of onboarding from fiat</a>)</li>
     <li><a href="https://www.piedao.org/">PieDAO</a> (<a href="https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14">BCP</a> is a good starting point - use the
 <a href="https://www.piedao.org/#/oven">Oven</a> to bake almost gas free
-    )</li>
-    <li><a href="https://indexed.finance">Indexed</a>
-    (<a href="https://ndxfi.medium.com/new-buying-defi5-on-quickswap-polygon-with-minimal-transaction-fees-6909dfac63be">check this guide for a great way of onboarding from fiat</a>)
+    )</li>    
     <li><a href="https://www.indexcoop.com">Index Coop</a></li>
     <li><a href="https://powerindex.io">Power Index</a></li>
     <li><a href="https://http://basketdao.org/">BasketDAO</a></li>
