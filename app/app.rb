@@ -37,7 +37,7 @@ module StephenReid
       fix_params!
       Time.zone = 'London'
       @og_desc = 'Co-operative technologist and cultural changemaker'
-      @og_image = "#{ENV['BASE_URI']}/images/link6.jpeg"
+      @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=https://stephenreid.net#{request.path}&width=1024"
     end
 
     error do
@@ -54,6 +54,7 @@ module StephenReid
     end
 
     get '/', cache: true do
+      @og_image = "#{ENV['BASE_URI']}/images/link6.jpeg"
       erb :about
     end
 
