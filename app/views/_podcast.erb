@@ -1,0 +1,12 @@
+<div class="card shadow-sm">
+  <a href="https://open.spotify.com/show/<%= podcast['Spotify ID'] %>">
+    <img onerror="this.style.display='none'" class="card-img-top" src="<%= podcast['Image URL'] %>">
+  </a>
+  <div class="card-body">
+    <h5 class="card-title mb-0">
+      <a href="https://open.spotify.com/show/<%= podcast['Spotify ID'] %>" class="text-dark">
+        <%= podcast['Name'] %>
+      </a>
+    </h5>
+  </div>
+</div>

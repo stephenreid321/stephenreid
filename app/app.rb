@@ -7,7 +7,7 @@ module StephenReid
     helpers Activate::NavigationHelpers
 
     register Padrino::Cache
-    enable :caching
+    enable :caching unless Padrino.env == :development
 
     require 'sass/plugin/rack'
     Sass::Plugin.options[:template_location] = Padrino.root('app', 'assets', 'stylesheets')
@@ -57,7 +57,7 @@ module StephenReid
       erb :about
     end
 
-    %w[services podcast books donate calendar habits tarot software groups].each do |r|
+    %w[services podcast books donate calendar habits tarot software groups podcasts].each do |r|
       get "/#{r}", cache: true do
         @title = r.capitalize
         erb :"#{r}"
@@ -191,7 +191,6 @@ module StephenReid
       '/bio' => '/about',
       '/darknet' => 'https://dark.fail/',
       '/why-use-the-darknet' => 'https://dark.fail/',
-      '/podcasts' => '/podcast',
       '/books-videos' => '/knowledgegraph',
       '/featured' => '/knowledgegraph',
       '/recommended' => '/knowledgegraph'

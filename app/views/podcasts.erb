@@ -1,0 +1,7 @@
+<div class="row">
+  <% Podcast.all.shuffle.each { |podcast| %>
+  <div class="col-sm-3 mb-3">
+    <%= partial :podcast, locals: { podcast: podcast } %>
+  </div>
+  <% } %>
+</div>
