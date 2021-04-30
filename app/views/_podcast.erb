@@ -7,6 +7,10 @@
       <a href="https://open.spotify.com/show/<%= podcast['Spotify ID'] %>" class="text-dark">
         <%= podcast['Name'] %>
       </a>
+      <% if podcast['Creator'] != podcast['Name'] && podcast['Creator'].length > 1 %>
+      <br />
+      <small class="text-muted"><%=podcast['Creator']%></small>
+      <% end %>
     </h5>
   </div>
 </div>
