@@ -37,7 +37,7 @@ module StephenReid
       fix_params!
       Time.zone = 'London'
       @og_desc = 'Co-operative technologist and cultural changemaker'
-      @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=https://stephenreid.net#{request.path}&width=1024&height=538"
+      @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=https://stephenreid.net#{request.path}&width=1280&height=591"
     end
 
     error do
