@@ -1,8 +1,6 @@
 StephenReid::App.controller do
   before do
     @favicon = 'moon.png'
-    @og_desc = nil
-    @og_image = nil
   end
 
   get '/coins' do
