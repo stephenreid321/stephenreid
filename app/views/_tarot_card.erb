@@ -1,4 +1,5 @@
-<% title = t['Name'] unless defined?(title) %>
+<% title = t['Name'] unless defined?(title) && title %>
+
   <% if t['Description'] %>
     <a href="javascript:;" data-toggle="modal" data-target="#card-<%= title.parameterize %>">
       <% if t.is_a? TarotCard %>
