@@ -155,7 +155,7 @@ class Strategy
       end
     end
 
-    %w[USDT TUSD].each do |s|
+    %w[USDT TUSD DAI].each do |s|
       if assets[s]
         assets['USDC'] += assets[s]
         assets.delete(s)
