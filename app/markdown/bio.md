@@ -1,7 +1,7 @@
 Stephen Reid is a **[co-operative technologist](https://www.wired.co.uk/article/cotech-tech-cooperatives-blake-house-outlandish) and cultural changemaker** who has trained in the fields of complexity science, physics, software development, meditation, psychotherapy, plant medicine, conscious sexuality and political activism. He is currently:
 
 * a co-director of [Dandelion Collective](https://dandelion.coop) (the not-for-profit worker co-operative behind the [Psychedelic Society](http://psychedelicsociety.org.uk/), which he founded in 2014)
-* the lead developer of [dandelion.earth](https://dandelion.earth)
+* the lead developer of [Dandelion](https://dandelion.earth), a platform for ticketed events and co-created gatherings
 * founder of the [Autopia DAO and associated AUT token](http://autopia.co/) and Autopia's delegate to the [DAOHaus](https://daohaus.club/) [UberHAUS DAO](https://medium.com/daohaus-club/uberhaus-is-alive-%EF%B8%8F-3af528dc3494)
 * a [Panvala](https://panvala.com/) committee member and Dandelion's representative to Panvala's Regenerative Commons Coalition
 * teacher of the [Tools for the Regenerative Renaissance](https://dandelion.earth/events/5fd23eae6824a9000d43006e), [The Promise of Decentralisation](https://dandelion.earth/events/605f1caeed084e000d44e844) and [Introduction to Crypto & DeFi](https://dandelion.earth/activities/5fa165912fa741001340ad26) courses
