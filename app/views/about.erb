@@ -3,7 +3,13 @@
     <p class="lead text-center">
       Hi! I'm Stephen Reid. I live in Totnes, Devon, UK...
     </p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2015798.3682713625!2d-4.101562806890817!3d50.320252508746925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486ce021982f9593%3A0x895d67431611ba78!2sTotnes!5e0!3m2!1sen!2suk!4v1600115448355!5m2!1sen!2suk" width="100%" height="350" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2015798.3682713625!2d-4.101562806890817!3d50.320252508746925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486ce021982f9593%3A0x895d67431611ba78!2sTotnes!5e0!3m2!1sen!2suk!4v1600115448355!5m2!1sen!2suk"
+      width="100%"
+      height="350"
+      frameborder="0"
+      style="border:0;"
+      allowfullscreen=""></iframe>
     <p class="mt-3 lead text-center">
       ...half an hour from Dartmoor, and half an hour from the South Devon coast.
     </p>
@@ -17,9 +23,30 @@
     </div>
   </div>
 </div>
+
 <div class="row justify-content-center">
   <div class="col-sm-9">
-    <p class="mt-3"><em>Short bio in the third person</em></p>
+    <p class="mt-3 lead text-center">
+      My current affiliations:
+    </p>
+    <div class="mt-3 row align-items-center justify-content-center">
+      <% Affiliation.all(filter: "AND({Current} = 1, {Order} != BLANK())", sort: { 'Order' => 'asc' }).each { |affiliation| %>
+        <div class="col-4 col-sm-2 text-center">
+          <a target="_blank" data-placement="bottom" data-toggle="tooltip" title="<%= affiliation.organisation['Name'] %>" href="<%= affiliation.organisation['URL'] %>">
+            <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+           filter: grayscale(100%);" class="w-100 mb-3" src="<%= affiliation.organisation['Logo'].first['url'] %>">
+          </a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-sm-9">
+    <p class="mt-3">
+      <em>Short bio in the third person</em>
+    </p>
     <div>
       <%= md :bio %>
     </div>
@@ -46,10 +73,10 @@
 <h2 class="mt-5" id="speaking">Training and teachers</h2>
 <div class="row align-items-center justify-content-center">
   <% Organisation.all(filter: "{Logo} != ''", sort: { 'Training order' => 'asc' }).select { |organisation| organisation['Training order'] }.each { |organisation| %>
-  <div class="col-4 col-sm-2 text-center">
-    <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    <div class="col-4 col-sm-2 text-center">
+      <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
            filter: grayscale(100%);" class="w-100 mb-3" src="<%= organisation['Logo'].first['url'] %>">
-  </div>
+    </div>
   <% } %>
 </div>
 <div class="mt-3">
@@ -58,13 +85,13 @@
 
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 <ul>
-  <% Affiliation.all(filter: "{Tier} = ''", sort: { 'Order' => 'asc' }).each { |affiliation| %>
-  <li>
-    <% if affiliation.fields['Organisation'] %>
-      <a href="<%= affiliation.organisation['URL'] %>"><%= affiliation.organisation['Name'] %></a>,
-    <% end %>
-    <%= affiliation['Position'] %>
-  </li>
+  <% Affiliation.all(filter: "{Current} = ''", sort: { 'Order' => 'asc' }).each { |affiliation| %>
+    <li>
+      <% if affiliation.fields['Organisation'] %>
+        <a href="<%= affiliation.organisation['URL'] %>"><%= affiliation.organisation['Name'] %></a>,
+      <% end %>
+      <%= affiliation['Position'] %>
+    </li>
   <% } %>
 </ul>
 
@@ -73,39 +100,52 @@
 
 <h2 class="mt-5" id="speaking">Speaking engagements</h2>
 <div class="row align-items-center justify-content-center">
-  <% Organisation.all(filter: "AND({Logo} != '',{Speaking engagements} != '', {Name} != 'The Psychedelic Society')").shuffle.each { |organisation| %>
-  <div class="col-4 col-sm-2 text-center py-3 px-3 py-sm-3 px-sm-5">
-    <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  <% Organisation.all(filter: "AND({Logo} != '', {Speaking engagements} != '', {Name} != 'The Psychedelic Society')").shuffle.each { |organisation| %>
+    <div class="col-4 col-sm-2 text-center py-3 px-3 py-sm-3 px-sm-5">
+      <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
            filter: grayscale(100%);" class="w-100 mb-3" src="<%= organisation['Logo'].first['url'] %>">
-  </div>
+    </div>
   <% } %>
 </div>
 <dl class="row">
   <% SpeakingEngagement.all(sort: { 'Date' => 'desc' }).each { |speaking_engagement| %>
-  <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
-  <dd class="col-sm-9"><a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a></dd>
+    <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %>
+      <% if speaking_engagement['Location'] %>,
+        <%= speaking_engagement['Location'] %>
+      <% end %>
+    </dt>
+    <dd class="col-sm-9">
+      <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
+    </dd>
   <% } %>
 </dl>
 
 <h2 class="mt-5" id="research">Peer-reviewed research</h2>
 <dl class="row">
   <% Paper.all.shuffle.each { |paper| %>
-  <dt class="col-sm-3"><%= date = Date.parse(paper['Date']); date.strftime('%b %Y') %>, <%= paper['Journal'] %></dt>
-  <dd class="col-sm-9"><a href="<%= paper['URL'] %>"><%= paper['Name'] %></a></dd>
+    <dt class="col-sm-3"><%= date = Date.parse(paper['Date']); date.strftime('%b %Y') %>,
+      <%= paper['Journal'] %></dt>
+    <dd class="col-sm-9">
+      <a href="<%= paper['URL'] %>"><%= paper['Name'] %></a>
+    </dd>
   <% } %>
 </dl>
 
 <h2 class="mt-5" id="writing">Previous writing</h2>
 <div class="row no-gutters">
   <% Writing.all(sort: { 'Date' => 'desc' }).each_with_index { |writing,i| %>
-  <dt class="col-sm-3"><%= date = Date.parse(writing['Date']); date.strftime('%b %Y') %>, <%= URI(writing['URL']).host.gsub('www.', '') %></dt>
-  <dd class="col-sm-9"><a href="<%= writing['URL'] %>"><%= writing['Name'] %></a></dd>
+    <dt class="col-sm-3"><%= date = Date.parse(writing['Date']); date.strftime('%b %Y') %>,
+      <%= URI(writing['URL']).host.gsub('www.', '') %></dt>
+    <dd class="col-sm-9">
+      <a href="<%= writing['URL'] %>"><%= writing['Name'] %></a>
+    </dd>
   <% } %>
 </div>
 <div class="mt-5 row justify-content-center">
   <div class="col-12 col-sm-7">
     <p class="text-center lead">
-      Read my blog series on my <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad">samá (dieta) with Noya Rao</a>
+      Read my blog series on my
+      <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad">samá (dieta) with Noya Rao</a>
     </p>
     <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad"><img class="w-100" src="https://miro.medium.com/max/1400/1*X7fjKFABhypYds7hLaHeaw.jpeg"></a>
   </div>
@@ -114,7 +154,8 @@
 <h2 class="mt-5" id="diet">Diet</h2>
 <%= md :diet %>
 
-
 <h2 class="mt-5" id="habits">Habits</h2>
-<p class="my-3"><a href="https://dandelion.earth/u/stephenreid321">Check out my Dandelion profile</a></p>
+<p class="my-3">
+  <a href="https://dandelion.earth/u/stephenreid321">Check out my Dandelion profile</a>
+</p>
 <iframe class="mb-3" src="https://dandelion.earth/u/stephenreid321/habits" style="border:0; width: 100%; height: 500px"></iframe>
