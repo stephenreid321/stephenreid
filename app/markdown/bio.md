@@ -7,8 +7,8 @@ Stephen Reid is a **[co-operative technologist](https://www.wired.co.uk/article/
 
 and in the blockchain space:
 
-* a contributor to [Hypha](http://hypha.earth/), the organisation leading the development of [SEEDS](https://joinseeds.com/)
 * founder of the [Autopia DAO and associated AUT token](http://autopia.co/)
+* a contributor to [Hypha](http://hypha.earth/), the organisation leading the development of [SEEDS](https://joinseeds.com/)
 * Autopia's delegate to the [DAOhaus](https://daohaus.club/) [UberHaus DAO](https://medium.com/daohaus-club/uberhaus-is-alive-%EF%B8%8F-3af528dc3494) and one of the [UberHaus UberPaladins](https://app.daohaus.club/dao/0x64/0x8fbbc168a9726d89b52d85af8108b3a3641b54cc/settings)
 * a [Panvala](https://panvala.com/) committee member and Dandelion's representative to Panvala's Regenerative Commons Coalition
 
