@@ -3,7 +3,6 @@ Stephen Reid is a **[co-operative technologist](https://www.wired.co.uk/article/
 * a co-director of [Dandelion Collective](https://dandelion.coop) (the not-for-profit worker co-operative behind the [Psychedelic Society](http://psychedelicsociety.org.uk/), which he founded in 2014)
 * the lead developer of [Dandelion](https://dandelion.earth), a platform for ticketed events and co-created gatherings
 * teacher of the [Tools for the Regenerative Renaissance](https://dandelion.earth/events/5fd23eae6824a9000d43006e), [The Promise of Decentralisation](https://dandelion.earth/events/605f1caeed084e000d44e844) and [Introduction to Crypto & DeFi](https://dandelion.earth/activities/5fa165912fa741001340ad26) courses
-* a contributor to [Enspiral](https://enspiral.com/)
 
 and in the blockchain space:
 
