@@ -1,4 +1,4 @@
-Stephen Reid is a **[co-operative technologist](https://www.wired.co.uk/article/cotech-tech-cooperatives-blake-house-outlandish) and cultural changemaker** who has trained in the fields of complexity science, physics, software development, meditation, psychotherapy, plant medicine, conscious sexuality and political activism. He is currently:
+Stephen Reid is a [co-operative technologist](https://www.wired.co.uk/article/cotech-tech-cooperatives-blake-house-outlandish) who has trained in the fields of complexity science, physics, software development, meditation, psychotherapy, plant medicine, conscious sexuality and political activism. He is currently:
 
 * a co-director of [Dandelion Collective](https://dandelion.coop) (the not-for-profit worker co-operative behind the [Psychedelic Society](http://psychedelicsociety.org.uk/), which he founded in 2014)
 * the lead developer of [Dandelion](https://dandelion.earth), a platform for ticketed events and co-created gatherings
