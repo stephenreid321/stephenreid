@@ -43,7 +43,7 @@ On 9th June at 18:25, having received no reply, I sent a link to this document.
 
 On 10th June at 19:30, a friend sent me a link to the site [https://www.whoisstephenreid.com/](https://www.whoisstephenreid.com/). The site does not include any mention of the responses below.
 
-On 10th June at 20:00, [I shared this document on my Facebook profile](https://www.facebook.com/stephenreid321/posts/5618213298253542?__cft__[0]=AZXIffrmbzcBHQ91DPWLBgvwaZHQs0MscU8ZRUwaOb2mkY3rKNufAQ2pTsuoF9W2cM3aouDL86P8IO-dOSfSe1ChYeaZOrc9R9N_5a5xMMrjRA&__tn__=%2CO%2CP-R). After digesting the testimonials, I expect I will release a further response. I will not be engaging in discussion on social media.
+On 10th June at 20:00, I shared this document on my Facebook profile. After digesting the testimonials, I expect I will release a further response. I will not be engaging in discussion on social media.
 
 ---
 
