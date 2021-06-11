@@ -161,7 +161,17 @@ In April 2021, understanding that LB still held this sentiment, I sent LB a hand
 >
 > Stephen
 
-I have a record of the text messages between LB and me between Oct 2016 and May 2017 from an app I had on my phone that synced messages to the cloud. The messages are friendly and give no indication that LB was unhappy with our interaction.
+I have a record of the text messages between LB and me between Oct 2016 and May 2017 from an app I had on my phone that synced messages to the cloud. The messages are friendly and give no indication that LB was unhappy with our interaction. Some examples:
+
+> **LB, 3 Jan 2017, 08:34**<br />Phenomenabean! Happy happy sunrise from a train to pastures lands and seas new wheeeee! If you find my scarf and hat keep a hold pls. I'll see you at th party! 😜😎😜😎😜 what's your address hon?xoxo
+>
+> **LB, 14 Jan 2017, 20:08**<br />Happy Saturday Stephen! Send you the tilt for Treguddick, apologies for wait and many thanks for your time and effort. I'm with [redacted] and we've been having a great time remembering it :)Are you around at lunchtime in London on Tuesday? I am passing through and would be lush to meet up :) xox
+>
+> **LB, 26 Feb 2017, 23:31**<br />I'd really like and appreciate fullsome constructive criticism and nods to areas of development for my public speaking please, useful feedback would be a gift to me xox
+>
+> **LB, 6 Mar 2017, 16:13**<br />Thank you for coming yeaterday wonderdream :) I just saw this message! Yay! Happy Monday :! Xox
+>
+> **LB, 8 Mar 2017, 15:29**<br />Heya hon, my friend [redacted] is sick today so I'm stayin in Brighton to nurse her, so I'm afraid I will miss dinner. Let's run around London soon :) xox
 
 I believe there was a mismatch in LB's and my expectations of our friendship/relationship which resulted in LB experiencing feelings of hurt and resentment. I believe I have already taken steps to  'meaningfully address [my] behaviour' and 'take responsibility for what [I] did'. I am open to hearing more on what further steps I could take.
 
