@@ -4,11 +4,4 @@ Stephen Reid is a [co-operative technologist](https://www.wired.co.uk/article/co
 * the lead developer of [Dandelion](https://dandelion.earth), a platform for ticketed events and co-created gatherings
 * teacher of the [Tools for the Regenerative Renaissance](https://dandelion.earth/events/5fd23eae6824a9000d43006e), [The Promise of Decentralisation](https://dandelion.earth/events/605f1caeed084e000d44e844) and [Introduction to Crypto & DeFi](https://dandelion.earth/activities/5fa165912fa741001340ad26) courses
 
-and in the blockchain space:
-
-* founder of the [Autopia DAO and associated AUT token](http://autopia.co/)
-* a contributor to [Hypha](http://hypha.earth/), the organisation leading the development of [SEEDS](https://joinseeds.com/)
-* Autopia's delegate to the [DAOhaus](https://daohaus.club/) [UberHaus DAO](https://medium.com/daohaus-club/uberhaus-is-alive-%EF%B8%8F-3af528dc3494) and one of the [UberHaus UberPaladins](https://app.daohaus.club/dao/0x64/0x8fbbc168a9726d89b52d85af8108b3a3641b54cc/settings)
-* a [Panvala](https://panvala.com/) committee member and Dandelion's representative to Panvala's Regenerative Commons Coalition
-
 Previously, he was the youngest ever board member of [Greenpeace UK](https://www.greenpeace.org.uk/), was selected as the [Green Party](https://www.greenparty.org.uk/) parliamentary candidate for Totnes, was the network organiser of the [New Economics Foundation](https://neweconomics.org/)'s [New Economy Organisers Network](https://neweconomyorganisers.org/) and worked as a technology consultant for organisations including the [Labour Party](https://labour.org.uk/), the [Living Wage Foundation](https://www.livingwage.org.uk/) and [350.org](https://350.org/). Stephen has an MPhys in [Physics](https://www2.physics.ox.ac.uk/) from the University of Oxford, where he specialised in quantum field theory, and an MRes in [Complexity Sciences](http://www.bristol.ac.uk/bccs/) from the University of Bristol.

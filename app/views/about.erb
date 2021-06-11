@@ -26,24 +26,6 @@
 
 <div class="row justify-content-center">
   <div class="col-sm-9">
-    <p class="mt-3 lead text-center">
-      My current affiliations:
-    </p>
-    <div class="mt-3 row align-items-center justify-content-center">
-      <% Affiliation.all(filter: "AND({Current} = 1, {Order} != BLANK())", sort: { 'Order' => 'asc' }).each { |affiliation| %>
-        <div class="col-4 col-sm-2 text-center">
-          <a target="_blank" data-placement="bottom" data-toggle="tooltip" title="<%= affiliation.organisation['Name'] %>" href="<%= affiliation.organisation['URL'] %>">
-            <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-           filter: grayscale(100%);" class="w-100 mb-3" src="<%= affiliation.organisation['Logo'].first['url'] %>">
-          </a>
-        </div>
-      <% } %>
-    </div>
-  </div>
-</div>
-
-<div class="row justify-content-center">
-  <div class="col-sm-9">
     <p class="mt-3">
       <em>Short bio in the third person</em>
     </p>
