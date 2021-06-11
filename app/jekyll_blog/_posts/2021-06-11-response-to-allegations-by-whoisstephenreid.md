@@ -176,5 +176,5 @@ I acknowledge I have been on a massive learning journey around psychedelics, pow
 
 Whilst at times in the past I did hold some key positions of ownership/leadership, I have put huge efforts into decentralising power and ownership in the organisations I am involved with (for example, stepping down as an admin of the Find The Others group before leaving it completely, and transforming the Psychedelic Society into a not-for-profit worker co-operative). I am passionate about continuing this process of decentralisation.
 
-With thanks to everyone who continues to help me to learn and grow,
+With thanks to everyone who continues to help me to learn and grow,<br />
 Stephen
