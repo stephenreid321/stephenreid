@@ -36,7 +36,7 @@ On 9th June at 12:17, I responded:
 >
 > Would you be able to make those involved aware of this and see if they would prefer such a process?
 >
-> Best,
+> Best,<br />
 > Stephen
 
 On 9th June at 18:25, having received no reply, I sent a link to this document.
