@@ -183,7 +183,7 @@ I know huge numbers of people have been positively impacted by my work and are g
 
 I acknowledge I have been on a massive learning journey around psychedelics, power and intimacy over the past decade.
 
-I have gone to great lengths to learn and grow in these areas. Since the last of the allegations in 2017 I have undertaken six months of one-on-one psychotherapy with a UKCP-accredited psychotherapist (ongoing), completed a Foundation training in Core Process Psychotherapy, attended two intimacy trainings, sat an extended meditation retreat and participated in several plant medicine retreats facilitated by elders. I am also in a co-habiting partnership of 18 months.
+I have gone to great lengths to learn and grow in these areas. Since the last of the allegations in 2017 I have undertaken six months of one-on-one psychotherapy with a UKCP-accredited psychotherapist (ongoing), completed a Foundation training in Core Process Psychotherapy, attended two intimacy trainings, sat an extended meditation retreat and participated in several plant medicine retreats facilitated by elders.
 
 I am committed to continuing this learning journey. I sincerely apologise to anyone who has been hurt by my past actions in connection with these topics.
 
