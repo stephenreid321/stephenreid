@@ -1,6 +1,5 @@
 ---
 title: "Response to allegations by whoisstephenreid.com"
-header_image_url: /blog/assets/2021-06-11-response-to-allegations-by-whoisstephenreid/stephen.jpg
 ---
 
 
