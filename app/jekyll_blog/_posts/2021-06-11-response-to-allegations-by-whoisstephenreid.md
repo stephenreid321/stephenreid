@@ -75,7 +75,7 @@ The first Psychedelic Experience Weekend, which took place in March 2016, was an
 
 After the workshop, I did have consensual sex with a friend, Stefana Bosse, who was no longer under the influence of any substances and with whom I subsequently had a relationship with for several months. This took place in a private space, not where the workshop took place.
 
-Stefana herself does not allege any wrongdoing. We remain friends and she was not even made aware of this 'allegation' before I sent it to her.
+[Stefana herself does not allege any wrongdoing](https://thisisstephenreid.com/stefana-bosse). We remain friends and she was not even made aware of this 'allegation' before I sent it to her.
 
 **A number of people have alleged that there were multiple attempts made between the years 2015-2018 to reach out to you through private meetings and mediations etc. None of these people left these interactions feeling satisfied that you understood what you had done, or that you were going to take steps to meaningfully address your behaviour or take responsibility for your actions.**
 
