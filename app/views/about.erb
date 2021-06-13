@@ -91,11 +91,7 @@
 </div>
 <dl class="row">
   <% SpeakingEngagement.all(sort: { 'Date' => 'desc' }).each { |speaking_engagement| %>
-    <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %>
-      <% if speaking_engagement['Location'] %>,
-        <%= speaking_engagement['Location'] %>
-      <% end %>
-    </dt>
+    <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
     <dd class="col-sm-9">
       <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
     </dd>
