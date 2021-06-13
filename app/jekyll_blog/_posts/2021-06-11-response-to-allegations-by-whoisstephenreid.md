@@ -1,5 +1,5 @@
 ---
-title: "Response to allegations by whoisstephenreid.com"
+title: "Response to allegations by Solidarity & Rage"
 ---
 
 
