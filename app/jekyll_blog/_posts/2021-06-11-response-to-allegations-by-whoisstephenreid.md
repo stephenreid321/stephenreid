@@ -191,3 +191,7 @@ Whilst at times in the past I did hold some key positions of ownership/leadershi
 
 With thanks to everyone who continues to help me to learn and grow,<br />
 Stephen
+
+<em>An independent group of friends and supporters have published an open letter at [thisisstephenreid.com](https://thisisstephenreid.com).
+
+I invite you to read the open letter (which links to this response) and consider signing and/or leaving a testimonial.</em>
