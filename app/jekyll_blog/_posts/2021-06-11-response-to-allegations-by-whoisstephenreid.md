@@ -187,11 +187,14 @@ I have gone to great lengths to learn and grow in these areas. Since the last of
 
 I am committed to continuing this learning journey. I sincerely apologise to anyone who has been hurt by my past actions in connection with these topics.
 
-Whilst at times in the past I did hold some key positions of ownership/leadership, I have put huge efforts into decentralising power and ownership in the organisations I am involved with (for example, stepping down as an admin of the Find The Others group before leaving it completely, and transforming the Psychedelic Society into a not-for-profit worker co-operative). I am passionate about continuing this process of decentralisation.
+Whilst at times in the past I did hold some key positions of ownership/leadership, I have put huge efforts into decentralising power and ownership in the organisations I am involved with (for example, stepping down as an admin of the Find The Others group before leaving it completely, and transforming the Psychedelic Society into a not-for-profit worker co-operative.). I am passionate about continuing this process of decentralisation.
 
 With thanks to everyone who continues to help me to learn and grow,<br />
 Stephen
 
 <em>An independent group of friends and supporters have published an open letter at [thisisstephenreid.com](https://thisisstephenreid.com).
 
-I invite you to read the open letter (which links to this response) and consider signing and/or leaving a testimonial.</em>
+I invite you to read the open letter (which links to this response) and consider signing and/or leaving a testimonial.
+
+Dandelion Collective/The Psychedelic Society has also published a [response](https://psychedelicsociety.org.uk/news/statement-from-the-psychedelic-societydandelion-collective-on-allegations-made-against-stephen-reid).
+</em>
