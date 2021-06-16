@@ -40,7 +40,7 @@ On 9th June at 12:17, I responded:
 
 On 9th June at 18:25, having received no reply, I sent a link to this document.
 
-On 10th June at 19:30, a friend sent me a link to the site [whoisstephenreid.com/](https://www.whoisstephenreid.com/). The site does not include any mention of the responses below.
+On 10th June at 19:30, a friend sent me a link to the site [whoisstephenreid.com](https://www.whoisstephenreid.com/). The site does not include any mention of the responses below.
 
 On 10th June at 20:00, I shared this document on my Facebook profile. After digesting the testimonials, I expect I will release a further response. I will not be engaging in discussion on social media.
 
