@@ -91,22 +91,16 @@
     <link rel="alternate" type="application/atom+xml" title="Stephen Reid's blog posts" href="/blog/feed.xml">
   </head>
   <body>
+
     <div class="mb-4">
       <%= partial :nav %>
     </div>
+
     <div class="container">
       <%= partial :alert %>
       <%= yield %>
     </div>
-    <div class="bg-dark p-3 mt-5">
-      <div class="container">
-        <div class="row justify-content-center mb-3">
-          <div class="col-sm-auto text-center">
-            <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <script>
       $(function () {
         if (!Cookies.get('shownModal')) {
@@ -117,6 +111,7 @@
         }
       })
     </script>
+
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -138,5 +133,6 @@
       <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+    
   </body>
 </html>
