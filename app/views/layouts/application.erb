@@ -21,7 +21,7 @@
     <link href="/fonts/overpass-font/stylesheet.css" rel="stylesheet">
 
     <link rel="preload" href="/fonts/ZilapEvolution/stylesheet.css" as="style">
-    <link href="/fonts/ZilapEvolution/stylesheet.css" rel="stylesheet">    
+    <link href="/fonts/ZilapEvolution/stylesheet.css" rel="stylesheet">
 
     <% {
          'jquery/3.2.0' => 'jquery.min.js',
@@ -104,9 +104,6 @@
           <div class="col-sm-auto text-center">
             <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
           </div>
-        </div>
-        <div class="row justify-content-center">
-          <%= Padrino.env == :production ? cp('social_networks') : partial(:social_networks) %>
         </div>
         <div class="text-center mt-3">
           <span class="text-muted mr-3">View source</span>
