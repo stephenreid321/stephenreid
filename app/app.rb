@@ -58,7 +58,7 @@ module StephenReid
       erb :about
     end
 
-    %w[services podcast books donate calendar habits tarot software podcasts].each do |r|
+    %w[podcast books donate calendar habits tarot software podcasts].each do |r|
       get "/#{r}", cache: true do
         @title = r.capitalize
         erb :"#{r}"
