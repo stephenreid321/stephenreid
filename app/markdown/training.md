@@ -30,7 +30,7 @@
 
 ### Entheogens and plant medicines
 
-*   Noya Rao & Ayahausca dieta with [Manuela Mahua](https://noyanete.com/) near Pucallpa, Peru (Dec 2017)
+*   Noya Rao & Ayahausca dieta with [Manuela Mahua](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) near Pucallpa, Peru (Dec 2017)
 *   Peyote ceremony with Marakame Don Ramiro of the [Wixarika](https://en.wikipedia.org/wiki/Huichol) (Aug 2017)
 *   Tobacco ceremony with Jeff Firewalker of the [Eagle Condor Council](https://www.eaglecondorcouncil.org/) (Mar 2018)
 *   Cacao ceremonies with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/) (Nov 2017) and [Eagle's Nest](https://eaglesnestatitlan.com/), Lake Atitlán (Jan 2018)
