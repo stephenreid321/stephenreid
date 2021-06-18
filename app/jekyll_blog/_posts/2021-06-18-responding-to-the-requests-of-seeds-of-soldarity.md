@@ -26,7 +26,7 @@ I understand that since I was frequently in leadership positions I had a respons
 
 I have [stepped back from my role at Dandelion Collective](https://psychedelicsociety.org.uk/news/statement-from-the-psychedelic-societydandelion-collective-on-allegations-made-against-stephen-reid) (the parent organisation of The Psychedelic Society) whilst my colleagues receive independent advice on the way forward. I already held no formal leadership or ownership roles in the co-operative and decentralised organisations I work with.
 
-Whilst I reflect further, I will not be accepting any speaking invitations nor use my email list for at least the rest of 2021, though I will fulfill outstanding teaching obligations. I will spend this time focusing on my learning journey with the continued support of my UKCP-accredited psychotherapist.
+Whilst I reflect further, I will not be accepting any speaking invitations nor use my email list for at least the rest of 2021. I will fulfill outstanding teaching obligations. I will spend this time focusing on my learning journey with the continued support of my UKCP-accredited psychotherapist.
 
 *Stop publicly and privately co-opting anti-oppressive movements, such as intersectionality, shamanism and ecofeminism.*
 
