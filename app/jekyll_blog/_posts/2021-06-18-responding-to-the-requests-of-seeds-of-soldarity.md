@@ -14,7 +14,7 @@ title: "Responding to the requests of Seeds of Solidarity"
       }
 </style>
 
-It has now been a week since I first read the testimonials by Solidarity & Rage/Seeds of Solidarity, which affected me deeply. Having had some time to reflect, converse, read and watch several of the resources suggested by the collective and move through an intense emotional process, I would like to respond to the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
+It has now been a week since I first read the testimonials by Solidarity & Rage/Seeds of Solidarity, which affected me deeply. Having had some time to reflect, converse, read and watch several of the [resources](https://www.whoisstephenreid.com/resources-and-recovery) suggested by the collective and move through an intense emotional process, I would like to respond to the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
 
 *Publicly acknowledge the serious harms outlined in the testimonials, the patterns of behaviour, and the deep hurt they have caused.*
 
