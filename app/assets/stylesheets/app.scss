@@ -55,19 +55,6 @@ a.rarible:hover {
 	}
 }
 
-ul {
-  margin: 0;
-}
-ul.dashed {
-  list-style-type: none;
-}
-ul.dashed > li {
-  text-indent: -5px;
-}
-ul.dashed > li:before {
-  content: "-";
-  text-indent: -5px;
-}
 
 .blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
 .blog_post img:not(.post-header-image), .blog_post video { max-width: 100%; margin: 1em 0 }
