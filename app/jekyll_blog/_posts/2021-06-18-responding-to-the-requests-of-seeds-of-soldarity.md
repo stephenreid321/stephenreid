@@ -7,13 +7,13 @@ It has now been a week since I first read the testimonials by Solidarity & Rage/
 <style>
       .blog_post ul {
         list-style-type: none;
+        margin-bottom: 1em;
       }
       .blog_post ul li:before {
         content: '\2014';
         position: absolute;
         margin-left: -20px;
       }
-
 
 </style>
 
@@ -23,7 +23,7 @@ It has now been a week since I first read the testimonials by Solidarity & Rage/
 * Gratitude, love, hope and rectitude, upon seeing [thisisstephenreid.com](https://thisisstephenreid.com) which acknowledges the significant learning journey I've been on since the last of the allegations in 2017
 * Acceptance, sadness, regret and remorse, as I totally switched off from social media
 
-<br />Having had some time to reflect, converse and move through this process, I would like to address the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
+Having had some time to reflect, converse and move through this process, I would like to address the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
 
 *Publicly acknowledge the serious harms outlined in the testimonials, the patterns of behaviour, and the deep hurt they have caused.*
 
