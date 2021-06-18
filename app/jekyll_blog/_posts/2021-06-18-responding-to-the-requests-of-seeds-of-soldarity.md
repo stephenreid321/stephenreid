@@ -14,13 +14,13 @@ title: "Responding to the requests of Seeds of Solidarity"
       }
 </style>
 
-It has now been a week since I first read the testimonials by Solidarity & Rage/Seeds of Solidarity, which affected me deeply. Having had some time to reflect, converse, read and watch several of the [resources](https://www.whoisstephenreid.com/resources-and-recovery) suggested by the collective and move through an intense emotional process, I would like to respond to the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
+It has now been a week since I first read the testimonials by the Solidarity & Rage/Seeds of Solidarity collective, which affected me deeply. It's been a time of intense self-reflection and emotional processing, greatly aided by conversation and the [resources](https://www.whoisstephenreid.com/resources-and-recovery) suggested by the collective. I would like to respond to the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
 
 *Publicly acknowledge the serious harms outlined in the testimonials, the patterns of behaviour, and the deep hurt they have caused.*
 
 I acknowledge that the testimonials show several people were harmed by my irresponsible use of psychedelics, lack of care in intimate relationships, and lack of empathy over the period 2010-2017. Whilst there are details and interpretations that I contest, I understand and accept the overall picture, including patterns of behaviour and the deep hurt they have caused. I sincerely apologise to those that have been hurt by my past actions in connection with these topics.
 
-I understand that since I was frequently in leadership positions I had a responsibility to exercise a particularly high standard of behaviour, which I failed to do on a number of occasions. Going forward, I am committed to the safe and responsible use of psychedelics, [healthy](https://doubleblindmag.com/consent/) and [empowering](https://www.youtube.com/watch?v=auokDp_EA80) intimacy, and deep listening and empathy.
+I understand that since I was frequently in leadership positions I had a responsibility to exercise a particularly high standard of behaviour, which I failed to do on a number of occasions. Going forward, I am committed to continuing my learning journey around the safe and responsible use of psychedelics, [healthy](https://doubleblindmag.com/consent/) and [empowering](https://www.youtube.com/watch?v=auokDp_EA80) intimacy, and deep listening and empathy.
 
 *Step back from leadership roles and ‘thought-leadership’ opportunities. This includes declining invitations to speak, deactivating his email newsletter, and resigning from leadership positions within current organisations.*
 
@@ -44,7 +44,7 @@ The past 10 days have been amongst the most emotionally intense of my life, akin
 * Gratitude, love, hope and rectitude, upon seeing [thisisstephenreid.com](https://thisisstephenreid.com) which acknowledges the significant learning journey I've been on since 2017
 * Acceptance, sadness, regret and remorse for the hurt I caused and contributed to
 
-I hope that real healing for everyone involved is possible. I ask that this letter is published on [whoisstephenreid.com](https://whoisstephenreid.com).
+I hope that real healing for everyone involved is possible. It would mean a lot to me if this letter were published on [whoisstephenreid.com](https://whoisstephenreid.com).
 
-May all find peace,<br />
+May we all find peace,<br />
 Stephen
