@@ -20,7 +20,7 @@ It has now been a week since I first read the testimonials by Solidarity & Rage/
 
 I acknowledge that the testimonials show several people were really hurt by my irresponsible use of psychedelics, lack of care in intimate relationships, and lack of empathy over the period 2010-2017. Whilst there are details and interpretations that I contest, I understand and accept the overall picture, including patterns of behaviour and the deep hurt they have caused. I sincerely apologise to those that have been hurt by my past actions in connection with these topics.
 
-I understand that since I was frequently in leadership positions I had a responsibility to exercise a particularly high standard of behaviour. Going forward, I am committed to the safe and responsible use of psychedelics, [healthy](https://doubleblindmag.com/consent/) and [empowering](https://www.youtube.com/watch?v=auokDp_EA80) intimacy, and deep listening and empathy.
+I understand that since I was frequently in leadership positions I had a responsibility to exercise a particularly high standard of behaviour, which I failed to do on a number of occasions. Going forward, I am committed to the safe and responsible use of psychedelics, [healthy](https://doubleblindmag.com/consent/) and [empowering](https://www.youtube.com/watch?v=auokDp_EA80) intimacy, and deep listening and empathy.
 
 *Step back from leadership roles and ‘thought-leadership’ opportunities. This includes declining invitations to speak, deactivating his email newsletter, and resigning from leadership positions within current organisations.*
 
