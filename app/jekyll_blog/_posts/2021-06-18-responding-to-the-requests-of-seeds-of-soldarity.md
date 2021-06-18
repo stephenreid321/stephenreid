@@ -5,18 +5,17 @@ title: "Responding to the requests of Seeds of Solidarity"
 It has now been a week since I first read the testimonials by Solidarity & Rage/Seeds of Solidarity, which affected me deeply. To give some idea of how my feelings have evolved:
 
 <style>
-      ul {
+      .blog_post ul {
         list-style-type: none;
       }
-      ul li:before {
+      .blog_post ul li:before {
         content: '\2014';
         position: absolute;
         margin-left: -20px;
       }
 
+
 </style>
-
-
 
 * Shock, disbelief, indignance, fear and sadness, upon receiving the first email from the group
 * Shame, fear, sorrow and anger, upon reading the testimonials
