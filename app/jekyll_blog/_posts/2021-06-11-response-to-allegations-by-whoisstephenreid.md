@@ -1,9 +1,9 @@
 ---
-title: "Response to allegations by Solidarity & Rage"
+title: "Response to allegations by Seeds of Solidarity"
 ---
 
 
-On 8th June at 18:00, I received this email:
+On 8th June at 18:00, I received this email from Solidarity & Rage/Seeds of Solidarity:
 
 > From: solidarityandrage &lt;solidarityandrage@protonmail.com><br />
 > Date: Tue, 8 Jun 2021 at 18:00<br />
