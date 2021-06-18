@@ -41,7 +41,7 @@ The past 10 days have been amongst the most emotionally intense of my life, akin
 * Shock, disbelief, indignance, fear and sadness, upon receiving the first email from the group
 * Shame, fear, sorrow and anger, upon reading the testimonials
 * Despair and anxiety followed by determination, upon receiving an email from a major media outlet
-* Gratitude, love, hope and rectitude, upon seeing [thisisstephenreid.com](https://thisisstephenreid.com) which acknowledges the significant learning journey I've been on since the last of the allegations in 2017
+* Gratitude, love, hope and rectitude, upon seeing [thisisstephenreid.com](https://thisisstephenreid.com) which acknowledges the significant learning journey I've been on since 2017
 * Acceptance, sadness, regret and remorse for the hurt I caused and contributed to
 
 I hope that real healing for everyone involved is possible. I ask that this letter is published on [whoisstephenreid.com](https://whoisstephenreid.com).
