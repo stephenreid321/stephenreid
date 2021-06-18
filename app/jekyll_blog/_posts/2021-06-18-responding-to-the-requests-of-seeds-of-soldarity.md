@@ -14,7 +14,7 @@ title: "Responding to the requests of Seeds of Solidarity"
       }
 </style>
 
-It has now been a week since I first read the testimonials by the Solidarity & Rage/Seeds of Solidarity collective, which affected me deeply. It's been a time of intense self-reflection and emotional processing, greatly aided by conversation and the [resources](https://www.whoisstephenreid.com/resources-and-recovery) suggested by the collective. Whilst in time there may be more I can share, for now I would like to respond to the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
+It has now been a week since I first read the testimonials by the Solidarity & Rage/Seeds of Solidarity collective, which affected me deeply. It's been a time of intense self-reflection and emotional processing, greatly aided by conversation and the [resources](https://www.whoisstephenreid.com/resources-and-recovery) suggested by the collective. I would like to respond to the collective's requests as a follow up to my [first blog](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
 
 *Publicly acknowledge the serious harms outlined in the testimonials, the patterns of behaviour, and the deep hurt they have caused.*
 
@@ -43,6 +43,8 @@ The past 10 days have been amongst the most emotionally intense of my life, akin
 * Despair and anxiety followed by determination, upon receiving an email from a major media outlet
 * Gratitude, love, hope and rectitude, upon seeing [thisisstephenreid.com](https://thisisstephenreid.com) which acknowledges the significant learning journey I've been on since 2017
 * Acceptance, sadness, regret and remorse for the hurt I caused and contributed to
+
+With time, there may be more that I feel able to share.
 
 I hope that real healing for everyone involved is possible. It would mean a lot to me if this letter were published on [whoisstephenreid.com](https://whoisstephenreid.com).
 
