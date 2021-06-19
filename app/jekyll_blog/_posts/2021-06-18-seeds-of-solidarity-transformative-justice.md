@@ -38,11 +38,11 @@ I have been in therapy with my UKCP-accredited therapist for six months now whic
 
 The past 10 days have been amongst the most emotionally intense of my life, akin to the periods around the premature deaths of my parents. To give some idea of how my feelings have evolved:
 
-* Shock, disbelief, indignance, fear and sadness, upon receiving the first email from the group
-* Shame, fear, sorrow and anger, upon reading the testimonials
+* I felt shock, disbelief, indignance, fear and sadness, upon receiving the first email from the group
+* I experienced shame, fear, sorrow and anger, upon reading the testimonials
 * Despair and anguish, upon receiving an email from a major media outlet
-* Gratitude, love, hope and rectitude, upon seeing [thisisstephenreid.com](https://thisisstephenreid.com) which acknowledges the significant learning journey I've been on since 2017
-* Acceptance, sadness, regret and remorse for the hurt I caused and contributed to
+* Feelings of gratitude, love, hope and rectitude, upon seeing [thisisstephenreid.com](https://thisisstephenreid.com) which acknowledges the significant learning journey I've been on since 2017
+* Finally, acceptance, sadness, regret and remorse for the hurt I caused and contributed to
 
 With time, there may be more that I feel able to share.
 
