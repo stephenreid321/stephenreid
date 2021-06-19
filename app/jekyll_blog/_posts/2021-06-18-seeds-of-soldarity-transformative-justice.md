@@ -1,5 +1,5 @@
 ---
-title: "Responding to the requests of Seeds of Solidarity"
+title: "Seeds of Solidarity requests for transformative justice"
 ---
 
 <style>
@@ -14,7 +14,7 @@ title: "Responding to the requests of Seeds of Solidarity"
       }
 </style>
 
-It has now been a week since I first read the testimonials by the Solidarity & Rage/Seeds of Solidarity collective, which affected me deeply. It's been a time of intense self-reflection and emotional processing, greatly aided by conversation and the [resources](https://www.whoisstephenreid.com/resources-and-recovery) suggested by the collective. I would like to respond to the collective's requests as a follow up to my [initial blog post](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
+It has now been a week since I first read the testimonials by the Solidarity & Rage/Seeds of Solidarity collective, which affected me deeply. It's been a time of intense self-reflection and emotional processing, greatly aided by conversation and the [resources](https://www.whoisstephenreid.com/resources-and-recovery) suggested by the collective. I would like to respond to the collective's transformative justice requests as a follow up to my [initial blog post](https://stephenreid.net/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html).
 
 *Publicly acknowledge the serious harms outlined in the testimonials, the patterns of behaviour, and the deep hurt they have caused.*
 
