@@ -1,5 +1,5 @@
 ---
-title: "Seeds of Solidarity transformative justice requests"
+title: "Responding to the Seeds of Solidarity transformative justice requests"
 ---
 
 <style>
