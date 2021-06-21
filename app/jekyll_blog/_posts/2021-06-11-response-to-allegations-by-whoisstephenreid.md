@@ -195,4 +195,6 @@ Stephen
 <em>An independent group of friends and supporters have published an open letter at [thisisstephenreid.com](https://thisisstephenreid.com). I invite you to read the open letter (which links to this response) and consider signing and/or leaving a testimonial.
 
 Dandelion Collective/The Psychedelic Society has also published a [response](https://psychedelicsociety.org.uk/news/statement-from-the-psychedelic-societydandelion-collective-on-allegations-made-against-stephen-reid).
+
+On 18th June I published a [follow-up to this post responding to the Seeds of Solidarity transformative justice requests](https://stephenreid.net/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html)
 </em>
