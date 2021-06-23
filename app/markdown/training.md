@@ -41,7 +41,7 @@
 
 ### Conscious sexuality
 
-*   [ISTA 1](https://www.schooloftemplearts.org/) with [Elaine Young](https://www.thetantricshaman.com/), [Binoy Milton D'souza](https://lovemovementevolution.com/) & [Frank Mondeose](https://frankmondeose.com/) (Sep 2019)
+*   [ISTA 1](https://ista.life/) with [Elaine Young](https://www.thetantricshaman.com/), [Binoy Milton D'souza](https://lovemovementevolution.com/) & [Frank Mondeose](https://frankmondeose.com/) (Sep 2019)
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/) (Nov 2017)
 *   [Ängsbacka Tantra Festival](http://angsbacka.se) (Aug 2018)
 
