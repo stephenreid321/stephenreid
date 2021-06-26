@@ -47,7 +47,7 @@ The past 10 days have been amongst the most emotionally intense of my life, akin
 
 With time, there may be more that I feel able to share.
 
-I hope that real healing for everyone involved is possible. It would mean a lot to me if this letter were published on [whoisstephenreid.com](https://whoisstephenreid.com).
+I hope that real healing for everyone involved is possible. It would mean a lot to me if this letter were published on [whoisstephenreid.com](https://whoisstephenreid.com) (edit: on 26th June, [Seeds of Solidarity published a link to this post](https://www.whoisstephenreid.com/stephen-reids-reply)).
 
 May we all find peace,<br />
 Stephen
