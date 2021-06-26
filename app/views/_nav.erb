@@ -2,7 +2,7 @@
 #nav .navbar-brand { font-size: 2em; }
 #nav .navbar-brand:hover { }
   @media(min-width: 992px) {
-    #nav .nav-item { font-size: 0.8rem }
+    #nav .nav-item {  }
   }
   #nav .nav-item { padding-right: 1rem; }
   #nav .nav-link.active { font-weight: bold }
@@ -15,33 +15,33 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%= ul_nav [
-            ['Updates',
-             [
-               ['Newsletter', 'https://stephenreid.substack.com/'],
-               ['Blog', '/blog'],
-               ['Podcast', '/podcast']
-             ]],
+            # ['Updates',
+            #  [
+            #    ['Newsletter', 'https://stephenreid.substack.com/'],
+            #    ['Blog', '/blog'],
+            #    ['Podcast', '/podcast']
+            #  ]],
             ['Knowledge',
              [
                ['Knowledgegraph', '/knowledgegraph'],
                ['Books', '/books'],
                ['Podcasts', '/podcasts'],
-               ['Software', '/software'],
-             ]],
-            ['Crypto',
-             [
-               ['Crypto investing: a very short introduction', '/crypto-investing'],
-               ['ICONOMI strategy evaluator', '/iconomi'],
-               ['Metastrategy', '/metastrategy'],
-               ['Introduction to Crypto & DeFi', ENV['CRYPTO_COURSE_URL']],
-               ['Bitcoin whitepaper', '/bitcoin.pdf'],
-               ['Ethereum whitepaper', 'https://ethereum.org/en/whitepaper/']
+               ['Software', '/software']
              ]],
             ['Wisdom',
              [
                ['Tao Te Ching', '/tao-te-ching'],
                ['Tarot', '/tarot']
              ]],
+             ['Crypto',
+              [
+                ['Crypto investing: a very short introduction', '/crypto-investing'],
+                ['ICONOMI strategy evaluator', '/iconomi'],
+                ['Metastrategy', '/metastrategy'],
+                ['Introduction to Crypto & DeFi', ENV['CRYPTO_COURSE_URL']],
+                ['Bitcoin whitepaper', '/bitcoin.pdf'],
+                ['Ethereum whitepaper', 'https://ethereum.org/en/whitepaper/']
+              ]],
             ['Recommendations', '/products']
           ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link' %>
       <ul class="navbar-nav ml-auto">

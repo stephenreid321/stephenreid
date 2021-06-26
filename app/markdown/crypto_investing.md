@@ -68,8 +68,8 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
    <td>
 <ul>
 <li><a href="https://www.dhedge.org/">dHedge</a></li>
-<li><a href="https://www.tokensets.com/">TokenSets</a></li>
 <li><a href="https://enzyme.finance/">Enzyme</a></li>
+<li><a href="https://www.tokensets.com/">TokenSets</a></li>
 </ul>
 <p>
   These are all early stage and I haven't yet used them myself.

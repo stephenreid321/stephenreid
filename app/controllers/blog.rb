@@ -1,6 +1,18 @@
 StephenReid::App.controller do
+  get '/blog' do
+    redirect '/'
+  end
+
   get '/blog/unplugging-from-facebook' do
     redirect '/blog/2020/07/09/unplugging-from-facebook.html'
+  end
+
+  get '/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html' do
+    erb :response_1
+  end
+
+  get '/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html' do
+    erb :response_2
   end
 
   get '/blog/feed' do

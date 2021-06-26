@@ -1,5 +1,6 @@
 ---
 title: "Response to allegations by Seeds of Solidarity"
+published: false
 ---
 
 
@@ -42,7 +43,7 @@ On 9th June at 18:25, having received no reply, I sent a link to this document.
 
 On 10th June at 19:30, a friend sent me a link to the site [whoisstephenreid.com](https://www.whoisstephenreid.com/). The site does not include any mention of the responses below.
 
-On 10th June at 20:00, I shared this document on my Facebook profile. After digesting the testimonials, I expect I will release a further response (edit: [released 18th June, read it here](https://stephenreid.net/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html)). I will not be engaging in discussion on social media.
+On 10th June at 20:00, I shared this document on my Facebook profile. After digesting the testimonials, I expect I will release a further response (edit: [released 18th June, read it here](/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html)). I will not be engaging in discussion on social media.
 
 ---
 
@@ -196,5 +197,5 @@ Stephen
 
 Dandelion Collective/The Psychedelic Society has also published a [response](https://psychedelicsociety.org.uk/news/statement-from-the-psychedelic-societydandelion-collective-on-allegations-made-against-stephen-reid).
 
-On 18th June 2021, I published a [follow-up to this post responding to the Seeds of Solidarity transformative justice requests](https://stephenreid.net/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html)
+On 18th June 2021, I published a [follow-up to this post responding to the Seeds of Solidarity transformative justice requests](/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html)
 </em>
