@@ -1,6 +1,6 @@
 ---
 title: "The Safer Sex Conversation"
-header_image_url: /blog/assets/2019-10-21-safer-sex-conversation/1__lrcvVcdNCV0vLeyQowv_A.jpeg
+header_image_url: /blog/assets/2019-10-21-safer-sex-conversation/5289.jpg
 ---
 
 This “script” is a good way to initiate a conversation about your sexual history and ask someone else to share theirs with you. Ideally, this is done prior to finding yourself in a sexually-charged situation.
