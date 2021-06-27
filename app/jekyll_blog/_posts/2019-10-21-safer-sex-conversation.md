@@ -38,4 +38,6 @@ The [Wheel of Consent](https://www.youtube.com/watch?v=auokDp_EA80) can be helpf
 
 **6. “My emotional desires after sexually engaging are …”**
 
+<hr />
+
 Then ask the other person, **“How about you?”** Listen closely to what they say and how they say it… Ask questions, if you need clarification.
