@@ -82,10 +82,10 @@ module StephenReid
       erb :tao
     end
 
-    get '/products', cache: true do
-      @title = 'Recommended products'
-      erb :products
-    end
+    # get '/products', cache: true do
+    #   @title = 'Recommended products'
+    #   erb :products
+    # end
 
     get '/places-plans' do
       @title = 'Places & Plans'
