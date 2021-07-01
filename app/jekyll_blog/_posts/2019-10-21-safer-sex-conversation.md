@@ -34,7 +34,7 @@ Healthy boundaries allow you feel safe and stay open, they are dynamic and can e
 
 The [Wheel of Consent](https://www.youtube.com/watch?v=auokDp_EA80) can be helpful here:
 
-![img](https://miro.medium.com/max/863/0*0LMp7IPl7Jv0omFH)
+[![img](https://miro.medium.com/max/863/0*0LMp7IPl7Jv0omFH)](https://www.youtube.com/watch?v=auokDp_EA80)
 
 **6. “My emotional desires after sexually engaging are …”**
 
