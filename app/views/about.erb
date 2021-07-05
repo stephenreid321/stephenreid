@@ -88,14 +88,6 @@
 <%= partial :places %>
 
 <h2 class="mt-5" id="speaking">Recent speaking engagements</h2>
-<div class="row align-items-center justify-content-center">
-  <% Organisation.all(filter: "AND({Logo} != '', {Speaking engagements} != '', {Name} != 'The Psychedelic Society')").shuffle.each { |organisation| %>
-    <div class="col-4 col-sm-2 text-center py-3 px-3 py-sm-3 px-sm-5">
-      <img style="-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-           filter: grayscale(100%);" class="w-100 mb-3" src="<%= organisation['Logo'].first['url'] %>">
-    </div>
-  <% } %>
-</div>
 <dl class="row">
   <% SpeakingEngagement.all(sort: { 'Date' => 'desc' }).first(5).each { |speaking_engagement| %>
     <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
