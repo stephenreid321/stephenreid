@@ -87,7 +87,7 @@
 <h2 class="mt-5" id="speaking">Places and plans</h2>
 <%= partial :places %>
 
-<h2 class="mt-5" id="speaking">Speaking engagements</h2>
+<h2 class="mt-5" id="speaking">Recent speaking engagements</h2>
 <div class="row align-items-center justify-content-center">
   <% Organisation.all(filter: "AND({Logo} != '', {Speaking engagements} != '', {Name} != 'The Psychedelic Society')").shuffle.each { |organisation| %>
     <div class="col-4 col-sm-2 text-center py-3 px-3 py-sm-3 px-sm-5">
@@ -97,7 +97,7 @@
   <% } %>
 </div>
 <dl class="row">
-  <% SpeakingEngagement.all(sort: { 'Date' => 'desc' }).each { |speaking_engagement| %>
+  <% SpeakingEngagement.all(sort: { 'Date' => 'desc' }).first(5).each { |speaking_engagement| %>
     <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
     <dd class="col-sm-9">
       <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
