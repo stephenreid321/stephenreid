@@ -61,6 +61,7 @@
 
 ### Other
 
+*   Divine Ridiculous' [Lupercalia](https://facebook.com/events/2482399778746614) (Feb 2020)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and Nikki Wyrd at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Haka workshop with [Matiu Te Huki](https://rainbowwarrior.nz/) at [Luminate Festival](https://www.luminatefestival.co.nz) (Feb 2019)
 *   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
