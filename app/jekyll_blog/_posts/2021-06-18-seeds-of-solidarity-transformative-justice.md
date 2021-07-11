@@ -37,7 +37,7 @@ I will not do anything to publicly or privately co-opt the movements named here 
 
 I have been in therapy with my UKCP-accredited therapist for six months now which has been pivotal in providing new perspectives on my past behaviour. I am committed to continuing this process and will be reflecting deeply on these events.
 
-The past 10 days have been amongst the most emotionally intense of my life, akin to the periods around the premature deaths of my parents. To give some idea of how my feelings have evolved:
+The past 10 days have been amongst the most emotionally intense of my life, akin to the periods around the [premature deaths](/blog/2020/03/20/karuna-journey.html) of my parents. To give some idea of how my feelings have evolved:
 
 * I felt shock, disbelief, indignance, fear and sadness, upon receiving the first email from the group
 * I experienced shame, fear, sorrow and anger, upon reading the testimonials

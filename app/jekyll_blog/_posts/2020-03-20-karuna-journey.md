@@ -6,7 +6,7 @@ header_image_url: /blog/assets/2020-03-20-karuna-journey/me.png
 
 *Me, age 1*
 
-I wrote this as part of my application to the [Karuna Institute's Foundation in Core Process Psychotherapy](https://www.karuna-institute.co.uk/foundation-training.html), which I completed last week. The prompt was:
+I wrote this as part of my application to the [Karuna Institute's Foundation in Core Process Psychotherapy](https://www.karuna-institute.co.uk/foundation-training.html). The prompt was:
 
 *Please write between two and four A4 sides on your journey through life. This should include significant life events, both difficult and expansive. Some information on your early years would be useful, as well as details of any psychotherapy/counselling, bodywork, group work and your spiritual journey. If you have a current spiritual practice of any form it is useful for us to know.*
 
@@ -34,7 +34,7 @@ I started at an all-boys state grammar school where I excelled academically. I h
 
 During my teenage years, I remember my father continuing to struggle with bipolar disorder, and I became aware of his addictive personality, which I believe was a consequence of abuse he suffered as a child. At various times he was addicted to spending, fast food, pornography, tobacco, alcohol and heroin. Several times I found burnt spoons and used syringes in our basement. I remember developing an attitude of anger and disapproval towards him, and sometimes shouting at him to pull himself together, which typically triggered withdrawal and low mood in him. He was a high-functioning addict, continued to hold down a well-paid job in the IT industry, and despite his challenges he continued to show the family a lot of love.
 
-I left home to study Physics at the University of Oxford at 18. My father's health deteriorated, and when I was 20 he was rushed to hospital with ruptured esophageal varices. He was in intensive care for 2 weeks before the doctors told us he wasn't going to get better. I remember crying over him in the cubicle before we took the decision to turn off his life support. 
+I left home to study Physics at the University of Oxford at 18. My father's health deteriorated, and when I was 20 he was rushed to hospital with ruptured esophageal varices. He was in intensive care for 2 weeks before the doctors told us he wasn't going to get better. I remember crying over him in the cubicle before we took the decision to turn off his life support.
 
 His passing was an initiatory experience for me. I felt grief for his passing, also a sense of relief that he didn't have to suffer any more, and relief for my devoted mother who had had to watch him destroy himself. Becoming the oldest male in the family inspired a sense of maturity and responsibility in me.
 
@@ -50,7 +50,7 @@ Around this time, I discovered psychedelic substances. I had always been wary of
 
 In 2014, I set up the Psychedelic Society, initially focused on campaigning for the legal regulation of psychedelic substances. At the beginning of 2016, the Society started running Psychedelic Experience Retreats, taking groups of 10-15 people to beautiful properties in the Netherlands (where psilocybin truffles are legal) for facilitated group psychedelic experiences. I co-facilitated the first 6 or so retreats, though I am not currently involved in that part of the organisation, feeling my time and talents have been better spent elsewhere. The Psychedelic Society is now a workers' cooperative with 7 members and a space in Hackney, London that hosts events including dance, meditation and talks almost every day.
 
-I left London to go travelling at the end of 2017, during which time I drank ayahuasca for the first time as part of a 10-day dieta in the Peruvian Amazon. This helped me to reflect upon and celebrate the lives of my parents, which I realised I had not given myself much chance to do since their passings. I described my experience in a series of blog pieces.
+I left London to go travelling at the end of 2017, during which time I drank ayahuasca for the first time as part of a 10-day dieta in the Peruvian Amazon. This helped me to [reflect upon and celebrate the lives of my parents](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad), which I realised I had not given myself much chance to do since their passings. I described my experience in a series of blog pieces.
 
 I returned to the UK in mid 2019 and made the decision to move to Totnes, where I am living now. I meditate regularly for 30 minutes each morning; participate in plant medicine ceremonies every few months; keep fit through dance, running and swimming; enjoy playing guitar and singing; listen regularly to podcasts; read plenty of books; and love spending time on the moor and at the coast.
 
