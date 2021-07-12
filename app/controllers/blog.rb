@@ -1,4 +1,8 @@
 StephenReid::App.controller do
+  get '/blog' do
+    redirect '/'
+  end
+
   get '/blog/unplugging-from-facebook' do
     redirect '/blog/2020/07/09/unplugging-from-facebook.html'
   end
