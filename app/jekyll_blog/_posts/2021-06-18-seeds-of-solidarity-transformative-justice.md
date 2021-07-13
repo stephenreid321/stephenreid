@@ -31,7 +31,7 @@ Whilst I reflect further, I will not be accepting any speaking invitations nor u
 
 *Stop publicly and privately co-opting anti-oppressive movements, such as intersectionality, shamanism and ecofeminism.*
 
-I will not do anything to publicly or privately co-opt the movements named here or other anti-oppressive movements.
+I will not do anything to publicly or privately co-opt the movements named here or other anti-oppressive movements (of course I will continue to offer them my full support).
 
 *Engage in a therapeutic process with a UKCP-certified therapist (as alternative therapists are often complicit in spiritual bypassing) to enable understanding and acknowledgement of pain caused, and help prevent harmful and abusive behaviour in the future.*
 
