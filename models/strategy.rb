@@ -104,7 +104,7 @@ class Strategy
     rescue StandardError => e
       # Airbrake.notify(e)
       puts "not found: #{self['ticker']}"
-      return
+      destroy
     end
     %w[management performance entry exit].each do |r|
       send("#{r}Fee=", j["#{r}Fee"])
