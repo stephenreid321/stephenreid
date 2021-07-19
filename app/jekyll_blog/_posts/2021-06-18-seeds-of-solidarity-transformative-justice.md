@@ -19,7 +19,7 @@ It has now been a week since I first read the testimonials by the Solidarity & R
 
 *Publicly acknowledge the serious harms outlined in the testimonials, the patterns of behaviour, and the deep hurt they have caused.*
 
-I acknowledge that the testimonials show several people were harmed by my irresponsible use of psychedelics, lack of care in intimate relationships, and lack of empathy over the period 2010-2017. Whilst I consider a number of the allegations, including the allegation of rape, to be false and defamatory, I understand and accept this bigger picture, including patterns of behaviour and the deep hurt they caused. I sincerely apologise to those that have been hurt by my past actions in connection with these topics.
+I acknowledge that the testimonials show several people were harmed by my irresponsible use of psychedelics, lack of care in intimate relationships, and lack of empathy over the period 2010-2017. Whilst I consider a number of the allegations, including the allegation of rape, to be defamatory, I understand and accept this bigger picture, including patterns of behaviour and the deep hurt they caused. I sincerely apologise to those that have been hurt by my past actions in connection with these topics.
 
 I understand that since I was frequently in leadership positions I had a responsibility to exercise a particularly high standard of behaviour, which I failed to do on a number of occasions. Going forward, I am committed to the safe and responsible use of psychedelics, [healthy](https://doubleblindmag.com/consent/) and [empowering](https://wheelofconsentbook.com/) intimacy, and deep listening and empathy.
 
