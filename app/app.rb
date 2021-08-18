@@ -54,7 +54,7 @@ module StephenReid
 
     get '/', cache: true do
       @og_image = "#{ENV['BASE_URI']}/images/link6.jpeg"
-      @og_desc = 'Co-operative technologist and cultural changemaker'
+      @og_desc = 'Teacher and technologist'
       erb :about
     end
 
