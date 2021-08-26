@@ -1,7 +1,18 @@
 <% if !params[:i] %>
-  <div class="row justify-content-center mb-5">
+  <div class="row justify-content-center mb-3">
     <div class="col-10 col-sm-4">
       <a target="_blank" href="https://amzn.to/30ZIpxw"><img class="w-100" src="/images/tao.jpg"></a>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-7">
+      <p style="font-size: 1.4rem">
+        Following an 81-day meditation on each of the 81 chapters of the Tao Te Ching, I minted NFTs for each chapter which contain a link to a secret Telegram group.
+      </p>
+      <p style="font-size: 1.4rem" class="mb-0">
+        51% of the first sale price of each NFT will be donated to GiveWell's <a href="https://givewell.org/maximum-impact-fund">Maximum Impact Fund</a>.
+      </p>
     </div>
   </div>
 <% end %>
@@ -11,10 +22,19 @@
   <div class="col-sm-9 order-sm-2 mb-3">
     <a href="/tao-te-ching/<%= verse['Verse'] %>"><img src="<%= verse['Images'].first['thumbnails']['full']['url'] %>" class="w-100"></a>
   </div>
-<div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
+  <div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
     <h2 class="mb-3 regular">
       <a style="background: white" class="text-dark" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
     </h2>
+    <p>
+      <a target="_blank" href="<%= verse['Rarible URL'] %>" class="rarible">
+        <% if (a = verse['Owner']) == '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324' && verse['Verse'] != 81 %>
+          <span class="d-inline-block px-1">NFT on sale for 1 ETH</span>
+        <% else %>
+          <span class="text-dark bg-white d-inline-block px-1">NFT owned by <%= "#{a[0..5]}&hellip;#{a[-4..]}" %></span>
+        <% end %>
+      </a>
+    </p>
     <div>
       <span style="background: white">
         <%= md(verse['Text']).gsub('<p>', '').gsub('</p>', '').gsub('  ', '&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n", "&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n", '&nbsp;<br />') %>
@@ -89,7 +109,7 @@
     </a>
     <% } %>
   </div>
-  <div class="row justify-content-center my-5">
+  <div class="row justify-content-center mt-5">
     <div class="col-10 col-sm-4">
       <a href="/tao-te-ching"><img class="w-100" src="/images/tao.jpg"></a>
     </div>
