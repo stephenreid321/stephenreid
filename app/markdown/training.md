@@ -24,11 +24,11 @@
 
 ### Psychotherapy
 
-*   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (March 2020)
-*   One-on-one Core Process Psychotherapy sessions (ongoing)
+*   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
+*   One-on-one Core Process Psychotherapy sessions (Aug 2020-ongoing)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 
-### Entheogens and plant medicines
+### Entheogens & plant medicines
 
 *   Noya Rao & Ayahausca dieta with [Manuela Mahua](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) near Pucallpa, Peru (Dec 2017)
 *   Peyote ceremony with Marakame Don Ramiro of the [Wixarika](https://en.wikipedia.org/wiki/Huichol) (Aug 2017)
@@ -46,13 +46,17 @@
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
 *   [Ängsbacka Tantra Festival](http://angsbacka.se) (Aug 2018)
 
+### Soulcraft & Wild Mind
+
+* [Wild Mind Intensive](https://www.soulcraft.eu/events/wild-mind-intensive-2) (Aug 2021)
+
 ### Burns
 
 *   [Nowhere](http://goingnowhere.org) (2014, 2015, 2016)
 *   [The Borderland](http://theborderland.se) (2016, 2017, 2019)
 *   [Kiez Burn](https://kiezburn.org/) (2019)
 
-### Politics and activism
+### Politics & activism
 
 *   [Andrew Simms](https://en.wikipedia.org/wiki/Andrew_Simms) whilst working at the [New Economics Foundation](https://neweconomics.org/)
 *   [Caroline Lucas](https://www.carolinelucas.com/) and Cath Miller whilst working in Caroline's parliamentary office
