@@ -100,10 +100,16 @@ class Strategy
     holdings.destroy_all
     begin
       j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
-      puts self['ticker']
+      if j.nil?
+        puts "nil response: #{ticker}"
+        destroy
+        return
+      else
+        puts ticker
+      end
     rescue StandardError => e
       # Airbrake.notify(e)
-      puts "not found: #{self['ticker']}"
+      puts "not found: #{ticker}"
       destroy
     end
     %w[management performance entry exit].each do |r|
