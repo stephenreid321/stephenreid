@@ -27,22 +27,6 @@ class Asset
     where(:verified.ne => true)
   end
 
-  def self.loopring_tickers
-    agent = Mechanize.new
-    JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/loopring').body)['tickers']
-  end
-
-  def self.loopring_symbols
-    loopring_tickers.map { |ticker| [ticker['base'], ticker['target']] }.flatten.uniq
-  end
-
-  def self.loopring_coingecko_id(symbol)
-    loopring_tickers.find do |ticker|
-      return ticker['coin_id'] if ticker['base'] == symbol
-      return ticker['target_coin_id'] if ticker['target'] == symbol
-    end
-  end
-
   def self.coingecko(coingecko_id)
     agent = Mechanize.new
     JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{coingecko_id.downcase}").body)

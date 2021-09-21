@@ -22,6 +22,12 @@ namespace :strategies do
     Time.zone = 'London'
     Strategy.rebalance if (Time.zone.now.hour % 3).zero?
   end
+
+  task propose: :environment do
+    proposed = Hash[Strategy.proposed(n: 10)]
+    Fragment.find_by(key: 'proposed').try(:destroy)
+    Fragment.create(key: 'proposed', value: proposed.to_json, expires: 1.year.from.now)
+  end
 end
 
 namespace :verses do
