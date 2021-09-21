@@ -25,8 +25,8 @@ namespace :strategies do
 
   task propose: :environment do
     proposed = Hash[Strategy.proposed(n: 10)]
-    Fragment.find_by(key: 'proposed').try(:destroy)
-    Fragment.create(key: 'proposed', value: proposed.to_json, expires: 1.year.from.now)
+    Stash.find_by(key: 'proposed').try(:destroy)
+    Stash.create(key: 'proposed', value: proposed.to_json, expires: 1.year.from.now)
   end
 end
 
