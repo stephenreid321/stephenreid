@@ -1,4 +1,4 @@
-class Fragment
+class Stash
   include Mongoid::Document
   include Mongoid::Timestamps
 
