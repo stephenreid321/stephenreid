@@ -42,7 +42,7 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
   </li>
 </ul>
 <p>
-  <a href="/metastrategy">Metastrategy</a> is my new strategy on ICONOMI. It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies, and is thus a great set-and-forget option.</p>
+  <a href="/metastrategy">Metastrategy</a> is my strategy on ICONOMI. It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies, and is thus a great set-and-forget option. <mark>This is my recommendation for newcomers.   <a href="/metastrategy">See here for a step-by-step guide to investing in Metastrategy.</a></mark></p>
 <p>
   You could also invest in 3-5 of the <a href="/iconomi">current top performing strategies</a>. If you choose this option I recommend you manually rebalance every 3-6 months (i.e. move your money out of any strategies that are now no longer in the top 5 and into the current top 5).</p>
    </td>
@@ -76,6 +76,7 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
   </p></td>
   </tr>
 </table>
+
 
 
 
