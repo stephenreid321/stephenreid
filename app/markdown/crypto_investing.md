@@ -85,4 +85,4 @@ You could of course pick a mix of these different options. For example,
 *   50% CeFi, in [Metastrategy](/metastrategy)
 *   50% DeFi, in [PieDAO's BCP](https://pools.piedao.org/#/pie/0xe4f726adc8e89c6a6017f01eada77865db22da14)
 
-If you do choose to invest, consider [dollar-cost averaging](https://www.investopedia.com/investing/dollar-cost-averaging-pays/) (investing regular small amounts) rather than going all-in.
+If you do choose to invest, consider <a href="https://www.degiro.co.uk/knowledge/strategies/what-is-dollar-cost-averaging">dollar-cost averaging</a> (investing equal sums of money at regular intervals) rather than going all-in.
