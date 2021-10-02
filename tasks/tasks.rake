@@ -54,9 +54,9 @@ namespace :posts do
   task :delete_duplicates do
     links = Post.all.map { |post| post['Link'] }
     dupes = links.select { |link| links.count(link) > 1 }
-    dupes.each do |link|
+    dupes.uniq.each do |link|
       posts = Post.all(filter: "{Link} = '#{link}'", sort: { 'Created at' => 'desc' })
-      posts[1..-1].each do
+      posts[1..-1].each do |post|
         puts "destroying #{post['Link']} created #{post['Created at']}"
         post.destroy
       end
