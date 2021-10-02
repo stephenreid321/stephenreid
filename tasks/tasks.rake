@@ -51,6 +51,18 @@ namespace :terms do
 end
 
 namespace :posts do
+  task :delete_duplicates do
+    links = Post.all.map { |post| post['Link'] }
+    dupes = links.select { |link| links.count(link) > 1 }
+    dupes.each do |link|
+      posts = Post.all(filter: "{Link} = '#{link}'", sort: { 'Created at' => 'desc' })
+      posts[1..-1].each do
+        puts "destroying #{post['Link']} created #{post['Created at']}"
+        post.destroy
+      end
+    end
+  end
+
   task tag_new: :environment do
     term_ids = []
     agent = Mechanize.new

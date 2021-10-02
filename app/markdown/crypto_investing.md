@@ -55,7 +55,7 @@ DeFi stands for **De**centralised **Fi**nance. These services are non-custodial 
     )</li>    
     <li><a href="https://www.indexcoop.com">Index Coop</a></li>
     <li><a href="https://powerindex.io">Power Index</a></li>
-    <li><a href="https://http://basketdao.org/">BasketDAO</a></li>
+    <li><a href="https://basketdao.org/">BasketDAO</a></li>
 </li>
 </ul>
    </td>
