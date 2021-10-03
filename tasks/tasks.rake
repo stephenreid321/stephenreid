@@ -51,7 +51,7 @@ namespace :terms do
 end
 
 namespace :posts do
-  task :delete_duplicates do
+  task delete_duplicates: :environment do
     links = Post.all.map { |post| post['Link'] }
     dupes = links.select { |link| links.count(link) > 1 }
     dupes.uniq.each do |link|
