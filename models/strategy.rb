@@ -201,11 +201,6 @@ class Strategy
   def self.rebalance(n: 10)
     Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
 
-    # Mail.deliver do
-    #   from 'notifications@stephenreid.net'
-    #   to 'stephen@stephenreid.net'
-    #   subject "Rebalancing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
-    # end
     Strategy.update
     success = nil
     until success
