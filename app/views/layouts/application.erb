@@ -101,6 +101,24 @@
       <%= yield %>
     </div>
 
+    <div class="bg-dark p-3 mt-5">
+      <div class="container">
+        <div class="row justify-content-center mb-3">
+          <div class="col-sm-auto text-center">
+            <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <%= Padrino.env == :production ? cp('social_networks') : partial(:social_networks) %>
+        </div>
+        <div class="text-center mt-3">
+          <span class="text-muted mr-3">View source</span>
+          <a class="mr-3 text-muted" target="_blank" href="https://airtable.com/shrpW8bgHdF9jMuPV"><img src="/images/airtable.png" style="height: 20px"> Airtable</a>
+          <a class="text-muted" target="_blank" href="https://github.com/stephenreid321/stephenreid"><i class="text-white fab fa-github"></i> Github</a>
+        </div>
+      </div>
+    </div>
+
     <script>
       $(function () {
         if (!Cookies.get('shownModal')) {
@@ -133,6 +151,7 @@
       <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
 
   </body>
 </html>
