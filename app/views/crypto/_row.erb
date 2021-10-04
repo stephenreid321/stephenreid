@@ -9,6 +9,12 @@
     <%= number_with_precision score, precision: 1 %>
   </span>
 </td>
+<td data-sort="<%= strategy.score %>">
+  <% score, index = strategy.score_index('score') %>
+  <span class="score">
+    <%= number_with_precision score, precision: 1 %>
+  </span>
+</td>
 <td>
 </td>
 <td>
