@@ -40,17 +40,6 @@ StephenReid::App.controller do
     partial :'crypto/metastrategy'
   end
 
-  post '/metastrategy/:p/bail' do
-    halt unless params[:p] == ENV['SITE_SECRET']
-    redirect "/metastrategy/#{ENV['SITE_SECRET']}/bail"
-  end
-
-  get '/metastrategy/:p/bail' do
-    halt unless params[:p] == ENV['SITE_SECRET']
-    Strategy.delay.bail
-    redirect '/metastrategy'
-  end
-
   get '/metastrategy/:p/rebalance' do
     halt unless params[:p] == ENV['SITE_SECRET']
     Strategy.delay.rebalance(force: params[:force])

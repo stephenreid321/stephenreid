@@ -15,7 +15,6 @@ class Alert
     # Telegram::Bot::Client.run(ENV['TELEGRAM_TOKEN']) do |bot|
     #   bot.api.send_message(chat_id: ENV['TELEGRAM_CHAT_ID'], text: text)
     # end
-    # Strategy.bail if value.negative?
   end
 
   def self.admin_fields

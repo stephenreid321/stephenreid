@@ -198,73 +198,42 @@ class Strategy
     assets.map { |k, v| [k, v] }
   end
 
-  def self.bail
+  def self.rebalance(n: 10)
     Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
-    rebalance(bail: true)
-    # delay(run_at: 1.hours.from_now).rebalance(force: true)
-  end
 
-  def self.rebalance(n: 10, bail: false, force: false)
-    unless force
-      usdc = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].find { |asset| asset['assetTicker'] == 'USDC' }
-      if usdc && usdc['rebalancedWeight'] == 0.9
-        puts 'Strategy is in bailed state, exiting'
-        return
+    # Mail.deliver do
+    #   from 'notifications@stephenreid.net'
+    #   to 'stephen@stephenreid.net'
+    #   subject "Rebalancing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
+    # end
+    Strategy.update
+    success = nil
+    until success
+
+      begin
+        weights = Strategy.proposed(n: n)
+      rescue StandardError => e
+        Airbrake.notify(e)
+        raise e
       end
-    end
 
-    Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
-
-    if bail
-      # Mail.deliver do
-      #   from 'notifications@stephenreid.net'
-      #   to 'stephen@stephenreid.net'
-      #   subject "Bailing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
-      # end
-      weights = [['USDC', 0.9], ['ETH', 0.1]]
       data = {
         ticker: 'DECENTCOOP',
         values: weights.map do |ticker, p|
           { assetTicker: ticker, rebalancedWeight: p }
         end,
-        speedType: 'FAST'
+        speedType: 'SLOW'
       }
-      Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
-    else
-      # Mail.deliver do
-      #   from 'notifications@stephenreid.net'
-      #   to 'stephen@stephenreid.net'
-      #   subject "Rebalancing at $#{JSON.parse(Iconomi.get('/v1/user/balance'))['daaList'].find { |daa| daa['ticker'] == 'DECENTCOOP' }['value'].to_i.to_s.reverse.scan(/\d{3}|.+/).join(',').reverse}"
-      # end
-      Strategy.update
-      success = nil
-      until success
 
-        begin
-          weights = Strategy.proposed(n: n)
-        rescue StandardError => e
-          Airbrake.notify(e)
-          raise e
-        end
-
-        data = {
-          ticker: 'DECENTCOOP',
-          values: weights.map do |ticker, p|
-            { assetTicker: ticker, rebalancedWeight: p }
-          end,
-          speedType: 'SLOW'
-        }
-
-        puts n
-        puts data.to_json
-        begin
-          Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
-          success = true
-        rescue StandardError => e
-          puts e
-          n -= 1
-          raise Strategy::RebalancingError if n < 3
-        end
+      puts n
+      puts data.to_json
+      begin
+        Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
+        success = true
+      rescue StandardError => e
+        puts e
+        n -= 1
+        raise Strategy::RebalancingError if n < 3
       end
     end
   end
