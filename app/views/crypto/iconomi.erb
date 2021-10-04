@@ -54,16 +54,16 @@
 <script>
 
   function proposedPosition() {
-    $('#iconomi tr td:nth-child(4)').text('')
     $('#iconomi tr td:nth-child(5)').text('')
+    $('#iconomi tr td:nth-child(6)').text('')
     var total = 0
     for(i=1; i<=$('#funds').val(); i++) {
-      total += parseFloat($('#iconomi tr').eq(i).find('td').eq(2).text())
+      total += parseFloat($('#iconomi tr').eq(i).find('td').eq(3).text())
     }
     for(i=1; i<=$('#funds').val(); i++) {
-      var p = parseFloat($('#iconomi tr').eq(i).find('td').eq(2).text()) / total * 100
-      $('#iconomi tr').eq(i).find('td').eq(3).text(Math.round(p, 1) + '%')
-      $('#iconomi tr').eq(i).find('td').eq(4).text('$' + Math.round($('#investment').val()*p/100, 2))
+      var p = parseFloat($('#iconomi tr').eq(i).find('td').eq(3).text()) / total * 100
+      $('#iconomi tr').eq(i).find('td').eq(4).text(Math.round(p, 1) + '%')
+      $('#iconomi tr').eq(i).find('td').eq(5).text('$' + Math.round($('#investment').val()*p/100, 2))
     }
   }
 
