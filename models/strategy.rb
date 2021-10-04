@@ -28,29 +28,6 @@ class Strategy
   field :verified, type: Boolean
   field :excluded, type: Boolean
 
-  validates_presence_of :ticker
-
-  def calculate_score
-    ((MONTH_FACTOR * (rmonth || 0)) + (THREE_MONTH_FACTOR * (rthree_month || 0)) + (SIX_MONTH_FACTOR * (rsix_month || 0)) + (YEAR_FACTOR * (ryear || 0)))
-  end
-
-  def calculate_score_fee_weighted
-    score * (1 - (managementFee || 0)) * (1 - (performanceFee || 0)) * (1 - (entryFee || 0)) * (1 - (exitFee || 0))
-  end
-
-  before_validation do
-    self.score = calculate_score
-    self.score_fee_weighted = calculate_score_fee_weighted
-  end
-
-  def score_index(x, strategies: Strategy.active_mature)
-    index = strategies.order("#{x} desc").pluck(:ticker).index(ticker) + 1
-    min = strategies.pluck(x).compact.min
-    max = strategies.pluck(x).compact.max
-    score = 100 * ((send(x) - min) / (max - min))
-    [score, index]
-  end
-
   def self.admin_fields
     {
       ticker: :text,
@@ -80,20 +57,35 @@ class Strategy
 
   has_many :holdings, dependent: :destroy
 
-  def self.import
-    JSON.parse(Iconomi.get('/v1/strategies')).each do |s|
-      strategy = Strategy.find_or_create_by(ticker: s['ticker'])
-      %w[ticker name manager managementType].each do |r|
-        strategy.send("#{r}=", s[r])
-      end
-      strategy.save
-    end
+  validates_presence_of :ticker
+
+  before_validation do
+    self.score = calculate_score
+    self.score_fee_weighted = calculate_score_fee_weighted
   end
 
-  def self.update
-    Strategy.all.each do |strategy|
-      strategy.update
+  def calculate_score
+    ((MONTH_FACTOR * (rmonth || 0)) + (THREE_MONTH_FACTOR * (rthree_month || 0)) + (SIX_MONTH_FACTOR * (rsix_month || 0)) + (YEAR_FACTOR * (ryear || 0)))
+  end
+
+  def calculate_score_fee_weighted
+    score * (1 - (managementFee || 0)) * (1 - (performanceFee || 0)) * (1 - (entryFee || 0)) * (1 - (exitFee || 0))
+  end
+
+  def score_index(x, strategies: Strategy.active_mature)
+    index = strategies.order("#{x} desc").pluck(:ticker).index(ticker) + 1
+    min = strategies.pluck(x).compact.min
+    max = strategies.pluck(x).compact.max
+    score = 100 * ((send(x) - min) / (max - min))
+    [score, index]
+  end
+
+  def max_maturity
+    m = nil
+    %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
+      m = r if send("r#{r.downcase}")
     end
+    m
   end
 
   def update
@@ -133,12 +125,20 @@ class Strategy
     save
   end
 
-  def max_maturity
-    m = nil
-    %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
-      m = r if send("r#{r.downcase}")
+  def self.import
+    JSON.parse(Iconomi.get('/v1/strategies')).each do |s|
+      strategy = Strategy.find_or_create_by(ticker: s['ticker'])
+      %w[ticker name manager managementType].each do |r|
+        strategy.send("#{r}=", s[r])
+      end
+      strategy.save
     end
-    m
+  end
+
+  def self.update
+    Strategy.all.each do |strategy|
+      strategy.update
+    end
   end
 
   def self.unverified
