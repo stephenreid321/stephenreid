@@ -25,6 +25,7 @@ gem 'erb_lint', require: false
 gem 'eth'
 gem 'factory_bot'
 gem 'front_matter_parser'
+gem 'google_drive'
 gem 'htmlbeautifier', github: 'trileuco/htmlbeautifier'
 gem 'koala'
 gem 'mail'

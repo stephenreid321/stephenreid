@@ -65,6 +65,11 @@ module StephenReid
       end
     end
 
+    get '/how-to-dao' do
+      @title = 'How to DAO'
+      erb :how_to_dao
+    end
+
     get '/tao-te-ching' do
       @title = 'Tao Te Ching'
       @favicon = 'tao-sq.png'
