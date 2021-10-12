@@ -207,7 +207,7 @@ GEM
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
     netaddr (2.0.4)
-    nio4r (2.5.7)
+    nio4r (2.5.8)
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
@@ -251,7 +251,7 @@ GEM
       faraday_middleware
       multi_json (~> 1.0, >= 1.0.3)
     public_suffix (4.0.6)
-    puma (5.2.2)
+    puma (5.5.1)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
