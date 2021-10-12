@@ -4,7 +4,7 @@ class Verse < Airrecord::Table
 
   def update_owner
     agent = Mechanize.new
-    owner = agent.get("https://opensea.io/assets/0xbd45ce0cd50152c130e6fa09cc8501831916e36b/#{self['Token ID']}").search('.item--counts a').first.attr('href').split('/').last
+    owner = agent.get("https://blockchair.com/ethereum/erc-721/token/0xbd45ce0cd50152c130e6fa09cc8501831916e36b/#{self['Token ID']}").search('.ownership-history__item a.hash').first.text
     self['Owner'] = owner
     save
   end
