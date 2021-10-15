@@ -23,13 +23,6 @@
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/) (Nov 2017)
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
 
-### Politics & activism
-
-*   [Andrew Simms](https://en.wikipedia.org/wiki/Andrew_Simms) whilst working at the [New Economics Foundation](https://neweconomics.org/)
-*   [Caroline Lucas](https://www.carolinelucas.com/) and Cath Miller whilst working in Caroline's parliamentary office
-*   [John Sauven](https://en.wikipedia.org/wiki/John_Sauven) whilst serving on the board of [Greenpeace UK](https://www.greenpeace.org.uk/)
-*   [Gail Bradbrook](https://en.wikipedia.org/wiki/Gail_Bradbrook) whilst taking action with [Extinction Rebellion](https://extinctionrebellion.uk/)
-
 ### Burns
 
 *   [Nowhere](http://goingnowhere.org) (2014, 2015, 2016)
