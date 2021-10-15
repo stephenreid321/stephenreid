@@ -4,11 +4,11 @@ StephenReid::App.controller do
   end
 
   get '/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html' do
-    erb :response_1
+    erb :'responses/response_1'
   end
 
   get '/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html' do
-    erb :response_2
+    erb :'responses/response_2'
   end
 
   get '/blog/feed' do

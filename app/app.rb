@@ -89,14 +89,14 @@ module StephenReid
 
     get '/substack' do
       @from = params[:from] ? Date.parse(params[:from]) : Date.today
-      erb :substack
+      erb :format_for_substack
     end
 
     get '/pocket' do
       # code = Pocket.get_code(:redirect_uri => 'https://stephenreid.net')
       # redirect Pocket.authorize_url(:code => code, :redirect_uri => 'https://stephenreid.net')
       # Pocket.get_result(code, :redirect_uri => 'https://stephenreid.net')
-      erb :pocket
+      erb :process_pocket
     end
 
     get '/pocket/:id' do
