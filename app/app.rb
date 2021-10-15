@@ -58,7 +58,7 @@ module StephenReid
       erb :about
     end
 
-    %w[podcast books donate calendar habits tarot software podcasts discord].each do |r|
+    %w[books podcasts software discord tarot].each do |r|
       get "/#{r}", cache: true do
         @title = r.capitalize
         erb :"#{r}"
@@ -87,56 +87,9 @@ module StephenReid
       erb :tao
     end
 
-    # get '/products', cache: true do
-    #   @title = 'Recommended products'
-    #   erb :products
-    # end
-
-    get '/places-plans' do
-      @title = 'Places & Plans'
-      erb :places
-    end
-
-    get '/software/update' do
-      agent = Mechanize.new
-      Software.all(filter: "AND({Featured} = 1, {Description} = '')").each do |software|
-        result = agent.get("https://iframe.ly/api/iframely?url=#{software['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-        json = JSON.parse(result.body.force_encoding('UTF-8'))
-        software['Description'] = json['meta']['description']
-        software['Images'] = [{ url: json['links']['thumbnail'].first['href'] }] if json['links']['thumbnail'] && !software['Images']
-        software.save
-      end
-      redirect '/software?r=1'
-    end
-
-    get '/groups/update' do
-      agent = Mechanize.new
-      agent.user_agent_alias = 'Android'
-      Group.all(filter: "AND(
-        FIND(', key,', {Interests joined}) > 0,
-        {Facebook URL} != ''
-      )").each do |group|
-        next if group['Images']
-
-        begin
-          page = agent.get(group['Facebook URL'])
-          image_url = page.search('._3m1l i.img')[0]['style'].split("('")[1].split("')")[0].gsub('\3a ', ':').gsub('\3d ', '=').gsub('\26 ', '&')
-          group['Images'] = [{ url: image_url }]
-          group.save
-        rescue StandardError
-          true
-        end
-      end
-      redirect '/groups?r=1'
-    end
-
     get '/substack' do
       @from = params[:from] ? Date.parse(params[:from]) : Date.today
       erb :substack
-    end
-
-    get '/diff' do
-      erb :diff
     end
 
     get '/pocket' do
@@ -174,8 +127,16 @@ module StephenReid
       send_file "#{Padrino.root}/app/markdown/master-lover-course.html"
     end
 
-    get '/md/:slug' do
-      erb :md
+    get '/software/update' do
+      agent = Mechanize.new
+      Software.all(filter: "AND({Featured} = 1, {Description} = '')").each do |software|
+        result = agent.get("https://iframe.ly/api/iframely?url=#{software['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+        json = JSON.parse(result.body.force_encoding('UTF-8'))
+        software['Description'] = json['meta']['description']
+        software['Images'] = [{ url: json['links']['thumbnail'].first['href'] }] if json['links']['thumbnail'] && !software['Images']
+        software.save
+      end
+      redirect '/software?r=1'
     end
 
     {

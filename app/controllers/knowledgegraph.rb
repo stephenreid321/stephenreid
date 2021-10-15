@@ -7,7 +7,7 @@ StephenReid::App.controller do
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
-    erb :links
+    erb :knowledgegraph
   end
 
   get '/search' do
@@ -30,7 +30,7 @@ StephenReid::App.controller do
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
     end
-    erb :search
+    erb :knowledgegraph
   end
 
   get '/feed', provides: :rss, cache: true do
@@ -139,19 +139,19 @@ StephenReid::App.controller do
         FIND(', #{@source['Name']},', {Terms joined}) > 0,
         FIND(', #{@sink['Name']},', {Terms joined}) > 0
         )", sort: { 'Created at' => 'desc' })
-    erb :search
+    erb :knowledgegraph
   end
 
   get '/terms/:term', cache: true do
     expires 1.hour.to_i
     @posts = Post.all(filter: "FIND(', #{params[:term]},', {Terms joined}) > 0", sort: { 'Created at' => 'desc' })
-    erb :search
+    erb :knowledgegraph
   end
 
   get '/organisations/:organisation', cache: true do
     expires 1.hour.to_i
     @posts = Post.all(filter: "{Organisation} = '#{params[:organisation]}'", sort: { 'Created at' => 'desc' })
-    erb :search
+    erb :knowledgegraph
   end
 
   get '/organisations/:id/tagify' do
