@@ -1,6 +1,6 @@
 ### Soulcraft & Wild Mind
 
-* [Wild Mind Intensive](https://www.soulcraft.eu/events/wild-mind-intensive-2) (Aug 2021)
+* [Wild Mind Intensive](https://www.soulcraft.eu/events/wild-mind-intensive-2) at [Lūžņa](https://www.soulcraft.eu/about), Latvia (Aug 2021)
 
 ### Meditation
 
