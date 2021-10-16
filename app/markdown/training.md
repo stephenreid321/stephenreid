@@ -16,7 +16,7 @@
 ### Plant medicine
 
 *   Noya Rao dieta with [Manuela Mahua](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) near Pucallpa, Peru (Dec 2017)
-*   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/) (Jan 2018)
+*   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 
 ### Conscious sexuality
 
