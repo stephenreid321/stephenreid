@@ -16,6 +16,7 @@
 ### Plant medicine
 
 *   Noya Rao dieta with [Manuela Mahua](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) near Pucallpa, Peru (Dec 2017)
+*   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/) (Jan 2018)
 
 ### Conscious sexuality
 
@@ -31,12 +32,11 @@
 
 ### Other
 
-*   [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
-*   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and Nikki Wyrd at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
-*   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) (Feb 2019)
 *   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
-*   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/) (Jan 2018)
+*   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and Nikki Wyrd at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
+*   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) (Feb 2019)
+*   [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 
 ### Physics
 
