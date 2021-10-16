@@ -21,7 +21,7 @@
 ### Conscious sexuality
 
 *   [ISTA 1](https://ista.life/) with [Elaine Young](https://www.thetantricshaman.com/), [Binoy Milton D'souza](https://lovemovementevolution.com/) & [Frank Mondeose](https://frankmondeose.com/) (Sep 2019)
-*   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/) (Nov 2017)
+*   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
 
 ### Burns
