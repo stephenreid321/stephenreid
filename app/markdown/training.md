@@ -34,7 +34,7 @@
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) (Feb 2019)
 *   [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
-*   *HER men's retreat with Alain Lagger at Brave Earth, Costa Rica (Oct 2021)*
+*   *[HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with Alain Lagger at Brave Earth, Costa Rica (Oct 2021)*
 *   *Permaculture Design Course at the Apricot Centre (Sep 2022 – Feb 2023)*
 
 ### Physics
