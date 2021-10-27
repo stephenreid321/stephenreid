@@ -94,6 +94,14 @@
   <%= md :training %>
 </div>
 
+<h2 class="mt-5 mb-3" id="feedback">Feedback on my courses</h2>
+<iframe style="overflow: scroll; border: 0; height: 100vh; width:100%;" id="dandelion" src="https://dandelion.earth/u/stephenreid321/feedback?minimal=true"></iframe>
+<script>
+$(function() {
+     $('#dandelion').iFrameResize({log: true, checkOrigin: false, heightCalculationMethod : 'taggedElement'})
+})
+</script>
+
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 <ul>
   <% Affiliation.all(filter: "{Current} = ''", sort: { 'Order' => 'asc' }).each { |affiliation| %>

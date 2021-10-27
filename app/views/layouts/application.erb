@@ -37,7 +37,8 @@
          'lightgallery/1.7.2' => 'js/lightgallery.min.js css/lightgallery.min.css',
          'lg-thumbnail/1.2.1' => 'lg-thumbnail.min.js',
          'sticky-table-headers/0.1.24' => 'js/jquery.stickytableheaders.min.js',
-         'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css'
+         'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css',
+         'iframe-resizer/4.2.1' => 'iframeResizer.min.js'
        }.each { |k,v| %>
     <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
     <% case f.split('.').last.to_sym; when :js %>
