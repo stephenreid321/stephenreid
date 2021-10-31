@@ -153,7 +153,7 @@ class Strategy
     assets = {}
     count = Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').count
     Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each_with_index do |strategy, i|
-      puts "#{i}/#{count}"
+      puts "#{i + 1}/#{count}"
       strategy.holdings.each do |holding|
         next unless holding.asset.verified
 
