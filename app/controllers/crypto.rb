@@ -55,6 +55,7 @@ StephenReid::App.controller do
     sign_in_required!
     asset = Asset.find(params[:id])
     asset.update_attribute(:multiplier, params[:multiplier])
+    Strategy.rebalance(skip_update: true)
     200
   end
 end
