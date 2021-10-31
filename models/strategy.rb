@@ -198,10 +198,10 @@ class Strategy
     assets.map { |k, v| [k, v] }
   end
 
-  def self.rebalance(n: 10, skip_update: false)
+  def self.rebalance(n: 10)
     Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
 
-    Strategy.update unless skip_update
+    Strategy.update
     success = nil
     until success
 
