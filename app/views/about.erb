@@ -30,35 +30,6 @@
       </div>
     </div>
   </div>
-  <p class="lead text-center">
-    These are some of the organisations I'm working with at the moment:
-  </p>
-</div>
-
-<div class="row justify-content-center">
-  <div class="col-sm-9">
-    <div class="row align-items-center justify-content-center">
-      <% Affiliation.all(filter: "AND({Current} = 1, {Order} != BLANK())", sort: { 'Order' => 'asc' }).each { |affiliation| %>
-        <div class="gst col-3 col-sm-2 text-center">
-          <a class="text-dark" style="text-decoration: none" target="_blank" title="<%= affiliation.organisation['Name'] %>" href="<%= affiliation.organisation['URL'] %>">
-          <img class="w-100 mb-1" src="<%= affiliation.organisation['Logo'].first['url'] %>">
-          <style>
-          .gst {
-            filter: grayscale(100%);
-            transition: 0.7s;
-          }
-          .gst:hover {
-            filter: grayscale(0%);
-            transition: 0.7s;
-          }
-          </style>
-           <br />
-           <small><%= affiliation.organisation['Name'].split(' ').first %></small>
-          </a>
-        </div>
-      <% } %>
-    </div>
-  </div>
 </div>
 
 <div class="row justify-content-center">

@@ -151,7 +151,9 @@ class Strategy
 
   def self.proposed(n: 10)
     assets = {}
-    Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each do |strategy|
+    count = Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').count
+    Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each_with_index do |strategy, i|
+      puts "#{i}/#{count}"
       strategy.holdings.each do |holding|
         next unless holding.asset.verified
 
