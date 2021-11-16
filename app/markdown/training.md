@@ -28,7 +28,7 @@
 
 ### Other
 
-*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with Alain Lagger at Brave Earth, Costa Rica (Oct 2021)
+*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with Alain Lagger at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and Nikki Wyrd at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
