@@ -12,7 +12,7 @@
 *   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
-*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with Alain Lagger at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
+*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 
 ### Meditation
 
