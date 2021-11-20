@@ -7,11 +7,12 @@
 *   [Guayusa dieta](https://www.sovereignxnature.com/shipibodieta) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
 *   [Noya Rao dieta](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) with Maestra Manuela near Pucallpa, Peru (Dec 2017, 10 days)
 
-### Psychotherapy
+### Psychotherapy & coaching
 
 *   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
+*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with Alain Lagger at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 
 ### Meditation
 
@@ -28,13 +29,12 @@
 
 ### Other
 
-*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with Alain Lagger at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and Nikki Wyrd at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
-*   [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
+*   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 *   *Permaculture Design Course at the Apricot Centre (Sep 2022 – Feb 2023)*
 
 ### Physics
