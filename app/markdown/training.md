@@ -18,7 +18,7 @@
 
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
-*   *[The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at Gaia House with Kirsten Kratz and Laura Bridgman (Dec 2021)*
+*   *[The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021)*
 
 ### Conscious sexuality
 
