@@ -1,6 +1,6 @@
 ### Soulcraft & Wild Mind
 
-* [Wild Mind Intensive](https://www.soulcraft.eu/events/wild-mind-intensive-2) at [Lūžņa](https://www.soulcraft.eu/about), Latvia with [Sage Magdalene](https://sagemagdalene.com/) and [Sara McFarland](https://www.saramcfarland.com/) (Aug 2021)
+* [Wild Mind](https://www.goodreads.com/en/book/show/16000440) Intensive at [Lūžņa](https://www.soulcraft.eu/about), Latvia with [Sage Magdalene](https://sagemagdalene.com/) and [Sara McFarland](https://www.saramcfarland.com/) (Aug 2021)
 
 ### Shipibo plant dietas
 
