@@ -98,7 +98,7 @@
         </span>
         <br>
         <small>
-          <%= index %>/<%= strategies.count %>
+          Top <%= number_to_percentage 100*index/strategies.count, precision: 0 %>
         </small>
       <% end %>
     </td>
