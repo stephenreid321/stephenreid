@@ -11,15 +11,14 @@
 
 *   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
-*   *Diploma in Transformational Coaching, [Animas Coaching](https://www.animascoaching.com/) (Feb – May 2022)*
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 
 ### Meditation
 
+*   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021)
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
-*   *[The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021)*
 
 ### Conscious sexuality
 
@@ -36,7 +35,7 @@
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
-*   *Permaculture Design Course at the Apricot Centre (Sep 2022 – Feb 2023)*
+*   *[Permaculture Design Course](https://www.apricotcentre.co.uk/courses-2021-1/permaculture-design-course-with-marina-oconnell-bob-mehew-xtx9s) at the [Apricot Centre](https://www.apricotcentre.co.uk/) (Sep 2022 – Feb 2023)*
 
 ### Physics
 
