@@ -35,7 +35,7 @@ class Tag
     all.sum { |tag| tag.holding }
   end
 
-  %w[1h 24h 7d].each do |p|
+  %w[1h 24h 7d 14d 30d 200d 1y].each do |p|
     define_method :"price_change_percentage_#{p}_in_currency" do
       a = coins.map(&:"price_change_percentage_#{p}_in_currency").compact
       if (n = a.count) > 0

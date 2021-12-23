@@ -29,7 +29,7 @@
           var t = parseFloat($('#tags td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
 
           <% if current_account && current_account.id == @account.id %>
-            
+
             var eth = parseFloat(t).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
             var usd = parseFloat(eth / <%= Coin.find_by(slug: 'usd-coin').price %>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
             $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
@@ -74,6 +74,10 @@
       <th>24h</th>
       <th>7d</th>
       <th>1h</th>
+      <th>14d</th>
+      <th>30d</th>
+      <th>200d</th>
+      <th>1y</th>
       <th>Market cap 24h</th>
     </tr>
   </thead>

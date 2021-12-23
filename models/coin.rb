@@ -18,6 +18,10 @@ class Coin
   field :price_change_percentage_1h_in_currency, type: Float
   field :price_change_percentage_24h_in_currency, type: Float
   field :price_change_percentage_7d_in_currency, type: Float
+  field :price_change_percentage_14d_in_currency, type: Float
+  field :price_change_percentage_30d_in_currency, type: Float
+  field :price_change_percentage_200d_in_currency, type: Float
+  field :price_change_percentage_1y_in_currency, type: Float
   field :ath_change_percentage, type: Float
   field :website, type: String
   field :twitter_username, type: String
@@ -45,6 +49,10 @@ class Coin
       price_change_percentage_1h_in_currency: :number,
       price_change_percentage_24h_in_currency: :number,
       price_change_percentage_7d_in_currency: :number,
+      price_change_percentage_14d_in_currency: :number,
+      price_change_percentage_30d_in_currency: :number,
+      price_change_percentage_200d_in_currency: :number,
+      price_change_percentage_1y_in_currency: :number,
       ath_change_percentage: :number,
       market_cap_change_percentage_24h: :number,
       website: :url,
@@ -79,7 +87,7 @@ class Coin
   def self.import
     agent = Mechanize.new
     i = 1
-    until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=eth&per_page=250&price_change_percentage=1h,24h,7d&page=#{i}").body)).empty?
+    until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=eth&per_page=250&price_change_percentage=1h,24h,7d,14d,30d,200d,1y&page=#{i}").body)).empty?
       i += 1
       coins.each do |c|
         puts c['symbol'].upcase
@@ -87,7 +95,7 @@ class Coin
         coin = Coin.find_or_create_by!(slug: c['id'])
         next if coin.skip_remote_update
 
-        %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
+        %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency price_change_percentage_14d_in_currency price_change_percentage_30d_in_currency price_change_percentage_200d_in_currency price_change_percentage_1y_in_currency].each do |r|
           coin.send("#{r}=", c[r])
         end
         coin.save
@@ -137,7 +145,7 @@ class Coin
       end
       return
     end
-    %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
+    %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency price_change_percentage_14d_in_currency price_change_percentage_30d_in_currency price_change_percentage_200d_in_currency price_change_percentage_1y_in_currency].each do |r|
       send("#{r}=", c['market_data'][r]['eth'])
     end
     self.ath_change_percentage = c['market_data']['ath_change_percentage']['usd']

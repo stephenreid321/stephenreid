@@ -13,6 +13,26 @@
     <%= number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2 %>%
   <% end %>
 </td>
+<td class="rg" style="opacity: 0.5">
+  <% if !coin.fixed_price && coin.price_change_percentage_14d_in_currency %>
+    <%= number_with_precision coin.price_change_percentage_14d_in_currency, precision: 2 %>%
+  <% end %>
+</td>
+<td class="rg" style="opacity: 0.5">
+  <% if !coin.fixed_price && coin.price_change_percentage_30d_in_currency %>
+    <%= number_with_precision coin.price_change_percentage_30d_in_currency, precision: 2 %>%
+  <% end %>
+</td>
+<td class="rg" style="opacity: 0.5">
+  <% if !coin.fixed_price && coin.price_change_percentage_200d_in_currency %>
+    <%= number_with_precision coin.price_change_percentage_200d_in_currency, precision: 2 %>%
+  <% end %>
+</td>
+<td class="rg" style="opacity: 0.5">
+  <% if !coin.fixed_price && coin.price_change_percentage_1y_in_currency %>
+    <%= number_with_precision coin.price_change_percentage_1y_in_currency, precision: 2 %>%
+  <% end %>
+</td>
 <td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
   <% if !coin.fixed_price && coin.market_cap_change_percentage_24h %>
     <%= number_with_precision coin.market_cap_change_percentage_24h, precision: 2 %>%

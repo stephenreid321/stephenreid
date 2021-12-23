@@ -7,7 +7,7 @@
     <div class="p"></div>
   </a>
 </td>
-<% %w[24h 7d 1h].each { |p| %>
+<% %w[24h 7d 1h 14d 30d 200d 1y].each { |p| %>
 <td class="rg" <% unless p == '24h' %> style="opacity: 0.5" <% end %>>
   <% if tag.send(:"price_change_percentage_#{p}_in_currency") %>
     <%= number_to_percentage tag.send(:"price_change_percentage_#{p}_in_currency"), precision: 2 %>

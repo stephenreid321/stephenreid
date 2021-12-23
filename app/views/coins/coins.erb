@@ -62,6 +62,34 @@
       :total_volume.gte => ENV['MIN_VOLUME']
     ).order('price_change_percentage_7d_in_currency desc').limit(20) } %>
 
+<% when '14d' %>
+
+  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+        :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+        :total_volume.gte => ENV['MIN_VOLUME']
+      ).order('price_change_percentage_14d_in_currency desc').limit(20) } %>
+
+<% when '30d' %>
+
+  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+        :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+        :total_volume.gte => ENV['MIN_VOLUME']
+      ).order('price_change_percentage_30d_in_currency desc').limit(20) } %>
+
+<% when '200d' %>
+
+  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+        :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+        :total_volume.gte => ENV['MIN_VOLUME']
+      ).order('price_change_percentage_200d_in_currency desc').limit(20) } %>
+
+<% when '1y' %>
+
+  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+        :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+        :total_volume.gte => ENV['MIN_VOLUME']
+      ).order('price_change_percentage_1y_in_currency desc').limit(20) } %>
+
 <% when 'market-cap-24h' %>
 
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
