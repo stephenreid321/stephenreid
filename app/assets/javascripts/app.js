@@ -47,7 +47,9 @@ $(function() {
 
   function ajaxCompleted() {
 
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip({
+      html: true
+    })
 
     $('.rg').each(function() {
       var d = parseFloat($(this).text())
@@ -63,7 +65,7 @@ $(function() {
       scale = chroma.scale(['white', '#00B963']);
       $(this).closest('td').css('background-color', scale(d / 100).hex())
     })
-
+    
   }
   $(document).ajaxComplete(function() {
     ajaxCompleted()
