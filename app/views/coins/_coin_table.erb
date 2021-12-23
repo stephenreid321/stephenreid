@@ -1,0 +1,170 @@
+<% if ['24h', '7d', 'market-cap-24h'].include?(params[:tag]) %>
+  <p class="text-center mt-3">
+    Showing coins with a market cap rank <= <%= ENV['MAX_MARKET_CAP_RANK'] %> and volume>= Ξ<%= ENV['MIN_VOLUME'] %>
+    </p>
+  <% end %>
+
+  <% if params[:tag] == 'defi-pulse' %>
+    <%= partial :'coins/defi_pulse' %>
+  <% end %>
+
+  <% if current_account && current_account.id == @account.id %>
+
+    <h1 id="total" class="mt-3 text-center">
+      Ξ~
+      <br>
+      <small style="opacity: 0.25">$~</small>
+    </h1>
+
+    <% unless @virtual_tags.include?(params[:tag]) %>
+      <div class="row justify-content-center mt-3">
+        <div class="col-auto">
+          <% form_tag "/coins/tag/#{params[:tag]}", class: 'form-inline' do %>
+            <div class="input-group">
+              <%= text_field_tag :symbol, class: 'form-control' %>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Add</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if coins.count > 0 %>
+      <div id="symbols" class="text-center mt-3">$~</div>
+    <% end %>
+
+  <% end %>
+
+  <script>
+    $(function () {
+      function coinTable() {
+        if (!$('#coins').hasClass('datatabled')) {
+
+        <% if %w[starred wallets elsewhere].include? params[:tag] %>
+          var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='holding']")[0])
+          var direction = 'desc'
+        <% elsif params[:tag] && params[:tag].starts_with?('top-100') %>
+          var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='market-cap-rank']")[0])
+          var direction = 'asc'
+        <% elsif params[:tag] %>
+           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%= params[:tag] %>']")[0])
+           var direction = 'desc'
+           if (colIndex == -1)
+            colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
+        <% else %>
+            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
+            var direction = 'desc'
+        <% end %>
+
+          var dt = $('#coins').dataTable({
+            bInfo: false,
+            paging: false,
+            searching: false,
+            order: [[colIndex, direction]]
+            }).addClass('datatabled').on('draw.dt', function () {
+              var i = 0;
+              $("#coins td:first-child").each(function () {
+                $(this).html(++i);
+              })
+            } ).trigger('draw.dt');
+
+          }
+
+          var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+
+          <% if current_account && current_account.id == @account.id %>
+
+            var eth = parseFloat(t).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
+            var usd = parseFloat(eth / <%= Coin.find_by(slug: 'usd-coin').price %>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+            $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
+
+            $('#coins').on('order.dt', function () {
+              $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
+            }).trigger('order.dt')
+
+          <% end %>
+
+            var max;
+            $('#coins td.holding').each(function() {
+              if (!max)
+                max = parseFloat($(this).attr('data-sort'))
+              else if (parseFloat($(this).attr('data-sort')) > max)
+                max = parseFloat($(this).attr('data-sort'))
+            })
+
+            $('#coins td.holding').each(function() {
+                var v = parseFloat($(this).attr('data-sort'))
+                if (v) {
+                  var text = parseFloat(100*v/t).toFixed(1)+'%'
+                  $(this).find('.p').html('\
+                  <div class="p back" style="width: 150px"> \
+                    <span>'+text+'</span> \
+                    <div class="p boundbox"> \
+                      <div class="p front">'+text+'</div> \
+                    </div>')
+                    var w = $(this).find('.back').width()
+                    $(this).find('.boundbox').css('width', v/max * w)
+                    $(this).find('.front').css('width', w)
+                  }
+            })
+          }
+          coinTable()
+          $(document).ajaxStop(function() { coinTable() })
+    })
+  </script>
+  <style>
+    #coins, #coins .input-group-text, #coins input { font-size: 0.85rem; }
+      #coins th { border-top: 0; }
+  </style>
+  <table class="table" style="border-collapse: collapse !important" id="coins">
+    <thead>
+      <tr>
+        <th></th>
+        <th data-col-name="market-cap-rank">
+          <span data-toggle="tooltip" title="Market cap rank">
+            MCR
+          </span>
+        </th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+        <th>Conviction-weighted price prediction</th>
+        <th data-col-name="holding" style="white-space: nowrap">Relative holding</th>
+        <th data-col-name="24h">24h</th>
+        <th data-col-name="7d">7d</th>
+        <th data-col-name="1h">1h</th>
+        <th data-col-name="market-cap-24h">Market cap 24h</th>
+        <th data-col-name="ath-change-percentage">ATH</th>
+        <th data-col-name="exchanges">Exchanges</th>
+        <th data-col-name="twitter-followers">Unit bias</th>
+        <th data-col-name="twitter-followers">Twitter followers</th>
+        <th>Volume/cap</th>
+        <th>Holding/cap</th>
+        <% if current_account && current_account.id == @account.id %>
+          <th></th>
+        <% end %>
+      </tr>
+    </thead>
+    <% coins.each { |coin| %>
+    <tr data-pagelet-url="/u/<%= @account.username %>/coins/<%= coin.slug %>?tag=<%= params[:tag] %>">
+      <%= partial :'coins/coin', locals: { coin: coin } %>
+    </tr>
+    <% } %>
+  </table>
+
+  <% unless @virtual_tags.include?(params[:tag]) %>
+    <div>
+      <small>
+        <a data-confirm="Are you sure?" class="text-dark" href="/coins/delete_tag/<%= params[:tag] %>">Delete tag</a>
+        &middot;
+        <a class="text-dark" href="javascript:;" onclick="
+        var tagName = prompt('New tag name');
+        if (tagName)
+          window.location = '/coins/rename_tag/<%= params[:tag] %>/' + tagName
+        ">Rename tag</a>
+      </small>
+    </div>
+  <% end %>

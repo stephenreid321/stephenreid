@@ -31,7 +31,7 @@ StephenReid::App.helpers do
     halt(403) unless current_account
   end
 
-  def tag_badge(tag, html_tag: 'a')
+  def tag_badge(tag, account: tag.try(:account), html_tag: 'a')
     if tag
       if tag.is_a?(Tag)
         name = tag.name
@@ -44,7 +44,7 @@ StephenReid::App.helpers do
         c = 'text-dark'
         s = 'font-weight: 500'
       end
-      %(<#{html_tag} href="/coins/tag/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white; #{s}">#{name}</#{html_tag}>)
+      %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white; #{s}">#{name}</#{html_tag}>)
     end
   end
 end

@@ -3,10 +3,12 @@ class Account
   include Mongoid::Timestamps
 
   field :name, type: String
+  field :username, type: String
   field :email, type: String
   field :admin, type: Boolean
   field :time_zone, type: String
   field :crypted_password, type: String
+  field :eth_address_hashes, type: Array
 
   has_many :coinships, dependent: :destroy
   has_many :tags, dependent: :destroy
@@ -28,6 +30,7 @@ class Account
   def self.admin_fields
     {
       name: :text,
+      username: :text,
       email: :text,
       admin: :check_box,
       time_zone: :select,

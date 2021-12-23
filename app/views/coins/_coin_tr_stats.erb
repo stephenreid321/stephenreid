@@ -1,0 +1,54 @@
+<td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %>>
+  <% if !coin.fixed_price && coin.price_change_percentage_24h_in_currency %>
+    <%= number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2 %>
+  <% end %>
+</td>
+<td class="rg" <% unless params[:tag] == '7d' %> style="opacity: 0.5" <% end %>>
+  <% if !coin.fixed_price && coin.price_change_percentage_7d_in_currency %>
+    <%= number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2 %>
+  <% end %>
+</td>
+<td class="rg" style="opacity: 0.5">
+  <% if !coin.fixed_price && coin.price_change_percentage_1h_in_currency %>
+    <%= number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2 %>%
+  <% end %>
+</td>
+<td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
+  <% if !coin.fixed_price && coin.market_cap_change_percentage_24h %>
+    <%= number_with_precision coin.market_cap_change_percentage_24h, precision: 2 %>%
+  <% end %>
+</td>
+<td data-sort="<%= coin.ath_change_percentage || 0 %>">
+  <% if !coin.fixed_price && coin.ath_change_percentage %>
+    <%= number_with_precision coin.ath_change_percentage, precision: 2 %>%
+  <% end %>
+</td>
+<td nowrap>
+  <% if coin.exchanges %>
+    <% {binance: '#F0B909', coinbase: '#3052FF', ftx: '#32A2C7', kraken: '#5842D8', 'crypto.com': '#399DFF', kucoin: '#2EAE8F', coinlist: '#F33596'}.each { |exchange,color| if coin.exchanges.any? { |x| x =~ /#{exchange}/i } %>
+      <span class="badge badge-primary" style="background-color: <%=color%>"><%= exchange %></span>
+    <% end } %>
+  <% end %>
+</td>
+<td>
+  <% if coin.usd_price && coin.usd_price < 1 %>
+   $<%= Float("%.#{3}g" % coin.usd_price) %>
+ <% end %>
+</td>
+<td>
+  <% if coin.twitter_followers %>
+    <a target="_blank" class="text-dark" href="https://twitter.com/<%= coin.twitter_username %>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
+  <% end %>
+</td>
+<td>
+  <% if coin.market_cap && coin.market_cap > 0 %>
+    <%= number_to_percentage 100 * (coin.total_volume.to_f / coin.market_cap), precision: 0 %>
+  <% end %>
+</td>
+<% if coinship && coinship.holding && coinship.holding > 1e-3 && coin.market_cap && coin.market_cap > 0 %>
+  <td data-sort="<%= format('%.18f', coinship.holding.to_f / coin.market_cap) %>">
+    <%= BigDecimal((coinship.holding.to_f * 100) / coin.market_cap, 2).to_f %>%
+  </td>
+<% else %>
+  <td></td>
+<% end %>
