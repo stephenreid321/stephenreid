@@ -26,9 +26,4 @@ class Asset
   def self.unverified
     where(:verified.ne => true)
   end
-
-  def self.coingecko(coingecko_id)
-    agent = Mechanize.new
-    JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{coingecko_id.downcase}").body)
-  end
 end
