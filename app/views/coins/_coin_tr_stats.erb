@@ -1,4 +1,4 @@
-<td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %>>
+<td class="rg" <% if %w[7d 1h 14d 30d 200d 1y].include?(params[:tag]) %> style="opacity: 0.5" <% end %>>
   <% if !coin.fixed_price && coin.price_change_percentage_24h_in_currency %>
     <%= number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2 %>
   <% end %>
@@ -8,27 +8,27 @@
     <%= number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2 %>
   <% end %>
 </td>
-<td class="rg" style="opacity: 0.5">
+<td class="rg" <% unless params[:tag] == '1h' %> style="opacity: 0.5" <% end %>>
   <% if !coin.fixed_price && coin.price_change_percentage_1h_in_currency %>
     <%= number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2 %>%
   <% end %>
 </td>
-<td class="rg" style="opacity: 0.5">
+<td class="rg" <% unless params[:tag] == '14d' %> style="opacity: 0.5" <% end %>>
   <% if !coin.fixed_price && coin.price_change_percentage_14d_in_currency %>
     <%= number_with_precision coin.price_change_percentage_14d_in_currency, precision: 2 %>%
   <% end %>
 </td>
-<td class="rg" style="opacity: 0.5">
+<td class="rg" <% unless params[:tag] == '30d' %> style="opacity: 0.5" <% end %>>
   <% if !coin.fixed_price && coin.price_change_percentage_30d_in_currency %>
     <%= number_with_precision coin.price_change_percentage_30d_in_currency, precision: 2 %>%
   <% end %>
 </td>
-<td class="rg" style="opacity: 0.5">
+<td class="rg" <% unless params[:tag] == '200d' %> style="opacity: 0.5" <% end %>>
   <% if !coin.fixed_price && coin.price_change_percentage_200d_in_currency %>
     <%= number_with_precision coin.price_change_percentage_200d_in_currency, precision: 2 %>%
   <% end %>
 </td>
-<td class="rg" style="opacity: 0.5">
+<td class="rg" <% unless params[:tag] == '1y' %> style="opacity: 0.5" <% end %>>
   <% if !coin.fixed_price && coin.price_change_percentage_1y_in_currency %>
     <%= number_with_precision coin.price_change_percentage_1y_in_currency, precision: 2 %>%
   <% end %>
