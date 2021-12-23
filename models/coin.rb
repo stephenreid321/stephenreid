@@ -88,7 +88,7 @@ class Coin
     Coin.all.set(market_cap_rank: nil)
     agent = Mechanize.new
     i = 1
-    until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=eth&order=market_cap_desc&per_page=250&price_change_percentage=1h,24h,7d,14d,30d,200d,1y&page=#{i}").body)).empty? || i > 8
+    until (coins = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=eth&order=market_cap_desc&per_page=250&price_change_percentage=1h,24h,7d,14d,30d,200d,1y&page=#{i}").body)).empty? || i > (ENV['MAX_MARKET_CAP_RANK'].to_i/250)
       i += 1
       coins.each do |c|
         puts "##{c['market_cap_rank']} #{c['symbol'].upcase}"
