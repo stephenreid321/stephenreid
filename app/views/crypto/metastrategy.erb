@@ -41,7 +41,7 @@
 
 <% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
-<% strategies = Strategy.where(:excluded.ne => true) %>
+<% strategies = Strategy.and(:excluded.ne => true) %>
 
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
