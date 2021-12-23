@@ -1,7 +1,8 @@
 StephenReid::App.controller do
   before do
     halt 200 unless current_account
-    @virtual_tags = %w[starred tagged wallets elsewhere uniswap sushiswap defi-pulse 24h 7d market-cap-24h top-100 top-100-less-tagged starred-less-tagged holding-less-starred starred-less-holding]
+    @virtual_tags = %w[starred tagged wallets elsewhere 24h 7d market-cap-24h top-100 top-100-less-tagged starred-less-tagged holding-less-starred starred-less-holding]
+    @container_class = 'container-fluid'
   end
 
   get '/u/:username' do
@@ -21,40 +22,6 @@ StephenReid::App.controller do
   get '/u/:username/tags/:tag' do
     @title = params[:tag]
     @account = Account.find_by(username: params[:username]) || not_found
-    if params[:tag] == 'uniswap'
-      agent = Mechanize.new
-      @uniswap = []
-      Coin.and(:uniswap_volume.ne => nil).set(uniswap_volume: nil)
-      JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/uniswap').body)['tickers'].each do |ticker|
-        if coin = Coin.find_by(slug: ticker['coin_id'])
-          coin.update_attribute(:uniswap_volume, ticker['converted_volume']['eth'])
-        end
-        @uniswap << ticker['coin_id']
-      end
-    elsif params[:tag] == 'sushiswap'
-      agent = Mechanize.new
-      @sushiswap = []
-      Coin.and(:sushiswap_volume.ne => nil).set(sushiswap_volume: nil)
-      JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/sushiswap').body)['tickers'].each do |ticker|
-        if coin = Coin.find_by(slug: ticker['coin_id'])
-          coin.update_attribute(:sushiswap_volume, ticker['converted_volume']['eth'])
-        end
-        @sushiswap << ticker['coin_id']
-      end
-    elsif params[:tag] == 'defi-pulse'
-      agent = Mechanize.new
-      @defi_pulse = []
-      Coin.and(:tvl.ne => nil).set(tvl: nil)
-      JSON.parse(agent.get('https://defipulse.com/').search('#__NEXT_DATA__').inner_html)['props']['initialState']['coin']['projects'].each do |project|
-        if coin = Coin.find_by(defi_pulse_name: project['name'])
-          coin.update_attribute(:tvl, project['value']['tvl']['ETH']['value'])
-          @defi_pulse << coin.slug
-        end
-      end
-    end
-    @uniswap_slugs = Coin.and(:uniswap_volume.ne => nil).order('uniswap_volume desc').pluck(:slug)
-    @sushiswap_slugs = Coin.and(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug)
-    @tvl_slugs = Coin.and(:tvl.ne => nil).order('tvl desc').pluck(:slug)
     erb :'coins/coins'
   end
 

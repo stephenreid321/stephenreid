@@ -48,24 +48,6 @@
       ).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
 
-<% when 'uniswap' %>
-
-<%= partial :'coins/coin_table', locals: { coins: Coin.and(
-      :slug.in => @uniswap
-    ).order('uniswap_volume desc').limit(20) } %>
-
-<% when 'sushiswap' %>
-
-<%= partial :'coins/coin_table', locals: { coins: Coin.and(
-      :slug.in => @sushiswap
-    ).order('sushiswap_volume desc').limit(20) } %>
-
-<% when 'defi-pulse' %>
-
-<%= partial :'coins/coin_table', locals: { coins: Coin.and(
-      :slug.in => @defi_pulse
-    ).order('tvl desc').limit(20) } %>
-
 <% when '24h' %>
 
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(

@@ -4,10 +4,6 @@
     </p>
   <% end %>
 
-  <% if params[:tag] == 'defi-pulse' %>
-    <%= partial :'coins/defi_pulse' %>
-  <% end %>
-
   <% if current_account && current_account.id == @account.id %>
 
     <h1 id="total" class="mt-3 text-center">
