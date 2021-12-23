@@ -5,6 +5,10 @@ StephenReid::App.controller do
     @container_class = 'container-fluid'
   end
 
+  get '/coins' do
+    redirect '/u/stephenreid321'
+  end
+
   get '/u/:username' do
     redirect "/u/#{params[:username]}/tags/starred"
   end

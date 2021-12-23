@@ -3,10 +3,6 @@ StephenReid::App.controller do
     @favicon = 'moon.png'
   end
 
-  get '/coins' do
-    redirect 'https://autopia.co/u/stephenreid321'
-  end
-
   get '/crypto-investing' do
     @title = 'Crypto investing: a very short introduction'
     @og_desc = 'This is not financial advice'
