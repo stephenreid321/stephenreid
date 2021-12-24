@@ -7,7 +7,18 @@
     <% end %>
   </a>
   <% form_tag "/assets/#{asset.id}/multiplier", style: 'display: none', class: 'form-inline' do %>
-    <%= number_field_tag :multiplier, value: (asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier), class: 'form-control', style: 'width: 5em', onblur: '$(this.form).submit()', step: :any %>
+    <script>
+    $(function() {
+      $("#asset-multiplier-<%=asset.id%>").bind('blur keydown',function(e) {
+        if (e.type === 'blur' || e.keyCode === 13) {
+          event.preventDefault();
+          $(this.form).submit()
+          event.stopPropagation();
+        }
+      });
+    })
+    </script>
+    <%= number_field_tag :multiplier, id: "asset-multiplier-#{asset.id}", value: (asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier), class: 'form-control', style: 'width: 5em', step: :any %>
   <% end %>
 <% else %>
   <% if asset.multiplier %>
