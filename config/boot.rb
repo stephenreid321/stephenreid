@@ -10,6 +10,8 @@ require 'active_support/all'
 require 'telegram/bot'
 Bundler.require(:default, RACK_ENV)
 
+String.send(:define_method, :html_safe?) { true }
+
 Padrino.load!
 
 Mongoid.load!("#{PADRINO_ROOT}/config/mongoid.yml")
