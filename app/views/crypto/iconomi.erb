@@ -128,7 +128,7 @@
   <% strategies.each_with_index { |strategy, i| %>
     <% if i != strategies.length-1 && settings.cache["/iconomi/#{strategy.id}"] %>
       <tr>
-      <% cache("/iconomi/#{strategy.id}", expires: 1.hour.to_i) do
+      <% cache("/iconomi/#{strategy.id}", expires: 3.hours.to_i) do
            partial :'crypto/row', locals: { strategy: strategy }
          end %>
     </tr>

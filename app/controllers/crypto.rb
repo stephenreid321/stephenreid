@@ -16,7 +16,7 @@ StephenReid::App.controller do
   end
 
   get '/iconomi/:id' do
-    cache("/iconomi/#{params[:id]}", expires: 1.hour.to_i) do
+    cache("/iconomi/#{params[:id]}", expires: 3.hours.to_i) do
       partial :'crypto/row', locals: { strategy: Strategy.find(params[:id]) }
     end
   end
