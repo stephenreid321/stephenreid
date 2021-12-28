@@ -9,7 +9,11 @@
       </a>
     </h5>
     <% if json['meta']['description'] %>
-      <p class="mb-1 card-text"><%= json['meta']['description'].truncate(150) %></p>
+      <p class="mb-1 card-text">
+        <small>
+          <%= json['meta']['description'].truncate(150) %>
+        </small>
+      </p>
     <% end %>
     <p>
       <% post['Terms joined'].split(', ').each { |term| %>
