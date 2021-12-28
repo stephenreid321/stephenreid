@@ -4,7 +4,7 @@
 <h2 class="mt-5"><%= type.blank? ? 'Everything else' : type %></h2>
 <div class="row">
   <% softwares.each { |software| %>
-  <div class="col-sm-4 mb-3">
+  <div class="col-sm-3 mb-3">
     <%= partial :software, locals: { software: software } %>
   </div>
   <% } %>
