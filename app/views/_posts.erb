@@ -3,17 +3,6 @@
     <em>No results</em>
   </div>
 <% else %>
-  <script>
-    $(function() {
-      var timer
-      $('.card.post').hover(function() {
-        clearTimeout(timer)
-        $('.card-text small', this).removeClass('text-muted')
-      }, function() {
-        $('.card-text small', this).addClass('text-muted')
-      })
-    })
-  </script>
   <% @posts.each { |post|
     json = JSON.parse(post['Iframely'])
     next unless json['links'] %>

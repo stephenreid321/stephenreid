@@ -10,9 +10,11 @@
     </h5>
     <% if json['meta']['description'] %>
       <p class="mb-1 card-text">
-        <small class="text-muted">
-          <%= json['meta']['description'].truncate(150) %>
-        </small>
+        <a href="<%= post['Link'] %>" target="_blank" class="text-dark" style="text-decoration: none">
+          <small class="text-muted">
+            <%= json['meta']['description'].truncate(150) %>
+          </small>
+        </a>
       </p>
     <% end %>
     <p>

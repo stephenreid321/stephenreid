@@ -1,5 +1,12 @@
 $(function() {
 
+  $('.card.post').hover(function() {
+    clearTimeout(timer)
+    $('.card-text small', this).removeClass('text-muted')
+  }, function() {
+    $('.card-text small', this).addClass('text-muted')
+  })
+
   $("#lightgallery").lightGallery({
     showAfterLoad: false,
     thumbnail: true,
@@ -65,7 +72,7 @@ $(function() {
       scale = chroma.scale(['white', '#00B963']);
       $(this).closest('td').css('background-color', scale(d / 100).hex())
     })
-    
+
   }
   $(document).ajaxComplete(function() {
     ajaxCompleted()
