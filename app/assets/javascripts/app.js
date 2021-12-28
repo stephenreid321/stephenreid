@@ -1,7 +1,6 @@
 $(function() {
 
   $('.card.post').hover(function() {
-    clearTimeout(timer)
     $('.card-text small', this).removeClass('text-muted')
   }, function() {
     $('.card-text small', this).addClass('text-muted')
