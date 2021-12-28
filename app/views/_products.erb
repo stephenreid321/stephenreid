@@ -1,6 +1,6 @@
 <div class="row">
   <% products.each { |product| %>
-  <div class="col-12 <% unless product['Featured'] %> col-sm-4 <% end %> text-center mb-5">
+  <div class="col-12 <% unless product['Featured'] %> col-sm-3 <% end %> text-center mb-5">
     <a title="<%= product['Name'] %>"
       <% if product['Notes'] %>
            href="javascript:;" data-toggle="modal" data-target="#product-<%= product['Name'].parameterize %>"
