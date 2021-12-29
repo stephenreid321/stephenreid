@@ -9,7 +9,11 @@
       </a>
     </h5>
     <% if software['Description'] %>
-      <p class="mb-1 card-text"><%= software['Description'].truncate(150) %></p>
+      <p class="mb-1 card-text text-muted">
+        <small>
+        <%= software['Description'].truncate(150) %>
+        </small>
+    </p>
     <% end %>
   </div>
 </div>
