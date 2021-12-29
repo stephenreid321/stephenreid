@@ -1,4 +1,4 @@
-<div class="card shadow-sm">
+<div class="card software shadow-sm">
   <a href="<%= software['URL'] %>">
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= software['Images'].first['url'] if software['Images'] %>">
   </a>
@@ -10,9 +10,11 @@
     </h5>
     <% if software['Description'] %>
       <p class="mb-1 card-text text-muted">
-        <small>
-        <%= software['Description'].truncate(150) %>
-        </small>
+        <a href="<%= software['URL'] %>" target="_blank" class="text-dark" style="text-decoration: none">
+          <small class="text-muted">
+            <%= software['Description'].truncate(150) %>
+          </small>
+        </a>
     </p>
     <% end %>
   </div>
