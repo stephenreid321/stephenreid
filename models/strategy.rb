@@ -89,6 +89,8 @@ class Strategy
 
   def self.nscore_index(strategies: Strategy.active_mature)
     %w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].each do |x|
+      Strategy.all.set("nscore_#{x}": nil)
+      Strategy.all.set("index_#{x}": nil)
       puts x
       tickers = strategies.order("#{x} desc").pluck(:ticker)
       min = strategies.pluck(x).compact.min
