@@ -71,39 +71,28 @@
 
     if (!$('#iconomi').hasClass('datatabled')) {
 
-      var i = 1;
-      $('#iconomi td:first-child').each(function () {
-        $(this).html('#'+i);
-        $(this).attr('data-sort', i);
-        i++;
-      })
-
       $('#iconomi').dataTable({
         info: false,
         paging: false,
         searching: false,
         order: [
-          [0, "asc"]
+          [2, "desc"]
         ]
-      }).addClass('datatabled')
+      }).addClass('datatabled').on('draw.dt', function () {
+        var i = 0;
+        $("#iconomi td:first-child").each(function () {
+          $(this).html(++i);
+        })
+      } ).trigger('draw.dt');
 
     }
   }
 
   $(function () {
-      var timeout = setTimeout(function(){ location.reload(); }, 10000);
-      $(document).ajaxStop(function() {
-        clearTimeout(timeout);
-        coinTable()
-        proposedPosition()
-        $('#iconomi-loading').css('visibility', 'hidden')
-      })
+    coinTable()
+    proposedPosition()
   })
 </script>
-
-<div id="iconomi-loading" class="text-center mb-3">
-  <i style="font-size: 24px" class="fas fa-spin fa-circle-notch"></i>
-</div>
 
 <table id="iconomi" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
   <thead>
@@ -126,16 +115,60 @@
     </tr>
   </thead>
   <% strategies.each_with_index { |strategy, i| %>
-    <% if i != strategies.length-1 && settings.cache["/iconomi/#{strategy.id}"] %>
-      <tr>
-      <% cache("/iconomi/#{strategy.id}", expires: 3.hours.to_i) do
-           partial :'crypto/row', locals: { strategy: strategy }
-         end %>
+    <tr>
+      <td style="opacity: 0.5">
+      </td>
+      <td>
+        <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>"><%= strategy.name %></a>
+      </td>
+      <td data-sort="<%= strategy.score_fee_weighted %>">
+        <span class="score">
+          <%= number_with_precision strategy.nscore_score_fee_weighted, precision: 1 %>
+        </span>
+        <br>
+        <small>
+          <%= strategy.index_score_fee_weighted %>/<%= Strategy.active_mature.count %>
+        </small>
+      </td>
+      <td data-sort="<%= strategy.score %>">
+        <span class="score">
+          <%= number_with_precision strategy.nscore_score, precision: 1 %>
+        </span>
+        <br>
+        <small>
+          <%= strategy.index_score %>/<%= Strategy.active_mature.count %>
+        </small>
+      </td>
+      <td>
+      </td>
+      <td>
+      </td>
+      <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each { |x| %>
+      <td <% if x == 'lastRebalanced' %> data-sort="<%= strategy[x].to_i %>" <% end %>>
+        <% if x == 'lastRebalanced' %>
+          <%= time_ago_in_words strategy[x] %> ago
+        <% else %>
+          <%= strategy[x] %>
+        <% end %>
+      </td>
+      <% } %>
+      <% %w[day week month three_month six_month year].each { |t| %>
+      <% if strategy.send("r#{t}") %>
+        <td data-sort="<%= strategy.send("r#{t}") %>">
+          <span class="score">
+            <%= number_with_precision strategy.send("nscore_r#{t}"), precision: 1 %>
+          </span>
+          <br>
+          <small>
+            <%= strategy.send("index_r#{t}") %>/<%= Strategy.active_mature.count %>
+          </small>
+        </td>
+      <% else %>
+        <td data-sort="0"></td>
+      <% end %>
+      <% } %>
     </tr>
-    <% else %>
-    <tr data-pagelet-url="/iconomi/<%= strategy.id %>"></tr>
-    <% end %>
-    <% } %>
+  <% } %>
 </table>
 
 <%= partial :course %>

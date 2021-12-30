@@ -13,7 +13,8 @@ class Coin
   field :fixed_price, type: Float
   field :market_cap, type: Float
   field :market_cap_change_percentage_24h, type: Float
-  field :market_cap_rank, type: Integer; index({ market_cap_rank: 1 })
+  field :market_cap_rank, type: Integer
+  index({ market_cap_rank: 1 })
   field :total_volume, type: Float
   field :price_change_percentage_1h_in_currency, type: Float
   field :price_change_percentage_24h_in_currency, type: Float
@@ -74,14 +75,6 @@ class Coin
 
   def erc20?
     platform == 'ethereum'
-  end
-
-  def score_index(x, coins)
-    index = coins.order("#{x} desc").pluck(:symbol).index(symbol) + 1
-    min = coins.pluck(x).compact.min
-    max = coins.pluck(x).compact.max
-    score = 100 * ((send(x) - min) / (max - min))
-    [score, index]
   end
 
   def self.import

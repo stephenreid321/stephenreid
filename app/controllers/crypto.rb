@@ -15,12 +15,6 @@ StephenReid::App.controller do
     erb :'crypto/iconomi'
   end
 
-  get '/iconomi/:id' do
-    cache("/iconomi/#{params[:id]}", expires: 3.hours.to_i) do
-      partial :'crypto/row', locals: { strategy: Strategy.find(params[:id]) }
-    end
-  end
-
   get '/metastrategy' do
     @title = 'Metastrategy'
     erb :'crypto/metastrategy'

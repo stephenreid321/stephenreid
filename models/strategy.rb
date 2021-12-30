@@ -105,12 +105,13 @@ class Strategy
     end
   end
 
-  def score_index(x, strategies: Strategy.active_mature)
-    index = strategies.order("#{x} desc").pluck(:ticker).index(ticker) + 1
+  def nscore_index(x, strategies: Strategy.active_mature)
+    tickers = strategies.order("#{x} desc").pluck(:ticker)
     min = strategies.pluck(x).compact.min
     max = strategies.pluck(x).compact.max
-    score = 100 * ((send(x) - min) / (max - min))
-    [score, index]
+    nscore = 100 * ((send(x) - min) / (max - min))
+    index = tickers.index(ticker) + 1
+    [nscore, index]
   end
 
   def max_maturity
