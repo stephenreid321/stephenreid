@@ -12,8 +12,6 @@ class Strategy
 
   field :ticker, type: String
   field :name, type: String
-  field :score, type: Float
-  field :score_fee_weighted, type: Float
   field :manager, type: String
   field :managementType, type: String
   %w[management performance entry exit].each do |r|
@@ -22,11 +20,17 @@ class Strategy
   field :numberOfAssets, type: Integer
   field :lastRebalanced, type: Time
   field :monthlyRebalancedCount, type: Integer
-  %w[DAY WEEK MONTH THREE_MONTH SIX_MONTH YEAR].each do |r|
-    field :"r#{r.downcase}", type: Float
-  end
   field :verified, type: Boolean
   field :excluded, type: Boolean
+  %w[day week month three_month six_month year].each do |t|
+    field :"r#{t}", type: Float
+  end
+  field :score, type: Float
+  field :score_fee_weighted, type: Float
+  %w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].each do |x|
+    field :"nscore_#{x}", type: Float
+    field :"index_#{x}", type: Integer
+  end
 
   def self.admin_fields
     {
@@ -43,16 +47,19 @@ class Strategy
       numberOfAssets: :number,
       lastRebalanced: :datetime,
       monthlyRebalancedCount: :number,
-      rday: :number,
-      rweek: :number,
-      rmonth: :number,
-      rthree_month: :number,
-      rsix_month: :number,
-      ryear: :number,
       verified: :check_box,
       excluded: :check_box,
       holdings: :collection
     }
+      .merge(Hash[%w[day week month three_month six_month year].map do |t|
+                    ["r#{t}".to_sym, :number]
+                  end])
+      .merge(Hash[%w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].map do |x|
+                    [
+                      ["nscore_#{x}".to_sym, :number],
+                      ["index_#{x}".to_sym, :number]
+                    ]
+                  end.flatten(1)])
   end
 
   has_many :holdings, dependent: :destroy
@@ -70,6 +77,24 @@ class Strategy
 
   def calculate_score_fee_weighted
     score * (1 - (managementFee || 0)) * (1 - (performanceFee || 0)) * (1 - (entryFee || 0)) * (1 - (exitFee || 0))
+  end
+
+  def self.nscore_index(strategies: Strategy.active_mature)
+    %w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].each do |x|
+      puts x
+      tickers = strategies.order("#{x} desc").pluck(:ticker)
+      min = strategies.pluck(x).compact.min
+      max = strategies.pluck(x).compact.max
+      strategies.each do |strategy|
+        next unless strategy.send(x)
+
+        score = 100 * ((strategy.send(x) - min) / (max - min))
+        index = tickers.index(strategy.ticker) + 1
+        strategy.send("nscore_#{x}=", score)
+        strategy.send("index_#{x}=", index)
+        strategy.save
+      end
+    end
   end
 
   def score_index(x, strategies: Strategy.active_mature)
