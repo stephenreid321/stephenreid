@@ -11,6 +11,7 @@ class Strategy
   YEAR_FACTOR = 1
 
   field :ticker, type: String
+  index({ ticker: 1 })
   field :name, type: String
   field :manager, type: String
   field :managementType, type: String
@@ -21,7 +22,9 @@ class Strategy
   field :lastRebalanced, type: Time
   field :monthlyRebalancedCount, type: Integer
   field :verified, type: Boolean
+  index({ verified: 1 })
   field :excluded, type: Boolean
+  index({ excluded: 1 })
   %w[day week month three_month six_month year].each do |t|
     field :"r#{t}", type: Float
     index({ "r#{t}": 1 })
