@@ -1,4 +1,7 @@
-<% strategies = Strategy.active_mature.order('score_fee_weighted desc') %>
+<%
+strategies = Strategy.active_mature.order('score_fee_weighted desc')
+count = strategies.count
+%>
 
 <div class="text-center">
   <%= md :iconomi %>
@@ -127,7 +130,7 @@
         </span>
         <br>
         <small>
-          <%= strategy.index_score_fee_weighted %>/<%= Strategy.active_mature.count %>
+          <%= strategy.index_score_fee_weighted %>/<%= count %>
         </small>
       </td>
       <td data-sort="<%= strategy.score %>">
@@ -136,7 +139,7 @@
         </span>
         <br>
         <small>
-          <%= strategy.index_score %>/<%= Strategy.active_mature.count %>
+          <%= strategy.index_score %>/<%= count %>
         </small>
       </td>
       <td>
@@ -160,7 +163,7 @@
           </span>
           <br>
           <small>
-            <%= strategy.send("index_r#{t}") %>/<%= Strategy.active_mature.count %>
+            <%= strategy.send("index_r#{t}") %>/<%= count %>
           </small>
         </td>
       <% else %>
