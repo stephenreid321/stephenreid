@@ -1,5 +1,5 @@
 <%
-strategies = Strategy.active_mature.order('score_fee_weighted desc')
+strategies = Strategy.active_mature.and(:nscore_score.ne => nil).order('score_fee_weighted desc')
 count = strategies.count
 %>
 
