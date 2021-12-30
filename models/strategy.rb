@@ -96,9 +96,9 @@ class Strategy
       strategies.each do |strategy|
         next unless strategy.send(x)
 
-        score = 100 * ((strategy.send(x) - min) / (max - min))
+        nscore = 100 * ((strategy.send(x) - min) / (max - min))
         index = tickers.index(strategy.ticker) + 1
-        strategy.send("nscore_#{x}=", score)
+        strategy.send("nscore_#{x}=", nscore)
         strategy.send("index_#{x}=", index)
         strategy.save
       end
