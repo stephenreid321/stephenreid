@@ -24,12 +24,17 @@ class Strategy
   field :excluded, type: Boolean
   %w[day week month three_month six_month year].each do |t|
     field :"r#{t}", type: Float
+    index({ "r#{t}": 1 })
   end
   field :score, type: Float
+  index({ score: 1 })
   field :score_fee_weighted, type: Float
+  index({ score_fee_weighted: 1 })
   %w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].each do |x|
     field :"nscore_#{x}", type: Float
+    index({ "nscore_#{x}": 1 })
     field :"index_#{x}", type: Integer
+    index({ "index_#{x}": 1 })
   end
 
   def self.admin_fields
