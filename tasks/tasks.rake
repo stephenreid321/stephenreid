@@ -2,6 +2,7 @@ namespace :strategies do
   task update: :environment do
     Strategy.import
     Strategy.update
+    Strategy.nscore_index
   end
 
   task rebalance: :environment do
