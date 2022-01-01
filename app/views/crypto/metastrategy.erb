@@ -70,7 +70,7 @@
     <% if Strategy.unverified.count > 0 %>
       Currently excluded strategies:
       <%= Strategy.unverified.map do |strategy|
-            %(<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name}</a>)
+            %(<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name}</a> (#{strategy.score}))
           end.join(' ') %>
     <% end %>
 
