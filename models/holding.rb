@@ -4,8 +4,8 @@ class Holding
 
   field :weight, type: Float
 
-  belongs_to :asset
-  belongs_to :strategy
+  belongs_to :asset, index: true
+  belongs_to :strategy, index: true
 
   def percent
     "#{(weight * 100).round(2)}%"
