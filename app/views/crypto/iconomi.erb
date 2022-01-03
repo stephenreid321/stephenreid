@@ -158,7 +158,7 @@ count = strategies.count
       <% } %>
       <% %w[day week month three_month six_month year].each { |t| %>
       <% if strategy.send("r#{t}") %>
-        <td data-sort="<%= strategy.send("r#{t}") %>">
+        <td data-sort="<%= strategy.send("nscore_r#{t}") %>">
           <span class="score">
             <%= number_with_precision strategy.send("nscore_r#{t}"), precision: 1 %>
           </span>
