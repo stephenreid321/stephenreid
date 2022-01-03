@@ -215,15 +215,6 @@ class Strategy
     t = assets.map { |_k, v| v }.sum
     assets = Hash[assets.map { |k, v| [k, v / t] }]
 
-    # include at least 10% ETH
-    if !assets['ETH'] || assets['ETH'] < 0.1
-      assets.delete('ETH')
-      t = assets.map { |_k, v| v }.sum
-      assets = Hash[assets.map { |k, v| [k, v / t] }]
-      assets = Hash[assets.map { |k, v| [k, v * (1 - 0.1)] }]
-      assets['ETH'] = 0.1
-    end
-
     # make sure asset weights sum to exactly 1
     assets = Hash[assets.map { |k, v| [k, v.floor(4)] }]
     t = assets.map { |_k, v| v }.sum
