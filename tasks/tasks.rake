@@ -9,21 +9,6 @@ namespace :strategies do
     Strategy.rebalance
   end
 
-  task rebalance_x2: :environment do
-    Time.zone = 'London'
-    Strategy.rebalance if (Time.zone.now.hour % 12).zero?
-  end
-
-  task rebalance_x4: :environment do
-    Time.zone = 'London'
-    Strategy.rebalance if (Time.zone.now.hour % 6).zero?
-  end
-
-  task rebalance_x8: :environment do
-    Time.zone = 'London'
-    Strategy.rebalance if (Time.zone.now.hour % 3).zero?
-  end
-
   task propose: :environment do
     proposed = Hash[Strategy.proposed(n: 10)]
     Stash.find_by(key: 'proposed').try(:destroy)

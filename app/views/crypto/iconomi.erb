@@ -125,7 +125,7 @@ count = strategies.count
       <td>
         <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>"><%= strategy.name %></a>
       </td>
-      <td data-sort="<%= strategy.score_fee_weighted %>">
+      <td data-sort="<%= strategy.nscore_score_fee_weighted %>">
         <span class="score">
           <%= number_with_precision strategy.nscore_score_fee_weighted, precision: 1 %>
         </span>
@@ -134,7 +134,7 @@ count = strategies.count
           <%= strategy.index_score_fee_weighted %>/<%= count %>
         </small>
       </td>
-      <td data-sort="<%= strategy.score %>">
+      <td data-sort="<%= strategy.nscore_score %>">
         <span class="score">
           <%= number_with_precision strategy.nscore_score, precision: 1 %>
         </span>
