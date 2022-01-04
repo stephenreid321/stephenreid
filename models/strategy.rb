@@ -175,6 +175,7 @@ class Strategy
     Strategy.all.each do |strategy|
       strategy.update
     end
+    Strategy.nscore_index
   end
 
   def self.unverified
