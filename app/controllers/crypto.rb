@@ -10,7 +10,8 @@ StephenReid::App.controller do
     erb :'crypto/crypto_investing'
   end
 
-  get '/iconomi' do
+  get '/iconomi', cache: true do
+    expires 1.hour.to_i
     @title = 'ICONOMI strategy evaluator'
     erb :'crypto/iconomi'
   end
