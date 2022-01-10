@@ -152,7 +152,7 @@ class Strategy
       asset = Asset.find_or_create_by(ticker: (v['assetTicker'] unless v['assetTicker'].blank?))
       if asset.persisted?
         asset.update_attribute(:name, v['assetName'])
-        holdings.create(asset: asset, weight: v['rebalancedWeight'])
+        holdings.create(asset: asset, weight: v['targetWeight'])
       end
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/statistics"))
