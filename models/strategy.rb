@@ -147,6 +147,7 @@ class Strategy
         Airbrake.notify(e, strategy: j)
         puts "error setting fees: #{ticker}"
         destroy
+      end
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/structure"))
     %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each do |r|
