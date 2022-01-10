@@ -4,6 +4,7 @@ class Asset
 
   field :ticker, type: String
   field :name, type: String
+  field :color, type: String
   field :multiplier, type: Float
   field :verified, type: Boolean
   field :excluded, type: Boolean
@@ -16,6 +17,7 @@ class Asset
     {
       ticker: :text,
       name: :text,
+      color: :text,
       multiplier: :number,
       verified: :check_box,
       excluded: :check_box,

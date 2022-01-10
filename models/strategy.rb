@@ -139,15 +139,10 @@ class Strategy
       # Airbrake.notify(e)
       puts "not found: #{ticker}"
       destroy
+      return
     end
     %w[management performance entry exit].each do |r|
-      begin
-        send("#{r}Fee=", j["#{r}Fee"])
-      rescue StandardError => e
-        Airbrake.notify(e, strategy: j)
-        puts "error setting fees: #{ticker}"
-        destroy
-      end
+      send("#{r}Fee=", j["#{r}Fee"])
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/structure"))
     %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each do |r|

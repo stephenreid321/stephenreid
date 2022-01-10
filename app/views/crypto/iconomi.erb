@@ -118,12 +118,18 @@ count = strategies.count
       <th>1Y</th>
     </tr>
   </thead>
-  <% strategies.each_with_index { |strategy, i| %>
+  <% strategies.each_with_index { |strategy, i| holding = strategy.holdings.order('weight desc').first; asset = holding.asset %>
     <tr>
       <td style="opacity: 0.5">
       </td>
       <td>
         <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>"><%= strategy.name %></a>
+        <br />
+        <span class="badge badge-primary"
+        style="background-color: #<%= asset.color || Digest::MD5.hexdigest(asset.ticker)[0..5] %>">
+          <%= asset.ticker %>
+          <%= holding.percent %>
+        </span>
       </td>
       <td data-sort="<%= strategy.nscore_score_fee_weighted %>">
         <span class="score">
