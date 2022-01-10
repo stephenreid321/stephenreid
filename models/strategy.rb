@@ -125,17 +125,28 @@ class Strategy
   end
 
   def update
-    holdings.delete_all
-    j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
-    if j.nil?
-      puts "nil response: #{ticker}"
+    holdings.destroy_all
+    begin
+      j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
+      if j.nil?
+        puts "nil response: #{ticker}"
+        destroy
+        return
+      else
+        puts ticker
+      end
+    rescue StandardError => e
+      # Airbrake.notify(e)
+      puts "not found: #{ticker}"
       destroy
-      return
-    else
-      puts ticker
     end
     %w[management performance entry exit].each do |r|
-      send("#{r}Fee=", j["#{r}Fee"])
+      begin
+        send("#{r}Fee=", j["#{r}Fee"])
+      rescue StandardError => e
+        Airbrake.notify(e, strategy: j)
+        puts "error setting fees: #{ticker}"
+        destroy
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/structure"))
     %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each do |r|
@@ -153,10 +164,6 @@ class Strategy
       send("r#{r.downcase}=", j['returns'][r])
     end
     save
-  rescue StandardError => e
-    # Airbrake.notify(e)
-    puts "error: #{ticker}"
-    destroy
   end
 
   def self.import
