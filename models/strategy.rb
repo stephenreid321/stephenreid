@@ -126,21 +126,7 @@ class Strategy
 
   def update
     holdings.destroy_all
-    begin
-      j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
-      if j.nil?
-        puts "nil response: #{ticker}"
-        destroy
-        return
-      else
-        puts ticker
-      end
-    rescue StandardError => e
-      # Airbrake.notify(e)
-      puts "not found: #{ticker}"
-      destroy
-      return
-    end
+    j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
     %w[management performance entry exit].each do |r|
       send("#{r}Fee=", j["#{r}Fee"])
     end
@@ -174,7 +160,11 @@ class Strategy
 
   def self.update
     Strategy.all.each do |strategy|
-      strategy.update
+      begin
+        strategy.update
+      rescue StandardError
+        strategy.destroy
+      end
     end
     Strategy.nscore_index
   end
