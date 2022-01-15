@@ -58,16 +58,16 @@ count = strategies.count
 <script>
 
   function proposedPosition() {
-    $('#iconomi tr td:nth-child(5)').text('')
-    $('#iconomi tr td:nth-child(6)').text('')
+    $('#iconomi tr td:nth-child(6)').text('') // 1-index, proposed %
+    $('#iconomi tr td:nth-child(7)').text('') // 1-index, proposed $
     var total = 0
     for(i=1; i<=$('#funds').val(); i++) {
       total += parseFloat($('#iconomi tr').eq(i).find('td').eq(3).text())
     }
     for(i=1; i<=$('#funds').val(); i++) {
       var p = parseFloat($('#iconomi tr').eq(i).find('td').eq(3).text()) / total * 100
-      $('#iconomi tr').eq(i).find('td').eq(4).text(Math.round(p, 1) + '%')
-      $('#iconomi tr').eq(i).find('td').eq(5).text('$' + Math.round($('#investment').val()*p/100, 2))
+      $('#iconomi tr').eq(i).find('td').eq(5).text(Math.round(p, 1) + '%') // 0-index, proposed %
+      $('#iconomi tr').eq(i).find('td').eq(6).text('$' + Math.round($('#investment').val()*p/100, 2)) // 0-index, proposed $
     }
   }
 
@@ -80,7 +80,7 @@ count = strategies.count
         paging: false,
         searching: false,
         order: [
-          [2, "desc"]
+          [3, "desc"]
         ]
       }).addClass('datatabled').on('draw.dt', function () {
         var i = 0;
@@ -103,6 +103,7 @@ count = strategies.count
     <tr>
       <th></th>
       <th></th>
+      <th>ACS</th>
       <th>Score (fee weighted)</th>
       <th>Score</th>
       <th>Proposed position</th>
@@ -130,6 +131,15 @@ count = strategies.count
           <%= asset.ticker %>
           <%= holding.percent %>
         </span>
+      </td>
+      <td data-sort="<%= strategy.nscore_aum %>">
+        <span class="score">
+          <%= number_with_precision strategy.nscore_aum, precision: 1 %>
+        </span>
+        <br>
+        <small>
+          <%= strategy.index_aum %>/<%= count %>
+        </small>
       </td>
       <td data-sort="<%= strategy.nscore_score_fee_weighted %>">
         <span class="score">

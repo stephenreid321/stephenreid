@@ -33,7 +33,9 @@ class Strategy
   index({ score: 1 })
   field :score_fee_weighted, type: Float
   index({ score_fee_weighted: 1 })
-  %w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].each do |x|
+  field :aum, type: Float
+  index({ aum: 1 })
+  %w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].each do |x|
     field :"nscore_#{x}", type: Float
     index({ "nscore_#{x}": 1 })
     field :"index_#{x}", type: Integer
@@ -46,6 +48,7 @@ class Strategy
       name: :text,
       score: :number,
       score_fee_weighted: :number,
+      aum: :number,
       manager: :text,
       managementType: :text,
       managementFee: :number,
@@ -62,7 +65,7 @@ class Strategy
       .merge(Hash[%w[day week month three_month six_month year].map do |t|
                     ["r#{t}".to_sym, :number]
                   end])
-      .merge(Hash[%w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].map do |x|
+      .merge(Hash[%w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].map do |x|
                     [
                       ["nscore_#{x}".to_sym, :number],
                       ["index_#{x}".to_sym, :number]
@@ -88,7 +91,7 @@ class Strategy
   end
 
   def self.nscore_index(strategies: Strategy.active_mature)
-    %w[score score_fee_weighted rday rweek rmonth rthree_month rsix_month ryear].each do |x|
+    %w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].each do |x|
       Strategy.all.set("nscore_#{x}": nil)
       Strategy.all.set("index_#{x}": nil)
       puts x
@@ -130,6 +133,8 @@ class Strategy
     %w[management performance entry exit].each do |r|
       send("#{r}Fee=", j["#{r}Fee"])
     end
+    j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/price"))
+    self.aum = j['aum']
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/structure"))
     %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each do |r|
       send("#{r}=", (r == 'lastRebalanced' ? Time.at(j[r]) : j[r]))
