@@ -166,10 +166,11 @@ class Strategy
   def self.update
     Strategy.all.each do |strategy|
       begin
-        puts strategy.ticker
         strategy.update
+        puts strategy.ticker
       rescue StandardError
         strategy.destroy
+        puts "error: #{strategy.ticker}"
       end
     end
     Strategy.nscore_index
