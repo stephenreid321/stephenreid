@@ -164,10 +164,11 @@ class Strategy
   end
 
   def self.update
-    Strategy.all.each do |strategy|
+    count = Strategy.all.count
+    Strategy.all.each_with_index do |strategy,i|
+      puts "#{i+1}/#{count}"
       begin
         strategy.update
-        puts strategy.ticker
       rescue StandardError
         strategy.destroy
         puts "error: #{strategy.ticker}"
