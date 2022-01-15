@@ -1,3 +1,7 @@
+<p class="lead">
+  Last updated <%= time_ago_in_words Date.parse(DiscordServer.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
+</p>
+
 <div class="row">
   <% DiscordServer.all(sort: {'ID': 'asc'}).each { |discord_server| %>
     <div class="col-4 col-sm-3 col-md-2 mb-4">

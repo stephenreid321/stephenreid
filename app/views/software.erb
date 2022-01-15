@@ -1,3 +1,7 @@
+<p class="lead">
+  Last updated <%= time_ago_in_words Date.parse(Software.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
+</p>
+
 <% types = Software.all(filter: '{Featured} = 1').map { |software| software['Type'] || '' }
    (types.uniq.reject { |t| t == '' }.sort + ['']).each { |type| %>
 <% softwares = Software.all(filter: "AND({Featured} = 1, {Type} = '#{type}')", sort: {'Name' => 'asc'}); if softwares.count > 0 %>

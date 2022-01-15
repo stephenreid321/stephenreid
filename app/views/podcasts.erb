@@ -1,4 +1,7 @@
-<p class="lead">All the podcasts I follow on Spotify</p>
+<p class="lead">
+  Podcasts I follow on Spotify,
+  last updated <%= time_ago_in_words Date.parse(Podcast.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
+</p>
 
 <div class="row">
   <% ['wild',
