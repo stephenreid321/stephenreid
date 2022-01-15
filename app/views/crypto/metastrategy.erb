@@ -1,3 +1,7 @@
+<% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
+<% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
+<% strategies = Strategy.and(:excluded.ne => true) %>
+
 <div class="row justify-content-center">
   <div class="col-6 col-sm-2">
     <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,0.33)" src="/images/meta-sq.jpg"></a>
@@ -12,6 +16,15 @@
   <a href="https://www.iconomi.com/asset/DECENTCOOP">Metastrategy</a> is my strategy on ICONOMI.
   It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies.
   It's a great 'set-and-forget' option and is my top recommendation for those new to crypto investing.
+</p>
+
+<p class="lead">
+  Metastrategy is currently the #<%=acs_index = strategy.nscore_index('aum', strategies: strategies)[1]%> most copied strategy on ICONOMI (by value).
+</p>
+<p class="lead">
+  Of the <%=acs_index-1%> larger strategies, Metastrategy is outperforming <%=(outperforming = strategies.where(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score < strategy.score }).count%> of them
+  (<%= number_to_percentage 100*outperforming.count/(acs_index-1), precision: 0 %>):
+  <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
 </p>
 
 <h2>Step-by-step guide to investing in Metastrategy</h2>
@@ -39,10 +52,6 @@
 
 </div>
 </div>
-
-<% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
-<% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
-<% strategies = Strategy.and(:excluded.ne => true) %>
 
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>

@@ -128,7 +128,7 @@ class Strategy
   end
 
   def update
-    holdings.destroy_all
+    holdings.delete_all
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
     %w[management performance entry exit].each do |r|
       send("#{r}Fee=", j["#{r}Fee"])
@@ -165,8 +165,8 @@ class Strategy
 
   def self.update
     count = Strategy.all.count
-    Strategy.all.each_with_index do |strategy,i|
-      puts "#{i+1}/#{count}"
+    Strategy.all.each_with_index do |strategy, i|
+      puts "#{i + 1}/#{count}"
       begin
         strategy.update
       rescue StandardError
