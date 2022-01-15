@@ -21,11 +21,13 @@
 <p class="lead">
   Metastrategy is currently the #<%=acs_index = strategy.nscore_index('aum', strategies: strategies)[1]%> most copied strategy on ICONOMI (by value).
 </p>
+
 <p class="lead">
-  Of the <%=acs_index-1%> larger strategies, Metastrategy is outperforming <%=(outperforming = strategies.order('acs desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score < strategy.score }).count%> of them
+  Of the <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1"><%=acs_index-1%> larger strategies</a>,
+  Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('acs desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score < strategy.score }).count%> of them
   (<%= number_to_percentage 100*outperforming.count/(acs_index-1), precision: 0 %>):
   <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
-  If you're copying one of these strategies, you're probably better off switching to Metastrategy.
+  If you're already copying these strategies, you're probably better off switching to Metastrategy.
 </p>
 
 <h2>Step-by-step guide to investing in Metastrategy</h2>
