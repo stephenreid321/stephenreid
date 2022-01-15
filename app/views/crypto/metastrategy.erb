@@ -23,7 +23,7 @@
 </p>
 
 <p class="lead">
-  Of the <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1"><%=acs_index-1%> larger strategies</a>,
+  Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
   Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('acs desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score < strategy.score }).count%> of them
   (<%= number_to_percentage 100*outperforming.count/(acs_index-1), precision: 0 %>):
   <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
