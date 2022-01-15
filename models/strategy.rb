@@ -166,6 +166,7 @@ class Strategy
   def self.update
     Strategy.all.each do |strategy|
       begin
+        puts strategy.ticker
         strategy.update
       rescue StandardError
         strategy.destroy
