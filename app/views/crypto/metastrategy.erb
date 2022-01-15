@@ -24,8 +24,7 @@
 
 <p class="lead">
   Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
-  Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('acs desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score_fee_weighted < strategy.score_fee_weighted }).count%> of them
-  (<%= number_to_percentage 100*outperforming.count/(acs_index-1), precision: 0 %>):
+  Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('acs desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score_fee_weighted < strategy.score_fee_weighted }).count%> of them:
   <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
   If you're already copying these strategies, you're probably better off switching to Metastrategy.
 </p>
