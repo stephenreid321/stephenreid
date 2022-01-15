@@ -58,16 +58,16 @@ count = strategies.count
 <script>
 
   function proposedPosition() {
-    $('#iconomi tr td:nth-child(6)').text('') // 1-index, proposed %
-    $('#iconomi tr td:nth-child(7)').text('') // 1-index, proposed $
+    $('#iconomi tr td:nth-child(5)').text('') // 1-index, proposed %
+    $('#iconomi tr td:nth-child(6)').text('') // 1-index, proposed $
     var total = 0
     for(i=1; i<=$('#funds').val(); i++) {
-      total += parseFloat($('#iconomi tr').eq(i).find('td').eq(3).text())
+      total += parseFloat($('#iconomi tr').eq(i).find('td').eq(2).text())
     }
     for(i=1; i<=$('#funds').val(); i++) {
-      var p = parseFloat($('#iconomi tr').eq(i).find('td').eq(3).text()) / total * 100
-      $('#iconomi tr').eq(i).find('td').eq(5).text(Math.round(p, 1) + '%') // 0-index, proposed %
-      $('#iconomi tr').eq(i).find('td').eq(6).text('$' + Math.round($('#investment').val()*p/100, 2)) // 0-index, proposed $
+      var p = parseFloat($('#iconomi tr').eq(i).find('td').eq(2).text()) / total * 100
+      $('#iconomi tr').eq(i).find('td').eq(4).text(Math.round(p, 1) + '%') // 0-index, proposed %
+      $('#iconomi tr').eq(i).find('td').eq(5).text('$' + Math.round($('#investment').val()*p/100, 2)) // 0-index, proposed $
     }
   }
 
@@ -80,7 +80,7 @@ count = strategies.count
         paging: false,
         searching: false,
         order: [
-          [3, "desc"]
+          [2, "desc"]
         ]
       }).addClass('datatabled').on('draw.dt', function () {
         var i = 0;
@@ -103,7 +103,6 @@ count = strategies.count
     <tr>
       <th></th>
       <th></th>
-      <th>ACS</th>
       <th>Score (fee weighted)</th>
       <th>Score</th>
       <th>Proposed position</th>
@@ -117,6 +116,7 @@ count = strategies.count
       <th>3M</th>
       <th>6M</th>
       <th>1Y</th>
+      <th>ACS</th>
     </tr>
   </thead>
   <% strategies.each_with_index { |strategy, i| holding = strategy.holdings.order('weight desc').first; asset = holding.asset %>
@@ -131,15 +131,6 @@ count = strategies.count
           <%= asset.ticker %>
           <%= holding.percent %>
         </span>
-      </td>
-      <td data-sort="<%= strategy.nscore_aum %>">
-        <span class="score">
-          <%= number_with_precision strategy.nscore_aum, precision: 1 %>
-        </span>
-        <br>
-        <small>
-          <%= strategy.index_aum %>/<%= count %>
-        </small>
       </td>
       <td data-sort="<%= strategy.nscore_score_fee_weighted %>">
         <span class="score">
@@ -187,6 +178,15 @@ count = strategies.count
         <td data-sort="0"></td>
       <% end %>
       <% } %>
+      <td data-sort="<%= strategy.nscore_aum %>">
+        <span class="score">
+          <%= number_with_precision strategy.nscore_aum, precision: 1 %>
+        </span>
+        <br>
+        <small>
+          <%= strategy.index_aum %>/<%= count %>
+        </small>
+      </td>      
     </tr>
   <% } %>
 </table>
