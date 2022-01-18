@@ -127,7 +127,7 @@ count = strategies.count
         <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>"><%= strategy.name %></a>
         <br />
         <% if current_account %>
-        <a href="https://stephenreid.net/admin/edit/Asset/<%=asset.id%>" class="badge badge-primary"
+        <a href="/admin/edit/Asset/<%=asset.id%>" class="badge badge-primary"
         style="background-color: <%= asset.color ? "##{asset.color}" : Digest::MD5.hexdigest(asset.ticker)[0..5].paint.opacity(0.5).to_rgb %>">
           <%= asset.ticker %>
           <%= holding.percent %>
