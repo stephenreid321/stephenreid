@@ -1,31 +1,21 @@
 <%= partial :'coins/nav' %>
-
 <% case params[:tag]; when nil, 'starred' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :id.in => @account.coinships.and(starred: true).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
-
 <% when 'tagged' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :id.in => @account.coinships.and(:tag_id.ne => nil).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
-
 <% when 'wallets' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :id.in => @account.coinships.and(:units.gte => 1e-6).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
-
 <% when 'elsewhere' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :id.in => @account.coinships.and(:units.lt => 1e-6).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
-
 <% when 'holding-less-starred' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :id.in => @account.coinships.and(
         :id.in =>
@@ -34,9 +24,7 @@
         :starred.ne => true
       ).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
-
 <% when 'starred-less-holding' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :id.in => @account.coinships.and(
         :id.nin =>
@@ -45,88 +33,93 @@
         :starred => true
       ).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>
-
 <% when '24h' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
       :total_volume.gte => ENV['MIN_VOLUME']
     ).order('price_change_percentage_24h_in_currency desc').limit(20) } %>
-
 <% when '-24h' %>
-
-    <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
           :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
           :total_volume.gte => ENV['MIN_VOLUME']
         ).order('price_change_percentage_24h_in_currency asc').limit(20) } %>
-
 <% when '7d' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
       :total_volume.gte => ENV['MIN_VOLUME']
     ).order('price_change_percentage_7d_in_currency desc').limit(20) } %>
-
+<% when '-7d' %>
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
+          :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+          :total_volume.gte => ENV['MIN_VOLUME']
+        ).order('price_change_percentage_7d_in_currency asc').limit(20) } %>
 <% when '14d' %>
-
-  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
         :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
         :total_volume.gte => ENV['MIN_VOLUME']
       ).order('price_change_percentage_14d_in_currency desc').limit(20) } %>
-
+<% when '-14d' %>
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
+                :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                :total_volume.gte => ENV['MIN_VOLUME']
+              ).order('price_change_percentage_14d_n_currency asc').limit(20) } %>
 <% when '30d' %>
-
-  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
         :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
         :total_volume.gte => ENV['MIN_VOLUME']
       ).order('price_change_percentage_30d_in_currency desc').limit(20) } %>
-
+<% when '-30d' %>
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
+                :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                :total_volume.gte => ENV['MIN_VOLUME']
+              ).order('price_change_percentage_30d_n_currency asc').limit(20) } %>
 <% when '200d' %>
-
-  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
         :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
         :total_volume.gte => ENV['MIN_VOLUME']
       ).order('price_change_percentage_200d_in_currency desc').limit(20) } %>
-
+<% when '-200d' %>
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
+                :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                :total_volume.gte => ENV['MIN_VOLUME']
+              ).order('price_change_percentage_200d_n_currency asc').limit(20) } %>
 <% when '1y' %>
-
-  <%= partial :'coins/coin_table', locals: { coins: Coin.and(
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
         :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
         :total_volume.gte => ENV['MIN_VOLUME']
       ).order('price_change_percentage_1y_in_currency desc').limit(20) } %>
-
+<% when '-1y' %>
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
+                :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+                :total_volume.gte => ENV['MIN_VOLUME']
+              ).order('price_change_percentage_1y_n_currency asc').limit(20) } %>
 <% when 'market-cap-24h' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
       :total_volume.gte => ENV['MIN_VOLUME']
     ).order('market_cap_change_percentage_24h desc').limit(20) } %>
-
+<% when '-market-cap-24h' %>
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
+          :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
+          :total_volume.gte => ENV['MIN_VOLUME']
+        ).order('market_cap_change_percentage_24h asc').limit(20) } %>
 <% when 'top-100' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :market_cap_rank.lte => 100
     ).order('market_cap_rank asc').limit(100) } %>
-
 <% when 'top-100-less-tagged' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :market_cap_rank.lte => 100,
       :id.nin => @account.coinships.and(:tag_id.ne => nil).pluck(:coin_id)
     ).order('market_cap_rank asc').limit(100) } %>
-
 <% when 'starred-less-tagged' %>
-
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :id.in => @account.coinships.and(tag_id: nil, starred: true).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency asc') } %>
-
 <% else %>
-
   <div data-pagelet-url="/u/<%= @account.username %>/tags/<%= params[:tag] %>/table">
     <%= partial :'coins/coin_table', locals: { coins: Coin.and(
           :id.in => @account.coinships.and(tag: @account.tags.find_by(name: params[:tag])).pluck(:coin_id)
         ).order('price_change_percentage_24h_in_currency desc') } %>
   </div>
-
 <% end %>
