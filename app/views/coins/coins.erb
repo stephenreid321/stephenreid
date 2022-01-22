@@ -48,14 +48,17 @@
 
 <% when '24h' %>
 
-<%= partial :'coins/coin_table', locals: { coins: Coin.and(:id.in => Coin.and(
+<%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
       :total_volume.gte => ENV['MIN_VOLUME']
-    ).order('price_change_percentage_24h_in_currency desc').limit(20).pluck(:id) + Coin.and(
+    ).order('price_change_percentage_24h_in_currency desc').limit(20) } %>
+
+<% when '-24h' %>
+
+    <%= partial :'coins/coin_table', locals: { coins: Coin.and(
           :market_cap_rank.lte => ENV['MAX_MARKET_CAP_RANK'],
           :total_volume.gte => ENV['MIN_VOLUME']
-        ).order('price_change_percentage_24h_in_currency asc').limit(20).pluck(:id)
-      ).order('price_change_percentage_24h_in_currency desc') } %>
+        ).order('price_change_percentage_24h_in_currency asc').limit(20) } %>
 
 <% when '7d' %>
 
