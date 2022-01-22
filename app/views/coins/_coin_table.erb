@@ -44,6 +44,9 @@
         <% elsif params[:tag] && params[:tag].starts_with?('top-100') %>
           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='market-cap-rank']")[0])
           var direction = 'asc'
+        <% elsif params[:tag] && params[:tag].starts_with?('-24h') %>
+            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
+            var direction = 'desc'
         <% elsif params[:tag] %>
            var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%= params[:tag] %>']")[0])
            var direction = 'desc'
