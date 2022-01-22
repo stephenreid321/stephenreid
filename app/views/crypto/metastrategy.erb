@@ -47,7 +47,10 @@
     </li>
     <li>
         <a href="https://iconomi.com/asset/DECENTCOOP">Go to the Metastrategy page</a>, click Copy Strategy > My Euro balance > Preview > Place order.
-        <mark>I recommend <a href="https://www.degiro.co.uk/knowledge/strategies/what-is-dollar-cost-averaging">dollar-cost averaging</a> (investing equal amounts of Euros at regular intervals) rather than going all-in.</mark>
+      <mark>I recommend <a href="https://www.degiro.co.uk/knowledge/strategies/what-is-dollar-cost-averaging">dollar-cost averaging</a> (investing equal amounts of Euros at regular intervals) rather than going all-in.</mark>
+      This is simple to do with ICONOMI's Autocopy feature.
+      Activate Autocopy on your ICONOMI dashboard, then set up a standing order/recurring payment from your bank to ICONOMI.
+      Every time Euros arrive in your ICONOMI account, they will be automatically used to copy Metastrategy.
       </li>
     </ol>
   </p>
@@ -56,7 +59,7 @@
 </div>
 
 <p class="text-center">
-  Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']).iso8601 %>
+  Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <% if current_account %>
     <a href="/metastrategy/<%= ENV['SITE_SECRET'] %>/rebalance">
       <i class="fas fa-sync"></i>
