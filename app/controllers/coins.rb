@@ -1,7 +1,7 @@
 StephenReid::App.controller do
   before do
     halt 200 unless current_account || Padrino.env == :development
-    @virtual_tags = %w[starred tagged wallets elsewhere 24h -24h 7d 14d 30d 200d 1y market-cap-24h top-100 top-100-less-tagged starred-less-tagged holding-less-starred starred-less-holding]
+    @virtual_tags = %w[starred tagged wallets elsewhere 24h -24h 7d -7d 14d -14d 30d -30d 200d -200d 1y -1y market-cap-24h -market-cap-24h top-100 top-100-less-tagged starred-less-tagged holding-less-starred starred-less-holding]
     @container_class = 'container-fluid'
   end
 
