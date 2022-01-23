@@ -191,18 +191,13 @@ class Strategy
     Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each_with_index do |strategy, i|
       puts "#{i + 1}/#{count}"
       strategy.holdings.each do |holding|
+        asset = holding.asset
+        asset = Asset.find_by(ticker: 'USDC') if %w[USDT TUSD DAI].include?(ticker)
         next unless holding.asset.verified
 
-        ticker = holding.asset.ticker
+        ticker = asset.ticker
         assets[ticker] = 0 unless assets[ticker]
-        assets[ticker] += holding.weight * strategy.nscore_score * (holding.asset.multiplier || 1)
-      end
-    end
-
-    %w[USDT TUSD DAI].each do |s|
-      if assets[s]
-        assets['USDC'] += assets[s]
-        assets.delete(s)
+        assets[ticker] += holding.weight * strategy.nscore_score * (asset.multiplier || 1)
       end
     end
 
