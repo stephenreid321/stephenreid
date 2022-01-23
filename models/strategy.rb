@@ -195,7 +195,7 @@ class Strategy
 
         ticker = holding.asset.ticker
         assets[ticker] = 0 unless assets[ticker]
-        assets[ticker] += holding.weight * strategy.score * (holding.asset.multiplier || 1)
+        assets[ticker] += holding.weight * strategy.nscore_score * (holding.asset.multiplier || 1)
       end
     end
 
@@ -205,10 +205,6 @@ class Strategy
         assets.delete(s)
       end
     end
-
-    # offset to take into account possibility of negative scores
-    offset = assets.values.min
-    assets = Hash[assets.map { |k, v| [k, v - offset] }]
 
     # restrict to top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
