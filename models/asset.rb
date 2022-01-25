@@ -6,8 +6,7 @@ class Asset
   field :name, type: String
   field :color, type: String
   field :multiplier, type: Float
-  field :verified, type: Boolean
-  field :excluded, type: Boolean
+  field :status, type: String
 
   validates_presence_of :ticker
 
@@ -19,13 +18,12 @@ class Asset
       name: :text,
       color: :text,
       multiplier: :number,
-      verified: :check_box,
-      excluded: :check_box,
+      status: :select,
       holdings: :collection
     }
   end
 
-  def self.unverified
-    where(:verified.ne => true)
+  def self.statuses
+    ['', 'verified', 'excluded']
   end
 end

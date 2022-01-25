@@ -21,10 +21,8 @@ class Strategy
   field :numberOfAssets, type: Integer
   field :lastRebalanced, type: Time
   field :monthlyRebalancedCount, type: Integer
-  field :verified, type: Boolean
-  index({ verified: 1 })
-  field :excluded, type: Boolean
-  index({ excluded: 1 })
+  field :status, type: String
+  index({ status: 1 })
   %w[day week month three_month six_month year].each do |t|
     field :"r#{t}", type: Float
     index({ "r#{t}": 1 })
@@ -58,8 +56,7 @@ class Strategy
       numberOfAssets: :number,
       lastRebalanced: :datetime,
       monthlyRebalancedCount: :number,
-      verified: :check_box,
-      excluded: :check_box,
+      status: :select,
       holdings: :collection
     }
       .merge(Hash[%w[day week month three_month six_month year].map do |t|
@@ -80,6 +77,10 @@ class Strategy
   before_validation do
     self.score = calculate_score
     self.score_fee_weighted = calculate_score_fee_weighted
+  end
+
+  def self.statuses
+    ['', 'verified', 'excluded']
   end
 
   def calculate_score
@@ -177,12 +178,8 @@ class Strategy
     Strategy.nscore_index
   end
 
-  def self.unverified
-    where(:verified.ne => true)
-  end
-
   def self.active_mature(mature_period: 'THREE_MONTH')
-    where(:monthlyRebalancedCount.gte => 1, :"r#{mature_period.downcase}".ne => nil, :verified => true)
+    where(:monthlyRebalancedCount.gte => 1, :"r#{mature_period.downcase}".ne => nil, :status => 'verified')
   end
 
   def self.proposed(n: 10)
@@ -196,7 +193,7 @@ class Strategy
                 else
                   holding.asset
                 end
-        next unless asset.verified
+        next unless asset.status == 'verified'
 
         ticker = asset.ticker
         assets[ticker] = 0 unless assets[ticker]

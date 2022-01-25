@@ -22,8 +22,8 @@ StephenReid::App.controller do
   end
 
   get '/metastrategy/verify' do
-    Asset.and(:verified.ne => true, :excluded.ne => true).set(verified: true)
-    Strategy.and(:verified.ne => true, :excluded.ne => true).set(verified: true)
+    Asset.and(status: nil).set(status: 'verified')
+    Strategy.and(status: nil).set(status: 'verified')
     redirect '/metastrategy'
   end
 

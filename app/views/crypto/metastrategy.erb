@@ -1,6 +1,6 @@
 <% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
-<% strategies = Strategy.and(:excluded.ne => true) %>
+<% strategies = Strategy.and(:status => 'verified') %>
 
 <div class="row justify-content-center">
   <div class="col-6 col-sm-2">
@@ -50,7 +50,7 @@
       <mark>I recommend <a href="https://www.degiro.co.uk/knowledge/strategies/what-is-dollar-cost-averaging">dollar-cost averaging</a> (investing equal amounts of Euros at regular intervals) rather than going all-in.</mark>
       This is simple to do with ICONOMI's Autocopy feature.
       Activate Autocopy on your ICONOMI dashboard, then set up a standing order/recurring payment from your bank to ICONOMI.
-      Every time Euros arrive in your ICONOMI account, they will be automatically used to copy Metastrategy.
+      Every time Euros arrive in your ICONOMI account, they will automatically be used to copy Metastrategy.
       </li>
     </ol>
   </p>
@@ -70,20 +70,20 @@
   <% } %>
 </p>
 
-<% if Strategy.unverified.count > 0 || Asset.unverified.count > 0 %>
+<% if Strategy.and(:status.ne => 'verified').count > 0 || Asset.and(:status.ne => 'verified').count > 0 %>
   <p class="text-center">
 
-    <% if Asset.unverified.count > 0 %>
+    <% if Asset.and(:status.ne => 'verified').count > 0 %>
       Currently excluded coins:
-      <%= Asset.unverified.map do |asset|
+      <%= Asset.and(:status.ne => 'verified').map do |asset|
             %{<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}">#{asset.name} (#{asset.ticker})</a>}
           end.join(' ') %>
       <br>
     <% end %>
 
-    <% if Strategy.unverified.count > 0 %>
+    <% if Strategy.and(:status.ne => 'verified').count > 0 %>
       Currently excluded strategies:
-      <%= Strategy.unverified.map do |strategy|
+      <%= Strategy.and(:status.ne => 'verified').map do |strategy|
             %(<a class="badge badge-secondary" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
           end.join(' ') %>
     <% end %>
