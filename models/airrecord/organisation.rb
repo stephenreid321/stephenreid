@@ -4,7 +4,6 @@ class Organisation < Airrecord::Table
 
   belongs_to :interest, class: 'Interest', column: 'Interest'
 
-  has_many :podcast_appearances, class: 'PodcastAppearance', column: 'Podcast appearances'
   has_many :affiliations, class: 'Affiliation', column: 'Affiliations'
   has_many :qualifications, class: 'Qualification', column: 'Qualifications'
   has_many :speaking_engagements, class: 'SpeakingEngagement', column: 'Speaking engagements'
@@ -26,6 +25,9 @@ class Organisation < Airrecord::Table
   def tagify
     organisation = self
     posts = Post.all(filter: "FIND('#{organisation['Domain']}', {Link}) > 0", sort: { 'Created at' => 'desc' })
-    posts.each { |post| puts post['Title']; post.tagify }
+    posts.each do |post|
+      puts post['Title']
+      post.tagify
+    end
   end
 end

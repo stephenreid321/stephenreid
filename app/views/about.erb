@@ -104,6 +104,18 @@
 </div>
 
 
+
+<h2 class="mt-5" id="speaking">Recent speaking engagements</h2>
+<dl class="row">
+  <% SpeakingEngagement.all(sort: { 'Date' => 'desc' }).first(5).each { |speaking_engagement| %>
+    <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
+    <dd class="col-sm-9">
+      <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
+    </dd>
+  <% } %>
+</dl>
+
+
 <h2 class="mt-5" id="feedback">Feedback on my courses</h2>
 <p class="mb-3">
   <a href="https://dandelion.earth/u/stephenreid321">Check out my Dandelion profile</a>
@@ -129,16 +141,6 @@ $(function() {
 
 <h2 class="mt-5" id="speaking">Places and plans</h2>
 <%= partial :places %>
-
-<h2 class="mt-5" id="speaking">Recent speaking engagements</h2>
-<dl class="row">
-  <% SpeakingEngagement.all(sort: { 'Date' => 'desc' }).first(5).each { |speaking_engagement| %>
-    <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
-    <dd class="col-sm-9">
-      <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
-    </dd>
-  <% } %>
-</dl>
 
 <h2 class="mt-5" id="research">Peer-reviewed research</h2>
 <dl class="row">
