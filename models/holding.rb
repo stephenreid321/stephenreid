@@ -12,7 +12,7 @@ class Holding
   end
 
   def summary
-    "#{strategy.ticker} #{asset.ticker} #{percent}"
+    "#{strategy.ticker if strategy} #{asset.ticker if asset} #{percent}"
   end
 
   def self.admin_fields
