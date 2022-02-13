@@ -128,13 +128,13 @@ count = strategies.count
         <br />
         <% if current_account %>
         <a target="_blank" href="/admin/edit/Asset/<%=asset.id%>" class="badge badge-primary"
-        style="background-color: <%= asset.color ? "##{asset.color}" : virtual_color %>">
+        style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
           <%= asset.ticker %>
           <%= holding.percent %>
         </a>
         <% else %>
         <span class="badge badge-primary"
-        style="background-color: <%= asset.color ? "##{asset.color}" : virtual_color %>">
+        style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
           <%= asset.ticker %>
           <%= holding.percent %>
         </span>
