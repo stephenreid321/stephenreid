@@ -5,6 +5,10 @@
 <% diff = Hash[actual.map { |k, _v| [k, actual[k] - rebalanced[k]] }] %>
 <% y = 50_000 %>
 
+<div class="my-3">
+  <%= partial :strategy_chart %>
+</div>
+
 <style>
   @media(min-width: 768px) {
   td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}

@@ -23,6 +23,10 @@ class Asset
     }
   end
 
+  def virtual_color
+    Digest::MD5.hexdigest(ticker)[0..5].paint.opacity(0.5).to_rgb
+  end
+
   def self.statuses
     ['', 'verified', 'excluded']
   end
