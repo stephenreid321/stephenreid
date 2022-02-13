@@ -1,4 +1,5 @@
-<% proposed = JSON.parse(Stash.find_by(key: 'proposed').value) %>
+<% proposed_with_multipliers = JSON.parse(Stash.find_by(key: 'proposed_with_multipliers').value) %>
+<% proposed_without_multipliers = JSON.parse(Stash.find_by(key: 'proposed_without_multipliers').value) %>
 <% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
 <% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
 <% diff = Hash[actual.map { |k, _v| [k, actual[k] - rebalanced[k]] }] %>
@@ -22,10 +23,11 @@
       <th>Asset</th>
       <th></th>
       <th>Current weight</th>
-      <th>Next rebalance</th>
+      <th>Without multipliers</th>
+      <th>With multipliers (next rebalance)</th>
     </tr>
   </thead>
-  <% tickers = (proposed.keys + actual.keys + Asset.and(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
+  <% tickers = (proposed_with_multipliers.keys + proposed_without_multipliers.keys + actual.keys + Asset.and(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
   <% tickers.uniq.each { |k| %>
   <% asset = Asset.find_by(ticker: k) %>
   <tr>
@@ -84,9 +86,14 @@
         </small>
       <% end %>
     </td>
-    <td data-sort="<%= proposed[k] || 0 %>" style="white-space: nowrap;">
-      <% if proposed[k] %>
-        <%= number_to_percentage (proposed[k] * 100), precision: 2 %>
+    <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
+      <% if proposed_without_multipliers[k] %>
+        <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 2 %>
+      <% end %>
+    </td>
+    <td data-sort="<%= proposed_with_multipliers[k] || 0 %>" style="white-space: nowrap;">
+      <% if proposed_with_multipliers[k] %>
+        <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 2 %>
       <% end %>
     </td>
   </tr>

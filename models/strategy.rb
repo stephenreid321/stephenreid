@@ -182,8 +182,9 @@ class Strategy
     where(:monthlyRebalancedCount.gte => 1, :"r#{mature_period.downcase}".ne => nil, :status => 'verified')
   end
 
-  def self.proposed(n: 10)
-    assets = {}
+  def self.assets_weighted
+    with_multipliers = {}
+    without_multipliers = {}
     count = Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').count
     Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each_with_index do |strategy, i|
       puts "#{i + 1}/#{count}"
@@ -196,11 +197,16 @@ class Strategy
         next unless asset.status == 'verified'
 
         ticker = asset.ticker
-        assets[ticker] = 0 unless assets[ticker]
-        assets[ticker] += holding.weight * strategy.nscore_score * (asset.multiplier || 1)
+        with_multipliers[ticker] = 0 unless with_multipliers[ticker]
+        without_multipliers[ticker] = 0 unless without_multipliers[ticker]
+        with_multipliers[ticker] += holding.weight * strategy.nscore_score * (asset.multiplier || 1)
+        without_multipliers[ticker] += holding.weight * strategy.nscore_score
       end
     end
+    [with_multipliers, without_multipliers]
+  end
 
+  def self.proposed(assets, n: 10)
     # restrict to top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
     t = assets.map { |_k, v| v }.sum
@@ -227,7 +233,8 @@ class Strategy
     until success
 
       begin
-        weights = Strategy.proposed(n: n)
+        with_multipliers, without_multipliers = Strategy.assets_weighted
+        weights = Strategy.proposed(with_multipliers, n: n)
       rescue StandardError => e
         Airbrake.notify(e)
         raise e

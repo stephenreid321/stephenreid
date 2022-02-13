@@ -42,4 +42,4 @@ The performance score of a strategy  <code>p<sup>Y</sup></code> is calculated as
 performance_score = (4 * 1_month_performance) + (3 * three_month_performance) + (2 * six_month_performance) + (1 * year_performance)
 ```
 
-[View the full code](https://github.com/stephenreid321/stephenreid/blob/master/models/strategy.rb) (see the `self.proposed` method)
+[View the full code](https://github.com/stephenreid321/stephenreid/blob/master/models/strategy.rb)
