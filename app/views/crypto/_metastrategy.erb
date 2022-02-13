@@ -26,9 +26,9 @@
       <th></th>
       <th>Asset</th>
       <th></th>
-      <th>Current weight</th>
-      <th>With multipliers (next rebalance)</th>
-      <th>Without multipliers</th>
+      <th style="width: 8em">Current weight</th>
+      <th style="width: 8em">With multipliers<br/>(next rebalance)</th>
+      <th style="width: 8em">Without multipliers</th>
     </tr>
   </thead>
   <% tickers = (proposed_with_multipliers.keys + proposed_without_multipliers.keys + actual.keys + Asset.and(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
@@ -94,7 +94,7 @@
       <% if proposed_with_multipliers[k] %>
         <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 2 %>
       <% end %>
-    </td>    
+    </td>
     <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
       <% if proposed_without_multipliers[k] %>
         <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 2 %>
