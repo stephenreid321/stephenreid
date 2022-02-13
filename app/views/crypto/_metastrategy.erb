@@ -78,7 +78,7 @@
     </td>
     <td data-sort="<%= actual[k] || 0 %>" style="white-space: nowrap;">
       <% if actual[k] %>
-        <%= number_to_percentage (actual[k] * 100), precision: 2 %>
+        <%= number_to_percentage (actual[k] * 100), precision: 1 %>
         <small>
           <span style="color: <%= if diff[k].positive?
                                     'green'
@@ -92,12 +92,12 @@
     </td>
     <td data-sort="<%= proposed_with_multipliers[k] || 0 %>" style="white-space: nowrap;">
       <% if proposed_with_multipliers[k] %>
-        <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 2 %>
+        <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 1 %>
       <% end %>
     </td>
     <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
       <% if proposed_without_multipliers[k] %>
-        <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 2 %>
+        <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 1 %>
       <% end %>
     </td>
   </tr>
