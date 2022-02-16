@@ -6,7 +6,7 @@
 <% y = 50_000 %>
 
 <div class="my-3">
-  <%= partial :strategy_chart %>
+  <%= partial :'crypto/strategy_chart', locals: { actual: actual } %>
 </div>
 
 <style>

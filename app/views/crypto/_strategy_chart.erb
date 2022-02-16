@@ -1,5 +1,4 @@
-<% proposed_with_multipliers = JSON.parse(Stash.find_by(key: 'proposed_with_multipliers').value) %>
-<% spin = 180 / proposed_with_multipliers.count %>
+<% spin = 180 / actual.count %>
 <div class="row justify-content-center">
   <div class="col-12 col-md-6 mb-3">
     <script>
@@ -8,14 +7,14 @@
           type: 'doughnut',
           data: {
             datasets: [{
-                data: <%= proposed_with_multipliers.map { |k,v| v } %>,
-                backgroundColor: <%= proposed_with_multipliers.each_with_index.map { |p,i|
+                data: <%= actual.map { |k,v| v } %>,
+                backgroundColor: <%= actual.each_with_index.map { |p,i|
                   k, v = p
                   asset = Asset.find_by(ticker: k)
                   asset.color ? "##{asset.color}" : asset.virtual_color
                 } %>
               }],
-            labels: <%= proposed_with_multipliers.map { |k,v| k } %>
+            labels: <%= actual.map { |k,v| k } %>
           },
           options: {
             legend: {
