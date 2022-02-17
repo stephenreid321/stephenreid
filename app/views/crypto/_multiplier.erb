@@ -3,7 +3,7 @@
     <% if asset.multiplier %>
       <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
     <% else %>
-      <span class="text-dark">&hellip;</span>
+      <span class="text-white">&hellip;</span>
     <% end %>
   </a>
   <% form_tag "/assets/#{asset.id}/multiplier", style: 'display: none', class: 'form-inline' do %>

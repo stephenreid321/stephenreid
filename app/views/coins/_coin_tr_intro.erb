@@ -34,7 +34,7 @@ end
 
    %><br />Updated <%=time_ago_in_words coin.updated_at%> ago"
 <% end %>
-    class="text-dark font-weight-bold" target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
+    class="text-white font-weight-bold" target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
     <%=coin.name%> (<%=coin.symbol%>)
   </a>
   <% if coinship && @virtual_tags.include?(params[:tag]) %>

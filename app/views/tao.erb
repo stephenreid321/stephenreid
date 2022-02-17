@@ -24,14 +24,14 @@
   </div>
   <div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
     <h2 class="mb-3 regular">
-      <a style="background: white" class="text-dark" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
+      <a style="background: white" class="text-white" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
     </h2>
     <p>
       <a target="_blank" href="<%= verse['Rarible URL'] %>" class="rarible">
         <% if (a = verse['Owner'].downcase) == '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324' && verse['Verse'] != 81 %>
           <span class="d-inline-block px-1">NFT on sale for 1 ETH</span>
         <% else %>
-          <span class="text-dark bg-white d-inline-block px-1">NFT owned by <%= "#{a[0..5]}&hellip;#{a[-4..]}" %></span>
+          <span class="text-white d-inline-block px-1">NFT owned by <%= "#{a[0..5]}&hellip;#{a[-4..]}" %></span>
         <% end %>
       </a>
     </p>
@@ -56,7 +56,7 @@
       <% else %>
         <a href="/tao-te-ching/<%= params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
           <div class="card-body py-1 px-3">
-            <span class="text-dark">&lArr;</span>
+            <span class="text-white">&lArr;</span>
             Verse <%= params[:i].to_i - 1 %>
           </div>
         </a>
@@ -73,7 +73,7 @@
         <a href="/tao-te-ching/<%= params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
           <div class="card-body py-1 px-3">
             Verse <%= params[:i].to_i + 1 %>
-            <span class="text-dark">&rArr;</span>
+            <span class="text-white">&rArr;</span>
           </div>
         </a>
       <% end %>
