@@ -229,7 +229,7 @@ input::-moz-focus-outer {
 #toc a {
     text-decoration: none;
     display: block;
-    color: rgba(33,37,41,0.6);
+    color: $body-color;
 }
 
 #toc .toc-h2 {
@@ -245,7 +245,7 @@ input::-moz-focus-outer {
 }
 
 #toc .toc-active a {
-  color: rgba(33,37,41,1);
+  color: $body-color;
   font-weight: bold;
 }
 
