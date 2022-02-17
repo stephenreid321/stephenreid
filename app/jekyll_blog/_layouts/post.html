@@ -28,7 +28,7 @@
         <div class="row justify-content-between">
           {% if page.previous.url %}
           <div class="col-auto">
-            <a href="{{ page.previous.url | relative_url }}" class="card text-center shadow-sm mb-1">
+            <a href="{{ page.previous.url | relative_url }}" class="card bg-dark text-center shadow-sm mb-1">
               <div class="card-body py-1 px-3">
                 <span class="text-white">&larr;</span>
                 {{ page.previous.title }}
@@ -38,7 +38,7 @@
           {% endif %}
           {% if page.next.url %}
           <div class="col-auto">
-            <a href="{{ page.next.url | relative_url }}" class="card text-center shadow-sm mb-1">
+            <a href="{{ page.next.url | relative_url }}" class="card bg-dark text-center shadow-sm mb-1">
               <div class="card-body py-1 px-3">
                 {{ page.next.title }}
                 <span class="text-white">&rarr;</span>
