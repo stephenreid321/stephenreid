@@ -9,7 +9,7 @@
             datasets: [{
                 data: <%= Ancestry.all(sort: { 'Autonumber' => 'asc' }).map { |ancestry| ancestry['Percentage'] } %>,
                 backgroundColor: <%= { 'European' => 0, 'Jewish' => 210, 'Central & South Asian' => 120, 'Unknown' => 0 }.map do |k, v|
-                                       n = Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).count; 0.upto(n - 1).map { |i| (k == 'Unknown' ? '#666' : '#00B963'.paint.spin(v + i * spin)).to_s }
+                                       n = Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).count; 0.upto(n - 1).map { |i| (k == 'Unknown' ? '#666' : '#2DB963'.paint.spin(v + i * spin)).to_s }
                                      end.sum %>
               }],
             labels: <%= Ancestry.all(sort: { 'Autonumber' => 'asc' }).map { |ancestry| ancestry['Name'] } %>,
@@ -54,7 +54,7 @@
     <% { 'European' => 0, 'Jewish' => 210, 'Central & South Asian' => 120, 'Unknown' => 0 }.each { |k,v| %>
     <% n = Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).count
        Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).each_with_index { |ancestry, i| %>
-    <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= (k == 'Unknown' ? '#666' : '#00B963'.paint.spin(v + i * spin)).to_s %>"><%= "#{ancestry['Percentage']}%" %></div>
+    <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= (k == 'Unknown' ? '#666' : '#2DB963'.paint.spin(v + i * spin)).to_s %>"><%= "#{ancestry['Percentage']}%" %></div>
     <%= ancestry['Name'] %> <br>
     <% } %>
     <% } %>

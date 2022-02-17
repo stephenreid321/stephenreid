@@ -30,7 +30,7 @@ module StephenReid
     before do
       @cachebuster = Padrino.env == :development ? SecureRandom.uuid : ENV['HEROKU_SLUG_COMMIT']
       redirect "#{ENV['BASE_URI']}#{request.path}" if ENV['BASE_URI'] && (ENV['BASE_URI'] != "#{request.scheme}://#{request.env['HTTP_HOST']}")
-      if Padrino.env == :production && params[:r]
+      if params[:r]
         StephenReid::App.cache.clear
         redirect request.path
       end

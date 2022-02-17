@@ -1,21 +1,44 @@
-$primary: rgb(0, 185, 99); // #00B963
-$font-family-sans-serif: 'Overpass', sans-serif;
-
+$primary: #BD75D3;
+$font-family-sans-serif: 'Fira Mono', sans-serif;
+$body-bg: #292C35;
+$body-color: #ABB3BF;
+$font-size-base: 0.95rem;
+$lead-font-size: ($font-size-base * 1.2);
 @import "bootstrap/bootstrap";
+
+
+.navbar-dark .navbar-nav .nav-link { color: $body-color }
+
+.bg-dark {
+  background-color: darken($body-bg, 5%) !important; }
+
+#footer { background-color: darken($body-bg, 5%) }
 
 body, small { font-weight: 300 }
 .form-control { font-weight: 300 }
 b, strong { font-weight: 600 }
 small { font-size: 90% }
 
+mark, .mark {
+  color: $body-color;
+  text-decoration: underline;
+  text-decoration-color: #E5C07C;
+  text-decoration-thickness: 2px;
+  background: none;
+}
+
+h2:not(.regular) { border-bottom: 3px solid #ABB3BF; display: inline-block }
+
+
+
+
 .ze { font-family: 'Zilap Evolution' }
 
-h2:not(.regular) { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
 .badge-warning { color: white }
 
 .bgo:hover { opacity: 0 !important }
 
-pre code { color: #e83e8c }
+code, pre code { color: #C5636C }
 
 p.attribution { text-align: right; font-size: 0.95rem !important }
 
@@ -183,10 +206,7 @@ input::-moz-focus-outer {
   border: 0;
 }
 
-mark, .mark {
-  padding: 0.2em 0;
-  background-color: #FDFFAA
-}
+
 
 
 
@@ -256,6 +276,6 @@ mark, .mark {
   position: absolute;
   left: 0;
   top: 0;
-  background-color: #00B963;
+  background-color: #2DB963;
   color: white;
 }

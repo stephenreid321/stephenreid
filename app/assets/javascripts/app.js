@@ -68,8 +68,8 @@ $(function() {
 
     $('.score').each(function() {
       var d = parseFloat($(this).text())
-      scale = chroma.scale(['white', '#00B963']);
-      $(this).closest('td').css('background-color', scale(d / 100).hex())
+      scale = chroma.scale(['white', '#2DB963']);
+      $(this).closest('td').css('background-color', scale(d / 100).hex()).addClass('text-dark')
     })
 
   }

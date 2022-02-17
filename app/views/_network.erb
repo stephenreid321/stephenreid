@@ -1,27 +1,26 @@
 <script>
   function drawNetwork() {
 
-  scale = chroma.scale(['#FBAE3B', '#FBAE3B']);
-  scale(0.5).hex(); // #FF7F7F
+  scale = chroma.scale(['#BD75D3', '#D26771']);
 
-  node_min_width = 10
+          node_min_width = 10
           node_min_color = 0.1
-          node_color_scale = 50
+          node_color_scale = 150
           edge_min_color = 0.1
-          edge_color_scale = 20
+          edge_color_scale = 50
           edge_min_opacity = 0.1
-          edge_opacity_scale = 20
+          edge_opacity_scale = 50
 
           cy = cytoscape({
 
           container: $('#cy'),
                   elements: [
   <% terms.each { |term| %>
-                    { data: {id: '<%= term.id %>', name: '<%= term['Name'] %>', weight: <%= w = (term['Posts'].try(:length) || 0) %>, width: (node_min_width +<%= w %>), color: scale(node_min_color +<%= w %> / node_color_scale).hex()} },
+                    { data: {id: '<%= term.id %>', name: '<%= term['Name'] %>', weight: <%= w = (term['Posts'].try(:length) || 0) %>, width: (node_min_width +<%= w %>), color: scale(node_min_color + (<%= w %> / node_color_scale)).hex()} },
   <% } %>
   <% term_links.each { |term_link| %>
                     {
-                    data: {id: '<%= term_link['Autonumber'] %>', source: '<%= term_link['Source'].first %>', target: '<%= term_link['Sink'].first %>', weight: <%= w = (term_link['Posts'].try(:length) || 0) %>, color: scale(edge_min_color +<%= w %> / edge_color_scale).hex(), opacity: (edge_min_opacity +<%= w %> / edge_opacity_scale)}
+                    data: {id: '<%= term_link['Autonumber'] %>', source: '<%= term_link['Source'].first %>', target: '<%= term_link['Sink'].first %>', weight: <%= w = (term_link['Posts'].try(:length) || 0) %>, color: scale(edge_min_color + (<%= w %> / edge_color_scale)).hex(), opacity: (edge_min_opacity + (<%= w %> / edge_opacity_scale))}
                     },
   <% } %>
                   ],
@@ -29,8 +28,9 @@
                   {
                   selector: 'node',
                           style: {
-                          'background-color': 'data(color)',
+                                  'background-color': 'data(color)',
                                   'opacity': 0.75,
+                                  'color': 'white',
                                   'label': 'data(name)',
                                   'width': 'data(width)',
                                   'height': 'data(width)'
@@ -41,7 +41,7 @@
                           style: {
   //                  'width': 'data(weight)',
   <% if defined?(edge_labels) %> 'label': 'data(weight)', <% end %>
-                          'opacity': 'data(opacity)',
+                                  'opacity': 'data(opacity)',
                                   'line-color': 'data(color)',
                           }
                   }
@@ -69,4 +69,4 @@
           $(window).one('focus', function() { drawNetwork() })
   })
 </script>
-<div id="cy" class="card shadow-sm" style="height: 500px"></div>
+<div id="cy" class="card bg-dark shadow-sm" style="height: 500px"></div>
