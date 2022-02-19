@@ -9,8 +9,8 @@ $font-family-sans-serif: 'Overpass', sans-serif;
 $highlight-color: #E5C07C;
 $contrast-color: $body-color;
 
-@import "blog";
 @import "core";
+@import "blog";
 @import "datatables";
 @import "range_slider";
 @import "share";
