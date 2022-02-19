@@ -50,7 +50,7 @@
   </div>
   <div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
     <h2 class="mb-3 regular">
-      <a style="background: white" class="text-contrast" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
+      <a class="bg-standard text-contrast" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
     </h2>
     <p>
       <a target="_blank" href="<%= verse['Rarible URL'] %>" class="rarible">
@@ -62,7 +62,7 @@
       </a>
     </p>
     <div>
-      <span style="background: white">
+      <span class="bg-standard">
         <%= md(verse['Text']).gsub('<p>', '').gsub('</p>', '').gsub('  ', '&nbsp;&nbsp;&nbsp;&nbsp;').gsub("\n\n", "&nbsp;<br />#{4.times.map { '&nbsp;' }.join}<br />").gsub("\n", '&nbsp;<br />') %>
         &nbsp;
       </span>

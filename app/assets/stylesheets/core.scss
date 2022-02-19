@@ -10,6 +10,8 @@ th { color: $contrast-color }
 .text-standard { color: $body-color !important}
 .text-standard:hover { color: $contrast-color !important }
 
+.bg-standard { background: $body-bg !important }
+
 code, pre code { color: $code-color }
 mark, .mark {
   color: $body-color;
