@@ -2,8 +2,10 @@
 .navbar-dark .navbar-nav .nav-link { color: $body-color }
 
 h1,h2,h3,h4,h5,h6 { color: $contrast-color }
+.modal h1,h2,h3,h4,h5,h6 { color: $body-color }
 h2:not(.regular) { border-bottom: 3px solid $contrast-color; display: inline-block }
 p.lead { color: $contrast-color }
+.modal p.lead { color: $body-color }
 th { color: $contrast-color }
 .text-contrast { color: $contrast-color !important }
 .text-contrast:hover { color: $contrast-color !important }
