@@ -81,13 +81,12 @@ module StephenReid
     end
 
     get '/tao-te-ching/:i' do
-      redirect 'https://rarible.com/tao-te-ching'
-      # @title = "Verse #{params[:i]} · Tao Te Ching"
-      # @favicon = 'tao-sq.png'
-      # verse = Verse.all(filter: "{Verse} = #{params[:i]}").first
-      # @og_image = verse['Images'].first['thumbnails']['full']['url']
-      # @og_desc = ''
-      # erb :tao
+      @title = "Verse #{params[:i]} · Tao Te Ching"
+      @favicon = 'tao-sq.png'
+      verse = Verse.all(filter: "{Verse} = #{params[:i]}").first
+      @og_image = verse['Images'].first['thumbnails']['full']['url']
+      @og_desc = ''
+      erb :tao
     end
 
     get '/substack' do
