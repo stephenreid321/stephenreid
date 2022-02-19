@@ -3,6 +3,7 @@
 
 h2:not(.regular) { border-bottom: 3px solid $contrast-color; display: inline-block }
 h1,h2,h3,h4,h5,h6 { color: $contrast-color }
+th { color: $contrast-color }
 .text-contrast { color: $contrast-color }
 .text-contrast:hover { color: $contrast-color }
 
@@ -16,7 +17,6 @@ mark, .mark {
 }
 blockquote { border-left: 0.3em solid $body-color; padding-left: 1em; font-style: italic }
 blockquote footer { font-size: 1rem !important }
-
 
 body, small { font-weight: 300 }
 .form-control { font-weight: 300 }

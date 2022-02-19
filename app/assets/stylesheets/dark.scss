@@ -19,3 +19,8 @@ $contrast-color: white;
 $bg-dark: darken($body-bg, 5%);
 .bg-dark { background-color: $bg-dark !important; }
 .card { background-color: $bg-dark }
+
+.dropdown-menu { background-color: $body-bg }
+.dropdown-item { color: $body-color }
+.dropdown-item:hover, .dropdown-item:focus { color: $contrast-color; background-color: $body-bg }
+.dropdown-item.active, .dropdown-item:active { background-color: $body-bg }

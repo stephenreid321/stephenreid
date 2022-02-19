@@ -55,7 +55,7 @@
   <% } %>
 
   <% [
-       "/stylesheets/#{@stylesheet || 'app'}.css?#{@cachebuster}"
+       "/stylesheets/#{@stylesheet}.css?#{@cachebuster}"
      ].each { |f| %>
   <link rel="stylesheet" href="<%= f %>">
   <% } %>
