@@ -1,5 +1,5 @@
-.blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
+.blog_post p, .blog_post ul, .blog_post ol { font-family: 'Overpass', sans-serif; font-size: 1.15rem; line-height: 1.8rem }
 .blog_post img:not(.post-header-image), .blog_post video { max-width: 100%; margin: 1em 0 }
 .blog_post h2 { display: block; border: none; }
-.blog_post h2, .blog_post h3, .blog_post h4 { margin-top: 0.75em; margin-bottom: 0.33em }
+.blog_post h2, .blog_post h3, .blog_post h4 { margin-top: 1em; margin-bottom: 0.33em }
 .blog_post strong { font-weight: bold }

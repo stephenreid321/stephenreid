@@ -9,8 +9,8 @@ $lead-font-size: ($font-size-base * 1.2);
 $highlight-color: #E5C07C;
 $contrast-color: white;
 
-@import "blog";
 @import "core";
+@import "blog";
 @import "datatables";
 @import "range_slider";
 @import "share";

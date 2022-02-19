@@ -1,8 +1,12 @@
+
 .navbar-dark .navbar-nav .nav-link { color: $body-color }
-h2:not(.regular) { border-bottom: 3px solid $body-color; display: inline-block }
-code, pre code { color: $code-color }
+
+h2:not(.regular) { border-bottom: 3px solid $contrast-color; display: inline-block }
+h1,h2,h3,h4,h5,h6 { color: $contrast-color }
 .text-contrast { color: $contrast-color }
 .text-contrast:hover { color: $contrast-color }
+
+code, pre code { color: $code-color }
 mark, .mark {
   color: $body-color;
   text-decoration: underline;
