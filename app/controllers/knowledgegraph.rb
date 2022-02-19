@@ -1,6 +1,7 @@
 StephenReid::App.controller do
   get '/knowledgegraph', cache: true do
     @title = 'Knowledgegraph'
+    @og_desc = "Network view of posts I've shared"
     expires 1.hour.to_i
     @full_network = true
     @posts = Post.all(filter: "AND(
@@ -192,7 +193,10 @@ StephenReid::App.controller do
     words = text.scan(/#{r}/) - stops - term_words
     phrases2 = text.scan(/#{r} #{r}/) - stops - terms
     phrases2 += (text.split(' ')[1..-1].join(' ') + ' ').scan(/#{r} #{r}/) - stops - terms
-    phrases2 = phrases2.reject { |phrase| a, b = phrase.split(' '); stops.include?(a) && stops.include?(b) }
+    phrases2 = phrases2.reject do |phrase|
+      a, b = phrase.split(' ')
+      stops.include?(a) && stops.include?(b)
+    end
     @word_frequency = words.each_with_object(Hash.new(0)) { |w, res| res[w.downcase] += 1; }
     @phrase2_frequency = phrases2.each_with_object(Hash.new(0)) { |w, res| res[w.downcase] += 1; }
     @host_frequency = hosts.each_with_object(Hash.new(0)) { |key, hash| hash[key] += 1 }
