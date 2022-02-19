@@ -5,7 +5,7 @@
   <div class="col-sm-8">
 
     <div class="blog_post">
-      <h1 class="post-title"><a class="text-white" href="{{ page.url | relative_url }}">{{ page.title }}</a></h1>
+      <h1 class="post-title"><a class="text-contrast" href="{{ page.url | relative_url }}">{{ page.title }}</a></h1>
 
       {% if page.excerpt %}
       <p class="d-none post-excerpt">{{ page.excerpt }}</p>
@@ -28,9 +28,9 @@
         <div class="row justify-content-between">
           {% if page.previous.url %}
           <div class="col-auto">
-            <a href="{{ page.previous.url | relative_url }}" class="card bg-dark text-center shadow-sm mb-1">
+            <a href="{{ page.previous.url | relative_url }}" class="card text-center shadow-sm mb-1">
               <div class="card-body py-1 px-3">
-                <span class="text-white">&larr;</span>
+                <span class="text-contrast">&larr;</span>
                 {{ page.previous.title }}
               </div>
             </a>
@@ -38,10 +38,10 @@
           {% endif %}
           {% if page.next.url %}
           <div class="col-auto">
-            <a href="{{ page.next.url | relative_url }}" class="card bg-dark text-center shadow-sm mb-1">
+            <a href="{{ page.next.url | relative_url }}" class="card text-center shadow-sm mb-1">
               <div class="card-body py-1 px-3">
                 {{ page.next.title }}
-                <span class="text-white">&rarr;</span>
+                <span class="text-contrast">&rarr;</span>
               </div>
             </a>
           </div>

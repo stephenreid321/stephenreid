@@ -5,7 +5,7 @@
         <strong style="font-weight: 700">Tags</strong>
         <% i = 0; Term.all({ filter: '{Hidden} != 1' }).map { |term| [term['Name'], term['Posts'] ? term['Posts'].length : 0] }.select { |_name, c| c.positive? }.sort_by { |_name, c| -c }.each { |name,c| %>
         <span class="term" style="<% if i > 24 %>display: none<% end %>  ">
-          <a class="text-white" style="text-decoration: none; border-bottom: 1px dotted" href="/terms/<%= name %>"><%= name %></a>
+          <a class="text-contrast" style="text-decoration: none; border-bottom: 1px dotted" href="/terms/<%= name %>"><%= name %></a>
           <span class="badge badge-primary badge-pill"><%= c %></span>
         </span>
         <% i += 1; } %>
@@ -18,7 +18,7 @@
     <small>
       <strong style="font-weight: 700">Featured publishers</strong>
       <% Organisation.all({ filter: "{Domain} != ''" }).map { |organisation| [organisation['Name'], organisation['Posts'] ? organisation['Posts'].length : 0] }.select { |_name, c| c.positive? }.sort_by { |_name, c| -c }.each { |name,c| %>
-      <a class="text-white" style="text-decoration: none; border-bottom: 1px dotted" href="/organisations/<%= name %>"><%= name %></a>
+      <a class="text-contrast" style="text-decoration: none; border-bottom: 1px dotted" href="/organisations/<%= name %>"><%= name %></a>
       <span class="badge badge-primary badge-pill"><%= c %></span>
       <% } %>
     </small>

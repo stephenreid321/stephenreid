@@ -54,7 +54,7 @@
     <% { 'European' => 0, 'Jewish' => 210, 'Central & South Asian' => 120, 'Unknown' => 0 }.each { |k,v| %>
     <% n = Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).count
        Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).each_with_index { |ancestry, i| %>
-    <div class="text-white text-center" style="display: inline-block; width: 5em;  background: <%= (k == 'Unknown' ? '#666' : '#2DB963'.paint.spin(v + i * spin)).to_s %>"><%= "#{ancestry['Percentage']}%" %></div>
+    <div class="text-contrast text-center" style="display: inline-block; width: 5em;  background: <%= (k == 'Unknown' ? '#666' : '#2DB963'.paint.spin(v + i * spin)).to_s %>"><%= "#{ancestry['Percentage']}%" %></div>
     <%= ancestry['Name'] %> <br>
     <% } %>
     <% } %>

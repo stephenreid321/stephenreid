@@ -3,25 +3,25 @@
     <p class="lead text-center">
       Showing <%= pluralize @posts.count, 'article' %> matching
       <span style="text-decoration: none; border-bottom: 1px dotted"><%= params[:q] %></span>
-      <a class="text-white" href="/knowledgegraph"><i class="fa fa-times"></i></a>
+      <a class="text-contrast" href="/knowledgegraph"><i class="fa fa-times"></i></a>
     </p>
   <% end %>
   <% if params[:term] %>
     <p class="lead text-center">
       Showing <%= pluralize @posts.count, 'article' %> tagged <a class="badge badge-primary" href="/terms/<%= params[:term] %>"><%= params[:term] %></a>
-      <a class="text-white" href="/knowledgegraph"><i class="fa fa-times"></i></a>
+      <a class="text-contrast" href="/knowledgegraph"><i class="fa fa-times"></i></a>
     </p>
   <% end %>
   <% if params[:source_id] && params[:sink_id] %>
     <p class="lead text-center">
       Showing <%= pluralize @posts.count, 'article' %> tagged <a class="badge badge-primary" href="/terms/<%= @source['Name'] %>"><%= @source['Name'] %></a> and <a class="badge badge-primary" href="/terms/<%= @sink['Name'] %>"><%= @sink['Name'] %></a>
-      <a class="text-white" ref="/knowledgegraph"><i class="fa fa-times"></i></a>
+      <a class="text-contrast" ref="/knowledgegraph"><i class="fa fa-times"></i></a>
     </p>
   <% end %>
   <% if params[:organisation] %>
     <p class="lead text-center">
       Showing <%= pluralize @posts.count, 'article' %> published by <a class="badge badge-primary" href="/organisations/<%= params[:organisation] %>"><%= params[:organisation] %></a>
-      <a class="text-white" href="/knowledgegraph"><i class="fa fa-times"></i></a>
+      <a class="text-contrast" href="/knowledgegraph"><i class="fa fa-times"></i></a>
     </p>
   <% end %>
   <%= partial :search %>

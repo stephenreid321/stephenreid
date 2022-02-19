@@ -5,9 +5,9 @@ layout: home
 <div class="row justify-content-center">
   <div class="col-sm-8">
     {% for post in site.posts %}
-    <div class="card bg-dark mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm">
       <div class="card-body">
-        <a class="d-block text-white" href="{{ post.url | relative_url }}" style="text-decoration: none">
+        <a class="d-block text-contrast" href="{{ post.url | relative_url }}" style="text-decoration: none">
           <p class="text-muted">{% include date.html date=post.date format='%o %B %Y' %}</p>
 
           {% if post.header_image_url %}

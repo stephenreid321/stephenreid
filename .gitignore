@@ -9,8 +9,8 @@ nbproject
 .env
 .envtest
 dragonfly.log
-app/assets/stylesheets/app.css
-app/assets/stylesheets/app.css.map
+app/assets/stylesheets/*.css
+app/assets/stylesheets/*.css.map
 
 *.gem
 *.rbc

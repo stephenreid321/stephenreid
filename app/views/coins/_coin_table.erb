@@ -161,9 +161,9 @@
   <% unless @virtual_tags.include?(params[:tag]) %>
     <div>
       <small>
-        <a data-confirm="Are you sure?" class="text-white" href="/coins/delete_tag/<%= params[:tag] %>">Delete tag</a>
+        <a data-confirm="Are you sure?" class="text-contrast" href="/coins/delete_tag/<%= params[:tag] %>">Delete tag</a>
         &middot;
-        <a class="text-white" href="javascript:;" onclick="
+        <a class="text-contrast" href="javascript:;" onclick="
         var tagName = prompt('New tag name');
         if (tagName)
           window.location = '/coins/rename_tag/<%= params[:tag] %>/' + tagName

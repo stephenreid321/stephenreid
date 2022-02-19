@@ -1,16 +1,16 @@
-<div class="card bg-dark software shadow-sm">
+<div class="card software shadow-sm">
   <a href="<%= software['URL'] %>">
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= software['Images'].first['url'] if software['Images'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
-      <a href="<%= software['URL'] %>" class="text-white">
+      <a href="<%= software['URL'] %>" class="text-contrast">
         <%= software['Name'] %>
       </a>
     </h5>
     <% if software['Description'] %>
       <p class="mb-1 card-text text-muted">
-        <a href="<%= software['URL'] %>" target="_blank" class="text-white" style="text-decoration: none">
+        <a href="<%= software['URL'] %>" target="_blank" class="text-contrast" style="text-decoration: none">
           <small class="text-muted">
             <%= software['Description'].truncate(150) %>
           </small>

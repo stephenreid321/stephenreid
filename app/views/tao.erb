@@ -1,3 +1,29 @@
+<style>
+  @keyframes rarible-gradient {
+  	0% {
+  		background-position: 0% 50%;
+  	}
+  	50% {
+  		background-position: 100% 50%;
+  	}
+  	100% {
+  		background-position: 0% 50%;
+  	}
+  }
+  a.rarible {
+    display: inline-block;
+    background: linear-gradient(to right, #3276F7, #F76CE6);
+    background-size: 200% 200%;
+    color: white;
+    padding: 0.25em;
+    border-radius: 0.25em;
+    animation: rarible-gradient 7s ease infinite;
+  }
+  a.rarible:hover {
+    color: white;
+  }
+</style>
+
 <% if !params[:i] %>
   <div class="row justify-content-center mb-3">
     <div class="col-10 col-sm-4">
@@ -24,14 +50,14 @@
   </div>
   <div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
     <h2 class="mb-3 regular">
-      <a style="background: white" class="text-white" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
+      <a style="background: white" class="text-contrast" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
     </h2>
     <p>
       <a target="_blank" href="<%= verse['Rarible URL'] %>" class="rarible">
         <% if (a = verse['Owner'].downcase) == '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324' && verse['Verse'] != 81 %>
           <span class="d-inline-block px-1">NFT on sale for 1 ETH</span>
         <% else %>
-          <span class="text-white d-inline-block px-1">NFT owned by <%= "#{a[0..5]}&hellip;#{a[-4..]}" %></span>
+          <span class="text-contrast d-inline-block px-1">NFT owned by <%= "#{a[0..5]}&hellip;#{a[-4..]}" %></span>
         <% end %>
       </a>
     </p>
@@ -56,7 +82,7 @@
       <% else %>
         <a href="/tao-te-ching/<%= params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
           <div class="card-body py-1 px-3">
-            <span class="text-white">&lArr;</span>
+            <span class="text-contrast">&lArr;</span>
             Verse <%= params[:i].to_i - 1 %>
           </div>
         </a>
@@ -73,7 +99,7 @@
         <a href="/tao-te-ching/<%= params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
           <div class="card-body py-1 px-3">
             Verse <%= params[:i].to_i + 1 %>
-            <span class="text-white">&rArr;</span>
+            <span class="text-contrast">&rArr;</span>
           </div>
         </a>
       <% end %>

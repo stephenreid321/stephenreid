@@ -1,16 +1,16 @@
-<div class="card bg-dark shadow-sm post">
+<div class="card shadow-sm post">
   <a href="<%= post['Link'] %>" target="_blank">
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] if json['links']['thumbnail'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
-      <a href="<%= post['Link'] %>" target="_blank" class="text-white">
+      <a href="<%= post['Link'] %>" target="_blank" class="text-contrast">
         <%= post['Title'] %>
       </a>
     </h5>
     <% if json['meta']['description'] %>
       <p class="mb-1 card-text">
-        <a href="<%= post['Link'] %>" target="_blank" class="text-white" style="text-decoration: none">
+        <a href="<%= post['Link'] %>" target="_blank" class="text-contrast" style="text-decoration: none">
           <small class="text-muted">
             <%= json['meta']['description'].truncate(150) %>
           </small>
@@ -55,7 +55,7 @@
       </p>
     </div>
     <div class="col-auto showOnHover d-none">
-      <a class="text-white" style="text-decoration: none" href="/posts/<%= post.id %>">
+      <a class="text-contrast" style="text-decoration: none" href="/posts/<%= post.id %>">
         <i class="fas fa-link"></i>
       </a>
     </div>

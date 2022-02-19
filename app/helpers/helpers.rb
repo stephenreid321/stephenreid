@@ -41,10 +41,10 @@ StephenReid::App.helpers do
       else
         name = tag
         bg = 'background: none'
-        c = 'text-white'
+        c = 'text-contrast'
         s = 'font-weight: 500'
       end
-      %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white; #{s}">#{name}</#{html_tag}>)
+      %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
     end
   end
 end

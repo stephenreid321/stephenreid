@@ -1,0 +1,38 @@
+#toc {
+  position: sticky;
+  top: 0;
+  font-size: 0.8rem;
+}
+
+#toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#toc li {
+    padding: 0.25em 0.1em;
+}
+
+#toc a {
+    text-decoration: none;
+    display: block;
+    color: $body-color;
+}
+
+#toc .toc-h2 {
+    padding-left: 1em;
+}
+
+#toc .toc-h3 {
+    padding-left: 2em;
+}
+
+#toc .toc-h4 {
+    padding-left: 3em;
+}
+
+#toc .toc-active a {
+  color: $body-color;
+  font-weight: bold;
+}

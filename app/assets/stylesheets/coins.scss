@@ -1,13 +1,13 @@
 $primary: #BD75D3;
-$font-family-sans-serif: 'Fira Mono', sans-serif;
-$body-bg: #292C35;
-$body-color: #ABB3BF;
+$font-family-sans-serif: 'Overpass', sans-serif;
+// $body-bg: #292C35;
+// $body-color: #ABB3BF;
 $font-size-base: 0.95rem;
 $lead-font-size: ($font-size-base * 1.2);
 @import "bootstrap/bootstrap";
 $highlight-color: #E5C07C;
 $code-color: #C5636C;
-$contrast-color: white;
+$contrast-color: $body-color;
 
 @import "blog";
 @import "core";
@@ -15,7 +15,3 @@ $contrast-color: white;
 @import "range_slider";
 @import "share";
 @import "toc";
-
-$bg-dark: darken($body-bg, 5%);
-.bg-dark { background-color: $bg-dark !important; }
-.card { background-color: $bg-dark }
