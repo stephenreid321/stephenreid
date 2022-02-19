@@ -80,7 +80,7 @@
           </div>
         </a>
       <% else %>
-        <a href="/tao-te-ching/<%= params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1">
+        <a href="/tao-te-ching/<%= params[:i].to_i - 1 %>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
           <div class="card-body py-1 px-3">
             <span class="text-contrast">&lArr;</span>
             Verse <%= params[:i].to_i - 1 %>
@@ -96,7 +96,7 @@
           </div>
         </a>
       <% else %>
-        <a href="/tao-te-ching/<%= params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1">
+        <a href="/tao-te-ching/<%= params[:i].to_i + 1 %>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
           <div class="card-body py-1 px-3">
             Verse <%= params[:i].to_i + 1 %>
             <span class="text-contrast">&rArr;</span>
