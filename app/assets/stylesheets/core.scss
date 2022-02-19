@@ -2,6 +2,7 @@
 h2:not(.regular) { border-bottom: 3px solid $body-color; display: inline-block }
 code, pre code { color: $code-color }
 .text-contrast { color: $contrast-color }
+.text-contrast:hover { color: $contrast-color }
 mark, .mark {
   color: $body-color;
   text-decoration: underline;
