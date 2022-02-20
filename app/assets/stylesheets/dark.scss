@@ -31,5 +31,7 @@ $dark-color: #343a40;
 
 .badge { font-weight: normal }
 
+.table th, .table td { border-color: $bg-dark }
+
 .overpass { font-family: 'Overpass', sans-serif; }
 .fira { font-family: 'Fira Mono', sans-serif; }
