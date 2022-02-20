@@ -1,12 +1,12 @@
 $primary: #2DB963;
 $font-family-sans-serif: 'Overpass', sans-serif;
-// $body-bg: #292C35;
-// $body-color: #ABB3BF;
-// $code-color: #C5636C;
-// $font-size-base: 0.95rem;
-// $lead-font-size: ($font-size-base * 1.2);
+// $body-bg
+// $body-color
+// $code-color
+// $font-size-base
+// $lead-font-size
 @import "bootstrap/bootstrap";
-$highlight-color: #E5C07C;
+$highlight-color: #FDFFAA;
 $contrast-color: $body-color;
 
 @import "core";
