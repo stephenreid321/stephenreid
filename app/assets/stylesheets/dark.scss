@@ -16,9 +16,13 @@ $contrast-color: white;
 @import "share";
 @import "toc";
 
+.overpass { font-family: 'Overpass', sans-serif !important }
+.fira { font-family: 'Fira Mono', sans-serif !important }
+
 $bg-dark: darken($body-bg, 5%);
 .bg-dark { background-color: $bg-dark !important; }
 .card { background-color: $bg-dark }
+.table th, .table td { border-color: $bg-dark }
 
 $dark-color: #343a40;
 .modal h1,.modal h2,.modal h3,.modal h4,.modal h5,.modal h6 { color: $dark-color }
@@ -31,7 +35,7 @@ $dark-color: #343a40;
 
 .badge { font-weight: normal }
 
-.table th, .table td { border-color: $bg-dark }
+.btn-secondary { background-color: lighten($body-bg, 15%); border-color: lighten($body-bg, 15%); }
+.btn-secondary:hover { background-color: lighten($body-bg, 10%); border-color: lighten($body-bg, 10%); }
 
-.overpass { font-family: 'Overpass', sans-serif !important }
-.fira { font-family: 'Fira Mono', sans-serif !important }
+.text-muted { color: darken($body-color, 20%) !important }

@@ -12,6 +12,9 @@ th { color: $contrast-color }
 
 .bg-standard { background: $body-bg !important }
 
+.btn-twitter { color: white; border-color: #379CF0; background-color: #379CF0 }
+.btn-twitter:hover { color: white; border-color: darken(#379CF0, 10%); background-color: darken(#379CF0, 10%); }
+
 code, pre code { color: $code-color }
 mark, .mark {
   color: $body-color;
