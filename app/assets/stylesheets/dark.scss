@@ -33,5 +33,5 @@ $dark-color: #343a40;
 
 .table th, .table td { border-color: $bg-dark }
 
-.overpass { font-family: 'Overpass', sans-serif; }
-.fira { font-family: 'Fira Mono', sans-serif; }
+.overpass { font-family: 'Overpass', sans-serif !important }
+.fira { font-family: 'Fira Mono', sans-serif !important }
