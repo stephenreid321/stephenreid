@@ -1,6 +1,6 @@
 StephenReid::App.helpers do
   def timeago(x)
-    %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x}</abbr>)
+    %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x.iso8601}</abbr>)
   end
 
   def md(slug)
