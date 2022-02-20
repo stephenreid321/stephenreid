@@ -1,55 +1,52 @@
 <% spin = 180 / actual.count %>
-<div class="row justify-content-center">
-  <div class="col-12 col-md-6 mb-3">
-    <script>
-      $(function () {
-        var config = {
-          type: 'doughnut',
-          data: {
-            datasets: [{
-                data: <%= actual.map { |k,v| v } %>,
-                backgroundColor: <%= actual.each_with_index.map { |p,i|
-                  k, v = p
-                  asset = Asset.find_by(ticker: k)
-                  asset.color ? "##{asset.color}" : asset.virtual_color
-                } %>
-              }],
-            labels: <%= actual.map { |k,v| k } %>
+<script>
+  $(function () {
+    var config = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+            data: <%= actual.map { |k,v| v } %>,
+            backgroundColor: <%= actual.each_with_index.map { |p,i|
+              k, v = p
+              asset = Asset.find_by(ticker: k)
+              asset.color ? "##{asset.color}" : asset.virtual_color
+            } %>
+          }],
+        labels: <%= actual.map { |k,v| k } %>
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: true
           },
-          options: {
-            legend: {
-              display: true
-            },
-            responsive: true,
-            tooltips: {
-              callbacks: {
-                label: function (tooltipItem, data) {
-                  try {
-                    let label = ' ' + data.labels[tooltipItem.index] || '';
-                    if (label) {
-                      label += ': ';
-                    }
-
-                    const sum = data.datasets[0].data.reduce((accumulator, curValue) => {
-                      return accumulator + curValue;
-                    });
-                    const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    label += Number((value / sum) * 100).toFixed(1) + '%';
-                    return label;
-                  } catch (error) {
-                    console.log(error);
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                try {
+                  let label = ' ' + tooltipItem.label || '';
+                  if (label) {
+                    label += ': ';
                   }
+
+                  const sum = tooltipItem.dataset.data.reduce((accumulator, curValue) => {
+                    return accumulator + curValue;
+                  });
+                  const value = tooltipItem.raw;
+                  label += Number((value / sum) * 100).toFixed(1) + '%';
+                  return label;
+                } catch (error) {
+                  console.log(error);
                 }
               }
             }
           }
-        };
-        $(function() {
-          var ctx = document.getElementById('chart-area').getContext('2d');
-          window.myPie = new Chart(ctx, config);
-        })
-      })
-    </script>
-    <canvas id="chart-area"></canvas>
-  </div>
-</div>
+        }
+      }
+    };
+    $(function() {
+      var ctx = document.getElementById('chart-area').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    })
+  })
+</script>
+<canvas id="chart-area"></canvas>

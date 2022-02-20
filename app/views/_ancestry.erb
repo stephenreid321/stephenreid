@@ -1,6 +1,6 @@
 <% spin = 60 / Ancestry.all.count %>
-<div class="row">
-  <div class="col-12 col-md-6 mb-3">
+<div class="row justify-content-center">
+  <div class="col-12 col-md-4 mb-3 px-5">
     <script>
       $(function () {
         var config = {
@@ -15,27 +15,28 @@
             labels: <%= Ancestry.all(sort: { 'Autonumber' => 'asc' }).map { |ancestry| ancestry['Name'] } %>,
           },
           options: {
-            legend: {
-              display: false
-            },
-            responsive: true,
-            tooltips: {
-              callbacks: {
-                label: function (tooltipItem, data) {
-                  try {
-                    let label = ' ' + data.labels[tooltipItem.index] || '';
-                    if (label) {
-                      label += ': ';
-                    }
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    try {
+                      let label = ' ' + tooltipItem.label || '';
+                      if (label) {
+                        label += ': ';
+                      }
 
-                    const sum = data.datasets[0].data.reduce((accumulator, curValue) => {
-                      return accumulator + curValue;
-                    });
-                    const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    label += Number((value / sum) * 100).toFixed(1) + '%';
-                    return label;
-                  } catch (error) {
-                    console.log(error);
+                      const sum = tooltipItem.dataset.data.reduce((accumulator, curValue) => {
+                        return accumulator + curValue;
+                      });
+                      const value = tooltipItem.raw;
+                      label += Number((value / sum) * 100).toFixed(1) + '%';
+                      return label;
+                    } catch (error) {
+                      console.log(error);
+                    }
                   }
                 }
               }

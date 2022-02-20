@@ -66,6 +66,10 @@ module StephenReid
       end
     end
 
+    get '/5km-run-times' do
+      erb :run_times
+    end
+
     get '/how-to-dao' do
       @title = 'How to DAO'
       erb :how_to_dao

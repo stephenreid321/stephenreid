@@ -5,10 +5,6 @@
 <% diff = Hash[actual.map { |k, _v| [k, actual[k] - rebalanced[k]] }] %>
 <% y = 50_000 %>
 
-<div class="my-3">
-  <%= partial :'crypto/strategy_chart', locals: { actual: actual } %>
-</div>
-
 <style>
   @media(min-width: 768px) {
   td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
@@ -20,6 +16,9 @@
       $('#assets').dataTable({info: false, paging: false, searching: false, order: [[4, "desc"]]})
   })
 </script>
+
+<div class="row align-items-center">
+  <div class="col-md-8">
 <table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
   <thead>
     <tr>
@@ -103,3 +102,8 @@
   </tr>
   <% } %>
 </table>
+</div>
+<div class="col-md-4">
+  <%= partial :'crypto/strategy_chart', locals: { actual: actual } %>
+</div>
+</div>

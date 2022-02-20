@@ -1,0 +1,66 @@
+<p class="lead">My 5km run times</p>
+
+<canvas id="tt"></canvas>
+<script>
+$(function() {
+
+  function epoch_to_hh_mm_ss(epoch) {
+     return new Date(epoch*1000).toISOString().substr(14, 5)
+   }
+
+  const options = {
+    type: 'line',
+    data: {
+      datasets: [{
+        data: [<% RunTime.all(sort: {'Unixtime' => 'desc'}).each { |run_time| if run_time['Seconds']%>
+          {
+            x: <%=run_time['Unixtime']%>,
+            y: <%=run_time['Seconds'] %>
+          },
+        <% end } %>],
+        borderColor: '#B16DC6'
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          displayColors: false,
+          callbacks: {
+            title: function(tooltipItems) {
+              return new Date(tooltipItems[0].element.parsed.x).toLocaleDateString('en-GB',  { year: 'numeric', month: 'short', day: 'numeric' })
+            },
+            label: function(tooltipItem) {
+              return epoch_to_hh_mm_ss(tooltipItem.element.parsed.y)
+            }
+          }
+        },
+      },
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+              displayFormats: {
+                  day: 'do MMM'
+              }
+          }
+        },
+        y: {
+          min: 60 * 20,
+          max: 60 * 25,
+          ticks: {
+            callback: function(v) { return epoch_to_hh_mm_ss(v) },
+            stepSize: 30
+          }
+        }
+      }
+    }
+  }
+
+  const ctx = document.getElementById('tt').getContext('2d');
+  new Chart(ctx, options);
+
+})
+</script>
