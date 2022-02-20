@@ -28,3 +28,6 @@ $dark-color: #343a40;
 .dropdown-item { color: $body-color }
 .dropdown-item:hover, .dropdown-item:focus { color: $contrast-color; background-color: $body-bg }
 .dropdown-item.active, .dropdown-item:active { background-color: $body-bg }
+
+.badge { font-weight: normal }
+.overpass { font-family: 'Overpass', sans-serif; }
