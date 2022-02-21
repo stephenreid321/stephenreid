@@ -59,8 +59,32 @@
   cy.on('tap', 'edge', function(){
   window.location.href = '/terms/' + this.data('source') + '/' + this.data('target');
   });
-  //cy.$('[weight < 2]').hide()
+  // cy.$('[weight < 4]').hide()
   cy.minZoom(0.5)
+
+  // function animate() {
+  //   cy.nodes().each(function(ele) {
+  //     ele.stop()
+  //     cy.nodes().each(function(ele) {
+  //       ele.animate({
+  //         style: {
+  //           'background-color': chroma(ele.data().color).darken().hex()
+  //         },
+  //         duration: 2000,
+  //         complete: function() {
+  //           cy.nodes().animate({
+  //             style: {
+  //               'background-color': ele.data().color
+  //             },
+  //             duration: 2000,
+  //             complete: ani
+  //           })
+  //         }
+  //       })
+  //     })
+  //   })
+  // }
+  // animate()
 
   }
 
