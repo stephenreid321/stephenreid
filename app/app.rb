@@ -69,7 +69,7 @@ module StephenReid
     get '/lunarpunk-dreams' do
       @title = 'Lunarpunk Dreams'
       @og_desc = 'Lunarpunk is what happens when the sun goes down in a Solarpunk village/town/city.'
-      @og_image = "#{ENV['BASE_URI']}/images/lunarpunk_dreams.png"
+      @og_image = "#{ENV['BASE_URI']}/images/lunarpunk_dreams_horizontal.png"
       erb :lunarpunk_dreams
     end
 

@@ -4,14 +4,14 @@ It's still oriented towards regeneration, community and freedom, but perhaps the
 
 Lunarpunk Dreams is a new podcast that asks the questions: Who do we need to be, and in what ways to we need to grow, to usher in a Solarpunk future? What is the culture we're creating around Solarpunk technologies, both silicon and psychospiritual?
 
-<p class="text-white">Expect deep dialogues on: (guests I plan to invite in brackets)</p>
+<p class="text-white">Expect deep dialogues on: (guests I plan to invite linked)</p>
 
 * web3, Ethereum, Cosmos, regenerative finance, DAOs, DHOs & DisCOs
-  * [@santisiri](https://twitter.com/santisiri), [@keikreutler](https://twitter.com/keikreutler), [@owocki](https://twitter.com/owocki), [@niran](https://twitter.com/niran), [@chaserchapman](https://twitter.com/chaserchapman), [@thegrifft](https://twitter.com/thegrifft), [@spengrah](https://twitter.com/spengrah), [@JakeHartnell](https://twitter.com/JakeHartnell), [@buchmanster](https://twitter.com/buchmanster)
+  * [@santisiri](https://twitter.com/santisiri), [@keikreutler](https://twitter.com/keikreutler), [@owocki](https://twitter.com/owocki), [@niran](https://twitter.com/niran), [@climateXcrypto](https://twitter.com/climateXcrypto), [@chaserchapman](https://twitter.com/chaserchapman), [@thegrifft](https://twitter.com/thegrifft), [@spengrah](https://twitter.com/spengrah), [@JakeHartnell](https://twitter.com/JakeHartnell), [@buchmanster](https://twitter.com/buchmanster)
 * Metamodernism, Teal, Reinventing Organisations, Source, Holocracy & Sociocracy
-  * [Hanzi Freinacht](https://metamoderna.org/), [The Ready](https://theready.com/), [@RichDecibels](https://twitter.com/RichDecibels), [@solarpunk_girl](https://twitter.com/solarpunk_girl)
+  * [Hanzi Freinacht](https://metamoderna.org/), [The Ready](https://theready.com/), [@RichDecibels](https://twitter.com/RichDecibels), [@solarpunk_girl](https://twitter.com/solarpunk_girl), [Joe Lightfoot](https://twitter.com/joe_lightfoot_)
 * meditation, plant medicine, entheogens, Soulcraft, conscious sexuality, art, music, magic, indigenous thinking, tarot, clowning & fooling
-  * [Manda Scott](https://accidentalgods.life/), [Bill Plotkin](https://www.animas.org/), [Alnoor Ladha](https://www.braveearth.com/), [Elaine Yonge](https://ista.life/profile/elaine-yonge)
+  * [Manda Scott](https://accidentalgods.life/), [Bill Plotkin](https://www.animas.org/), [Alnoor Ladha](https://www.braveearth.com/), [Elaine Yonge](https://ista.life/profile/elaine-yonge), [Tyson Yunkaporta](https://www.linkedin.com/in/tyson-yunkaporta-04a9b969)
 * psychotherapy, counselling, coaching & mentoring 
   * [Alain Lagger](http://www.alainlagger.com/bio-2), [Nick Bolton](https://www.animascoaching.com/about-animas/our-team/nick-bolton/) 
 * permaculture, regenerative agriculture, microgrids, mesh networks & ecovillages
@@ -21,5 +21,5 @@ Lunarpunk Dreams is a new podcast that asks the questions: Who do we need to be,
 * complexity science, game theory, multipolar traps, coordination & Moloch
   * [Daniel Schmachtenberger](https://www.facebook.com/danielschmachtenberger), [Jordan Hall](https://twitter.com/jgreenhall)
 
-[Subscribe to my newsletter](https://stephenreid.substack.com/) to hear more.
+[Subscribe to the newsletter](https://stephenreid.substack.com/s/lunarpunk-dreams) to hear more.
 
