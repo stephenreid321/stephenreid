@@ -1,5 +1,6 @@
 
 .navbar-dark .navbar-nav .nav-link { color: $body-color }
+.navbar-nav .nav-item { font-size: 0.9rem }
 
 h1,h2,h3,h4,h5,h6 { color: $contrast-color }
 h2:not(.regular) { border-bottom: 3px solid $contrast-color; display: inline-block }

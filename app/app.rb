@@ -66,6 +66,10 @@ module StephenReid
       end
     end
 
+    get '/lunarpunk-dreams' do
+      erb :lunarpunk_dreams
+    end
+
     get '/5km-run-times' do
       erb :run_times
     end
