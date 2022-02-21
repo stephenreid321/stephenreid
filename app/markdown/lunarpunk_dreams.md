@@ -2,14 +2,14 @@
 
 It's still oriented towards regeneration, community and freedom, but perhaps there's a little more space for the weird, the mystical and the personal.
 
-Lunarpunk Dreams is a new podcast that asks the questions: Who do we need to be, and in what ways to we need to grow, to usher in a Solarpunk future? What is the culture we're creating around Solarpunk technologies, both silicon and psychospiritual, inner and outer?
+Lunarpunk Dreams is a new podcast _launching soon_ that asks the questions: Who do we need to be, and in what ways to we need to grow, to usher in a Solarpunk future? What is the culture we're creating around Solarpunk technologies, both silicon and psychospiritual, inner and outer?
 
 <p class="text-white">Expect deep dialogues on: (guests I plan to invite linked)</p>
 
 * web3, Ethereum, Cosmos, regenerative finance, DAOs, DHOs & DisCOs
   * [@santisiri](https://twitter.com/santisiri), [@keikreutler](https://twitter.com/keikreutler), [@owocki](https://twitter.com/owocki), [@niran](https://twitter.com/niran), [@climateXcrypto](https://twitter.com/climateXcrypto), [@chaserchapman](https://twitter.com/chaserchapman), [@thegrifft](https://twitter.com/thegrifft), [@spengrah](https://twitter.com/spengrah), [@JakeHartnell](https://twitter.com/JakeHartnell), [@buchmanster](https://twitter.com/buchmanster)
 * Metamodernism, Teal, Reinventing Organisations, Source, Holocracy & Sociocracy
-  * [Hanzi Freinacht](https://metamoderna.org/), [The Ready](https://theready.com/), [@RichDecibels](https://twitter.com/RichDecibels), [@solarpunk_girl](https://twitter.com/solarpunk_girl), [Joe Lightfoot](https://twitter.com/joe_lightfoot_)
+  * [Hanzi Freinacht](https://metamoderna.org/), [The Ready](https://theready.com/), [@RichDecibels](https://twitter.com/RichDecibels), [@solarpunk_girl](https://twitter.com/solarpunk_girl), [Joe Lightfoot](https://twitter.com/joe_lightfoot_), [@tomnixon](https://twitter.com/tomnixon)
 * meditation, plant medicine, entheogens, Soulcraft, conscious sexuality, art, music, magic, indigenous thinking, tarot, clowning & fooling
   * [Manda Scott](https://accidentalgods.life/), [Bill Plotkin](https://www.animas.org/), [Alnoor Ladha](https://www.braveearth.com/), [Elaine Yonge](https://ista.life/profile/elaine-yonge), [Tyson Yunkaporta](https://www.linkedin.com/in/tyson-yunkaporta-04a9b969)
 * psychotherapy, counselling, coaching & mentoring 
