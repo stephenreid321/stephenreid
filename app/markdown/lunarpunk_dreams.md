@@ -22,4 +22,5 @@ Lunarpunk Dreams is a new podcast _launching soon_ that asks the questions: Who 
   * [Daniel Schmachtenberger](https://www.facebook.com/danielschmachtenberger), [Jordan Hall](https://twitter.com/jgreenhall)
 
 [Subscribe to the newsletter](https://stephenreid.substack.com/s/lunarpunk-dreams) to hear more.
+[Read the Twitter thread](https://twitter.com/lunarpunk_0x/status/1495724216804589568)
 
