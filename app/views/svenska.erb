@@ -24,7 +24,7 @@ $(function() {
 
 <% lektion = nil %>
 <table class="table" id="ord">
-  <% SvensktOrd.all(sort: {'Autonumber' => 'asc'}).each { |svenskt_ord| %>
+  <% SvensktOrd.all(sort: {'Lektion' => 'asc', 'Autonumber' => 'asc'}).each { |svenskt_ord| %>
     <tr>
        <td class="svenska" <% if lektion != svenskt_ord['Lektion'] %>style="border-color: white"<% end %>>
          <%= svenskt_ord['Svenska'] %>
