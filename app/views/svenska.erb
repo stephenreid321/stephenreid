@@ -1,0 +1,41 @@
+
+<p class="lead text-center">
+  De <%= SvensktOrd.all.count %> orden jag har lärt mig via <a href="https://www.memrise.com/">Memrise</a>
+</p>
+
+<div class="row justify-content-center">
+  <div class="col-md-9">
+
+<style>
+  #ord tr:hover { color: white; cursor: pointer }
+</style>
+<script>
+$(function() {
+
+  $('#ord tr').click(function() {
+    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + $('td:first-child', this).text();
+    var audioEl = $('audio', this)[0]
+    audioEl.src = url;
+    audioEl.play();
+  })
+
+})
+</script>
+
+<% lektion = nil %>
+<table class="table" id="ord">
+  <% SvensktOrd.all(sort: {'Autonumber' => 'asc'}).each { |svenskt_ord| %>
+    <tr>
+       <td class="svenska" <% if lektion != svenskt_ord['Lektion'] %>style="border-color: white"<% end %>>
+         <%= svenskt_ord['Svenska'] %>
+         <audio class="d-none" controls />
+       </td>
+       <td <% if lektion != svenskt_ord['Lektion'] %>style="border-color: white"<% end %>>
+         <%= svenskt_ord['Engelska'] %>
+       </td>
+     </tr>
+  <% lektion = svenskt_ord['Lektion'] } %>
+</table>
+
+</div>
+</div>

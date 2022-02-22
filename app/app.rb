@@ -59,7 +59,7 @@ module StephenReid
       erb :about
     end
 
-    %w[books podcasts software discord tarot events].each do |r|
+    %w[books podcasts software discord tarot events svenska].each do |r|
       get "/#{r}", cache: true do
         @title = r.capitalize
         erb :"#{r}"
