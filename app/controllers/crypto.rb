@@ -1,8 +1,4 @@
 StephenReid::App.controller do
-  before do
-    @favicon = 'moon.png'
-  end
-
   get '/crypto-investing' do
     @title = 'Crypto investing: a very short introduction'
     @og_desc = 'This is not financial advice'
