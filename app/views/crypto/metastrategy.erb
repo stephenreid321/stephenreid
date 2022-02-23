@@ -83,7 +83,7 @@
 
     <% if Strategy.and(:status.ne => 'verified').count > 0 %>
       Currently excluded strategies:
-      <%= Strategy.and(:status.ne => 'verified').map do |strategy|
+      <%= Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').map do |strategy|
             %(<a class="badge #{strategy.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
           end.join(' ') %>
     <% end %>
