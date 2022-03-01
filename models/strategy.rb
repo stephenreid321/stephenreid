@@ -229,35 +229,21 @@ class Strategy
     Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
 
     Strategy.update
-    success = nil
-    until success
 
-      begin
-        with_multipliers, without_multipliers = Strategy.assets_weighted
-        weights = Strategy.proposed(with_multipliers, n: n)
-      rescue StandardError => e
-        Airbrake.notify(e)
-        raise e
-      end
+    with_multipliers, _without_multipliers = Strategy.assets_weighted
+    weights = Strategy.proposed(with_multipliers, n: n)
 
-      data = {
-        ticker: 'DECENTCOOP',
-        values: weights.map do |ticker, p|
-          { assetTicker: ticker, rebalancedWeight: p }
-        end,
-        speedType: 'SLOW'
-      }
+    data = {
+      ticker: 'DECENTCOOP',
+      values: weights.map do |ticker, p|
+        { assetTicker: ticker, rebalancedWeight: p }
+      end,
+      speedType: 'SLOW'
+    }
 
-      puts n
-      puts data.to_json
-      begin
-        Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
-        success = true
-      rescue StandardError => e
-        puts e
-        n -= 1
-        raise Strategy::RebalancingError if n < 3
-      end
-    end
+    puts data.to_json
+    Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
+  rescue StandardError
+    raise Strategy::RebalancingError
   end
 end

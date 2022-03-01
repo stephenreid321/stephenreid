@@ -1,8 +1,6 @@
 StephenReid::App.controller do
   get '/crypto-investing' do
     @title = 'Crypto investing: a very short introduction'
-    @og_desc = 'This is not financial advice'
-    @og_image = "#{ENV['BASE_URI']}/images/crypto-investing-2.jpg"
     erb :'crypto/crypto_investing'
   end
 
