@@ -3,18 +3,10 @@
 <% strategies = Strategy.and(:status => 'verified') %>
 
 <div class="row justify-content-center text-center">
-  <div class="col-6 col-sm-2">
+  <div class="col-6 col-sm-2 mb-4">
     <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,1)" src="/images/meta-sq.jpg"></a>
   </div>
 </div>
-
-<div class="row justify-content-center text-center">
-  <div class="col-12">
-    <p class="lead mb-4"><a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group</a></p>
-  </div>
-</div>
-
-
 
 
 <div class="row justify-content-center">
@@ -35,7 +27,9 @@
   Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score_fee_weighted < strategy.score_fee_weighted }).count%> of them:
   <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
   If you're already copying these strategies, you're probably better off switching to Metastrategy.
+  <a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group &rarr;</a>
 </p>
+
 
 <h2>Step-by-step guide to investing in Metastrategy</h2>
 <p>
