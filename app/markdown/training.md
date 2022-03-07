@@ -17,14 +17,14 @@
 
 ### Meditation
 
-*   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021)
-*   *[The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Zohar Lavie and Jake Dartington (Mar 2022)*
+*   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Zohar Lavie and Jake Dartington (Mar 2022, 5 days)
+*   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 4 days)
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
 
 ### Conscious sexuality
 
-*   [ISTA 1](https://ista.life/) with [Elaine Young](https://www.thetantricshaman.com/), [Binoy Milton D'souza](https://lovemovementevolution.com/) & [Frank Mondeose](https://frankmondeose.com/) (Sep 2019)
+*   [ISTA 1](https://ista.life/) with [Elaine Young](https://www.thetantricshaman.com/), [Binoy Milton D'souza](https://lovemovementevolution.com/) & [Frank Mondeose](https://frankmondeose.com/) including the [Wheel of Consent](https://wheelofconsentbook.com/) (Sep 2019)
 *   *[ISTA 2](https://ista.life/events/county-louth-ireland-ista-level-2-apr-2022) with Elaine Yonge, Laurie Handlers & Eugene Hedlund (Apr 2022)*
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
