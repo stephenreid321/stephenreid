@@ -1,19 +1,7 @@
-### Soulcraft & Wild Mind
-
-* [Wild Mind](https://www.goodreads.com/en/book/show/16000440) Intensive at [Lūžņa](https://www.soulcraft.eu/about), Latvia with [Sage Magdalene](https://sagemagdalene.com/) and [Sara McFarland](https://www.saramcfarland.com/) (Aug 2021)
-* *[Betwixt: Exploring the Threshold between Worlds](https://naturewisdom.life/event/betwixt-exploring-the-threshold-between-worlds/) with [Rebecca Card](http://naturewisdom.life/) and [Bell Selkie Lovelock](https://www.bellselkie.co.uk/) (Mar 2022)*
-
 ### Shipibo plant dietas
 
 *   [Guayusa dieta](https://www.sovereignxnature.com/shipibodieta) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
 *   [Noya Rao dieta](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) with Maestra Manuela near Pucallpa, Peru (Dec 2017, 10 days)
-
-### Psychotherapy & coaching
-
-*   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
-*   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
-*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
-*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 
 ### Meditation
 
@@ -21,6 +9,18 @@
 *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 4 days)
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
+
+### Soulcraft & Wild Mind
+
+* [Wild Mind](https://www.goodreads.com/en/book/show/16000440) Intensive at [Lūžņa](https://www.soulcraft.eu/about), Latvia with [Sage Magdalene](https://sagemagdalene.com/) and [Sara McFarland](https://www.saramcfarland.com/) (Aug 2021)
+* *[Betwixt: Exploring the Threshold between Worlds](https://naturewisdom.life/event/betwixt-exploring-the-threshold-between-worlds/) with [Rebecca Card](http://naturewisdom.life/) and [Bell Selkie Lovelock](https://www.bellselkie.co.uk/) (Mar 2022)*
+
+### Psychotherapy & coaching
+
+*   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
+*   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
+*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
+*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 
 ### Conscious sexuality
 
