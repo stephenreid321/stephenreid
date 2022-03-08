@@ -38,7 +38,7 @@ Coaching can be distinguished from mentoring and teaching (where the mentor/teac
 
 I offer an initial free first exploratory meeting for up to an hour, so we can see if we are well suited to one another.
 
-From there, my preference is for us to meet for an hour each week via Zoom and continue until we feel a sense of completion, though we can adjust this according to your needs and desires.
+From there, my preference is for us to meet for an hour each week via Zoom and continue until we feel a sense of completion.
 
 I charge £10-50 per hour, according to your means. This is self-assessed; you just tell me how much you want to pay.
 
