@@ -1,4 +1,4 @@
-<p class="lead">I am currently accepting coaching clients as part of my training towards becoming an <a href="https://coachingfederation.org/credentials-and-standards/acc-paths">ICF-certified</a> transformational coach.</p>
+<p class="lead">I am currently accepting coaching clients as part of my training towards becoming an <a href="https://coachingfederation.org/credentials-and-standards">ICF-certified</a> transformational coach.</p>
 
 How would it feel to be in conversation with someone who:
 
