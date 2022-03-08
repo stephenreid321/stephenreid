@@ -75,6 +75,7 @@ module StephenReid
 
     get '/coaching' do
       @title = 'Coaching'
+      @og_desc = 'What do you really want, and how can you move towards it?'
       @hide_subscribe = true
       erb :coaching
     end
