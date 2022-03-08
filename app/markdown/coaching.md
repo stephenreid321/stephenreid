@@ -36,7 +36,7 @@ Coaching can be distinguished from mentoring and teaching (where the mentor/teac
 
 ### Interested in working together?
 
-I offer an initial free exploratory meeting for up to an hour, so we can see if we are well suited to one another.
+I offer an initial free exploratory meeting for up to an hour, so we can see if we are well-suited to one another.
 
 From there, my preference is for us to meet for an hour each week via Zoom and continue until we feel a sense of completion.
 
