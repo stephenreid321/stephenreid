@@ -75,6 +75,7 @@ module StephenReid
 
     get '/coaching' do
       @title = 'Coaching'
+      @og_image = "#{ENV['BASE_URI']}/images/brave earth/1.jpg"
       @hide_subscribe = true
       erb :coaching
     end
