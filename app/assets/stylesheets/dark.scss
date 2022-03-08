@@ -16,6 +16,8 @@ $contrast-color: white;
 @import "share";
 @import "toc";
 
+blockquote { border-left: 0.3em solid $body-color; }
+
 .overpass { font-family: 'Overpass', sans-serif !important }
 .fira { font-family: 'Fira Mono', sans-serif !important }
 

@@ -4,18 +4,22 @@ StephenReid::App.controller do
   end
 
   get '/blog/2021/06/11/response-to-allegations-by-whoisstephenreid.html' do
+    @stylesheet = 'light'
     redirect '/response-to-allegations-by-whoisstephenreid'
   end
 
   get '/response-to-allegations-by-whoisstephenreid' do
+    @stylesheet = 'light'
     erb :'responses/response_1'
   end
 
   get '/blog/2021/06/18/seeds-of-solidarity-transformative-justice.html' do
+    @stylesheet = 'light'
     redirect '/seeds-of-solidarity-transformative-justice'
   end
 
   get '/seeds-of-solidarity-transformative-justice' do
+    @stylesheet = 'light'
     erb :'responses/response_2'
   end
 
@@ -35,7 +39,8 @@ StephenReid::App.controller do
     content_type = MIME::Types.type_for(file_path).first.content_type
     if content_type == 'text/html'
       html = Nokogiri::HTML.parse(content)
-      @title = (t = html.search('.post-title').text; t.empty? ? 'Blog' : t)
+      @title = (t = html.search('.post-title').text
+                t.empty? ? 'Blog' : t)
       d = html.search('.post-excerpt').text
       @og_desc = d unless d.empty?
       src = html.search('.post-header-image').attr('src').to_s

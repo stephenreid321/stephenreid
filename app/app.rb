@@ -73,7 +73,14 @@ module StephenReid
       erb :lunarpunk_dreams
     end
 
+    get '/coaching' do
+      @title = 'Coaching'
+      @hide_subscribe = true
+      erb :coaching
+    end
+
     get '/5km-run-times' do
+      @title = '5km run times'
       erb :run_times
     end
 

@@ -24,7 +24,7 @@ mark, .mark {
   text-decoration-thickness: 2px;
   background: none;
 }
-blockquote { border-left: 0.3em solid $body-color; padding-left: 1em; font-style: italic }
+blockquote { border-left: 0.3em solid $gray-300; padding-left: 1em; font-style: italic }
 blockquote footer { font-size: 1rem !important }
 
 body, small { font-weight: 300 }

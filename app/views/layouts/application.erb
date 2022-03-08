@@ -112,11 +112,13 @@
 
     <div id="footer" class="bg-dark p-3 mt-5">
       <div class="container">
-        <div class="row justify-content-center mb-3">
-          <div class="col-sm-auto text-center">
-            <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
+        <% unless @hide_subscribe %>
+          <div class="row justify-content-center mb-3">
+            <div class="col-sm-auto text-center">
+              <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
+            </div>
           </div>
-        </div>
+        <% end %>
         <div class="row justify-content-center">
           <%= Padrino.env == :production ? cp('social_networks') : partial(:social_networks) %>
         </div>
