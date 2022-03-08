@@ -83,7 +83,7 @@ module StephenReid
     end
 
     get '/tao-te-ching' do
-      redirect 'https://tao-te-ching/1'
+      redirect '/tao-te-ching/1'
       # redirect 'https://rarible.com/tao-te-ching'
       # @title = 'Tao Te Ching'
       # @favicon = 'tao-sq.png'
