@@ -9,7 +9,7 @@ How would it feel to be in conversation with someone who:
 * holds up a mirror for you to see where you are part of your own problem
 * trusts that you can find the answers you need through the power of a challenging but compassionate exploration?
 
-If that resonates, read on&hellip;
+If that sounds appealing, read on&hellip;
 
 ### What is coaching?
 
