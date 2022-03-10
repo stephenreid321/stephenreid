@@ -3,8 +3,6 @@ class Strategy
   include Mongoid::Timestamps
   class RoundingError < StandardError; end
 
-  class RebalancingError < StandardError; end
-
   MONTH_FACTOR = 4
   THREE_MONTH_FACTOR = 3
   SIX_MONTH_FACTOR = 2
@@ -243,7 +241,5 @@ class Strategy
 
     puts data.to_json
     Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
-  rescue StandardError
-    raise Strategy::RebalancingError
   end
 end
