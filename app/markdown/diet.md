@@ -10,10 +10,9 @@
 *   Fast from time to time
 *   Drink plenty of water & tea, some fresh juice
 *   Coffee and alcohol only on special occasions
-*   Medicinal foods: green tea, turmeric + black pepper, mushroom extracts, lemon, ginger, garlic
+*   Medicinal foods: green tea, turmeric + black pepper, mushroom extracts, lemon, ginger, garlic, ginseng, cinnamon, cumin, cloves
 *   Living foods: probiotic yoghurt, kombucha
 *   Digital health  
     *   No smartphone in bedroom
     *   Notifications off for most apps
     *   [Unplugged from social media](https://stephenreid.net/blog/2020/07/09/unplugging-from-facebook.html)
-
