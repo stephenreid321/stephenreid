@@ -14,7 +14,7 @@
 ### Soulcraft & Wild Mind
 
 * [Wild Mind](https://www.goodreads.com/en/book/show/16000440) Intensive at [Lūžņa](https://www.soulcraft.eu/about), Latvia with [Sage Magdalene](https://sagemagdalene.com/) and [Sara McFarland](https://www.saramcfarland.com/) (Aug 2021)
-* *[Betwixt: Exploring the Threshold between Worlds](https://naturewisdom.life/event/betwixt-exploring-the-threshold-between-worlds/) with [Rebecca Card](http://naturewisdom.life/) and [Bell Selkie Lovelock](https://www.bellselkie.co.uk/) (Mar 2022)*
+* [Betwixt: Exploring the Threshold between Worlds](https://naturewisdom.life/event/betwixt-exploring-the-threshold-between-worlds/) with [Rebecca Card](http://naturewisdom.life/) and [Bell Selkie Lovelock](https://www.bellselkie.co.uk/) (Mar 2022)
 
 ### Psychotherapy & coaching
 
