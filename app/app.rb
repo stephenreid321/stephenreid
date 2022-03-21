@@ -105,7 +105,7 @@ module StephenReid
       @favicon = 'tao-sq.png'
       verse = Verse.all(filter: "{Verse} = #{params[:i]}").first
       @og_image = verse['Images'].first['thumbnails']['full']['url']
-      @og_desc = verse['Text'].split("\n").first
+      @og_desc = verse['Text'].split("\n\n").first
       erb :tao
     end
 
