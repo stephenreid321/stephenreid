@@ -31,6 +31,9 @@ $(function() {
   </div>
   <div id="books" class="col-sm-8">
 
+    <h2 id="recently-read">Recently read</h2>
+    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=read&num_books=9&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
+
 <%
 %w(philosophy
 buddhism
@@ -53,13 +56,10 @@ psychotherapy
 
 <% } %>
 
-<h2 id="currently-reading" class="mt-5">Currently reading</h2>
+<h2 id="currently-reading">Currently reading</h2>
 <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=currently-reading&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
 
-<h2 id="recently-read" class="mt-5">Recently read</h2>
-<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=read&num_books=9&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
-
-<h2 id="reading-soon" class="mt-5">Reading soon</h2>
+<h2 id="reading-soon">Reading soon</h2>
 <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=reading-soon&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
 
 
