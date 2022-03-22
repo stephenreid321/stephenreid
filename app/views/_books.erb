@@ -2,7 +2,6 @@
   .gr_grid_container {
     /* customize grid container div here. eg: width: 500px; */
   }
-
   .gr_grid_book_container {
     /* customize book cover container div here */
     float: left;
@@ -13,29 +12,60 @@
     margin-right: 10px;
     margin-bottom: 10px;
   }
-
   .gr_grid_branding { display: none }
 </style>
-<% opts = 'cover_size=medium&hide_link=&hide_title=true' %>
-<h2 class="mt-5">Currently reading</h2>
-<div id="gr_grid_widget_1574200000"></div>
-<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=currently-reading&num_books=100&sort=date_read&order=d&widget_id=1574200000" type="text/javascript" charset="utf-8"></script>
-<h2 class="mt-5">Recently read</h2>
-<div id="gr_grid_widget_1535721300"></div>
-<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=read&num_books=9&sort=date_read&order=d&widget_id=1535721300" type="text/javascript" charset="utf-8"></script>
-<h2 class="mt-5">Reading soon</h2>
-<div id="gr_grid_widget_1548123832"></div>
-<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=reading-soon&num_books=100&sort=date_read&order=d&widget_id=1548123832" type="text/javascript" charset="utf-8"></script>
-<h2 class="mt-5">Recommended</h2>
-<div id="gr_grid_widget_1547403801"></div>
-<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=featured&num_books=100&sort=avg_rating&order=d&widget_id=1547403801" type="text/javascript" charset="utf-8"></script>
 <script>
-  $(function () {
-    $('.gr_grid_book_container a').each(function () {
-      // $(this).attr('href', 'https://www.amazon.co.uk/s/ref=as_li_ss_tl?k=' + $(this).attr('title') + '&i=stripbooks&tag=stephenreid-21')
-    })
-  })
+$(function() {
+  $('#toc').toc({
+    'container': '#books',
+    'selectors': 'h2'
+  });
+})
 </script>
+<% opts = 'cover_size=medium&hide_link=&hide_title=true' %>
+
+
+<div class="row">
+  <div class="col-sm-2">
+    <div class="d-none d-sm-block" id="toc"></div>
+  </div>
+  <div id="books" class="col-sm-8">
+
+<%
+%w(philosophy
+buddhism
+complexity
+conscious-sexuality
+david-bohm
+fiction
+indigenous-thinking
+life
+magic
+metamodernism
+myth
+poetry
+psychedelics
+psychotherapy
+).each { |shelf| %>
+
+<h2 id="<%=shelf%>"><%=shelf%></h2>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=<%=shelf%>&num_books=100&sort=avg_rating&order=d" type="text/javascript" charset="utf-8"></script>
+
+<% } %>
+
+<h2 id="currently-reading" class="mt-5">Currently reading</h2>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=currently-reading&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
+
+<h2 id="recently-read" class="mt-5">Recently read</h2>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=read&num_books=9&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
+
+<h2 id="reading-soon" class="mt-5">Reading soon</h2>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=reading-soon&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
+
+
+</div>
+</div>
+
 <div class="row justify-content-center mt-5">
   <div class="col-auto">
     <p class="lead">If you only read one thing...</p>
