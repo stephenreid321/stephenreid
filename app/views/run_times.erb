@@ -33,7 +33,7 @@ $(function() {
               return new Date(tooltipItems[0].element.parsed.x).toLocaleDateString('en-GB',  { year: 'numeric', month: 'short', day: 'numeric' })
             },
             label: function(tooltipItem) {
-              return epoch_to_hh_mm_ss(tooltipItem.element.parsed.y)
+              return epoch_to_hh_mm_ss(tooltipItem.element.parsed.y) + ' (' + (5/(tooltipItem.element.parsed.y/3600)).toFixed(1) + ' km/h)'
             }
           }
         },
