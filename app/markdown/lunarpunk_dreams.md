@@ -7,7 +7,7 @@ Lunarpunk Dreams is a new podcast _launching soon_ that asks the questions: Who 
 <p class="text-white">Expect deep dialogues on: (guests I plan to invite linked)</p>
 
 * web3, Ethereum, Cosmos, regenerative finance, DAOs, DHOs & DisCOs
-  * [@santisiri](https://twitter.com/santisiri), [@keikreutler](https://twitter.com/keikreutler), [@owocki](https://twitter.com/owocki), [@niran](https://twitter.com/niran), [@climateXcrypto](https://twitter.com/climateXcrypto), [@chaserchapman](https://twitter.com/chaserchapman), [@thegrifft](https://twitter.com/thegrifft), [@spengrah](https://twitter.com/spengrah), [@JakeHartnell](https://twitter.com/JakeHartnell), [@buchmanster](https://twitter.com/buchmanster)
+  * [@tracheopteryx](https://twitter.com/tracheopteryx), [@santisiri](https://twitter.com/santisiri), [@keikreutler](https://twitter.com/keikreutler), [@owocki](https://twitter.com/owocki), [@niran](https://twitter.com/niran), [@climateXcrypto](https://twitter.com/climateXcrypto), [@chaserchapman](https://twitter.com/chaserchapman), [@thegrifft](https://twitter.com/thegrifft), [@spengrah](https://twitter.com/spengrah), [@JakeHartnell](https://twitter.com/JakeHartnell), [@buchmanster](https://twitter.com/buchmanster)
 * Metamodernism, Teal, Reinventing Organisations, Source, Holocracy & Sociocracy
   * [Hanzi Freinacht](https://metamoderna.org/), [The Ready](https://theready.com/), [@RichDecibels](https://twitter.com/RichDecibels), [@solarpunk_girl](https://twitter.com/solarpunk_girl), [Joe Lightfoot](https://twitter.com/joe_lightfoot_), [@tomnixon](https://twitter.com/tomnixon)
 * meditation, plant medicine, entheogens, Soulcraft, conscious sexuality, art, music, magic, indigenous thinking, tarot, clowning & fooling
