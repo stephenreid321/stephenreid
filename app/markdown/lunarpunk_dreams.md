@@ -11,7 +11,7 @@ Lunarpunk Dreams is a new podcast _launching soon_ that asks the questions: Who 
 * Metamodernism, Teal, Reinventing Organisations, Source, Holocracy & Sociocracy
   * [Hanzi Freinacht](https://metamoderna.org/), [The Ready](https://theready.com/), [@RichDecibels](https://twitter.com/RichDecibels), [@solarpunk_girl](https://twitter.com/solarpunk_girl), [Joe Lightfoot](https://twitter.com/joe_lightfoot_), [@tomnixon](https://twitter.com/tomnixon)
 * meditation, plant medicine, entheogens, Soulcraft, conscious sexuality, art, music, magic, indigenous thinking, tarot, clowning & fooling
-  * [Vince Fakhoury Horn](https://twitter.com/VinceFHorn), [Manda Scott](https://accidentalgods.life/), [Bill Plotkin](https://www.animas.org/), [Alnoor Ladha](https://www.braveearth.com/), [Elaine Yonge](https://ista.life/profile/elaine-yonge), [Tyson Yunkaporta](https://www.linkedin.com/in/tyson-yunkaporta-04a9b969), 
+  * [Vince Fakhoury Horn](https://twitter.com/VinceFHorn), [Manda Scott](https://accidentalgods.life/), [Bill Plotkin](https://www.animas.org/), [Alnoor Ladha](https://www.braveearth.com/), [Elaine Yonge](https://ista.life/profile/elaine-yonge), [Tyson Yunkaporta](https://www.linkedin.com/in/tyson-yunkaporta-04a9b969)
 * psychotherapy, counselling, coaching & mentoring 
   * [Alain Lagger](http://www.alainlagger.com/bio-2), [Nick Bolton](https://www.animascoaching.com/about-animas/our-team/nick-bolton/) 
 * permaculture, regenerative agriculture, microgrids, mesh networks & ecovillages
