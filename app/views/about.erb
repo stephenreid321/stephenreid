@@ -139,9 +139,6 @@ $(function() {
   <% } %>
 </ul>
 
-<h2 class="mt-5" id="speaking">Places and plans</h2>
-<%= partial :places %>
-
 <h2 class="mt-5" id="research">Peer-reviewed research</h2>
 <dl class="row">
   <% Paper.all.shuffle.each { |paper| %>
@@ -153,5 +150,5 @@ $(function() {
   <% } %>
 </dl>
 
-<h2 class="mt-5" id="diet">Diet</h2>
-<%= md :diet %>
+<h2 class="mt-5" id="speaking">Places and plans</h2>
+<%= partial :places %>
