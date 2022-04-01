@@ -54,7 +54,7 @@ somatics
 ).each { |shelf| %>
 
 <h2 id="<%=shelf%>"><%=shelf%></h2>
-<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=<%=shelf%>&num_books=100&sort=avg_rating&order=d" type="text/javascript" charset="utf-8"></script>
+<script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=<%=shelf.downcase%>&num_books=100&sort=avg_rating&order=d" type="text/javascript" charset="utf-8"></script>
 
 <% } %>
 
