@@ -22,6 +22,7 @@
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
+*   *In training towards becoming an ICF-certified [transformational coach](https://stephenreid.net/coaching) (Feb 2022 – ongoing)*
 
 ### Conscious sexuality
 
@@ -40,6 +41,7 @@
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 *   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
 *   *[Permaculture Design Course](https://www.apricotcentre.co.uk/courses-2021-1/permaculture-design-course-with-marina-oconnell-bob-mehew-xtx9s) at the [Apricot Centre](https://www.apricotcentre.co.uk/) (Sep 2022 – Feb 2023)*
+*   *[Devon School of Yoga Foundation Course](https://devonyoga.com/yoga-foundation-course/) (Sep – Nov 2022)*
 
 ### Physics
 
