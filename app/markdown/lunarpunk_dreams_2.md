@@ -18,4 +18,6 @@
 [Lunarpunk Dreams on Substack](https://stephenreid.substack.com/s/lunarpunk-dreams)<br />
 [Lunarpunk Dreams on Mirror](https://mirror.xyz/lunarpunk.eth/)<br />
 [Lunarpunk Dreams on Spotify](https://open.spotify.com/show/10ctU5qPd41ltAjIg9lw2O?si=cf33bf60fb0f44b2)<br />
-[Lunarpunk Dreams on YouTube](https://mirror.xyz/stephenreid.eth/)<br />[Follow me on Twitter](https://twitter.com/lunarpunk_0x)
+[Lunarpunk Dreams on YouTube](https://www.youtube.com/watch?v=9KzgdjcGp5U)<br />
+[Lunarpunk Dreams RSS](https://anchor.fm/s/8f060448/podcast/rss)<br />
+[Follow me on Twitter](https://twitter.com/lunarpunk_0x)
