@@ -169,8 +169,18 @@ class Strategy
       begin
         strategy.update
       rescue StandardError
-        strategy.destroy
-        puts "error: #{strategy.ticker}"
+        begin
+          puts "error: #{strategy.ticker}, attempt 2"
+          strategy.update
+        rescue StandardError
+          begin
+            puts "error: #{strategy.ticker}, attempt 3"
+            strategy.update
+          rescue StandardError
+            puts "error: #{strategy.ticker}, deleting"
+            strategy.destroy
+          end
+        end
       end
     end
     Strategy.nscore_index
