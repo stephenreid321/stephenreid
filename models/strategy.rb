@@ -176,9 +176,10 @@ class Strategy
           begin
             puts "error: #{strategy.ticker}, attempt 3"
             strategy.update
-          rescue StandardError
+          rescue StandardError => e
             puts "error: #{strategy.ticker}, deleting"
             strategy.destroy
+            Airbrake.notify(e)
           end
         end
       end
