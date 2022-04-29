@@ -27,7 +27,7 @@
 ### Conscious sexuality
 
 *   [ISTA 1](https://ista.life/) with [Elaine Young](https://www.thetantricshaman.com/), [Binoy Milton D'souza](https://lovemovementevolution.com/) & [Frank Mondeose](https://frankmondeose.com/) including the [Wheel of Consent](https://wheelofconsentbook.com/) (Sep 2019)
-*   *[ISTA 2](https://ista.life/events/county-louth-ireland-ista-level-2-apr-2022) with Elaine Yonge, Laurie Handlers & Eugene Hedlund (Apr 2022)*
+*   [ISTA 2](https://ista.life/events/county-louth-ireland-ista-level-2-apr-2022) with [Elaine Yonge](https://www.thetantricshaman.com/), [Laurie Handlers](https://www.lauriehandlers.com) & [Eugene Hedlund](https://ista.life/profile/eugene-hedlund) (Apr 2022)
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
 
