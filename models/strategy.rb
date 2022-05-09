@@ -2,6 +2,7 @@ class Strategy
   include Mongoid::Document
   include Mongoid::Timestamps
   class RoundingError < StandardError; end
+  class NotEnoughStrategies < StandardError; end
 
   MONTH_FACTOR = 4
   THREE_MONTH_FACTOR = 3
@@ -195,6 +196,8 @@ class Strategy
     with_multipliers = {}
     without_multipliers = {}
     count = Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').count
+    raise Strategy::NotEnoughStrategies if count < 100
+
     Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each_with_index do |strategy, i|
       puts "#{i + 1}/#{count}"
       strategy.holdings.each do |holding|
