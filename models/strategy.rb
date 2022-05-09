@@ -201,8 +201,8 @@ class Strategy
     Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each_with_index do |strategy, i|
       puts "#{i + 1}/#{count}"
       strategy.holdings.each do |holding|
-        asset = if %w[USDC USDT TUSD DAI].include?(holding.asset.ticker)
-                  Asset.find_by(ticker: 'UST')
+        asset = if %w[UST USDT TUSD DAI].include?(holding.asset.ticker)
+                  Asset.find_by(ticker: 'USDC')
                 else
                   holding.asset
                 end
