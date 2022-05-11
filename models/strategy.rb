@@ -218,7 +218,7 @@ class Strategy
     [with_multipliers, without_multipliers]
   end
 
-  def self.proposed(assets, n: 10)
+  def self.proposed(assets, n: 3)
     # restrict to top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
     t = assets.map { |_k, v| v }.sum
@@ -237,7 +237,7 @@ class Strategy
     assets.map { |k, v| [k, v] }
   end
 
-  def self.rebalance(n: 10)
+  def self.rebalance(n: 3)
     Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
 
     Strategy.update
@@ -250,7 +250,7 @@ class Strategy
       values: weights.map do |ticker, p|
         { assetTicker: ticker, rebalancedWeight: p }
       end,
-      speedType: 'SLOW'
+      speedType: 'FAST'
     }
 
     puts data.to_json

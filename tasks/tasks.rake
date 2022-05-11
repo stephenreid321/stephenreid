@@ -10,8 +10,8 @@ namespace :strategies do
 
   task propose: :environment do
     with_multipliers, without_multipliers = Strategy.assets_weighted
-    proposed_with_multipliers = Strategy.proposed(with_multipliers, n: 10)
-    proposed_without_multipliers = Strategy.proposed(without_multipliers, n: 10)
+    proposed_with_multipliers = Strategy.proposed(with_multipliers)
+    proposed_without_multipliers = Strategy.proposed(without_multipliers)
     Stash.find_by(key: 'proposed_with_multipliers').try(:destroy)
     Stash.create(key: 'proposed_with_multipliers', value: Hash[proposed_with_multipliers].to_json)
     Stash.find_by(key: 'proposed_without_multipliers').try(:destroy)
