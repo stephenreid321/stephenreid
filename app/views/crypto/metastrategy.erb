@@ -96,12 +96,12 @@
 <table class="table mt-3" style="width: auto; margin: auto">
   <thead style="border-top: none">
     <tr>
-      <th>24h</th>
-      <th>7d</th>
-      <th>1M</th>
-      <th>3M</th>
-      <th>6M</th>
-      <th>1Y</th>
+      <th style="text-align: center">24h</th>
+      <th style="text-align: center">7d</th>
+      <th style="text-align: center">1M</th>
+      <th style="text-align: center">3M</th>
+      <th style="text-align: center" >6M</th>
+      <th style="text-align: center" >1Y</th>
     </tr>
   </thead>
   <tr>
@@ -114,9 +114,9 @@
           <%= number_with_precision nscore, precision: 1 %>
         </span>
         <!-- <br> -->
-        <small>
-          Top <%= number_to_percentage 100*index/strategies.count, precision: 0 %>
-        </small>
+        Top
+        <br />
+        <%= number_to_percentage 100*index/strategies.count, precision: 0 %>
       <% end %>
     </td>
     <% } %>
