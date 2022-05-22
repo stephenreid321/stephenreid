@@ -250,7 +250,7 @@ class Strategy
       values: weights.map do |ticker, p|
         { assetTicker: ticker, rebalancedWeight: p }
       end,
-      speedType: 'FAST'
+      speedType: 'SLOW'
     }
 
     puts data.to_json
