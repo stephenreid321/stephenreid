@@ -39,7 +39,8 @@ StephenReid::App.controller do
   post '/assets/:id/multiplier' do
     sign_in_required!
     asset = Asset.find(params[:id])
-    asset.update_attribute(:multiplier, params[:multiplier])
+    asset.multiplier = params[:multiplier]
+    asset.save
     200
   end
 end
