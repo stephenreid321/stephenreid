@@ -13,7 +13,7 @@
 $(function() {
 
   $('#ord tr').click(function() {
-    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + $('td:first-child', this).text();
+    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + $('td:first-child', this).text().split('(')[0];
     var audioEl = $('audio', this)[0]
     audioEl.src = url;
     audioEl.play();
