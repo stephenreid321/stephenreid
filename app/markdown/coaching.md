@@ -45,6 +45,3 @@ I charge £10-50 per hour, according to your means. This is self-assessed; you j
 I would expect you to attend sessions on time and from a quiet place, free from distractions. If you need to cancel or reschedule a session, I would not charge as long as you provide at least 24 hours notice.
 
 Sessions are recorded, with recordings shared with you confidentially shortly after each session for your reflection and review. I might sometimes ask your permission to share a recording with my supervisor as part of my training.
-
-
-
