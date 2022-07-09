@@ -40,7 +40,7 @@ I offer an initial free half-hour exploratory call, so we can see if we are well
 
 All being well, typically we'd then meet for an hour every other week via Zoom for an initial run of four sessions across two months.
 
-I charge £10-50 per hour, according to your means. This is self-assessed; you just tell me how much you want to pay.
+I charge £25/£50/£75 per hour, according to your means. This is self-assessed; you just tell me how much you want to pay.
 
 I would expect you to attend sessions on time and from a quiet place, free from distractions. If you need to cancel or reschedule a session, I would not charge as long as you provide at least 24 hours notice.
 
