@@ -40,8 +40,6 @@
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 *   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
-*   *[Permaculture Design Course](https://www.apricotcentre.co.uk/courses-2021-1/permaculture-design-course-with-marina-oconnell-bob-mehew-xtx9s) at the [Apricot Centre](https://www.apricotcentre.co.uk/) (Sep 2022 – Feb 2023)*
-*   *[Devon School of Yoga Foundation Course](https://devonyoga.com/yoga-foundation-course/) (Sep – Nov 2022)*
 
 ### Physics
 
@@ -61,3 +59,8 @@
 *   [Nowhere](http://goingnowhere.org) (2014, 2015, 2016)
 *   [The Borderland](http://theborderland.se) (2016, 2017, 2019, *2022*)
 *   [Kiez Burn](https://kiezburn.org/) (2019)
+
+### Triathlons
+
+* Weymouth Sprint Triathlon 2022 (1h38m)
+
