@@ -21,7 +21,7 @@
     <%= number_field_tag :multiplier, id: "asset-multiplier-#{asset.id}", value: (asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier), class: 'form-control', style: 'width: 5em', step: :any %>
   <% end %>
 <% else %>
-  <% if asset.multiplier %>
+  <% if asset.multiplier && asset.multiplier != 1 %>
     <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
   <% end %>
 <% end %>
