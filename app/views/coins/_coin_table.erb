@@ -1,4 +1,4 @@
-<% if ['24h', '7d', '14d', '30d', '200d', '1y' 'market-cap-24h'].include?(params[:tag]) %>
+<% if ['24h', '-24h', '7d', '-7d', '14d', '-14d', '30d', '-30d', '200d', '-200d', '1y', '-1y', 'market-cap-24h', '-market-cap-24h'].include?(params[:tag]) %>
   <p class="text-center mt-3">
     Showing coins with a market cap rank <= <%= ENV['MAX_MARKET_CAP_RANK'] %> and volume>= Ξ<%= ENV['MIN_VOLUME'] %>
     </p>
