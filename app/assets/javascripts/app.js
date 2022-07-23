@@ -1,5 +1,10 @@
 $(function() {
 
+  $('img').each(function() {
+    if($(this).prop('naturalWidth') == 1 && $(this).prop('naturalHeight') == 1)
+      $(this).hide()
+  })
+
   $('.card.post, .card.software').hover(function() {
     $('.card-text small', this).removeClass('text-muted')
   }, function() {
