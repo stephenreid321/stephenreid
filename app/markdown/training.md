@@ -57,10 +57,9 @@
 ### Burns
 
 *   [Nowhere](http://goingnowhere.org) (2014, 2015, 2016)
-*   [The Borderland](http://theborderland.se) (2016, 2017, 2019, *2022*)
+*   [The Borderland](http://theborderland.se) (2016, 2017, 2019, 2022)
 *   [Kiez Burn](https://kiezburn.org/) (2019)
 
 ### Triathlons
 
 * Weymouth Sprint Triathlon 2022 (1h38m)
-
