@@ -43,3 +43,6 @@ $dark-color: #343a40;
 
 .text-muted { color: darken($body-color, 20%) !important }
 .blockquote-footer { color: darken($body-color, 20%) !important }
+
+.blog_post table, .blog_post table mark { color: $contrast-color }
+.blog_post .table th, .blog_post .table td { border-color: $contrast-color }

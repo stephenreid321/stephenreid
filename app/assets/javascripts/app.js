@@ -26,6 +26,7 @@ $(function() {
     });
 
   $(".blog_post a[href^=http]").attr('target', '_blank')
+  $(".blog_post table").addClass('table')
 
   $("abbr.timeago").timeago()
 
