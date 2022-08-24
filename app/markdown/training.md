@@ -31,9 +31,14 @@
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
 
+### Music
+
+* [Natural Voice Camp](https://www.unicornvillagecamps.co.uk/natural-voice-camp) (Aug 2022)
+* Member of the [Natural Voice Network](https://naturalvoice.net/)
+* Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
+
 ### Other
 
-*   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
