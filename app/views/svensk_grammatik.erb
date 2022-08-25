@@ -1,0 +1,21 @@
+<script>
+$(function() {
+  $("#svensk-grammatik table").addClass('table mb-4')
+  $("#svensk-grammatik h2").addClass('mb-4')
+
+  $('#toc').toc({
+    'container': '#svensk-grammatik',
+    'selectors': 'h1,h2,h3,h4'
+  });
+
+})
+</script>
+
+<div id="svensk-grammatik" class="row">
+  <div class="col-sm-2">
+    <div class="d-none d-sm-block" id="toc"></div>
+  </div>
+  <div class="col-sm-8">
+    <%= md :svensk_grammatik %>
+  </div>
+</div>
