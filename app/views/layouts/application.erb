@@ -16,7 +16,7 @@
     <% end %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <% if request.path == '/svenska-ord' %>
+    <% if request.path.starts_with?('/svensk') %>
       <meta name="referrer" content="no-referrer">
     <% end %>
 

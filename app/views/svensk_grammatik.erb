@@ -1,3 +1,6 @@
+<style>
+  #svensk-grammatik td:hover { color: white; cursor: pointer }
+</style>
 <script>
 $(function() {
   $("#svensk-grammatik table").addClass('table mb-4')
@@ -8,6 +11,13 @@ $(function() {
     'selectors': 'h1,h2,h3,h4'
   });
 
+  $('#svensk-grammatik td').click(function() {
+    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + $(this).text().split('(')[0];
+    var audioEl = $('#sa')[0]
+    audioEl.src = url;
+    audioEl.play();
+  })
+
 })
 </script>
 
@@ -16,6 +26,7 @@ $(function() {
     <div class="d-none d-sm-block" id="toc"></div>
   </div>
   <div class="col-sm-8">
+    <audio id="sa" class="d-none" controls></audio>
     <%= md :svensk_grammatik %>
   </div>
 </div>
