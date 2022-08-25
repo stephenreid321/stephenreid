@@ -61,7 +61,7 @@ module StephenReid
 
     %w[books podcasts software discord tarot events svenska-ord svensk-grammatik maps diet].each do |r|
       get "/#{r}", cache: true do
-        @title = r.capitalize
+        @title = r.gsub('-', ' ').capitalize
         erb :"#{r.underscore}"
       end
     end
