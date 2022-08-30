@@ -1,5 +1,5 @@
 class Iconomi
-  def self.get(path)
+  def self.get(path, parameters = nil)
     t = DateTime.now.strftime('%Q')
 
     method = 'GET'
@@ -19,7 +19,7 @@ class Iconomi
       'ICN-SIGN' => signature,
       'ICN-TIMESTAMP' => t
     }
-    agent.get('https://api.iconomi.com' + path).body
+    agent.get('https://api.iconomi.com' + path + (parameters ? "?#{parameters}" : '')).body
   end
 
   def self.post(path, request_body)

@@ -107,7 +107,7 @@ count = strategies.count
       <th>Score</th>
       <th>Proposed position</th>
       <th></th>
-      <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each { |x| %>
+      <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount lastPostedAt].each { |x| %>
       <th><%= x %></th>
       <% } %>
       <th>24h</th>
@@ -162,7 +162,7 @@ count = strategies.count
       </td>
       <td>
       </td>
-      <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each { |x| %>
+      <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount last_posted_at].each { |x| %>
       <td <% if x == 'lastRebalanced' %> data-sort="<%= strategy[x].to_i %>" <% end %>>
         <% if x == 'lastRebalanced' %>
           <%= time_ago_in_words strategy[x] %> ago

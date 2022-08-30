@@ -38,6 +38,7 @@ class Strategy
     field :"index_#{x}", type: Integer
     index({ "index_#{x}": 1 })
   end
+  field :last_posted_at, type: Time
 
   def self.admin_fields
     {
@@ -55,6 +56,7 @@ class Strategy
       numberOfAssets: :number,
       lastRebalanced: :datetime,
       monthlyRebalancedCount: :number,
+      last_posted_at: :datetime,
       status: :select,
       holdings: :collection
     }
@@ -135,6 +137,10 @@ class Strategy
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/price"))
     self.aum = j['aum']
+    j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/posts"))
+    if (last_post = j['posts'].sort_by { |x| x['timestamp'] }.last)
+      self.last_posted_at = Time.at(last_post['timestamp'] / 1000)
+    end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/structure"))
     %w[numberOfAssets lastRebalanced monthlyRebalancedCount].each do |r|
       send("#{r}=", (r == 'lastRebalanced' ? Time.at(j[r]) : j[r]))
@@ -189,7 +195,7 @@ class Strategy
   end
 
   def self.active_mature(mature_period: 'THREE_MONTH')
-    where(:monthlyRebalancedCount.gte => 1, :"r#{mature_period.downcase}".ne => nil, :status => 'verified')
+    self.or({ :monthlyRebalancedCount.gte => 1 }, { :last_posted_at.gte => 1.month.ago }).and(:"r#{mature_period.downcase}".ne => nil, :status => 'verified')
   end
 
   def self.assets_weighted
