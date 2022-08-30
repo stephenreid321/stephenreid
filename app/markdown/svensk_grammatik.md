@@ -39,15 +39,15 @@ När Gustav kom hem **hade** Eva **ätit** (preteritum perfekt)
 
 ### Hjälpverb
 
-| Svenska                       | Engelska                     |
-| ----------------------------- | ---------------------------- |
-| jag måste                     | I must                       |
-| jag kan (jag får) (jag orkar) | I can (I may) (I am able to) |
-| jag vill                      | I want                       |
-| jag ska (jag borde)           | I will (I should)            |
-| jag behöver                   | I need                       |
-| jag brukar                    | I usually                    |
-| jag hinner                    | I have time                  |
+| Svenska                       | Engelska                      |
+| ----------------------------- | ----------------------------- |
+| jag måste                     | I must                        |
+| jag kan (jag får) (jag orkar) | I can (I may) (I have energy) |
+| jag vill                      | I want                        |
+| jag ska (jag borde)           | I will (I should)             |
+| jag behöver                   | I need                        |
+| jag brukar                    | I usually                     |
+| jag hinner                    | I have time                   |
 
 ## Substantiv
 
