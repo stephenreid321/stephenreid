@@ -243,10 +243,10 @@ class Strategy
     assets.map { |k, v| [k, v] }
   end
 
-  def self.rebalance(n: 10)
+  def self.rebalance(n: 10, skip_update: false)
     Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
 
-    Strategy.update
+    Strategy.update unless skip_update
 
     with_multipliers, _without_multipliers = Strategy.assets_weighted
     weights = Strategy.proposed(with_multipliers, n: n)
