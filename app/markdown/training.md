@@ -49,6 +49,7 @@
 ### Physics
 
 *   MPhys in Physics at the University of Oxford (2004-2008)
+    *   Graduated with first-class honours
     *   Final year specialisations in quantum field theory and condensed matter physics
     *   [Dissertation](https://stephenreid.net/reid_report_final.pdf) on community detection in complex networks supervised by [Mason Porter](https://en.wikipedia.org/wiki/Mason_Porter)
     *   Main tutor [Dr Candadi Sukumar](https://www.wadham.ox.ac.uk/people/emeritus-fellows/s/candadi-sukumar)
@@ -56,8 +57,10 @@
 ### Complexity science
 
 *   MRes in Complexity Science at the [Bristol Centre for Complexity Sciences](http://www.bristol.ac.uk/bccs/), University of Bristol (2008-2009)
+    *   Graduated with distinction
     *   Research projects on automated trading agents in financial markets and synthetic biology
     *   Lead developer of the software that won Best Model at the [iGEM 2009](https://igem.org/Results?year=2009) competition
+    
 
 ### Burns
 
