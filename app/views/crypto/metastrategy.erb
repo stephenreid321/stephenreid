@@ -1,65 +1,49 @@
 <% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
 <% strategies = Strategy.and(:status => 'verified') %>
-
 <div class="row justify-content-center text-center">
   <div class="col-6 col-sm-2 mb-4">
-    <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,1)" src="/images/meta-sq.jpg"></a>
+    <a href="https://iconomi.com/asset/DECENTCOOP?ref=YGnZy"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,1)" src="/images/meta-sq.jpg"></a>
   </div>
 </div>
-
-
 <div class="row justify-content-center">
   <div class="col-sm-9">
-
-<p class="lead">
-  <a href="https://www.iconomi.com/asset/DECENTCOOP">Metastrategy</a> is my strategy on ICONOMI.
-  It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies.
-  It's a great 'set-and-forget' option and is my top recommendation for those new to crypto investing.
-</p>
-
-<p class="lead">
-  Metastrategy is currently the #<%=acs_index = strategy.nscore_index('aum', strategies: strategies)[1]%> most copied strategy on ICONOMI (by value).
-</p>
-
-<p class="lead">
-  Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
-  Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score < strategy.score }).count%> of them:
-  <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
-  If you're already copying these strategies, you're probably better off switching to Metastrategy.
-  <a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group &rarr;</a>
-</p>
-
-
-<h2>Step-by-step guide to investing in Metastrategy</h2>
-<p>
-  <ol>
-    <li>
-      You will need a Euro-denominated bank account in your name to load your ICONOMI account.
-      If you live in the UK, <a href="https://moneysavinganswers.com/personal/bank-accounts/best-euro-current-accounts/">check this page to see your options</a>,
-      including <a href="https://wise.com/gb/borderless/euro-account">Wise</a>, <a href="https://www.starlingbank.com/current-account/euro-bank-account/">Starling</a> and Revolut.
-    </li>
-    <li>
-      <a href="https://www.iconomi.com/register?ref=YGnZy">Sign up to ICONOMI via this referral link</a>
-      or use the referral code YGnZy
-    </li>
-    <li>
-      In ICONOMI, go to Money Transfer > Deposit > Clear Junction (SEPA) and load your ICONOMI account with Euros.
-      Wait for the Euros to arrive (usually takes less than an hour).
-    </li>
-    <li>
-        <a href="https://iconomi.com/asset/DECENTCOOP">Go to the Metastrategy page</a>, click Copy Strategy > My Euro balance > Preview > Place order.
-      <mark>I recommend <a href="https://www.degiro.co.uk/knowledge/strategies/what-is-dollar-cost-averaging">dollar-cost averaging</a> (investing equal amounts of Euros at regular intervals) rather than going all-in.</mark>
-      This is simple to do with ICONOMI's Autocopy feature.
-      Activate Autocopy on your ICONOMI dashboard, then set up a standing order/recurring payment from your bank to ICONOMI.
-      Every time Euros arrive in your ICONOMI account, they will automatically be used to copy Metastrategy.
+    <p class="lead">
+      <a href="https://www.iconomi.com/asset/DECENTCOOP?ref=YGnZy">Metastrategy</a> is my strategy on ICONOMI.
+      It's an automated strategy with daily rebalancing that is always an intelligent mix of the current top performing strategies.
+      It's a great 'set-and-forget' option and is my top recommendation for those new to crypto investing.
+    </p>
+    <p class="lead">
+      Metastrategy is currently the #<%=acs_index = strategy.nscore_index('aum', strategies: strategies)[1]%> most copied strategy on ICONOMI (by value).
+    </p>
+    <p class="lead">
+      Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?ref=YGnZy&sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
+      Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| other_strategy.score < strategy.score }).count%> of them:
+      <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
+      If you're already copying these strategies, you're probably better off switching to Metastrategy.
+      <a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group &rarr;</a>
+    </p>
+    <h2>Step-by-step guide to investing in Metastrategy</h2>
+    <ol class="mt-1">
+      <li>
+        <a href="https://www.iconomi.com/register?ref=YGnZy">Sign up to ICONOMI via this referral link</a>
+        or use the referral code <span style="border-bottom: 1px dotted">YGnZy</span>
+      </li>
+      <li>
+        In ICONOMI, click Deposit and load your ICONOMI account.
+      </li>
+      <li>
+        <a href="https://iconomi.com/asset/DECENTCOOP?ref=YGnZy">Go to the Metastrategy page</a> and click Copy Strategy.
       </li>
     </ol>
-  </p>
-
+    <p>
+      <mark>I recommend <a href="https://www.degiro.co.uk/knowledge/strategies/what-is-dollar-cost-averaging">dollar-cost averaging</a> (investing equal amounts at regular intervals) rather than going all-in.</mark>
+      This is simple to do with ICONOMI's Autocopy feature.
+      Activate Autocopy on your ICONOMI dashboard, then set up a standing order/recurring payment from your bank to ICONOMI.
+      Every time funds arrive in your ICONOMI account, they will automatically be used to copy Metastrategy.
+    </p>
+  </div>
 </div>
-</div>
-
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <% if current_account %>
@@ -71,28 +55,23 @@
   &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%= delayed_job.run_at %>"><%= time_ago_in_words delayed_job.run_at %></abbr>
   <% } %>
 </p>
-
 <% if Strategy.and(:status.ne => 'verified').count > 0 || Asset.and(:status.ne => 'verified').count > 0 %>
   <p class="text-center">
-
     <% if Asset.and(:status.ne => 'verified').count > 0 %>
       Currently excluded coins:
       <%= Asset.and(:status.ne => 'verified').map do |asset|
-            %{<a class="badge #{asset.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}">#{asset.name} (#{asset.ticker})</a>}
+            %{<a class="badge #{asset.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}?ref=YGnZy">#{asset.name} (#{asset.ticker})</a>}
           end.join(' ') %>
       <br>
     <% end %>
-
     <% if Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').count > 0 %>
       Currently excluded strategies:
       <%= Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').map do |strategy|
-            %(<a class="badge #{strategy.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
+            %(<a class="badge #{strategy.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}?ref=YGnZy">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
           end.join(' ') %>
     <% end %>
-
   </p>
 <% end %>
-
 <table class="table mt-3" style="width: auto; margin: auto">
   <thead style="border-top: none">
     <tr>
@@ -122,7 +101,6 @@
     <% } %>
   </tr>
 </table>
-
 <% if Padrino.env == :development || current_account %>
   <div data-pagelet-url="/metastrategy/table" class="mb-3">
     <%= partial :'crypto/metastrategy' %>
@@ -130,8 +108,5 @@
 <% else %>
   <%= cp :'crypto/metastrategy' %>
 <% end %>
-
-
-
 <h2>How Metastrategy works</h2>
 <%= md :metastrategy %>
