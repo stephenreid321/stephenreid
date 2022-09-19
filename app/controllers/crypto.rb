@@ -27,7 +27,7 @@ StephenReid::App.controller do
 
   get '/metastrategy/:p/rebalance' do
     halt unless params[:p] == ENV['SITE_SECRET']
-    Strategy.delay.rebalance
+    Strategy.delay.rebalance(skip_update: false)
     redirect '/metastrategy'
   end
 
