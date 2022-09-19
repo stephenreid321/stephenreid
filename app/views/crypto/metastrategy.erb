@@ -47,7 +47,7 @@
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <% if current_account %>
-    <a href="/metastrategy/<%= ENV['SITE_SECRET'] %>/rebalance">
+    <a href="/metastrategy/rebalance">
       <i class="fas fa-sync"></i>
     </a>
   <% end %>

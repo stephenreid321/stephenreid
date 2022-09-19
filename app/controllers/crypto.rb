@@ -25,8 +25,8 @@ StephenReid::App.controller do
     partial :'crypto/metastrategy'
   end
 
-  get '/metastrategy/:p/rebalance' do
-    halt unless params[:p] == ENV['SITE_SECRET']
+  get '/metastrategy/rebalance' do
+    sign_in_required!
     Strategy.delay.rebalance(skip_update: false)
     redirect '/metastrategy'
   end
