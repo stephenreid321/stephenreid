@@ -11,6 +11,7 @@ nbproject
 dragonfly.log
 app/assets/stylesheets/*.css
 app/assets/stylesheets/*.css.map
+*.code-workspace
 
 *.gem
 *.rbc
