@@ -54,6 +54,7 @@ module StephenReid
     end
 
     get '/', cache: true do
+      expires 1.hour.to_i
       @og_image = "#{ENV['BASE_URI']}/images/og-image.jpg"
       @og_desc = 'Teacher, technologist and coach'
       erb :about
@@ -61,6 +62,7 @@ module StephenReid
 
     %w[books podcasts software discord tarot events svenska-ord svensk-grammatik maps diet].each do |r|
       get "/#{r}", cache: true do
+        expires 1.hour.to_i
         @title = r.gsub('-', ' ').capitalize
         erb :"#{r.underscore}"
       end

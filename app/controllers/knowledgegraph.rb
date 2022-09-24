@@ -1,8 +1,8 @@
 StephenReid::App.controller do
   get '/knowledgegraph', cache: true do
-    @title = 'Knowledgegraph'
-    @og_desc = "Network view of posts I've shared"
     expires 1.hour.to_i
+    @title = 'Knowledgegraph'
+    @og_desc = "Network view of posts I've shared"    
     @full_network = true
     @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
@@ -59,6 +59,7 @@ StephenReid::App.controller do
   end
 
   get '/posts/:id', cache: true do
+    expires 1.hour.to_i
     @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
     @json = JSON.parse(@post['Iframely'])
     @full_title = @post['Title']

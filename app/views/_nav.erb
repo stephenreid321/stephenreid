@@ -7,10 +7,9 @@
     #nav .nav-item { font-size: 0.85rem; padding-right: 0.5rem; }
     #nav .nav-link.active { font-weight: bold }
 </style>
-<a target="_blank" href="https://www.mindlabpro.com/" class="text-center d-block bg-dark p-1" style="font-size: 85%; text-decoration: none">
-  <span class="text-contrast">I've used</span> Mind Lab Pro&reg; <span class="text-contrast">since 2018.</span>
-  <span class="badge badge-secondary" style="opacity: 0.5">Sponsored</span>
-</a>
+
+<%= partial :"sponsors/#{Dir['app/views/sponsors/*'].map { |f| f.split('/_').last.gsub('.erb','') }.sample}" %>
+
 <div id="nav">
   <nav class="navbar navbar-expand-lg navbar-<%=@stylesheet%>">
     <a style="font-family: 'Zilap Evolution'" class="navbar-brand" href="/">Stephen Reid</a>
