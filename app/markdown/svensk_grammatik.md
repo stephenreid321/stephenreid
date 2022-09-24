@@ -51,13 +51,13 @@ När Gustav kom hem **hade** Eva **ätit** (preteritum perfekt)
 
 ## Substantiv
 
-| Grupp | Obestämd singularform            | Bestämd singularform         | Obestämd pluralform | Bestämd pluralform           |
-| ----- | -------------------------------- | ---------------------------- | ------------------- | ---------------------------- |
-| 1     | **en** lampa                     | lamp**an**                   | lamp**or**          | lamp**orna**                 |
-| 2     | **en** säng                      | säng**en**                   | säng**ar**          | säng**arna**                 |
-| 3     | **en** madrass                   | madrass**en**                | madrass**er**       | madrass**erna**              |
-| 4     | **ett** täcke                    | täck**et**                   | täck**en**          | täck**ena**                  |
-| 5     | **ett** lakan<br />**en** läkare | lakan**et**<br />läkar**en** | lakan<br />läkare   | lakan**en**<br />läkar**na** |
+| Grupp                           | Obestämd singularform            | Bestämd singularform         | Obestämd pluralform | Bestämd pluralform           |
+| ------------------------------- | -------------------------------- | ---------------------------- | ------------------- | ---------------------------- |
+| 1 (slutar på -a)                | **en** lampa                     | lamp**an**                   | lamp**or**          | lamp**orna**                 |
+| 2 (-ing & korta ord)            | **en** säng                      | säng**en**                   | säng**ar**          | säng**arna**                 |
+| 3 (betoning på sista stavelsen) | **en** madrass                   | madrass**en**                | madrass**er**       | madrass**erna**              |
+| 4 (slutar på vokal)             | **ett** täcke                    | täck**et**                   | täck**en**          | täck**ena**                  |
+| 5 (slutar på konsonant)         | **ett** lakan<br />**en** läkare | lakan**et**<br />läkar**en** | lakan<br />läkare   | lakan**en**<br />läkar**na** |
 
 ## Pronomen
 

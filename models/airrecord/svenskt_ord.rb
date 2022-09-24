@@ -3,4 +3,4 @@ class SvensktOrd < Airrecord::Table
   self.table_name = 'Svenska ord'
 end
 
-# x = ''; $('.thing').each(function() { x += $('.col_a', this).text() + "\t" + $('.col_b', this).text() + "\n" }); copy(x)
+# x = ''; $('.thing').each(function() { x += $('.col_a', this).text() + "\t" + $('.col_b', this).text() + "\n" }); copy(x); console.log('Copied!');
