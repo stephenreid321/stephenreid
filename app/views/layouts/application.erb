@@ -29,6 +29,10 @@
     <link rel="preload" href="/fonts/Fira_Mono/stylesheet.css" as="style">
     <link href="/fonts/Fira_Mono/stylesheet.css" rel="stylesheet">
 
+    <script>
+      (function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');
+    </script>
+    <script async src="https://r.wdfl.co/rw.js" data-rewardful="<%=ENV['REWARDFUL_API_KEY']%>"></script>
 
     <% {
          'jquery/3.2.0' => 'jquery.min.js',
@@ -85,82 +89,82 @@
                  else
                    'Stephen Reid'
                  end %></title>
-    <meta property="og:title" content="<%= t %>">
-    <meta name="description" content="<%= @og_desc %>">
-    <meta property="og:image" content="<%= @og_image %>">
+  <meta property="og:title" content="<%= t %>">
+  <meta name="description" content="<%= @og_desc %>">
+  <meta property="og:image" content="<%= @og_image %>">
 
-    <% if @og_image && @og_desc %>
-      <meta name="twitter:title" content="<%= t %>">
-      <meta name="twitter:description" content="<%= @og_desc %>">
-      <meta name="twitter:image" content="<%= @og_image %>">
-      <meta name="twitter:card" content="summary_large_image">
-    <% end %>
+  <% if @og_image && @og_desc %>
+    <meta name="twitter:title" content="<%= t %>">
+    <meta name="twitter:description" content="<%= @og_desc %>">
+    <meta name="twitter:image" content="<%= @og_image %>">
+    <meta name="twitter:card" content="summary_large_image">
+  <% end %>
 
-    <link rel="alternate" type="application/atom+xml" title="Stephen Reid" href="/feed.rss">
-    <link rel="alternate" type="application/atom+xml" title="Stephen Reid's blog posts" href="/blog/feed.xml">
-  </head>
-  <body>
+  <link rel="alternate" type="application/atom+xml" title="Stephen Reid" href="/feed.rss">
+  <link rel="alternate" type="application/atom+xml" title="Stephen Reid's blog posts" href="/blog/feed.xml">
+</head>
+<body>
 
-    <div class="mb-4">
-      <%= partial :nav %>
-    </div>
+  <div class="mb-4">
+    <%= partial :nav %>
+  </div>
 
-    <div class="<%= @container_class || 'container' %>">
-      <%= partial :alert %>
-      <%= yield %>
-    </div>
+  <div class="<%= @container_class || 'container' %>">
+    <%= partial :alert %>
+    <%= yield %>
+  </div>
 
-    <div id="footer" class="bg-dark p-3 mt-5">
-      <div class="container">
-        <% unless @hide_subscribe %>
-          <div class="row justify-content-center mb-3">
-            <div class="col-sm-auto text-center">
-              <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
-            </div>
+  <div id="footer" class="bg-dark p-3 mt-5">
+    <div class="container">
+      <% unless @hide_subscribe %>
+        <div class="row justify-content-center mb-3">
+          <div class="col-sm-auto text-center">
+            <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe to my newsletter</a>
           </div>
-        <% end %>
-        <div class="row justify-content-center">
-          <%= Padrino.env == :production ? cp('social_networks') : partial(:social_networks) %>
         </div>
-        <div class="text-center mt-3">
-          <span class="text-muted mr-3">View source</span>
-          <a class="mr-3 text-muted" target="_blank" href="https://airtable.com/shrpW8bgHdF9jMuPV"><img src="/images/airtable.png" style="height: 20px"> Airtable</a>
-          <a class="text-muted" target="_blank" href="https://github.com/stephenreid321/stephenreid"><i class="text-white fab fa-github"></i> Github</a>
-        </div>
+      <% end %>
+      <div class="row justify-content-center">
+        <%= Padrino.env == :production ? cp('social_networks') : partial(:social_networks) %>
+      </div>
+      <div class="text-center mt-3">
+        <span class="text-muted mr-3">View source</span>
+        <a class="mr-3 text-muted" target="_blank" href="https://airtable.com/shrpW8bgHdF9jMuPV"><img src="/images/airtable.png" style="height: 20px"> Airtable</a>
+        <a class="text-muted" target="_blank" href="https://github.com/stephenreid321/stephenreid"><i class="text-white fab fa-github"></i> Github</a>
       </div>
     </div>
+  </div>
 
-    <script>
-      $(function () {
-        if (!Cookies.get('shownModal')) {
-          setTimeout(function () {
-            $('#modal').modal('show')
-            Cookies.set('shownModal', true, {expires: 90})
-          }, 5000)
-        }
-      })
-    </script>
+  <script>
+    $(function () {
+      if (!Cookies.get('shownModal')) {
+        setTimeout(function () {
+          $('#modal').modal('show')
+          Cookies.set('shownModal', true, {expires: 90})
+        }, 5000)
+      }
+    })
+  </script>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Let's stay in touch!</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p class="lead">
-              Join 1,800+ others receiving my regular newsletter:
-            </p>
-            <iframe width="100%" height="250" src="https://stephenreid.substack.com/embed" frameborder="0" scrolling="no"></iframe>
-          </div>
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Let's stay in touch!</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <!-- /.modal-content -->
+        <div class="modal-body">
+          <p class="lead">
+            Join 1,800+ others receiving my regular newsletter:
+          </p>
+          <iframe width="100%" height="250" src="https://stephenreid.substack.com/embed" frameborder="0" scrolling="no"></iframe>
+        </div>
       </div>
-      <!-- /.modal-dialog -->
+      <!-- /.modal-content -->
     </div>
-    <!-- /.modal -->
-  </body>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</body>
 </html>
