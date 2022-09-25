@@ -24,7 +24,7 @@ doc.search('a').each do |a|
       a.parent.parent['style'] = 'list-style-type: none; margin-left: -1.4em'
     elsif a.parent.parent.name == 'p'
       p = a.parent.parent
-      p['style'] = "margin-bottom: 0; #{p['style']}";
+      p['style'] = 'margin-bottom: 0';
     end
   end
   
