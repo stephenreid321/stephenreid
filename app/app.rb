@@ -60,6 +60,25 @@ module StephenReid
       erb :about
     end
 
+    get '/life-as-practice', cache: true do
+      expires 1.hour.to_i
+      @title = 'Life as Practice'
+      erb :life_as_practice
+    end
+
+    get '/life-as-practice/doc', cache: true do
+      expires 1.hour.to_i
+      @stylesheet = 'light'
+      @title = 'Life as Practice'
+      erb :life_as_practice_doc, layout: :minimal
+    end
+
+    get '/life-as-practice/thanks', cache: true do
+      expires 1.hour.to_i
+      @title = 'Life as Practice'
+      erb :life_as_practice_thanks
+    end
+
     %w[books podcasts software discord tarot events svenska-ord svensk-grammatik maps diet].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i
