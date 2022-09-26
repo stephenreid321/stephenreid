@@ -8,7 +8,9 @@
     #nav .nav-link.active { font-weight: bold }
 </style>
 
-<%= partial :"sponsors/#{Dir['app/views/sponsors/*'].map { |f| f.split('/_').last.gsub('.erb','') }.sample}" %>
+<% if @stylesheet = 'dark' %>
+  <%= partial :"sponsors/#{Dir['app/views/sponsors/*'].map { |f| f.split('/_').last.gsub('.erb','') }.sample}" %>
+<% end %>
 
 <div id="nav">
   <nav class="navbar navbar-expand-lg navbar-<%=@stylesheet%>">
