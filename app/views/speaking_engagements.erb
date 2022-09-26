@@ -4,9 +4,6 @@
 
 <dl class="row">
   <% SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).each { |speaking_engagement| %>
-  <dt class="col-sm-4"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
-  <dd class="col-sm-8">
-    <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
-  </dd>
+  <%= partial :speaking_engagement, object: speaking_engagement %>
   <% } %>
 </dl>
