@@ -1,4 +1,4 @@
-<dt class="col-sm-4"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% elsif speaking_engagement['Organisation'] %>, <%= speaking_engagement.organisation['Name'] %><% end %>
+<dt class="col-sm-4"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% elsif speaking_engagement['Organisation'] %>, <%= speaking_engagement['Organisation name'] %><% end %>
 </dt>
 <dd class="col-sm-8">
   <a href="<%= speaking_engagement['URL'] %>">
