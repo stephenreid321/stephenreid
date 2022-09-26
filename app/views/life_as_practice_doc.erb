@@ -40,7 +40,6 @@ doc.search('a').each do |a|
       p['style'] = 'margin-bottom: 0';
     end
   end
-  
   a.inner_html = "https://#{URI(a.inner_html).host}/..." if a.inner_html.starts_with?('http')
   unless a['href'].starts_with?('#')
     a['href'] = 'https://buy.stripe.com/cN2cNwaBIg6a5RmeVa'
