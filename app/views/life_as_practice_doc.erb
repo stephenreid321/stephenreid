@@ -34,7 +34,6 @@ doc = doc.search('body')
 doc.search('p')[6]['style'] = 'font-style: italic;'
 doc.search('a[id^=cmnt_ref]').each { |a| a.parent.remove }
 doc.search('a[id^=cmnt]').each { |a| a.parent.parent.remove }
-# doc.search("a[href^='#']").each { |a| a.parent.parent.remove }
 doc.search('a').each do |a|
   if a['href'] =~ /youtube/
     a.inner_html = '<i class="fab fa-youtube"></i> ' + a.inner_html
