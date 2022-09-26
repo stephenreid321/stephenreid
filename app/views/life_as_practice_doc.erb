@@ -1,19 +1,5 @@
-<style>
-  h2, h3, h4 { margin-top: 0.5em }
-  h2 { border-bottom: none !important }
-  p.c19, p.c28 { margin-top: 1em }
-  p.c19 + p.c15 {
-    margin-top: -1em;
-  }
-  p.c15, p.c16 { margin-bottom: 0 }
-  p.c15 { margin-left: 1em }
-  p.c16 { margin-left: 2em }
-</style>
-
 <div class="p-3 px-5">
   <%= 
-f = ''
-
 authenticator = DropboxApi::Authenticator.new(ENV['DROPBOX_APP_KEY'], ENV['DROPBOX_APP_SECRET'])
 token_hash = JSON.parse(Stash.find_by(key: 'dropbox_token_hash').value)
 access_token = OAuth2::AccessToken.from_hash(authenticator, token_hash)
@@ -24,16 +10,26 @@ dropbox = DropboxApi::Client.new(
   }
 )
 
+f = ''
 dropbox.download '/LifeasPractice.html' do |chunk|
   f = "#{f}#{chunk}"
 end  
 doc = Nokogiri::HTML(f)
 doc = doc.search('body')
+
+toc_start_class = doc.search('p').find { |p| p.text == 'Session 1 prep' }['class']
+toc_h1_class = doc.search('p').find { |p| p.text == 'Session 1: Foundations' }['class']
+toc_h2_class = doc.search('p').find { |p| p.text == 'Frameworks for Wellbeing' }['class']
+toc_h3_class = doc.search('p').find { |p| p.text == "Five Ways to Wellbeing (New Economics Foundation)" }['class']
+toc_end_class = doc.search('p').find { |p| p.text == "That's a wrap!" }['class']
+
 3.times do; doc.search('p')[0].remove; end
 1.upto(5).each do |i|; doc.search('p')[i]['style'] = 'margin-bottom: 0; font-style: italic'; end
 doc.search('p')[6]['style'] = 'font-style: italic;'
+
 doc.search('a[id^=cmnt_ref]').each { |a| a.parent.remove }
 doc.search('a[id^=cmnt]').each { |a| a.parent.parent.remove }
+
 doc.search('a').each do |a|
   if a['href'] =~ /youtube/
     a.inner_html = '<i class="fab fa-youtube"></i> ' + a.inner_html
@@ -51,7 +47,18 @@ doc.search('a').each do |a|
     a['target'] = '_blank'  
   end
 end
+
 doc.search('img').each { |img| img['src'] = "/Life as Practice/#{img['src']}" }
 doc
 %>
 </div>
+
+<style>
+  h2, h3, h4 { margin-top: 0.5em }
+  h2 { border-bottom: none !important }
+  p.<%=toc_h1_class%>, p.<%=toc_end_class%> { margin-top: 1em }
+  p.<%=toc_h1_class%> + p.<%=toc_h2_class%> { margin-top: -1em; }
+  p.<%=toc_h2_class%> , p.<%=toc_h3_class%>  { margin-bottom: 0 }
+  p.<%=toc_h2_class%>  { margin-left: 1em }
+  p.<%=toc_h3_class%>  { margin-left: 2em }
+</style>
