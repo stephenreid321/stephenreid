@@ -82,7 +82,7 @@ module StephenReid
       erb :life_as_practice_thanks
     end
 
-    %w[books podcasts software discord tarot events svenska-ord svensk-grammatik maps diet].each do |r|
+    %w[books podcasts software discord tarot events svenska-ord svensk-grammatik maps diet speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i
         @title = r.gsub('-', ' ').capitalize

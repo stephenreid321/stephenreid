@@ -104,16 +104,19 @@
 </div>
 
 
-
 <h2 class="mt-5" id="speaking">Recent speaking engagements</h2>
 <dl class="row">
   <% SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).first(5).each { |speaking_engagement| %>
-    <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
-    <dd class="col-sm-9">
-      <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
-    </dd>
+  <dt class="col-sm-3"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% end %></dt>
+  <dd class="col-sm-9">
+    <a href="<%= speaking_engagement['URL'] %>"><%= speaking_engagement['Name'] %></a>
+  </dd>
   <% } %>
 </dl>
+
+<p>
+  <a href="/speaking-engagements">View all &rarr;</a>
+</p>
 
 
 <h2 class="mt-5" id="feedback">Feedback on my courses</h2>
@@ -122,31 +125,31 @@
 </p>
 <iframe style="overflow: scroll; border: 0; height: 100vh; width:100%;" id="dandelion-feedback" src="https://dandelion.earth/u/stephenreid321/feedback?minimal=true&hide_pictures=1"></iframe>
 <script>
-$(function() {
-     $('#dandelion-feedback').iFrameResize({log: true, checkOrigin: false, heightCalculationMethod : 'taggedElement'})
-})
+  $(function() {
+       $('#dandelion-feedback').iFrameResize({log: true, checkOrigin: false, heightCalculationMethod : 'taggedElement'})
+  })
 </script>
 
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 <ul>
   <% Affiliation.all(filter: "{Current} = ''", sort: { 'Order' => 'asc' }).each { |affiliation| %>
-    <li>
-      <% if affiliation.fields['Organisation'] %>
-        <a href="<%= affiliation.organisation['URL'] %>"><%= affiliation.organisation['Name'] %></a>,
-      <% end %>
-      <%= affiliation['Position'] %>
-    </li>
+  <li>
+    <% if affiliation.fields['Organisation'] %>
+      <a href="<%= affiliation.organisation['URL'] %>"><%= affiliation.organisation['Name'] %></a>,
+    <% end %>
+    <%= affiliation['Position'] %>
+  </li>
   <% } %>
 </ul>
 
 <h2 class="mt-5" id="research">Peer-reviewed research</h2>
 <dl class="row">
   <% Paper.all.shuffle.each { |paper| %>
-    <dt class="col-sm-3"><%= date = Date.parse(paper['Date']); date.strftime('%b %Y') %>,
-      <%= paper['Journal'] %></dt>
-    <dd class="col-sm-9">
-      <a href="<%= paper['URL'] %>"><%= paper['Name'] %></a>
-    </dd>
+  <dt class="col-sm-3"><%= date = Date.parse(paper['Date']); date.strftime('%b %Y') %>,
+    <%= paper['Journal'] %></dt>
+  <dd class="col-sm-9">
+    <a href="<%= paper['URL'] %>"><%= paper['Name'] %></a>
+  </dd>
   <% } %>
 </dl>
 
