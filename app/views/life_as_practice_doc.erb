@@ -1,11 +1,22 @@
 <style>
   h2, h3, h4 { margin-top: 0.5em }
+  h2 { border-bottom: none !important }
 </style>
 
 <div class="p-3 px-5">
   <%= 
 f = ''
-dropbox = DropboxApi::Client.new
+
+authenticator = DropboxApi::Authenticator.new(ENV['DROPBOX_APP_KEY'], ENV['DROPBOX_APP_SECRET'])
+token_hash = JSON.parse(Stash.find_by(key: 'dropbox_token_hash').value)
+access_token = OAuth2::AccessToken.from_hash(authenticator, token_hash)
+dropbox = DropboxApi::Client.new(
+  access_token: access_token,
+  on_token_refreshed: lambda { |new_token_hash|
+    Stash.find_by(key: 'dropbox_token_hash').update_attribute(:value, new_token_hash.to_json)
+  }
+)
+
 dropbox.download '/LifeasPractice.html' do |chunk|
   f = "#{f}#{chunk}"
 end  
