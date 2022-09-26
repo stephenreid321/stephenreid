@@ -1,6 +1,13 @@
 <style>
   h2, h3, h4 { margin-top: 0.5em }
   h2 { border-bottom: none !important }
+  p.c19, p.c28 { margin-top: 1em }
+  p.c19 + p.c15 {
+    margin-top: -1em;
+  }
+  p.c15, p.c16 { margin-bottom: 0 }
+  p.c15 { margin-left: 1em }
+  p.c16 { margin-left: 2em }
 </style>
 
 <div class="p-3 px-5">
@@ -27,7 +34,7 @@ doc = doc.search('body')
 doc.search('p')[6]['style'] = 'font-style: italic;'
 doc.search('a[id^=cmnt_ref]').each { |a| a.parent.remove }
 doc.search('a[id^=cmnt]').each { |a| a.parent.parent.remove }
-doc.search("a[href^='#']").each { |a| a.parent.parent.remove }
+# doc.search("a[href^='#']").each { |a| a.parent.parent.remove }
 doc.search('a').each do |a|
   if a['href'] =~ /youtube/
     a.inner_html = '<i class="fab fa-youtube"></i> ' + a.inner_html
