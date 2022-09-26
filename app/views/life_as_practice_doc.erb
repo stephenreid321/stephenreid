@@ -46,8 +46,10 @@ doc.search('a').each do |a|
   end
   
   a.inner_html = "https://#{URI(a.inner_html).host}/..." if a.inner_html.starts_with?('http')
-  a['href'] = 'https://buy.stripe.com/cN2cNwaBIg6a5RmeVa'
-  a['target'] = '_blank'  
+  unless a['href'].starts_with?('#')
+    a['href'] = 'https://buy.stripe.com/cN2cNwaBIg6a5RmeVa'
+    a['target'] = '_blank'  
+  end
 end
 doc.search('img').each { |img| img['src'] = "/Life as Practice/#{img['src']}" }
 doc
