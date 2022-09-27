@@ -18,35 +18,36 @@
 </script>
 
 <div class="row align-items-center">
-  <div class="col-md-8">
-<table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Asset</th>
-      <th></th>
-      <th style="width: 8em">Current weight</th>
-      <th style="width: 8em">With multipliers<br/>(next rebalance)</th>
-      <th style="width: 8em">Without multipliers</th>
-    </tr>
-  </thead>
-  <% tickers = (proposed_with_multipliers.keys + proposed_without_multipliers.keys + actual.keys + Asset.and(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
-  <% tickers.uniq.each { |k| %>
-  <% asset = Asset.find_by(ticker: k) %>
-  <tr>
-    <td style="vertical-align: middle; text-align: right; width: 10vw">
-      <% if actual[k] %>
-        <% if diff[k] < 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
+  <div class="col-lg-8">
+    <table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Asset</th>
+          <th></th>
+          <th style="width: 8em">Current weight</th>
+          <th style="width: 8em">With multipliers<br/>
+            (next rebalance)</th>
+          <th style="width: 8em">Without multipliers</th>
+        </tr>
+      </thead>
+      <% tickers = (proposed_with_multipliers.keys + proposed_without_multipliers.keys + actual.keys + Asset.and(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
+      <% tickers.uniq.each { |k| %>
+      <% asset = Asset.find_by(ticker: k) %>
+      <tr>
+        <td style="vertical-align: middle; text-align: right; width: 10vw">
+          <% if actual[k] %>
+            <% if diff[k] < 0 %>
+              <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
                                                                                                                        'green'
                                                                                                                      elsif diff[k].negative?
                                                                                                                        'red'
                                                                                                                      end %>; width: <%= "#{100 * -diff[k] / diff.values.map(&:abs).max}%" %>"></div>
-        <% end %>
-      <% end %>
-    </td>
-    <td class="assetName" style="white-space: nowrap;">
-      <a
+            <% end %>
+          <% end %>
+        </td>
+        <td class="assetName" style="white-space: nowrap;">
+          <a
       data-toggle="tooltip"
 <% if coin = Coin.find_by(symbol: asset.ticker) %>
       title="$<%= coin.usd_price
@@ -60,50 +61,50 @@
 <% end %>
 
       target="_blank" href="https://www.iconomi.com/asset/<%= k %>?ref=YGnZy">
-        <%= asset.name %> (<%= k %>)
-      </a>
-      <%= partial :'crypto/multiplier', locals: { asset: asset } %>
-    </td>
-    <td style="vertical-align: middle; width: 10vw">
-      <% if actual[k] %>
-        <% if diff[k] > 0 %>
-          <div class="d-none d-sm-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
+            <%= asset.name %> (<%= k %>)
+          </a>
+          <%= partial :'crypto/multiplier', locals: { asset: asset } %>
+        </td>
+        <td style="vertical-align: middle; width: 10vw">
+          <% if actual[k] %>
+            <% if diff[k] > 0 %>
+              <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
                                                                                                                        'green'
                                                                                                                      elsif diff[k].negative?
                                                                                                                        'red'
                                                                                                                      end %>; width: <%= "#{100 * diff[k] / diff.values.map(&:abs).max}%" %>"></div>
-        <% end %>
-      <% end %>
-    </td>
-    <td data-sort="<%= actual[k] || 0 %>" style="white-space: nowrap;">
-      <% if actual[k] %>
-        <%= number_to_percentage (actual[k] * 100), precision: 1 %>
-        <small>
-          <span style="color: <%= if diff[k].positive?
+            <% end %>
+          <% end %>
+        </td>
+        <td data-sort="<%= actual[k] || 0 %>" style="white-space: nowrap;">
+          <% if actual[k] %>
+            <%= number_to_percentage (actual[k] * 100), precision: 1 %>
+            <small>
+              <span style="color: <%= if diff[k].positive?
                                     'green'
                                   elsif diff[k].negative?
                                     'red'
                                   end %>">
-            <%= '+' if diff[k].positive? %><%= (diff[k] * 10_000).round %>
-          </span>
-        </small>
-      <% end %>
-    </td>
-    <td data-sort="<%= proposed_with_multipliers[k] || 0 %>" style="white-space: nowrap;">
-      <% if proposed_with_multipliers[k] %>
-        <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 1 %>
-      <% end %>
-    </td>
-    <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
-      <% if proposed_without_multipliers[k] %>
-        <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 1 %>
-      <% end %>
-    </td>
-  </tr>
-  <% } %>
-</table>
-</div>
-<div class="col-md-4">
-  <%= partial :'crypto/strategy_chart', locals: { actual: actual } %>
-</div>
+                <%= '+' if diff[k].positive? %><%= (diff[k] * 10_000).round %>
+              </span>
+            </small>
+          <% end %>
+        </td>
+        <td data-sort="<%= proposed_with_multipliers[k] || 0 %>" style="white-space: nowrap;">
+          <% if proposed_with_multipliers[k] %>
+            <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 1 %>
+          <% end %>
+        </td>
+        <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
+          <% if proposed_without_multipliers[k] %>
+            <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 1 %>
+          <% end %>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+  <div class="col-lg-4">
+    <%= partial :'crypto/strategy_chart', locals: { actual: actual } %>
+  </div>
 </div>

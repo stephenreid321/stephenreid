@@ -1,6 +1,6 @@
 <% spin = 60 / Ancestry.all.count %>
 <div class="row justify-content-center">
-  <div class="col-12 col-md-4 mb-3 px-5">
+  <div class="col-12 col-lg-4 mb-3 px-5">
     <script>
       $(function () {
         var config = {
@@ -51,7 +51,7 @@
     </script>
     <canvas id="chart-area"></canvas>
   </div>
-  <div class="col-12 col-md-6">
+  <div class="col-12 col-lg-6">
     <% { 'European' => 0, 'Jewish' => 210, 'Central & South Asian' => 120, 'Unknown' => 0 }.each { |k,v| %>
     <% n = Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).count
        Ancestry.all(filter: "{Region} = '#{k}'", sort: { 'Autonumber' => 'asc' }).each_with_index { |ancestry, i| %>

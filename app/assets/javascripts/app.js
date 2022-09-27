@@ -1,13 +1,13 @@
-$(function() {
+$(function () {
 
-  $('img').each(function() {
-    if($(this).prop('naturalWidth') == 1 && $(this).prop('naturalHeight') == 1)
+  $('img').each(function () {
+    if ($(this).prop('naturalWidth') == 1 && $(this).prop('naturalHeight') == 1)
       $(this).hide()
   })
 
-  $('.card.post, .card.software').hover(function() {
+  $('.card.post, .card.software').hover(function () {
     $('.card-text small', this).removeClass('text-muted')
-  }, function() {
+  }, function () {
     $('.card-text small', this).addClass('text-muted')
   })
 
@@ -30,7 +30,7 @@ $(function() {
 
   $("abbr.timeago").timeago()
 
-  $(document).on('click', 'a[data-confirm]', function(e) {
+  $(document).on('click', 'a[data-confirm]', function (e) {
     var message = $(this).data('confirm');
     if (!confirm(message)) {
       e.preventDefault();
@@ -38,22 +38,22 @@ $(function() {
     }
   });
 
-  $(document).on('click', 'a.popup', function(e) {
+  $(document).on('click', 'a.popup', function (e) {
     window.open(this.href, null, 'scrollbars=yes,width=600,height=600,left=150,top=150').focus();
     return false;
   });
 
-  $('.card').hover(function() {
-    $('.showOnHover', this).addClass('d-sm-inline')
-  }, function() {
-    $('.showOnHover', this).removeClass('d-sm-inline')
+  $('.card').hover(function () {
+    $('.showOnHover', this).addClass('d-lg-inline')
+  }, function () {
+    $('.showOnHover', this).removeClass('d-lg-inline')
   })
 
-  $('.range-slider__range').on('input', function() {
+  $('.range-slider__range').on('input', function () {
     $(this).next().html($(this).val());
   });
 
-  $('.range-slider__value').each(function() {
+  $('.range-slider__value').each(function () {
     $(this).html($(this).prev().val());
   });
 
@@ -63,7 +63,7 @@ $(function() {
       html: true
     })
 
-    $('.rg').each(function() {
+    $('.rg').each(function () {
       var d = parseFloat($(this).text())
       var b = 0
       if (d > b)
@@ -72,14 +72,14 @@ $(function() {
         $(this).css('color', 'red')
     })
 
-    $('.score').each(function() {
+    $('.score').each(function () {
       var d = parseFloat($(this).text())
       scale = chroma.scale(['white', '#2DB963']);
       $(this).closest('td').css('background-color', scale(d / 100).hex()).addClass('text-dark')
     })
 
   }
-  $(document).ajaxComplete(function() {
+  $(document).ajaxComplete(function () {
     ajaxCompleted()
   });
   ajaxCompleted()

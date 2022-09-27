@@ -1,27 +1,27 @@
 <script>
-$(function() {
-  $('#toc').toc({
-    'container': '#maps',
-    'selectors': 'h2'
-  });
-})
+  $(function() {
+    $('#toc').toc({
+      'container': '#maps',
+      'selectors': 'h2'
+    });
+  })
 </script>
 
 <div class="row">
-  <div class="col-sm-2">
-    <div class="d-none d-sm-block" id="toc"></div>
+  <div class="col-lg-2">
+    <div class="d-none d-lg-block" id="toc"></div>
   </div>
-  <div id="maps" class="col-sm-8">
+  <div id="maps" class="col-lg-8">
 
 
-<% Map.all(sort: { 'Order' => 'asc' }).each_with_index { |map,i| %>
-  <h2 <% unless i == 0 %>class="mt-5"<% end %>><%=map['Name']%></h2>
-  <% map['Images'].each { |image| %>
+    <% Map.all(sort: { 'Order' => 'asc' }).each_with_index { |map,i| %>
+    <h2 <% unless i == 0 %>class="mt-5"<% end %>><%=map['Name']%></h2>
+    <% map['Images'].each { |image| %>
     <div class="mb-3">
       <a target="_blank" href="<%=image['url']%>"><img style="max-width: 100%" src="<%=image['url']%>" /></a>
     </div>
-  <% } %>
-<% } %>
+    <% } %>
+    <% } %>
 
-</div>
+  </div>
 </div>

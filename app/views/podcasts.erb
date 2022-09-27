@@ -16,10 +16,10 @@
       'pop',
       'psychedelics',
       'science'].each { |c| %>
-    <% Podcast.all(filter: "{Category} = '#{c}'").shuffle.each { |podcast| %>
-    <div class="col-sm-3 mb-3">
-      <%= partial :podcast, locals: { podcast: podcast } %>
-    </div>
-    <% } %>
+  <% Podcast.all(filter: "{Category} = '#{c}'").shuffle.each { |podcast| %>
+  <div class="col-lg-3 mb-3">
+    <%= partial :podcast, locals: { podcast: podcast } %>
+  </div>
+  <% } %>
   <% } %>
 </div>

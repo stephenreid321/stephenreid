@@ -8,7 +8,7 @@ count = strategies.count
 </div>
 
 <div class="row">
-  <div class="col-sm-6 text-center">
+  <div class="col-lg-6 text-center">
     <% form_tag '', method: 'get', class: 'mb-3' do %>
       <label>Number of funds</label>
       <div class="range-slider">
@@ -17,18 +17,18 @@ count = strategies.count
       </div>
       <label>Investment</label>
       <div class="row justify-content-center">
-         <div class="col-auto">
-           <div class="input-group" style="width: 10rem">
-             <div class="input-group-prepend">
-               <span class="input-group-text">$</span>
-             </div>
-             <%= number_field_tag :investment, class: 'form-control-lg form-control', value: 1000, id: 'investment', onchange: 'proposedPosition()' %>
-           </div>
-         </div>
-       </div>
+        <div class="col-auto">
+          <div class="input-group" style="width: 10rem">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <%= number_field_tag :investment, class: 'form-control-lg form-control', value: 1000, id: 'investment', onchange: 'proposedPosition()' %>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
-  <div class="col-sm-6">
+  <div class="col-lg-6">
     <div class="card mb-3 p-3">
       <div class="card-body text-center">
         <h5 class="card-title">
@@ -56,7 +56,6 @@ count = strategies.count
 </div>
 
 <script>
-
   function proposedPosition() {
     $('#iconomi tr td:nth-child(5)').text('') // 1-index, proposed %
     $('#iconomi tr td:nth-child(6)').text('') // 1-index, proposed $
@@ -120,86 +119,86 @@ count = strategies.count
     </tr>
   </thead>
   <% strategies.each_with_index { |strategy, i| holding = strategy.holdings.order('weight desc').first; asset = holding.asset %>
-    <tr>
-      <td style="opacity: 0.5">
-      </td>
-      <td>
-        <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>?ref=YGnZy"><%= strategy.name %></a>
-        <br />
-        <% if current_account %>
+  <tr>
+    <td style="opacity: 0.5">
+    </td>
+    <td>
+      <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>?ref=YGnZy"><%= strategy.name %></a>
+      <br />
+      <% if current_account %>
         <a target="_blank" href="/admin/edit/Asset/<%=asset.id%>" class="badge badge-primary"
         style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
           <%= asset.ticker %>
           <%= holding.percent %>
         </a>
-        <% else %>
+      <% else %>
         <span class="badge badge-primary"
         style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
           <%= asset.ticker %>
           <%= holding.percent %>
         </span>
-        <% end %>
-      </td>
-      <td data-sort="<%= strategy.nscore_score_fee_weighted %>">
-        <span class="score">
-          <%= number_with_precision strategy.nscore_score_fee_weighted, precision: 1 %>
-        </span>
-        <br>
-        <small>
-          <%= strategy.index_score_fee_weighted %>/<%= count %>
-        </small>
-      </td>
-      <td data-sort="<%= strategy.nscore_score %>">
-        <span class="score">
-          <%= number_with_precision strategy.nscore_score, precision: 1 %>
-        </span>
-        <br>
-        <small>
-          <%= strategy.index_score %>/<%= count %>
-        </small>
-      </td>
-      <td>
-      </td>
-      <td>
-      </td>
-      <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount last_posted_at].each { |x| %>
-        <% if strategy.send(x) %>
-          <td <% if %w[lastRebalanced last_posted_at].include?(x) %> data-sort="<%= strategy.send(x).to_i %>" <% end %>>
-            <% if %w[lastRebalanced last_posted_at].include?(x) %>
-              <%= time_ago_in_words strategy.send(x) %> ago
-            <% else %>
-              <%= strategy.send(x) %>
-            <% end %>
-          </td>
-        <% else %>
-          <td data-sort="0"></td>
-        <% end %>
-      <% } %>
-      <% %w[day week month three_month six_month year].each { |t| %>
-      <% if strategy.send("r#{t}") %>
-        <td data-sort="<%= strategy.send("nscore_r#{t}") %>">
-          <span class="score">
-            <%= number_with_precision strategy.send("nscore_r#{t}"), precision: 1 %>
-          </span>
-          <br>
-          <small>
-            <%= strategy.send("index_r#{t}") %>/<%= count %>
-          </small>
-        </td>
-      <% else %>
-        <td class="bg-white" data-sort="0"></td>
       <% end %>
-      <% } %>
-      <td data-sort="<%= strategy.nscore_aum %>">
+    </td>
+    <td data-sort="<%= strategy.nscore_score_fee_weighted %>">
+      <span class="score">
+        <%= number_with_precision strategy.nscore_score_fee_weighted, precision: 1 %>
+      </span>
+      <br>
+      <small>
+        <%= strategy.index_score_fee_weighted %>/<%= count %>
+      </small>
+    </td>
+    <td data-sort="<%= strategy.nscore_score %>">
+      <span class="score">
+        <%= number_with_precision strategy.nscore_score, precision: 1 %>
+      </span>
+      <br>
+      <small>
+        <%= strategy.index_score %>/<%= count %>
+      </small>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    <% %w[numberOfAssets lastRebalanced monthlyRebalancedCount last_posted_at].each { |x| %>
+    <% if strategy.send(x) %>
+      <td <% if %w[lastRebalanced last_posted_at].include?(x) %> data-sort="<%= strategy.send(x).to_i %>" <% end %>>
+        <% if %w[lastRebalanced last_posted_at].include?(x) %>
+          <%= time_ago_in_words strategy.send(x) %> ago
+        <% else %>
+          <%= strategy.send(x) %>
+        <% end %>
+      </td>
+    <% else %>
+      <td data-sort="0"></td>
+    <% end %>
+    <% } %>
+    <% %w[day week month three_month six_month year].each { |t| %>
+    <% if strategy.send("r#{t}") %>
+      <td data-sort="<%= strategy.send("nscore_r#{t}") %>">
         <span class="score">
-          <%= number_with_precision strategy.nscore_aum, precision: 1 %>
+          <%= number_with_precision strategy.send("nscore_r#{t}"), precision: 1 %>
         </span>
         <br>
         <small>
-          <%= strategy.index_aum %>/<%= count %>
+          <%= strategy.send("index_r#{t}") %>/<%= count %>
         </small>
       </td>
-    </tr>
+    <% else %>
+      <td class="bg-white" data-sort="0"></td>
+    <% end %>
+    <% } %>
+    <td data-sort="<%= strategy.nscore_aum %>">
+      <span class="score">
+        <%= number_with_precision strategy.nscore_aum, precision: 1 %>
+      </span>
+      <br>
+      <small>
+        <%= strategy.index_aum %>/<%= count %>
+      </small>
+    </td>
+  </tr>
   <% } %>
 </table>
 

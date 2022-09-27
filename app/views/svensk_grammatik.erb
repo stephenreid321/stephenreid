@@ -2,30 +2,30 @@
   #svensk-grammatik td:hover { color: white; cursor: pointer }
 </style>
 <script>
-$(function() {
-  $("#svensk-grammatik table").addClass('table mb-4')
-  $("#svensk-grammatik h2").addClass('mb-4')
+  $(function() {
+    $("#svensk-grammatik table").addClass('table mb-4')
+    $("#svensk-grammatik h2").addClass('mb-4')
 
-  $('#toc').toc({
-    'container': '#svensk-grammatik',
-    'selectors': 'h1,h2,h3,h4'
-  });
+    $('#toc').toc({
+      'container': '#svensk-grammatik',
+      'selectors': 'h1,h2,h3,h4'
+    });
 
-  $('#svensk-grammatik td').click(function() {
-    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + $(this).text().split('(')[0];
-    var audioEl = $('#sa')[0]
-    audioEl.src = url;
-    audioEl.play();
+    $('#svensk-grammatik td').click(function() {
+      var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + $(this).text().split('(')[0];
+      var audioEl = $('#sa')[0]
+      audioEl.src = url;
+      audioEl.play();
+    })
+
   })
-
-})
 </script>
 
 <div id="svensk-grammatik" class="row">
-  <div class="col-sm-2">
-    <div class="d-none d-sm-block" id="toc"></div>
+  <div class="col-lg-2">
+    <div class="d-none d-lg-block" id="toc"></div>
   </div>
-  <div class="col-sm-8">
+  <div class="col-lg-8">
     <audio id="sa" class="d-none" controls></audio>
     <%= md :svensk_grammatik %>
   </div>

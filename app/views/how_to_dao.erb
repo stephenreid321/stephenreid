@@ -14,10 +14,10 @@ session = GoogleDrive::Session.from_config(OpenStruct.new(
 
 
 <div class="row">
-  <div class="col-sm-2">
-    <div class="d-none d-sm-block" id="toc"></div>
+  <div class="col-lg-2">
+    <div class="d-none d-lg-block" id="toc"></div>
   </div>
-  <div class="col-sm-8">
+  <div class="col-lg-8">
     <div class="blog_post">
       <%= n = Nokogiri::HTML(h)
       n.search('h1,h2,h3,h4,h5,h6').remove_attribute('id')

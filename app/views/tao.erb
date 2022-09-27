@@ -26,13 +26,13 @@
 
 <% if !params[:i] %>
   <div class="row justify-content-center mb-3">
-    <div class="col-10 col-sm-4">
+    <div class="col-10 col-lg-4">
       <a target="_blank" href="https://amzn.to/30ZIpxw"><img class="w-100" src="/images/tao.jpg"></a>
     </div>
   </div>
 
   <div class="row justify-content-center mb-5">
-    <div class="col-md-7">
+    <div class="col-lg-7">
       <p style="font-size: 1.4rem">
         Following an 81-day meditation on each of the 81 chapters of the Tao Te Ching, I minted NFTs for each chapter which contain a link to a secret Telegram group.
       </p>
@@ -45,10 +45,10 @@
 
 <% (params[:i] ? Verse.all(filter: "{Verse} = #{params[:i]}", sort: { 'Verse' => 'asc'}) : Verse.all(sort: { 'Verse' => 'asc'})).each_with_index { |verse,i| next if !verse['Images'] %>
 <div class="row" <% unless params[:i] %> style="margin-bottom: 10rem"<% end %>>
-  <div class="col-sm-9 order-sm-2 mb-3">
+  <div class="col-lg-9 order-lg-2 mb-3">
     <a href="/tao-te-ching/<%= verse['Verse'] %>"><img src="<%= verse['Images'].first['thumbnails']['full']['url'] %>" class="w-100"></a>
   </div>
-  <div class="col-sm-3 order-sm-1 mb-3" style="white-space: nowrap; z-index: 99">
+  <div class="col-lg-3 order-lg-1 mb-3" style="white-space: nowrap; z-index: 99">
     <h2 class="mb-3 regular">
       <a class="bg-standard text-contrast" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
     </h2>
@@ -136,7 +136,7 @@
     <% } %>
   </div>
   <div class="row justify-content-center mt-5">
-    <div class="col-10 col-sm-4">
+    <div class="col-10 col-lg-4">
       <a href="/tao-te-ching"><img class="w-100" src="/images/tao.jpg"></a>
     </div>
   </div>

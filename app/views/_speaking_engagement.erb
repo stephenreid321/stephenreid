@@ -1,6 +1,6 @@
-<dt class="col-sm-4"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% elsif speaking_engagement['Organisation'] %>, <%= speaking_engagement['Organisation name'] %><% end %>
+<dt class="col-lg-4"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% elsif speaking_engagement['Organisation'] %>, <%= speaking_engagement['Organisation name'] %><% end %>
 </dt>
-<dd class="col-sm-8">
+<dd class="col-lg-8">
   <a href="<%= speaking_engagement['URL'] %>">
     <% if speaking_engagement['URL'] =~ /youtu/ %>
       <i class="fab fa-youtube"></i>

@@ -1,71 +1,71 @@
 <% title = t['Name'] unless defined?(title) && title %>
 
-  <% if t['Description'] %>
-    <a href="javascript:;" data-toggle="modal" data-target="#card-<%= title.parameterize %>">
-      <% if t.is_a? TarotCard %>
-        <img class="tarot-card-preview" src="<%= t['Image'].first['url'] %>">
-      <% else %>
-        <%= title %>
-      <% end %>
-    </a>
-  <% else %>
+<% if t['Description'] %>
+  <a href="javascript:;" data-toggle="modal" data-target="#card-<%= title.parameterize %>">
     <% if t.is_a? TarotCard %>
-      <img class="tarot-card-preview" src="/images/card-back.png" onmouseover="$(this).hide().next().show()">
-      <a href="javascript:;" data-toggle="modal" data-target="#card-<%= title.parameterize %>" style="display: none">
-        <img class="tarot-card-preview" src="<%= t['Image'].first['url'] %>">
-      </a>
+      <img class="tarot-card-preview" src="<%= t['Image'].first['url'] %>">
     <% else %>
       <%= title %>
     <% end %>
+  </a>
+<% else %>
+  <% if t.is_a? TarotCard %>
+    <img class="tarot-card-preview" src="/images/card-back.png" onmouseover="$(this).hide().next().show()">
+    <a href="javascript:;" data-toggle="modal" data-target="#card-<%= title.parameterize %>" style="display: none">
+      <img class="tarot-card-preview" src="<%= t['Image'].first['url'] %>">
+    </a>
+  <% else %>
+    <%= title %>
   <% end %>
+<% end %>
 
-  <script>
-    $(function() {
+<script>
+  $(function() {
 
+    $("a[data-target='#card-<%= title.parameterize %>']").on('mouseout', function() {
+      $(this).hide().prev().show()
+    })
+
+    $("a[data-target='#card-<%= title.parameterize %>']").click(function() {
+      $(this).off('mouseout')
+    })
+
+    $('#card-<%= title.parameterize %>').on('hide.bs.modal', function() {
       $("a[data-target='#card-<%= title.parameterize %>']").on('mouseout', function() {
         $(this).hide().prev().show()
-      })
-
-      $("a[data-target='#card-<%= title.parameterize %>']").click(function() {
-        $(this).off('mouseout')
-      })
-
-      $('#card-<%= title.parameterize %>').on('hide.bs.modal', function() {
-        $("a[data-target='#card-<%= title.parameterize %>']").on('mouseout', function() {
-          $(this).hide().prev().show()
-        }).mouseout()
-      })
-
+      }).mouseout()
     })
-  </script>
 
-  <div class="modal fade" id="card-<%= title.parameterize %>" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><%= title %></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body font-weight-normal">
+  })
+</script>
 
-          <div class="row">
-            <% if t['Image'] %>
-              <div class=" <%= t['Description'] ? 'col-sm-4' : 'col-sm-8 offset-sm-2' %>">
-                <div class="mb-3 text-center">
-                  <img style="width: 100%; max-width: none" src="<%= t['Image'].first['url'] %>">
-                </div>
+<div class="modal fade" id="card-<%= title.parameterize %>" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= title %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body font-weight-normal">
+
+        <div class="row">
+          <% if t['Image'] %>
+            <div class=" <%= t['Description'] ? 'col-lg-4' : 'col-lg-8 offset-lg-2' %>">
+              <div class="mb-3 text-center">
+                <img style="width: 100%; max-width: none" src="<%= t['Image'].first['url'] %>">
               </div>
-            <% end %>
-            <div class="<%= t['Image'] ? 'col-sm-8' : 'col-sm-12' %>">
-              <% if t['Description'] %>
-                <%= t['Description'].gsub("\n", '<br />') %>
-              <% end %>
             </div>
+          <% end %>
+          <div class="<%= t['Image'] ? 'col-lg-8' : 'col-lg-12' %>">
+            <% if t['Description'] %>
+              <%= t['Description'].gsub("\n", '<br />') %>
+            <% end %>
           </div>
-
         </div>
+
       </div>
     </div>
   </div>
+</div>
