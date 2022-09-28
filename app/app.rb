@@ -60,29 +60,7 @@ module StephenReid
       erb :about
     end
 
-    get '/life-as-practice', cache: true do
-      expires 1.hour.to_i
-      @og_image = 'https://autopia.s3.amazonaws.com/2022/07/13/11/36/03/96394251-0af2-4126-a99f-2b127a13bff8/Untitled-6.jpg'
-      @title = 'Life as Practice'
-      erb :life_as_practice
-    end
-
-    get '/life-as-practice/doc', cache: true do
-      expires 1.hour.to_i
-      @og_image = 'https://autopia.s3.amazonaws.com/2022/07/13/11/36/03/96394251-0af2-4126-a99f-2b127a13bff8/Untitled-6.jpg'
-      @stylesheet = 'light'
-      @title = 'Life as Practice'
-      erb :life_as_practice_doc, layout: :minimal
-    end
-
-    get '/life-as-practice/thanks', cache: true do
-      expires 1.hour.to_i
-      @og_image = 'https://autopia.s3.amazonaws.com/2022/07/13/11/36/03/96394251-0af2-4126-a99f-2b127a13bff8/Untitled-6.jpg'
-      @title = 'Life as Practice'
-      erb :life_as_practice_thanks
-    end
-
-    %w[books podcasts software discord tarot events svenska-ord svensk-grammatik maps diet speaking-engagements].each do |r|
+    %w[books podcasts software discord tarot events svenska-ord svensk-grammatik diet speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i
         @title = r.gsub('-', ' ').capitalize
@@ -107,30 +85,6 @@ module StephenReid
     get '/5km-run-times' do
       @title = '5km run times'
       erb :run_times
-    end
-
-    get '/how-to-dao' do
-      @title = 'How to DAO'
-      erb :how_to_dao
-    end
-
-    get '/tao-te-ching' do
-      redirect '/tao-te-ching/1'
-      # redirect 'https://rarible.com/tao-te-ching'
-      # @title = 'Tao Te Ching'
-      # @favicon = 'tao-sq.png'
-      # @og_image = "#{ENV['BASE_URI']}/images/fish.jpg"
-      # @og_desc = ''
-      # erb :tao
-    end
-
-    get '/tao-te-ching/:i' do
-      @title = "Verse #{params[:i]} · Tao Te Ching"
-      @favicon = 'tao-sq.png'
-      verse = Verse.all(filter: "{Verse} = #{params[:i]}").first
-      @og_image = verse['Images'].first['thumbnails']['full']['url']
-      @og_desc = verse['Text'].split("\n\n").first
-      erb :tao
     end
 
     get '/substack' do
@@ -206,7 +160,8 @@ module StephenReid
       '/why-use-the-darknet' => 'https://dark.fail/',
       '/books-videos' => '/knowledgegraph',
       '/featured' => '/knowledgegraph',
-      '/recommended' => '/knowledgegraph'
+      '/recommended' => '/knowledgegraph',
+      '/maps' => '/life-as-practice'
     }.each { |k, v| get k.to_s do; redirect v; end }
   end
 end
