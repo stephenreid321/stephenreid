@@ -68,13 +68,6 @@ module StephenReid
       end
     end
 
-    get '/lunarpunk-dreams' do
-      @title = 'Lunarpunk Dreams'
-      @og_desc = 'Lunarpunk is what happens when the sun goes down in a Solarpunk village/town/city.'
-      @og_image = "#{ENV['BASE_URI']}/images/lunarpunk_dreams_horizontal.png"
-      erb :lunarpunk_dreams
-    end
-
     get '/coaching' do
       @title = 'Coaching'
       @og_desc = 'What do you really want, and how can you move towards it?'
@@ -82,10 +75,37 @@ module StephenReid
       erb :coaching
     end
 
-    get '/5km-run-times' do
-      @title = '5km run times'
-      erb :run_times
+    get '/lunarpunk-dreams' do
+      @title = 'Lunarpunk Dreams'
+      @og_desc = 'Lunarpunk is what happens when the sun goes down in a Solarpunk village/town/city.'
+      @og_image = "#{ENV['BASE_URI']}/images/lunarpunk_dreams_horizontal.png"
+      erb :lunarpunk_dreams
     end
+
+    {
+      '/calendly' => 'https://calendly.com/stephenreid321',
+      '/1' => 'https://calendly.com/stephenreid321/1-min-call',
+      '/5' => 'https://calendly.com/stephenreid321/5-min-call',
+      '/15' => 'https://calendly.com/stephenreid321/15-min-call',
+      '/30' => 'https://calendly.com/stephenreid321/30-min-call',
+      '/55' => 'https://calendly.com/stephenreid321/60-min-call',
+      '/60' => 'https://calendly.com/stephenreid321/60-min-call',
+      '/90' => 'https://calendly.com/stephenreid321/90-min-call',
+      '/120' => 'https://calendly.com/stephenreid321/120-min-call',
+      '/15p' => 'https://calendly.com/stephenreid321/priority-15-min-call',
+      '/30p' => 'https://calendly.com/stephenreid321/priority-30-min-call',
+      '/60p' => 'https://calendly.com/stephenreid321/priority-60-min-call',
+      '/about' => '/',
+      '/link' => '/',
+      '/training' => '/about',
+      '/bio' => '/about',
+      '/darknet' => 'https://dark.fail/',
+      '/why-use-the-darknet' => 'https://dark.fail/',
+      '/books-videos' => '/knowledgegraph',
+      '/featured' => '/knowledgegraph',
+      '/recommended' => '/knowledgegraph',
+      '/maps' => '/life-as-practice'
+    }.each { |k, v| get k.to_s do; redirect v; end }
 
     get '/substack' do
       @from = params[:from] ? Date.parse(params[:from]) : Date.today
@@ -123,10 +143,6 @@ module StephenReid
       erb :redirect
     end
 
-    get '/master-lover-course' do
-      send_file "#{Padrino.root}/app/markdown/master-lover-course.html"
-    end
-
     get '/software/update' do
       agent = Mechanize.new
       Software.all(filter: "AND({Featured} = 1, {Description} = '')").each do |software|
@@ -139,29 +155,8 @@ module StephenReid
       redirect '/software?r=1'
     end
 
-    {
-      '/calendly' => 'https://calendly.com/stephenreid321',
-      '/1' => 'https://calendly.com/stephenreid321/1-min-call',
-      '/5' => 'https://calendly.com/stephenreid321/5-min-call',
-      '/15' => 'https://calendly.com/stephenreid321/15-min-call',
-      '/30' => 'https://calendly.com/stephenreid321/30-min-call',
-      '/55' => 'https://calendly.com/stephenreid321/60-min-call',
-      '/60' => 'https://calendly.com/stephenreid321/60-min-call',
-      '/90' => 'https://calendly.com/stephenreid321/90-min-call',
-      '/120' => 'https://calendly.com/stephenreid321/120-min-call',
-      '/15p' => 'https://calendly.com/stephenreid321/priority-15-min-call',
-      '/30p' => 'https://calendly.com/stephenreid321/priority-30-min-call',
-      '/60p' => 'https://calendly.com/stephenreid321/priority-60-min-call',
-      '/about' => '/',
-      '/link' => '/',
-      '/training' => '/about',
-      '/bio' => '/about',
-      '/darknet' => 'https://dark.fail/',
-      '/why-use-the-darknet' => 'https://dark.fail/',
-      '/books-videos' => '/knowledgegraph',
-      '/featured' => '/knowledgegraph',
-      '/recommended' => '/knowledgegraph',
-      '/maps' => '/life-as-practice'
-    }.each { |k, v| get k.to_s do; redirect v; end }
+    get '/master-lover-course' do
+      send_file "#{Padrino.root}/app/markdown/master-lover-course.html"
+    end
   end
 end
