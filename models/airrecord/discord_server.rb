@@ -4,14 +4,16 @@ class DiscordServer < Airrecord::Table
 end
 
 # jQuery('[data-list-item-id^=guildsnav]').each(function() {
-#
+
 #   name = jQuery(this).attr('aria-label')
 #   parts = name.split(', ')
 #   name = parts[parts.length - 1]
-#   href = jQuery(this).attr('href') || ''
-#   parts = href.split('/')
-#   id = parts[parts.length-2]
+
+#   d = jQuery(this).attr('data-list-item-id') || ''
+#   parts = d.split('_')
+#   id = parts[parts.length-1]
+
 #   src = jQuery(this).find('img').attr('src')
 #   console.log(name.trim() + ',' + id + ',' + src)
-#
+
 # })
