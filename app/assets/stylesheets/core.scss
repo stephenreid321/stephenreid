@@ -1,40 +1,127 @@
+.navbar-dark .navbar-nav .nav-link {
+  color: $body-color
+}
 
-.navbar-dark .navbar-nav .nav-link { color: $body-color }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $contrast-color
+}
 
-h1,h2,h3,h4,h5,h6 { color: $contrast-color }
-h2:not(.regular) { border-bottom: 3px solid $contrast-color; display: inline-block }
-p.lead { color: $contrast-color }
-th { color: $contrast-color }
-.text-contrast { color: $contrast-color !important }
-.text-contrast:hover { color: $contrast-color !important }
-.text-standard { color: $body-color !important}
-.text-standard:hover { color: $contrast-color !important }
+h2:not(.regular) {
+  border-bottom: 3px solid $contrast-color;
+  display: inline-block
+}
 
-.bg-standard { background: $body-bg !important }
+p.lead {
+  color: $contrast-color
+}
 
-.btn-twitter { color: white; border-color: #379CF0; background-color: #379CF0 }
-.btn-twitter:hover { color: white; border-color: darken(#379CF0, 10%); background-color: darken(#379CF0, 10%); }
+th {
+  color: $contrast-color
+}
 
-code, pre code { color: $code-color }
-mark, .mark {
+.text-contrast {
+  color: $contrast-color  !important
+}
+
+.text-contrast:hover {
+  color: $contrast-color  !important
+}
+
+.text-standard {
+  color: $body-color  !important
+}
+
+.text-standard:hover {
+  color: $contrast-color  !important
+}
+
+.bg-standard {
+  background: $body-bg  !important
+}
+
+.btn-twitter {
+  color: white;
+  border-color: #379CF0;
+  background-color: #379CF0
+}
+
+.btn-twitter:hover {
+  color: white;
+  border-color: darken(#379CF0, 10%);
+  background-color: darken(#379CF0, 10%);
+}
+
+code,
+pre code {
+  color: $code-color
+}
+
+mark,
+.mark {
   color: $body-color;
   text-decoration: underline;
   text-decoration-color: $highlight-color;
   text-decoration-thickness: 2px;
   background: none;
 }
-blockquote { border-left: 0.3em solid $gray-300; padding-left: 1em; font-style: italic }
-blockquote footer { font-size: 1rem !important }
 
-body, small { font-weight: 300 }
-.form-control { font-weight: 300 }
-b, strong { font-weight: 600 }
-small { font-size: 90% }
-.dropdown-item { font-weight: 300 }
-.dropdown-item.active { font-weight: bold }
-.text-sm, .text-sm p { font-size: 90% !important; line-height: 1.2rem !important }
-p.attribution { text-align: right; font-size: 0.95rem !important }
+blockquote {
+  border-left: 0.3em solid $gray-300;
+  padding-left: 1em;
+  font-style: italic
+}
+
+blockquote footer {
+  font-size: 1rem !important
+}
+
+body,
+small {
+  font-weight: 300
+}
+
+.form-control {
+  font-weight: 300
+}
+
+b,
+strong {
+  font-weight: 600
+}
+
+small {
+  font-size: 90%
+}
+
+.dropdown-item {
+  font-weight: 300
+}
+
+.dropdown-item.active {
+  font-weight: bold
+}
+
+.text-sm,
+.text-sm p {
+  font-size: 90% !important;
+  line-height: 1.2rem !important
+}
+
+p.attribution {
+  text-align: right;
+  font-size: 0.95rem !important
+}
 
 
-.badge-warning { color: white }
-.bgo:hover { opacity: 0 !important }
+.badge-warning {
+  color: white
+}
+
+.bgo:hover {
+  opacity: 0 !important
+}

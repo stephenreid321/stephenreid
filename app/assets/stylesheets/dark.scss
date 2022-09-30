@@ -1,10 +1,12 @@
 $primary: #B16DC6;
 $font-family-sans-serif: 'Fira Mono', sans-serif;
 $body-bg: #292C35;
-$body-color: #ABB3BF;
+$body-color: #B7BEC8;
 $code-color: #C5636C;
 $font-size-base: 1rem;
-$lead-font-size: ($font-size-base * 1.1);
+$lead-font-size: (
+  $font-size-base * 1.1
+);
 @import "bootstrap/bootstrap";
 $highlight-color: #E5C07C;
 $contrast-color: white;
@@ -16,35 +18,104 @@ $contrast-color: white;
 @import "share";
 @import "toc";
 
-blockquote { border-left: 0.3em solid $body-color; }
+blockquote {
+  border-left: 0.3em solid white;
+}
 
-.overpass { font-family: 'Overpass', sans-serif !important }
-.fira { font-family: 'Fira Mono', sans-serif !important }
+.overpass {
+  font-family: 'Overpass', sans-serif !important
+}
+
+.fira {
+  font-family: 'Fira Mono', sans-serif !important
+}
 
 $bg-dark: darken($body-bg, 5%);
-.bg-dark { background-color: $bg-dark !important; }
-.card { background-color: $bg-dark }
-.table th, .table td { border-color: $bg-dark }
+
+.bg-dark {
+  background-color: $bg-dark  !important;
+}
+
+.card {
+  background-color: $bg-dark
+}
+
+.table th,
+.table td {
+  border-color: $bg-dark
+}
 
 $dark-color: #343a40;
-.modal h1,.modal h2,.modal h3,.modal h4,.modal h5,.modal h6 { color: $dark-color }
-.modal p.lead { color: $dark-color }
 
-.dropdown-menu { background-color: $body-bg }
-.dropdown-item { color: $body-color }
-.dropdown-item:hover, .dropdown-item:focus { color: $contrast-color; background-color: $body-bg }
-.dropdown-item.active, .dropdown-item:active { background-color: $body-bg }
+.modal h1,
+.modal h2,
+.modal h3,
+.modal h4,
+.modal h5,
+.modal h6 {
+  color: $dark-color
+}
 
-.badge { font-weight: normal }
+.modal p.lead {
+  color: $dark-color
+}
 
-.btn-secondary { background-color: lighten($body-bg, 15%); border-color: lighten($body-bg, 15%); }
-.btn-secondary:hover { background-color: lighten($body-bg, 10%); border-color: lighten($body-bg, 10%); }
-.badge-secondary { background-color: lighten($body-bg, 15%); }
+.dropdown-menu {
+  background-color: $body-bg
+}
 
-.text-muted { color: darken($body-color, 20%) !important }
-.blockquote-footer { color: darken($body-color, 20%) !important }
+.dropdown-item {
+  color: $body-color
+}
 
-.blog_post table, .blog_post table mark { color: $contrast-color }
-.blog_post .table th, .blog_post .table td { border-color: $contrast-color }
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: $contrast-color;
+  background-color: $body-bg
+}
 
-mark { padding-left: 0; padding-right: 0 }
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: $body-bg
+}
+
+.badge {
+  font-weight: normal
+}
+
+.btn-secondary {
+  background-color: lighten($body-bg, 15%);
+  border-color: lighten($body-bg, 15%);
+}
+
+.btn-secondary:hover {
+  background-color: lighten($body-bg, 10%);
+  border-color: lighten($body-bg, 10%);
+}
+
+.badge-secondary {
+  background-color: lighten($body-bg, 15%);
+}
+
+.text-muted {
+  color: darken($body-color, 20%) !important
+}
+
+.blockquote-footer {
+  color: darken($body-color, 20%) !important
+}
+
+.blog_post table,
+.blog_post table mark {
+  color: $contrast-color
+}
+
+.blog_post .table th,
+.blog_post .table td {
+  border-color: $contrast-color
+}
+
+mark {
+  padding-left: 0;
+  padding-right: 0
+}
