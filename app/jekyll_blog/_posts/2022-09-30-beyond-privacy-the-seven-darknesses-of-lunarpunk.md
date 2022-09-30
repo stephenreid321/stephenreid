@@ -27,7 +27,7 @@ header_image_url: /blog/assets/2022-09-30-beyond-privacy-the-seven-darknesses-of
 
 Lunarpunk first rose to the attention of the web3 community via the essay [Lunarpunk and the Dark Side of the Cycle](https://www.egirlcapital.com/writings/107533289) by [@lunar_mining](https://twitter.com/lunar_mining) in February 2022. 
 
-Despite a note there that lunarpunk is "the solar shadow-self", the authors go on to define lunarpunk overwhelmingly in terms of privacy, anonymity and a "conflict between crypto and existing power structures".
+Despite a note there that lunarpunk is "the solar shadow-self", the author goes on to define lunarpunk overwhelmingly in terms of privacy, anonymity and a "conflict between crypto and existing power structures".
 
 In this piece I seek a broader notion of lunarpunk, returning to the idea of the "solar shadow-self" and exploring lunarpunk in its most general form as *the dark side of solarpunk*, a complementary opposite.
 
