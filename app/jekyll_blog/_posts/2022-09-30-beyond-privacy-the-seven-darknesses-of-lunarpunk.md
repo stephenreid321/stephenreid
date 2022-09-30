@@ -25,7 +25,7 @@ header_image_url: /blog/assets/2022-09-30-beyond-privacy-the-seven-darknesses-of
 &mdash; Rainer Maria Rilke
 
 
-Lunarpunk first rose to the attention of the web3 community via the essay [Lunarpunk and the Dark Side of the Cycle](https://www.egirlcapital.com/writings/107533289) in February 2022. 
+Lunarpunk first rose to the attention of the web3 community via the essay [Lunarpunk and the Dark Side of the Cycle](https://www.egirlcapital.com/writings/107533289) by [https://twitter.com/lunar_mining](@lunar_mining) in February 2022. 
 
 Despite a note there that lunarpunk is "the solar shadow-self", the authors go on to define lunarpunk overwhelmingly in terms of privacy, anonymity and a "conflict between crypto and existing power structures".
 
@@ -36,7 +36,7 @@ I identify privacy/anonymity as just one of Seven Darknesses of Lunarpunk, each 
 Lunarpunks understand that there is nothing inherently bad or wrong about the dark, and to speak of darkness is not to suggest the *sinister*. Rather, the commonality between the tools, techniques and technologies featured here is an association with *the* *unconscious, the shadow* or *the taboo.*
 
 ## Darkness of Privacy
-Key technology: cryptography, as explored in [Lunarpunk and the Dark Side of the Cycle](https://www.egirlcapital.com/writings/107533289)
+Key technology: cryptography, as explored in [Lunarpunk and the Dark Side of the Cycle](https://www.egirlcapital.com/writings/107533289) by [https://twitter.com/lunar_mining](@lunar_mining)
 
 ![img](/blog/assets/2022-09-30-beyond-privacy-the-seven-darknesses-of-lunarpunk/1.jpg)
 
