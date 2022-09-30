@@ -1,6 +1,6 @@
 ---
 title: "Beyond Privacy: The Seven Darknesses of Lunarpunk"
-excerpt: "Exploring lunarpunk in its most general form"
+excerpt: "Expanding notions of lunarpunk in web3"
 header_image_url: /blog/assets/2022-09-30-beyond-privacy-the-seven-darknesses-of-lunarpunk/0.jpg
 ---
 
