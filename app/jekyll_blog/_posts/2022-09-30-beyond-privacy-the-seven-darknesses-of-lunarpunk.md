@@ -112,7 +112,7 @@ Every characterisation of lunarpunk in this piece is simply an opinion (mine), a
 
 What is clear to me, though, is that lunarpunk existed before web3 and exists beyond it. I hope this piece stimulates useful discussions on holistic and [developmentally-focused](https://medium.com/age-of-awareness/a-metamodern-guide-to-human-development-49fe8d8f0e8f) notions of both solarpunk and lunarpunk in the web3 space and beyond.
 
-[May we contiunue to move towards wholeness](https://www.scienceandnonduality.com/article/david-bohm-implicate-order-and-holomovement), embracing both dark and light 🌓
+[May we continue to move towards wholeness](https://www.scienceandnonduality.com/article/david-bohm-implicate-order-and-holomovement), embracing both dark and light 🌓
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">New blog post – Beyond Privacy: The Seven Darknesses of Lunarpunk:<br><br>Darkness of Privacy<br>Darkness of Attention<br>Darkness of Suffering<br>Darkness of Eros<br>Darkness of Plants<br>Darkness of the Soul<br>Darkness in Light<a href="https://t.co/MiGa5vHLF1">https://t.co/MiGa5vHLF1</a></p>&mdash; Stephen Reid ☯️ (@lunarpunk_0x) <a href="https://twitter.com/lunarpunk_0x/status/1575970584789295104?ref_src=twsrc%5Etfw">September 30, 2022</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
