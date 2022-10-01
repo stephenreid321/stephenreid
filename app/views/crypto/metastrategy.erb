@@ -55,7 +55,7 @@
   &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%= delayed_job.run_at %>"><%= time_ago_in_words delayed_job.run_at %></abbr>
   <% } %>
 </p>
-<% if admin? %>
+<% if current_account %>
   <% if Strategy.and(:status.ne => 'verified').count > 0 || Asset.and(:status.ne => 'verified').count > 0 %>
     <p class="text-center">
       <% if Asset.and(:status.ne => 'verified').count > 0 %>
