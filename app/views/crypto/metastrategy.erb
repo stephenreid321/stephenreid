@@ -55,22 +55,24 @@
   &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%= delayed_job.run_at %>"><%= time_ago_in_words delayed_job.run_at %></abbr>
   <% } %>
 </p>
-<% if Strategy.and(:status.ne => 'verified').count > 0 || Asset.and(:status.ne => 'verified').count > 0 %>
-  <p class="text-center">
-    <% if Asset.and(:status.ne => 'verified').count > 0 %>
-      Currently excluded coins:
-      <%= Asset.and(:status.ne => 'verified').map do |asset|
+<% if admin? %>
+  <% if Strategy.and(:status.ne => 'verified').count > 0 || Asset.and(:status.ne => 'verified').count > 0 %>
+    <p class="text-center">
+      <% if Asset.and(:status.ne => 'verified').count > 0 %>
+        Currently excluded coins:
+        <%= Asset.and(:status.ne => 'verified').map do |asset|
             %{<a class="badge #{asset.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}?ref=YGnZy">#{asset.name} (#{asset.ticker})</a>}
           end.join(' ') %>
-      <br>
-    <% end %>
-    <% if Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').count > 0 %>
-      Currently excluded strategies:
-      <%= Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').map do |strategy|
+        <br>
+      <% end %>
+      <% if Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').count > 0 %>
+        Currently excluded strategies:
+        <%= Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').map do |strategy|
             %(<a class="badge #{strategy.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}?ref=YGnZy">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
           end.join(' ') %>
-    <% end %>
-  </p>
+      <% end %>
+    </p>
+  <% end %>
 <% end %>
 <table class="table mt-3" style="width: auto; margin: auto">
   <thead style="border-top: none">
