@@ -4,6 +4,8 @@ class Strategy
   class RoundingError < StandardError; end
   class NotEnoughStrategies < StandardError; end
 
+  NUMBER_OF_ASSETS = 5
+
   MONTH_FACTOR = 4
   THREE_MONTH_FACTOR = 3
   SIX_MONTH_FACTOR = 2
@@ -60,15 +62,15 @@ class Strategy
       status: :select,
       holdings: :collection
     }
-      .merge(Hash[%w[day week month three_month six_month year].map do |t|
-                    ["r#{t}".to_sym, :number]
-                  end])
-      .merge(Hash[%w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].map do |x|
-                    [
-                      ["nscore_#{x}".to_sym, :number],
-                      ["index_#{x}".to_sym, :number]
-                    ]
-                  end.flatten(1)])
+      .merge(%w[day week month three_month six_month year].map do |t|
+               ["r#{t}".to_sym, :number]
+             end.to_h)
+      .merge(%w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].map do |x|
+               [
+                 ["nscore_#{x}".to_sym, :number],
+                 ["index_#{x}".to_sym, :number]
+               ]
+             end.flatten(1).to_h)
   end
 
   has_many :holdings, dependent: :destroy
@@ -224,14 +226,14 @@ class Strategy
     [with_multipliers, without_multipliers]
   end
 
-  def self.proposed(assets, n: 10)
+  def self.proposed(assets)
     # restrict to top n assets
-    assets = assets.sort_by { |_k, v| -v }[0..(n - 1)]
+    assets = assets.sort_by { |_k, v| -v }[0..(NUMBER_OF_ASSETS - 1)]
     t = assets.map { |_k, v| v }.sum
-    assets = Hash[assets.map { |k, v| [k, v / t] }]
+    assets = assets.map { |k, v| [k, v / t] }.to_h
 
     # make sure asset weights sum to exactly 1
-    assets = Hash[assets.map { |k, v| [k, v.floor(4)] }]
+    assets = assets.map { |k, v| [k, v.floor(4)] }.to_h
     t = assets.map { |_k, v| v }.sum
     k = assets.keys.first
     assets[k] += (1 - t)
@@ -243,13 +245,13 @@ class Strategy
     assets.map { |k, v| [k, v] }
   end
 
-  def self.rebalance(n: 10, skip_update: false)
+  def self.rebalance(skip_update: false)
     Delayed::Job.and(handler: /method_name: :rebalance/).destroy_all
 
     Strategy.update unless skip_update
 
     with_multipliers, _without_multipliers = Strategy.assets_weighted
-    weights = Strategy.proposed(with_multipliers, n: n)
+    weights = Strategy.proposed(with_multipliers)
 
     data = {
       ticker: 'DECENTCOOP',
