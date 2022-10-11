@@ -46,6 +46,7 @@
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 *   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
+*   *[The Tent of Seven Doors: The School of Myth Summer School](https://schoolofmyth.com/summer-school/) with [Dr. Martin Shaw](https://drmartinshaw.com/) (Jun 2023)*
 
 ### Physics
 
