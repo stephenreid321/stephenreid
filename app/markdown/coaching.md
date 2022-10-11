@@ -42,7 +42,7 @@ All being well, typically we'd then meet for an hour every other week via Zoom f
 
 My rates vary according to your income:
 
-* Under £25k/year (UK median salary): £25/hour (max 4 sessions)
+* Under £25k/year: £25/hour (max 4 sessions at this rate)
 * £25k – £50k/year: £50/hour
 * Over £50k/year: £100/hour
 
