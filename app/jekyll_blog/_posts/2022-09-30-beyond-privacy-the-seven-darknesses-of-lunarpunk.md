@@ -98,7 +98,7 @@ Key psychotechnology: [Soulcraft](https://www.animas.org/books/soulcraft/) by th
 Lunarpunks are practitioners of [Soulcraft](https://www.animas.org/books/soulcraft/), seeking to become ever more aware of their unique [mythopoetic identity](https://www.animas.org/glossary-to-language-of-soul-canyon/#mythopoetic identity) through the [Descent to Soul](https://www.animas.org/glossary-to-language-of-soul-canyon/#Descent to Soul). Soulcraft practices include dreamwork and deep-imagery journeys, solo ceremonies and exercises while wandering on the land, trance dancing and drumming, council work, storytelling, vision fasts, symbolic artwork, soul-oriented poetry, Shadow work, and communicating with birds, trees, the winds, and the land and waters.
 
 ## Darkness in Light
-Key psychotechnology: Zazen as explored in [Branching Streams Flow in the Darkness](https://www.goodreads.com/book/show/361898.Branching_Streams_Flow_in_the_Darkness) by [Shunryu Suzuki Roshi](https://www.goodreads.com/author/show/62707.Shunryu_Suzuki)
+Key psychotechnology: Meditations on Emptiness and Dependent Arising as explored in [Seeing That Frees](https://www.goodreads.com/book/show/25172403-seeing-that-frees) by [Rob Burbea](https://tasshin.com/blog/rob-burbea-ordinary-guy-werewolf-eternal-wanderer/)
 
 ![img](/blog/assets/2022-09-30-beyond-privacy-the-seven-darknesses-of-lunarpunk/7.jpg)
 
