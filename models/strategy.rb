@@ -34,7 +34,7 @@ class Strategy
   index({ score_fee_weighted: 1 })
   field :aum, type: Float
   index({ aum: 1 })
-  %w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].each do |x|
+  %w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted ].each do |x|
     field :"nscore_#{x}", type: Float
     index({ "nscore_#{x}": 1 })
     field :"index_#{x}", type: Integer
@@ -65,7 +65,7 @@ class Strategy
       .merge(%w[day week month three_month six_month year].map do |t|
                ["r#{t}".to_sym, :number]
              end.to_h)
-      .merge(%w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].map do |x|
+      .merge(%w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].map do |x|
                [
                  ["nscore_#{x}".to_sym, :number],
                  ["index_#{x}".to_sym, :number]
@@ -77,17 +77,12 @@ class Strategy
 
   validates_presence_of :ticker
 
-  before_validation do
-    self.score = calculate_score
-    self.score_fee_weighted = calculate_score_fee_weighted
-  end
-
   def self.statuses
     ['', 'verified', 'excluded']
   end
 
   def calculate_score
-    ((MONTH_FACTOR * (rmonth || 0)) + (THREE_MONTH_FACTOR * (rthree_month || 0)) + (SIX_MONTH_FACTOR * (rsix_month || 0)) + (YEAR_FACTOR * (ryear || 0)))
+    ((MONTH_FACTOR * (nscore_rmonth || 0)) + (THREE_MONTH_FACTOR * (nscore_rthree_month || 0)) + (SIX_MONTH_FACTOR * (nscore_rsix_month || 0)) + (YEAR_FACTOR * (nscore_ryear || 0)))
   end
 
   def calculate_score_fee_weighted
@@ -95,7 +90,8 @@ class Strategy
   end
 
   def self.nscore_index(strategies: Strategy.active_mature)
-    %w[score score_fee_weighted aum rday rweek rmonth rthree_month rsix_month ryear].each do |x|
+    %w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].each do |x|
+      strategies.all.each(&:"calculate_#{x}") if %w[score score_fee_weighted].include?(x)
       Strategy.all.set("nscore_#{x}": nil)
       Strategy.all.set("index_#{x}": nil)
       puts x
