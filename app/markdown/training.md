@@ -1,8 +1,3 @@
-### Shipibo plant dietas
-
-*   [Guayusa dieta](https://www.sovereignxnature.com/shipibodieta) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
-*   [Noya Rao dieta](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) with Maestra Manuela near Pucallpa, Peru (Dec 2017, 10 days)
-
 ### Meditation
 
 *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Yahel Avigur, based on the teachings of [Rob Burbea](https://tasshin.com/blog/rob-burbea-ordinary-guy-werewolf-eternal-wanderer/) in [Seeing That Frees](https://www.goodreads.com/book/show/25172403-seeing-that-frees) (Oct 2022, 7 days)
@@ -10,6 +5,11 @@
 *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
+
+### Shipibo plant dietas
+
+*   [Guayusa dieta](https://www.sovereignxnature.com/shipibodieta) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
+*   [Noya Rao dieta](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) with Maestra Manuela near Pucallpa, Peru (Dec 2017, 10 days)
 
 ### Soulcraft & Wild Mind
 

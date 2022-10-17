@@ -88,22 +88,6 @@
 </div>
 
 
-<div class="row justify-content-center">
-  <div class="col-lg-9">
-    <div class="mt-5 row justify-content-center">
-      <div class="col-6 text-center">
-        <a target="_blank" href="https://www.sovereignxnature.com/shipibodieta"><img class="w-100" src="/images/ynes.png"></a>
-        <small><em>Maestra Ynes</em></small>
-      </div>
-      <div class="col-6 text-center">
-        <a target="_blank" href="https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad"><img class="w-100" src="https://miro.medium.com/max/1400/1*X7fjKFABhypYds7hLaHeaw.jpeg"></a>
-        <small><em>Maestra Manuela</em></small>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <h2 class="mt-5" id="speaking">Recent speaking engagements</h2>
 <dl class="row">
   <% SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).first(5).each { |speaking_engagement| %>
