@@ -34,7 +34,7 @@ class Strategy
   index({ score_fee_weighted: 1 })
   field :aum, type: Float
   index({ aum: 1 })
-  %w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted ].each do |x|
+  %w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].each do |x|
     field :"nscore_#{x}", type: Float
     index({ "nscore_#{x}": 1 })
     field :"index_#{x}", type: Integer
@@ -91,7 +91,9 @@ class Strategy
 
   def self.nscore_index(strategies: Strategy.active_mature)
     %w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].each do |x|
-      strategies.all.each(&:"calculate_#{x}") if %w[score score_fee_weighted].include?(x)
+      strategies.all.each do |strategy|
+        strategy.send("#{x}=", strategy.send("calculate_#{x}")) if %w[score score_fee_weighted].include?(x)
+      end
       Strategy.all.set("nscore_#{x}": nil)
       Strategy.all.set("index_#{x}": nil)
       puts x
