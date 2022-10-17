@@ -91,8 +91,11 @@ class Strategy
 
   def self.nscore_index(strategies: Strategy.active_mature)
     %w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].each do |x|
-      strategies.all.each do |strategy|
-        strategy.send("#{x}=", strategy.send("calculate_#{x}")) if %w[score score_fee_weighted].include?(x)
+      if %w[score score_fee_weighted].include?(x)
+        strategies.all.each do |strategy|
+          strategy.send("#{x}=", strategy.send("calculate_#{x}"))
+          strategy.save
+        end
       end
       Strategy.all.set("nscore_#{x}": nil)
       Strategy.all.set("index_#{x}": nil)
