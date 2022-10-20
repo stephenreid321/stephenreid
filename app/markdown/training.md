@@ -39,6 +39,7 @@
 
 ### Other
 
+*   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) online course with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)

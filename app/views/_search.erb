@@ -23,6 +23,36 @@
         }, edge_labels: true %>
   </div>
 <% end %>
-<div class="row mt-5 <% if params[:images_only] %>no-gutters<% end %>">
-  <%= partial :posts %>
-</div>
+<% if params[:images_only] %>
+  <style>
+    .grid-sizer, .grid-item {  width: 100% }
+    @media(min-width: 768px) {
+      .grid-sizer, .grid-item {  width: 25% }
+    }
+    .grid-item img { padding: 0.1rem }
+  </style>
+  <script>
+    $(window).on('load', function () {
+      $('.grid').masonry({
+        // set itemSelector so .grid-sizer is not used in layout
+        itemSelector: '.grid-item',
+        // use element for option
+        columnWidth: '.grid-sizer',
+        percentPosition: true
+      })
+      $('.grid').animate({opacity: 1});
+    })
+  </script>
+  <div class="grid mt-5" style="opacity: 0">
+    <% @posts.shuffle.each { |post| json = JSON.parse(post['Iframely']); next unless json['links'] && json['links']['thumbnail'] %>
+    <div class="grid-sizer"></div>
+    <div class="grid-item">
+      <img class="w-100" src="<%= json['links']['thumbnail'].first['href']  %>">
+    </div>
+    <% } %>
+  </div>
+<% else %>
+  <div class="row mt-5">
+    <%= partial :posts %>
+  </div>
+<% end %>
