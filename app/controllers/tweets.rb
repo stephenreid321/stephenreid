@@ -4,7 +4,7 @@ StephenReid::App.controller do
   end
 
   get '/tweets' do
-    redirect '/tweets/7d/likes'
+    redirect '/tweets/1h/likes'
   end
 
   get '/tweets/:timeframe/:likes_or_rts' do
