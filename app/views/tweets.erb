@@ -1,4 +1,6 @@
-<%= ul_nav %w[7d 24h 1h].map { |slug| [slug, "/tweets/#{slug}"] },
+<%= ul_nav (
+  %w[7d 24h 1h].map { |timeframe| ["#{timeframe} likes", "/tweets/#{timeframe}/likes"] } +
+  %w[7d 24h 1h].map { |timeframe| ["#{timeframe} retweets", "/tweets/#{timeframe}/retweets"] }),
            ul_class: 'nav nav-tabs mb-3',
            li_class: 'nav-item',
            li_active_class: nil,

@@ -4,36 +4,17 @@ StephenReid::App.controller do
   end
 
   get '/tweets' do
-    redirect '/tweets/7d'
+    redirect '/tweets/7d/likes'
   end
 
-  get '/tweets/7d' do
-    @tweets = Tweet.all.sort_by do |t|
-                t = t.data
-                t['likes_per_follower_per_second']
-              end.reverse[0..19]
-    erb :tweets
-  end
-
-  get '/tweets/24h' do
+  get '/tweets/:timeframe/:likes_or_rts' do
     @tweets = Tweet.all.select do |t|
-                t = t.data
-                t['age'] < 24.hours
-              end.sort_by do |t|
-                t = t.data
-                t['likes_per_follower_per_second']
-              end.reverse[0..19]
-    erb :tweets
-  end
-
-  get '/tweets/1h' do
-    @tweets = Tweet.all.select do |t|
-                t = t.data
-                t['age'] < 1.hour
-              end.sort_by do |t|
-                t = t.data
-                t['likes_per_follower_per_second']
-              end.reverse[0..19]
+      t = t.data
+      t['age'] < (case params[:timeframe]; when '7d' then 7.days; when '24h' then 24.hours; when '1h' then 1.hour; end)
+    end.sort_by do |t|
+      t = t.data
+      t["#{params[:likes_or_rts]}_per_follower_per_second"]
+    end.reverse[0..19]
     erb :tweets
   end
 end

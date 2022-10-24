@@ -41,6 +41,9 @@ class Tweet
       t['likes_per_follower'] = t['public_metrics']['like_count'].to_f / t['user']['public_metrics']['followers_count']
       t['likes_per_second'] = t['public_metrics']['like_count'].to_f / t['age']
       t['likes_per_follower_per_second'] = t['public_metrics']['like_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
+      t['retweets_per_follower'] = t['public_metrics']['retweet_count'].to_f / t['user']['public_metrics']['followers_count']
+      t['retweets_per_second'] = t['public_metrics']['retweet_count'].to_f / t['age']
+      t['retweets_per_follower_per_second'] = t['public_metrics']['retweet_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
     end
   end
 
