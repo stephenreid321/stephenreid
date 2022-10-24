@@ -12,6 +12,11 @@
 <div class="row justify-content-center">
   <div class="col-12 col-lg-6">
     <% @tweets.each { |tweet| %>
+    <% if tweet.data['text'].starts_with?('RT @') %>
+      <a class="text-body" target="_blank" href="https://twitter.com/<%=tweet.data['user']['username']%>/status/<%=tweet.data['id']%>">
+        <i class="fa fa-retweet"></i> <%=tweet.data['user']['name']%> retweeted
+      </a>
+    <% end %>
     <%= tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html %>
     <hr />
     <% } %>
