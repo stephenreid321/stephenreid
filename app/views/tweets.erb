@@ -8,7 +8,7 @@
            generate_subnav_href_and_ul: false %>
 
 <div class="row justify-content-center">
-  <div class="col-6">
+  <div class="col-12 col-lg-6">
     <% @tweets.each { |tweet| %>
     <%= tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html %>
     <hr />
