@@ -315,6 +315,7 @@ GEM
       faraday (>= 0.17.3, < 2.0)
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
+    simple_oauth (0.3.1)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
     sinatra (2.1.0)
@@ -386,6 +387,7 @@ DEPENDENCIES
   rubocop
   rubocop-daemon
   sass
+  simple_oauth
   sinatra
   stripe
   telegram-bot-ruby

@@ -79,6 +79,11 @@ $dark-color: #343a40;
   background-color: $body-bg
 }
 
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #B7BEC8;
+}
+
 .badge {
   font-weight: normal
 }

@@ -1,0 +1,17 @@
+<%= ul_nav %w[7d 24h 1h].map { |slug| [slug, "/tweets/#{slug}"] },
+           ul_class: 'nav nav-tabs mb-3',
+           li_class: 'nav-item',
+           li_active_class: nil,
+           a_class: 'nav-link',
+           a_active_class: 'active',
+           ul_id: 'coins-ul',
+           generate_subnav_href_and_ul: false %>
+
+<div class="row justify-content-center">
+  <div class="col-6">
+    <% @tweets.each { |tweet| %>
+    <%= tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html %>
+    <hr />
+    <% } %>
+  </div>
+</div>
