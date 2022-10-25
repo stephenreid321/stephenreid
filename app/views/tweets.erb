@@ -43,10 +43,12 @@
               <strong><%= t['user']['name'] %></strong>
               <br/>
               <span class="text-muted">@<%= t['user']['username'] %></span>
+              <span class="text-muted">&middot;</span>
+              <span class="text-muted"><%= time_ago_in_words Time.iso8601(t['created_at']) %> ago</span>
             </div>
           </div>
 
-          <p class="lead my-3 tweet-text" style="cursor: pointer" onclick="window.location = '<%=tweet.url%>'">
+          <p class="lead my-3 tweet-text" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
             <% text = t['text'] %>
             <% if t['entities'] %>
               <% if t['entities']['urls'] %>
@@ -63,7 +65,7 @@
           <% if t['referenced_tweets'] %>
             <% t['referenced_tweets'].each { |rt| %>
             <% if %w[quoted].include?(rt['type']) && rt['tweet'] %>
-              <div class="card bg-white text-dark mb-3" style="font-size: 90%;">
+              <div class="card bg-white text-dark mb-3" style="font-size: 90%; cursor: pointer" onclick="window.open('<%=Tweet.url(rt['tweet'])%>','_blank')">
                 <div class="card-body p-2">
                   <div class="row no-gutters mb-2">
                     <div class="col-auto pr-2">
@@ -72,6 +74,8 @@
                     <div class="col">
                       <strong><%= rt['tweet']['user']['name'] %></strong>
                       <span class="text-muted">@<%= rt['tweet']['user']['username'] %></span>
+                      <span class="text-muted">&middot;</span>
+                      <span class="text-muted"><%= time_ago_in_words Time.iso8601(rt['tweet']['created_at']) %> ago</span>
                     </div>
                   </div>
                   <p style="font-weight: 400" class="mb-0"><%= rt['tweet']['text'] %></p>
@@ -83,14 +87,10 @@
 
           <% if t['media'] %>
             <div class="mb-3">
-              <% t['media'].each { |m| %>
-              <% if m %>
-                <% if m['type'] == 'video' %>
+              <% t['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
                   <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
                     <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
                   </video>
-                <% else %>
-                  <img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>">
                 <% end %>
               <% end %>
               <% } %>
@@ -110,9 +110,6 @@
           <% end %>
           <% } if t['entities'] && t['entities']['urls'] %>
 
-          <p class="text-muted">
-            <%= time_ago_in_words Time.iso8601(t['created_at']) %> ago
-          </p>
           <hr />
           <p>
             <a class="d-block text-muted font-weight-bold mb-0" style="text-decoration: none" target="_blank" href="<%=tweet.url%>">

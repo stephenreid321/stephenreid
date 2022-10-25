@@ -76,6 +76,10 @@ class Tweet
   end
 
   def url
+    Tweet.url(data)
+  end
+
+  def self.url(data)
     "https://twitter.com/#{data['user']['username']}/status/#{data['id']}"
   end
 
