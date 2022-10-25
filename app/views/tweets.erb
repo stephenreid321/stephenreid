@@ -72,7 +72,7 @@
               <% t['media'].each { |m| %>
               <% if m %>
                 <% if m['type'] == 'video' %>
-                  <video class="w-100" controls>
+                  <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
                     <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
                   </video>
                 <% else %>
@@ -100,11 +100,13 @@
             <%= time_ago_in_words Time.iso8601(t['created_at']) %> ago
           </p>
           <hr />
-          <p class="text-muted font-weight-bold mb-0">
-            <span class="mr-3"><i class="fa fa-heart mr-1" style="color: #F71880"></i> <%=number_with_delimiter t['public_metrics']['like_count'] %></span>
-            <span class="mr-3"><i class="fa fa-retweet mr-1" style="color: #2FBA7D"></i> <%=number_with_delimiter t['public_metrics']['retweet_count'] %></span>
-            <span class="mr-3"><i class="fa fa-reply mr-1" style="color: #379CF0"></i> <%=number_with_delimiter t['public_metrics']['reply_count'] %></span>
-            <span class="mr-3"><i class="fa fa-edit mr-1 text-dark"></i> <%=number_with_delimiter t['public_metrics']['quote_count'] %></span>
+          <p>
+            <a class="d-block text-muted font-weight-bold mb-0" style="text-decoration: none" target="_blank" href="<%=tweet.url%>">
+              <span class="mr-3"><i class="fa fa-heart mr-1" style="color: #F71880"></i> <%=number_with_delimiter t['public_metrics']['like_count'] %></span>
+              <span class="mr-3"><i class="fa fa-retweet mr-1" style="color: #2FBA7D"></i> <%=number_with_delimiter t['public_metrics']['retweet_count'] %></span>
+              <span class="mr-3"><i class="fa fa-reply mr-1" style="color: #379CF0"></i> <%=number_with_delimiter t['public_metrics']['reply_count'] %></span>
+              <span class="mr-3"><i class="fa fa-edit mr-1 text-dark"></i> <%=number_with_delimiter t['public_metrics']['quote_count'] %></span>
+            </a>
           </p>
         </div>
 
