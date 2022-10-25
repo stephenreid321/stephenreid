@@ -125,3 +125,16 @@ p.attribution {
 .bgo:hover {
   opacity: 0 !important
 }
+
+.tweet,
+.tweet p.lead a {
+  color: black !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tweet p.lead {
+  color: black;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+}

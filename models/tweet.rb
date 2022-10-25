@@ -23,20 +23,38 @@ class Tweet
   def self.timeline
     tweets = []
     users = []
-    q = 'tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=public_metrics'
+    media = []
+    referenced_tweets = []
+    q = 'tweet.fields=referenced_tweets,entities,public_metrics,created_at,attachments&user.fields=profile_image_url,public_metrics&expansions=author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id&media.fields=media_key,preview_image_url,type,url'
     r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}")
     tweets += r.body['data']
     users += r.body['includes']['users']
+    media += r.body['includes']['media']
+    referenced_tweets += r.body['includes']['tweets']
     pagination_token = r.body['meta']['next_token']
     while pagination_token
       r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}&pagination_token=#{pagination_token}")
       tweets += r.body['data']
       users += r.body['includes']['users']
+      media += r.body['includes']['media']
+      referenced_tweets += r.body['includes']['tweets']
       pagination_token = r.body['meta']['next_token']
       puts pagination_token
     end
     tweets.each do |t|
       t['user'] = users.find { |u| u['id'] == t['author_id'] }
+      if t['attachments'] && t['attachments']['media_keys']
+        t['attachments']['media_keys'].each do |media_key|
+          t['media'] ||= []
+          t['media'] << media.find { |m| m['media_key'] == media_key }
+        end
+      end
+      if t['referenced_tweets']
+        t['referenced_tweets'].each_with_index do |referenced_tweet, i|
+          t['referenced_tweets'][i]['tweet'] = referenced_tweets.find { |t| t['id'] == referenced_tweet['id'] }
+          t['referenced_tweets'][i]['tweet']['user'] = users.find { |u| u['id'] == referenced_tweet['tweet']['author_id'] }
+        end
+      end
       t['age'] = Time.now - Time.iso8601(t['created_at'])
       t['likes_per_follower'] = t['public_metrics']['like_count'].to_f / t['user']['public_metrics']['followers_count']
       t['likes_per_second'] = t['public_metrics']['like_count'].to_f / t['age']
@@ -45,6 +63,10 @@ class Tweet
       t['retweets_per_second'] = t['public_metrics']['retweet_count'].to_f / t['age']
       t['retweets_per_follower_per_second'] = t['public_metrics']['retweet_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
     end
+  end
+
+  def url
+    "https://twitter.com/#{data['user']['username']}/status/#{data['id']}"
   end
 
   def get_html
