@@ -10,7 +10,7 @@
   <div class="col-12 col-lg-6">
 
     <% form_tag '', method: :get, class: 'form-inline mb-3' do %>
-      <%= select_tag :timeframe, options: %w[1h 3h 6h 12h 24h 7d], selected: params[:timeframe], class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
+      <%= select_tag :timeframe, options: %w[1h 3h 6h 12h 24h 3d 7d], selected: params[:timeframe], class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
       <%= select_tag :stat, options: %w[likes retweets quotes], selected: params[:stat], class: 'form-control mb-1', onchange: 'this.form.submit()' %>
     <% end %>
 
@@ -62,6 +62,35 @@
             .gsub("\n",'<br />') %>
           </p>
 
+          <% if t['media'] %>
+            <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
+              <% t['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
+                  <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
+                    <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
+                  </video>
+                <% end %>
+              <% else %>
+                <div class="text-center my-3"><em>Media missing</em></div>
+              <% end %>
+              <% } %>
+            </div>
+          <% end %>
+
+          <% if t['entities'] && t['entities']['urls']  %>
+            <% t['entities']['urls'].each { |e| next if e['expanded_url'].starts_with?('https://twitter.com') %>
+            <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
+              <% if e['images'] %>
+                <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
+              <% end %>
+              <div class="card-body p-2">
+                <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
+                <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
+                <p class="card-text"><%= e['description'] %></p>
+              </div>
+            </div>
+            <% } %>
+          <% end %>
+
           <% if t['referenced_tweets'] %>
             <% t['referenced_tweets'].each { |rt| %>
             <% if %w[quoted].include?(rt['type']) && rt['tweet'] %>
@@ -107,33 +136,6 @@
             <% end %>
             <% } %>
           <% end %>
-
-          <% if t['media'] %>
-            <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
-              <% t['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
-                  <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
-                    <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
-                  </video>
-                <% end %>
-              <% else %>
-                <div class="text-center my-3"><em>Media missing</em></div>
-              <% end %>
-              <% } %>
-            </div>
-          <% end %>
-
-          <% t['entities']['urls'].each { |e| next if e['expanded_url'].starts_with?('https://twitter.com') %>
-          <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
-            <% if e['images'] %>
-              <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
-            <% end %>
-            <div class="card-body p-2">
-              <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
-              <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
-              <p class="card-text"><%= e['description'] %></p>
-            </div>
-          </div>
-          <% } if t['entities'] && t['entities']['urls'] %>
 
           <hr />
 
