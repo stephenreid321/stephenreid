@@ -79,7 +79,13 @@
                     </div>
                   </div>
                   <p style="font-weight: 400" class="mb-0">
-                    <%= text = rt['tweet']['text'].chars; if rt['tweet']['entities']['urls']; rt['tweet']['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; end; text = text.join %>
+                    <% text = rt['tweet']['text'] %>
+                    <% if rt['tweet']['entities'] %>
+                      <% if rt['tweet']['entities']['urls'] %>
+                        <% text = text.chars; rt['tweet']['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; text = text.join %>
+                      <% end %>
+                    <% end %>
+                    <%= text %>
                   </p>
 
                   <% if rt['tweet']['media'] %>
