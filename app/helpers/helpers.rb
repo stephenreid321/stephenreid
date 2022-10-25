@@ -46,5 +46,5 @@ StephenReid::App.helpers do
       end
       %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
     end
-  end
+  end 
 end

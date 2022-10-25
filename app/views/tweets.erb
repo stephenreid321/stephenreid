@@ -1,16 +1,11 @@
-<%= ul_nav (
-  %w[6h 24h 7d].map { |timeframe| ["#{timeframe} likes", "/tweets/#{timeframe}/likes"] } +
-  %w[6h 24h 7d].map { |timeframe| ["#{timeframe} retweets", "/tweets/#{timeframe}/retweets"] }),
-           ul_class: 'nav nav-tabs mb-3',
-           li_class: 'nav-item',
-           li_active_class: nil,
-           a_class: 'nav-link',
-           a_active_class: 'active',
-           ul_id: 'coins-ul',
-           generate_subnav_href_and_ul: false %>
-
 <div class="row justify-content-center">
   <div class="col-12 col-lg-6">
+
+    <% form_tag '', method: :get, class: 'form-inline mb-3' do %>
+      <%= select_tag :timeframe, options: %w[1h 3h 6h 12h 24h 7d], selected: params[:timeframe], class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
+      <%= select_tag :stat, options: %w[likes retweets], selected: params[:stat], class: 'form-control mb-1', onchange: 'this.form.submit()' %>
+    <% end %>
+
     <% @tweets.each { |tweet| t = tweet.data %>
     <% if t['referenced_tweets'] && %w[quoted retweeted].include?(t['referenced_tweets'].first['type']) %>
       <a style="text-decoration: none" class="text-body mb-1 d-inline-block" target="_blank" href="<%=tweet.url%>">
@@ -24,84 +19,96 @@
       </a>
     <% end %>
 
-    <%=
-      # tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html
-    %>
-
     <% if t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted'; t = t['referenced_tweets'].first['tweet']; end %>
 
-      <div class="tweet bg-white rounded p-3">
+      <% if t['media'] == [nil] %>
+        <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
+      <% else %>
 
-        <div class="row no-gutters">
-          <div class="col-auto pr-2">
-            <img class="rounded-circle" src="<%=t['user']['profile_image_url']%>">
+        <div class="tweet bg-white rounded p-3">
+
+          <div class="row no-gutters">
+            <div class="col-auto pr-2">
+              <img class="rounded-circle" src="<%=t['user']['profile_image_url']%>">
+            </div>
+            <div class="col">
+              <strong><%= t['user']['name'] %></strong>
+              <br/>
+              <span class="text-muted">@<%= t['user']['username'] %></span>
+            </div>
           </div>
-          <div class="col">
-            <strong><%= t['user']['name'] %></strong>
-            <br/>
-            <span class="text-muted">@<%= t['user']['username'] %></span>
-          </div>
-        </div>
 
-        <p class="lead my-3">
-          <% text = t['text'] %>
-          <% if t['entities'] && t['entities']['urls'] %>
-            <% text = text.chars; t['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; text = text.join %>
-          <% end %>
-          <a style="text-decoration: none" target="_blank" href="<%=tweet.url%>"><%= text.strip.gsub("\n",'<br />') %></a>
-        </p>
+          <p class="lead my-3">
+            <% text = t['text'] %>
+            <% if t['entities'] && t['entities']['urls'] %>
+              <% text = text.chars; t['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; text = text.join %>
+            <% end %>
+            <a style="text-decoration: none" target="_blank" href="<%=tweet.url%>"><%= text.strip.gsub("\n",'<br />') %></a>
+          </p>
 
-        <% if t['referenced_tweets'] %>
-          <% t['referenced_tweets'].each { |rt| %>
-          <% if %w[quoted].include?(rt['type']) && rt['tweet'] %>
-            <div class="card bg-white text-dark mb-3" style="font-size: 90%;">
-              <div class="card-body p-2">
-                <div class="row no-gutters mb-2">
-                  <div class="col-auto pr-2">
-                    <img class="rounded-circle" style="width: 20px" src="<%=rt['tweet']['user']['profile_image_url']%>">
+          <% if t['referenced_tweets'] %>
+            <% t['referenced_tweets'].each { |rt| %>
+            <% if %w[quoted].include?(rt['type']) && rt['tweet'] %>
+              <div class="card bg-white text-dark mb-3" style="font-size: 90%;">
+                <div class="card-body p-2">
+                  <div class="row no-gutters mb-2">
+                    <div class="col-auto pr-2">
+                      <img class="rounded-circle" style="width: 20px" src="<%=rt['tweet']['user']['profile_image_url']%>">
+                    </div>
+                    <div class="col">
+                      <strong><%= rt['tweet']['user']['name'] %></strong>
+                      <span class="text-muted">@<%= rt['tweet']['user']['username'] %></span>
+                    </div>
                   </div>
-                  <div class="col">
-                    <strong><%= rt['tweet']['user']['name'] %></strong>
-                    <span class="text-muted">@<%= rt['tweet']['user']['username'] %></span>
-                  </div>
+                  <p style="font-weight: 400" class="mb-0"><%= rt['tweet']['text'] %></p>
                 </div>
-                <p style="font-weight: 400" class="mb-0"><%= rt['tweet']['text'] %></p>
+              </div>
+            <% end %>
+            <% } %>
+          <% end %>
+
+          <% if t['media'] %>
+            <div class="mb-3">
+              <% t['media'].each { |m| %>
+              <% if m %>
+                <% if m['type'] == 'video' %>
+                  <video class="w-100" controls>
+                    <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
+                  </video>
+                <% else %>
+                  <img class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>">
+                <% end %>
+              <% end %>
+              <% } %>
+            </div>
+          <% end %>
+
+          <% t['entities']['urls'].each { |e| %>
+          <% if e['images'] %>
+            <div class="card bg-white text-dark mb-3">
+              <img class="card-img-top" src="<%= e['images'].first['url'] %>">
+              <div class="card-body p-2">
+                <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
+                <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
+                <p class="card-text"><%= e['description'] %></p>
               </div>
             </div>
           <% end %>
-          <% } %>
-        <% end %>
+          <% } if t['entities'] && t['entities']['urls'] %>
 
-        <% if t['media'] %>
-          <div class="mb-3">
-            <% t['media'].each { |m| %><img class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% } %>
-          </div>
-        <% end %>
+          <p class="text-muted">
+            <%= time_ago_in_words Time.iso8601(t['created_at']) %> ago
+          </p>
+          <hr />
+          <p class="text-muted font-weight-bold mb-0">
+            <span class="mr-3"><i class="fa fa-heart mr-1" style="color: #F71880"></i> <%=number_with_delimiter t['public_metrics']['like_count'] %></span>
+            <span class="mr-3"><i class="fa fa-retweet mr-1" style="color: #2FBA7D"></i> <%=number_with_delimiter t['public_metrics']['retweet_count'] %></span>
+            <span class="mr-3"><i class="fa fa-reply mr-1" style="color: #379CF0"></i> <%=number_with_delimiter t['public_metrics']['reply_count'] %></span>
+            <span class="mr-3"><i class="fa fa-edit mr-1 text-dark"></i> <%=number_with_delimiter t['public_metrics']['quote_count'] %></span>
+          </p>
+        </div>
 
-        <% t['entities']['urls'].each { |e| %>
-        <% if e['images'] %>
-          <div class="card bg-white text-dark mb-3">
-            <img class="card-img-top" src="<%= e['images'].first['url'] %>">
-            <div class="card-body p-2">
-              <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
-              <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
-              <p class="card-text"><%= e['description'] %></p>
-            </div>
-          </div>
-        <% end %>
-        <% } if t['entities'] && t['entities']['urls'] %>
-
-        <p class="text-muted">
-          <%= time_ago_in_words Time.iso8601(t['created_at']) %> ago
-        </p>
-        <hr />
-        <p class="text-muted font-weight-bold mb-0">
-          <span class="mr-3"><i class="fa fa-heart mr-1" style="color: #F71880"></i> <%=t['public_metrics']['like_count'] %></span>
-          <span class="mr-3"><i class="fa fa-retweet mr-1" style="color: #2FBA7D"></i> <%=t['public_metrics']['retweet_count'] %></span>
-          <span class="mr-3"><i class="fa fa-reply mr-1" style="color: #379CF0"></i> <%=t['public_metrics']['reply_count'] %></span>
-          <span class="mr-3"><i class="fa fa-edit mr-1 text-dark"></i> <%=t['public_metrics']['quote_count'] %></span>
-        </p>
-      </div>
+      <% end %>
       <hr />
       <% } %>
     </div>

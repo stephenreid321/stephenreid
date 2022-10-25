@@ -25,7 +25,7 @@ class Tweet
     users = []
     media = []
     referenced_tweets = []
-    q = 'tweet.fields=referenced_tweets,entities,public_metrics,created_at,attachments&user.fields=profile_image_url,public_metrics&expansions=author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id&media.fields=media_key,preview_image_url,type,url'
+    q = 'tweet.fields=referenced_tweets,entities,public_metrics,created_at,attachments&user.fields=profile_image_url,public_metrics&expansions=author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id&media.fields=media_key,preview_image_url,type,url,variants'
     r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}")
     tweets += r.body['data']
     users += r.body['includes']['users']
@@ -51,8 +51,18 @@ class Tweet
       end
       if t['referenced_tweets']
         t['referenced_tweets'].each_with_index do |referenced_tweet, i|
-          t['referenced_tweets'][i]['tweet'] = referenced_tweets.find { |t| t['id'] == referenced_tweet['id'] }
-          t['referenced_tweets'][i]['tweet']['user'] = users.find { |u| u['id'] == referenced_tweet['tweet']['author_id'] }
+          next unless (t['referenced_tweets'][i]['tweet'] = referenced_tweets.find { |t| t['id'] == referenced_tweet['id'] })
+
+          t['referenced_tweets'][i]['tweet']['user'] = users.find do |u|
+            u['id'] == referenced_tweet['tweet']['author_id']
+          end
+
+          next unless t['referenced_tweets'][i]['tweet']['attachments'] && t['referenced_tweets'][i]['tweet']['attachments']['media_keys']
+
+          t['referenced_tweets'][i]['tweet']['attachments']['media_keys'].each do |media_key|
+            t['referenced_tweets'][i]['tweet']['media'] ||= []
+            t['referenced_tweets'][i]['tweet']['media'] << media.find { |m| m['media_key'] == media_key }
+          end
         end
       end
       t['age'] = Time.now - Time.iso8601(t['created_at'])
