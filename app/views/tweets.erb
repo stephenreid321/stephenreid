@@ -76,7 +76,7 @@
                     <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
                   </video>
                 <% else %>
-                  <img class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>">
+                  <img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>">
                 <% end %>
               <% end %>
               <% } %>
@@ -86,7 +86,7 @@
           <% t['entities']['urls'].each { |e| %>
           <% if e['images'] %>
             <div class="card bg-white text-dark mb-3">
-              <img class="card-img-top" src="<%= e['images'].first['url'] %>">
+              <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
               <div class="card-body p-2">
                 <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
                 <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
