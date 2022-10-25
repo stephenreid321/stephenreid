@@ -11,7 +11,7 @@
 
     <% form_tag '', method: :get, class: 'form-inline mb-3' do %>
       <%= select_tag :timeframe, options: %w[1h 3h 6h 12h 24h 7d], selected: params[:timeframe], class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
-      <%= select_tag :stat, options: %w[likes retweets], selected: params[:stat], class: 'form-control mb-1', onchange: 'this.form.submit()' %>
+      <%= select_tag :stat, options: %w[likes retweets quotes], selected: params[:stat], class: 'form-control mb-1', onchange: 'this.form.submit()' %>
     <% end %>
 
     <% @tweets.each { |tweet| t = tweet.data %>
@@ -27,11 +27,11 @@
       </a>
     <% end %>
 
-    <% if t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted'; t = t['referenced_tweets'].first['tweet']; end %>
+    <% if (t['referenced_tweets'] && t['referenced_tweets'].any? { |rt| rt['tweet']['media'] && rt['tweet']['media'].include?(nil) }) %>
+      <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
+    <% else %>
 
-      <% if t['media'] == [nil] %>
-        <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
-      <% else %>
+      <% if t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted'; t = t['referenced_tweets'].first['tweet']; end %>
 
         <div class="tweet bg-white rounded p-3">
 
@@ -78,7 +78,24 @@
                       <span class="text-muted"><%= time_ago_in_words Time.iso8601(rt['tweet']['created_at']) %> ago</span>
                     </div>
                   </div>
-                  <p style="font-weight: 400" class="mb-0"><%= rt['tweet']['text'] %></p>
+                  <p style="font-weight: 400" class="mb-0">
+                    <%= text = rt['tweet']['text'].chars; if rt['tweet']['entities']['urls']; rt['tweet']['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; end; text = text.join %>
+                  </p>
+
+                  <% if rt['tweet']['media'] %>
+                    <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
+                      <% rt['tweet']['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= rt['tweet']['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
+                          <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
+                            <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
+                          </video>
+                        <% end %>
+                      <% else %>
+                        <div class="text-center my-3"><em>Media missing</em></div>
+                      <% end %>
+                      <% } %>
+                    </div>
+                  <% end %>
+
                 </div>
               </div>
             <% end %>
@@ -86,12 +103,14 @@
           <% end %>
 
           <% if t['media'] %>
-            <div class="mb-3">
+            <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
               <% t['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
                   <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
                     <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
                   </video>
                 <% end %>
+              <% else %>
+                <div class="text-center my-3"><em>Media missing</em></div>
               <% end %>
               <% } %>
             </div>
@@ -99,7 +118,7 @@
 
           <% t['entities']['urls'].each { |e| %>
           <% if e['images'] %>
-            <div class="card bg-white text-dark mb-3">
+            <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
               <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
               <div class="card-body p-2">
                 <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
