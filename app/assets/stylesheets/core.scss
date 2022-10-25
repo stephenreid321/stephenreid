@@ -126,9 +126,13 @@ p.attribution {
   opacity: 0 !important
 }
 
+.tweet {
+  color: black !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 .tweet,
 .tweet p.lead a {
-  color: black !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -137,4 +141,8 @@ p.attribution {
   font-size: 20px;
   line-height: 24px;
   font-weight: 400;
+}
+
+.tweet-text a {
+  color: rgb(29, 155, 240)
 }
