@@ -27,7 +27,7 @@
       </a>
     <% end %>
 
-    <% if (t['referenced_tweets'] && t['referenced_tweets'].any? { |rt| rt['tweet']['media'] && rt['tweet']['media'].include?(nil) }) %>
+    <% if (t['referenced_tweets'] && t['referenced_tweets'].any? { |rt| rt['tweet'] && rt['tweet']['media'] && rt['tweet']['media'].include?(nil) }) %>
       <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
     <% else %>
 
