@@ -123,19 +123,20 @@
           <% end %>
 
           <% t['entities']['urls'].each { |e| %>
-          <% if e['images'] %>
-            <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
+          <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
+            <% if e['images'] %>
               <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
-              <div class="card-body p-2">
-                <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
-                <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
-                <p class="card-text"><%= e['description'] %></p>
-              </div>
+            <% end %>
+            <div class="card-body p-2">
+              <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
+              <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
+              <p class="card-text"><%= e['description'] %></p>
             </div>
-          <% end %>
+          </div>
           <% } if t['entities'] && t['entities']['urls'] %>
 
           <hr />
+
           <p>
             <a class="d-block text-muted font-weight-bold mb-0" style="text-decoration: none" target="_blank" href="<%=tweet.url%>">
               <span class="mr-3"><i class="fa fa-heart mr-1" style="color: #F71880"></i> <%=number_with_delimiter t['public_metrics']['like_count'] %></span>
