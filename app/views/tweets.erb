@@ -157,7 +157,10 @@
             <i class="fa fa-edit mr-1 text-dark"></i>
             <%=number_with_delimiter t['public_metrics']['quote_count'] %>
           </a>
-
+          <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="javascript:;" onclick="navigator.share({url: '<%=tweet.url%>'})">
+            <i class="fa fa-share mr-1 text-dark"></i>
+            Share
+          </a>
         </p>
       </div>
 
