@@ -9,10 +9,7 @@
 <div class="row justify-content-center">
   <div class="col-12 col-lg-6">
 
-    <% form_tag '', method: :get, class: 'form-inline mb-3' do %>
-      <%= select_tag :timeframe, options: %w[1h 3h 6h 12h 24h 3d 7d], selected: params[:timeframe], class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
-      <%= select_tag :stat, options: %w[likes retweets quotes], selected: params[:stat], class: 'form-control mb-1', onchange: 'this.form.submit()' %>
-    <% end %>
+    <%= partial :tweet_timeframe %>
 
     <% @tweets.each { |tweet| t = tweet.data %>
     <% if t['referenced_tweets'] && %w[quoted retweeted].include?(t['referenced_tweets'].first['type']) %>
@@ -167,5 +164,8 @@
     <% end %>
     <hr />
     <% } %>
+
+    <%= partial :tweet_timeframe %>
+
   </div>
 </div>
