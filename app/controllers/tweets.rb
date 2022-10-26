@@ -4,6 +4,8 @@ StephenReid::App.controller do
   end
 
   get '/tweets' do
+    @title = 'Tweets'
+    @favicon = 'twitter.png'
     @tweets = Tweet.all.select do |t|
       t = t.data
       t['age'] < (case (params[:timeframe] ||= '1h')
