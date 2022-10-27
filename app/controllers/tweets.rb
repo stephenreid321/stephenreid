@@ -10,18 +10,14 @@ StephenReid::App.controller do
     @tweets = Tweet.all.select do |t|
       t = t.data
       t['age'] < (case (params[:timeframe] ||= '1h')
-                  when '1h' then 1.hour
                   when '3h' then 3.hours
-                  when '6h' then 6.hours
                   when '12h' then 12.hours
                   when '24h' then 24.hours
                   when '3d' then 3.days
                   when '7d' then 7.days
                   end) && t['age'] >= (case params[:timeframe]
-                                       when '1h' then 0
-                                       when '3h' then 1.hour
-                                       when '6h' then 3.hours
-                                       when '12h' then 6.hours
+                                       when '3h' then 0
+                                       when '12h' then 3.hours
                                        when '24h' then 12.hours
                                        when '3d' then 24.hours
                                        when '7d' then 3.days

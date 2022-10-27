@@ -21,7 +21,7 @@ end
 
 namespace :tweets do
   task import: :environment do
-    Tweet.import
+    Tweet.import if Time.now.hour % 3 == 0
   end
 end
 
