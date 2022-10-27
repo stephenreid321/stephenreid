@@ -34,8 +34,6 @@ class Tweet
     pagination_token = r.body['meta']['next_token']
     while pagination_token
       r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}&pagination_token=#{pagination_token}")
-      puts r.body['data']
-      puts r.body['meta']
       tweets += r.body['data']
       users += r.body['includes']['users'] if r.body['includes'] && r.body['includes']['users']
       media += r.body['includes']['media'] if r.body['includes'] && r.body['includes']['media']
