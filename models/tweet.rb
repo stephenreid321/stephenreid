@@ -28,16 +28,16 @@ class Tweet
     q = 'tweet.fields=referenced_tweets,entities,public_metrics,created_at,attachments&user.fields=profile_image_url,public_metrics&expansions=author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id&media.fields=media_key,preview_image_url,type,url,variants'
     r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}")
     tweets += r.body['data']
-    users += r.body['includes']['users']
-    media += r.body['includes']['media']
-    referenced_tweets += r.body['includes']['tweets']
+    users += r.body['includes']['users'] if r.body['includes'] && r.body['includes']['users']
+    media += r.body['includes']['media'] if r.body['includes'] && r.body['includes']['media']
+    referenced_tweets += r.body['includes']['tweets'] if r.body['includes'] && r.body['includes']['tweets']
     pagination_token = r.body['meta']['next_token']
     while pagination_token
       r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}&pagination_token=#{pagination_token}")
       tweets += r.body['data']
-      users += r.body['includes']['users']
-      media += r.body['includes']['media']
-      referenced_tweets += r.body['includes']['tweets']
+      users += r.body['includes']['users'] if r.body['includes'] && r.body['includes']['users']
+      media += r.body['includes']['media'] if r.body['includes'] && r.body['includes']['media']
+      referenced_tweets += r.body['includes']['tweets'] if r.body['includes'] && r.body['includes']['tweets']
       pagination_token = r.body['meta']['next_token']
       puts pagination_token
     end
@@ -74,7 +74,7 @@ class Tweet
       t['retweets_per_follower_per_second'] = t['public_metrics']['retweet_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
       t['quotes_per_follower'] = t['public_metrics']['quote_count'].to_f / t['user']['public_metrics']['followers_count']
       t['quotes_per_second'] = t['public_metrics']['quote_count'].to_f / t['age']
-      t['quotes_per_follower_per_second'] = t['public_metrics']['quote_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])      
+      t['quotes_per_follower_per_second'] = t['public_metrics']['quote_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
     end
   end
 
