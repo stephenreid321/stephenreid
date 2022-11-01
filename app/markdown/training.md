@@ -3,6 +3,7 @@
 *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Yahel Avigur, based on the teachings of [Rob Burbea](https://tasshin.com/blog/rob-burbea-ordinary-guy-werewolf-eternal-wanderer/) in [Seeing That Frees](https://www.goodreads.com/book/show/25172403-seeing-that-frees) (Oct 2022, 7 days)
 *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
 *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
+*   *[The Eye of the Heart: Tracing a Path from Heartfulness to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)*
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
 
@@ -18,11 +19,11 @@
 
 ### Psychotherapy & coaching
 
+*   *In training towards becoming an ICF-certified [transformational coach](https://stephenreid.net/coaching) (Feb 2022 – ongoing)*
 *   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
-*   *In training towards becoming an ICF-certified [transformational coach](https://stephenreid.net/coaching) (Feb 2022 – ongoing)*
 
 ### Conscious sexuality
 
