@@ -3,7 +3,7 @@
 *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Yahel Avigur, based on the teachings of [Rob Burbea](https://tasshin.com/blog/rob-burbea-ordinary-guy-werewolf-eternal-wanderer/) in [Seeing That Frees](https://www.goodreads.com/book/show/25172403-seeing-that-frees) (Oct 2022, 7 days)
 *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
 *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
-*   *[The Eye of the Heart: Tracing a Path from Heartfulness to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)*
+*   *[The Eye of the Heart: Tracing a Path from Heartfulness to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)*
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
 
