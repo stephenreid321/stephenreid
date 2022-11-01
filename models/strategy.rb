@@ -202,10 +202,11 @@ class Strategy
   def self.assets_weighted
     with_multipliers = {}
     without_multipliers = {}
-    count = Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').count
+    strategies = Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP', :nscore_score.ne => nil)
+    count = strategies.count
     raise Strategy::NotEnoughStrategies if count < 100
 
-    Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP').each_with_index do |strategy, i|
+    strategies.each_with_index do |strategy, i|
       puts "#{i + 1}/#{count}"
       strategy.holdings.each do |holding|
         asset = if %w[USDT TUSD DAI PAXG].include?(holding.asset.ticker)
