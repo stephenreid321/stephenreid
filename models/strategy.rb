@@ -4,8 +4,6 @@ class Strategy
   class RoundingError < StandardError; end
   class NotEnoughStrategies < StandardError; end
 
-  NUMBER_OF_ASSETS = 5
-
   MONTH_FACTOR = 4
   THREE_MONTH_FACTOR = 3
   SIX_MONTH_FACTOR = 2
@@ -229,7 +227,7 @@ class Strategy
 
   def self.proposed(assets)
     # restrict to top n assets
-    assets = assets.sort_by { |_k, v| -v }[0..(NUMBER_OF_ASSETS - 1)]
+    assets = assets.sort_by { |_k, v| -v }[0..(ENV['NUMBER_OF_ASSETS'].to_i - 1)]
     t = assets.map { |_k, v| v }.sum
     assets = assets.map { |k, v| [k, v / t] }.to_h
 
