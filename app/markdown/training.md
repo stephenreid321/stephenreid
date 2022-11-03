@@ -22,8 +22,9 @@
 *   *In training towards becoming an ICF-certified [transformational coach](https://stephenreid.net/coaching) (Feb 2022 – ongoing)*
 *   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
-*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
+*   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
+*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 
 ### Conscious sexuality
 
