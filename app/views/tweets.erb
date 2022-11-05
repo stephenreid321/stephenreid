@@ -28,149 +28,153 @@
       </a>
     <% end %>
 
-    <% if ((t['attachments'] && t['attachments']['poll_ids']) || (t['referenced_tweets'] && t['referenced_tweets'].any? { |rt| rt['tweet'] && rt['tweet']['media'] && rt['tweet']['media'].include?(nil) })) %>
-      <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
-    <% else %>
+    <% if (
+      (t['attachments'] && t['attachments']['poll_ids']) ||
+      (t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted' && (rt = t['referenced_tweets'].first['tweet']) && rt['referenced_tweets'] && rt['referenced_tweets'].first['type'] == 'quoted')
+      (t['referenced_tweets'] && t['referenced_tweets'].any? { |rt| rt['tweet'] && rt['tweet']['media'] && rt['tweet']['media'].include?(nil) })      
+      ) %>
+    <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
+  <% else %>
 
-      <% (t = t['referenced_tweets'].first['tweet']) if t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted' %>
+    <% (t = t['referenced_tweets'].first['tweet']) if t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted' %>
 
-      <div class="tweet bg-white rounded p-3">
+    <div class="tweet bg-white rounded p-3">
 
-        <div class="row no-gutters" style="cursor: pointer" onclick="window.open('https://twitter.com/<%=t['user']['username']%>','_blank')">
-          <div class="col-auto pr-2">
-            <img class="rounded-circle" src="<%=t['user']['profile_image_url']%>">
-          </div>
-          <div class="col">
-            <strong><%= t['user']['name'] %></strong>
-            <br/>
-            <span class="text-muted">@<%= t['user']['username'] %></span>
-            <span class="text-muted">&middot;</span>
-            <span class="text-muted"><%= time_ago_in_words Time.iso8601(t['created_at']) %> ago</span>
-          </div>
+      <div class="row no-gutters" style="cursor: pointer" onclick="window.open('https://twitter.com/<%=t['user']['username']%>','_blank')">
+        <div class="col-auto pr-2">
+          <img class="rounded-circle" src="<%=t['user']['profile_image_url']%>">
         </div>
+        <div class="col">
+          <strong><%= t['user']['name'] %></strong>
+          <br/>
+          <span class="text-muted">@<%= t['user']['username'] %></span>
+          <span class="text-muted">&middot;</span>
+          <span class="text-muted"><%= time_ago_in_words Time.iso8601(t['created_at']) %> ago</span>
+        </div>
+      </div>
 
-        <p class="lead my-3 tweet-text" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
-          <% text = t['text'] %>
-          <% if t['entities'] %>
-            <% if t['entities']['urls'] %>
-              <% text = text.chars; t['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; text = text.join %>
-            <% end %>
+      <p class="lead my-3 tweet-text" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
+        <% text = t['text'] %>
+        <% if t['entities'] %>
+          <% if t['entities']['urls'] %>
+            <% text = text.chars; t['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; text = text.join %>
           <% end %>
-          <%= text
+        <% end %>
+        <%= text
             .strip
             .gsub(/@(\w+)/i, '<a target="_blank" href="http://twitter.com/\1" >@\1</a>')
             .gsub(/#(\w+)/i, '<a target="_blank" href="https://twitter.com/hashtag/\1" >#\1</a>')
             .gsub(/$(\w+)/i, '<a target="_blank" href="https://twitter.com/search?q=%24\1" >$\1</a>')
             .gsub("\n",'<br />') %>
-        </p>
+      </p>
 
-        <% if t['media'] %>
-          <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
-            <% t['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
-                <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
-                  <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
-                </video>
-              <% end %>
-            <% else %>
-              <div class="text-center my-3"><em>Media missing</em></div>
+      <% if t['media'] %>
+        <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
+          <% t['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= t['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
+              <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
+                <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
+              </video>
             <% end %>
-            <% } %>
-          </div>
-        <% end %>
-
-        <% if t['entities'] && t['entities']['urls']  %>
-          <% t['entities']['urls'].each { |e| next if e['expanded_url'].starts_with?('https://twitter.com') %>
-          <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
-            <% if e['images'] %>
-              <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
-            <% end %>
-            <div class="card-body p-2">
-              <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
-              <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
-              <p class="card-text"><%= e['description'] %></p>
-            </div>
-          </div>
-          <% } %>
-        <% end %>
-
-        <% if t['referenced_tweets'] %>
-          <% t['referenced_tweets'].each { |rt| %>
-          <% if %w[quoted].include?(rt['type']) && rt['tweet'] %>
-            <div class="card bg-white text-dark mb-3" style="font-size: 90%; cursor: pointer" onclick="window.open('<%=Tweet.url(rt['tweet'])%>','_blank')">
-              <div class="card-body p-2">
-                <div class="row no-gutters mb-2">
-                  <div class="col-auto pr-2">
-                    <img class="rounded-circle" style="width: 20px" src="<%=rt['tweet']['user']['profile_image_url']%>">
-                  </div>
-                  <div class="col">
-                    <strong><%= rt['tweet']['user']['name'] %></strong>
-                    <span class="text-muted">@<%= rt['tweet']['user']['username'] %></span>
-                    <span class="text-muted">&middot;</span>
-                    <span class="text-muted"><%= time_ago_in_words Time.iso8601(rt['tweet']['created_at']) %> ago</span>
-                  </div>
-                </div>
-                <p style="font-weight: 400" class="mb-0">
-                  <% text = rt['tweet']['text'] %>
-                  <% if rt['tweet']['entities'] %>
-                    <% if rt['tweet']['entities']['urls'] %>
-                      <% text = text.chars; rt['tweet']['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; text = text.join %>
-                    <% end %>
-                  <% end %>
-                  <%= text %>
-                </p>
-
-                <% if rt['tweet']['media'] %>
-                  <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
-                    <% rt['tweet']['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= rt['tweet']['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
-                        <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
-                          <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
-                        </video>
-                      <% end %>
-                    <% else %>
-                      <div class="text-center my-3"><em>Media missing</em></div>
-                    <% end %>
-                    <% } %>
-                  </div>
-                <% end %>
-
-              </div>
-            </div>
+          <% else %>
+            <div class="text-center my-3"><em>Media missing</em></div>
           <% end %>
           <% } %>
+        </div>
+      <% end %>
+
+      <% if t['entities'] && t['entities']['urls']  %>
+        <% t['entities']['urls'].each { |e| next if e['expanded_url'].starts_with?('https://twitter.com') %>
+        <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
+          <% if e['images'] %>
+            <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
+          <% end %>
+          <div class="card-body p-2">
+            <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
+            <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
+            <p class="card-text"><%= e['description'] %></p>
+          </div>
+        </div>
+        <% } %>
+      <% end %>
+
+      <% if t['referenced_tweets'] %>
+        <% t['referenced_tweets'].each { |rt| %>
+        <% if %w[quoted].include?(rt['type']) && rt['tweet'] %>
+          <div class="card bg-white text-dark mb-3" style="font-size: 90%; cursor: pointer" onclick="window.open('<%=Tweet.url(rt['tweet'])%>','_blank')">
+            <div class="card-body p-2">
+              <div class="row no-gutters mb-2">
+                <div class="col-auto pr-2">
+                  <img class="rounded-circle" style="width: 20px" src="<%=rt['tweet']['user']['profile_image_url']%>">
+                </div>
+                <div class="col">
+                  <strong><%= rt['tweet']['user']['name'] %></strong>
+                  <span class="text-muted">@<%= rt['tweet']['user']['username'] %></span>
+                  <span class="text-muted">&middot;</span>
+                  <span class="text-muted"><%= time_ago_in_words Time.iso8601(rt['tweet']['created_at']) %> ago</span>
+                </div>
+              </div>
+              <p style="font-weight: 400" class="mb-0">
+                <% text = rt['tweet']['text'] %>
+                <% if rt['tweet']['entities'] %>
+                  <% if rt['tweet']['entities']['urls'] %>
+                    <% text = text.chars; rt['tweet']['entities']['urls'].each { |e| (e['start']..e['end']).each { |i| text[i] = nil }; }; text = text.join %>
+                  <% end %>
+                <% end %>
+                <%= text %>
+              </p>
+
+              <% if rt['tweet']['media'] %>
+                <div class="mb-3" style="cursor: pointer" onclick="window.open('<%=tweet.url%>','_blank')">
+                  <% rt['tweet']['media'].each { |m| %><% if m %><% if m['type'] != 'video' %><img onerror="this.style.display='none'" class="<%= rt['tweet']['media'].length == 1 ? 'w-100' : 'w-50 p-1' %>" src="<%=m['url'] || m['preview_image_url']%>"><% else %>
+                      <video class="w-100" poster="<%=m['preview_image_url']%>" controls>
+                        <source src="<%=m['variants'].select { |v| v['content_type'] == 'video/mp4' }.last['url']%>" type="video/mp4">
+                      </video>
+                    <% end %>
+                  <% else %>
+                    <div class="text-center my-3"><em>Media missing</em></div>
+                  <% end %>
+                  <% } %>
+                </div>
+              <% end %>
+
+            </div>
+          </div>
         <% end %>
+        <% } %>
+      <% end %>
 
-        <hr />
+      <hr />
 
-        <p class="d-block font-weight-bold mb-0">
+      <p class="d-block font-weight-bold mb-0">
 
-          <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="https://twitter.com/intent/like?tweet_id=<%=t['id']%>">
-            <i class="fa fa-heart mr-1" style="color: #F71880"></i>
-            <%=number_with_delimiter t['public_metrics']['like_count'] %>
-          </a>
-          <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="https://twitter.com/intent/retweet?tweet_id=<%=t['id']%>">
-            <i class="fa fa-retweet mr-1" style="color: #2FBA7D"></i>
-            <%=number_with_delimiter t['public_metrics']['retweet_count'] %>
-          </a>
-          <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="<%=tweet.url%>">
-            <i class="fa fa-reply mr-1" style="color: #379CF0"></i>
-            <%=number_with_delimiter t['public_metrics']['reply_count'] %>
-          </a>
-          <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="<%=tweet.url%>">
-            <i class="fa fa-edit mr-1 text-dark"></i>
-            <%=number_with_delimiter t['public_metrics']['quote_count'] %>
-          </a>
-          <a class="text-muted mr-3" style="text-decoration: none" href="javascript:;" onclick="navigator.share({url: '<%=tweet.url%>'})">
-            <i class="fa fa-share mr-1 text-dark"></i>
-            Share
-          </a>
-        </p>
-      </div>
+        <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="https://twitter.com/intent/like?tweet_id=<%=t['id']%>">
+          <i class="fa fa-heart mr-1" style="color: #F71880"></i>
+          <%=number_with_delimiter t['public_metrics']['like_count'] %>
+        </a>
+        <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="https://twitter.com/intent/retweet?tweet_id=<%=t['id']%>">
+          <i class="fa fa-retweet mr-1" style="color: #2FBA7D"></i>
+          <%=number_with_delimiter t['public_metrics']['retweet_count'] %>
+        </a>
+        <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="<%=tweet.url%>">
+          <i class="fa fa-reply mr-1" style="color: #379CF0"></i>
+          <%=number_with_delimiter t['public_metrics']['reply_count'] %>
+        </a>
+        <a class="text-muted mr-3" style="text-decoration: none" target="_blank" href="<%=tweet.url%>">
+          <i class="fa fa-edit mr-1 text-dark"></i>
+          <%=number_with_delimiter t['public_metrics']['quote_count'] %>
+        </a>
+        <a class="text-muted mr-3" style="text-decoration: none" href="javascript:;" onclick="navigator.share({url: '<%=tweet.url%>'})">
+          <i class="fa fa-share mr-1 text-dark"></i>
+          Share
+        </a>
+      </p>
+    </div>
 
-    <% end %>
-    <hr />
-    <% } %>
+  <% end %>
+  <hr />
+  <% } %>
 
-    <%= partial :tweet_timeframe %>
+  <%= partial :tweet_timeframe %>
 
-  </div>
+</div>
 </div>
