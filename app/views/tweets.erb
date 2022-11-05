@@ -60,6 +60,7 @@
             .strip
             .gsub(/@(\w+)/i, '<a target="_blank" href="http://twitter.com/\1" >@\1</a>')
             .gsub(/#(\w+)/i, '<a target="_blank" href="https://twitter.com/hashtag/\1" >#\1</a>')
+            .gsub(/$(\w+)/i, '<a target="_blank" href="https://twitter.com/search?q=%24\1" >$\1</a>')
             .gsub("\n",'<br />') %>
         </p>
 
