@@ -17,7 +17,7 @@ Coaching is a collaborative, non-directive dialogue practice that seeks to bring
 
 It's based on the belief that people are creative, resourceful and capable of change, and already have, or otherwise can find, answers to their challenges.
 
-*Transformative* coaching is a coaching style with a particular focus on exploring the inner world of beliefs, assumptions, values and expectations.
+*Transformative* coaching is a coaching style with a particular focus on exploring the inner world of beliefs, assumptions, values and expectations. <a href="/blog/2022/08/04/coach-maturity.html">Read more about what makes a good coach</a>
 
 ### Who can benefit?
 
