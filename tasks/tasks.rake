@@ -8,14 +8,12 @@ namespace :strategies do
     Strategy.rebalance
   end
 
+  task fast_rebalance: :environment do
+    Strategy.rebalance(skip_update: true)
+  end
+
   task propose: :environment do
-    with_multipliers, without_multipliers = Strategy.assets_weighted
-    proposed_with_multipliers = Strategy.proposed(with_multipliers)
-    proposed_without_multipliers = Strategy.proposed(without_multipliers)
-    Stash.find_by(key: 'proposed_with_multipliers').try(:destroy)
-    Stash.create(key: 'proposed_with_multipliers', value: proposed_with_multipliers.to_h.to_json)
-    Stash.find_by(key: 'proposed_without_multipliers').try(:destroy)
-    Stash.create(key: 'proposed_without_multipliers', value: proposed_without_multipliers.to_h.to_json)
+    Strategy.propose_and_stash
   end
 end
 

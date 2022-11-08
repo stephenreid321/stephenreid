@@ -31,6 +31,12 @@ StephenReid::App.controller do
     redirect '/metastrategy'
   end
 
+  get '/metastrategy/propose' do
+    sign_in_required!
+    Strategy.delay.propose_and_stash
+    redirect '/metastrategy'
+  end
+
   get '/assets/:id/multiplier' do
     asset = Asset.find(params[:id])
     partial :'crypto/multiplier', locals: { asset: asset }

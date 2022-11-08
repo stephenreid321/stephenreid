@@ -226,9 +226,19 @@ class Strategy
     [with_multipliers, without_multipliers]
   end
 
+  def self.propose_and_stash
+    with_multipliers, without_multipliers = Strategy.assets_weighted
+    proposed_with_multipliers = Strategy.proposed(with_multipliers)
+    proposed_without_multipliers = Strategy.proposed(without_multipliers)
+    Stash.find_by(key: 'proposed_with_multipliers').try(:destroy)
+    Stash.create(key: 'proposed_with_multipliers', value: proposed_with_multipliers.to_h.to_json)
+    Stash.find_by(key: 'proposed_without_multipliers').try(:destroy)
+    Stash.create(key: 'proposed_without_multipliers', value: proposed_without_multipliers.to_h.to_json)
+  end
+
   def self.proposed(assets)
     # restrict to top n assets
-    assets = assets.sort_by { |_k, v| -v }[0..(ENV['NUMBER_OF_ASSETS'].to_i - 1)]
+    assets = assets.sort_by { |_k, v| -v }[0..(Stash.find_by(key: 'number_of_assets').value.to_i - 1)]
     t = assets.map { |_k, v| v }.sum
     assets = assets.map { |k, v| [k, v / t] }.to_h
 

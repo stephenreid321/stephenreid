@@ -27,7 +27,8 @@
     <ol class="mt-1">
       <li>
         <a href="https://www.iconomi.com/register?ref=YGnZy">Sign up to ICONOMI via this referral link</a>
-        or use the referral code <span style="border-bottom: 1px dotted">YGnZy</span>
+        or use the referral code 
+        <span style="border-bottom: 1px dotted">YGnZy</span>
       </li>
       <li>
         Click Deposit and load your ICONOMI account.
@@ -47,8 +48,13 @@
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
   <% if current_account %>
+    &middot;
     <a href="/metastrategy/rebalance">
-      <i class="fas fa-sync"></i>
+      Rebalance
+    </a>
+    &middot;
+    <a href="/metastrategy/propose">
+      Propose
     </a>
   <% end %>
   <% Delayed::Job.and(handler: /method_name: :rebalance/).each { |delayed_job| %>
