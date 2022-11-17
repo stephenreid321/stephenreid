@@ -1,5 +1,3 @@
-<p class="lead">I am currently accepting coaching clients as part of my training towards becoming an <a href="https://coachingfederation.org/credentials-and-standards">ICF-certified</a> transformational coach.</p>
-
 How would it feel to be in conversation with someone who:
 
 * helps you consider what you really want and how you can move towards it
@@ -17,7 +15,7 @@ Coaching is a collaborative, non-directive dialogue practice that seeks to bring
 
 It's based on the belief that people are creative, resourceful and capable of change, and already have, or otherwise can find, answers to their challenges.
 
-*Transformative* coaching is a coaching style with a particular focus on exploring the inner world of beliefs, assumptions, values and expectations. <a href="/blog/2022/08/04/coach-maturity.html">Read more about what makes a good coach</a>
+I trained in a coaching style called *transformative coaching*, which has a particular focus on exploring the inner world of beliefs, assumptions, values and expectations. <a href="/blog/2022/08/04/coach-maturity.html">Read more about what makes a good coach</a>
 
 ### Who can benefit?
 
@@ -48,4 +46,4 @@ I ask you to book and pay for four sessions at a time. My rates vary according t
 
 I would expect you to attend sessions on time and from a quiet place, free from distractions. If you need to cancel or reschedule a session, I would not charge as long as you provide at least 24 hours notice.
 
-Sessions are recorded, with recordings shared with you confidentially shortly after each session for your reflection and review. I might sometimes ask your permission to share a recording with my supervisor as part of my training.
+Sessions are recorded (unless you request otherwise), with recordings shared with you confidentially shortly after each session for your reflection and review. I might occasionally ask your permission to share a recording with a supervisor.
