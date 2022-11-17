@@ -19,7 +19,7 @@
 
 ### Psychotherapy & coaching
 
-*   *In training towards becoming an ICF-certified [transformational coach](https://stephenreid.net/coaching) (Feb 2022 – ongoing)*
+*   *In training towards becoming an ICF-certified [transformative coach](https://stephenreid.net/coaching) (Feb 2022 – ongoing)*
 *   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
