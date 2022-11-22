@@ -87,7 +87,7 @@
       <% end %>
 
       <% if t['entities'] && t['entities']['urls']  %>
-        <% t['entities']['urls'].each { |e| %>
+        <% t['entities']['urls'].each { |e| next if e['expanded_url'].starts_with?('https://twitter.com') && t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'quoted' %>
         <div class="card bg-white text-dark mb-3" style="cursor: pointer" onclick="window.open('<%=e['expanded_url']%>','_blank')">
           <% if e['images'] %>
             <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
