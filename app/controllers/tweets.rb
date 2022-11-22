@@ -1,6 +1,5 @@
 StephenReid::App.controller do
   before do
-    halt 200 unless current_account || Padrino.env == :development
     @hide_sponsors = true
   end
 
