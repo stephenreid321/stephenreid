@@ -93,7 +93,9 @@
             <img onerror="this.style.display='none'" class="card-img-top" src="<%= e['images'].first['url'] %>">
           <% end %>
           <div class="card-body p-2">
-            <p class="text-muted mb-1"><%= URI(e['expanded_url']).host.gsub('www.','') %></p>
+            <p class="text-muted mb-1">
+              <%= (e['expanded_url'].starts_with?('https://twitter.com') ? URI(e['expanded_url']) : URI(e['expanded_url']).host).gsub('www.','') %>
+            </p>
             <h5 class="text-dark card-title mb-1"><%= e['title'] %></h5>
             <p class="card-text"><%= e['description'] %></p>
           </div>
