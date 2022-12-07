@@ -39,16 +39,20 @@
 * Member of the [Natural Voice Network](https://naturalvoice.net/)
 * Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 
+### Online
+
+*   Fritjof Capra’s [Capra Course](https://www.capracourse.net/) on the [The Systems View of Life](https://www.goodreads.com/en/book/show/18554985) (Fall 2022)
+*   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
+*   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
+
 ### Other
 
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
-*   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) online course with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
-*   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
 *   *[The Tent of Seven Doors: The School of Myth Summer School](https://schoolofmyth.com/summer-school/) with [Dr. Martin Shaw](https://drmartinshaw.com/) (Jun 2023)*
 
 ### Physics

@@ -8,7 +8,7 @@ namespace :strategies do
     Strategy.rebalance
   end
 
-  task fast_rebalance: :environment do
+  task rebalance_without_update: :environment do
     Strategy.rebalance(skip_update: true)
   end
 
