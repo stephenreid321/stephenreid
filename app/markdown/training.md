@@ -41,7 +41,7 @@
 
 ### Online
 
-*   Fritjof Capra’s [Capra Course](https://www.capracourse.net/) on the [The Systems View of Life](https://www.goodreads.com/en/book/show/18554985) (Fall 2022)
+*   [Capra Course](https://www.capracourse.net/) with [Fritjof Capra](https://www.fritjofcapra.net/) on the [The Systems View of Life](https://www.goodreads.com/en/book/show/18554985) (Fall 2022)
 *   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
 *   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
 
