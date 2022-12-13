@@ -44,6 +44,7 @@
 *   [Capra Course](https://www.capracourse.net/) with [Fritjof Capra](https://www.fritjofcapra.net/) on the [The Systems View of Life](https://www.goodreads.com/en/book/show/18554985) (Fall 2022)
 *   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
 *   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
+*   *[Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely (Jan – Mar 2023)*
 
 ### Other
 
@@ -53,7 +54,6 @@
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
-*   *[The Tent of Seven Doors: The School of Myth Summer School](https://schoolofmyth.com/summer-school/) with [Dr. Martin Shaw](https://drmartinshaw.com/) (Jun 2023)*
 
 ### Physics
 
