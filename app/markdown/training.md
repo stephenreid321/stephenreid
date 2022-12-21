@@ -9,7 +9,7 @@
 
 ### Shipibo plant dietas
 
-*   [Guayusa dieta](https://www.sovereignxnature.com/shipibodieta) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
+*   [Guayusa dieta](https://niweraoxobo.com/project/schedule) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
 *   [Noya Rao dieta](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) with Maestra Manuela near Pucallpa, Peru (Dec 2017, 10 days)
 
 ### Soulcraft & Wild Mind
