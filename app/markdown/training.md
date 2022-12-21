@@ -20,10 +20,8 @@
 ### Coaching & psychotherapy
 
 *   [Diploma in Transformative Coaching](https://www.animascoaching.com/coach-training-course/) (ICF-accredited), Animas Coaching (2022)
-*   Foundation in Core Process Psychotherapy from the [Karuna Institute](https://www.karuna-institute.co.uk/foundation-training.html) (Mar 2020)
+*   [Foundation in Core Process Psychotherapy](https://www.karunadartmoor.co.uk/introduction-to-core-process-psychotherapy) from the Karuna Institute (Mar 2020)
 *   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
-*   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
-*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 
 ### Conscious sexuality
@@ -49,6 +47,8 @@
 ### Other
 
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
+*   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
+*   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://en.wikipedia.org/wiki/Andreas_Weber_(writer)) (Mar 2018)
