@@ -6,7 +6,8 @@ StephenReid::App.controller do
   get '/tweets' do
     @title = 'Tweets'
     @favicon = 'twitter.png'
-    @tweets = Tweet.all.select do |t|
+    @timeline = params[:timeline] || 'Home'
+    @tweets = Tweet.and(timeline: @timeline).select do |t|
       t = t.data
       t['age'] < (case (params[:timeframe] ||= '3h')
                   when '3h' then 3.hours

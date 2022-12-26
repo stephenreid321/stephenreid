@@ -4,10 +4,12 @@ class Tweet
 
   field :data, type: Hash
   field :html, type: String
+  field :timeline, type: String
 
   def self.admin_fields
     {
-      data: { type: :text_area, disabled: true }
+      data: { type: :text_area, disabled: true },
+      timeline: :text
     }
   end
 
@@ -20,20 +22,20 @@ class Tweet
     end
   end
 
-  def self.timeline
+  def self.timeline(url)
     tweets = []
     users = []
     media = []
     referenced_tweets = []
     q = 'tweet.fields=referenced_tweets,entities,public_metrics,created_at,attachments&user.fields=profile_image_url,public_metrics&expansions=author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id&media.fields=media_key,preview_image_url,type,url,variants'
-    r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}")
+    r = Tweet.api.get("#{url}?#{q}")
     tweets += r.body['data']
     users += r.body['includes']['users'] if r.body['includes'] && r.body['includes']['users']
     media += r.body['includes']['media'] if r.body['includes'] && r.body['includes']['media']
     referenced_tweets += r.body['includes']['tweets'] if r.body['includes'] && r.body['includes']['tweets']
     pagination_token = r.body['meta']['next_token']
     while pagination_token
-      r = Tweet.api.get("users/514812230/timelines/reverse_chronological?#{q}&pagination_token=#{pagination_token}")
+      r = Tweet.api.get("#{url}?#{q}&pagination_token=#{pagination_token}")
       tweets += r.body['data']
       users += r.body['includes']['users'] if r.body['includes'] && r.body['includes']['users']
       media += r.body['includes']['media'] if r.body['includes'] && r.body['includes']['media']
@@ -92,9 +94,13 @@ class Tweet
 
   def self.import
     Tweet.delete_all
-    tweets = Tweet.timeline
-    tweets.each do |t|
-      Tweet.create(data: t)
+
+    timelines = { 'Home' => 'users/514812230/timelines/reverse_chronological', 'Crypto Twitter' => 'lists/1585548222935736321/tweets' }
+    timelines.each do |timeline, url|
+      tweets = Tweet.timeline(url)
+      tweets.each do |t|
+        Tweet.create(data: t, timeline: timeline)
+      end
     end
   end
 end
