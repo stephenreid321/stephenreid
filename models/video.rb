@@ -8,7 +8,7 @@ class Video
 
   def self.admin_fields
     {
-      youtube_id: :text,
+      youtube_id: { type: :text, full: true },
       title: :text_area,
       transcript: :text_area
     }
