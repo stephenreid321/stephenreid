@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col">
+    <ol>
+      <% @word_frequency.sort_by { |w,f| -f }.each { |w,f| if w.length > 4 && f > (x=20) %>
+      <li>
+        <a href="/metacrisis/terms/<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 2 ? 2 : em %>em">  <%= w %>   </a>
+        <label class="badge badge-primary"><%=f%></label>
+      </li>
+    <% end } %>
+  </ol>
+</div>
+<div class="col">
+  <ol>
+    <% @phrase2_frequency.sort_by { |w,f| -f }.each { |w,f| if w.length > 4 && f > (x=10) %>
+    <li>
+      <a href="/metacrisis/terms/<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 2 ? 2 : em %>em">  <%= w %>   </a>
+
+    </li>
+  <% end } %>
+</ol>
+</div>
+</div>
