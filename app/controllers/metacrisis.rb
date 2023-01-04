@@ -1,6 +1,5 @@
 StephenReid::App.controller do
-  get '/metacrisis/terms' do
-    expires 1.hour.to_i
+  get '/metacrisis/terms', cache: true do
     text = []
     Video.all.each do |video|
       text << video.text
