@@ -1,3 +1,10 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-dark">
+    <li class="breadcrumb-item"><a href="/metacrisis/terms">Metacrisis</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=params[:term]%></li>
+  </ol>
+</nav>
+
 <% Video.all.each { |video| %>
 <% terms = video.term(params[:term]) %>
 <% if terms.count > 0 %>
