@@ -94,13 +94,41 @@ class Tweet
 
   def self.import
     Tweet.delete_all
-
-    timelines = { 'Home' => 'users/514812230/timelines/reverse_chronological', 'Crypto Twitter' => 'lists/1585548222935736321/tweets' }
+    r = Tweet.api.get("users/#{ENV['TWITTER_USER_ID']}/owned_lists")
+    timelines = {
+      'Home' => "users/#{ENV['TWITTER_USER_ID']}/timelines/reverse_chronological"
+    }.merge(r.body['data'].map { |x| [x['name'], "lists/#{x['id']}/tweets"] }.to_h)
     timelines.each do |timeline, url|
       tweets = Tweet.timeline(url)
       tweets.each do |t|
         Tweet.create(data: t, timeline: timeline)
       end
     end
+  end
+
+  # get all members of a list
+  def self.list_members(list_id)
+    r = Tweet.api.get("lists/#{list_id}/members")
+    users = r.body['data']
+    pagination_token = r.body['meta']['next_token']
+    while pagination_token
+      r = Tweet.api.get("lists/#{list_id}/followers?pagination_token=#{pagination_token}")
+      users += r.body['data']
+      pagination_token = r.body['meta']['next_token']
+    end
+    users
+  end
+
+  # get all followers of a user
+  def self.following(user_id)
+    r = Tweet.api.get("users/#{user_id}/following")
+    users = r.body['data']
+    pagination_token = r.body['meta']['next_token']
+    while pagination_token
+      r = Tweet.api.get("users/#{user_id}/following?pagination_token=#{pagination_token}")
+      users += r.body['data']
+      pagination_token = r.body['meta']['next_token']
+    end
+    users
   end
 end
