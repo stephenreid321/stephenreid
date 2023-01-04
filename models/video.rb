@@ -5,18 +5,21 @@ class Video
   field :youtube_id, type: String
   field :title, type: String
   field :transcript, type: String
+  field :text, type: String
 
   def self.admin_fields
     {
       youtube_id: { type: :text, full: true },
       title: :text_area,
-      transcript: :text_area
+      transcript: :text_area,
+      text: :text_area
     }
   end
 
   before_validation do
     set_title if title.blank?
     set_transcript if transcript.blank?
+    set_text if transcript.blank?
   end
 
   def set_title
@@ -30,12 +33,12 @@ class Video
     self.transcript = r.body.force_encoding('UTF-8')
   end
 
-  def text
-    Nokogiri::XML(transcript.gsub('</text><text', '</text> <text')).text
+  def set_text
+    self.text = Nokogiri::XML(transcript.gsub('</text><text', '</text> <text')).text
   end
 
   def term(term)
-    lines = transcript.split('</text>')
+    lines = transcript.downcase.split('</text>')
     lines_including_term = lines.select { |l| l.include?(term) }
     lines_including_term.map do |l|
       [
@@ -71,4 +74,5 @@ class Video
     end
     nil
   end
+
 end
