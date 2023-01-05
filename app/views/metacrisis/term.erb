@@ -16,7 +16,7 @@
   </h2>
   <ul>
     <% terms.each { |time, line| %>
-    <li><a target="_blank" href="https://www.youtube.com/watch?v=<%=video.youtube_id%>&t=<%=time%>s"><%=line%></a></li>
+    <li><a target="_blank" class="text-body" href="https://www.youtube.com/watch?v=<%=video.youtube_id%>&t=<%=time%>s"><%=line%></a></li>
     <% } %>
   </ul>
 <% end %>

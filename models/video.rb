@@ -50,9 +50,10 @@ class Video
     lines = transcript.downcase.split('</text>')
     lines_including_term = lines.select { |l| l.include?(term) }
     lines_including_term.map do |l|
+      prev = lines[(lines.index(l) - 1)]
       [
-        lines[(lines.index(l) - 1)].match(/start="([\d.]+)"/)[1],
-        [lines[(lines.index(l) - 1)], l, lines[(lines.index(l) + 1)]].map { |l| l.split('>').last }.join(' ').gsub(term, "<strong>#{term}</strong>")
+        prev && (m = prev.match(/start="([\d.]+)"/)) ? m[1] : l[1],
+        [lines[(lines.index(l) - 1)], l, lines[(lines.index(l) + 1)]].map { |l| l.split('>').last }.join(' ').gsub(term, %(<mark>#{term}</mark>))
       ]
     end
   end
