@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col">
+    <ol>
+      <% x = 20 %>
+      <% @word_frequency.sort_by { |w,f| -f }.first(100).each { |w,f| %>
+      <li>
+        <a href="/metacrisis/terms/create/<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 2 ? 2 : em %>em">  <%= w %>   </a>
+        <label class="d-none badge badge-primary"><%=f%></label>
+      </li>
+      <% } %>
+    </ol>
+  </div>
+  <div class="col">
+    <ol>
+      <% x = 10 %>
+      <% @phrase2_frequency.sort_by { |w,f| -f }.first(100).each { |w,f| %>
+      <li>
+        <a href="/metacrisis/terms/create/<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 2 ? 2 : em %>em">  <%= w %>   </a>
+        <label class="d-none badge badge-primary"><%=f%></label>
+      </li>
+      <% } %>
+    </ol>
+  </div>
+</div>
