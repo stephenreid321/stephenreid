@@ -6,13 +6,15 @@ class Video
   field :title, type: String
   field :transcript, type: String
   field :text, type: String
+  field :view_count, type: Integer
 
   def self.admin_fields
     {
       youtube_id: :text,
       title: { type: :text, full: true },
       transcript: :text_area,
-      text: :text_area
+      text: :text_area,
+      view_count: :number
     }
   end
 
@@ -20,6 +22,7 @@ class Video
     set_title if title.blank?
     set_transcript if transcript.blank?
     set_text if text.blank?
+    set_view_count if view_count.blank?
     errors.add(:title, 'is invalid') if !title.match(/game b/i) && !title.match(/daniel schmachtenberger/i)
   end
 
@@ -36,6 +39,11 @@ class Video
 
   def set_text
     self.text = Nokogiri::XML(transcript.gsub('</text><text', '</text> <text')).text
+  end
+
+  def set_view_count
+    self.view_count = JSON.parse(Faraday.get("https://returnyoutubedislikeapi.com/votes?videoId=#{youtube_id}").body)['viewCount']
+    sleep 1
   end
 
   def term(term)
