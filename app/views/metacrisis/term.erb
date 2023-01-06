@@ -16,7 +16,7 @@
   </div>
 <% end %>
 
-<% Video.where(text: /#{@vterm.term}/i).order('view_count desc').each { |video| %>
+<% Video.or({text: /#{@vterm.term}/i}, {text: /#{@vterm.term.pluralize}/i}).order('view_count desc').each { |video| %>
 <% terms = video.term(@vterm.term) %>
 <% if terms.count > 0 %>
   <h2 class="regular">
