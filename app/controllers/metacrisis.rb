@@ -9,7 +9,7 @@ StephenReid::App.controller do
   end
 
   get '/metacrisis/stats' do
-    interesting = Video.interesting
+    interesting = Vterm.interesting
     stops = STOPS
     stops += interesting
     stops += interesting.map { |x| x.pluralize }
@@ -26,6 +26,7 @@ StephenReid::App.controller do
   end
 
   get '/metacrisis/terms/:term' do
+    @vterm = Vterm.find_or_create_by(term: params[:term])
     erb :'metacrisis/term'
   end
 end

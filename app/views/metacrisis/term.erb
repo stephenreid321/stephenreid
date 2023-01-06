@@ -1,12 +1,19 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-dark">
     <li class="breadcrumb-item"><a href="/metacrisis">Daniel Schmachtenberger on the Metacrisis</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><%=params[:term]%></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=@vterm.term%></li>
   </ol>
 </nav>
 
-<% Video.where(text: /#{params[:term]}/i).order('view_count desc').each { |video| %>
-<% terms = video.term(params[:term]) %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <%= simple_format(@vterm.linked_definition).gsub('<p>', '<p class="lead">') %>
+  </div>
+</div>
+
+<% Video.where(text: /#{@vterm.term}/i).order('view_count desc').each { |video| %>
+<% terms = video.term(@vterm.term) %>
 <% if terms.count > 0 %>
   <h2 class="regular">
     <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
@@ -21,3 +28,4 @@
   </ul>
 <% end %>
 <% } %>
+

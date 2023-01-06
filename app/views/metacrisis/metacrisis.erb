@@ -6,8 +6,8 @@
 
 <ol>
   <% x = 10 %>
-  <% terms = (Video.interesting + (plurals = Video.interesting.map { |x| x.pluralize })).uniq %>
-  <% terms.map { |term| [term, Video.where(text: /#{term}/i).count] }.reject { |w,f| f == 0 || (plurals.include?(w) && f < 3) }.sort_by { |w,f| -f }.each { |w,f| %>
+  <% terms = Vterm.interesting %>
+  <% terms.map { |term| [term, Video.where(text: /#{term}/i).count] }.reject { |w,f| f == 0 || (Vterm.plurals.include?(w) && f < 3) }.sort_by { |w,f| -f }.each { |w,f| %>
   <li>
     <a href="/metacrisis/terms/<%= w %>" class="text-contrast" style="font-size: <%= em = 1 + f.to_f / x; em > 2 ? 2 : em %>em">  <%= w %>   </a>
     <label class="badge badge-primary"><%=f%></label>
