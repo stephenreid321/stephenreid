@@ -51,7 +51,6 @@ class Vterm
     race to the bottom
 
     multipolar trap
-    multi-polar trap
 
     materials economy
 
@@ -72,7 +71,7 @@ class Vterm
     exponential growth
     collective action
 
-    nuclear weapons
+    nuclear weapon
     planetary boundary
 
     supply chain
@@ -105,10 +104,8 @@ class Vterm
     social system
     bretton woods
 
-    nonlinear systems
-    non-linear systems
+    nonlinear system
     nonlinear dynamics
-    non-linear dynamics
 
     decision making
 
