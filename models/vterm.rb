@@ -34,13 +34,10 @@ class Vterm
   def linked_definition
     d = definition
     d.gsub!("‘#{term}’", term)
-    d.gsub!(term.pluralize.humanize, %(<mark class="text-white">#{term.pluralize.humanize}</mark>))
-    if term.pluralize != term
-      d.gsub!(term.humanize, %(<mark class="text-white">#{term.humanize}</mark>))
-      d.gsub!(term, %(<mark class="text-white">#{term}</mark>))
-    end
+    d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
+    d.gsub!(/\b(#{term})\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
     ((Vterm.plurals + Vterm.interesting).uniq - [term]).each do |t|
-      d.gsub!(/\b#{t}\b/, %(<a href="/metacrisis/terms/#{t}">#{t}</a>))
+      d.gsub!(/\b(#{t})\b/i, %(<a href="/metacrisis/terms/#{t}">\\0</a>))
     end
     d
   end
