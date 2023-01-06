@@ -16,7 +16,7 @@ class Vterm
 
   after_save do
     set_definition! if definition.blank?
-  end  
+  end
   def set_definition!
     openapi_response = OPENAI.post('completions') do |req|
       req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
@@ -94,7 +94,6 @@ class Vterm
       race to the bottom
       regenerative agriculture
       regenerative economics
-      sense making
       sensemaking
       social media
       social structure

@@ -9,10 +9,8 @@ StephenReid::App.controller do
   end
 
   get '/metacrisis/stats' do
-    interesting = Vterm.interesting
     stops = STOPS
-    stops += interesting
-    stops += interesting.map { |x| x.pluralize }
+    stops += Vterm.interesting + Vterm.plurals
 
     text = []
     Video.all.sort_by { |video| -video.text.length }.first(10).each do |video|
