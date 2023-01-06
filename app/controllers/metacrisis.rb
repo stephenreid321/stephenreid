@@ -24,7 +24,7 @@ StephenReid::App.controller do
   end
 
   get '/metacrisis/terms/:term' do
-    redirect "/metacrisis/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize
+    redirect "/metacrisis/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && Vterm.find_by(term: params[:term].singularize)
     @vterm = Vterm.find_by(term: params[:term])
     erb :'metacrisis/term'
   end
