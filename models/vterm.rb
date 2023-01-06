@@ -47,85 +47,63 @@ class Vterm
 
   def self.interesting
     %(
-    arms race
-    race to the bottom
-
-    multipolar trap
-
-    materials economy
-
-    collective intelligence
-    game theory
-    game theoretic
-    network theory
-
-    catastrophic risk
-    catastrophic threat
-    existential risk
-    existential threat
-
-    nation state
-
-    apex predator
-    dunbar number
-    exponential growth
-    collective action
-
-    nuclear weapon
-    planetary boundary
-
-    supply chain
-
-    civilizational collapse
-    climate change
-
-    sensemaking
-    sense making
-    game b
-
-    artificial intelligence
-    blockchain
-    web3
-    social media
-
-    complexity science
-    systems thinking
-
-    global governance
-    fourth estate
-    social tech
-    mutually assured destruction
-    open source
-    perverse incentive
-    human nature
-    epistemic commons
-    network dynamics
-    open society
-    social system
-    bretton woods
-
-    nonlinear system
-    nonlinear dynamics
-
-    decision making
-
-    biosecurity
-    critical infrastructure
-
-    regenerative agriculture
-    regenerative economics
-    permaculture
-
-    coordination failure
-
-    superstructure
-    social structure
-    infrastructure
-
-    third attractor
-    dystopia
-
-    exponential tech
+      apex predator
+      arms race
+      artificial intelligence
+      biosecurity
+      blockchain
+      bretton woods
+      catastrophic risk
+      catastrophic threat
+      civilizational collapse
+      climate change
+      collective action
+      collective intelligence
+      complexity science
+      coordination failure
+      critical infrastructure
+      decision making
+      dunbar number
+      dystopia
+      epistemic commons
+      existential risk
+      existential threat
+      exponential growth
+      exponential tech
+      fourth estate
+      game b
+      game theory
+      global governance
+      human nature
+      infrastructure
+      materials economy
+      multipolar trap
+      mutually assured destruction
+      nation state
+      network dynamics
+      network theory
+      nonlinear dynamics
+      nonlinear system
+      nuclear weapon
+      open society
+      open source
+      permaculture
+      perverse incentive
+      planetary boundary
+      race to the bottom
+      regenerative agriculture
+      regenerative economics
+      sense making
+      sensemaking
+      social media
+      social structure
+      social system
+      social tech
+      superstructure
+      supply chain
+      systems thinking
+      third attractor
+      web3
   ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
   end
 
