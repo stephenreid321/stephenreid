@@ -79,7 +79,6 @@ class Vterm
       game theory
       global governance
       human nature
-      infrastructure
       materials economy
       multipolar trap
       mutually assured destruction
