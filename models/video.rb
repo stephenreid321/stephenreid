@@ -26,6 +26,8 @@ class Video
     errors.add(:title, 'is invalid') if !title.match(/game b/i) && !title.match(/daniel schmachtenberger/i)
   end
 
+  validates_uniqueness_of :youtube_id
+
   def set_title
     r = Faraday.get("https://www.youtube.com/watch?v=#{youtube_id}")
     self.title = r.body.match(%r{<title>(.+)</title>})[1].force_encoding('UTF-8')
@@ -87,5 +89,4 @@ class Video
     # end
     # nil
   end
-  
 end
