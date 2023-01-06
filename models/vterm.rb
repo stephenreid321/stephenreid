@@ -40,7 +40,7 @@ class Vterm
       d.gsub!(term.humanize, %(<mark class="text-white">#{term.humanize}</mark>))
       d.gsub!(term, %(<mark class="text-white">#{term}</mark>))
     end
-    (Vterm.interesting + Vterm.plurals - [term]).each do |t|
+    ((Vterm.plurals + Vterm.interesting).uniq - [term]).each do |t|
       d.gsub!(t, %(<a href="/metacrisis/terms/#{t}">#{t}</a>))
     end
     d

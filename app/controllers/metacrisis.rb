@@ -10,7 +10,7 @@ StephenReid::App.controller do
 
   get '/metacrisis/stats' do
     stops = STOPS
-    stops += Vterm.interesting + Vterm.plurals
+    stops += (Vterm.plurals + Vterm.interesting).uniq
 
     text = []
     Video.all.sort_by { |video| -video.text.length }.first(10).each do |video|
