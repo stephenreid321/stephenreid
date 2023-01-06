@@ -6,11 +6,15 @@
 </nav>
 
 
-<div class="row justify-content-center">
-  <div class="col-lg-10">
-    <%= simple_format(@vterm.linked_definition).gsub('<p>', '<p class="lead">') %>
+<% if !@vterm.definition %>
+  <p class="lead">Generating definition... <i class="fa fa-spin fa-circle-notch"></i></p>
+<% else %>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <%= simple_format(@vterm.linked_definition).gsub('<p>', '<p class="lead">') %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <% Video.where(text: /#{@vterm.term}/i).order('view_count desc').each { |video| %>
 <% terms = video.term(@vterm.term) %>
@@ -28,4 +32,3 @@
   </ul>
 <% end %>
 <% } %>
-

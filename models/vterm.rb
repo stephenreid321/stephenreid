@@ -12,13 +12,12 @@ class Vterm
     }
   end
 
-  before_validation do
-    set_definition if definition.blank?
-  end
-
   validates_uniqueness_of :term
 
-  def set_definition
+  after_save do
+    set_definition! if definition.blank?
+  end  
+  def set_definition!
     openapi_response = OPENAI.post('completions') do |req|
       req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
         "Consider this list of related terms: #{Vterm.interesting.join(', ')}.
@@ -28,7 +27,9 @@ class Vterm
         The definition should be a minimum of 300 words and refer to at least 3 other concepts in the list." }.to_json
     end
     self.definition = JSON.parse(openapi_response.body)['choices'].first['text']
+    save
   end
+  handle_asynchronously :set_definition!
 
   def linked_definition
     d = definition
