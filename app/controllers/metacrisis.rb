@@ -24,7 +24,8 @@ StephenReid::App.controller do
   end
 
   get '/metacrisis/terms/:term' do
-    @vterm = Vterm.find_or_create_by(term: params[:term])
+    @vterm = Vterm.find_by(term: params[:term])
+    @vterm ||= Vterm.find_by(term: params[:term].singuralize) || not_found
     erb :'metacrisis/term'
   end
 end

@@ -34,8 +34,9 @@ class Vterm
   def linked_definition
     d = definition
     d.gsub!("‘#{term}’", term)
-    d.gsub!(term, %(<mark class="text-white">#{term}</mark>))
-    (Vterm.interesting - [term]).each do |t|
+    d.gsub!(term.pluralize, %(<mark class="text-white">#{term.pluralize}</mark>))
+    d.gsub!(term, %(<mark class="text-white">#{term}</mark>)) if term.pluralize != term
+    (Vterm.interesting + Vterm.plurals - [term]).each do |t|
       d.gsub!(t, %(<a href="/metacrisis/terms/#{t}">#{t}</a>))
     end
     d
@@ -43,7 +44,6 @@ class Vterm
 
   def self.populate
     interesting.each { |term| Vterm.create(term: term) }
-    plurals.each { |term| Vterm.create(term: term) }
   end
 
   def self.interesting
