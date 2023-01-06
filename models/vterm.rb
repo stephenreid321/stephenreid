@@ -31,17 +31,6 @@ class Vterm
   end
   handle_asynchronously :set_definition!
 
-  def linked_definition
-    d = definition
-    d.gsub!("‘#{term}’", term)
-    d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
-    d.gsub!(/\b(#{term})\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
-    ((Vterm.plurals + Vterm.interesting).uniq - [term]).each do |t|
-      d.gsub!(/\b(#{t})\b/i, %(<a href="/metacrisis/terms/#{t}">\\0</a>))
-    end
-    d
-  end
-
   def self.populate
     interesting.each { |term| Vterm.create(term: term) }
   end
@@ -108,5 +97,17 @@ class Vterm
 
   def self.plurals
     interesting.map { |term| term.pluralize }
+  end
+
+  def linked_definition
+    d = definition
+    d.gsub!(/‘(#{term.pluralize})’/i, %(\\0))
+    d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
+    d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
+    d.gsub!(/\b(#{term})\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
+    ((Vterm.plurals + Vterm.interesting).uniq - [term]).each do |t|
+      d.gsub!(/\b(#{t})\b/i, %(<a href="/metacrisis/terms/#{t}">\\0</a>))
+    end
+    d
   end
 end
