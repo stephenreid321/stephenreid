@@ -42,9 +42,10 @@ class Vterm
   end
   def set_definition!
     n = 1
+    context = Vterm.hints[term] || 'as if written by Daniel Schmachtenberger'
     openapi_response = OPENAI.post('completions') do |req|
       req.body = { model: 'text-davinci-003', max_tokens: 1024, n: n, prompt:
-        "Provide a postgraduate-level definition of the term '#{term}', as if written by Daniel Schmachtenberger.
+        "Provide a postgraduate-level definition of the term '#{term}', #{context}.
 
         The definition should be 1 paragraph, maximum 150 words." }.to_json
     end
@@ -190,6 +191,13 @@ class Vterm
       third attractor
       web3
   ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
+  end
+
+  def self.hints
+    {
+      'self-terminating' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations',
+      'embedded growth obligation' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations'
+    }
   end
 
   def self.plurals
