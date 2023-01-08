@@ -1,23 +1,16 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-dark">
     <li class="breadcrumb-item"><a href="/metacrisis">Daniel Schmachtenberger on the Metacrisis</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><%=@vterm.term%></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <a href="/metacrisis/terms/<%=@vedge.source.term%>"><%=@vedge.source.term%></a>
+      &
+      <a href="/metacrisis/terms/<%=@vedge.sink.term%>"><%=@vedge.sink.term%></a>
+    </li>
   </ol>
 </nav>
 
-
-<% if !@vterm.definition %>
-  <p class="lead">Generating definition... <i class="fa fa-spin fa-circle-notch"></i></p>
-<% else %>
-  <div class="row justify-content-center">
-    <div class="col-lg-10">
-      <%= simple_format(@vterm.linked_definition).gsub('<p>', '<p class="lead">') %>
-    </div>
-  </div>
-<% end %>
-
-<% @vterm.videos.order('view_count desc').each { |video| %>
-<% terms = video.term(@vterm.term) %>
+<% @vedge.videos.order('view_count desc').each { |video| %>
+<% terms = video.terms(@vedge.source.term, @vedge.sink.term) %>
 <% if terms.count > 0 %>
   <h2 class="regular">
     <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">

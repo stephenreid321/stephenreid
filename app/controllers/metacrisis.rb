@@ -4,6 +4,17 @@ StephenReid::App.controller do
     erb :'metacrisis/metacrisis'
   end
 
+  get '/metacrisis/terms/:term' do
+    redirect "/metacrisis/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && Vterm.find_by(term: params[:term].singularize)
+    @vterm = Vterm.find_by(term: params[:term]) || not_found
+    erb :'metacrisis/term'
+  end
+
+  get '/metacrisis/edges/:id' do
+    @vedge = Vedge.find(params[:id]) || not_found
+    erb :'metacrisis/edge'
+  end
+
   get '/metacrisis/terms' do
     redirect '/metacrisis'
   end
@@ -21,11 +32,5 @@ StephenReid::App.controller do
     @word_frequency = words.reject { |a| stops.include?(a) || a.length < 4 }.each_with_object(Hash.new(0)) { |word, counts| counts[word] += 1 }
     @phrase2_frequency = words.each_cons(2).reject { |a, b| stops.include?("#{a} #{b}") || (stops.include?(a) || stops.include?(b)) || (a.length < 4 || b.length < 4) }.each_with_object(Hash.new(0)) { |word, counts| counts[word.join(' ')] += 1 }
     erb :'metacrisis/discover'
-  end
-
-  get '/metacrisis/terms/:term' do
-    redirect "/metacrisis/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && Vterm.find_by(term: params[:term].singularize)
-    @vterm = Vterm.find_by(term: params[:term]) || not_found
-    erb :'metacrisis/term'
   end
 end

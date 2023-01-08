@@ -69,14 +69,30 @@ class Video
 
   def term(term)
     lines = transcript.downcase.split('</text>')
-    lines_including_term = lines.select { |l| l.include?(term) || l.include?(term.pluralize) }
+    lines_including_term = lines.select { |l| l =~ /\b#{term}\b/i || l =~ /\b#{term.pluralize}\b/i }
     lines_including_term.map do |l|
       prev = lines[(lines.index(l) - 1)]
       [
         prev && (m = prev.match(/start="([\d.]+)"/)) ? m[1] : l[1],
         [lines[(lines.index(l) - 1)], l, lines[(lines.index(l) + 1)]].map { |l| l.split('>').last }.join(' ')
-                                                                     .gsub(/\b(#{term.pluralize})\b/, %(<mark>\\0</mark>))
-                                                                     .gsub(/\b(#{term})\b/, %(<mark>\\0</mark>))
+                                                                     .gsub(/\b(#{term.pluralize})\b/i, %(<mark>\\0</mark>))
+                                                                     .gsub(/\b(#{term})\b/i, %(<mark>\\0</mark>))
+      ]
+    end
+  end
+
+  def terms(a, b)
+    lines = transcript.downcase.split('</text>')
+    lines_including_term = lines.select { |l| l =~ /\b#{a}\b/i || l =~ /\b#{a.pluralize}\b/i || l =~ /\b#{b}\b/i || l =~ /\b#{b.pluralize}\b/i }
+    lines_including_term.map do |l|
+      prev = lines[(lines.index(l) - 1)]
+      [
+        prev && (m = prev.match(/start="([\d.]+)"/)) ? m[1] : l[1],
+        [lines[(lines.index(l) - 1)], l, lines[(lines.index(l) + 1)]].map { |l| l.split('>').last }.join(' ')
+                                                                     .gsub(/\b(#{a.pluralize})\b/i, %(<mark>\\0</mark>))
+                                                                     .gsub(/\b(#{a})\b/i, %(<mark>\\0</mark>))
+                                                                     .gsub(/\b(#{b.pluralize})\b/i, %(<mark>\\0</mark>))
+                                                                     .gsub(/\b(#{b})\b/i, %(<mark>\\0</mark>))                                                                     
       ]
     end
   end

@@ -4,15 +4,35 @@ class Vterm
 
   field :term, type: String
   field :definition, type: String
+  field :weight, type: Integer
 
   def self.admin_fields
     {
       term: :text,
-      definition: :text_area
+      definition: :text_area,
+      weight: :number
     }
   end
 
+  has_many :vedges_as_source, class_name: 'Vedge', inverse_of: :source, dependent: :destroy
+  has_many :vedges_as_sink, class_name: 'Vedge', inverse_of: :sink, dependent: :destroy
+
   validates_uniqueness_of :term
+
+  before_validation do
+    set_weight if weight.blank?
+  end
+
+  def videos
+    ids = []
+    ids += Video.where(text: /\b#{term}\b/i).pluck(:id)
+    ids += Video.where(text: /\b#{term.pluralize}\b/i).pluck(:id) if term.pluralize != term
+    Video.where(:id.in => ids)
+  end
+
+  def set_weight
+    self.weight = videos.count
+  end
 
   after_save do
     set_definition! if definition.blank?
@@ -27,9 +47,22 @@ class Vterm
         The definition should be a minimum of 300 words and refer to at least 3 other concepts in the list." }.to_json
     end
     self.definition = JSON.parse(openapi_response.body)['choices'].first['text']
+    tidy_definition
     save
   end
   handle_asynchronously :set_definition!
+
+  def tidy_definition
+    %w[
+      multi-polar
+      non-linear
+    ].each do |term|
+      self.definition = definition.gsub(term, term.gsub('-', ''))
+    end
+    ['sense making'].each do |term|
+      self.definition = definition.gsub(term, term.gsub(' ', ''))
+    end
+  end
 
   def self.populate
     interesting.each { |term| Vterm.create(term: term) }

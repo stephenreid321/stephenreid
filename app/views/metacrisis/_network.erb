@@ -1,0 +1,96 @@
+<script>
+  function drawNetwork() {
+
+  scale = chroma.scale(['#6D71C6', '#B16DC6']);
+
+          node_min_width = 10
+          node_min_color = 0.1
+          node_color_scale = 100
+          edge_min_color = 0
+          edge_color_scale = 250
+          edge_min_opacity = 0.1
+          edge_opacity_scale = 250
+
+          cy = cytoscape({
+
+          container: $('#cy'),
+                  elements: [
+  <% Vterm.each { |vterm| %>
+                    { data: {id: '<%= vterm.id %>', name: '<%= vterm.term %>', weight: <%= w = vterm.weight %>, width: (node_min_width +<%= w %>), color: scale(node_min_color + (<%= w %> / node_color_scale)).hex()} },
+  <% } %>
+  <% Vedge.where(:weight.gt => 0).each { |vedge| %>
+                    {
+                    data: {id: '<%= vedge.id %>', source: '<%= vedge.source_id %>', target: '<%= vedge.sink_id %>', weight: <%= w = vedge.weight %>, color: scale(edge_min_color + (<%= w %> / edge_color_scale)).hex(), opacity: (edge_min_opacity + (<%= w %> / edge_opacity_scale))}
+                    },
+  <% } %>
+                  ],
+                  style: [// the stylesheet for the graph
+                  {
+                  selector: 'node',
+                          style: {
+                                  'background-color': 'data(color)',
+                                  'opacity': 0.75,
+                                  'color': 'white',
+                                  'label': 'data(name)',
+                                  'width': 'data(width)',
+                                  'height': 'data(width)'
+                          }
+                  },
+                  {
+                  selector: 'edge',
+                          style: {
+  //                  'width': 'data(weight)',
+  <% if defined?(edge_labels) %> 'label': 'data(weight)', <% end %>
+                                  'opacity': 'data(opacity)',
+                                  'line-color': 'data(color)',
+                          }
+                  }
+                  ],
+                  layout: {
+                  name: 'cola',
+                          // infinite: true,
+                          nodeSpacing: function(node){ return 40; },
+                  }
+
+          });
+  cy.on('tap', 'node', function(){
+  window.location.href = '/metacrisis/terms/' + this.data('name');
+  });
+  cy.on('tap', 'edge', function(){
+  window.location.href = '/metacrisis/edges/' + this.data('id');
+  });
+  // cy.$('[weight < 4]').hide()
+  cy.minZoom(0.5)
+
+  // function animate() {
+  //   cy.nodes().each(function(ele) {
+  //     ele.stop()
+  //     cy.nodes().each(function(ele) {
+  //       ele.animate({
+  //         style: {
+  //           'background-color': chroma(ele.data().color).darken().hex()
+  //         },
+  //         duration: 2000,
+  //         complete: function() {
+  //           cy.nodes().animate({
+  //             style: {
+  //               'background-color': ele.data().color
+  //             },
+  //             duration: 2000,
+  //             complete: ani
+  //           })
+  //         }
+  //       })
+  //     })
+  //   })
+  // }
+  // animate()
+
+  }
+
+  $(function() {
+  drawNetwork()
+          $(window).one('focus', function() { drawNetwork() })
+  })
+</script>
+<div id="cy" class="card shadow-sm" style="height: 500px"></div>
