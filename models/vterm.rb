@@ -221,6 +221,8 @@ class Vterm
     d = definition.strip + "\n\nSee also: #{see_also}"
     d.gsub!(/‘(#{term.pluralize})’/i, %(\\0))
     d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
+    d.gsub!(/“(#{term.pluralize})”/i, %(\\0))
+    d.gsub!(/“(#{term})”/i, %(\\0)) if term.pluralize != term
     d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
     d.gsub!(/\b(#{term})\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
     (['metacrisis'] + ((Vterm.plurals + Vterm.interesting).uniq - ['metacrisis']) - [term, term.pluralize]).each do |t|
