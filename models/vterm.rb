@@ -19,15 +19,15 @@ class Vterm
 
   validates_uniqueness_of :term
 
-  before_validation do
-    set_weight if weight.blank?
-  end
-
   def videos
     ids = []
     ids += Video.where(text: /\b#{term}\b/i).pluck(:id)
     ids += Video.where(text: /\b#{term.pluralize}\b/i).pluck(:id) if term.pluralize != term
     Video.where(:id.in => ids)
+  end  
+
+  before_validation do
+    set_weight if weight.blank?
   end
 
   def set_weight
@@ -65,6 +65,7 @@ class Vterm
   end
 
   def self.populate
+    Vterm.delete_all
     interesting.each { |term| Vterm.create(term: term) }
   end
 

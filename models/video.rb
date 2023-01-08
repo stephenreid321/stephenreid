@@ -35,7 +35,6 @@ class Video
 
   def set_transcript
     r = Faraday.get("https://youtubetranscript.com/?server_vid=#{youtube_id}")
-    # deal with "\xE2" from ASCII-8BIT to UTF-8 (Encoding::UndefinedConversionError)
     self.transcript = r.body.force_encoding('UTF-8')
     tidy_transcript
   end
@@ -92,7 +91,7 @@ class Video
                                                                      .gsub(/\b(#{a.pluralize})\b/i, %(<mark>\\0</mark>))
                                                                      .gsub(/\b(#{a})\b/i, %(<mark>\\0</mark>))
                                                                      .gsub(/\b(#{b.pluralize})\b/i, %(<mark>\\0</mark>))
-                                                                     .gsub(/\b(#{b})\b/i, %(<mark>\\0</mark>))                                                                     
+                                                                     .gsub(/\b(#{b})\b/i, %(<mark>\\0</mark>))
       ]
     end
   end

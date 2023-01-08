@@ -6,7 +6,7 @@
 
 <%= partial :'metacrisis/network' %>
 
-<ol>
+<ol class="mt-3">
   <% x = 10 %>
   <% Vterm.where(:weight.gt => 0).order('weight desc').each { |vterm| %>
   <li>

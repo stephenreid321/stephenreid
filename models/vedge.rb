@@ -25,8 +25,12 @@ class Vedge
   end
 
   before_validation do
-    self.weight = videos.count
+    set_weight if weight.blank?
   end
+
+  def set_weight
+    self.weight = videos.count
+  end  
 
   def self.find_or_create(source, sink)
     if !(vedge = Vedge.find_by(source: source, sink: sink)) && !(vedge = Vedge.find_by(source: sink, sink: source))
