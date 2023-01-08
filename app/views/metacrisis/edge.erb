@@ -12,11 +12,23 @@
 <div class="mb-3">
   <%=
 
-vedges = Vedge.or({source: @vedge.source}, {sink: @vedge.source}).where(:weight.gt => 0).sample(5)
+vedges = Vedge.or({source: @vedge.source}, {sink: @vedge.source})
+w = vedges.pluck(:weight).sort
+c = w.count
+median = (w[(c - 1) / 2] + w[c / 2]) / 2.0
+vedges = vedges.where(:weight.gte => median).sample(5)
+
 vterms_source = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vedge.source.see_also_ids)
 vedges_source = Vedge.or({:source_id.in => vterms_source.pluck(:id)}, {:sink_id.in => vterms_source.pluck(:id)})
 
-vedges = Vedge.or({source: @vedge.sink}, {sink: @vedge.sink}).where(:weight.gt => 0).sample(5)
+###
+
+vedges = Vedge.or({source: @vedge.sink}, {sink: @vedge.sink})
+w = vedges.pluck(:weight).sort
+c = w.count
+median = (w[(c - 1) / 2] + w[c / 2]) / 2.0
+vedges = vedges.where(:weight.gte => median).sample(5)
+
 vterms_sink = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vedge.sink.see_also_ids)
 vedges_sink = Vedge.or({:source_id.in => vterms_sink.pluck(:id)}, {:sink_id.in => vterms_sink.pluck(:id)})
 
