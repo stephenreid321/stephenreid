@@ -16,19 +16,19 @@
   </div>
 <% end %>
 
-<% if false; @vterm.videos.order('view_count desc').each { |video| %>
-  <% terms = video.term(@vterm.term) %>
-  <% if terms.count > 0 %>
-    <h2 class="regular">
-      <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
-        <%=video.title.gsub(' - YouTube','') %>
-      </a>
-      <span class="badge badge-primary"><%=number_with_delimiter video.view_count%></span>
-    </h2>
-    <ul>
-      <% terms.each { |time, line| %>
-      <li><a target="_blank" class="text-body" href="https://www.youtube.com/watch?v=<%=video.youtube_id%>&t=<%=time%>s"><%=line%></a></li>
-      <% } %>
-    </ul>
-  <% end %>
-  <% }; end %>
+<% @vterm.videos.order('view_count desc').each { |video| %>
+<% terms = video.term(@vterm.term) %>
+<% if terms.count > 0 %>
+  <h2 class="regular">
+    <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
+      <%=video.title.gsub(' - YouTube','') %>
+    </a>
+    <span class="badge badge-primary"><%=number_with_delimiter video.view_count%></span>
+  </h2>
+  <ul>
+    <% terms.each { |time, line| %>
+    <li><a target="_blank" class="text-body" href="https://www.youtube.com/watch?v=<%=video.youtube_id%>&t=<%=time%>s"><%=line%></a></li>
+    <% } %>
+  </ul>
+<% end %>
+<% } %>
