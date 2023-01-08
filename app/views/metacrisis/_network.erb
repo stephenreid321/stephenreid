@@ -24,7 +24,7 @@
                     },
   <% } %>
                   ],
-                  style: [// the stylesheet for the graph
+                  style: [
                   {
                   selector: 'node',
                           style: {
@@ -39,7 +39,6 @@
                   {
                   selector: 'edge',
                           style: {
-  //                  'width': 'data(weight)',
   <% if defined?(edge_labels) %> 'label': 'data(weight)', <% end %>
                                   'opacity': 'data(opacity)',
                                   'line-color': 'data(color)',
@@ -48,7 +47,6 @@
                   ],
                   layout: {
                   name: 'cola',
-                          // infinite: true,
                           nodeSpacing: function(node){ return 40; },
                   }
 
@@ -59,32 +57,7 @@
   cy.on('tap', 'edge', function(){
   window.location.href = '/metacrisis/edges/' + this.data('id');
   });
-  // cy.$('[weight < 4]').hide()
   cy.minZoom(0.5)
-
-  // function animate() {
-  //   cy.nodes().each(function(ele) {
-  //     ele.stop()
-  //     cy.nodes().each(function(ele) {
-  //       ele.animate({
-  //         style: {
-  //           'background-color': chroma(ele.data().color).darken().hex()
-  //         },
-  //         duration: 2000,
-  //         complete: function() {
-  //           cy.nodes().animate({
-  //             style: {
-  //               'background-color': ele.data().color
-  //             },
-  //             duration: 2000,
-  //             complete: ani
-  //           })
-  //         }
-  //       })
-  //     })
-  //   })
-  // }
-  // animate()
 
   }
 
