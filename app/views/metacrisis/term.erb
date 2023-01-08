@@ -25,6 +25,7 @@ vedges = vedges.where(:weight.gte => median).sample(10)
 
 vterms = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vterm.see_also_ids)
 vedges = Vedge.or({:source_id.in => vterms.pluck(:id)}, {:sink_id.in => vterms.pluck(:id)})
+
 partial :'metacrisis/network', locals: {vterms: vterms, vedges: vedges} 
 
 %>
