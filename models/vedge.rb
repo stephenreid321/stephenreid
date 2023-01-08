@@ -15,6 +15,8 @@ class Vedge
     }
   end
 
+  validates_uniqueness_of :source, scope: :sink
+
   def videos
     ids = []
     ids += Video.and({ text: /\b#{source.term}\b/i }, { text: /\b#{sink.term}\b/i }).pluck(:id)
@@ -30,17 +32,12 @@ class Vedge
 
   def set_weight
     self.weight = videos.count
-  end  
+  end
 
   def self.find_or_create(source, sink)
     if !(vedge = Vedge.find_by(source: source, sink: sink)) && !(vedge = Vedge.find_by(source: sink, sink: source))
       vedge = Vedge.create(source: source, sink: sink)
     end
     vedge
-  end
-
-  def self.populate
-    Vedge.delete_all
-    Vterm.all.each { |source| (Vterm.all - [source]).each { |sink| Vedge.find_or_create(source, sink) } }
   end
 end

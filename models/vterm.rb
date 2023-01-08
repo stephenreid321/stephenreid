@@ -81,6 +81,7 @@ class Vterm
     %w[
       multi-polar
       non-linear
+      hyper-normal
     ]
   end
 
@@ -88,7 +89,8 @@ class Vterm
     [
       'meta crisis',
       'super organism',
-      'sense making'
+      'sense making',
+      'hyper normal'
     ]
   end
 
@@ -115,7 +117,6 @@ class Vterm
   end
 
   def self.populate
-    Vterm.delete_all
     interesting.each { |term| Vterm.create(term: term) }
   end
 
@@ -127,18 +128,21 @@ class Vterm
       biosecurity
       blockchain
       bretton woods
+      catastrophe weapon
       catastrophic risk
       civilizational collapse
       climate change
       collective action
       collective intelligence
       complexity science
+      confirmation bias
       conflict theory
       coordination failure
       critical infrastructure
       decision making
       dunbar number
       dystopia
+      embedded growth obligation
       emergent property
       epistemic commons
       existential risk
@@ -151,6 +155,7 @@ class Vterm
       generator function
       global governance
       human nature
+      hypernormal stimuli
       materials economy
       metacrisis
       mistake theory
@@ -168,6 +173,7 @@ class Vterm
       permaculture
       perverse incentive
       planetary boundary
+      plausible deniability
       race to the bottom
       regenerative agriculture
       rivalrous dynamics
@@ -188,6 +194,19 @@ class Vterm
 
   def self.plurals
     interesting.map { |term| term.pluralize }
+  end
+
+  def self.edgeless
+    Vterm.where(:id.nin => Vedge.pluck(:source_id) + Vedge.pluck(:sink_id))
+  end
+
+  def generate_edges
+    source = self
+    (Vterm.all - [source]).each { |sink| Vedge.find_or_create(source, sink) }
+  end
+
+  def self.generate_edges
+    Vterm.edgeless.each { |source| source.generate_edges }
   end
 
   def linked_definition
