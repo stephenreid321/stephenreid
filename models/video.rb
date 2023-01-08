@@ -40,14 +40,14 @@ class Video
   end
 
   def tidy_transcript
-    %w[
-      multi-polar
-      non-linear
-    ].each do |term|
-      self.transcript = transcript.gsub(term, term.gsub('-', ''))
+    Vterm.dashed_terms_to_undash.each do |term|
+      self.transcript = transcript.gsub(/#{term}/i, term.gsub('-', ''))
     end
-    ['sense making'].each do |term|
-      self.transcript = transcript.gsub(term, term.gsub(' ', ''))
+    Vterm.spaced_terms_to_unspace.each do |term|
+      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', ''))
+    end
+    Vterm.spaced_terms_to_dash.each do |term|
+      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', '-'))
     end
   end
 

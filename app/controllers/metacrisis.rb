@@ -22,9 +22,10 @@ StephenReid::App.controller do
   get '/metacrisis/discover' do
     stops = STOPS
     stops += (Vterm.plurals + Vterm.interesting).uniq
+    stops += Vterm.terms_to_tidy
 
     text = []
-    Video.all.sort_by { |video| -video.text.length }.first(10).each do |video|
+    Video.all.sample(20).each do |video|
       text << video.text
     end
     text = text.flatten.join(' ').downcase

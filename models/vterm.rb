@@ -24,7 +24,7 @@ class Vterm
     ids += Video.where(text: /\b#{term}\b/i).pluck(:id)
     ids += Video.where(text: /\b#{term.pluralize}\b/i).pluck(:id) if term.pluralize != term
     Video.where(:id.in => ids)
-  end  
+  end
 
   before_validation do
     set_weight if weight.blank?
@@ -44,7 +44,7 @@ class Vterm
 
         Provide a postgraduate-level definition of the term '#{term}', as if written by Daniel Schmachtenberger.
 
-        The definition should be a minimum of 300 words and refer to at least 3 other concepts in the list." }.to_json
+        The definition should be 1 paragraph, maximum 150 words, and refer to 3 other concepts in the list." }.to_json
     end
     self.definition = JSON.parse(openapi_response.body)['choices'].first['text']
     tidy_definition
@@ -52,15 +52,40 @@ class Vterm
   end
   handle_asynchronously :set_definition!
 
-  def tidy_definition
+  def self.dashed_terms_to_undash
     %w[
       multi-polar
       non-linear
-    ].each do |term|
-      self.definition = definition.gsub(term, term.gsub('-', ''))
+    ]
+  end
+
+  def self.spaced_terms_to_unspace
+    [
+      'meta crisis',
+      'super organism',
+      'sense making'
+    ]
+  end
+
+  def self.spaced_terms_to_dash
+    [
+      'self terminating'
+    ]
+  end
+
+  def self.terms_to_tidy
+    dashed_terms_to_undash + spaced_terms_to_unspace + spaced_terms_to_dash
+  end
+
+  def tidy_definition
+    Vterm.dashed_terms_to_undash.each do |term|
+      self.definition = definition.gsub(/#{term}/i, term.gsub('-', ''))
     end
-    ['sense making'].each do |term|
-      self.definition = definition.gsub(term, term.gsub(' ', ''))
+    Vterm.spaced_terms_to_unspace.each do |term|
+      self.definition = definition.gsub(/#{term}/i, term.gsub(' ', ''))
+    end
+    Vterm.spaced_terms_to_dash.each do |term|
+      self.definition = definition.gsub(/#{term}/i, term.gsub(' ', '-'))
     end
   end
 
@@ -78,17 +103,18 @@ class Vterm
       blockchain
       bretton woods
       catastrophic risk
-      catastrophic threat
       civilizational collapse
       climate change
       collective action
       collective intelligence
       complexity science
+      conflict theory
       coordination failure
       critical infrastructure
       decision making
       dunbar number
       dystopia
+      emergent property
       epistemic commons
       existential risk
       existential threat
@@ -97,30 +123,36 @@ class Vterm
       fourth estate
       game b
       game theory
+      generator function
       global governance
       human nature
       materials economy
+      metacrisis
+      mistake theory
       multipolar trap
       mutually assured destruction
+      narrative warfare
       nation state
       network dynamics
       network theory
       nonlinear dynamics
-      nonlinear system
       nuclear weapon
       open society
       open source
+      paperclip maximizer
       permaculture
       perverse incentive
       planetary boundary
       race to the bottom
       regenerative agriculture
-      regenerative economics
+      rivalrous dynamics
+      self-terminating
       sensemaking
       social media
       social structure
       social system
       social tech
+      superorganism
       superstructure
       supply chain
       systems thinking
@@ -139,7 +171,7 @@ class Vterm
     d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
     d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
     d.gsub!(/\b(#{term})\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
-    ((Vterm.plurals + Vterm.interesting).uniq - [term, term.pluralize]).each do |t|
+    (['metacrisis'] + ((Vterm.plurals + Vterm.interesting).uniq - ['metacrisis']) - [term, term.pluralize]).each do |t|
       d.gsub!(/\b(#{t})\b/i, %(<a href="/metacrisis/terms/#{t}">\\0</a>))
     end
     d
