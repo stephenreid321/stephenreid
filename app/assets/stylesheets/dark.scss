@@ -140,3 +140,8 @@ mark {
 .page-link:focus {
   box-shadow: none;
 }
+
+.breadcrumb-item+.breadcrumb-item::before,
+.breadcrumb-item.active {
+  color: darken($body-color, 25%)
+}
