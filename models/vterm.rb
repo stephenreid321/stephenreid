@@ -166,7 +166,7 @@ class Vterm
   end
 
   def linked_definition
-    d = definition
+    d = definition.strip
     d.gsub!(/‘(#{term.pluralize})’/i, %(\\0))
     d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
     d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
