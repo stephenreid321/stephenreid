@@ -117,10 +117,6 @@ class Vterm
     end
   end
 
-  def self.populate
-    interesting.each { |term| Vterm.create(term: term) }
-  end
-
   def self.interesting
     %(
       apex predator
@@ -215,7 +211,8 @@ class Vterm
     (Vterm.all - [source]).each { |sink| Vedge.find_or_create(source, sink) }
   end
 
-  def self.generate_edges
+  def self.populate
+    (interesting - Vterm.pluck(:term)).each { |term| Vterm.create(term: term) }
     Vterm.edgeless.each { |source| source.generate_edges }
     Vterm.all.set(see_also: nil)
     Vterm.all.each { |vterm| vterm.set_see_also! }
