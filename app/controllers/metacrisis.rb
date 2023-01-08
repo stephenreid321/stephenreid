@@ -7,11 +7,13 @@ StephenReid::App.controller do
   get '/metacrisis/terms/:term' do
     redirect "/metacrisis/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && Vterm.find_by(term: params[:term].singularize)
     @vterm = Vterm.find_by(term: params[:term]) || not_found
+    @videos = @vterm.videos.paginate(page: params[:page], per_page: 10)
     erb :'metacrisis/term'
   end
 
   get '/metacrisis/edges/:id' do
     @vedge = Vedge.find(params[:id]) || not_found
+    @videos = @vedge.videos.paginate(page: params[:page], per_page: 10)
     erb :'metacrisis/edge'
   end
 

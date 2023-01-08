@@ -9,7 +9,7 @@
   </ol>
 </nav>
 
-<% @vedge.videos.order('view_count desc').each { |video| %>
+<% @videos.order('view_count desc').each { |video| %>
 <% terms = video.terms(@vedge.source.term, @vedge.sink.term) %>
 <% if terms.count > 0 %>
   <h2 class="regular">
@@ -25,3 +25,9 @@
   </ul>
 <% end %>
 <% } %>
+
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <%= will_paginate @videos, renderer: WillPaginate::ViewHelpers::BootstrapRenderer %>
+  </div>
+</div>

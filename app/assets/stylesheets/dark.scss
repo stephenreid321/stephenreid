@@ -33,7 +33,7 @@ blockquote {
 $bg-dark: darken($body-bg, 5%);
 
 .bg-dark {
-  background-color: $bg-dark  !important;
+  background-color: $bg-dark !important;
 }
 
 .card {
@@ -123,4 +123,20 @@ $dark-color: #343a40;
 mark {
   padding-left: 0;
   padding-right: 0
+}
+
+.page-link,
+.page-item.disabled .page-link {
+  background-color: $body-bg;
+  border: 1px solid darken($body-bg, 10%);
+}
+
+.page-link:hover,
+.page-item.active .page-link {
+  background-color: darken($body-bg, 10%);
+  border: 1px solid darken($body-bg, 10%);
+}
+
+.page-link:focus {
+  box-shadow: none;
 }
