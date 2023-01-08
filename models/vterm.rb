@@ -4,12 +4,14 @@ class Vterm
 
   field :term, type: String
   field :definition, type: String
+  field :see_also, type: String
   field :weight, type: Integer
 
   def self.admin_fields
     {
       term: :text,
       definition: :text_area,
+      see_also: :text_area,
       weight: :number
     }
   end
@@ -36,6 +38,7 @@ class Vterm
 
   after_save do
     set_definition! if definition.blank?
+    set_see_also! if see_also.blank?
   end
   def set_definition!
     n = 1
@@ -45,10 +48,14 @@ class Vterm
 
         The definition should be 1 paragraph, maximum 150 words." }.to_json
     end
+    self.definition = JSON.parse(openapi_response.body)['choices'].first['text']
+    tidy_definition
+    save
+  end
+  handle_asynchronously :set_definition!
 
-    #  Refer to a maximum of 3 terms from this list: #{Vterm.interesting.join(', ')}.
-
-    openapi_response_b = OPENAI.post('completions') do |req|
+  def set_see_also!
+    openapi_response = OPENAI.post('completions') do |req|
       req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
         "Select the 5 terms from the list below that are most relevant to the term '#{term}'.
 
@@ -59,25 +66,11 @@ class Vterm
         " }.to_json
     end
 
-    see_also = JSON.parse(openapi_response_b.body)['choices'].first['text'].strip
+    see_also = JSON.parse(openapi_response.body)['choices'].first['text'].strip
     see_also = see_also.split(', ').map { |term| term.downcase }.select { |term| Vterm.interesting.include?(term) && term != self.term }.join(', ')
-    self.definition = JSON.parse(openapi_response.body)['choices'].first['text'] + "\n\nSee also: #{see_also}"
-
-    # openapi_response_a = OPENAI.post('completions') do |req|
-    #   req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
-    #     "Consider these #{n} definitions of the term '#{term}':
-
-    #     #{(1..n).map { |i| "#{i}. #{JSON.parse(openapi_response.body)['choices'][i - 1]['text']}" }.join("\n\n")}
-
-    #     Output the best definition verbatim." }.to_json
-    # end
-
-    # self.definition = JSON.parse(openapi_response_a.body)['choices'].first['text']
-
-    tidy_definition
+    self.see_also = see_also
     save
   end
-  handle_asynchronously :set_definition!
 
   def self.dashed_terms_to_undash
     %w[
@@ -193,7 +186,7 @@ class Vterm
   end
 
   def linked_definition
-    d = definition.strip
+    d = definition.strip + "\n\nSee also: #{see_also}"
     d.gsub!(/‘(#{term.pluralize})’/i, %(\\0))
     d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
     d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))

@@ -1,7 +1,7 @@
 StephenReid::App.controller do
   before do
     @hide_sponsors = true
-    @title = 'The Metacrisis according to Daniel Schmachtenberger'
+    @title = 'Daniel Schmachtenberger on the Metacrisis'
   end
 
   get '/metacrisis', cache: true do
