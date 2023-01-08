@@ -50,16 +50,18 @@ class Vterm
 
     openapi_response_b = OPENAI.post('completions') do |req|
       req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
-        "Select the three terms from the list below that are most relevant to the term '#{term}'.
+        "Select the 5 terms from the list below that are most relevant to the term '#{term}'.
 
         #{(Vterm.interesting - [term]).join(', ')}.
 
-        Return the result as a comma-separated list, e.g. 'term1, term2, term3'.  Make sure to only use the exact terms in the list, and do not include '#{term}' in the result!
+        Return the result as a comma-separated list, e.g. 'term1, term2, term3, term4, term5'.
 
         " }.to_json
     end
 
-    self.definition = JSON.parse(openapi_response.body)['choices'].first['text'] + "\n\nSee also: #{JSON.parse(openapi_response_b.body)['choices'].first['text'].strip}"
+    see_also = JSON.parse(openapi_response_b.body)['choices'].first['text'].strip
+    see_also = see_also.split(', ').map { |term| term.downcase }.select { |term| Vterm.interesting.include?(term) && term != self.term }.join(', ')
+    self.definition = JSON.parse(openapi_response.body)['choices'].first['text'] + "\n\nSee also: #{see_also}"
 
     # openapi_response_a = OPENAI.post('completions') do |req|
     #   req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
