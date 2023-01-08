@@ -5,15 +5,27 @@
   </ol>
 </nav>
 
-<% if !@vterm.definition %>
-  <p class="lead">Generating definition... <i class="fa fa-spin fa-circle-notch"></i></p>
-<% else %>
-  <div class="row justify-content-center">
-    <div class="col-lg-10">
+<div class="row mb-3">
+  <div class="col">
+
+    <% if !@vterm.definition %>
+      <p class="lead">Generating definition... <i class="fa fa-spin fa-circle-notch"></i></p>
+    <% else %>
       <%= simple_format(@vterm.linked_definition).gsub('<p>', '<p class="lead">') %>
-    </div>
+    <% end %>
   </div>
-<% end %>
+  <div class="col">
+    <%=
+
+vedges = Vedge.or({source: @vterm}, {sink: @vterm}).where(:weight.gt => 0).sample(10)
+vterms = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id))
+vedges = Vedge.or({:source_id.in => vterms.pluck(:id)}, {:sink_id.in => vterms.pluck(:id)})
+partial :'metacrisis/network', locals: {vterms: vterms, vedges: vedges} 
+
+%>
+  </div>
+</div>
+
 
 <% @videos.order('view_count desc').each { |video| %>
 <% terms = video.term(@vterm.term) %>

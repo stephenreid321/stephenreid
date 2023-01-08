@@ -15,10 +15,10 @@
 
           container: $('#cy'),
                   elements: [
-  <% vterms.each { |vterm| %>
+  <% vterm_ids = vterms.pluck(:id); vterms.each { |vterm| %>
                     { data: {id: '<%= vterm.id %>', name: '<%= vterm.term %>', weight: <%= w = vterm.weight %>, width: (node_min_width +<%= w %>), color: scale(node_min_color + (<%= w %> / node_color_scale)).hex()} },
   <% } %>
-  <% vedges.where(:weight.gt => 0).each { |vedge| %>
+  <% vedges.where(:weight.gt => 0).each { |vedge| next unless [vedge.source_id, vedge.sink_id].all? { |id| vterm_ids.include?(id) } %>
                     {
                     data: {id: '<%= vedge.id %>', source: '<%= vedge.source_id %>', target: '<%= vedge.sink_id %>', weight: <%= w = vedge.weight %>, color: scale(edge_min_color + (<%= w %> / edge_color_scale)).hex(), opacity: (edge_min_opacity + (<%= w %> / edge_opacity_scale))}
                     },

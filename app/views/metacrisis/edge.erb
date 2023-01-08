@@ -9,6 +9,25 @@
   </ol>
 </nav>
 
+<div class="mb-3">
+  <%=
+
+vedges = Vedge.or({source: @vedge.source}, {sink: @vedge.source}).where(:weight.gt => 0).sample(5)
+vterms_source = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id))
+vedges_source = Vedge.or({:source_id.in => vterms_source.pluck(:id)}, {:sink_id.in => vterms_source.pluck(:id)})
+
+vedges = Vedge.or({source: @vedge.sink}, {sink: @vedge.sink}).where(:weight.gt => 0).sample(5)
+vterms_sink = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id))
+vedges_sink = Vedge.or({:source_id.in => vterms_sink.pluck(:id)}, {:sink_id.in => vterms_sink.pluck(:id)})
+
+vterms = Vterm.where(:id.in => vterms_source.pluck(:id) + vterms_sink.pluck(:id))
+vedges = Vedge.where(:id.in => vedges_source.pluck(:id) + vedges_sink.pluck(:id))
+
+partial :'metacrisis/network', locals: {vterms: vterms, vedges: vedges} 
+
+%>
+</div>
+
 <% @videos.order('view_count desc').each { |video| %>
 <% terms = video.terms(@vedge.source.term, @vedge.sink.term) %>
 <% if terms.count > 0 %>
