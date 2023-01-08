@@ -157,6 +157,7 @@ class Vterm
       global governance
       human nature
       hypernormal stimuli
+      liquid democracy
       materials economy
       metacrisis
       mistake theory
@@ -191,6 +192,7 @@ class Vterm
       third attractor
       web3
   ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
+    # complex system
   end
 
   def self.hints
