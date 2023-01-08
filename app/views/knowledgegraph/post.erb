@@ -5,7 +5,7 @@
     </div>
   <% else %>
     <div class="col-lg-4">
-      <%= partial :post, locals: { post: @post, json: @json } %>
+      <%= partial :'knowledgegraph/post', locals: { post: @post, json: @json } %>
     </div>
   <% end %>
 </div>
@@ -17,5 +17,5 @@
   <% end %>
 </div>
 <div class="my-5">
-  <%= Padrino.env == :production ? cp('full_network') : partial(:full_network) %>
+  <%= Padrino.env == :production ? cp(:'knowledgegraph/full_network') : partial(:'knowledgegraph/full_network') %>
 </div>

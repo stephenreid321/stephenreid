@@ -10,15 +10,15 @@
     <% end %>
   </div>
 </div>
-<%= Padrino.env == :production ? cp('tags') : partial(:tags) %>
+<%= Padrino.env == :production ? cp(:'knowledgegraph/tags') : partial(:'knowledgegraph/tags') %>
 <% if @full_network %>
   <div class="my-5">
-    <%= partial :network, locals: { terms: Term.all, term_links: TermLink.all } %>
+    <%= partial :'knowledgegraph/network', locals: { terms: Term.all, term_links: TermLink.all } %>
   </div>
-<% elsif (terms = Term.find_many(@posts.map { |post| post['Terms']}.flatten)).length > 1 %>
+<% elsif (terms = Term.find_many(@posts.first(100).map { |post| post['Terms']}.flatten.uniq)).length > 1 %>
   <div class="my-5">
-    <%= partial :network, locals: {
-          term_links: TermLink.find_many(@posts.map { |post| post['Term Links'] }.flatten),
+    <%= partial :'knowledgegraph/network', locals: {
+          term_links: TermLink.find_many(@posts.first(100).map { |post| post['Term Links'] }.flatten.uniq),
           terms: terms
         }, edge_labels: true %>
   </div>
@@ -53,6 +53,6 @@
   </div>
 <% else %>
   <div class="row mt-5">
-    <%= partial :posts %>
+    <%= partial :'knowledgegraph/posts' %>
   </div>
 <% end %>

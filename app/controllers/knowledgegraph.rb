@@ -8,7 +8,7 @@ StephenReid::App.controller do
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
-    erb :knowledgegraph
+    erb :'knowledgegraph/knowledgegraph'
   end
 
   get '/search' do
@@ -31,7 +31,7 @@ StephenReid::App.controller do
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
     end
-    erb :knowledgegraph
+    erb :'knowledgegraph/knowledgegraph'
   end
 
   get '/feed', provides: :rss, cache: true do
@@ -65,7 +65,7 @@ StephenReid::App.controller do
     @full_title = @post['Title']
     @og_desc = @json['meta']['description']
     @og_image = @json['links']['thumbnail'].first['href'] if @json['links'] && @json['links']['thumbnail']
-    erb :post
+    erb :'knowledgegraph/post'
   end
 
   get '/terms/:source_id/:sink_id', cache: true do
@@ -76,19 +76,19 @@ StephenReid::App.controller do
         FIND(', #{@source['Name']},', {Terms joined}) > 0,
         FIND(', #{@sink['Name']},', {Terms joined}) > 0
         )", sort: { 'Created at' => 'desc' })
-    erb :knowledgegraph
+    erb :'knowledgegraph/knowledgegraph'
   end
 
   get '/terms/:term', cache: true do
     expires 1.hour.to_i
     @posts = Post.all(filter: "FIND(', #{params[:term]},', {Terms joined}) > 0", sort: { 'Created at' => 'desc' })
-    erb :knowledgegraph
+    erb :'knowledgegraph/knowledgegraph'
   end
 
   get '/organisations/:organisation', cache: true do
     expires 1.hour.to_i
     @posts = Post.all(filter: "{Organisation} = '#{params[:organisation]}'", sort: { 'Created at' => 'desc' })
-    erb :knowledgegraph
+    erb :'knowledgegraph/knowledgegraph'
   end
 
   get '/stats' do
@@ -130,7 +130,7 @@ StephenReid::App.controller do
     @word_frequency = words.each_with_object(Hash.new(0)) { |w, res| res[w.downcase] += 1; }
     @phrase2_frequency = phrases2.each_with_object(Hash.new(0)) { |w, res| res[w.downcase] += 1; }
     @host_frequency = hosts.each_with_object(Hash.new(0)) { |key, hash| hash[key] += 1 }
-    erb :stats
+    erb :'knowledgegraph/stats'
   end
 
   get '/organisations/:id/tagify' do

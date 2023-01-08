@@ -1,11 +1,11 @@
 StephenReid::App.controller do
   before do
     @hide_sponsors = true
+    @title = 'The Metacrisis according to Daniel Schmachtenberger'
   end
 
   get '/metacrisis', cache: true do
     expires 1.hour.to_i
-    @title = "The Metacrisis according to Daniel Schmachtenberger"
     erb :'metacrisis/metacrisis'
   end
 
