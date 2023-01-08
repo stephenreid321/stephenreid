@@ -11,7 +11,7 @@ class Vterm
     {
       term: :text,
       definition: :text_area,
-      see_also: :text_area,
+      see_also: :text,
       weight: :number
     }
   end
