@@ -71,6 +71,11 @@ class Vterm
     self.see_also = see_also
     save
   end
+  handle_asynchronously :set_see_also!
+
+  def see_also_ids
+    see_also ? Vterm.where(:term.in => see_also.split(', ')).pluck(:id) : []
+  end
 
   def self.dashed_terms_to_undash
     %w[
