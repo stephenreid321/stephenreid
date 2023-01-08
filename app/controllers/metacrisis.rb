@@ -1,4 +1,8 @@
 StephenReid::App.controller do
+  before do
+    @hide_sponsors = true
+  end
+
   get '/metacrisis', cache: true do
     expires 1.hour.to_i
     erb :'metacrisis/metacrisis'
