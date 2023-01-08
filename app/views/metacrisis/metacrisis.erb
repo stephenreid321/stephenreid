@@ -10,7 +10,7 @@
   <% x = 10 %>
   <% Vterm.all.order('weight desc').each { |vterm| %>
   <li>
-    <a href="/metacrisis/terms/<%= vterm.term %>" class="text-contrast" style="font-size: <%= em = 1 + vterm.weight.to_f / x; em > 2 ? 2 : em %>em">  <%= vterm.term %>   </a>
+    <a href="/metacrisis/terms/<%= vterm.term %>" class="text-contrast" style="font-size: <%= em = 1 + vterm.weight.to_f / x; em > 2 ? 2 : em %>em"><%= vterm.term %></a>
     <label class="badge badge-primary"><%=vterm.weight%></label>
   </li>
   <% } %>
