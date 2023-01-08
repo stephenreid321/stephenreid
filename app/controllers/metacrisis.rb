@@ -5,6 +5,7 @@ StephenReid::App.controller do
 
   get '/metacrisis', cache: true do
     expires 1.hour.to_i
+    @title = "The Metacrisis according to Daniel Schmachtenberger"
     erb :'metacrisis/metacrisis'
   end
 
