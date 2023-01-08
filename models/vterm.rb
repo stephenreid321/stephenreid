@@ -38,15 +38,27 @@ class Vterm
     set_definition! if definition.blank?
   end
   def set_definition!
+    n = 5
     openapi_response = OPENAI.post('completions') do |req|
-      req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
+      req.body = { model: 'text-davinci-003', max_tokens: 1024, n: n, prompt:
         "Consider this list of related terms: #{Vterm.interesting.join(', ')}.
 
         Provide a postgraduate-level definition of the term '#{term}', as if written by Daniel Schmachtenberger.
 
         The definition should be 1 paragraph, maximum 150 words, and refer to 3 other concepts in the list." }.to_json
     end
-    self.definition = JSON.parse(openapi_response.body)['choices'].first['text']
+
+    openapi_response_a = OPENAI.post('completions') do |req|
+      req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
+        "Consider these #{n} definitions of the term '#{term}':
+
+        #{(1..n).map { |i| "#{i}. #{JSON.parse(openapi_response.body)['choices'][i - 1]['text']}" }.join("\n\n")}
+
+        Output the best definition verbatim." }.to_json
+    end
+
+    self.definition = JSON.parse(openapi_response_a.body)['choices'].first['text']
+
     tidy_definition
     save
   end
