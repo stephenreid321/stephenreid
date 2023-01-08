@@ -6,7 +6,7 @@
 </nav>
 
 <div class="row mb-3">
-  <div class="col">
+  <div class="col-12 col-lg-6">
 
     <% if !@vterm.definition %>
       <p class="lead">Generating definition... <i class="fa fa-spin fa-circle-notch"></i></p>
@@ -14,7 +14,7 @@
       <%= simple_format(@vterm.linked_definition).gsub('<p>', '<p class="lead">') %>
     <% end %>
   </div>
-  <div class="col">
+  <div class="col-12 col-lg-6">
     <%=
 
 vedges = Vedge.or({source: @vterm}, {sink: @vterm}).where(:weight.gt => 0).sample(10)
