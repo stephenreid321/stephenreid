@@ -217,6 +217,8 @@ class Vterm
 
   def self.generate_edges
     Vterm.edgeless.each { |source| source.generate_edges }
+    Vterm.all.set(see_also: nil)
+    Vterm.all.each { |vterm| vterm.set_see_also! }
   end
 
   def linked_definition
