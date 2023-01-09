@@ -194,7 +194,8 @@ class Vterm
   def self.hints
     {
       'self-terminating' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations',
-      'embedded growth obligation' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations'
+      'embedded growth obligation' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations',
+      'generator function' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations, without reference to computing or programming. The definition should start "A generator function, in the context of failed civilizations"'
     }
   end
 

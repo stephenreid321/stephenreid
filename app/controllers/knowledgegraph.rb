@@ -115,20 +115,18 @@ StephenReid::App.controller do
       hosts << URI(post['Link']).host.gsub('www.', '')
     end
 
-    stops = STOPS
     terms = Term.all.map { |term| term['Name'].downcase }
     term_words = terms.map { |term| term.split(' ') }.flatten
+
+    stops = STOPS
+    stops += terms
+    stops += term_words
+
     text = text.flatten.join(' ').downcase
-    r = /[\w'-]+/
-    words = text.scan(/#{r}/) - stops - term_words
-    phrases2 = text.scan(/#{r} #{r}/) - stops - terms
-    phrases2 += (text.split(' ')[1..-1].join(' ') + ' ').scan(/#{r} #{r}/) - stops - terms
-    phrases2 = phrases2.reject do |phrase|
-      a, b = phrase.split(' ')
-      stops.include?(a) && stops.include?(b)
-    end
-    @word_frequency = words.each_with_object(Hash.new(0)) { |w, res| res[w.downcase] += 1; }
-    @phrase2_frequency = phrases2.each_with_object(Hash.new(0)) { |w, res| res[w.downcase] += 1; }
+    words = text.split(' ')
+    @word_frequency = words.reject { |a| stops.include?(a) || a.length < 4 }.each_with_object(Hash.new(0)) { |word, counts| counts[word] += 1 }
+    @phrase2_frequency = words.each_cons(2).reject { |a, b| stops.include?("#{a} #{b}") || (stops.include?(a) || stops.include?(b)) || (a.length < 4 || b.length < 4) }.each_with_object(Hash.new(0)) { |word, counts| counts[word.join(' ')] += 1 }
+
     @host_frequency = hosts.each_with_object(Hash.new(0)) { |key, hash| hash[key] += 1 }
     erb :'knowledgegraph/stats'
   end

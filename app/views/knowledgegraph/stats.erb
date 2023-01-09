@@ -1,16 +1,23 @@
-<p>
-  <% @word_frequency.sort_by { |w,f| -f }.each { |w,f| if w.length > 4 && f > (x=20) %>
-  <a href="/search?q=<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 10 ? 10 : em %>em">  <%= w %>   </a>
-<% end } %>
-</p>
-<hr>
-<p>
-  <% @phrase2_frequency.sort_by { |w,f| -f }.each { |w,f| if w.length > 4 && f > (x=10) %>
-  <a href="/search?q=<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 10 ? 10 : em %>em">  <%= w %>   </a>
-<% end } %>
-</p>
-<hr>
-<p><% domains = Organisation.all.map { |organisation| organisation['Domain'] }
+<div class="row">
+  <div class="col-4">
+    <ol>
+      <% @word_frequency.sort_by { |w,f| -f }.each { |w,f| if w.length > 4 && f > (x=20) %>
+      <li><a href="/search?q=<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 2 ? 2 : em %>em"><%= w %></a></li>
+    <% end } %>
+  </ol>
+</div>
+<div class="col-4">
+  <ol>
+    <% @phrase2_frequency.sort_by { |w,f| -f }.each { |w,f| if w.length > 4 && f > (x=10) %>
+    <li><a href="/search?q=<%= w %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 2 ? 2 : em %>em"><%= w %></a></li>
+  <% end } %>
+</ol>
+</div>
+<div class="col-4">
+  <ol><% domains = Organisation.all.map { |organisation| organisation['Domain'] }
   @host_frequency.sort_by { |h,f| -f }.each { |h,f| if f > (x=1) && !domains.include?(h) %>
-  <a href="/search?q=<%= h %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 10 ? 10 : em %>em">  <%= h %>  </a>
-<% end } %></p>
+    <li><a href="/search?q=<%= h %>" class="text-contrast" title="<%= f %>" style="font-size: <%= em = f.to_f / x; em > 2 ? 2 : em %>em"><%= h %></a></li>
+  <% end } %>
+</ol>
+</div>
+</div>
