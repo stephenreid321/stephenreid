@@ -1,4 +1,77 @@
 StephenReid::App.controller do
+  get '/organisations/:id/tagify' do
+    @organisation = begin; Organisation.find(params[:id]); rescue StandardError; not_found; end
+    @organisation.tagify
+    200
+  end
+
+  get '/posts/:id/iframely' do
+    @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
+    agent = Mechanize.new
+    result = agent.get("https://iframe.ly/api/iframely?url=#{@post['Link'].split('#').first}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+    @post['Iframely'] = result.body.force_encoding('UTF-8')
+    @post.save
+    200
+  end
+
+  get '/posts/:id/tagify' do
+    @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
+    unless @post['Title']
+      @json = JSON.parse(@post['Iframely'])
+      @post['Title'] = @json['meta']['title']
+      @post['Body'] = @json['meta']['description']
+      @post.save
+    end
+    @post.tagify
+    200
+  end
+
+  get '/terms/tagify' do
+    post_ids = []
+    Term.all.each do |term|
+      next if term['Posts']
+
+      post_ids += Post.all(filter: "
+      OR(
+        FIND(LOWER('#{term['Name']}'), LOWER({Title})) > 0,
+        FIND(LOWER('#{term['Name']}'), LOWER({Body})) > 0,
+        FIND(LOWER('#{term['Name']}'), LOWER({Iframely})) > 0
+      )
+        ", sort: { 'Created at' => 'desc' }).map(&:id)
+    end
+    post_ids = post_ids.uniq
+    if post_ids.length > 0
+      puts "#{c = post_ids.length} posts"
+      Post.find_many(post_ids).each_with_index do |post, i|
+        puts "#{post['Title']} (#{i}/#{c})"
+        post.tagify(skip_linking: true)
+      end
+    end
+    200
+  end
+
+  get '/terms/:id/tagify' do
+    @term = begin; Term.find(params[:id]); rescue StandardError; not_found; end
+    @term.tagify
+    200
+  end
+
+  get '/terms/create_edges' do
+    Term.all(filter: "AND({Sources} = '', {Sinks} = '')").each do |term|
+      puts term['Name']
+      term.create_edges
+    end
+    200
+  end
+
+  get '/terms/:id/create_edges' do
+    @term = begin; Term.find(params[:id]); rescue StandardError; not_found; end
+    @term.create_edges
+    200
+  end
+
+  ############################
+
   get '/knowledgegraph', cache: true do
     expires 1.hour.to_i
     @title = 'Knowledgegraph'
@@ -129,76 +202,5 @@ StephenReid::App.controller do
 
     @host_frequency = hosts.each_with_object(Hash.new(0)) { |key, hash| hash[key] += 1 }
     erb :'knowledgegraph/stats'
-  end
-
-  get '/organisations/:id/tagify' do
-    @organisation = begin; Organisation.find(params[:id]); rescue StandardError; not_found; end
-    @organisation.tagify
-    200
-  end
-
-  get '/posts/:id/iframely' do
-    @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
-    agent = Mechanize.new
-    result = agent.get("https://iframe.ly/api/iframely?url=#{@post['Link'].split('#').first}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-    @post['Iframely'] = result.body.force_encoding('UTF-8')
-    @post.save
-    200
-  end
-
-  get '/posts/:id/tagify' do
-    @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
-    unless @post['Title']
-      @json = JSON.parse(@post['Iframely'])
-      @post['Title'] = @json['meta']['title']
-      @post['Body'] = @json['meta']['description']
-      @post.save
-    end
-    @post.tagify
-    200
-  end
-
-  get '/terms/tagify' do
-    post_ids = []
-    Term.all.each do |term|
-      next if term['Posts']
-
-      post_ids += Post.all(filter: "
-      OR(
-        FIND(LOWER('#{term['Name']}'), LOWER({Title})) > 0,
-        FIND(LOWER('#{term['Name']}'), LOWER({Body})) > 0,
-        FIND(LOWER('#{term['Name']}'), LOWER({Iframely})) > 0
-      )
-        ", sort: { 'Created at' => 'desc' }).map(&:id)
-    end
-    post_ids = post_ids.uniq
-    if post_ids.length > 0
-      puts "#{c = post_ids.length} posts"
-      Post.find_many(post_ids).each_with_index do |post, i|
-        puts "#{post['Title']} (#{i}/#{c})"
-        post.tagify(skip_linking: true)
-      end
-    end
-    200
-  end
-
-  get '/terms/:id/tagify' do
-    @term = begin; Term.find(params[:id]); rescue StandardError; not_found; end
-    @term.tagify
-    200
-  end
-
-  get '/terms/create_edges' do
-    Term.all(filter: "AND({Sources} = '', {Sinks} = '')").each do |term|
-      puts term['Name']
-      term.create_edges
-    end
-    200
-  end
-
-  get '/terms/:id/create_edges' do
-    @term = begin; Term.find(params[:id]); rescue StandardError; not_found; end
-    @term.create_edges
-    200
   end
 end
