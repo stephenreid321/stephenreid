@@ -14,8 +14,8 @@ StephenReid::App.controller do
   get '/blog/?*' do
     file_path = File.join(Padrino.root('app', 'jekyll_blog', '_site'), request.path.gsub('/blog', ''))
     file_path = File.join(Padrino.root('app', 'jekyll_blog', '_site'), 'index.html') unless file_path =~ /\.[a-z]+$/i
-    redirect('/blog') unless File.exist?(file_path)
-    content = File.open(file_path, 'rb').read
+    not_found unless File.exist?(file_path)
+    content = File.binread(file_path)
     content_type = MIME::Types.type_for(file_path).first.content_type
     if content_type == 'text/html'
       html = Nokogiri::HTML.parse(content)
