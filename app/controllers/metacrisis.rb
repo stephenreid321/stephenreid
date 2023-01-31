@@ -7,11 +7,15 @@ StephenReid::App.controller do
     end
   end
 
+  get '/metacrisis' do
+    redirect '/k/daniel'
+  end
+
   get '/metacrisis/terms' do
     redirect '/k/daniel'
   end
 
-  get '/metacrisis' do
+  get '/metacrisis/terms/:term' do
     redirect '/k/daniel'
   end
 
