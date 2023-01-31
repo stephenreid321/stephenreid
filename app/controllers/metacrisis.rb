@@ -15,20 +15,20 @@ StephenReid::App.controller do
     redirect '/k/daniel'
   end
 
-  get '/k/:slug', cache: true do    
+  get '/k/:slug', cache: true do
     expires 1.hour.to_i
     erb :'k/network'
   end
 
   get '/k/:slug/terms/:term' do
-    redirect "/k/#{params[:slug]}/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && Vterm.find_by(term: params[:term].singularize)
-    @vterm = Vterm.find_by(term: params[:term]) || not_found
+    redirect "/k/#{params[:slug]}/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && @network.vterms.find_by(term: params[:term].singularize)
+    @vterm = @network.vterms.find_by(term: params[:term]) || not_found
     @videos = @vterm.videos.paginate(page: params[:page], per_page: 10)
     erb :'k/term'
   end
 
   get '/k/:slug/edges/:id' do
-    @vedge = Vedge.find(params[:id]) || not_found
+    @vedge = @network.vedges.find(params[:id]) || not_found
     @videos = @vedge.videos.paginate(page: params[:page], per_page: 10)
     erb :'k/edge'
   end

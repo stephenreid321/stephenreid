@@ -17,14 +17,14 @@
   <div class="col-12 col-lg-6">
     <%=
 
-vedges = Vedge.or({source: @vterm}, {sink: @vterm})
+vedges = @network.vedges.or({source: @vterm}, {sink: @vterm})
 w = vedges.pluck(:weight).sort
 c = w.count
 median = (w[(c - 1) / 2] + w[c / 2]) / 2.0
 vedges = vedges.where(:weight.gte => median).sample(10)
 
-vterms = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vterm.see_also_ids)
-vedges = Vedge.or({:source_id.in => vterms.pluck(:id)}, {:sink_id.in => vterms.pluck(:id)})
+vterms = @network.vterms.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vterm.see_also_ids)
+vedges = @network.vedges.or({:source_id.in => vterms.pluck(:id)}, {:sink_id.in => vterms.pluck(:id)})
 
 partial :'k/network', locals: {vterms: vterms, vedges: vedges} 
 
