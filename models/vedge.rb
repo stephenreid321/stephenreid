@@ -4,6 +4,7 @@ class Vedge
 
   belongs_to :source, class_name: 'Vterm', inverse_of: :vedges_as_source, index: true
   belongs_to :sink, class_name: 'Vterm', inverse_of: :vedges_as_sink, index: true
+  belongs_to :network
 
   field :weight, type: Integer
 
@@ -11,7 +12,8 @@ class Vedge
     {
       source_id: :lookup,
       sink_id: :lookup,
-      weight: :number
+      weight: :number,
+      network_id: :lookup
     }
   end
 
@@ -19,11 +21,11 @@ class Vedge
 
   def videos
     ids = []
-    ids += Video.and({ text: /\b#{source.term}\b/i }, { text: /\b#{sink.term}\b/i }).pluck(:id)
-    ids += Video.and({ text: /\b#{source.term.pluralize}\b/i }, { text: /\b#{sink.term}\b/i }).pluck(:id) if source.term != source.term.pluralize
-    ids += Video.and({ text: /\b#{source.term}\b/i }, { text: /\b#{sink.term.pluralize}\b/i }).pluck(:id) if sink.term != sink.term.pluralize
-    ids += Video.and({ text: /\b#{source.term.pluralize}\b/i }, { text: /\b#{sink.term.pluralize}\b/i }).pluck(:id) if source.term != source.term.pluralize && sink.term != sink.term.pluralize
-    Video.where(:id.in => ids)
+    ids += network.videos.and({ text: /\b#{source.term}\b/i }, { text: /\b#{sink.term}\b/i }).pluck(:id)
+    ids += network.videos.and({ text: /\b#{source.term.pluralize}\b/i }, { text: /\b#{sink.term}\b/i }).pluck(:id) if source.term != source.term.pluralize
+    ids += network.videos.and({ text: /\b#{source.term}\b/i }, { text: /\b#{sink.term.pluralize}\b/i }).pluck(:id) if sink.term != sink.term.pluralize
+    ids += network.videos.and({ text: /\b#{source.term.pluralize}\b/i }, { text: /\b#{sink.term.pluralize}\b/i }).pluck(:id) if source.term != source.term.pluralize && sink.term != sink.term.pluralize
+    network.videos.where(:id.in => ids)
   end
 
   before_validation do
@@ -34,10 +36,4 @@ class Vedge
     self.weight = videos.count
   end
 
-  def self.find_or_create(source, sink)
-    if !(vedge = Vedge.find_by(source: source, sink: sink)) && !(vedge = Vedge.find_by(source: sink, sink: source))
-      vedge = Vedge.create(source: source, sink: sink)
-    end
-    vedge
-  end
 end

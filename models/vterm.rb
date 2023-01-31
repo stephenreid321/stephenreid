@@ -12,20 +12,23 @@ class Vterm
       term: :text,
       definition: :text_area,
       see_also: :text,
-      weight: :number
+      weight: :number,
+      network_id: :lookup
     }
   end
+
+  belongs_to :network
 
   has_many :vedges_as_source, class_name: 'Vedge', inverse_of: :source, dependent: :destroy
   has_many :vedges_as_sink, class_name: 'Vedge', inverse_of: :sink, dependent: :destroy
 
-  validates_uniqueness_of :term
+  validates_uniqueness_of :term, scope: :network
 
   def videos
     ids = []
-    ids += Video.where(text: /\b#{term}\b/i).pluck(:id)
-    ids += Video.where(text: /\b#{term.pluralize}\b/i).pluck(:id) if term.pluralize != term
-    Video.where(:id.in => ids)
+    ids += network.videos.where(text: /\b#{term}\b/i).pluck(:id)
+    ids += network.videos.where(text: /\b#{term.pluralize}\b/i).pluck(:id) if term.pluralize != term
+    network.videos.where(:id.in => ids)
   end
 
   before_validation do
@@ -42,7 +45,7 @@ class Vterm
   end
   def set_definition!
     n = 1
-    context = Vterm.hints[term] || 'as if written by Daniel Schmachtenberger'
+    context = network.hints[term] || network.prompt
     openapi_response = OPENAI.post('completions') do |req|
       req.body = { model: 'text-davinci-003', max_tokens: 1024, n: n, prompt:
         "Provide a postgraduate-level definition of the term '#{term}', #{context}.
@@ -60,7 +63,7 @@ class Vterm
       req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
         "Select the 5 terms from the list below that are most relevant to the term '#{term}'.
 
-        #{(Vterm.interesting - [term]).join(', ')}.
+        #{(network.interesting - [term]).join(', ')}.
 
         Return the result as a comma-separated list, e.g. 'term1, term2, term3, term4, term5'.
 
@@ -68,14 +71,14 @@ class Vterm
     end
 
     see_also = JSON.parse(openapi_response.body)['choices'].first['text'].strip
-    see_also = see_also.split(', ').map { |term| term.downcase }.select { |term| Vterm.interesting.include?(term) && term != self.term }.join(', ')
+    see_also = see_also.split(', ').map { |term| term.downcase }.select { |term| network.interesting.include?(term) && term != self.term }.join(', ')
     self.see_also = see_also
     save
   end
   handle_asynchronously :set_see_also!
 
   def see_also_ids
-    see_also ? Vterm.where(:term.in => see_also.split(', ')).pluck(:id) : []
+    see_also ? network.vterms.where(:term.in => see_also.split(', ')).pluck(:id) : []
   end
 
   def self.dashed_terms_to_undash
@@ -117,106 +120,9 @@ class Vterm
     end
   end
 
-  def self.interesting
-    %(
-      apex predator
-      arms race
-      artificial intelligence
-      biosecurity
-      blockchain
-      bretton woods
-      catastrophe weapon
-      catastrophic risk
-      civilizational collapse
-      climate change
-      collective action
-      collective intelligence
-      complexity science
-      confirmation bias
-      conflict theory
-      coordination failure
-      critical infrastructure
-      decision making
-      dunbar number
-      dystopia
-      embedded growth obligation
-      emergent property
-      epistemic commons
-      existential risk
-      existential threat
-      exponential growth
-      exponential tech
-      fourth estate
-      game b
-      game theory
-      generator function
-      global governance
-      human nature
-      hypernormal stimuli
-      liquid democracy
-      materials economy
-      metacrisis
-      mistake theory
-      multipolar trap
-      mutually assured destruction
-      narrative warfare
-      nation state
-      network dynamics
-      network theory
-      nonlinear dynamics
-      nuclear weapon
-      open society
-      open source
-      paperclip maximizer
-      permaculture
-      perverse incentive
-      planetary boundary
-      plausible deniability
-      race to the bottom
-      regenerative agriculture
-      rivalrous dynamics
-      self-terminating
-      sensemaking
-      social media
-      social structure
-      social system
-      social tech
-      superorganism
-      superstructure
-      supply chain
-      systems thinking
-      third attractor
-      web3
-  ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
-    # complex system
-  end
-
-  def self.hints
-    {
-      'self-terminating' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations',
-      'embedded growth obligation' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations',
-      'generator function' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations, without reference to computing or programming. The definition should start "A generator function, in the context of failed civilizations"'
-    }
-  end
-
-  def self.plurals
-    interesting.map { |term| term.pluralize }
-  end
-
-  def self.edgeless
-    Vterm.where(:id.nin => Vedge.pluck(:source_id) + Vedge.pluck(:sink_id))
-  end
-
-  def generate_edges
+  def find_or_create_vedges
     source = self
-    (Vterm.all - [source]).each { |sink| Vedge.find_or_create(source, sink) }
-  end
-
-  def self.populate
-    (interesting - Vterm.pluck(:term)).each { |term| Vterm.create(term: term) }
-    Vterm.edgeless.each { |source| source.generate_edges }
-    Vterm.all.set(see_also: nil)
-    Vterm.all.each { |vterm| vterm.set_see_also! }
+    (network.vterms - [source]).each { |sink| network.find_or_create_vedge(source, sink) }
   end
 
   def linked_definition
@@ -227,8 +133,8 @@ class Vterm
     d.gsub!(/“(#{term})”/i, %(\\0)) if term.pluralize != term
     d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
     d.gsub!(/\b(#{term})\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
-    (['metacrisis'] + ((Vterm.plurals + Vterm.interesting).uniq - ['metacrisis']) - [term, term.pluralize]).each do |t|
-      d.gsub!(/\b(#{t})\b/i, %(<a href="/metacrisis/terms/#{t}">\\0</a>))
+    (['metacrisis'] + ((network.plurals + network.interesting).uniq - ['metacrisis']) - [term, term.pluralize]).each do |t|
+      d.gsub!(/\b(#{t})\b/i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
     end
     d
   end

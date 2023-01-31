@@ -52,10 +52,10 @@
 
           });
   cy.on('tap', 'node', function(){
-  window.location.href = '/metacrisis/terms/' + this.data('name');
+  window.location.href = '/k/<%=@network.slug%>/terms/' + this.data('name');
   });
   cy.on('tap', 'edge', function(){
-  window.location.href = '/metacrisis/edges/' + this.data('id');
+  window.location.href = '/k/<%=@network.slug%>/edges/' + this.data('id');
   });
   cy.minZoom(0.5)
 

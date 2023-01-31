@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-dark">
-    <li class="breadcrumb-item"><a href="/metacrisis">Daniel Schmachtenberger on the Metacrisis</a></li>
+    <li class="breadcrumb-item"><a href="/k/<%=@network.slug%>"><%=@network.name%></a></li>
     <li class="breadcrumb-item active" aria-current="page"><%=@vterm.term%></li>
   </ol>
 </nav>
@@ -26,7 +26,7 @@ vedges = vedges.where(:weight.gte => median).sample(10)
 vterms = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vterm.see_also_ids)
 vedges = Vedge.or({:source_id.in => vterms.pluck(:id)}, {:sink_id.in => vterms.pluck(:id)})
 
-partial :'metacrisis/network', locals: {vterms: vterms, vedges: vedges} 
+partial :'k/network', locals: {vterms: vterms, vedges: vedges} 
 
 %>
   </div>

@@ -1,10 +1,10 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-dark">
-    <li class="breadcrumb-item"><a href="/metacrisis">Daniel Schmachtenberger on the Metacrisis</a></li>
+    <li class="breadcrumb-item"><a href="/k/<%=@network.slug%>"><%=@network.name%></a></li>
     <li class="breadcrumb-item active" aria-current="page">
-      <a href="/metacrisis/terms/<%=@vedge.source.term%>"><%=@vedge.source.term%></a>
+      <a href="/k/<%=@network.slug%>/terms/<%=@vedge.source.term%>"><%=@vedge.source.term%></a>
       &
-      <a href="/metacrisis/terms/<%=@vedge.sink.term%>"><%=@vedge.sink.term%></a>
+      <a href="/k/<%=@network.slug%>/terms/<%=@vedge.sink.term%>"><%=@vedge.sink.term%></a>
     </li>
   </ol>
 </nav>
@@ -12,30 +12,30 @@
 <div class="mb-3">
   <%=
 
-vedges = Vedge.or({source: @vedge.source}, {sink: @vedge.source})
+vedges = @network.vedges.or({source: @vedge.source}, {sink: @vedge.source})
 w = vedges.pluck(:weight).sort
 c = w.count
 median = (w[(c - 1) / 2] + w[c / 2]) / 2.0
 vedges = vedges.where(:weight.gte => median).sample(5)
 
-vterms_source = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vedge.source.see_also_ids)
-vedges_source = Vedge.or({:source_id.in => vterms_source.pluck(:id)}, {:sink_id.in => vterms_source.pluck(:id)})
+vterms_source = @network.vterms.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vedge.source.see_also_ids)
+vedges_source = @network.vedges.or({:source_id.in => vterms_source.pluck(:id)}, {:sink_id.in => vterms_source.pluck(:id)})
 
 ###
 
-vedges = Vedge.or({source: @vedge.sink}, {sink: @vedge.sink})
+vedges = @network.vedges.or({source: @vedge.sink}, {sink: @vedge.sink})
 w = vedges.pluck(:weight).sort
 c = w.count
 median = (w[(c - 1) / 2] + w[c / 2]) / 2.0
 vedges = vedges.where(:weight.gte => median).sample(5)
 
-vterms_sink = Vterm.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vedge.sink.see_also_ids)
-vedges_sink = Vedge.or({:source_id.in => vterms_sink.pluck(:id)}, {:sink_id.in => vterms_sink.pluck(:id)})
+vterms_sink = @network.vterms.where(:id.in => vedges.pluck(:source_id) + vedges.pluck(:sink_id) + @vedge.sink.see_also_ids)
+vedges_sink = @network.vedges.or({:source_id.in => vterms_sink.pluck(:id)}, {:sink_id.in => vterms_sink.pluck(:id)})
 
-vterms = Vterm.where(:id.in => vterms_source.pluck(:id) + vterms_sink.pluck(:id))
-vedges = Vedge.where(:id.in => vedges_source.pluck(:id) + vedges_sink.pluck(:id))
+vterms = @network.vterms.where(:id.in => vterms_source.pluck(:id) + vterms_sink.pluck(:id))
+vedges = @network.vedges.where(:id.in => vedges_source.pluck(:id) + vedges_sink.pluck(:id))
 
-partial :'metacrisis/network', locals: {vterms: vterms, vedges: vedges} 
+partial :'k/network', locals: {vterms: vterms, vedges: vedges} 
 
 %>
 </div>
