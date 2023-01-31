@@ -115,33 +115,37 @@ class Network
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     when 'jim'
       %(
-        omega point
-        meaning crisis
-        social media
-        climate change
-        liquid democracy
         artificial intelligence
-        social justice
-        neural networks
-        collective intelligence
-        neural network
-        left hemisphere
-        free speech
-        serious play
-        small group
-        consensus process
-        relevance realization
+        climate change
         cognitive science
-        gradient descent
-        social network
+        collective action
+        collective intelligence
+        complex system
+        complexity science
+        consensus process
         deep learning
         flow state
-        urban planning
-        complexity science
+        free speech
+        gradient descent
+        integral theory
+        left hemisphere
+        liquid democracy
         machine learning
+        meaning crisis
+        nervous system
+        neural network
+        nuclear weapon
+        omega point
         quantum mechanics
-        self-driving cars
-        elon musk
+        relevance realization
+        self-driving car
+        serious play
+        small group
+        social capital
+        social justice
+        social media
+        social network
+        urban planning
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     end
   end
