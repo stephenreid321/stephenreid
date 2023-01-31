@@ -132,6 +132,7 @@ class Network
         liquid democracy
         machine learning
         meaning crisis
+        mutual credit
         nervous system
         neural network
         nuclear weapon
@@ -140,7 +141,6 @@ class Network
         relevance realization
         self-driving car
         serious play
-        small group
         social capital
         social justice
         social media
