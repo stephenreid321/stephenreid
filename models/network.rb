@@ -146,6 +146,8 @@ class Network
         social media
         social network
         urban planning
+        regen villages
+        boltzmann brain
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     end
   end
