@@ -1,4 +1,4 @@
-workers Integer(ENV['WEB_CONCURRENCY'] || 3)
+workers Integer(ENV['WEB_CONCURRENCY'] || 0)
 threads Integer(ENV['MIN_THREADS'] || 1), Integer(ENV['MAX_THREADS'] || 1)
 
 preload_app!

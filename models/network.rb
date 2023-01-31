@@ -36,7 +36,7 @@ class Network
     when 'daniel'
       'as if written by Daniel Schmachtenberger'
     when 'jim'
-      'as if written by Daniel Schmachtenberger'
+      'as if written by Jim Rutt, host of the Jim Rutt Show podcast'
     end
   end
 
@@ -117,7 +117,31 @@ class Network
       %(
         omega point
         meaning crisis
-        jordan peterson
+        social media
+        climate change
+        liquid democracy
+        artificial intelligence
+        social justice
+        neural networks
+        collective intelligence
+        neural network
+        left hemisphere
+        free speech
+        serious play
+        small group
+        consensus process
+        relevance realization
+        cognitive science
+        gradient descent
+        social network
+        deep learning
+        flow state
+        urban planning
+        complexity science
+        machine learning
+        quantum mechanics
+        self-driving cars
+        elon musk
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     end
   end
@@ -135,6 +159,7 @@ class Network
         'generator function' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations, without reference to computing or programming. The definition should start "A generator function, in the context of failed civilizations"'
       }
     when 'jim'
+      {}
     end
   end
 
