@@ -16,7 +16,11 @@ StephenReid::App.controller do
   end
 
   get '/metacrisis/terms/:term' do
-    redirect '/k/daniel'
+    redirect "/k/daniel/terms/#{params[:term]}"
+  end
+
+  get '/metacrisis/edges/:id' do
+    redirect "/k/daniel/edges/#{params[:id]}"
   end
 
   get '/k/:slug', cache: true do

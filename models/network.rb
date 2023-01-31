@@ -149,6 +149,7 @@ class Network
         regen villages
         boltzmann brain
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
+      # solar energy
     end
   end
 
