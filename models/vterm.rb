@@ -92,15 +92,21 @@ class Vterm
   def self.spaced_terms_to_unspace
     [
       'meta crisis',
+      'meta modern',
+      'meta modernism',
+      'meta modernity',
       'super organism',
       'sense making',
-      'hyper normal'
+      'hyper normal',
+      'psycho technology'
     ]
   end
 
   def self.spaced_terms_to_dash
     [
-      'self terminating'
+      'self terminating',
+      'self organizing',
+      'self organization'
     ]
   end
 

@@ -115,41 +115,112 @@ class Network
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     when 'jim'
       %(
+        agi
+        abiogenisis
+        agent-based modeling
+        antifragile
+        attractor
+        causality
+        crypto
+        cultural evolution
+        dunbar number
+        edge of chaos
+        emergence
+        evolution
+        evolutionary computing
+        evolutionary psychology
+        fermi paradox
+        free will
+        game b
+        iit
+        integrated information theory
+        intellectual honesty
+        lord of the rings
+        maslow's hierarchy
+        membrane
+        origin of life
+        phase change
+        prigogine
+        proto b
+        protocol
+        psychotechnology
+        quantum foundations
+        strong links
+        ubi
+        universal basic income
+        virtue ethics
+        warm data
+        archetype
         artificial intelligence
+        boltzmann brain
+        bottom-up
+        cambrian explosion
         climate change
         cognitive science
+        coherence
+        coherent pluralism
         collective action
         collective intelligence
         complex system
         complexity science
         consensus process
+        conviviality
+        custodial species
         deep learning
+        deterministic chaos
+        epidemiology
+        externality
         flow state
         free speech
+        game theory
+        global workspace theory
+        governance
         gradient descent
+        hierarchical complexity
         integral theory
+        intentional community
         left hemisphere
         liquid democracy
         machine learning
         meaning crisis
+        memetic tribe
+        memetic warfare
+        metamodernism
+        metamodernity
+        metaverse
+        monetary system
+        money-on-money return
+        multipolar trap
         mutual credit
         nervous system
+        network effect
         neural network
+        nihilism
+        non-rivalrous
+        nuclear power
         nuclear weapon
         omega point
+        open source
+        permaculture
+        phase transition
+        philosophy of science
+        psychedelic
         quantum mechanics
+        regen villages
+        regenerative
         relevance realization
+        self-organization
+        self-organizing
         self-driving car
+        sensemaking
         serious play
         social capital
         social justice
         social media
         social network
+        solar energy
         urban planning
-        regen villages
-        boltzmann brain
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
-      # solar energy
     end
   end
 
