@@ -116,7 +116,7 @@ class Network
     when 'jim'
       %(
         agi
-        abiogenisis
+        abiogenesis
         agent-based modeling
         antifragile
         attractor

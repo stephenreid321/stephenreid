@@ -31,6 +31,14 @@ class Video
 
   validates_uniqueness_of :youtube_id
 
+  def self.tidy!
+    Video.all.each do |video|
+      video.tidy_transcript
+      video.set_text
+      video.save
+    end
+  end
+
   def set_title
     r = Faraday.get("https://www.youtube.com/watch?v=#{youtube_id}")
     self.title = r.body.match(%r{<title>(.+)</title>})[1].force_encoding('UTF-8')
