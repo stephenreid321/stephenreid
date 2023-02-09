@@ -231,7 +231,7 @@ class Network
         blue church
         choice making
         collective intelligence
-        complex systems
+        complex system
         culture space
         deep code
         deep state
@@ -249,7 +249,7 @@ class Network
         participatory knowing
         phase transition
         possibility space
-        psycho technologies
+        psychotechnology
         reciprocal narrowing
         reciprocal opening
         relevance realization

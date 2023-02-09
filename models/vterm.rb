@@ -98,7 +98,8 @@ class Vterm
       'super organism',
       'sense making',
       'hyper normal',
-      'psycho technology'
+      'psycho technology',
+      'psycho technologies'
     ]
   end
 
