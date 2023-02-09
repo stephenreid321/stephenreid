@@ -28,6 +28,8 @@ class Network
       ).split("\n").map(&:strip).reject(&:blank?)
     when 'jim'
       []
+    when 'jordan'
+      []
     end
   end
 
@@ -37,6 +39,8 @@ class Network
       'as if written by Daniel Schmachtenberger'
     when 'jim'
       'as if written by Jim Rutt, host of the Jim Rutt Show podcast'
+    when 'jordan'
+      'as if written by Jordan Hall, aka Jordan Greenhall'
     end
   end
 
@@ -221,6 +225,8 @@ class Network
         solar energy
         urban planning
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
+    when 'jordan'
+      %().split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     end
   end
 
@@ -237,6 +243,8 @@ class Network
         'generator function' => 'as if written by Daniel Schmachtenberger, in the context of failed civilizations, without reference to computing or programming. The definition should start "A generator function, in the context of failed civilizations"'
       }
     when 'jim'
+      {}
+    when 'jordan'
       {}
     end
   end
@@ -258,7 +266,7 @@ class Network
 
   def populate_videos
     youtube_ids.each { |youtube_id| videos.create(youtube_id: youtube_id) }
-  end 
+  end
 
   def populate_vterms
     (interesting - vterms.pluck(:term)).each { |term| vterms.create(term: term) }
