@@ -136,7 +136,6 @@ class Network
         fermi paradox
         free will
         game b
-        iit
         integrated information theory
         intellectual honesty
         lord of the rings
@@ -227,16 +226,23 @@ class Network
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     when 'jordan'
       %(
-        adjacent possible
+   adjacent possible
         artificial intelligence
         blue church
         choice making
         collective intelligence
+        complex systems
         culture space
+        deep code
         deep state
         diminishing returns
         distributed cognition
+        feedback loop
+        felt sense
+        game theory
+        hill climbing
         low-hanging fruit
+        mass media
         meaning crisis
         mental health
         pair bonding
@@ -249,6 +255,8 @@ class Network
         relevance realization
         simulated thinking
         situational assessment
+        social media
+        sovereignty
         subjective well-being
         unconventional warfare
       ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
