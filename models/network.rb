@@ -258,7 +258,7 @@ class Network
 
   def populate_videos
     youtube_ids.each { |youtube_id| videos.create(youtube_id: youtube_id) }
-  end
+  end 
 
   def populate_vterms
     (interesting - vterms.pluck(:term)).each { |term| vterms.create(term: term) }
