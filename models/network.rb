@@ -226,7 +226,32 @@ class Network
         urban planning
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     when 'jordan'
-      %().split("\n").reject { |x| x.blank? }.map { |x| x.strip }
+      %(
+        adjacent possible
+        artificial intelligence
+        blue church
+        choice making
+        collective intelligence
+        culture space
+        deep state
+        diminishing returns
+        distributed cognition
+        low-hanging fruit
+        meaning crisis
+        mental health
+        pair bonding
+        participatory knowing
+        phase transition
+        possibility space
+        psycho technologies
+        reciprocal narrowing
+        reciprocal opening
+        relevance realization
+        simulated thinking
+        situational assessment
+        subjective well-being
+        unconventional warfare
+      ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     end
   end
 
