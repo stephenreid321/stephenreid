@@ -94,10 +94,13 @@ class Tweet
 
   def self.import
     Tweet.delete_all
-    r = Tweet.api.get("users/#{ENV['TWITTER_USER_ID']}/owned_lists")
+    r = Tweet.api.get("users/#{ENV['TWITTER_USER_ID']}/owned_lists")      
     timelines = {
       'Home' => "users/#{ENV['TWITTER_USER_ID']}/timelines/reverse_chronological"
-    }.merge(r.body['data'].map { |x| [x['name'], "lists/#{x['id']}/tweets"] }.to_h)
+      'Crypto Twitter' => "lists/1585548222935736321/tweets",
+      'Greenpill' => "lists/1610587490670317573/tweets",
+    }
+    # }.merge(r.body['data'].map { |x| [x['name'], "lists/#{x['id']}/tweets"] }.to_h)
     timelines.each do |timeline, url|
       tweets = Tweet.timeline(url)
       tweets.each do |t|

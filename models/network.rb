@@ -226,7 +226,7 @@ class Network
     ).split("\n").reject { |x| x.blank? }.map { |x| x.strip }
     when 'jordan'
       %(
-   adjacent possible
+        adjacent possible
         artificial intelligence
         blue church
         choice making
@@ -241,6 +241,7 @@ class Network
         felt sense
         game theory
         hill climbing
+        liminal space
         low-hanging fruit
         mass media
         meaning crisis
