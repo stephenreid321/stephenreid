@@ -26,6 +26,8 @@ class Video
     errors.add(:title, 'is invalid') unless network.filter_words_a.empty? || network.filter_words_a.any? { |word| title.match(/#{word}/i) }
 
     set_transcript if transcript.blank?
+    errors.add(:transcript, 'is invalid') if transcript.include?('<error>')
+
     set_text if text.blank?
     set_view_count if view_count.blank?
     tidy

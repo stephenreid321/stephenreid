@@ -101,7 +101,11 @@ class Vterm
       'hyper normal',
       'psycho technology',
       'psycho technologies',
-      'micro solidarity'
+      'micro solidarity',
+      'trans contextual',
+      'breath work',
+      'micro dose',
+      'micro dosing'
     ]
   end
 
@@ -109,7 +113,8 @@ class Vterm
     [
       'self terminating',
       'self organizing',
-      'self organization'
+      'self organization',
+      'late stage'
     ]
   end
 
