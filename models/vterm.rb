@@ -144,7 +144,7 @@ class Vterm
     end
     Vterm.corrections.each do |term, correction|
       text = text.gsub(/#{term}/i, correction)
-    end   
+    end
     text
   end
 
@@ -154,7 +154,8 @@ class Vterm
   end
 
   def linked_definition
-    d = definition.strip + "\n\nSee also: #{see_also}"
+    d = definition.strip
+    d += "\n\nSee also: #{see_also}" if see_also
     d.gsub!(/‘(#{term.pluralize})’/i, %(\\0))
     d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
     d.gsub!(/“(#{term.pluralize})”/i, %(\\0))
