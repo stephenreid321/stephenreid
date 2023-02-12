@@ -118,6 +118,12 @@ class Vterm
     ]
   end
 
+  def self.corrections
+    {
+      'lumio' => 'loomio'
+    }
+  end
+
   def self.terms_to_tidy
     dashed_terms_to_undash + spaced_terms_to_unspace + spaced_terms_to_dash
   end
@@ -132,6 +138,9 @@ class Vterm
     Vterm.spaced_terms_to_dash.each do |term|
       self.definition = definition.gsub(/#{term}/i, term.gsub(' ', '-'))
     end
+    Vterm.corrections.each do |term, correction|
+      self.definition = definition.gsub(/#{term}/i, correction)
+    end   
   end
 
   def find_or_create_vedges

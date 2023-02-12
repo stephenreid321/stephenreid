@@ -69,6 +69,10 @@ class Video
       self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', '-'))
       self.text = text.gsub(/#{term}/i, term.gsub(' ', '-'))
     end
+    Vterm.corrections.each do |term, correction|
+      self.transcript = transcript.gsub(/#{term}/i, correction)
+      self.text = text.gsub(/#{term}/i, correction)
+    end    
   end
 
   def set_view_count
