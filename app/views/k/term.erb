@@ -5,6 +5,8 @@
   </ol>
 </nav>
 
+<%= partial :'k/explain' %>
+
 <div class="row mb-3">
   <div class="col-12 col-lg-6">
 
@@ -31,7 +33,6 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
 %>
   </div>
 </div>
-
 
 <% @videos.order('view_count desc').each { |video| %>
 <% terms = video.term(@vterm.term) %>
