@@ -4,6 +4,7 @@
   scale = chroma.scale(['#6D71C6', '#B16DC6']);
 
           node_min_width = 10
+          node_width_multiplier = 10
           node_min_color = 0.1
           node_color_scale = <%=@network.vterms.pluck(:weight).max%>
           edge_min_color = 0
@@ -16,7 +17,7 @@
           container: $('#cy'),
                   elements: [
   <% vterm_ids = vterms.pluck(:id); vterms.each { |vterm| %>
-                    { data: {id: '<%= vterm.id %>', name: "<%= vterm.term %>", weight: <%= w = vterm.weight %>, width: (node_min_width +<%= w %>), color: scale(node_min_color + (<%= w %> / node_color_scale)).hex()} },
+                    { data: {id: '<%= vterm.id %>', name: "<%= vterm.term %>", weight: <%= w = vterm.weight %>, width: (node_min_width + (node_width_multiplier * <%= w %> / node_color_scale)), color: scale(node_min_color + (<%= w %> / node_color_scale)).hex()} },
   <% } %>
   <% vedges.where(:weight.gt => 0).each { |vedge| next unless [vedge.source_id, vedge.sink_id].all? { |id| vterm_ids.include?(id) } %>
                     {
