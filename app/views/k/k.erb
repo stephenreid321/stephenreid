@@ -1,0 +1,7 @@
+<p class="lead">
+  Select a thinker:
+</p>
+
+<% form_tag '/k', method: :get do %>
+  <%= select_tag :slug, onchange: '$(this.form).submit()', options: [''] + Network.all.map { |network| [network.name, network.slug] }, selected: (@network.slug if @network), class: 'form-control bg-dark border-0', style: 'color: #6f7d91' %>
+<% end %>

@@ -24,7 +24,11 @@ StephenReid::App.controller do
   end
 
   get '/k' do
-    redirect "/k/#{params[:slug]}"
+    if params[:slug]
+      redirect "/k/#{params[:slug]}"
+    else
+      erb :'k/k'
+    end
   end
 
   get '/k/:slug', cache: true do
