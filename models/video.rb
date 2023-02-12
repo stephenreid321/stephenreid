@@ -31,7 +31,7 @@ class Video
     tidy
   end
 
-  validates_uniqueness_of :youtube_id
+  validates_uniqueness_of :youtube_id, scope: :network
 
   def self.tidy!
     Video.all.each do |video|
