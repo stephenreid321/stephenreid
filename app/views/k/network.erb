@@ -1,6 +1,10 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-dark">
-    <li class="breadcrumb-item active" aria-current="page"><%=@network.name%></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <% form_tag '/k', method: :get do %>
+        <%= select_tag :slug, onchange: '$(this.form).submit()', options: Network.all.map { |network| [network.name, network.slug] }, selected: @network.slug, class: 'form-control bg-dark border-0' %>
+      <% end %>
+    </li>
   </ol>
 </nav>
 
