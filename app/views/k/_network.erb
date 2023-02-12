@@ -4,12 +4,12 @@
   scale = chroma.scale(['#6D71C6', '#B16DC6']);
 
           node_min_width = 10
-          node_width_multiplier = 5
+          node_width_multiplier = 10
           node_min_color = 0.1
           node_color_scale = <%=@network.vterms.pluck(:weight).max%>
           edge_min_color = 0
           edge_color_scale = <%=@network.vedges.pluck(:weight).max%>
-          edge_min_opacity = 0.1
+          edge_min_opacity = 0.05
           edge_opacity_scale = <%=@network.vedges.pluck(:weight).max%>
 
           cy = cytoscape({
