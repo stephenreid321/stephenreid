@@ -23,10 +23,12 @@ class Video
 
   before_validation do
     set_title if title.blank?
+    errors.add(:title, 'is invalid') unless network.filter_words_a.empty? || network.filter_words_a.any? { |word| title.match(/#{word}/i) }
+
     set_transcript if transcript.blank?
     set_text if text.blank?
     set_view_count if view_count.blank?
-    errors.add(:title, 'is invalid') unless network.filter_words_a.empty? || network.filter_words_a.any? { |word| title.match(/#{word}/i) }
+    tidy
   end
 
   validates_uniqueness_of :youtube_id
@@ -45,7 +47,7 @@ class Video
 
   def set_transcript
     r = Faraday.get("https://youtubetranscript.com/?server_vid=#{youtube_id}")
-    self.transcript = r.body.force_encoding('UTF-8')    
+    self.transcript = r.body.force_encoding('UTF-8')
   end
 
   def set_text
@@ -59,13 +61,13 @@ class Video
     end
     Vterm.spaced_terms_to_unspace.each do |term|
       self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', ''))
-      self.text = text.gsub(/#{term}/i, term.gsub('-', ''))
+      self.text = text.gsub(/#{term}/i, term.gsub(' ', ''))
     end
     Vterm.spaced_terms_to_dash.each do |term|
       self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', '-'))
-      self.text = text.gsub(/#{term}/i, term.gsub('-', ''))
+      self.text = text.gsub(/#{term}/i, term.gsub(' ', '-'))
     end
-  end  
+  end
 
   def set_view_count
     self.view_count = JSON.parse(Faraday.get("https://returnyoutubedislikeapi.com/votes?videoId=#{youtube_id}").body)['viewCount']
