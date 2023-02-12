@@ -28,6 +28,12 @@ StephenReid::App.controller do
     erb :'k/network'
   end
 
+  get '/k/:slug/terms/create/:term' do    
+    @vterm = @network.vterms.create(term: params[:term])
+    200
+  end
+
+
   get '/k/:slug/terms/:term' do
     redirect "/k/#{params[:slug]}/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && @network.vterms.find_by(term: params[:term].singularize)
     @vterm = @network.vterms.find_by(term: params[:term]) || not_found

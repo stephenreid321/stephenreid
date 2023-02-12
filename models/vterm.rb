@@ -6,6 +6,7 @@ class Vterm
   field :definition, type: String
   field :see_also, type: String
   field :weight, type: Integer
+  field :prompt, type: String
 
   def self.admin_fields
     {
@@ -13,6 +14,7 @@ class Vterm
       definition: :text_area,
       see_also: :text,
       weight: :number,
+      prompt: :text,
       network_id: :lookup
     }
   end
@@ -41,11 +43,10 @@ class Vterm
 
   after_save do
     set_definition! if definition.blank?
-    set_see_also! if see_also.blank?
   end
   def set_definition!
     n = 1
-    context = network.hints[term] || network.prompt
+    context = prompt || network.prompt
     openapi_response = OPENAI.post('completions') do |req|
       req.body = { model: 'text-davinci-003', max_tokens: 1024, n: n, prompt:
         "Provide a postgraduate-level definition of the term '#{term}', #{context}.
