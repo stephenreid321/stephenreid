@@ -129,18 +129,23 @@ class Vterm
   end
 
   def tidy_definition
+    self.definition = Vterm.tidy(definition)
+  end
+
+  def self.tidy(text)
     Vterm.dashed_terms_to_undash.each do |term|
-      self.definition = definition.gsub(/#{term}/i, term.gsub('-', ''))
+      text = text.gsub(/#{term}/i, term.gsub('-', ''))
     end
     Vterm.spaced_terms_to_unspace.each do |term|
-      self.definition = definition.gsub(/#{term}/i, term.gsub(' ', ''))
+      text = text.gsub(/#{term}/i, term.gsub(' ', ''))
     end
     Vterm.spaced_terms_to_dash.each do |term|
-      self.definition = definition.gsub(/#{term}/i, term.gsub(' ', '-'))
+      text = text.gsub(/#{term}/i, term.gsub(' ', '-'))
     end
     Vterm.corrections.each do |term, correction|
-      self.definition = definition.gsub(/#{term}/i, correction)
+      text = text.gsub(/#{term}/i, correction)
     end   
+    text
   end
 
   def find_or_create_vedges

@@ -57,22 +57,8 @@ class Video
   end
 
   def tidy
-    Vterm.dashed_terms_to_undash.each do |term|
-      self.transcript = transcript.gsub(/#{term}/i, term.gsub('-', ''))
-      self.text = text.gsub(/#{term}/i, term.gsub('-', ''))
-    end
-    Vterm.spaced_terms_to_unspace.each do |term|
-      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', ''))
-      self.text = text.gsub(/#{term}/i, term.gsub(' ', ''))
-    end
-    Vterm.spaced_terms_to_dash.each do |term|
-      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', '-'))
-      self.text = text.gsub(/#{term}/i, term.gsub(' ', '-'))
-    end
-    Vterm.corrections.each do |term, correction|
-      self.transcript = transcript.gsub(/#{term}/i, correction)
-      self.text = text.gsub(/#{term}/i, correction)
-    end    
+    self.transcript = Vterm.tidy(transcript)
+    self.text = Vterm.tidy(text)
   end
 
   def set_view_count
