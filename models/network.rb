@@ -24,7 +24,7 @@ class Network
   end
 
   def filter_words_a
-    filter_words.split(',').map(&:strip)
+    filter_words ? filter_words.split(',').map(&:strip) : []
   end
 
   def interesting
@@ -39,7 +39,7 @@ class Network
     vterms.where(:id.nin => vedges.pluck(:source_id) + vedges.pluck(:sink_id))
   end
 
-  def populate_vterms
+  def create_edges
     edgeless.each { |source| source.find_or_create_vedges }
     vterms.set(see_also: nil)
     vterms.each { |vterm| vterm.set_see_also! }
