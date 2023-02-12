@@ -1,3 +1,3 @@
 <% form_tag '/k', method: :get do %>
-  <%= select_tag :slug, onchange: '$(this.form).submit()', options: [''] + Network.all.map { |network| [network.name, network.slug] }, selected: (@network.slug if @network), class: 'form-control bg-dark border-0', style: 'height: auto; padding: 0; color: #6f7d91' %>
+  <%= select_tag :slug, onchange: '$(this.form).submit()', options: [''] + Network.order('name asc').map { |network| [network.name, network.slug] }, selected: (@network.slug if @network), class: 'form-control bg-dark border-0', style: 'height: auto; padding: 0; color: #6f7d91' %>
 <% end %>
