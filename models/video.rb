@@ -33,8 +33,7 @@ class Video
 
   def self.tidy!
     Video.all.each do |video|
-      video.tidy_transcript
-      video.set_text
+      video.tidy
       video.save
     end
   end
@@ -46,25 +45,27 @@ class Video
 
   def set_transcript
     r = Faraday.get("https://youtubetranscript.com/?server_vid=#{youtube_id}")
-    self.transcript = r.body.force_encoding('UTF-8')
-    tidy_transcript
-  end
-
-  def tidy_transcript
-    Vterm.dashed_terms_to_undash.each do |term|
-      self.transcript = transcript.gsub(/#{term}/i, term.gsub('-', ''))
-    end
-    Vterm.spaced_terms_to_unspace.each do |term|
-      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', ''))
-    end
-    Vterm.spaced_terms_to_dash.each do |term|
-      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', '-'))
-    end
+    self.transcript = r.body.force_encoding('UTF-8')    
   end
 
   def set_text
     self.text = Nokogiri::XML(transcript.gsub('</text><text', '</text> <text')).text
   end
+
+  def tidy
+    Vterm.dashed_terms_to_undash.each do |term|
+      self.transcript = transcript.gsub(/#{term}/i, term.gsub('-', ''))
+      self.text = text.gsub(/#{term}/i, term.gsub('-', ''))
+    end
+    Vterm.spaced_terms_to_unspace.each do |term|
+      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', ''))
+      self.text = text.gsub(/#{term}/i, term.gsub('-', ''))
+    end
+    Vterm.spaced_terms_to_dash.each do |term|
+      self.transcript = transcript.gsub(/#{term}/i, term.gsub(' ', '-'))
+      self.text = text.gsub(/#{term}/i, term.gsub('-', ''))
+    end
+  end  
 
   def set_view_count
     self.view_count = JSON.parse(Faraday.get("https://returnyoutubedislikeapi.com/votes?videoId=#{youtube_id}").body)['viewCount']
