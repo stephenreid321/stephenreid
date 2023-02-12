@@ -26,7 +26,7 @@ class Video
     set_transcript if transcript.blank?
     set_text if text.blank?
     set_view_count if view_count.blank?
-    errors.add(:title, 'is invalid') unless network.filter_words.empty? || network.filter_words.any? { |word| title.match(/#{word}/i) }
+    errors.add(:title, 'is invalid') unless network.filter_words_a.empty? || network.filter_words_a.any? { |word| title.match(/#{word}/i) }
   end
 
   validates_uniqueness_of :youtube_id

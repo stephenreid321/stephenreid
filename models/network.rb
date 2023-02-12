@@ -5,8 +5,7 @@ class Network
   field :slug, type: String
   field :name, type: String
   field :prompt, type: String
-  field :filter_words, type: Array, default: []
-  field :youtube_ids, type: Array, default: []
+  field :filter_words, type: String
 
   has_many :videos, dependent: :destroy
   has_many :vterms, dependent: :destroy
@@ -16,11 +15,16 @@ class Network
     {
       slug: :text,
       name: :text,
+      filter_words: :text,
       prompt: :text_area,
       videos: :collection,
       vterms: :collection,
       vedges: :collection
     }
+  end
+
+  def filter_words_a
+    filter_words.split(',').map(&:strip)
   end
 
   def interesting
@@ -29,18 +33,13 @@ class Network
 
   def plurals
     interesting.map { |term| term.pluralize }
-  end  
+  end
 
   def edgeless
     vterms.where(:id.nin => vedges.pluck(:source_id) + vedges.pluck(:sink_id))
   end
 
-  def populate_videos
-    youtube_ids.each { |youtube_id| videos.create(youtube_id: youtube_id) }
-  end
-
   def populate_vterms
-    (interesting - vterms.pluck(:term)).each { |term| vterms.create(term: term) }
     edgeless.each { |source| source.find_or_create_vedges }
     vterms.set(see_also: nil)
     vterms.each { |vterm| vterm.set_see_also! }

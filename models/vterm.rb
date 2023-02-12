@@ -11,10 +11,10 @@ class Vterm
   def self.admin_fields
     {
       term: :text,
+      prompt: :text_area,
       definition: :text_area,
       see_also: :text,
       weight: :number,
-      prompt: :text,
       network_id: :lookup
     }
   end
@@ -141,7 +141,7 @@ class Vterm
     d.gsub!(/“(#{term})”/i, %(\\0)) if term.pluralize != term
     d.gsub!(/\b(#{term.pluralize})\b/i, %(<mark class="text-white">\\0</mark>))
     d.gsub!(/\b(#{term})\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
-    (['metacrisis'] + ((network.plurals + network.interesting).uniq - ['metacrisis']) - [term, term.pluralize]).each do |t|
+    (((network.plurals + network.interesting).uniq) - [term, term.pluralize]).each do |t|
       d.gsub!(/\b(#{t})\b/i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
     end
     d
