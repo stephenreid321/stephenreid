@@ -10,3 +10,50 @@ Date::DATE_FORMATS.merge!(
   default: ->(date) { date.strftime("%a #{date.day.ordinalize} %b %Y") },
   post: ->(date) { date.strftime("#{date.day} %b#{" #{date.year}" unless date.year == Date.today.year}") }
 )
+
+
+module ActiveSupport
+  class TimeWithZone
+    def to_s(format = :default)
+      if formatter = Time::DATE_FORMATS[format]
+        if formatter.respond_to?(:call)
+          formatter.call(self).to_s
+        else
+          strftime(formatter)
+        end
+      else
+        to_default_s
+      end
+    end
+  end
+end
+
+class Time
+  def to_s(format = :default)
+    if formatter = Time::DATE_FORMATS[format]
+      if formatter.respond_to?(:call)
+        formatter.call(self).to_s
+      else
+        strftime(formatter)
+      end
+    else
+      to_default_s
+    end
+  end
+end
+
+class Date
+  def to_s(format = :default)
+    if formatter = Date::DATE_FORMATS[format]
+      if formatter.respond_to?(:call)
+        formatter.call(self).to_s
+      else
+        strftime(formatter)
+      end
+    else
+      to_default_s
+    end
+  end
+end
+
+
