@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.3'
+ruby '2.7.7'
 gem 'irb'
 gem 'padrino'
 gem 'puma'
@@ -14,7 +14,7 @@ gem 'activate-tools', github: 'stephenreid321/activate-tools'
 gem 'will_paginate', github: 'mislav/will_paginate'
 
 gem 'airbrake'
-gem 'airrecord'
+gem 'airrecord', '1.0.8'
 gem 'bcrypt'
 gem 'better_html'
 gem 'binance'
