@@ -60,6 +60,14 @@ module StephenReid
       erb :about
     end
 
+    get '/sign_in/:code' do
+      if params[:code] == ENV['SIGN_IN_CODE']
+        session[:account_id] = account.id.to_s
+        flash.now[:success] = 'Signed in!'        
+      end
+      redirect '/'
+    end
+
     %w[books podcasts software discord tarot events svenska-ord svensk-grammatik diet speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i
