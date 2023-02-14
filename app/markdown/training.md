@@ -1,3 +1,17 @@
+### Technical
+
+*   *[Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence/), UC Berkeley (2023)*
+*   MPhys in Physics at the University of Oxford (2004-2008)
+    *   Graduated with first-class honours
+    *   Final year specialisations in quantum field theory and condensed matter physics
+    *   [Dissertation](https://stephenreid.net/reid_report_final.pdf) on community detection in complex networks supervised by [Mason Porter](https://en.wikipedia.org/wiki/Mason_Porter)
+    *   Main tutor [Dr Candadi Sukumar](https://www.wadham.ox.ac.uk/people/emeritus-fellows/s/candadi-sukumar)
+
+*   MRes in Complexity Science at the [Bristol Centre for Complexity Sciences](http://www.bristol.ac.uk/bccs/), University of Bristol (2008-2009)
+    *   Graduated with distinction
+    *   Research projects on automated trading agents in financial markets and synthetic biology
+    *   Lead developer of the software that won Best Model at the [iGEM 2009](https://igem.org/Results?year=2009) competition
+
 ### Meditation
 
 *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Yahel Avigur, based on the teachings of [Rob Burbea](https://tasshin.com/blog/rob-burbea-ordinary-guy-werewolf-eternal-wanderer/) in [Seeing That Frees](https://www.goodreads.com/book/show/25172403-seeing-that-frees) (Oct 2022, 7 days)
@@ -38,38 +52,20 @@
 * Member of the [Natural Voice Network](https://naturalvoice.net/)
 * Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 
-### Online
+### Other
 
 *   [Capra Course](https://www.capracourse.net/) with [Fritjof Capra](https://www.fritjofcapra.net/) on the [The Systems View of Life](https://www.goodreads.com/en/book/show/18554985) (Fall 2022)
 *   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
 *   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
-
-### Other
-
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
+
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://biologyofwonder.org/) (Mar 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
-
-### Physics
-
-*   MPhys in Physics at the University of Oxford (2004-2008)
-    *   Graduated with first-class honours
-    *   Final year specialisations in quantum field theory and condensed matter physics
-    *   [Dissertation](https://stephenreid.net/reid_report_final.pdf) on community detection in complex networks supervised by [Mason Porter](https://en.wikipedia.org/wiki/Mason_Porter)
-    *   Main tutor [Dr Candadi Sukumar](https://www.wadham.ox.ac.uk/people/emeritus-fellows/s/candadi-sukumar)
-
-### Complexity science
-
-*   MRes in Complexity Science at the [Bristol Centre for Complexity Sciences](http://www.bristol.ac.uk/bccs/), University of Bristol (2008-2009)
-    *   Graduated with distinction
-    *   Research projects on automated trading agents in financial markets and synthetic biology
-    *   Lead developer of the software that won Best Model at the [iGEM 2009](https://igem.org/Results?year=2009) competition
-    
 
 ### Burns
 
