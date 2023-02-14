@@ -61,7 +61,7 @@ module StephenReid
     end
 
     get '/sign_in/:code' do
-      if params[:code] == ENV['SIGN_IN_CODE']
+      if params[:code].to_i == ENV['SIGN_IN_CODE']
         session[:account_id] = Account.find_by(admin: true)
         flash.now[:success] = 'Signed in!'        
       end
