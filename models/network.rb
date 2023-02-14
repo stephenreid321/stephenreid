@@ -23,9 +23,11 @@ class Network
     }
   end
 
+  # n = Network.last  
   # y = y.split("\n").map { |id| id.strip }
-  # y.each { |id| puts id; n = Network.last; v = n.videos.create(youtube_id: id); if !v.errors.empty?; puts v.errors.full_messages; end }
+  # y.each { |id| puts id; v = n.videos.create(youtube_id: id); if !v.errors.empty?; puts v.errors.full_messages; end }
 
+  # n.vterms.each { |v| v.set_weight; v.save }
   # n.vterms.each { |x| n.vterms.each { |y| if x.term != y.term && x.term.include?(y.term); puts "#{x.term} includes #{y.term}"; end } }
 
   def filter_words_a

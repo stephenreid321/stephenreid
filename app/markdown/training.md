@@ -6,7 +6,6 @@
     *   Final year specialisations in quantum field theory and condensed matter physics
     *   [Dissertation](https://stephenreid.net/reid_report_final.pdf) on community detection in complex networks supervised by [Mason Porter](https://en.wikipedia.org/wiki/Mason_Porter)
     *   Main tutor [Dr Candadi Sukumar](https://www.wadham.ox.ac.uk/people/emeritus-fellows/s/candadi-sukumar)
-
 *   MRes in Complexity Science at the [Bristol Centre for Complexity Sciences](http://www.bristol.ac.uk/bccs/), University of Bristol (2008-2009)
     *   Graduated with distinction
     *   Research projects on automated trading agents in financial markets and synthetic biology
@@ -59,7 +58,6 @@
 *   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
-
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
