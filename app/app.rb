@@ -13,8 +13,8 @@ module StephenReid
     Sass::Plugin.options[:template_location] = Padrino.root('app', 'assets', 'stylesheets')
     Sass::Plugin.options[:css_location] = Padrino.root('app', 'assets', 'stylesheets')
     use Sass::Plugin::Rack
-
-    set :sessions, expire_after: 1.year
+    
+    use Rack::Session::Cookie, expire_after: 1.year.to_i, secret: ENV['SESSION_SECRET']
     set :public_folder, Padrino.root('app', 'assets')
     set :default_builder, 'ActivateFormBuilder'
 

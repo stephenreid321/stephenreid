@@ -23,6 +23,11 @@ class Network
     }
   end
 
+  # y = y.split("\n").map { |id| id.strip }
+  # y.each { |id| puts id; n = Network.last; v = n.videos.create(youtube_id: id); if !v.errors.empty?; puts v.errors.full_messages; end }
+
+  # n.vterms.each { |x| n.vterms.each { |y| if x.term != y.term && x.term.include?(y.term); puts "#{x.term} includes #{y.term}"; end } }
+
   def filter_words_a
     filter_words ? filter_words.split(',').map(&:strip) : []
   end
@@ -40,13 +45,16 @@ class Network
   end
 
   def create_edges
-    edgeless.each { |source| source.find_or_create_vedges }
+    edgeless.each { |source|      
+      source.find_or_create_vedges
+    }
     vterms.set(see_also: nil)
     vterms.each { |vterm| vterm.set_see_also! }
   end
 
   def find_or_create_vedge(source, sink)
     if !(vedge = vedges.find_by(source: source, sink: sink)) && !(vedge = vedges.find_by(source: sink, sink: source))
+      puts "creating edge for #{source.term} - #{sink.term}"
       vedge = vedges.create(source: source, sink: sink)
     end
     vedge

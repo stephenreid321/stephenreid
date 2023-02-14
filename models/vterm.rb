@@ -105,7 +105,9 @@ class Vterm
       'trans contextual',
       'breath work',
       'micro dose',
-      'micro dosing'
+      'micro dosing',
+      'corona virus',
+      'cosmo vision'
     ]
   end
 
@@ -120,7 +122,8 @@ class Vterm
 
   def self.corrections
     {
-      'lumio' => 'loomio'
+      'lumio' => 'loomio',
+      'cancer culture' => 'cancel culture'
     }
   end
 
