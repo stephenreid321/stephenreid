@@ -6,9 +6,9 @@ GIT
 
 GIT
   remote: https://github.com/stephenreid321/activate-admin.git
-  revision: ef109899438aeacbd8bcb3f0c82f7e24e99588b1
+  revision: 7b8eebdf046346c37b2e12c04fd7ea1cf05a1a12
   specs:
-    activate-admin (0.0.11)
+    activate-admin (0.0.12)
       activate-tools
       padrino
       will_paginate
@@ -220,7 +220,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.14.1)
+    nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     oauth2 (1.4.11)
