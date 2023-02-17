@@ -21,6 +21,13 @@
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
 
+### Coaching & psychotherapy
+
+*   [Accredited Diploma in Transformative Coaching](https://www.animascoaching.com/coach-training-course/) (ICF Level 2), Animas Coaching (2022)
+*   [Foundation in Core Process Psychotherapy](https://www.karunadartmoor.co.uk/introduction-to-core-process-psychotherapy) from the Karuna Institute (Mar 2020)
+*   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
+*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
+
 ### Shipibo plant dietas
 
 *   [Guayusa dieta](https://niweraoxobo.com/project/schedule) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
@@ -30,13 +37,6 @@
 
 * [Wild Mind](https://www.goodreads.com/en/book/show/16000440) Intensive at [Lūžņa](https://www.soulcraft.eu/about), Latvia with [Sage Magdalene](https://sagemagdalene.com/) and [Sara McFarland](https://www.saramcfarland.com/) (Aug 2021)
 * [Betwixt: Exploring the Threshold between Worlds](https://naturewisdom.life/event/betwixt-exploring-the-threshold-between-worlds/) with [Rebecca Card](http://naturewisdom.life/) and [Bell Selkie Lovelock](https://www.bellselkie.co.uk/) (Mar 2022)
-
-### Coaching & psychotherapy
-
-*   [Accredited Diploma in Transformative Coaching](https://www.animascoaching.com/coach-training-course/) (ICF Level 2), Animas Coaching (2022)
-*   [Foundation in Core Process Psychotherapy](https://www.karunadartmoor.co.uk/introduction-to-core-process-psychotherapy) from the Karuna Institute (Mar 2020)
-*   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
-*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 
 ### Conscious sexuality
 
@@ -74,3 +74,4 @@
 ### Triathlons
 
 * Weymouth Sprint Triathlon 2022 (1h38m)
+* *Weymouth Triathlon 2023*
