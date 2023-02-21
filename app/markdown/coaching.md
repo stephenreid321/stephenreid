@@ -36,7 +36,7 @@ Coaching can be distinguished from mentoring and teaching (where the mentor/teac
 
 I offer an initial free half-hour exploratory call, so we can see if we are well-suited to one another. All being well, typically we'd then meet for an hour every other week via Zoom for an initial run of four sessions across two months.
 
-==My usual rate is £100/hour.== I sometimes offer reduced rates for those on low incomes (make a note in the form linked below if this is of interest to you).
+<mark>My usual rate is £100/hour.</mark> I sometimes offer reduced rates for those on low incomes (make a note in the form linked below if this is of interest to you).
 
 I would expect you to attend sessions on time and from a quiet place, free from distractions. If you need to cancel or reschedule a session, I would not charge as long as you provide at least 24 hours notice.
 
