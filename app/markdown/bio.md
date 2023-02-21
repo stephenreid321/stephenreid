@@ -1,4 +1,4 @@
-Stephen Reid is a Ruby/Python developer, facilitator and [coach](https://stephenreid.net/coaching) devoted to the flourishing of [Life on Earth](https://fall.capracourse.net/wp-content/uploads/2020/12/Introduction.pdf) who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine.
+Stephen Reid is a facilitator, [coach](https://stephenreid.net/coaching) and Ruby/Python developer devoted to the flourishing of [Life on Earth](https://fall.capracourse.net/wp-content/uploads/2020/12/Introduction.pdf) who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine.
 
 He is currently working with [Supermodular](https://supermodular.xyz/) on the [metacrisis](http://wiki.metacrisisdao.com), hosting the upcoming [Futurecraft Residency](https://dandelion.earth/e/futurecraft-residency) and leading the development of the [Dandelion](https://dandelion.earth/) platform for regenerative events and co-created gatherings.
 
