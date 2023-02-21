@@ -34,15 +34,9 @@ Coaching can be distinguished from mentoring and teaching (where the mentor/teac
 
 ### Interested in working together?
 
-I offer an initial free half-hour exploratory call, so we can see if we are well-suited to one another.
+I offer an initial free half-hour exploratory call, so we can see if we are well-suited to one another. All being well, typically we'd then meet for an hour every other week via Zoom for an initial run of four sessions across two months.
 
-All being well, typically we'd then meet for an hour every other week via Zoom for an initial run of four sessions across two months.
-
-I ask you to book and pay for four sessions at a time. My rates vary according to your income:
-
-* Under £25k/year: four sessions for £100 (£25/hour, max four sessions at this rate)
-* £25k – £50k/year: four sessions for £200 (£50/hour)
-* Over £50k/year: four sessions for £400 (£100/hour)
+My standard charge is £100/hour. I sometimes offer reduced rates for those on lower incomes.
 
 I would expect you to attend sessions on time and from a quiet place, free from distractions. If you need to cancel or reschedule a session, I would not charge as long as you provide at least 24 hours notice.
 
