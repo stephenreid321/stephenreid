@@ -19,7 +19,7 @@ class Vterm
     }
   end
 
-  belongs_to :network
+  belongs_to :network, index: true
 
   has_many :vedges_as_source, class_name: 'Vedge', inverse_of: :source, dependent: :destroy
   has_many :vedges_as_sink, class_name: 'Vedge', inverse_of: :sink, dependent: :destroy

@@ -23,7 +23,7 @@ class Network
     }
   end
 
-  # n = Network.last  
+  # n = Network.last
   # y = y.split("\n").map { |id| id.strip }
   # y.each { |id| puts id; v = n.videos.create(youtube_id: id); if !v.errors.empty?; puts v.errors.full_messages; end }
 
@@ -47,9 +47,9 @@ class Network
   end
 
   def create_edges
-    edgeless.each { |source|      
+    edgeless.each do |source|
       source.find_or_create_vedges
-    }
+    end
     vterms.set(see_also: nil)
     vterms.each { |vterm| vterm.set_see_also! }
   end

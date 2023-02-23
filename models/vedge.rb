@@ -4,7 +4,7 @@ class Vedge
 
   belongs_to :source, class_name: 'Vterm', inverse_of: :vedges_as_source, index: true
   belongs_to :sink, class_name: 'Vterm', inverse_of: :vedges_as_sink, index: true
-  belongs_to :network
+  belongs_to :network, index: true
 
   field :weight, type: Integer
 
