@@ -168,11 +168,12 @@ class Vterm
       d.gsub!(%r{\b(?<!>)(?<!/)(#{t})(?!<)(?!")\b}i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
     end
     if see_also
+      s = see_also.strip
       ((network.plurals + network.interesting).uniq - [term, term.pluralize]).each do |t|
-        see_also.gsub!(%r{\b(?<!>)(?<!/)(#{t})(?!<)(?!")\b}i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
+        s.gsub!(%r{\b(?<!>)(?<!/)(#{t})(?!<)(?!")\b}i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
       end
-      d += "\n\nSee also: #{see_also}"
-    end    
+      d += "\n\nSee also: #{s}"
+    end
     d
   end
 end
