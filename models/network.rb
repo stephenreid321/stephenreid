@@ -28,7 +28,6 @@ class Network
   # y.each { |id| puts id; v = n.videos.create(youtube_id: id); if !v.errors.empty?; puts v.errors.full_messages; end }
 
   # n.vterms.each { |v| v.set_weight; v.save }
-  # n.vterms.each { |x| n.vterms.each { |y| if x.term != y.term && x.term.include?(y.term); puts "#{x.term} includes #{y.term}"; end } }
 
   def filter_words_a
     filter_words ? filter_words.split(',').map(&:strip) : []
@@ -40,6 +39,16 @@ class Network
 
   def plurals
     interesting.map { |term| term.pluralize }
+  end
+
+  def superterms
+    superterms = []
+    vterms.each do |x|
+      n.vterms.each do |y|
+        superterms << x if x.term != y.term && x.term.include?(y.term)
+      end
+    end
+    superterms
   end
 
   def edgeless
