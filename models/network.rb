@@ -44,7 +44,7 @@ class Network
   def superterms
     superterms = []
     vterms.each do |x|
-      n.vterms.each do |y|
+      vterms.each do |y|
         superterms << x if x.term != y.term && x.term.include?(y.term)
       end
     end
