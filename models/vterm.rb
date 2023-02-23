@@ -163,12 +163,11 @@ class Vterm
     d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
     d.gsub!(/“(#{term.pluralize})”/i, %(\\0))
     d.gsub!(/“(#{term})”/i, %(\\0)) if term.pluralize != term
+    ((network.plurals + network.interesting).uniq - [term, term.pluralize]).each do |t|
+      d.gsub!(/\b(?<!>)(#{t})(?!<)\b/i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
+    end    
     d.gsub!(/\b(?<!>)(#{term.pluralize})(?!<)\b/i, %(<mark class="text-white">\\0</mark>))
     d.gsub!(/\b(?<!>)(#{term})(?!<)\b/i, %(<mark class="text-white">\\0</mark>)) if term.pluralize != term
-    ((network.plurals + network.interesting).uniq - [term, term.pluralize]).each do |t|            
-      d.gsub!(/\b(?<!>)(#{t})(?!<)\b/i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))    
-    end
     d
   end
-
 end
