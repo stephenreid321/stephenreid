@@ -49,9 +49,10 @@ class Network
   def create_edges
     edgeless.each do |source|
       source.find_or_create_vedges
+      source.set_see_also!
     end
-    vterms.set(see_also: nil)
-    vterms.each { |vterm| vterm.set_see_also! }
+    # vterms.set(see_also: nil)
+    # vterms.each { |vterm| vterm.set_see_also! }
   end
 
   def find_or_create_vedge(source, sink)

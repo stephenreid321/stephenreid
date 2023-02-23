@@ -19,7 +19,7 @@ class Video
     }
   end
 
-  belongs_to :network
+  belongs_to :network, index: true
 
   before_validation do
     set_title if title.blank?
