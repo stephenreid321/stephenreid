@@ -158,12 +158,6 @@ class Vterm
 
   def linked_definition
     d = definition.strip
-    if see_also
-      ((network.plurals + network.interesting).uniq - [term, term.pluralize]).each do |t|
-        see_also.gsub!(%r{\b(?<!>)(?<!/)(#{t})(?!<)(?!")\b}i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
-      end
-      d += "\n\nSee also: #{see_also}" 
-    end
     d.gsub!(/‘(#{term.pluralize})’/i, %(\\0))
     d.gsub!(/‘(#{term})’/i, %(\\0)) if term.pluralize != term
     d.gsub!(/“(#{term.pluralize})”/i, %(\\0))
@@ -173,6 +167,12 @@ class Vterm
     ((network.plurals + network.interesting).uniq - [term, term.pluralize]).each do |t|
       d.gsub!(%r{\b(?<!>)(?<!/)(#{t})(?!<)(?!")\b}i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
     end
+    if see_also
+      ((network.plurals + network.interesting).uniq - [term, term.pluralize]).each do |t|
+        see_also.gsub!(%r{\b(?<!>)(?<!/)(#{t})(?!<)(?!")\b}i, %(<a href="/k/#{network.slug}/terms/#{t}">\\0</a>))
+      end
+      d += "\n\nSee also: #{see_also}"
+    end    
     d
   end
 end
