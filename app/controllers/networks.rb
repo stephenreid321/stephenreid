@@ -37,7 +37,7 @@ StephenReid::App.controller do
   end
 
   get '/k/:slug/terms/create/:term' do
-    @vterm = @network.vterms.create(term: params[:term])
+    @vterm = @network.vterms.create(term: params[:term].singularize)
     200
   end
 
