@@ -34,7 +34,7 @@ class Network
   end
 
   def interesting
-    vterms.pluck(:term)
+    vterms.pluck(:term).sort { |t| -t.length }
   end
 
   def plurals
