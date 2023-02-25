@@ -34,11 +34,11 @@ class Network
   end
 
   def interesting
-    vterms.pluck(:term).sort { |t| -t.length }
+    vterms.pluck(:term).sort_by { |t| -t.length }
   end
 
   def plurals
-    interesting.map { |term| term.pluralize }
+    interesting.map(&:pluralize)
   end
 
   def superterms
