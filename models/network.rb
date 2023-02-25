@@ -26,8 +26,7 @@ class Network
   # n = Network.last
   # y = y.split("\n").map { |id| id.strip }
   # y.each { |id| puts id; v = n.videos.create(youtube_id: id); if !v.errors.empty?; puts v.errors.full_messages; end }
-
-  # n.vterms.each { |v| v.set_weight; v.save }
+  # n.create_edges  
 
   def filter_words_a
     filter_words ? filter_words.split(',').map(&:strip) : []
