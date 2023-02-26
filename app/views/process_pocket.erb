@@ -1,7 +1,8 @@
 <% hosts = {} %>
 <% client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN']) %>
-<% items = client.retrieve(detailType: :complete)['list']; items.each do |_id, item|
-                                                             domain = URI(item['resolved_url']).host.gsub('www.', '')
+<% items = client.retrieve(detailType: :complete, count: 100)['list']; items.each do |_id, item|
+                                                             puts item['resolved_url']
+                                                             domain = begin; URI(item['resolved_url']).host.gsub('www.', ''); rescue; next; end
                                                              hosts[domain] = [] unless hosts[domain]
                                                              hosts[domain] << item
                                                            end %>
