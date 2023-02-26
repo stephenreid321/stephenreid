@@ -128,7 +128,7 @@ module StephenReid
       erb :process_pocket
     end
 
-    get '/pocket/:id' do
+    get '/pocket/:id/delete' do
       client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
       url = client.retrieve(detailType: :complete)['list'][params[:id]]['resolved_url']
       client.modify([{ action: 'delete', item_id: params[:id] }])

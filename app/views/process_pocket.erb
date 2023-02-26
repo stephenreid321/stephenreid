@@ -16,7 +16,8 @@
   <% items.sort_by { |item| params[:order] ? item[params[:order]] : item['resolved_title'].parameterize }.each { |item| %>
   <li>
     <h4>
-      <a onclick="$(this).closest('li').remove()" href="/pocket/<%= item['item_id'] %>"><%= !item['resolved_title'].blank? ? item['resolved_title'] : item['resolved_url'] %></a>
+      <a href="<%=item['resolved_url']%>"><%= !item['resolved_title'].blank? ? item['resolved_title'] : item['resolved_url'] %></a>
+      <a onclick="$.get('/pocket/<%= item['item_id'] %>/delete'); $(this).closest('li').remove()" href="javascript:;"><i class="fa fa-times"></i></a>
     </h4>
   </li>
   <% } %>
