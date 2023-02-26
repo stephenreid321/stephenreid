@@ -6,8 +6,6 @@
                                                              hosts[domain] = [] unless hosts[domain]
                                                              hosts[domain] << item
                                                            end %>
-<h1 class="text-center"><%= pluralize items.count, 'unread item' %></h1>
-<p><%= items.first[1].keys.join(' ') %></p>
 <% hosts.sort_by { |_domain, items| -items.count }.each { |domain, items| %>
 <h3><%= domain %>
   <span class="badge badge-primary"><%= items.count %></span>
