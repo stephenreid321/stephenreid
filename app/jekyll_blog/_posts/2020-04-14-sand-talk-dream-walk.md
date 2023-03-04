@@ -1,7 +1,7 @@
 ---
 title: "Sand Talk Dream Walk"
 excerpt: A guided meditation ('dream walk') featured in the book Sand Talk by Indigenous author Tyson Yunkaporta.
-header_image_url: /blog/assets/2020-04-14-sand-talk-dream-walk/c44b87_11d8a55d213a48f0bd79786338f9d5cb_mv2.jpg
+header_image_url: assets/c44b87_11d8a55d213a48f0bd79786338f9d5cb_mv2.jpg
 ---
 
 *A guided meditation ('dream walk') featured in the book [Sand Talk: How Indigenous Thinking Can Save the World](https://www.goodreads.com/book/show/45449501-sand-talk) by Indigenous Australian author Tyson Yunkaporta.*

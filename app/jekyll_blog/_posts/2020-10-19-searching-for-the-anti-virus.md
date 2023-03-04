@@ -1,7 +1,7 @@
 ---
 title: "Compassion and trust are the ultimate anti-viruses of Wetiko"
 excerpt: Can we entertain the possibility that we as humanity – or some deeper part of ourselves, whether conscious or not – have dreamed this moment into existence as a catalyst for our collective evolution?
-header_image_url: /blog/assets/2020-10-19-searching-for-the-anti-virus/split.jpeg
+header_image_url: assets/split.jpeg
 ---
 
 *Written by [Martin Winiecki](https://www.tamera.org/martin-winiecki/), first published in [Kosmos Journal](https://www.kosmosjournal.org/kj_article/searching-for-the-anti-virus-covid-19-as-quantum-phenomenon/). Highlights my own.*

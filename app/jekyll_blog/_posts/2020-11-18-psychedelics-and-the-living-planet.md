@@ -1,7 +1,7 @@
 ---
 title: "Psychedelics and the Living Planet"
 excerpt: Notes from a talk I gave to the Cambridge Psychedelic Society 
-header_image_url: /blog/assets/2020-11-18-psychedelics-and-the-living-planet/Lost-Gardens-of-Heligan-Sculpture.jpg
+header_image_url: assets/Lost-Gardens-of-Heligan-Sculpture.jpg
 ---
 
 > "If the self is expanded to include the natural world, behavior leading to destruction of this world will be experienced as self-destruction."

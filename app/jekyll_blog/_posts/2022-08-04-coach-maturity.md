@@ -1,7 +1,7 @@
 ---
 title: "Coach maturity: An emerging concept"
 excerpt: Defining quality in coaching
-header_image_url: /blog/assets/2022-08-04-coach-maturity/dunamis-church-Y_kIawhP8gc-unsplash.jpg
+header_image_url: assets/dunamis-church-Y_kIawhP8gc-unsplash.jpg
 ---
 
 *Written by [Professor David Clutterbuck and Professor David Megginson](https://www.davidclutterbuckpartnership.com/wp-content/uploads/Coach-maturity.pdf). Highlights my own.*

@@ -1,7 +1,7 @@
 ---
 title: "Relative Utopia"
 excerpt: The problems of old have all but vanished, just as new ones have appeared—as dark clouds on the horizon, growing cracks in the walls, and new subtle knots within our hearts and minds. A metamodern society is one in which the problems that emerged in modernity—lack of sustainability, excess inequality, alienation and stress—have been resolved.
-header_image_url: /blog/assets/2019-11-22-relative-utopia/fifth.jpg
+header_image_url: assets/fifth.jpg
 ---
 
 *Chapter 1 of [Nordic Ideology](https://www.goodreads.com/book/show/47157252-nordic-ideology) by [Hanzi Freinacht](https://www.facebook.com/profile.php?id=100015149321507)*

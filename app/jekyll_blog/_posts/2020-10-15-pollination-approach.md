@@ -1,7 +1,7 @@
 ---
 title: "The Pollination Approach"
 excerpt: The Pollination Approach focuses on the intrinsically interdependent production of individual and community wellness
-header_image_url: /blog/assets/2020-10-15-pollination-approach/bee.jpeg
+header_image_url: assets/bee.jpeg
 ---
 
 *Written by [Bennet A. Zelner](https://www.rhsmith.umd.edu/directory/bennet-zelner), first published in [MAPS Bulletin Spring 2020: Vol. 30, No. 1](https://maps.org/news/bulletin/articles/439-bulletin-spring-2020/8131-the-pollination-approach-to-delivering-psychedelic-assisted-mental-healthcare). Highlights my own.*
