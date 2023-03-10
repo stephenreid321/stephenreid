@@ -44,13 +44,11 @@ StephenReid::App.controller do
   get '/k/:slug/terms/:term' do
     redirect "/k/#{params[:slug]}/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && @network.vterms.find_by(term: params[:term].singularize)
     @vterm = @network.vterms.find_by(term: params[:term]) || not_found
-    @videos = @vterm.videos.paginate(page: params[:page], per_page: 10)
     erb :'k/term'
   end
 
   get '/k/:slug/edges/:id' do
     @vedge = @network.vedges.find(params[:id]) || not_found
-    @videos = @vedge.videos.paginate(page: params[:page], per_page: 10)
     erb :'k/edge'
   end
 

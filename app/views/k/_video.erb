@@ -1,0 +1,14 @@
+  <% terms = video.term(@vterm.term) %>
+<% if terms.count > 0 %>
+  <h2 class="regular">
+    <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
+      <%=video.title.gsub(' - YouTube','') %>
+    </a>
+    <span class="badge badge-primary"><%=pluralize video.view_count, 'view' %></span>
+  </h2>
+  <ul>
+    <% terms.each { |time, line| %>
+    <li><a target="_blank" class="text-body" href="https://www.youtube.com/watch?v=<%=video.youtube_id%>&t=<%=time%>s"><%=line%></a></li>
+    <% } %>
+  </ul>
+<% end %>

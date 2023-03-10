@@ -34,27 +34,20 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
   </div>
 </div>
 
-<% @videos = @videos.order(@network.mentions ? 'title asc' : 'view_count desc') %>
-<% @videos.each { |video| %>
-<% terms = video.term(@vterm.term) %>
-<% if terms.count > 0 %>
-  <h2 class="regular">
-    <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
-      <%=video.title.gsub(' - YouTube','') %>
-    </a>
-    <% if @network.mentions %>
-      <span class="badge badge-primary"><%=pluralize terms.count, 'mention'%></span>
-    <% else %>
-      <span class="badge badge-primary"><%=pluralize video.view_count, 'view' %></span>
-    <% end %>
-  </h2>
-  <ul>
-    <% terms.each { |time, line| %>
-    <li><a target="_blank" class="text-body" href="https://www.youtube.com/watch?v=<%=video.youtube_id%>&t=<%=time%>s"><%=line%></a></li>
-    <% } %>
-  </ul>
+
+<% if @network.mentions %>
+  <% vtermships = @vterm.vtermships.order('weight desc') %>
+  <% vtermships = vtermships.paginate(page: params[:page], per_page: 10) %>
+  <% vtermships.each { |vtermship| %>
+  <%= partial :'k/video', locals: {video: vtermship.video} %>
+  <% } %>
+<% else %>
+  <% videos = @vterm.videos.paginate(page: params[:page], per_page: 10) %>
+  <% videos = videos.order(@network.mentions ? 'title asc' : 'view_count desc') %>
+  <% videos.each { |video| %>
+  <%= partial :'k/video', locals: {video: video} %>
+  <% } %>
 <% end %>
-<% } %>
 
 <div class="row justify-content-center">
   <div class="col-auto">

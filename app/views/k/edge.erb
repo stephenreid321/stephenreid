@@ -40,7 +40,9 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
 %>
 </div>
 
-<% @videos.order('view_count desc').each { |video| %>
+<% videos = @vedge.videos.paginate(page: params[:page], per_page: 10) %>
+<% videos = videos.order('view_count desc') %>
+<% videos.each { |video| %>
 <% terms = video.terms(@vedge.source.term, @vedge.sink.term) %>
 <% if terms.count > 0 %>
   <h2 class="regular">
