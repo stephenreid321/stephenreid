@@ -10,6 +10,7 @@ class Network
 
   has_many :videos, dependent: :destroy
   has_many :vterms, dependent: :destroy
+  has_many :vtermships, dependent: :destroy
   has_many :vedges, dependent: :destroy
 
   def self.admin_fields

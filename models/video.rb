@@ -20,6 +20,8 @@ class Video
   end
 
   belongs_to :network, index: true
+  
+  has_many :vtermships, dependent: :destroy
 
   before_validation do
     set_title if title.blank?
