@@ -3,7 +3,11 @@
     <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
       <%=video.title.gsub(' - YouTube','') %>
     </a>
-    <span class="badge badge-primary"><%=pluralize video.view_count, 'view' %></span>
+    <% if defined?(vtermship) %>
+      <span class="badge badge-primary"><%=pluralize vtermship.weight, 'mention' %></span>
+    <% else %>
+      <span class="badge badge-primary"><%=pluralize video.view_count, 'view' %></span>
+    <% end %>
   </h2>
   <ul>
     <% terms.each { |time, line| %>

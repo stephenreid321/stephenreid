@@ -43,8 +43,7 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
 <% videos = @vedge.videos.paginate(page: params[:page], per_page: 10) %>
 <% videos = videos.order('view_count desc') %>
 <% videos.each { |video| %>
-<% terms = video.terms(@vedge.source.term, @vedge.sink.term) %>
-<%= partial :'k/video', locals: {video: video, terms: terms} %>
+<%= partial :'k/video', locals: {video: video, terms: video.terms(@vedge.source.term, @vedge.sink.term)} %>
 <% } %>
 
 <div class="row justify-content-center">

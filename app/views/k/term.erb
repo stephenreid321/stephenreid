@@ -39,8 +39,7 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
   <% vtermships = @vterm.vtermships.order('weight desc') %>
   <% vtermships = vtermships.paginate(page: params[:page], per_page: 10) %>
   <% vtermships.each { |vtermship| %>
-  <% terms = vtermship.video.term(@vterm.term) %>
-  <%= partial :'k/video', locals: {video: vtermship.video, terms: terms} %>
+  <%= partial :'k/video', locals: {vtermship: vtermship, video: vtermship.video, terms: vtermship.video.term(@vterm.term)} %>
   <% } %>
   <div class="row justify-content-center">
     <div class="col-auto">
@@ -51,8 +50,7 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
   <% videos = @vterm.videos.paginate(page: params[:page], per_page: 10) %>
   <% videos = videos.order(@network.mentions ? 'title asc' : 'view_count desc') %>
   <% videos.each { |video| %>
-  <% terms = video.term(@vterm.term) %>
-  <%= partial :'k/video', locals: {video: video, terms: terms} %>
+  <%= partial :'k/video', locals: {video: video, terms: terms = video.term(@vterm.term)} %>
   <% } %>
   <div class="row justify-content-center">
     <div class="col-auto">
