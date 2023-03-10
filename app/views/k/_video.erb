@@ -6,7 +6,7 @@
     <% if defined?(vtermship) %>
       <span class="badge badge-primary"><%=pluralize vtermship.weight, 'mention' %></span>
     <% else %>
-      <span class="badge badge-primary"><%=pluralize video.view_count, 'view' %></span>
+      <span class="badge badge-primary"><%=number_with_delimiter video.view_count %></span>
     <% end %>
   </h2>
   <ul>
