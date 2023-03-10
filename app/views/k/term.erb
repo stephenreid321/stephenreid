@@ -36,7 +36,7 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
 
 
 <% if @network.mentions %>
-  <% vtermships = @vterm.vtermships.order('weight desc') %>
+  <% vtermships = @vterm.vtermships.where(:weight.gt => 0).order('weight desc') %>
   <% vtermships = vtermships.paginate(page: params[:page], per_page: 10) %>
   <% vtermships.each { |vtermship| %>
   <%= partial :'k/video', locals: {vtermship: vtermship, video: vtermship.video, terms: vtermship.video.term(@vterm.term)} %>
