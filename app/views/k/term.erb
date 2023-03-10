@@ -34,7 +34,7 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
   </div>
 </div>
 
-<% @videos = @videos.order(@network.alphabetize ? 'name asc' : 'view_count desc') %>
+<% @videos = @videos.order(@network.alphabetize ? 'term asc' : 'view_count desc') %>
 <% @videos.each { |video| %>
 <% terms = video.term(@vterm.term) %>
 <% if terms.count > 0 %>
