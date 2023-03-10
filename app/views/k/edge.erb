@@ -44,23 +44,11 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
 <% videos = videos.order('view_count desc') %>
 <% videos.each { |video| %>
 <% terms = video.terms(@vedge.source.term, @vedge.sink.term) %>
-<% if terms.count > 0 %>
-  <h2 class="regular">
-    <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
-      <%=video.title.gsub(' - YouTube','') %>
-    </a>
-    <span class="badge badge-primary"><%=number_with_delimiter video.view_count%></span>
-  </h2>
-  <ul>
-    <% terms.each { |time, line| %>
-    <li><a target="_blank" class="text-body" href="https://www.youtube.com/watch?v=<%=video.youtube_id%>&t=<%=time%>s"><%=line%></a></li>
-    <% } %>
-  </ul>
-<% end %>
+<%= partial :'k/video', locals: {video: video, terms: terms} %>
 <% } %>
 
 <div class="row justify-content-center">
   <div class="col-auto">
-    <%= will_paginate @videos, renderer: WillPaginate::ViewHelpers::BootstrapRenderer %>
+    <%= will_paginate videos, renderer: WillPaginate::ViewHelpers::BootstrapRenderer %>
   </div>
 </div>
