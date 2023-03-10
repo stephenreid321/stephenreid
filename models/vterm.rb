@@ -87,6 +87,7 @@ class Vterm
       multi-polar
       non-linear
       hyper-normal
+      soul-making
     ]
   end
 
@@ -107,7 +108,8 @@ class Vterm
       'micro dose',
       'micro dosing',
       'corona virus',
-      'cosmo vision'
+      'cosmo vision',
+      'soul making'
     ]
   end
 
@@ -123,7 +125,10 @@ class Vterm
   def self.corrections
     {
       'lumio' => 'loomio',
-      'cancer culture' => 'cancel culture'
+      'cancer culture' => 'cancel culture',
+      'inside meditation' => 'insight meditation',
+      'meta practice' => 'metta practice',
+      'jana' => 'jhana'
     }
   end
 

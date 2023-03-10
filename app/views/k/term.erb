@@ -34,14 +34,19 @@ partial :'k/network', locals: {vterms: vterms, vedges: vedges}
   </div>
 </div>
 
-<% @videos.order('view_count desc').each { |video| %>
+<% @videos = @videos.order(@network.alphabetize ? 'name asc' : 'view_count desc') %>
+<% @videos.each { |video| %>
 <% terms = video.term(@vterm.term) %>
 <% if terms.count > 0 %>
   <h2 class="regular">
     <a target="_blank" class="text-white" href="https://youtu.be/<%=video.youtube_id%>">
       <%=video.title.gsub(' - YouTube','') %>
     </a>
-    <span class="badge badge-primary"><%=number_with_delimiter video.view_count%></span>
+    <% if @network.alphabetize %>
+      <span class="badge badge-primary"><%=pluralize terms.count, 'mention'%></span>
+    <% else %>
+      <span class="badge badge-primary"><%=pluralize video.view_count, 'view' %></span>
+    <% end %>
   </h2>
   <ul>
     <% terms.each { |time, line| %>

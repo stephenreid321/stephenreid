@@ -6,6 +6,7 @@ class Network
   field :name, type: String
   field :prompt, type: String
   field :filter_words, type: String
+  field :alphabetize, type: Boolean
 
   has_many :videos, dependent: :destroy
   has_many :vterms, dependent: :destroy
@@ -16,6 +17,7 @@ class Network
       slug: :text,
       name: :text,
       filter_words: :text,
+      alphabetize: :check_box,
       prompt: :text_area,
       videos: :collection,
       vterms: :collection,
@@ -26,7 +28,7 @@ class Network
   # n = Network.last
   # y = y.split("\n").map { |id| id.strip }
   # y.each { |id| puts id; v = n.videos.create(youtube_id: id); if !v.errors.empty?; puts v.errors.full_messages; end }
-  # n.create_edges  
+  # n.create_edges
 
   def filter_words_a
     filter_words ? filter_words.split(',').map(&:strip) : []
