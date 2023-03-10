@@ -6,7 +6,7 @@ class Network
   field :name, type: String
   field :prompt, type: String
   field :filter_words, type: String
-  field :alphabetize, type: Boolean
+  field :mentions, type: Boolean
 
   has_many :videos, dependent: :destroy
   has_many :vterms, dependent: :destroy
@@ -17,7 +17,7 @@ class Network
       slug: :text,
       name: :text,
       filter_words: :text,
-      alphabetize: :check_box,
+      mentions: :check_box,
       prompt: :text_area,
       videos: :collection,
       vterms: :collection,
