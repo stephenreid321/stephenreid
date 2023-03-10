@@ -55,9 +55,11 @@
   cy.on('tap', 'node', function(){
   window.location.href = '/k/<%=@network.slug%>/terms/' + this.data('name');
   });
+  <% unless @network.mentions %>
   cy.on('tap', 'edge', function(){
   window.location.href = '/k/<%=@network.slug%>/edges/' + this.data('id');
   });
+  <% end %>
   cy.minZoom(0.5)
 
   }
