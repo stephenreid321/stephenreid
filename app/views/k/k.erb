@@ -1,7 +1,37 @@
-<p class="lead">
-  Select a thinker:
-</p>
-
-<% form_tag '/k', method: :get do %>
-  <%= select_tag :slug, onchange: '$(this.form).submit()', options: [''] + Network.order('name asc').map { |network| [network.name, network.slug] }, selected: (@network.slug if @network), class: 'form-control bg-dark border-0', style: 'color: #6f7d91' %>
-<% end %>
+<style>
+  a.network { height: 50vw; position: relative; }
+  @media (min-width: 576px) {
+    a.network {
+      height: 20vw;
+    }
+  }
+</style>
+<div class="row">
+  <% Network.order('name asc').shuffle.map { |network| %>
+  <style>
+    #network-<%=network.slug%>::before {
+      content: "";
+      background-image: url('/images/portraits/<%=network.slug%>.jpg');
+      background-size: cover;
+      background-position: center center;
+      position: absolute;
+      opacity: 0.25;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+    }
+    #network-<%=network.slug%>:hover::before { opacity: 1; transition: opacity .25s ease-in-out; }
+    #network-<%=network.slug%>:hover h2 { opacity: 0; transition: opacity .25s ease-in-out; }
+  </style>
+  <div class="col-12 col-sm-3">
+    <a class="network mb-3" id="network-<%=network.slug%>" href="/k/<%=network.slug%>" style="text-decoration: none; display: block; width: 100%;">
+      <div class="h-100 row justify-content-center align-items-center">
+        <div class="col text-center text-white">
+          <h2 class="regular"><%= network.name %></h2>
+        </div>
+      </div>
+    </a>
+  </div>
+  <% } %>
+</div>
