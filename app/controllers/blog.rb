@@ -18,7 +18,7 @@ StephenReid::App.controller do
     content = File.binread(file_path)
     content_type = MIME::Types.type_for(file_path).first.content_type
     if content_type == 'text/html'
-      content = content.gsub!('assets/', '/jekyll/')
+      content.gsub!('assets/', '/jekyll/')
       html = Nokogiri::HTML.parse(content)
       @title = (t = html.search('.post-title').text
                 t.empty? ? 'Blog' : t)
