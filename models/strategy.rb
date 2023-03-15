@@ -209,7 +209,7 @@ class Strategy
     strategies.each_with_index do |strategy, i|
       puts "#{i + 1}/#{count}"
       strategy.holdings.each do |holding|
-        asset = if %w[USDT TUSD DAI PAXG].include?(holding.asset.ticker)
+        asset = if %w[USDT TUSD DAI USDC PAXG].include?(holding.asset.ticker)
                   Asset.find_by(ticker: 'PAXG')
                 else
                   holding.asset
