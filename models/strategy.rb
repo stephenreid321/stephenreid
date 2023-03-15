@@ -210,7 +210,7 @@ class Strategy
       puts "#{i + 1}/#{count}"
       strategy.holdings.each do |holding|
         asset = if %w[USDT TUSD DAI PAXG].include?(holding.asset.ticker)
-                  Asset.find_by(ticker: 'USDC')
+                  Asset.find_by(ticker: 'PAXG')
                 else
                   holding.asset
                 end
