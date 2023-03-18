@@ -1,0 +1,3 @@
+<% form_tag '/metastrategy/n', class: 'form-inline d-inline' do %>
+  <%= number_field_tag :n, onchange: '$(this.form).submit()', class: 'form-control', style: 'width: 4em', value: Stash.find_by(key: 'number_of_assets').value.to_i %>
+<% end %>

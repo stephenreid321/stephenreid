@@ -47,17 +47,21 @@
 </div>
 <p class="text-center">
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
-  <% if current_account %>
-    &middot;
+</p>
+
+
+<% if current_account %>
+  <div class="text-center mb-3">
+    <div class="d-inline" data-pagelet-url="/metastrategy/n"></div>
     <a href="/metastrategy/propose">Propose</a>
     &middot;
     <a data-confirm="Are you sure you want to rebalance?" href="/metastrategy/rebalance">Rebalance</a>
-  <% end %>
+  </div>
+
   <% Delayed::Job.and(handler: /method_name: :rebalance/).each { |delayed_job| %>
   &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%= delayed_job.run_at %>"><%= time_ago_in_words delayed_job.run_at %></abbr>
   <% } %>
-</p>
-<% if current_account %>
+
   <% if Strategy.and(:status.ne => 'verified').count > 0 || Asset.and(:status.ne => 'verified').count > 0 %>
     <p class="text-center">
       <% if Asset.and(:status.ne => 'verified').count > 0 %>
@@ -76,6 +80,8 @@
     </p>
   <% end %>
 <% end %>
+
+
 <table class="table mt-3" style="width: auto; margin: auto">
   <thead style="border-top: none">
     <tr>
