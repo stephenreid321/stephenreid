@@ -58,10 +58,6 @@
     <a data-confirm="Are you sure you want to rebalance?" href="/metastrategy/rebalance">Rebalance</a>
   </div>
 
-  <% Delayed::Job.and(handler: /method_name: :rebalance/).each { |delayed_job| %>
-  &middot; Rebalancing in <abbr data-toggle="tooltip" title="<%= delayed_job.run_at %>"><%= time_ago_in_words delayed_job.run_at %></abbr>
-  <% } %>
-
   <% if Strategy.and(:status.ne => 'verified').count > 0 || Asset.and(:status.ne => 'verified').count > 0 %>
     <p class="text-center">
       <% if Asset.and(:status.ne => 'verified').count > 0 %>
