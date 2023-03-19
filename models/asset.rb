@@ -9,7 +9,7 @@ class Asset
   field :status, type: String
 
   validates_presence_of :ticker
-  validates :multiplier, numericality: { greater_than_or_equal_to: 0.5, less_than_or_equal_to: 4, allow_nil: true }
+  validates :multiplier, numericality: { greater_than_or_equal_to: 0.25, less_than_or_equal_to: 4, allow_nil: true }
 
   has_many :holdings, dependent: :destroy
 
