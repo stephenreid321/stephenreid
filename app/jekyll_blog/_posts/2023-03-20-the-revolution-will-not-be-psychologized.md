@@ -786,7 +786,7 @@ Another day in awe of the shine.
 
 Another day in awe of the shine.
 
-And that shine reminds that in precarious times, the revolution, the revolution, the revolution will be bactified.
+And that shine reminds that in precarious times, the revolution, the revolution, the revolution will be bhaktified.
 
 So devotional fervor in these times gets a pretty bad rap, right?
 
