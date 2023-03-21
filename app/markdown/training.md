@@ -39,7 +39,7 @@
 
 ### Conscious sexuality
 
-*   Trainings with [Elaine Yonge](https://www.elaineyonge.com/) (Sep 2019, Apr 2022)
+*   Trainings with [Elaine Yonge](https://www.elaineyonge.com/) (Sep 2019, Apr 2022, *Sep 2023*)
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
 

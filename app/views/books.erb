@@ -31,6 +31,9 @@
   </div>
   <div id="books" class="col-lg-8">
 
+    <h2 id="currently-reading">Currently reading</h2>
+    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=currently-reading&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
+
     <h2 id="recently-read">Recently read</h2>
     <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=read&num_books=9&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
 
@@ -58,9 +61,6 @@ somatics
     <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=<%=shelf.downcase%>&num_books=100&sort=avg_rating&order=d" type="text/javascript" charset="utf-8"></script>
 
     <% } %>
-
-    <h2 id="currently-reading">Currently reading</h2>
-    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=currently-reading&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
 
     <h2 id="reading-soon">Reading soon</h2>
     <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=reading-soon&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
