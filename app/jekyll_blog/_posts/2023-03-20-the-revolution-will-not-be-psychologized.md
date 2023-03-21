@@ -1,7 +1,7 @@
 ---
 title: "The Revolution Will Not Be Psychologized"
 excerpt: A breath resounds with ecstatic shouts and cries beyond doubt that the revolution- the revolution, will not be psychologized.
-header_image_url: assets/Pasted image 20230320213728.png
+header_image_url: assets/Pasted image 20230320213728.jpg
 ---
 
 *Transcript of [The Revolution Will Not Be Psychologized by The Emerald](https://open.spotify.com/episode/3e5bkfY8mCsdhb9H39dHmy)*
