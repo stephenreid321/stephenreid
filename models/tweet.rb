@@ -103,7 +103,7 @@ class Tweet
     # }.merge(r.body['data'].map { |x| [x['name'], "lists/#{x['id']}/tweets"] }.to_h)
     timelines.each do |timeline, (url, refresh_time)|
       first_tweet = Tweet.where(timeline: timeline).order('created_at desc').first
-      next if refresh_time && first_tweet && first_tweet.created_at < refresh_time
+      next if refresh_time && first_tweet && first_tweet.created_at > refresh_time
 
       Tweet.delete_all(timeline: timeline)
       tweets = Tweet.timeline(url)
