@@ -22,7 +22,7 @@ class Tweet
     end
   end
 
-  def self.timeline(url)
+  def self.timeline(url, start_time: nil)
     tweets = []
     users = []
     media = []
@@ -42,6 +42,7 @@ class Tweet
       referenced_tweets += r.body['includes']['tweets'] if r.body['includes'] && r.body['includes']['tweets']
       pagination_token = r.body['meta']['next_token']
       puts pagination_token
+      break if start_time && Time.iso8601(tweets.last['created_at']) < start_time
     end
     tweets.each do |t|
       t['user'] = users.find { |u| u['id'] == t['author_id'] }
@@ -96,13 +97,14 @@ class Tweet
     Tweet.delete_all
     r = Tweet.api.get("users/#{ENV['TWITTER_USER_ID']}/owned_lists")
     timelines = {
-      'Home' => "users/#{ENV['TWITTER_USER_ID']}/timelines/reverse_chronological",
-      'Crypto Twitter' => 'lists/1585548222935736321/tweets',
-      'Greenpill' => 'lists/1610587490670317573/tweets'
+      'Home' => ["users/#{ENV['TWITTER_USER_ID']}/timelines/reverse_chronological", nil],
+      'Crypto Twitter' => ['lists/1585548222935736321/tweets', 3.days.ago],
+      'Greenpill' => ['lists/1610587490670317573/tweets', 3.days.ago],
+      'Contemplatives' => ['lists/1610571716199055360/tweets', 3.days.ago]
     }
     # }.merge(r.body['data'].map { |x| [x['name'], "lists/#{x['id']}/tweets"] }.to_h)
-    timelines.each do |timeline, url|
-      tweets = Tweet.timeline(url)
+    timelines.each do |timeline, (url, start_time)|
+      tweets = Tweet.timeline(url, start_time: start_time)
       tweets.each do |t|
         Tweet.create(data: t, timeline: timeline)
       end
