@@ -1,6 +1,6 @@
 ---
 title: "A Manifesto of Apocalyptic Witchcraft"
-header_image_url: assets/1_wJZR5U-_CtPNpiIZ1em32w.jpeg
+header_image_url: assets/image/1_wJZR5U-_CtPNpiIZ1em32w.jpeg
 ---
 
 1. If the land is poisoned, the witchcraft must respond.

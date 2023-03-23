@@ -1,7 +1,7 @@
 ---
 title: "Seeing through Dualities, Deepening in Emptiness"
 excerpt: To mark the completion of the Seeing through Dualities, Deepening in Emptiness course, two of my favourite passages from Seeing That Frees
-header_image_url: assets/Pasted image 20230313115520.png
+header_image_url: assets/image/Pasted image 20230313115520.png
 ---
 *To mark the completion of the [Seeing through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) course, here are two of my favourite passage from [Seeing That Frees](https://www.goodreads.com/en/book/show/25172403):*
 

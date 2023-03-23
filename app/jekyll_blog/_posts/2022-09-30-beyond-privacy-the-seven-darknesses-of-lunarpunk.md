@@ -1,7 +1,7 @@
 ---
 title: "Beyond Privacy: The Seven Darknesses of Lunarpunk"
 excerpt: "Expanding notions of lunarpunk in web3"
-header_image_url: assets/0.jpg
+header_image_url: assets/image/0.jpg
 ---
 
 > You darkness from which I come,  
@@ -37,7 +37,7 @@ Lunarpunks understand that there is nothing inherently bad or wrong about the da
 ## Darkness of Privacy
 Key technology: cryptography, as explored in [Lunarpunk and the Dark Side of the Cycle](https://www.egirlcapital.com/writings/107533289) by [@lunar_mining](https://twitter.com/lunar_mining)
 
-![img](assets/1.jpg)
+![img](assets/image/1.jpg)
 
 *"Strong cryptography can resist an unlimited application of violence. No amount of coercive force will ever solve a math problem."* &mdash; [Cypherpunks: Freedom and the Future of the Internet](https://www.goodreads.com/book/show/16153182-cypherpunks)
 
@@ -48,7 +48,7 @@ Lunarpunks are masters of cryptography. They understand how pseudonymity grants 
 ## Darkness of Attention
 Key psychotechnology: mastering of submissive/dominant attention, as explored by [Kasia Urbaniak](https://www.kasiaurbaniak.com/)
 
-![img](assets/2.jpg)
+![img](assets/image/2.jpg)
 
 *"I understood that both the Taoist nuns and dominatrices I most admired were powerful precisely because they could control that conversation under the conversation—and it wasn’t through a self-conscious manipulation of their body language. Instead, they did so with something far more powerful and primal: their attention.*
 
@@ -59,7 +59,7 @@ Lunarpunks are masters of attention, both submissive (inward) and dominant (outw
 ## Darkness of Suffering
 Key psychotechnology: [Existential Kink](https://www.goodreads.com/book/show/50915816-existential-kink) by Carolyn Elliott
 
-![img](assets/3.jpg)
+![img](assets/image/3.jpg)
 
 *"One does not become enlightened by imagining figures of light, but by making the darkness conscious… Until you make the unconscious, conscious, it will rule your life and you will call it Fate."* ― C.G. Jung
 
@@ -70,7 +70,7 @@ Lunarpunks are highly attuned to their fears, aversions and dislikes, and see al
 ## Darkness of Eros
 Key psychotechnology: harnessing the [Light/Dark Masculine/Feminine](https://www.facebook.com/RadicalWomenCommunity/posts/pfbid02xdxph6ZhNqzb4omvz2uFUnzxL5Z9eHARmxkxTh68N5exSWY1R5RbYd4yqhMeFRXRl) as explored by [ISTA](https://ista.life/trainings/ista-level-2)
 
-![img](assets/4.jpg)
+![img](assets/image/4.jpg)
 
 *"The DARK FEMININE: sensual pleasure, erotic wisdom, emotional fluidity, and naked authenticity. This energy has a sexual sovereignty, the capacity to attract/magnetize, and the willingness to feel everything, even the most apparently ugly, desperate, and suffering parts of life. The shadow expression is manipulation, power games, chaoticness, vengeance, and emotionally explosive. The stunted version is frigidity (rejection or judgment of sensual and sexual pleasure), and emotionally, physically or sexually detached."* &mdash; [A Brief Introduction to The Cross](https://www.rememberyourself.live/a-brief-introduction-to-the-cross/)
 
@@ -79,7 +79,7 @@ Lunarpunks healthily express all four archetypes of the [dark/light masculine/fe
 ## Darkness of Plants
 Key psychotechnology: plant medicine, especially ayahuasca ("vine of death") as practised by the [Shipibo](https://niweraoxobo.com/)
 
-![img](assets/5.jpg)
+![img](assets/image/5.jpg)
 
 *"Ayahuasca is not a recreational drug taken for entertainment, relaxation, or escapism. The medicine does not allow us to suppress issues and escape reality. In fact, quite the opposite is typically the case. Ayahuasca compels us to face, resolve, and release issues that have been buried throughout our lives."* &mdash; [Temple of the Way of Light](https://templeofthewayoflight.org/integrating-ayahuasca/facing-your-shadow/)
 
@@ -90,7 +90,7 @@ Lunarpunks are intimately familiar with the healing power of plant medicines, pa
 ## Darkness of the Soul
 Key psychotechnology: [Soulcraft](https://www.animas.org/books/soulcraft/) by the [Animas Valley Institute](https://www.animas.org/)
 
-![img](assets/6.jpg)
+![img](assets/image/6.jpg)
 
 *"In the course of healthy human development, we are each meant to reach this breakpoint, this crisis, this divide beyond which we’re no longer able to decisively define ourselves in terms of social or romantic relationships, or in terms of a job or career, a creative or artistic project, a political affiliation, a theory or philosophical perspective, a religious or ethnic membership, or a transcendental spiritual goal. We are propelled — compelled! — toward an underworld self-definition, a soul-infused experience of meaning and purpose and identity. True for all humans, this is our evolutionary birthright, a necessary passage on the way from psychological adolescence to true adulthood… The mainstream currents of our contemporary cultures neither assert nor deny the existence of an underworld identity; it has simply disappeared from awareness."* &mdash; [Bill Plotkin](https://www.animas.org/the-realm-of-purpose-least-realized-but-most-essential-in-our-time-of-radical-global-change/)
 
@@ -99,7 +99,7 @@ Lunarpunks are practitioners of [Soulcraft](https://www.animas.org/books/soulcra
 ## Darkness in Light
 Key psychotechnology: Meditations on Emptiness and Dependent Arising as explored in [Seeing That Frees](https://www.goodreads.com/book/show/25172403-seeing-that-frees) by [Rob Burbea](https://tasshin.com/blog/rob-burbea-ordinary-guy-werewolf-eternal-wanderer/)
 
-![img](assets/7.jpg)
+![img](assets/image/7.jpg)
 
 *"They are the same thing, but our lazy mind separates darkness from light. To plunge into the light, to find darkness in light, to find Buddha nature in perfect zazen is our way."* &mdash; [Shunryu Suzuki Roshi](https://www.goodreads.com/book/show/361898.Branching_Streams_Flow_in_the_Darkness)
 

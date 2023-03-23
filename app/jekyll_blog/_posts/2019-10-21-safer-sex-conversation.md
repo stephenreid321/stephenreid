@@ -1,6 +1,6 @@
 ---
 title: "The Safer Sex Conversation"
-header_image_url: assets/5289.jpg
+header_image_url: assets/image/5289.jpg
 ---
 
 I learnt this format via [ISTA](http://ista.life/), and I now consider such a conversation essential before connecting intimately with someone. The text below is based on [this PDF by Crystal Dawn Morris](https://sexualrenaissance.com/wp-content/uploads/2017/11/Six-Safe-Sex-Points-Handout.pdf).

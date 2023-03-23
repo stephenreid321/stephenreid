@@ -1,7 +1,7 @@
 ---
 title: "My journey through life"
 excerpt: I didn't think I'd share this, but somehow in these strange times it feels appropriate.
-header_image_url: assets/me.png
+header_image_url: assets/image/me.png
 ---
 
 *Me, age 1*

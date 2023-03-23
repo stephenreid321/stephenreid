@@ -1,7 +1,7 @@
 ---
 title: "Whirlpools in consciousness"
 excerpt: When I talk of the brain being a structure in consciousness that reflects the self-limitation of consciousness, I mean something very analogous to the whirlpool in a water stream.
-header_image_url: assets/2004-09-05_14-53-56.jpg
+header_image_url: assets/image/2004-09-05_14-53-56.jpg
 ---
 
 > Think of consciousness as a stream. Water can flow along the stream through its entire length; that is, water is not localized in the stream, but traverses it unlimited. Now imagine a small whirlpool in the stream: It has a visible and identifiable existence; one can locate a whirlpool and delineate its boundaries precisely; one can point at it and say "here is a whirlpool!" There seems to be no question about how palpable and concrete the whirlpool seems to be. Moreover, the whirlpool somewhat limits and localizes the flow of water: The water molecules trapped in it can no longer traverse the course of the entire stream unbound, but become locked, swirling around a specific and well-defined location.

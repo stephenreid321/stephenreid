@@ -1,7 +1,7 @@
 ---
 title: "An introduction to platform co-ops"
 excerpt: Prepared as part of the Platform Co-ops Now! course
-header_image_url: assets/header.jpg
+header_image_url: assets/image/header.jpg
 ---
 
 ## What does 'platform' mean here?
@@ -81,7 +81,7 @@ _[Resonate](https://resonate.is/) is a stream-to-own music platform harnessing b
 
 _[Equal Care Co-op](https://equalcare.coop/) are building a new, co-owned social care platform that puts care givers and receivers in charge. By incorporating as a multi-stakeholder co-operative, their digital product and accompanying service is owned by and accountable to the communities using and sustaining it. They arrived at the platform co-op model as a response to systemic inequities within the social care system, seeing it as a practical route to centering choice, power and ownership with the two most important people in care – the person giving and the person getting support._
 
-![](assets/equal-care.jpg)
+![](assets/image/equal-care.jpg)
 
 <table class="table table-bordered text-sm">
   <tr>
@@ -112,8 +112,8 @@ _[Equal Care Co-op](https://equalcare.coop/) are building a new, co-owned social
 
 [Introduction to platform co-ops](https://ia601506.us.archive.org/16/items/platform-cooperativism_graphic-individual-letter-size-pages/platform-cooperativism_graphic-individual-letter-size-pages.pdf)
 
-[![](assets/intro.jpg)](https://ia601506.us.archive.org/16/items/platform-cooperativism_graphic-individual-letter-size-pages/platform-cooperativism_graphic-individual-letter-size-pages.pdf)
+[![](assets/image/intro.jpg)](https://ia601506.us.archive.org/16/items/platform-cooperativism_graphic-individual-letter-size-pages/platform-cooperativism_graphic-individual-letter-size-pages.pdf)
 
 [Why platform co-ops?](https://www.uk.coop/start-new-co-op/support/start-platform-co-op/why-platform-co-ops)
 
-[![](assets/unfound.png)](https://www.uk.coop/start-new-co-op/support/start-platform-co-op/why-platform-co-ops)
+[![](assets/image/unfound.png)](https://www.uk.coop/start-new-co-op/support/start-platform-co-op/why-platform-co-ops)

@@ -1,7 +1,7 @@
 ---
 title: "Unplugging from Facebook"
 excerpt: I'm significantly changing how I use Facebook and other corporate social media
-header_image_url: assets/aac97bc5.jpeg
+header_image_url: assets/image/aac97bc5.jpeg
 ---
 
 Hi friends,

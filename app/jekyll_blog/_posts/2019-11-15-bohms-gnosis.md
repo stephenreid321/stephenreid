@@ -1,7 +1,7 @@
 ---
 title: "Bohm's Gnosis: The Implicate Order"
 excerpt: At the very depths of the ground of all existence Bohm believes that there exists a special energy. The energy of this ground is likened to one whole and unbroken movement by Bohm. He calls this the "holomovement." It is the holomovement that carries the Implicate Order.
-header_image_url: assets/david_bohm_and_jiddu_krishnamurti.jpg
+header_image_url: assets/image/david_bohm_and_jiddu_krishnamurti.jpg
 ---
 
 *By [Beatrix Murrell](http://www.bizint.com/stoa_del_sol/plenum/plenum_3.html)*
