@@ -58,6 +58,7 @@
 
 ### Other
 
+*   [Navigating the Mysteries](https://schoolofmyth.com/event/navigating-the-mysteries/) with [Dr. Martin Shaw](https://drmartinshaw.com/) (Mar 2023)
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
@@ -66,7 +67,6 @@
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://biologyofwonder.org/) (Mar 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
-*   *[Navigating the Mysteries](https://schoolofmyth.com/event/navigating-the-mysteries/) with [Dr. Martin Shaw](https://drmartinshaw.com/) (Mar 2023)*
 
 ### Burns
 
