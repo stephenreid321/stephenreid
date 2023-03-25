@@ -92,14 +92,17 @@ class Tweet
     JSON.parse(Faraday.get("https://publish.twitter.com/oembed?omit_script=1&url=#{"https://twitter.com/#{data['user']['username']}/status/#{data['id']}"}").body)['html']
   end
 
-  def self.import
-    # r = Tweet.api.get("users/#{ENV['TWITTER_USER_ID']}/owned_lists")
-    timelines = {
+  def self.timelines
+    {
       'Home' => ["users/#{ENV['TWITTER_USER_ID']}/timelines/reverse_chronological", nil],
       'Crypto Twitter' => ['lists/1585548222935736321/tweets', 24.hours.ago],
       'Greenpill' => ['lists/1610587490670317573/tweets', 24.hours.ago],
       'Contemplatives' => ['lists/1610571716199055360/tweets', 24.hours.ago]
     }
+  end
+
+  def self.import
+    # r = Tweet.api.get("users/#{ENV['TWITTER_USER_ID']}/owned_lists")
     # }.merge(r.body['data'].map { |x| [x['name'], "lists/#{x['id']}/tweets"] }.to_h)
     timelines.each do |timeline, (url, refresh_time)|
       first_tweet = Tweet.where(timeline: timeline).order('created_at desc').first
