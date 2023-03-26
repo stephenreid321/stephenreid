@@ -5,11 +5,13 @@
 
     <div class="row justify-content-center mb-5">
       <div class="col">
-        <% form_tag '/ai' do %>
+        <% form_tag '/ai', class: 'mb-2' do %>
           <%= text_field_tag :title, placeholder: 'What do you want AI-me to write about?', class: 'form-control' %>
         <% end %>
+        <p class="text-muted" style="font-size: 0.85em">Silly is fine, but please nothing offensive. Your IP address will be logged.</p>
       </div>
     </div>
+
 
   </div>
 </div>
