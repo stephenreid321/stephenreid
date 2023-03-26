@@ -47,7 +47,7 @@ class BlogPost
 Write a 500-word blog post in the first person, as if written by the person below, on the topic of '#{title}'.
 
 - Write the title of the blog post on the first line.
-- Start each section with a heading with two hashtags like this: ## Heading
+- Start each section with a heading with two hashes like this: ## Heading
 - There should be maximum of 5 sections.
 - Most sections should have at least two paragraphs.
 - The post should integrate the author's interests and expertise, but not include biographical information.
