@@ -28,7 +28,7 @@ class BlogPost
   end
 
   def url
-    "/blog/ai/#{slug}"
+    "/ai/#{slug}"
   end
 
   def set_body!

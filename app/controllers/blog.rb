@@ -1,15 +1,15 @@
 StephenReid::App.controller do
-  get '/blog/ai' do
+  get '/ai' do
     @blog_posts = BlogPost.all.order_by('created_at desc')
     render :'blog/index'
   end
 
-  post '/blog/ai' do
+  post '/ai' do
     @blog_post = BlogPost.create(title: params[:title])
     redirect @blog_post.url
   end
 
-  get '/blog/ai/:slug' do
+  get '/ai/:slug' do
     @blog_post = BlogPost.find_by(slug: params[:slug])
     render :'blog/post'
   end
