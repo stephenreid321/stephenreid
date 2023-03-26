@@ -10,8 +10,15 @@ StephenReid::App.controller do
   end
 
   get '/ai/:slug' do
-    @blog_post = BlogPost.find_by(slug: params[:slug])
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     render :'blog/post'
+  end
+
+  get '/ai/:slug/refresh_image' do
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @blog_post.set_image
+    @blog_post.save
+    redirect @blog_post.url
   end
 
   get '/blog/unplugging-from-facebook' do

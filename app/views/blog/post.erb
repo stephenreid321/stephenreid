@@ -20,7 +20,9 @@
 
       <% if @blog_post.image_url %>
         <div class="mb-3 text-center">
-          <img class="post-header-image" style="max-width: 100%" src="<%= @blog_post.image_url %>">
+          <a href="<%=@blog_post.url%>/refresh_image">
+            <img class="post-header-image" style="max-width: 100%" src="<%= @blog_post.image_url %>">
+          </a>
         </div>
       <% end %>
 

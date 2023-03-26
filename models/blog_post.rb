@@ -68,13 +68,17 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
     ]
   end
 
+  def set_image
+    self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{title}").headers[:location] unless image_url
+  end
+
   before_validation do
     self.slug = title.parameterize if !slug && title
     # openai_response = OPENAI.post('images/generations') do |req|
     #   req.body = { prompt: "Hilma AF Klint: #{title}", size: '512x512' }.to_json
     # end
     # self.image_url = JSON.parse(openai_response.body)['data'][0]['url']
-    self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{title}").headers[:location] unless image_url
+    set_image
   end
 
   after_create do
