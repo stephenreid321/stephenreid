@@ -1,0 +1,22 @@
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <% @blog_posts.each { |blog_post| %>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <a class="d-block text-contrast" href="<%=blog_post.url%>" style="text-decoration: none">
+          <p class="fira text-muted">
+            <%= date = blog_post.created_at; date.strftime("#{date.day.ordinalize} %b %Y") %>
+          </p>
+
+          <% if blog_post.image_url %>
+            <div class="mb-3" style="height: 250px; background-image: url('<%= blog_post.image_url %>'); background-size: cover; background-position: center"></div>
+          <% end %>
+
+          <h1><%= blog_post.title %></h1>
+
+        </a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

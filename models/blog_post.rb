@@ -7,6 +7,8 @@ class BlogPost
   field :body, type: String
   field :image_url, type: String
 
+  validates_uniqueness_of :slug
+
   def self.admin_fields
     {
       title: :text,
@@ -14,6 +16,18 @@ class BlogPost
       body: :text_area,
       image_url: :url
     }
+  end
+
+  def previous
+    BlogPost.where(:id.lt => id).order_by(:id.desc).first
+  end
+
+  def next
+    BlogPost.where(:id.gt => id).order_by(:id.asc).first
+  end
+
+  def url
+    "/blog/ai/#{slug}"
   end
 
   def self.generate
@@ -32,16 +46,16 @@ class BlogPost
   def self.prompt
     [
       %(
-Write a 700-word blog piece in the first person, as if written by the person below, on a topic they would be interested in.
+Write a 700-word blog post in the first person, as if written by the person below, on a topic they would be interested in.
 
-- Write the title of the blog piece on the first line.
+- Write the title of the blog post on the first line.
 - Start each section with a heading with two hashtags like this: ## Heading
 - There should be maximum of 5 sections.
-- Most sections should have two paragraphs.
-- The piece should integrate the author's interests and expertise, but not include biographical information.
+- Most sections should have at least two paragraphs.
+- The post should integrate the author's interests and expertise, but not include biographical information.
 - Reference at least one book the author has read.
 - Write for a postgraduate-level audience.
-- Make sure the piece has a proper conclusion.
+- Make sure the post has a proper conclusion.
 ---),
       %(Hi! I'm Stephen.
 I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from the South Devon coast.
@@ -59,7 +73,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   before_validation do
     self.slug = title.parameterize if title
     openai_response = OPENAI.post('images/generations') do |req|
-      req.body = { prompt: title, size: '512x512' }.to_json
+      req.body = { prompt: "Hilma AF Klint: #{title}", size: '512x512' }.to_json
     end
     self.image_url = JSON.parse(openai_response.body)['data'][0]['url']
   end

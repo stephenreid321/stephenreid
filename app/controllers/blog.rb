@@ -1,4 +1,19 @@
 StephenReid::App.controller do
+  get '/blog/ai' do
+    @blog_posts = BlogPost.all.order_by('created_at desc')
+    render :'blog/index'
+  end
+
+  get '/blog/ai/generate' do
+    @blog_post = BlogPost.generate
+    redirect "/blog/ai/#{@blog_post.slug}"
+  end
+
+  get '/blog/ai/:slug' do
+    @blog_post = BlogPost.find_by(slug: params[:slug])
+    render :'blog/post'
+  end
+
   get '/blog/unplugging-from-facebook' do
     redirect '/blog/2020/07/09/unplugging-from-facebook.html'
   end
@@ -9,16 +24,6 @@ StephenReid::App.controller do
 
   get '/blog/feed.rss' do
     redirect '/blog/feed.xml'
-  end
-
-  get '/blog/generate' do
-    @blog_post = BlogPost.generate
-    redirect "/blog/generated/#{@blog_post.slug}"
-  end
-
-  get '/blog/generated/:slug' do
-    @blog_post = BlogPost.find_by(slug: params[:slug])
-    render :generated
   end
 
   get '/blog/?*' do

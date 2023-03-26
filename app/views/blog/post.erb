@@ -1,0 +1,64 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="alert alert-info" role="alert">
+      This is an AI-generated post.
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-2">
+    <div class="d-none d-lg-block" id="toc">
+    </div>
+  </div>
+  <div class="col-lg-8">
+
+    <div class="blog_post">
+      <h1 class="post-title">
+        <a class="text-contrast" href="<%= @blog_post.url %>">
+          <%= @blog_post.title %>
+        </a>
+      </h1>
+
+      <p class="fira text-muted">
+        <%= date = @blog_post.created_at; date.strftime("#{date.day.ordinalize} %b %Y") %>
+      </p>
+
+      <% if @blog_post.image_url %>
+        <div class="mb-3 text-center">
+          <img class="post-header-image" style="max-width: 100%" src="<%= @blog_post.image_url %>">
+        </div>
+      <% end %>
+
+      <div>
+        <%= md @blog_post.body %>
+      </div>
+
+      <div class="mt-5 p-1">
+        <div class="row justify-content-between">
+          <% if @blog_post.previous %>
+            <div class="col-auto">
+              <a href="<%=@blog_post.previous.url%>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
+                <div class="card-body py-1 px-3">
+                  <span class="text-contrast">&larr;</span>
+                  <%=@blog_post.previous.title%>
+                </div>
+              </a>
+            </div>
+          <% end %>
+          <% if @blog_post.next %>
+            <div class="col-auto">
+              <a href="<%=@blog_post.next.url%>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
+                <div class="card-body py-1 px-3">
+                  <%=@blog_post.next.title%>
+                  <span class="text-contrast">&rarr;</span>
+                </div>
+              </a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
