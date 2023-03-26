@@ -44,7 +44,7 @@ class BlogPost
   def prompt
     [
       %(
-Write a 700-word blog post in the first person, as if written by the person below, on the topic of '#{title}'.
+Write a 500-word blog post in the first person, as if written by the person below, on the topic of '#{title}'.
 
 - Write the title of the blog post on the first line.
 - Start each section with a heading with two hashtags like this: ## Heading
