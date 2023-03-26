@@ -1,10 +1,4 @@
-<div class="row justify-content-center mb-5">
-  <div class="col-auto">
-    <div class="alert alert-info" role="alert">
-      This is an AI-generated post.
-    </div>
-  </div>
-</div>
+<%= partial :'blog/create' %>
 
 <div class="row">
   <div class="col-lg-2">
@@ -31,7 +25,16 @@
       <% end %>
 
       <div>
-        <%= md @blog_post.body %>
+        <% if @blog_post.body %>
+          <%= md @blog_post.body %>
+        <% else %>
+          <script>
+            setTimeout(function() {
+              window.location.reload(1);
+            }, 5000);
+          </script>
+          Generating, please wait... <i class="fas fa-circle-notch fa-spin"></i>
+        <% end %>
       </div>
 
       <div class="mt-5 p-1">

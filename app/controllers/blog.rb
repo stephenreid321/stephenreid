@@ -4,9 +4,9 @@ StephenReid::App.controller do
     render :'blog/index'
   end
 
-  get '/blog/ai/generate' do
-    @blog_post = BlogPost.generate
-    redirect "/blog/ai/#{@blog_post.slug}"
+  post '/blog/ai' do
+    @blog_post = BlogPost.create(title: params[:title])
+    redirect @blog_post.url
   end
 
   get '/blog/ai/:slug' do

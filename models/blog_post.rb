@@ -7,6 +7,7 @@ class BlogPost
   field :body, type: String
   field :image_url, type: String
 
+  validates_presence_of :title
   validates_uniqueness_of :slug
 
   def self.admin_fields
@@ -30,23 +31,20 @@ class BlogPost
     "/blog/ai/#{slug}"
   end
 
-  def self.generate
-    messages = []
-    messages << { role: 'user', content: prompt.join("\n ") }
+  def set_body!
     openapi_response = OPENAI.post('chat/completions') do |req|
-      req.body = { model: 'gpt-3.5-turbo', messages: messages }.to_json
+      req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: prompt.join("\n ") }] }.to_json
     end
     content = JSON.parse(openapi_response.body)['choices'][0]['message']['content']
-    BlogPost.create(
-      title: content.split("\n").first.gsub('#', ''),
-      body: content.split("\n")[1..-1].join("\n")
-    )
+    self.body = content.split("\n")[1..-1].join("\n")
+    save
   end
+  handle_asynchronously :set_body!
 
-  def self.prompt
+  def prompt
     [
       %(
-Write a 700-word blog post in the first person, as if written by the person below, on a topic they would be interested in.
+Write a 700-word blog post in the first person, as if written by the person below, on the topic of '#{title}'.
 
 - Write the title of the blog post on the first line.
 - Start each section with a heading with two hashtags like this: ## Heading
@@ -65,16 +63,21 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
 #{open("#{Padrino.root}/app/markdown/training.md").read.force_encoding('utf-8')}),
       %(## Books I've read
 #{Book.all(sort: { 'ID' => 'desc' }).first(20).map { |b| "#{b['Title']} by #{b['Author']}" }.join("\n\n")})
+      #    %(## Speaking engagements
+      # #{SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")})
     ]
-    # %(## Speaking engagements
-    # {SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")}),
   end
 
   before_validation do
-    self.slug = title.parameterize if title
-    openai_response = OPENAI.post('images/generations') do |req|
-      req.body = { prompt: "Hilma AF Klint: #{title}", size: '512x512' }.to_json
-    end
-    self.image_url = JSON.parse(openai_response.body)['data'][0]['url']
+    self.slug = title.parameterize if !slug && title
+    # openai_response = OPENAI.post('images/generations') do |req|
+    #   req.body = { prompt: "Hilma AF Klint: #{title}", size: '512x512' }.to_json
+    # end
+    # self.image_url = JSON.parse(openai_response.body)['data'][0]['url']
+    self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{title}").headers[:location] unless image_url
+  end
+
+  after_create do
+    Padrino.env == :development ? set_body_without_delay! : set_body!
   end
 end
