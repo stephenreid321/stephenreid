@@ -3,15 +3,19 @@ StephenReid::App.helpers do
     %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x.iso8601}</abbr>)
   end
 
-  def md(slug)
+  def md(slug, render: true)
     begin
       text = open("#{Padrino.root}/app/markdown/#{slug}.md").read.force_encoding('utf-8')
       text = text.gsub(/\A---(.|\n)*?---/, '')
     rescue StandardError
       text = slug
     end
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
-    markdown.render(text)
+    if render
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
+      markdown.render(text)
+    else
+      text
+    end
   end
 
   def front_matter(slug)
@@ -32,19 +36,19 @@ StephenReid::App.helpers do
   end
 
   def tag_badge(tag, account: tag.try(:account), html_tag: 'a')
-    if tag
-      if tag.is_a?(Tag)
-        name = tag.name
-        bg = "background-color: #{tag.background_color}"
-        c = ''
-        s = ''
-      else
-        name = tag
-        bg = 'background: none'
-        c = 'text-contrast'
-        s = 'font-weight: 500'
-      end
-      %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
+    return unless tag
+
+    if tag.is_a?(Tag)
+      name = tag.name
+      bg = "background-color: #{tag.background_color}"
+      c = ''
+      s = ''
+    else
+      name = tag
+      bg = 'background: none'
+      c = 'text-contrast'
+      s = 'font-weight: 500'
     end
-  end 
+    %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
+  end
 end

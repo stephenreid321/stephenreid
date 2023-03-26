@@ -69,6 +69,10 @@ module StephenReid
       redirect '/'
     end
 
+    get '/prompt' do
+      BlogPost.prompt.join("\n").gsub("\n", '<br>')
+    end
+
     %w[books podcasts software discord tarot events svenska-ord svensk-grammatik diet speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i

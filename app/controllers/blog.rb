@@ -11,6 +11,16 @@ StephenReid::App.controller do
     redirect '/blog/feed.xml'
   end
 
+  get '/blog/generate' do
+    @blog_post = BlogPost.generate
+    redirect "/blog/generated/#{@blog_post.slug}"
+  end
+
+  get '/blog/generated/:slug' do
+    @blog_post = BlogPost.find_by(slug: params[:slug])
+    render :generated
+  end
+
   get '/blog/?*' do
     file_path = File.join(Padrino.root('app', 'jekyll_blog', '_site'), request.path.gsub('/blog', ''))
     file_path = File.join(Padrino.root('app', 'jekyll_blog', '_site'), 'index.html') unless file_path =~ /\.[a-z]+$/i
