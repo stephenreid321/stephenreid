@@ -102,7 +102,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   before_validation do
     self.title = title.titleize if title && title.downcase == title
     self.slug = title.parameterize if !slug && title
-    self.version = 'gpt-4-32k'
+    self.version = 'gpt-4'
   end
 
   after_create do
