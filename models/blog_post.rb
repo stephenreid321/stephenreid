@@ -15,8 +15,8 @@ class BlogPost
     {
       title: :text,
       slug: :text,
+      image_word: :text,
       body: :text_area,
-      image_word: :url,
       image_url: :url
     }
   end
