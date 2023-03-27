@@ -44,7 +44,7 @@ class BlogPost
   handle_asynchronously :set_body!
 
   def image_prompt
-    %(Suggest a single word that, as an image, would best represent a blog post with the title '#{title}'. Return ONLY the word, with no text before or after.)
+    %(Suggest a common, single word that, as an image, would best represent a blog post with the title '#{title}'. Return ONLY the word, with no text before or after.)
   end
 
   def set_image_word!
@@ -52,7 +52,7 @@ class BlogPost
       req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: image_prompt }] }.to_json
     end
     content = JSON.parse(openapi_response.body)['choices'][0]['message']['content']
-    self.image_word = content.downcase
+    self.image_word = content.downcase.match(/\w+/)[0]
     set_image
     save
   end
