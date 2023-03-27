@@ -95,8 +95,8 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   end
 
   after_create do
-    Padrino.env == :development ? set_body_without_delay! : set_body!
     Padrino.env == :development ? set_image_word_without_delay! : set_image_word!
+    Padrino.env == :development ? set_body_without_delay! : set_body!
     # send an email notification
     blog_post = self
     mail = Mail.new do
