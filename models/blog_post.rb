@@ -48,8 +48,7 @@ class BlogPost
       req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: image_prompt }] }.to_json
     end
     content = JSON.parse(openapi_response.body)['choices'][0]['message']['content']
-    # extract url from content
-    self.image_prompt_url = content.match(%r{https?://\S+})[0]
+    self.image_prompt_url = content
     set_image
     save
   end
@@ -83,7 +82,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   end
 
   def image_prompt
-    %(The Unsplash endpoint https://source.unsplash.com/random/800x600?xyz returns a random image for the term xyz. Suggest a URL for a blog post with the title '#{title}'.)
+    %(The Unsplash endpoint https://source.unsplash.com/random/800x600?xyz returns a random image for the term xyz. Suggest a URL for a blog post with the title '#{title}'. Return ONLY the URL, without any text before or after.)
   end
 
   def set_image
