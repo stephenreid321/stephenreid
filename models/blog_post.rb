@@ -52,7 +52,7 @@ class BlogPost
       req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: image_prompt }] }.to_json
     end
     content = JSON.parse(openapi_response.body)['choices'][0]['message']['content']
-    self.image_word = "https://source.unsplash.com/random/800x600?#{content.downcase}"
+    self.image_word = content.downcase
     set_image
     save
   end
