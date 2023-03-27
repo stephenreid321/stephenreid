@@ -11,6 +11,8 @@ StephenReid::App.controller do
 
   get '/ai/:slug' do
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @title = @blog_post.title
+    @og_image = @blog_post.image_url
     render :'blog/post'
   end
 
