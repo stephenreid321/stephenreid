@@ -20,7 +20,7 @@
           &middot;
           <a target="_blank" href="<%=@blog_post.url%>/prompt">Prompt</a>
           &middot;
-          <a href="javascript:;" onclick="$('#image-word-form').show()"><%=@blog_post.image_word%></a>
+          <a href="javascript:;" onclick="$('#image-word-form').show().find('input').select()"><%=@blog_post.image_word%></a>
         <% end %>
       </p>
 
