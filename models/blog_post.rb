@@ -82,7 +82,11 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   end
 
   def image_prompt
-    %(The Unsplash endpoint https://source.unsplash.com/random/800x600?xyz returns a random image for the term xyz. Suggest a URL for a blog post with the title '#{title}'. Return ONLY the URL, without any text before or after.)
+    %(Suggest the URL for a header image for a blog post with the title '#{title}' using the Unsplash endpoint
+
+      https://source.unsplash.com/random/800x600?x,y
+
+      Return ONLY the URL, without any text before or after.)
   end
 
   def set_image
