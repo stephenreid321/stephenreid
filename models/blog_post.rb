@@ -5,7 +5,7 @@ class BlogPost
   field :title, type: String
   field :slug, type: String
   field :body, type: String
-  field :image_prompt_url, type: String
+  field :image_word, type: String
   field :image_url, type: String
 
   validates_presence_of :title
@@ -16,7 +16,7 @@ class BlogPost
       title: :text,
       slug: :text,
       body: :text_area,
-      image_prompt_url: :url,
+      image_word: :url,
       image_url: :url
     }
   end
@@ -43,16 +43,20 @@ class BlogPost
   end
   handle_asynchronously :set_body!
 
-  def set_image_prompt_url!
+  def image_prompt
+    %(Suggest a single word that, as an image, would best represent a blog post with the title '#{title}'. Return ONLY the word, with no text before or after.)
+  end
+
+  def set_image_word!
     openapi_response = OPENAI.post('chat/completions') do |req|
       req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: image_prompt }] }.to_json
     end
     content = JSON.parse(openapi_response.body)['choices'][0]['message']['content']
-    self.image_prompt_url = content
+    self.image_word = "https://source.unsplash.com/random/800x600?#{content.downcase}"
     set_image
     save
   end
-  handle_asynchronously :set_image_prompt_url!
+  handle_asynchronously :set_image_word!
 
   def prompt
     [
@@ -81,16 +85,8 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
     ]
   end
 
-  def image_prompt
-    %(Suggest the URL for a header image for a blog post with the title '#{title}' using the Unsplash endpoint
-
-      https://source.unsplash.com/random/800x600?x,y
-
-      Return ONLY the URL, without any text before or after.)
-  end
-
   def set_image
-    self.image_url = Faraday.get(image_prompt_url || "https://source.unsplash.com/random/800x600?#{title}").headers[:location]
+    self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{image_word || title}").headers[:location]
   end
 
   before_validation do
@@ -101,7 +97,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
 
   after_create do
     Padrino.env == :development ? set_body_without_delay! : set_body!
-    Padrino.env == :development ? set_image_prompt_url_without_delay! : set_image_prompt_url!
+    Padrino.env == :development ? set_image_word_without_delay! : set_image_word!
     # send an email notification
     blog_post = self
     mail = Mail.new do
