@@ -6,7 +6,7 @@ StephenReid::App.controller do
 
   post '/ai' do
     @blog_post = BlogPost.create(title: params[:title])
-    redirect @blog_post.url
+    redirect "#{@blog_post.url}?refresh_image=1"
   end
 
   get '/ai/:slug' do
@@ -14,11 +14,16 @@ StephenReid::App.controller do
     render :'blog/post'
   end
 
+  get '/ai/:slug/prompt' do
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @blog_post.prompt.join("\n\n").gsub("\n", '<br />')
+  end
+
   get '/ai/:slug/refresh_image' do
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     @blog_post.set_image
     @blog_post.save
-    redirect @blog_post.url
+    redirect "#{@blog_post.url}?refresh_image=1"
   end
 
   get '/blog/unplugging-from-facebook' do

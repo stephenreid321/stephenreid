@@ -73,6 +73,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   end
 
   before_validation do
+    self.title = title.titleize if title && title.downcase == title
     self.slug = title.parameterize if !slug && title
     # openai_response = OPENAI.post('images/generations') do |req|
     #   req.body = { prompt: "Hilma AF Klint: #{title}", size: '512x512' }.to_json
@@ -82,6 +83,15 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   end
 
   after_create do
-    Padrino.env == :development ? set_body_without_delay! : set_body!
+     Padrino.env == :development ? set_body_without_delay! : set_body!
+    # send an email notification
+    blog_post = self
+    mail = Mail.new do
+      from 'notifications@stephenreid.net'
+      to 'stephen@stephenreid.net'
+      subject "New blog post: #{blog_post.title}"
+      body "https://stephenreid.net#{blog_post.url}"
+    end
+    mail.deliver
   end
 end
