@@ -58,6 +58,10 @@ class BlogPost
   end
   handle_asynchronously :set_image_word!
 
+  def set_image
+    self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{image_word}").headers[:location]
+  end
+
   def prompt
     [
       %(
@@ -85,14 +89,9 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
     ]
   end
 
-  def set_image
-    self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{image_word || title}").headers[:location]
-  end
-
   before_validation do
     self.title = title.titleize if title && title.downcase == title
     self.slug = title.parameterize if !slug && title
-    set_image unless image_url
   end
 
   after_create do
