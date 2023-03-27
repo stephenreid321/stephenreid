@@ -1,4 +1,8 @@
 StephenReid::App.controller do
+  get '/ai/prompt' do
+    BlogPost.first.prompt.join("\n\n").gsub("\n", '<br />')
+  end
+
   get '/ai' do
     @blog_posts = BlogPost.all.order_by('created_at desc')
     render :'blog/index'
@@ -14,11 +18,6 @@ StephenReid::App.controller do
     @title = @blog_post.title
     @og_image = @blog_post.image_url
     render :'blog/post'
-  end
-
-  get '/ai/:slug/prompt' do
-    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
-    @blog_post.prompt.join("\n\n").gsub("\n", '<br />')
   end
 
   post '/ai/:slug/image_word' do

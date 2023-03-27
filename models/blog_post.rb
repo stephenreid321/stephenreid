@@ -7,6 +7,7 @@ class BlogPost
   field :body, type: String
   field :image_word, type: String
   field :image_url, type: String
+  field :version, type: String
 
   validates_presence_of :title
   validates_uniqueness_of :slug
@@ -17,7 +18,8 @@ class BlogPost
       slug: :text,
       image_word: :text,
       body: :text_area,
-      image_url: :url
+      image_url: :url,
+      version: :text
     }
   end
 
@@ -65,7 +67,7 @@ class BlogPost
   def prompt
     [
       %(
-Write a 500-word blog post in the first person, as if written by the person below, on the topic of '#{title}'.
+Write a 700-word blog post in the first person, as if written by the person below, on the topic of '#{title}'.
 
 - Write the title of the blog post on the first line.
 - Start each section with a heading with two hashes like this: ## Heading
@@ -92,7 +94,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
         #{Dir['app/jekyll_blog/_posts/*.md'].sort.reverse.map do |f|
             content = File.read(f)
             yaml = YAML.load(content)
-            "#{yaml['title']}\n#{yaml['excerpt']}"
+            "### #{yaml['title']}\n#{yaml['excerpt']}"
           end.join("\n\n")})
     ]
   end
@@ -100,6 +102,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   before_validation do
     self.title = title.titleize if title && title.downcase == title
     self.slug = title.parameterize if !slug && title
+    self.version = 'gpt-4'
   end
 
   after_create do
