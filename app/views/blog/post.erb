@@ -18,9 +18,15 @@
         <%= date = @blog_post.created_at; date.strftime("#{date.day.ordinalize} %b %Y") %>
         <% if current_account %>
           &middot;
-          <a href="<%=@blog_post.url%>/prompt">Prompt</a>
+          <a target="_blank" href="<%=@blog_post.url%>/prompt">Prompt</a>
+          &middot;
+          <a href="javascript:;" onclick="$('#image-word-form').show()"><%=@blog_post.image_word%></a>
         <% end %>
       </p>
+
+      <% form_tag "#{@blog_post.url}/image_word", id: 'image-word-form', class: 'mb-3', style: 'display: none' do %>
+        <%= text_field_tag :image_word, class: 'form-control', value: @blog_post.image_word %>
+      <% end %>
 
       <% if @blog_post.image_url %>
         <div class="mb-3 text-center">

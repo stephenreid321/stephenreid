@@ -19,6 +19,14 @@ StephenReid::App.controller do
     @blog_post.prompt.join("\n\n").gsub("\n", '<br />')
   end
 
+  post '/ai/:slug/image_word' do
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @blog_post.image_word = params[:image_word]
+    @blog_post.set_image
+    @blog_post.save
+    redirect "#{@blog_post.url}?refresh_image=1"
+  end
+
   get '/ai/:slug/refresh_image' do
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     @blog_post.set_image
