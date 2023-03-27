@@ -23,6 +23,10 @@ class BlogPost
     }
   end
 
+  def self.version
+    'gpt-4'
+  end
+
   def previous
     BlogPost.where(:id.lt => id).order_by(:id.desc).first
   end
@@ -37,7 +41,7 @@ class BlogPost
 
   def set_body!
     openai_response = OPENAI.post('chat/completions') do |req|
-      req.body = { model: 'gpt-4', messages: [{ role: 'user', content: prompt.join("\n\n") }] }.to_json
+      req.body = { model: BlogPost.version, messages: [{ role: 'user', content: prompt.join("\n\n") }] }.to_json
     end
     content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
     self.body = content.split("\n")[1..-1].join("\n")
@@ -102,7 +106,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
   before_validation do
     self.title = title.titleize if title && title.downcase == title
     self.slug = title.parameterize if !slug && title
-    self.version = 'gpt-4'
+    self.version = BlogPost.version
   end
 
   after_create do
