@@ -107,6 +107,6 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
       subject "New blog post: #{blog_post.title}"
       body "https://stephenreid.net#{blog_post.url}"
     end
-    mail.deliver
+    mail.deliver if Padrino.env == :production
   end
 end
