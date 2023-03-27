@@ -35,7 +35,7 @@ class BlogPost
 
   def set_body!
     openapi_response = OPENAI.post('chat/completions') do |req|
-      req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: prompt.join("\n ") }] }.to_json
+      req.body = { model: 'gpt-4', messages: [{ role: 'user', content: prompt.join("\n\n") }] }.to_json
     end
     content = JSON.parse(openapi_response.body)['choices'][0]['message']['content']
     self.body = content.split("\n")[1..-1].join("\n")
@@ -83,9 +83,17 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
       %(## Training and teachers
 #{open("#{Padrino.root}/app/markdown/training.md").read.force_encoding('utf-8')}),
       %(## Books I've read
-#{Book.all(sort: { 'ID' => 'desc' }).first(20).map { |b| "#{b['Title']} by #{b['Author']}" }.join("\n\n")})
-      #    %(## Speaking engagements
-      # #{SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")})
+#{Book.all(sort: { 'ID' => 'desc' }).map { |b| "#{b['Title']} by #{b['Author']}" }.join("\n\n")}),
+      %(## Speaking engagements
+      #{SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")}),
+      %(## Content I've shared
+        #{Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).map { |post| "[#{post['Title']}](#{post['Link']})\n#{post['Body']}" }.join("\n\n")}),
+      %(## Blog posts I've written
+        #{Dir['app/jekyll_blog/_posts/*.md'].sort.reverse.map do |f|
+            content = File.read(f)
+            yaml = YAML.load(content)
+            "#{yaml['title']}\n#{yaml['excerpt']}"
+          end.join("\n\n")})
     ]
   end
 
