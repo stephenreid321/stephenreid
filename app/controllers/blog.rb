@@ -10,7 +10,7 @@ StephenReid::App.controller do
 
   post '/ai' do
     @blog_post = BlogPost.create(title: params[:title])
-    redirect "#{@blog_post.url}?refresh_image=1"
+    redirect @blog_post.url
   end
 
   get '/ai/:slug' do
@@ -25,14 +25,15 @@ StephenReid::App.controller do
     @blog_post.image_word = params[:image_word]
     @blog_post.set_image
     @blog_post.save
-    redirect "#{@blog_post.url}?refresh_image=1"
+    redirect @blog_post.url
   end
 
   get '/ai/:slug/refresh_image' do
+    sign_in_required!
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     @blog_post.set_image
     @blog_post.save
-    redirect "#{@blog_post.url}?refresh_image=1"
+    redirect @blog_post.url
   end
 
   get '/blog/unplugging-from-facebook' do

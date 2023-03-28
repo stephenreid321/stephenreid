@@ -28,7 +28,7 @@
 
       <% if @blog_post.image_url %>
         <div class="my-3 text-center">
-          <% if current_account || params[:refresh_image] %>
+          <% if current_account %>
             <a href="<%=@blog_post.url%>/refresh_image">
               <img class="post-header-image" style="max-width: 100%" src="<%= @blog_post.image_url %>">
             </a>
