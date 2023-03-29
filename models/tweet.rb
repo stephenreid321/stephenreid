@@ -95,7 +95,7 @@ class Tweet
   def self.timelines
     {
       'Home' => ["users/#{ENV['TWITTER_USER_ID']}/timelines/reverse_chronological", nil],
-      'Crypto Twitter' => ['lists/1585548222935736321/tweets', 24.hours.ago],
+      'Crypto Twitter' => ['lists/1585548222935736321/tweets', nil],
       'Greenpill' => ['lists/1610587490670317573/tweets', 24.hours.ago],
       'Contemplatives' => ['lists/1610571716199055360/tweets', 24.hours.ago]
     }
