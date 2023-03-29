@@ -10,7 +10,7 @@
   <div class="col-12 col-lg-6">
 
     <% if Tweet.count > 0 %>
-      <p>Updated <%=time_ago_in_words Tweet.first.created_at %> ago</p>
+      <p>Updated <%=time_ago_in_words Tweet.order('created_at desc').first.created_at %> ago</p>
     <% end %>
 
     <%= partial :tweet_timeframe %>
