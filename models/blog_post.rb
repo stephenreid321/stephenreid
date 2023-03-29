@@ -79,7 +79,7 @@ Write a 700-word blog post in the first person, as if written by the person belo
 - Start each section with a heading with two hashes like this: ## Heading
 - There should be a maximum of 5 sections.
 - Most sections should have at least two paragraphs.
-- The post should integrate the author's interests and expertise, but not include biographical information.
+- The post should synthesise and integrate the author's interests and expertise, but not include biographical information.
 - Reference at least one book the author has read.
 - Assume the audience is highly intelligent.
 - Make sure the post has a proper conclusion.

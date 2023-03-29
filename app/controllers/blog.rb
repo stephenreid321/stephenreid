@@ -28,6 +28,20 @@ StephenReid::App.controller do
     redirect @blog_post.url
   end
 
+  get '/ai/:slug/make_public' do
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @blog_post.public = true
+    @blog_post.save
+    redirect @blog_post.url
+  end  
+
+  get '/ai/:slug/make_private' do
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @blog_post.public = false
+    @blog_post.save
+    redirect @blog_post.url
+  end    
+
   get '/ai/:slug/refresh_image' do
     sign_in_required!
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found

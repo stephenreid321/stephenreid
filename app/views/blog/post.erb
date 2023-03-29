@@ -19,11 +19,21 @@
         <span style="position: relative; top: -0.2em" class="badge badge-primary"><%= @blog_post.version %></span>
       </p>
 
-      <% if current_account && @blog_post.image_word %>
-        <p><a href="javascript:;" onclick="$(this).parent().hide();$('#image-word-form').show().find('input').select()"><%=@blog_post.image_word%></a></p>
-      <% end %>
-      <% form_tag "#{@blog_post.url}/image_word", id: 'image-word-form', class: 'mb-3', style: 'display: none' do %>
-        <%= text_field_tag :image_word, class: 'form-control', value: @blog_post.image_word %>
+      <% if current_account %>
+        <p>
+          <% if @blog_post.image_word %>
+            <a href="javascript:;" onclick="$(this).parent().hide();$('#image-word-form').show().find('input').select()"><%=@blog_post.image_word%></a>
+            &middot;
+          <% end %>
+          <% if @blog_post.public? %>
+            <a href="<%=@blog_post.url%>/make_private">public</a>
+          <% else %>
+            <a href="<%=@blog_post.url%>/make_public">private</a>
+          <% end %>
+        </p>
+        <% form_tag "#{@blog_post.url}/image_word", id: 'image-word-form', class: 'mb-3', style: 'display: none' do %>
+          <%= text_field_tag :image_word, class: 'form-control', value: @blog_post.image_word %>
+        <% end %>
       <% end %>
 
       <% if @blog_post.image_url %>
