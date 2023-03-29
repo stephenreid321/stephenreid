@@ -8,6 +8,7 @@ class BlogPost
   field :image_word, type: String
   field :image_url, type: String
   field :version, type: String
+  field :public, type: Boolean
 
   validates_presence_of :title
   validates_uniqueness_of :slug
@@ -15,6 +16,7 @@ class BlogPost
   def self.admin_fields
     {
       title: :text,
+      public: :check_box,
       slug: :text,
       image_word: :text,
       body: :text_area,
