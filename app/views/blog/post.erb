@@ -51,30 +51,32 @@
         <% end %>
       </div>
 
-      <div class="mt-5 p-1">
-        <div class="row justify-content-between">
-          <% if @blog_post.previous %>
-            <div class="col-auto">
-              <a href="<%=@blog_post.previous.url%>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
-                <div class="card-body py-1 px-3">
-                  <span class="text-contrast">&larr;</span>
-                  <%=@blog_post.previous.title%>
-                </div>
-              </a>
-            </div>
-          <% end %>
-          <% if @blog_post.next %>
-            <div class="col-auto">
-              <a href="<%=@blog_post.next.url%>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
-                <div class="card-body py-1 px-3">
-                  <%=@blog_post.next.title%>
-                  <span class="text-contrast">&rarr;</span>
-                </div>
-              </a>
-            </div>
-          <% end %>
+      <% if @blog_post.public? %>
+        <div class="mt-5 p-1">
+          <div class="row justify-content-between">
+            <% if @blog_post.previous %>
+              <div class="col-auto">
+                <a href="<%=@blog_post.previous.url%>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
+                  <div class="card-body py-1 px-3">
+                    <span class="text-contrast">&larr;</span>
+                    <%=@blog_post.previous.title%>
+                  </div>
+                </a>
+              </div>
+            <% end %>
+            <% if @blog_post.next %>
+              <div class="col-auto">
+                <a href="<%=@blog_post.next.url%>" class="card text-center shadow-sm mb-1" style="text-decoration: none">
+                  <div class="card-body py-1 px-3">
+                    <%=@blog_post.next.title%>
+                    <span class="text-contrast">&rarr;</span>
+                  </div>
+                </a>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
     </div>
   </div>

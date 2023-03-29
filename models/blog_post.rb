@@ -30,11 +30,11 @@ class BlogPost
   end
 
   def previous
-    BlogPost.where(:id.lt => id).order_by(:id.desc).first
+    BlogPost.where(:public => true, :id.lt => id).order_by(:id.desc).first
   end
 
   def next
-    BlogPost.where(:id.gt => id).order_by(:id.asc).first
+    BlogPost.where(:public => true, :id.gt => id).order_by(:id.asc).first
   end
 
   def url
