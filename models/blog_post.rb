@@ -81,7 +81,7 @@ Write a 700-word blog post in the first person, as if written by the person belo
 - Most sections should have at least two paragraphs.
 - The post should integrate the author's interests and expertise, but not include biographical information.
 - Reference at least one book the author has read.
-- Write for a postgraduate-level audience.
+- Assume the audience is highly intelligent.
 - Make sure the post has a proper conclusion.
 ---),
       %(Hi! I'm Stephen.
