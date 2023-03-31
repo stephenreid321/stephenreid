@@ -23,15 +23,6 @@ class Tweet
     Tweet.nitter
   end
 
-  def self.api
-    Faraday.new 'https://api.twitter.com/2' do |f|
-      f.request :oauth, consumer_key: ENV['TWITTER_KEY'], consumer_secret: ENV['TWITTER_SECRET'], token: ENV['TWITTER_ACCESS_TOKEN'], token_secret: ENV['TWITTER_ACCESS_TOKEN_SECRET']
-      f.request :json
-      f.response :json
-      f.adapter :net_http
-    end
-  end
-
   def self.nitter
     twitter_friends = TwitterFriend.all
     c = twitter_friends.count
@@ -71,14 +62,24 @@ class Tweet
       t['quotes_per_follower'] = t['public_metrics']['quote_count'].to_f / t['user']['public_metrics']['followers_count']
       t['quotes_per_second'] = t['public_metrics']['quote_count'].to_f / t['age']
       t['quotes_per_follower_per_second'] = t['public_metrics']['quote_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
-      Tweet.create(tweet_id: t['id'], data: t, timeline: timeline)
+
       oldest_tweet_in_cursor_created_at = Time.iso8601(t['created_at'])
+      Tweet.create(tweet_id: t['id'], data: t, timeline: timeline) if item.search('.retweet-header').empty?
     end
     return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 7.days.ago
 
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
     puts cursor
     Tweet.nitter_user(username, timeline, cursor: cursor)
+  end
+
+  def self.api
+    Faraday.new 'https://api.twitter.com/2' do |f|
+      f.request :oauth, consumer_key: ENV['TWITTER_KEY'], consumer_secret: ENV['TWITTER_SECRET'], token: ENV['TWITTER_ACCESS_TOKEN'], token_secret: ENV['TWITTER_ACCESS_TOKEN_SECRET']
+      f.request :json
+      f.response :json
+      f.adapter :net_http
+    end
   end
 
   def self.timeline(url)
