@@ -380,6 +380,7 @@ DEPENDENCIES
   better_html
   binance
   chroma
+  concurrent-ruby
   delayed_job_mongoid
   digest-sha3
   dropbox_api

@@ -2,15 +2,31 @@ class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :tweet_id, type: Integer
   field :data, type: Hash
   field :html, type: String
   field :timeline, type: String
 
   def self.admin_fields
     {
+      tweet_id: { type: :number, disabled: true },
       data: { type: :text_area, disabled: true },
+      html: { type: :text_area, disabled: true },
       timeline: :text
     }
+  end
+
+  validates_uniqueness_of :tweet_id
+
+  def self.oldest_tweet_for_user(username)
+    Tweet.where('data.user.username' => username).order_by('data.created_at' => 1).first
+  end
+
+  def self.users_where_oldest_tweet_is_less_than_7_days_ago
+    TwitterFriend.all.map { |tf| tf['Screen name'] }.select do |username|
+      oldest_tweet = Tweet.oldest_tweet_for_user(username)
+      oldest_tweet && Time.now - Time.iso8601(oldest_tweet.data['created_at']) < 7.days
+    end
   end
 
   def self.api
@@ -20,6 +36,53 @@ class Tweet
       f.response :json
       f.adapter :net_http
     end
+  end
+
+  def self.nitter
+    twitter_friends = TwitterFriend.all
+    c = twitter_friends.count
+    twitter_friends.map { |tf| tf['Screen name'] }.each_with_index do |username, i|
+      puts "#{i + 1}/#{c} #{username}"
+      Tweet.nitter_user(username)
+    end
+  end
+
+  def self.nitter_user(username, cursor: nil)
+    a = Mechanize.new
+    oldest_tweet_in_cursor_created_at = nil
+    page = a.get("https://nitter.net/#{username}?cursor=#{cursor}")
+    page.search('.timeline .timeline-item .tweet-body').each do |item|
+      t = {}
+      t['user'] = {}
+      t['user']['username'] = username
+      t['created_at'] = Time.parse(item.search('.tweet-date a[title]')[0]['title']).iso8601
+      t['id'] = item.parent.search('.tweet-link')[0]['href'].split('/').last.split('#').first
+      t['age'] = Time.now - Time.iso8601(t['created_at'])
+
+      t['public_metrics'] = {}
+      t['public_metrics']['like_count'] = item.search('.icon-heart')[0].parent.text
+      t['public_metrics']['retweet_count'] = item.search('.icon-retweet')[0].parent.text
+      t['public_metrics']['quote_count'] = item.search('.icon-quote')[0].parent.text
+      t['user']['public_metrics'] = {}
+      t['user']['public_metrics']['followers_count'] = page.search('.followers .profile-stat-num').text.gsub(',', '').to_i
+
+      t['likes_per_follower'] = t['public_metrics']['like_count'].to_f / t['user']['public_metrics']['followers_count']
+      t['likes_per_second'] = t['public_metrics']['like_count'].to_f / t['age']
+      t['likes_per_follower_per_second'] = t['public_metrics']['like_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
+      t['retweets_per_follower'] = t['public_metrics']['retweet_count'].to_f / t['user']['public_metrics']['followers_count']
+      t['retweets_per_second'] = t['public_metrics']['retweet_count'].to_f / t['age']
+      t['retweets_per_follower_per_second'] = t['public_metrics']['retweet_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
+      t['quotes_per_follower'] = t['public_metrics']['quote_count'].to_f / t['user']['public_metrics']['followers_count']
+      t['quotes_per_second'] = t['public_metrics']['quote_count'].to_f / t['age']
+      t['quotes_per_follower_per_second'] = t['public_metrics']['quote_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
+      Tweet.create(tweet_id: t['id'], data: t, timeline: 'Home')
+      oldest_tweet_in_cursor_created_at = Time.iso8601(t['created_at'])
+    end
+    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 7.days.ago
+
+    cursor = page.search('.show-more a').last['href'].split('cursor=').last
+    puts cursor
+    Tweet.nitter_user(username, cursor: cursor)
   end
 
   def self.timeline(url)
