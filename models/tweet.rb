@@ -18,15 +18,17 @@ class Tweet
 
   validates_uniqueness_of :tweet_id
 
-  def self.oldest_tweet_for_user(username)
-    Tweet.where('data.user.username' => username).order_by('data.created_at' => 1).first
+  def self.import
+    Tweet.delete_all
+    Tweet.nitter
   end
 
-  def self.users_where_oldest_tweet_is_less_than_7_days_ago
-    TwitterFriend.all.map { |tf| tf['Screen name'] }.select do |username|
-      oldest_tweet = Tweet.oldest_tweet_for_user(username)
-      oldest_tweet && Time.now - Time.iso8601(oldest_tweet.data['created_at']) < 7.days
-    end
+  def self.newest_tweet_for_user(username)
+    Tweet.where('data.user.username' => username).order_by('data.created_at desc').first
+  end
+
+  def self.oldest_tweet_for_user(username)
+    Tweet.where('data.user.username' => username).order_by('data.created_at asc').first
   end
 
   def self.api
@@ -41,13 +43,18 @@ class Tweet
   def self.nitter
     twitter_friends = TwitterFriend.all
     c = twitter_friends.count
-    twitter_friends.map { |tf| tf['Screen name'] }.each_with_index do |username, i|
+    twitter_friends.each_with_index do |tf, i|
+      username = tf['Username']
+      timeline = tf['Timeline']
       puts "#{i + 1}/#{c} #{username}"
-      Tweet.nitter_user(username)
+      newest_tweet_for_user = Tweet.newest_tweet_for_user(username)
+      next if newest_tweet_for_user && newest_tweet_for_user['data']['created_at'] < 3.hours.ago
+
+      Tweet.nitter_user(username, timeline)
     end
   end
 
-  def self.nitter_user(username, cursor: nil)
+  def self.nitter_user(username, timeline, cursor: nil)
     a = Mechanize.new
     oldest_tweet_in_cursor_created_at = nil
     page = a.get("https://nitter.net/#{username}?cursor=#{cursor}")
@@ -75,14 +82,14 @@ class Tweet
       t['quotes_per_follower'] = t['public_metrics']['quote_count'].to_f / t['user']['public_metrics']['followers_count']
       t['quotes_per_second'] = t['public_metrics']['quote_count'].to_f / t['age']
       t['quotes_per_follower_per_second'] = t['public_metrics']['quote_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
-      Tweet.create(tweet_id: t['id'], data: t, timeline: 'Home')
+      Tweet.create(tweet_id: t['id'], data: t, timeline: timeline)
       oldest_tweet_in_cursor_created_at = Time.iso8601(t['created_at'])
     end
     return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 7.days.ago
 
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
     puts cursor
-    Tweet.nitter_user(username, cursor: cursor)
+    Tweet.nitter_user(username, timeline, cursor: cursor)
   end
 
   def self.timeline(url)
@@ -164,7 +171,7 @@ class Tweet
     }
   end
 
-  def self.import
+  def self.import_timelines
     # r = Tweet.api.get("users/#{ENV['TWITTER_USER_ID']}/owned_lists")
     # }.merge(r.body['data'].map { |x| [x['name'], "lists/#{x['id']}/tweets"] }.to_h)
     timelines.each do |timeline, (url, refresh_time)|
