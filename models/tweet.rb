@@ -23,14 +23,6 @@ class Tweet
     Tweet.nitter
   end
 
-  def self.newest_tweet_for_user(username)
-    Tweet.where('data.user.username' => username).order_by('data.created_at desc').first
-  end
-
-  def self.oldest_tweet_for_user(username)
-    Tweet.where('data.user.username' => username).order_by('data.created_at asc').first
-  end
-
   def self.api
     Faraday.new 'https://api.twitter.com/2' do |f|
       f.request :oauth, consumer_key: ENV['TWITTER_KEY'], consumer_secret: ENV['TWITTER_SECRET'], token: ENV['TWITTER_ACCESS_TOKEN'], token_secret: ENV['TWITTER_ACCESS_TOKEN_SECRET']
@@ -47,9 +39,6 @@ class Tweet
       username = tf['Username']
       timeline = tf['Timeline']
       puts "#{i + 1}/#{c} #{username}"
-      newest_tweet_for_user = Tweet.newest_tweet_for_user(username)
-      next if newest_tweet_for_user && newest_tweet_for_user['data']['created_at'] < 3.hours.ago
-
       Tweet.nitter_user(username, timeline)
     end
   end
