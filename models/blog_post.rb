@@ -142,7 +142,7 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
     cipher.encrypt
     cipher.key = Digest::MD5.hexdigest(ENV['ENCRYPTION_KEY'])
     encrypted = cipher.update(text) + cipher.final
-    Base64.encode64(encrypted).strip
+    Base64.encode64(encrypted).gsub("\n", '')
   end
 
   def self.decrypt(ciphertext)
