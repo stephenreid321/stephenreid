@@ -14,7 +14,7 @@ StephenReid::App.controller do
   end
 
   get '/ai/generate/:encrypted_title' do
-    title = BlogPost.unencrypt(params[:encrypted_title])
+    title = BlogPost.decrypt(params[:encrypted_title])
     @blog_post = BlogPost.create(title: title)
     redirect @blog_post.url
   end
