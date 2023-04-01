@@ -11,6 +11,7 @@ $(function () {
     const pagelet = $(form).closest('[data-pagelet-url]')
     pagelet.css('opacity', '0.3')
     if ($(this).hasClass('no-submit')) {
+      $('[data-toggle="tooltip"]', pagelet).tooltip('hide')
       pagelet.load(pagelet.attr('data-pagelet-url'), function () {
         pagelet.css('opacity', '1')
       })
@@ -24,6 +25,7 @@ $(function () {
           url: $(form).attr('action'),
           data: formData,
           success: function () {
+            $('[data-toggle="tooltip"]', pagelet).tooltip('hide')
             pagelet.load(pagelet.attr('data-pagelet-url'), function () {
               pagelet.css('opacity', '1')
             })
@@ -31,6 +33,7 @@ $(function () {
         })
       } else {
         $.post($(form).attr('action'), $(form).serialize(), function () {
+          $('[data-toggle="tooltip"]', pagelet).tooltip('hide')
           pagelet.load(pagelet.attr('data-pagelet-url'), function () {
             pagelet.css('opacity', '1')
           })
@@ -49,6 +52,7 @@ $(function () {
     const pagelet = $(a).closest('[data-pagelet-url]')
     pagelet.css('opacity', '0.3')
     $.get($(a).attr('href'), function () {
+      $('[data-toggle="tooltip"]', pagelet).tooltip('hide')
       pagelet.load(pagelet.attr('data-pagelet-url'), function () {
         pagelet.css('opacity', '1')
       })
@@ -60,6 +64,7 @@ $(function () {
     const a = this
     const pagelet = $(a).closest('[data-pagelet-url]')
     pagelet.css('opacity', '0.3')
+    $('[data-toggle="tooltip"]', pagelet).tooltip('hide')
     pagelet.load($(a).attr('href'), function () {
       pagelet.css('opacity', '1')
       const offset = pagelet.offset()
@@ -78,22 +83,25 @@ $(function () {
   })
 
   function pageletPusher () {
-    $('[data-pusher-channel]:not([data-pusher-channel-registered])').attr('data-pusher-channel-registered', 'true').each(function () {
-      const pagelet = $(this)
-      const channel = pusher.subscribe(pagelet.attr('data-pusher-channel'))
-      channel.bind('updated', function (data) {
-        if ($(document).find(pagelet).length == 1) { // only proceed if this pagelet still exists in the DOM, to prevent unnecessary calls to .load()
-          $(pagelet).load($(pagelet).attr('data-pagelet-url'))
-        }
+    if (typeof (pusher) != 'undefined') {
+      $('[data-pusher-channel]:not([data-pusher-channel-registered])').attr('data-pusher-channel-registered', 'true').each(function () {
+        const pagelet = $(this)
+        const channel = pusher.subscribe(pagelet.attr('data-pusher-channel'))
+        channel.bind('updated', function (data) {
+          if ($(document).find(pagelet).length == 1) { // only proceed if this pagelet still exists in the DOM, to prevent unnecessary calls to .load()
+            $(pagelet).load($(pagelet).attr('data-pagelet-url'))
+          }
+        })
       })
-    })
+    }
   }
 
   function loadEmptyPagelets () {
     $('[data-pagelet-url]').each(function () {
       const pagelet = this
-      if ($(pagelet).html().length == 0) {
-        $(pagelet).html('<i class="fas fa-spin fa-circle-notch"></i>')
+      const placeholder = $(pagelet)[0].hasAttribute('data-with-placeholder')
+      if ($(pagelet).html().length == 0 || placeholder) {
+        if (placeholder) { $(pagelet).removeAttr('data-with-placeholder') } else { $(pagelet).html('<i class="fa fa-spin fa-circle-o-notch"></i>') }
         $(pagelet).load($(pagelet).attr('data-pagelet-url'))
       }
     })
