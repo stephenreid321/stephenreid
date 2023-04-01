@@ -150,6 +150,8 @@ class Tweet
 
   def get_html
     JSON.parse(Faraday.get("https://publish.twitter.com/oembed?omit_script=1&url=#{"https://twitter.com/#{data['user']['username']}/status/#{data['id']}"}").body)['html']
+  rescue StandardError
+    nil
   end
 
   def self.timelines
