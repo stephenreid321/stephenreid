@@ -9,12 +9,22 @@ StephenReid::App.controller do
   end
 
   post '/ai' do
-    @blog_post = BlogPost.create(title: params[:title])
+    BlogPost.confirm(params[:title], params[:email])
+    redirect '/ai/thanks'
+  end
+
+  get '/ai/generate/:encrypted_title' do
+    title = BlogPost.unencrypt(params[:encrypted_title])
+    @blog_post = BlogPost.create(title: title)
     redirect @blog_post.url
   end
 
+  get '/ai/thanks' do
+    erb :'blog/thanks'
+  end
+
   get '/ai/:slug' do
-    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || redirect('/ai')
     @title = @blog_post.title
     @og_image = @blog_post.image_url
     render :'blog/post'
@@ -33,14 +43,14 @@ StephenReid::App.controller do
     @blog_post.public = true
     @blog_post.save
     redirect @blog_post.url
-  end  
+  end
 
   get '/ai/:slug/make_private' do
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     @blog_post.public = false
     @blog_post.save
     redirect @blog_post.url
-  end    
+  end
 
   get '/ai/:slug/refresh_image' do
     sign_in_required!

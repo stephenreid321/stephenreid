@@ -126,4 +126,31 @@ I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from t
     end
     mail.deliver if Padrino.env == :production
   end
+
+  def self.confirm(title, email)
+    mail = Mail.new do
+      from 'Stephen Reid <stephen@stephenreid.net>'
+      to email
+      subject title
+      body "Click here to generate your post: https://stephenreid.net/ai/generate/#{BlogPost.encrypt(title)}"
+    end
+    mail.deliver if Padrino.env == :production
+  end
+
+  def self.encrypt(text)
+    cipher = OpenSSL::Cipher.new('AES-256-ECB')
+    cipher.encrypt
+    cipher.key = Digest::MD5.hexdigest(ENV['ENCRYPTION_KEY'])
+    encrypted = cipher.update(text) + cipher.final
+    Base64.encode64(encrypted).strip
+  end
+
+  def self.decrypt(ciphertext)
+    cipher = OpenSSL::Cipher.new('AES-256-ECB')
+    cipher.decrypt
+    cipher.key = Digest::MD5.hexdigest(ENV['ENCRYPTION_KEY'])
+    decoded = Base64.decode64(ciphertext)
+    decrypted = cipher.update(decoded) + cipher.final
+    decrypted.force_encoding('utf-8')
+  end
 end
