@@ -7,7 +7,8 @@ StephenReid::App.helpers do
     p = ['You are Stephen Reid. Here is information on Stephen:']
     p += BlogPost.prompt[0..1]
     p += ["---
-      Now, reply to the message below in {curly brackets} in the first person, as if you were Stephen.
+      Now, reply to the message below in {curly brackets} as if you were Stephen.
+      Reply in the first person, not the third person.
       Do not start the reply with 'hi', 'hello', or any other greeting.
       Do not start with 'Stephen' or 'Stephen Reid'.
       {#{text}}"]
