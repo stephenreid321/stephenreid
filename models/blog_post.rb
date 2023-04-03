@@ -70,6 +70,27 @@ class BlogPost
     self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{image_word}").headers[:location]
   end
 
+  def self.prompt
+    [%(Hi! I'm Stephen.
+      I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from the South Devon coast.
+      ## Short bio in the third person
+      #{open("#{Padrino.root}/app/markdown/bio.md").read.force_encoding('utf-8')}),
+     %(## Training and teachers
+      #{open("#{Padrino.root}/app/markdown/training.md").read.force_encoding('utf-8')}),
+     %(## Books I've read
+      #{Book.all(sort: { 'ID' => 'asc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")}),
+     %(## Content I've shared recently
+      #{Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).first(10).map { |post| "[#{post['Title']}](#{post['Link']})\n#{post['Body']}" }.join("\n\n")})]
+    # %(## Speaking engagements
+    # #{SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")}),
+    # %(## Blog posts I've written
+    #   #{Dir['app/jekyll_blog/_posts/*.md'].sort.reverse.map do |f|
+    #       content = File.read(f)
+    #       yaml = YAML.load(content)
+    #       "### #{yaml['title']}\n#{yaml['excerpt']}"
+    #     end.join("\n\n")})
+  end
+
   def prompt
     [
       %(
@@ -85,26 +106,8 @@ Write a 700-word blog post in the first person, as if written by the person belo
 - Reference at least one book the author has read.
 - Assume the audience is highly intelligent.
 - Make sure the post has a proper conclusion.
----),
-      %(Hi! I'm Stephen.
-I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from the South Devon coast.
-## Short bio in the third person
-#{open("#{Padrino.root}/app/markdown/bio.md").read.force_encoding('utf-8')}),
-      %(## Training and teachers
-#{open("#{Padrino.root}/app/markdown/training.md").read.force_encoding('utf-8')}),
-      %(## Books I've read
-#{Book.all(sort: { 'ID' => 'asc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")}),
-      %(## Content I've shared recently
-#{Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).first(10).map { |post| "[#{post['Title']}](#{post['Link']})\n#{post['Body']}" }.join("\n\n")})
-      # %(## Speaking engagements
-      # #{SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")}),
-      # %(## Blog posts I've written
-      #   #{Dir['app/jekyll_blog/_posts/*.md'].sort.reverse.map do |f|
-      #       content = File.read(f)
-      #       yaml = YAML.load(content)
-      #       "### #{yaml['title']}\n#{yaml['excerpt']}"
-      #     end.join("\n\n")})
-    ]
+---)
+    ] + BlogPost.prompt
   end
 
   before_validation do

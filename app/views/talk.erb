@@ -1,0 +1,37 @@
+<script>
+  function speak(form) {
+    $('#spin').show();
+    let text = $('input[name=text]').val()
+    $('input[name=text]').val('').prop('disabled', true)
+    $.post(form.action, $.param({text: text}), function(data) {
+      $('audio source').attr('src', 'data:audio/mpeg;base64,' + data);
+      $('audio')[0].load();
+      $('audio')[0].play();
+    }).always(function() {
+      $('input[name=text]').prop('disabled', false).focus();
+      $('#spin').hide();
+    });
+  }
+</script>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+    <% form_tag '/talk', onsubmit: 'speak(this); return false' do %>
+      <div class="input-group mb-3">
+        <%= text_field_tag :text, class: 'form-control' %>
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    <% end %>
+    <div class="text-center" id="spin" style="display: none">
+      <i class="fa fa-spin fa-circle-notch"></i>
+    </div>
+  </div>
+</div>
+
+<audio style="display: none">
+  <source type="audio/mpeg">
+</audio>

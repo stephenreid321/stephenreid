@@ -54,6 +54,28 @@ module StephenReid
       erb :not_found, layout: :application
     end
 
+    post '/talk' do
+      openai_response = OPENAI.post('chat/completions') do |req|
+        req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: audio_prompt(params[:text]).join("\n\n") }] }.to_json
+      end
+      content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
+
+      elevenlabs_response = ELEVENLABS.post("text-to-speech/#{ENV['ELEVENLABS_VOICE_ID']}") do |req|
+        req.body = {
+          text: content,
+          voice_settings: {
+            stability: 0,
+            similarity_boost: 0
+          }
+        }.to_json
+      end
+      Base64.encode64(elevenlabs_response.body)
+    end
+
+    get '/talk' do
+      erb :talk
+    end
+
     get '/', cache: true do
       expires 1.hour.to_i
       @og_image = "#{ENV['BASE_URI']}/images/og-image.jpg"

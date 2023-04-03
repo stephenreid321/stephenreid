@@ -3,6 +3,17 @@ StephenReid::App.helpers do
     %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x.iso8601}</abbr>)
   end
 
+  def audio_prompt(text)
+    p = ['You are Stephen Reid. Here is information on Stephen:']
+    p += BlogPost.prompt[0..1]
+    p += ["---
+      Now, reply to the message below in {curly brackets} as if you were Stephen.
+      Do not start the reply with 'hi', 'hello', or any other greeting.
+      Do not start with 'Stephen' or 'Stephen Reid'.
+      {#{text}}"]
+    p
+  end
+
   def md(slug, render: true)
     begin
       text = open("#{Padrino.root}/app/markdown/#{slug}.md").read.force_encoding('utf-8')
