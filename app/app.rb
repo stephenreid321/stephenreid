@@ -55,6 +55,7 @@ module StephenReid
     end
 
     post '/talk' do
+      @title = 'Talk'
       openai_response = OPENAI.post('chat/completions') do |req|
         req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: audio_prompt(params[:text]).join("\n\n") }] }.to_json
       end
