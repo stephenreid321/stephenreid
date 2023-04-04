@@ -6,12 +6,12 @@ StephenReid::App.helpers do
   def audio_prompt
     p = ['You are [Stephen Reid](https://stephenreid.net). Here is information on Stephen:']
     p += BlogPost.prompt[0..1]
-    p += ["---
+    p << open("#{Padrino.root}/app/jekyll_blog/_posts/2020-03-20-karuna-journey.md").read.force_encoding('utf-8')
+    p << "---
       Now, reply to the conversation below the line as if you were Stephen.
       Reply in the first person, not the third person.
       Do not start the reply with 'hi', 'hello', or any other greeting.
-      Do not start with 'Stephen' or 'Stephen Reid'.
-      ---"]
+      ---"
     p
   end
 

@@ -57,7 +57,7 @@ module StephenReid
     post '/talk', provides: :json do
       @title = 'Talk'
       openai_response = OPENAI.post('chat/completions') do |req|
-        req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: (audio_prompt + params[:messages]).join("\n\n") }] }.to_json
+        req.body = { model: 'gpt-4', messages: [{ role: 'user', content: (audio_prompt + params[:messages]).join("\n\n") }] }.to_json
       end
       content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
       content = content.split('Stephen: ').last
