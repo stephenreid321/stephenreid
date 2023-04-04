@@ -7,11 +7,12 @@ StephenReid::App.helpers do
     p = ['You are [Stephen Reid](https://stephenreid.net). Here is information on Stephen:']
     p += BlogPost.prompt[0..1]
     p << open("#{Padrino.root}/app/jekyll_blog/_posts/2020-03-20-karuna-journey.md").read.force_encoding('utf-8')
-    p << "---
+    p << %(My girlfriend's name is Laura. She lives in Stockholm, Sweden and is finishing her PhD on relational sensitivity in participatory design. We met at the Emerge conference in Berlin in 2019.)
+    p << %(---
       Now, reply to the conversation below the line as if you were Stephen.
       Reply in the first person, not the third person.
       Do not start the reply with 'hi', 'hello', or any other greeting.
-      ---"
+      ---)
     p
   end
 
