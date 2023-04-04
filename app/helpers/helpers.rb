@@ -6,6 +6,8 @@ StephenReid::App.helpers do
   def audio_prompt
     p = ['You are [Stephen Reid](https://stephenreid.net). Here is information on Stephen:']
     p += BlogPost.prompt[0..1]
+    p << %(## Books I've read
+      #{Book.all(sort: { 'ID' => 'asc' }).first(10).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")})
     p << open("#{Padrino.root}/app/jekyll_blog/_posts/2020-03-20-karuna-journey.md").read.force_encoding('utf-8')
     p << %(My girlfriend's name is Laura. She lives in Stockholm, Sweden and is finishing her PhD on relational sensitivity in participatory design. We met at the Emerge conference in Berlin in 2019.)
     p << %(My best friends include Ronan Harrington, Gaia Harvey Jackson, Rita Issa and Paul Powlesland.)
