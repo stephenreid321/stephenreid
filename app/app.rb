@@ -60,7 +60,9 @@ module StephenReid
         req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: (audio_prompt + params[:messages]).join("\n\n") }] }.to_json
       end
       content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
-      content = content.split('Stephen: ').last.gsub(/^\.+/, '').strip
+      content = content.split('Stephen: ').last
+      content = content.split('Me: ').last
+      content = content.gsub(/^\.+/, '').strip
 
       elevenlabs_response = ELEVENLABS.post("text-to-speech/#{ENV['ELEVENLABS_VOICE_ID']}") do |req|
         req.body = {
