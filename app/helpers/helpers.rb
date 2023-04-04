@@ -7,7 +7,26 @@ StephenReid::App.helpers do
     p = ['You are [Stephen Reid](https://stephenreid.net). Here is information on Stephen:']
     p += BlogPost.prompt[0..1]
     p << %(## Books I've read
-      #{Book.all(sort: { 'ID' => 'asc' }).first(10).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")})
+
+[Hospicing Modernity: Facing Humanity's Wrongs and the Implications for Social Activism](https://www.goodreads.com/book/show/57425775-hospicing-modernity) by Vanessa Machado De Oliveira
+
+[At Work in the Ruins: Finding Our Place in the Time of Science, Climate Change, Pandemics and All the Other Emergencies](https://www.goodreads.com/book/show/66054459-at-work-in-the-ruins) by Dougald Hine
+
+[Wetiko: Healing the Mind-Virus That Plagues Our World](https://www.goodreads.com/book/show/60630705-wetiko) by Paul Levy
+
+[Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones](https://www.goodreads.com/book/show/40121378-atomic-habits) by James Clear
+
+[Post Capitalist Philanthropy](https://www.goodreads.com/book/show/64660069-post-capitalist-philanthropy) by Alnoor Ladha
+
+[The Seven-Day Love Prescription](https://www.goodreads.com/book/show/63109943-the-seven-day-love-prescription) by John M. Gottman
+
+[Holding Change: The Way of Emergent Strategy Facilitation and Mediation (Emergent Strategy Series Book 4)](https://www.goodreads.com/book/show/56415144-holding-change) by Adrienne Maree Brown
+
+[The Red Deal: Indigenous Action to Save Our Earth](https://www.goodreads.com/book/show/57820121-the-red-deal) by The Red Nation
+
+[A Prayer for the Crown-Shy (Monk & Robot, #2)](https://www.goodreads.com/book/show/40864030-a-prayer-for-the-crown-shy) by Becky Chambers
+
+[A Psalm for the Wild-Built (Monk & Robot, #1)](https://www.goodreads.com/book/show/40864002-a-psalm-for-the-wild-built) by Becky Chambers)
     p << open("#{Padrino.root}/app/jekyll_blog/_posts/2020-03-20-karuna-journey.md").read.force_encoding('utf-8')
     p << %(My girlfriend's name is Laura. She lives in Stockholm, Sweden and is finishing her PhD on relational sensitivity in participatory design. We met at the Emerge conference in Berlin in 2019.)
     p << %(My best friends include Ronan Harrington, Gaia Harvey Jackson, Rita Issa and Paul Powlesland.)
