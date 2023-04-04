@@ -54,12 +54,13 @@ module StephenReid
       erb :not_found, layout: :application
     end
 
-    post '/talk' do
+    post '/talk', provides: :json do
       @title = 'Talk'
       openai_response = OPENAI.post('chat/completions') do |req|
-        req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: audio_prompt(params[:text]).join("\n\n") }] }.to_json
+        req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: (audio_prompt + params[:messages]).join("\n\n") }] }.to_json
       end
       content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
+      content = content.split('Stephen: ').last.gsub(/^\.+/, '').strip
 
       elevenlabs_response = ELEVENLABS.post("text-to-speech/#{ENV['ELEVENLABS_VOICE_ID']}") do |req|
         req.body = {
@@ -70,11 +71,19 @@ module StephenReid
           }
         }.to_json
       end
-      Base64.encode64(elevenlabs_response.body)
+
+      {
+        text: content,
+        audio: Base64.encode64(elevenlabs_response.body)
+      }.to_json
     end
 
     get '/talk' do
       erb :talk
+    end
+
+    get '/talk/prompt' do
+      (audio_prompt + ["Friend: Hi there, how's it going?", 'Stephen: Good thanks!']).join("\n\n").gsub("\n", '<br>')
     end
 
     get '/', cache: true do
