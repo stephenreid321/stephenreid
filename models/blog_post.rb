@@ -152,7 +152,7 @@ Write a 700-word blog post in the first person, as if written by the person belo
     cipher = OpenSSL::Cipher.new('AES-256-ECB')
     cipher.decrypt
     cipher.key = Digest::MD5.hexdigest(ENV['ENCRYPTION_KEY'])
-    decoded = Base64.decode64(ciphertext.gsub('_', '/'))
+    decoded = Base64.decode64(ciphertext).gsub('_', '/')
     decrypted = cipher.update(decoded) + cipher.final
     decrypted.force_encoding('utf-8')
   end
