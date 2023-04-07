@@ -42,6 +42,8 @@
                 &middot;
                 <a href="<%=blog_post.url%>/make_public">make public</a>
               <% end %>
+              &middot;
+              <a data-confirm="Are you sure you want to delete this post?" href="<%=blog_post.url%>/destroy">destroy</a>
             </p>
           <% end %>
         </a>
