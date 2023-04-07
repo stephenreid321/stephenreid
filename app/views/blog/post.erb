@@ -31,7 +31,7 @@
             <a href="<%=@blog_post.url%>/make_public">private</a>
           <% end %>
           &middot;
-          <a href="<%=@blog_post.url%>/destroy">destroy</a>
+          <a data-confirm="Are you sure you want to delete this post?" href="<%=@blog_post.url%>/destroy">destroy</a>
         </p>
         <% form_tag "#{@blog_post.url}/image_word", id: 'image-word-form', class: 'mb-3', style: 'display: none' do %>
           <%= text_field_tag :image_word, class: 'form-control', value: @blog_post.image_word %>
