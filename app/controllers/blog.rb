@@ -4,7 +4,12 @@ StephenReid::App.controller do
   end
 
   get '/ai' do
-    @blog_posts = BlogPost.where(public: !current_account).order_by('created_at desc')
+    @blog_posts = if current_account
+                    BlogPost.where(:public.ne => false)
+                  else
+                    BlogPost.where(public: true)
+                  end
+    @blog_posts = @blog_posts.order_by('created_at desc')
     render :'blog/index'
   end
 
