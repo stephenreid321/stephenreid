@@ -25,10 +25,10 @@
             <a href="javascript:;" onclick="$(this).parent().hide();$('#image-word-form').show().find('input').select()"><%=@blog_post.image_word%></a>
             &middot;
           <% end %>
-          <% if @blog_post.public? %>
-            <a href="<%=@blog_post.url%>/make_private">public</a>
+          <% if blog_post.public? %>
+            <a href="<%=blog_post.url%>/make_private">public</a>
           <% else %>
-            <a href="<%=@blog_post.url%>/make_public">private</a>
+            <a href="<%=blog_post.url%>/make_public">private</a>
           <% end %>
         </p>
         <% form_tag "#{@blog_post.url}/image_word", id: 'image-word-form', class: 'mb-3', style: 'display: none' do %>
