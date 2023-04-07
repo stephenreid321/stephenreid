@@ -4,11 +4,22 @@ StephenReid::App.controller do
   end
 
   get '/ai' do
-    @blog_posts = if current_account
-                    BlogPost.where(:public.ne => false)
-                  else
-                    BlogPost.where(public: true)
-                  end
+    redirect '/ai/public/true' if current_account
+    @blog_posts = BlogPost.where(public: true)
+    @blog_posts = @blog_posts.order_by('created_at desc')
+    render :'blog/index'
+  end
+
+  get '/ai/public/:public' do
+    public = case params[:public]
+             when 'false'
+               false
+             when 'nil'
+               nil
+             else
+               true
+             end
+    @blog_posts = BlogPost.where(public: public)
     @blog_posts = @blog_posts.order_by('created_at desc')
     render :'blog/index'
   end
@@ -52,14 +63,14 @@ StephenReid::App.controller do
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     @blog_post.public = true
     @blog_post.save
-    redirect @blog_post.url
+    redirect back
   end
 
   get '/ai/:slug/make_private' do
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
     @blog_post.public = false
     @blog_post.save
-    redirect @blog_post.url
+    redirect back
   end
 
   get '/ai/:slug/destroy' do

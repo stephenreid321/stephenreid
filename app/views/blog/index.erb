@@ -2,6 +2,20 @@
 
 <div class="row justify-content-center">
   <div class="col-lg-8">
+
+    <%= ul_nav ({
+      'Public' => 'true',
+      'Pending' => 'nil',
+      'Private' => 'false'
+      }.map { |k,v| [k, "/ai/public/#{v}"] }),
+             ul_class: 'nav nav-tabs mb-3',
+             li_class: 'nav-item',
+             li_active_class: nil,
+             a_class: 'nav-link',
+             a_active_class: 'active'
+      %>
+
+
     <% @blog_posts.each { |blog_post| %>
     <div class="card mb-4 shadow-sm">
       <div class="card-body">
@@ -17,10 +31,14 @@
           <h1><%= blog_post.title %></h1>
           <% if current_account %>
             <p>
-              <% if blog_post.public? %>
+              <% if blog_post.public == true %>
                 <a href="<%=blog_post.url%>/make_private">public</a>
-              <% else %>
+              <% elsif blog_post.public == false %>
                 <a href="<%=blog_post.url%>/make_public">private</a>
+              <% else %>
+                <a href="<%=blog_post.url%>/make_private">make private</a>
+                &middot;
+                <a href="<%=blog_post.url%>/make_public">make public</a>
               <% end %>
             </p>
           <% end %>
