@@ -3,7 +3,8 @@
 <div class="row justify-content-center">
   <div class="col-lg-8">
 
-    <%= ul_nav ({
+    <% if current_account %>
+      <%= ul_nav ({
       'Public' => 'true',
       'Pending' => 'nil',
       'Private' => 'false'
@@ -14,6 +15,7 @@
              a_class: 'nav-link',
              a_active_class: 'active'
       %>
+    <% end %>
 
 
     <% @blog_posts.each { |blog_post| %>
