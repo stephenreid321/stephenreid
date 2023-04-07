@@ -15,7 +15,15 @@
           <% end %>
 
           <h1><%= blog_post.title %></h1>
-
+          <% if current_account %>
+            <p>
+              <% if @blog_post.public? %>
+                <a href="<%=@blog_post.url%>/make_private">public</a>
+              <% else %>
+                <a href="<%=@blog_post.url%>/make_public">private</a>
+              <% end %>
+            </p>
+          <% end %>
         </a>
       </div>
     </div>
