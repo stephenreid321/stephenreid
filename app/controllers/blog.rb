@@ -62,6 +62,13 @@ StephenReid::App.controller do
     redirect @blog_post.url
   end
 
+  get '/ai/:slug/make_private' do
+    sign_in_required!
+    @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
+    @blog_post.destroy
+    redirect '/ai'
+  end
+
   get '/ai/:slug/refresh_image' do
     sign_in_required!
     @blog_post = BlogPost.find_by(slug: params[:slug]) || not_found
