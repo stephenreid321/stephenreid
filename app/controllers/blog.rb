@@ -4,14 +4,18 @@ StephenReid::App.controller do
   end
 
   get '/ai' do
-    
     @blog_posts = BlogPost.where(public: !current_account).order_by('created_at desc')
     render :'blog/index'
   end
 
   post '/ai' do
-    BlogPost.confirm(params[:title], params[:email])
-    redirect '/ai/thanks'
+    if current_account
+      @blog_post = BlogPost.create(title: params[:title])
+      redirect @blog_post.url
+    else
+      BlogPost.confirm(params[:title], params[:email])
+      redirect '/ai/thanks'
+    end
   end
 
   get '/ai/generate/:encrypted_title' do
