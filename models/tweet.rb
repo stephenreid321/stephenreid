@@ -178,7 +178,8 @@ class Tweet
     # added chrome buildpack
     f = Ferrum::Browser.new
     f.go_to("https://platform.twitter.com/embed/Tweet.html?id=#{tweet_id}")
-    sleep 1
+    f.screenshot(path: 'tweet.png')
+    sleep 5
     width = 1
     while width == 1
       image = Magick::Image.from_blob(Base64.decode64(f.screenshot(encoding: :base64))).first

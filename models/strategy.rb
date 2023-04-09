@@ -250,7 +250,7 @@ class Strategy
     assets[k] = assets[k].round(4)
 
     t = assets.map { |_k, v| v }.sum
-    raise Strategy::RoundingError(assets.to_json) unless t == 1
+    raise Strategy::RoundingError, assets.to_json unless t == 1
 
     assets.map { |k, v| [k, v] }
   end
