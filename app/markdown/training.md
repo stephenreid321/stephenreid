@@ -1,6 +1,6 @@
 ### Technical
 
-*   *[Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence/), UC Berkeley (2023)*
+*   *[Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence?advocate_source=dashboard&coupon=STEPH%3A11-8ICI43C&utm_campaign=incentivized_referrals&utm_content=SO+-+Berkeley+Professional+Certificate+in+ML+%26+AI&utm_medium=personal_url&utm_source=referral#referrals-email-capture-modal), UC Berkeley (2023)*
 *   MPhys in Physics, University of Oxford (2004-2008)
     *   Graduated with first-class honours
     *   Final year specialisations in quantum field theory and condensed matter physics
