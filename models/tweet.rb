@@ -175,6 +175,7 @@ class Tweet
   end
 
   def get_image
+    # added chrome buildpack
     f = Ferrum::Browser.new
     f.go_to("https://platform.twitter.com/embed/Tweet.html?id=#{tweet_id}")
     sleep 1
