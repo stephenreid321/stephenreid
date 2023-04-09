@@ -26,7 +26,7 @@ StephenReid::App.controller do
 
   post '/ai' do
     if current_account
-      @blog_post = BlogPost.create(title: params[:title])
+      @blog_post = BlogPost.create(title: params[:title], skip_notification: true)
       redirect @blog_post.url
     else
       BlogPost.confirm(params[:title], params[:email])

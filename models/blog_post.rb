@@ -13,6 +13,8 @@ class BlogPost
   validates_presence_of :title
   validates_uniqueness_of :slug
 
+  attr_accessor :skip_notification
+
   def self.admin_fields
     {
       title: :text,
@@ -127,7 +129,7 @@ Write a 700-word blog post in the first person, as if written by the person belo
       subject "New blog post: #{blog_post.title}"
       body "https://stephenreid.net#{blog_post.url}"
     end
-    mail.deliver if Padrino.env == :production
+    mail.deliver if Padrino.env == :production && !skip_notification
   end
 
   def self.confirm(title, email)
