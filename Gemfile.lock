@@ -88,6 +88,13 @@ GEM
     digest-sha3 (1.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dragonfly (1.4.0)
+      addressable (~> 2.3)
+      multi_json (~> 1.0)
+      rack (>= 1.3)
+    dragonfly-s3_data_store (1.3.0)
+      dragonfly (~> 1.0)
+      fog-aws
     dropbox_api (0.1.21)
       faraday (< 3.0)
       oauth2 (~> 1.1)
@@ -109,6 +116,7 @@ GEM
       rbsecp256k1 (~> 5.1)
       scrypt (~> 3.0)
     eventmachine (1.2.7)
+    excon (0.99.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     faraday (0.17.6)
@@ -120,10 +128,31 @@ GEM
     faye-websocket (0.11.1)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
+    ferrum (0.13)
+      addressable (~> 2.5)
+      concurrent-ruby (~> 1.1)
+      webrick (~> 1.7)
+      websocket-driver (>= 0.6, < 0.8)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    fog-aws (3.17.0)
+      fog-core (~> 2.1)
+      fog-json (~> 1.1)
+      fog-xml (~> 0.1)
+    fog-core (2.3.0)
+      builder
+      excon (~> 0.71)
+      formatador (>= 0.2, < 2.0)
+      mime-types
+    fog-json (1.2.0)
+      fog-core
+      multi_json (~> 1.10)
+    fog-xml (0.1.4)
+      fog-core
+      nokogiri (>= 1.5.11, < 2.0.0)
+    formatador (1.1.0)
     front_matter_parser (1.0.1)
     google-apis-core (0.11.0)
       addressable (~> 2.5, >= 2.5.1)
@@ -302,6 +331,8 @@ GEM
       uber (< 0.2.0)
     retriable (3.1.2)
     rexml (3.2.5)
+    rmagick (5.2.0)
+      pkg-config (~> 1.4)
     rss (0.2.9)
       rexml
     rubocop (1.45.1)
@@ -383,11 +414,14 @@ DEPENDENCIES
   concurrent-ruby
   delayed_job_mongoid
   digest-sha3
+  dragonfly
+  dragonfly-s3_data_store
   dropbox_api
   email_address
   erb_lint
   eth
   factory_bot
+  ferrum
   front_matter_parser
   google_drive
   htmlbeautifier!
@@ -401,6 +435,7 @@ DEPENDENCIES
   puma
   rake
   redcarpet
+  rmagick
   rss
   rubocop
   sass

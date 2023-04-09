@@ -41,7 +41,13 @@
       (t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted' && (rt = t['referenced_tweets'].first['tweet']) && rt['referenced_tweets'] && rt['referenced_tweets'].first['type'] == 'quoted') ||
       (t['referenced_tweets'] && t['referenced_tweets'].any? { |rt| rt['tweet'] && rt['tweet']['media'] && rt['tweet']['media'].include?(nil) })      
       ) %>
-    <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
+    <% if tweet.image %>
+      <div class="mb-3">
+        <a target="_blank" href="<%=tweet.url%>"><img src="<%=tweet.image.url%>" class="rounded w-100"></a>
+      </div>
+    <% else %>
+      <%=tweet.set_image!; tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
+    <% end %>
   <% else %>
 
     <% (t = t['referenced_tweets'].first['tweet']) if t['referenced_tweets'] && t['referenced_tweets'].first['type'] == 'retweeted' %>

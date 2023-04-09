@@ -1,22 +1,42 @@
 class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
+  extend Dragonfly::Model
 
   field :tweet_id, type: Integer
   field :data, type: Hash
   field :html, type: String
   field :timeline, type: String
+  field :image_uid, type: String
 
   def self.admin_fields
     {
       tweet_id: { type: :number, disabled: true },
       data: { type: :text_area, disabled: true },
       html: { type: :text_area, disabled: true },
+      image_uid: { type: :text, disabled: true },
+      image: :image,
       timeline: :text
     }
   end
 
   validates_uniqueness_of :tweet_id
+
+  dragonfly_accessor :image
+  before_validation do
+    if image
+      begin
+        if %w[jpeg png gif pam].include?(image.format)
+          image.name = "#{SecureRandom.uuid}.#{image.format}"
+        else
+          errors.add(:image, 'must be an image')
+        end
+      rescue StandardError
+        self.image = nil
+        errors.add(:image, 'must be an image')
+      end
+    end
+  end
 
   def self.import
     Tweet.delete_all
@@ -153,6 +173,28 @@ class Tweet
   rescue StandardError
     nil
   end
+
+  def get_image
+    f = Ferrum::Browser.new
+    f.go_to("https://platform.twitter.com/embed/Tweet.html?id=#{tweet_id}")
+    sleep 1
+    width = 1
+    while width == 1
+      image = Magick::Image.from_blob(Base64.decode64(f.screenshot(encoding: :base64))).first
+      image.trim!
+      width = image.columns
+    end
+    f.quit
+    self.image = image.to_blob
+  end
+
+  def set_image!
+    return if image
+
+    get_image
+    save
+  end
+  handle_asynchronously :set_image!
 
   def self.timelines
     {
