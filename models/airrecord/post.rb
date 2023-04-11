@@ -14,6 +14,8 @@ class Post < Airrecord::Table
     replacements = []
     additions = []
 
+    post['Link'] = post['Link'].gsub('youtu.be/', 'youtube.com/watch?v=')
+
     Term.all(sort: { 'Priority' => 'desc' }).each do |term|
       i = term['Case sensitive'] ? false : true
       t = term['Name']
