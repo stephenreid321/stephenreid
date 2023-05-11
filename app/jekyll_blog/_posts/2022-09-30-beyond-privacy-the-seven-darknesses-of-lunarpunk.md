@@ -1,7 +1,7 @@
 ---
 title: "Beyond Privacy: The Seven Darknesses of Lunarpunk"
 excerpt: "Expanding notions of lunarpunk in web3"
-header_image_url: assets/image/0.jpg
+header_image_url: assets/image/2022-09-30-beyond-privacy-the-seven-darknesses-of-lunarpunk-1683793747470.jpeg
 ---
 
 > You darkness from which I come,  
@@ -44,6 +44,10 @@ Key technology: cryptography, as explored in [Lunarpunk and the Dark Side of the
 *"What’s the most powerful force on earth? In the 1800s, God. In the 1900s, the US military. And by the mid-2000s, encryption.. It doesn’t matter how many nuclear weapons you have; if property or information is secured by cryptography, the state can’t seize it without getting the solution to an equation."* &mdash; [The Network State](https://thenetworkstate.com/god-state-network)
 
 Lunarpunks are masters of cryptography. They understand how pseudonymity grants not just freedom of speech, but [freedom after speech](https://thehub.ca/in-the-know/2021-06-10/what-is-the-pseudonymous-economy-balaji-srinivasan/).
+
+*Edit: [I appreciate this distinction between privacy and anonymity by @lunar_mining](https://twitter.com/lunar_mining/status/1598720153851727875)*
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The agora is all activity outside the state.<br><br>In the lunarpunk future, the agora expands. The state is overcome. Dark forests of encryption become primary. <br><br>Protected by cypher-foliage, self-governing squads are free to define their destinies. <a href="https://t.co/skCHETT6Xv">pic.twitter.com/skCHETT6Xv</a></p>&mdash; 𝖝𝖊𝖓𝖔 ⛛ 🕊️ (@lunar_mining) <a href="https://twitter.com/lunar_mining/status/1598720153851727875?ref_src=twsrc%5Etfw">December 2, 2022</a></blockquote>
 
 ## Darkness of Attention
 Key psychotechnology: mastering of submissive/dominant attention, as explored by [Kasia Urbaniak](https://www.kasiaurbaniak.com/)
