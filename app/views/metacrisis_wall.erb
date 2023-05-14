@@ -1,0 +1,35 @@
+<style>
+  .grid-sizer, .grid-item {  width: 100% }
+  @media(min-width: 768px) {
+    .grid-sizer, .grid-item {  width: 20% }
+  }
+  .grid-item img { padding: 0rem }
+</style>
+<script>
+  $(window).on('load', function () {
+    $('.grid').masonry({
+      // set itemSelector so .grid-sizer is not used in layout
+      itemSelector: '.grid-item',
+      // use element for option
+      columnWidth: '.grid-sizer',
+      percentPosition: true
+    })
+    $('.grid').animate({opacity: 1});
+  })
+</script>
+<div class="grid mt-5" style="opacity: 0">
+  <% JSON.parse(open('https://indexer-grants-stack.gitcoin.co/data/1/rounds/0x8aA06b3b8cAc2970857F4E0fD78F21dc01AAdE94/applications.json').read).shuffle.each { |project|
+  next unless project['status'] = 'APPROVED'
+  id = project['metadata']['application']['project']['bannerImg']
+  puts id
+  next if id == 'bafkreigxk6hzmqi5isaxu3zahdovkyq4jkvlrhpvhcdnvw7go2wq5l42tq'
+  next if id == 'bafybeia2n3ekeyj44vf73k5m7jvjmklyrupqefn3vng7nlr3vovkh2pzpy'
+  src = "https://ipfs-grants-stack.gitcoin.co/ipfs/#{id}"  
+  %>
+  <div class="grid-sizer"></div>
+  <div class="grid-item">
+    <img class="w-100" src="<%= src %>" onerror="$(this).hide()">
+  </div>
+  <% } %>
+</div>
+</div>

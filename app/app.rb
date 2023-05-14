@@ -55,6 +55,10 @@ module StephenReid
       erb :not_found, layout: :application
     end
 
+    get '/metacrisis-wall' do
+      erb :metacrisis_wall
+    end
+
     post '/talk', provides: :json do
       @title = 'Talk'
       openai_response = OPENAI.post('chat/completions') do |req|
