@@ -63,8 +63,8 @@
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
-*   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://biologyofwonder.org/) (Mar 2018)
+*   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 
