@@ -10,6 +10,12 @@
     *   Research projects on automated trading agents in financial markets and synthetic biology
     *   Lead developer of the software that won Best Model at the [iGEM 2009](https://igem.org/Results?year=2009) competition
 
+### Coaching & psychotherapy
+
+*   [Accredited Diploma in Transformative Coaching](https://www.animascoaching.com/coach-training-course/) (ICF Level 2), Animas Coaching (2022)
+*   [Foundation in Core Process Psychotherapy](https://www.karunadartmoor.co.uk/introduction-to-core-process-psychotherapy), Karuna Institute (Mar 2020)
+*   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
+
 ### Meditation
 
 *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Yahel Avigur, based on the teachings of [Rob Burbea](https://tasshin.com/blog/rob-burbea-ordinary-guy-werewolf-eternal-wanderer/) in [Seeing That Frees](https://www.goodreads.com/book/show/25172403-seeing-that-frees) (Oct 2022, 7 days)
@@ -19,13 +25,6 @@
 *   *[The Eye of the Heart: Tracing a Path from Heartfulness to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)*
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
-
-### Coaching & psychotherapy
-
-*   [Accredited Diploma in Transformative Coaching](https://www.animascoaching.com/coach-training-course/) (ICF Level 2), Animas Coaching (2022)
-*   [Foundation in Core Process Psychotherapy](https://www.karunadartmoor.co.uk/introduction-to-core-process-psychotherapy), Karuna Institute (Mar 2020)
-*   One-on-one Core Process Psychotherapy sessions (Aug 2020 – Oct 2021)
-*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 
 ### Shipibo plant dietas
 
@@ -62,6 +61,7 @@
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
+*   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://biologyofwonder.org/) (Mar 2018)
