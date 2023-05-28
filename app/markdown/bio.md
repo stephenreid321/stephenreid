@@ -2,7 +2,7 @@ Stephen Reid is a facilitator, [coach](https://stephenreid.net/coaching) and Rub
 
 * hosting the [Futurecraft Residencies](https://dandelion.earth/e/futurecraft-residency)
 * leading the development of the [Dandelion](https://dandelion.earth/) platform for regenerative events and co-created gatherings
-* working with [Supermodular](https://supermodular.xyz/) on the [metacrisis](http://wiki.metacrisisdao.com)
+* working with [Supermodular](https://supermodular.xyz/) on the [metacrisis](https://metacrisis.xyz)
 * creating a knowledgegraph for [RADAR](https://radardao.xyz/)
 * co-founding [Coaching for Collective Transformation](https://collectivetransformation.coach/)
 * studying for the UC Berkeley [Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence/)
