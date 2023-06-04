@@ -77,4 +77,4 @@
 ### Triathlons
 
 * Weymouth Sprint Triathlon 2022 (1h38m)
-* *Weymouth Triathlon 2023*
+* Weymouth Classic Triathlon 2023 (3h26m)
