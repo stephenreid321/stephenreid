@@ -9,7 +9,7 @@ StephenReid::App.controller do
     @timeline = params[:timeline] || 'Home'
     @tweets = Tweet.and(timeline: @timeline).select do |t|
       t = t.data
-      t['age'] < (case (params[:timeframe] ||= '3h')
+      t['age'] < (case (params[:timeframe] ||= '7d')
                   when '3h' then 3.hours
                   when '12h' then 12.hours
                   when '24h' then 24.hours
