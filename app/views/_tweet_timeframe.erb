@@ -1,5 +1,6 @@
 <% form_tag '', method: :get, class: 'form-inline mb-3' do %>
   <%= select_tag :timeline, options: Tweet.timelines.keys, selected: params[:timeline], class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
-  <%= select_tag :timeframe, options: %w[3h 12h 24h 3d 7d].reverse, selected: params[:timeframe], class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
+  <%= select_tag :from, options: %w[0 3h 12h 24h 3d 7d].reverse, selected: @from, class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
+  <%= select_tag :to, options: %w[0 3h 12h 24h 3d 7d].reverse, selected: @to, class: 'form-control mb-1 mr-lg-1', onchange: 'this.form.submit()' %>
   <%= select_tag :stat, options: %w[likes retweets quotes], selected: params[:stat], class: 'form-control mb-1', onchange: 'this.form.submit()' %>
 <% end %>
