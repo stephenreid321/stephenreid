@@ -34,17 +34,19 @@
       </div>
     </div>
 
-    <script>
-      $(function () {
-        // $('#modal').modal('show')
-        if (!Cookies.get('shownModal')) {
-          setTimeout(function () {
-            $('#modal').modal('show')
-            Cookies.set('shownModal', true, {expires: 90})
-          }, 5000)
-        }
-      })
-    </script>
+    <% unless params[:no_modal] %>
+      <script>
+        $(function () {
+          // $('#modal').modal('show')
+          if (!Cookies.get('shownModal')) {
+            setTimeout(function () {
+              $('#modal').modal('show')
+              Cookies.set('shownModal', true, {expires: 90})
+            }, 5000)
+          }
+        })
+      </script>
+    <% end %>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
       <div class="modal-dialog" role="document">
