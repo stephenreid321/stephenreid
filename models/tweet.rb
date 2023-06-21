@@ -198,8 +198,9 @@ class Tweet
   handle_asynchronously :set_image!
 
   def self.timelines
-    {
+    [
       'Home' => ["users/#{ENV['TWITTER_USER_ID']}/timelines/reverse_chronological", nil],
+      'AI' => ['lists/1671431015573733381/tweets', nil],
       'Crypto Twitter' => ['lists/1585548222935736321/tweets', nil],
       'Greenpill' => ['lists/1610587490670317573/tweets', 24.hours.ago],
       'Contemplatives' => ['lists/1610571716199055360/tweets', 24.hours.ago]
