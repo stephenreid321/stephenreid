@@ -10,21 +10,21 @@ StephenReid::App.controller do
     @t1 = params[:t1] || '3d'
     @t2 = params[:t2] || '7d'
     @t1t = case @t1
-          when '0' then 0
-          when '3h' then 3.hours
-          when '12h' then 12.hours
-          when '24h' then 24.hours
-          when '3d' then 3.days
-          when '7d' then 7.days
-          end
+           when '0' then 0
+           when '3h' then 3.hours
+           when '12h' then 12.hours
+           when '24h' then 24.hours
+           when '3d' then 3.days
+           when '7d' then 7.days
+           end
     @t2t = case @t2
-          when '0h' then 0
-          when '3h' then 3.hours
-          when '12h' then 12.hours
-          when '24h' then 24.hours
-          when '3d' then 3.days
-          when '7d' then 7.days
-          end
+           when '0' then 0
+           when '3h' then 3.hours
+           when '12h' then 12.hours
+           when '24h' then 24.hours
+           when '3d' then 3.days
+           when '7d' then 7.days
+           end
     @tweets = Tweet.and(timeline: @timeline).select do |t|
       t = t.data
       t['age'] >= @t1t && t['age'] < @t2t
