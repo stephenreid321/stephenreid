@@ -55,6 +55,7 @@ class Tweet
   end
 
   def self.nitter_user(username, timeline, cursor: nil)
+    username = username[1..-1] if username[0] == '@'
     a = Mechanize.new
     oldest_tweet_in_cursor_created_at = nil
     page = a.get("https://nitter.net/#{username}?cursor=#{cursor}")
