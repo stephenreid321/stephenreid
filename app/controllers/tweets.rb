@@ -7,7 +7,7 @@ StephenReid::App.controller do
     @title = 'Tweets'
     @favicon = 'twitter.png'
     @timeline = params[:timeline] || 'Home'
-    @t1 = params[:t1] || '0'
+    @t1 = params[:t1] || '24h'
     @t2 = params[:t2] || '7d'
     @t1t = case @t1
            when '0' then 0
