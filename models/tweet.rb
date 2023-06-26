@@ -42,7 +42,7 @@ class Tweet
 
   def self.import
     Tweet.and(:hidden.ne => true).delete_all
-    Tweet.and(:'data.age'.gt => (Time.now - 7.days.ago).to_i).delete_all
+    Tweet.and(:'data.age'.gt => 7.days).delete_all
     Tweet.nitter
   end
 
