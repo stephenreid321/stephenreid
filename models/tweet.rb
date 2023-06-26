@@ -41,7 +41,7 @@ class Tweet
   end
 
   def self.import
-    Tweet.delete_all
+    Tweet.and(:hidden.ne => true).delete_all
     Tweet.nitter
   end
 
