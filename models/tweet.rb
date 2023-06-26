@@ -58,7 +58,7 @@ class Tweet
     username = username[1..-1] if username[0] == '@'
     a = Mechanize.new
     oldest_tweet_in_cursor_created_at = nil
-    page = a.get("https://nitter.net/#{username}?cursor=#{cursor}")
+    page = begin; a.get("https://nitter.net/#{username}?cursor=#{cursor}"); rescue Mechanize::ResponseCodeError; return; end
     page.search('.timeline .timeline-item .tweet-body').each do |item|
       t = {}
       t['user'] = {}
