@@ -8,6 +8,7 @@ class Tweet
   field :html, type: String
   field :timeline, type: String
   field :image_uid, type: String
+  field :hidden, type: Boolean
 
   def self.admin_fields
     {
@@ -16,7 +17,8 @@ class Tweet
       html: { type: :text_area, disabled: true },
       image_uid: { type: :text, disabled: true },
       image: :image,
-      timeline: :text
+      timeline: :text,
+      hidden: :check_box
     }
   end
 

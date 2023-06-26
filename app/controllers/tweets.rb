@@ -25,7 +25,7 @@ StephenReid::App.controller do
            when '3d' then 3.days
            when '7d' then 7.days
            end
-    @tweets = Tweet.and(timeline: @timeline).select do |t|
+    @tweets = Tweet.and(:timeline => @timeline, :hidden.ne => true).select do |t|
       t = t.data
       t['age'] >= @t1t && t['age'] < @t2t
     end.sort_by do |t|
@@ -34,4 +34,11 @@ StephenReid::App.controller do
     end.reverse[0..19]
     erb :tweets
   end
+
+  get '/tweets/:id/hide' do
+    tweet = Tweet.find(params[:id])
+    tweet.update_attribute(:hidden, true)
+    200
+  end
+  
 end
