@@ -42,7 +42,7 @@
       (t['referenced_tweets'] && t['referenced_tweets'].any? { |rt| rt['tweet'] && rt['tweet']['media'] && rt['tweet']['media'].include?(nil) })      
       ) %>
     <div class="mb-3">
-      <a href="javascript:;" onclick="$.get('/tweets/<%=tweet.id%>/hide'); $(this).parent().hide()" class="btn btn-primary bg-dark btn-lg border-0 text-muted float-right"><i class="fa fa-times"></i></a>
+      <a href="javascript:;" onclick="$.get('/tweets/<%=tweet.id%>/hide'); $(this).parent().hide()" class="btn bg-dark btn-lg text-muted float-right"><i class="fa fa-times"></i></a>
       <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
     </div>
   <% else %>
