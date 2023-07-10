@@ -1,4 +1,4 @@
-Stephen Reid is a facilitator, [coach](https://stephenreid.net/coaching) and Ruby/Python developer devoted to the flourishing of Life on Earth who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine. Current projects include:
+Stephen Reid is a teacher, technologist and [coach](https://stephenreid.net/coaching) devoted to the flourishing of Life on Earth who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine. Current projects include:
 
 * hosting the [Futurecraft Residencies](https://dandelion.earth/e/futurecraft-residency)
 * leading the development of the [Dandelion](https://dandelion.earth/) platform for regenerative events and co-created gatherings
