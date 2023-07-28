@@ -1,6 +1,6 @@
 Stephen Reid is a teacher, technologist and [coach](https://stephenreid.net/coaching) devoted to the flourishing of Life on Earth who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine. Current projects include:
 
-* hosting the [Futurecraft Residencies](https://dandelion.earth/e/futurecraft-residency)
+* hosting the upcoming [Futurecraft Residency](https://dandelion.events/e/futurecraft-brave-earth) at [Brave Earth](https://www.braveearth.com/) in December
 * leading the development of the [Dandelion](https://dandelion.earth/) platform for regenerative events and co-created gatherings
 * studying for the UC Berkeley [Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence/) and teaching the upcoming [Introduction to AI](https://dandelion.events/e/intro-to-ai) course
 
