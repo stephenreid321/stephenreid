@@ -42,7 +42,7 @@ class Tweet
 
   def self.import
     Tweet.and(:hidden.ne => true).delete_all
-    Tweet.and(:'data.age'.gt => 7.days).delete_all
+    Tweet.and(:'data.age'.gt => 14.days).delete_all
     Tweet.nitter
   end
 
@@ -92,7 +92,7 @@ class Tweet
       oldest_tweet_in_cursor_created_at = Time.iso8601(t['created_at'])
       Tweet.create(tweet_id: t['id'], data: t, timeline: timeline) if item.search('.retweet-header').empty?
     end
-    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 7.days.ago
+    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 14.days.ago
 
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
     puts cursor

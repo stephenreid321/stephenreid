@@ -8,7 +8,7 @@ StephenReid::App.controller do
     @favicon = 'twitter.png'
     @timeline = params[:timeline] || 'Home'
     @t1 = params[:t1] || '24h'
-    @t2 = params[:t2] || '7d'
+    @t2 = params[:t2] || '14d'
     @t1t = case @t1
            when '0' then 0
            when '3h' then 3.hours
@@ -16,6 +16,7 @@ StephenReid::App.controller do
            when '24h' then 24.hours
            when '3d' then 3.days
            when '7d' then 7.days
+           when '14d' then 14.days
            end
     @t2t = case @t2
            when '0' then 0
@@ -24,6 +25,7 @@ StephenReid::App.controller do
            when '24h' then 24.hours
            when '3d' then 3.days
            when '7d' then 7.days
+           when '14d' then 14.days
            end
     @tweets = Tweet.and(:timeline => @timeline, :hidden.ne => true).select do |t|
       t = t.data
