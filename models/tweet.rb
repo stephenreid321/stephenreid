@@ -51,6 +51,7 @@ class Tweet
     c = twitter_friends.count
     twitter_friends.each_with_index do |tf, i|
       username = tf['Username']
+      username = username[1..-1] if username[0] == '@'
       timeline = tf['Timeline']
       puts "#{i + 1}/#{c} #{username}"
       if Tweet.find_by(:'data.user.username' => username, :timeline => timeline, :hidden.ne => true)
@@ -66,7 +67,6 @@ class Tweet
   end
 
   def self.nitter_user(username, timeline, cursor: nil)
-    username = username[1..-1] if username[0] == '@'
     a = Mechanize.new
     oldest_tweet_in_cursor_created_at = nil
     url = "https://uk.unofficialbird.com/#{username}?cursor=#{cursor}"
