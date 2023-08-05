@@ -53,7 +53,11 @@ class Tweet
       username = tf['Username']
       timeline = tf['Timeline']
       puts "#{i + 1}/#{c} #{username}"
-      Tweet.nitter_user(username, timeline)
+      begin
+        Tweet.nitter_user(username, timeline)
+      rescue => e
+        puts e
+      end        
     end
   end
 
