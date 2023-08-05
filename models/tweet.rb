@@ -53,11 +53,15 @@ class Tweet
       username = tf['Username']
       timeline = tf['Timeline']
       puts "#{i + 1}/#{c} #{username}"
+      if Tweet.find_by(:'data.user.username' => username, :timeline => timeline, :hidden.ne => true)
+        puts 'already imported, skipping'
+        next
+      end
       begin
         Tweet.nitter_user(username, timeline)
-      rescue => e
+      rescue StandardError => e
         puts e
-      end        
+      end
     end
   end
 
