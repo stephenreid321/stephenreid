@@ -69,7 +69,7 @@ class Tweet
   def self.nitter_user(username, timeline, cursor: nil)
     a = Mechanize.new
     oldest_tweet_in_cursor_created_at = nil
-    url = "https://uk.unofficialbird.com/#{username}?cursor=#{cursor}"
+    url = "https://#{ENV['NITTER_DOMAIN']}/#{username}?cursor=#{cursor}"
     puts url
     page = begin; a.get(url); rescue Mechanize::ResponseCodeError; return; end
     page.search('.timeline .timeline-item .tweet-body').each do |item|
