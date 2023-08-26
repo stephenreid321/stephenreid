@@ -100,6 +100,12 @@ StephenReid::App.controller do
     redirect '/blog/feed.xml'
   end
 
+  get '/blog/full' do
+    Dir['app/jekyll_blog/_posts/*.md'].sort.reverse.map do |path|
+      File.read(path).sub(/^---/, "---\ndate: #{path.split('/').last.split('-')[0..2].join('-')}")
+    end.join("\n\n")
+  end
+
   get '/blog/?*' do
     file_path = File.join(Padrino.root('app', 'jekyll_blog', '_site'), request.path.gsub('/blog', ''))
     file_path = File.join(Padrino.root('app', 'jekyll_blog', '_site'), 'index.html') unless file_path =~ /\.[a-z]+$/i
