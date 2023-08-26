@@ -19,7 +19,10 @@ end
 
 namespace :tweets do
   task import: :environment do
-    Tweet.import if Time.now.hour % 3 == 0
+    Tweet.import
+  end
+  task nitter: :environment do
+    Tweet.nitter
   end
 end
 
