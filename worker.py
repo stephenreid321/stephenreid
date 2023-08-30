@@ -1,12 +1,14 @@
 import os
 from telegram import Bot
+import asyncio
 
 
-def send_message():
+async def send_message():
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     bot = Bot(token=token)
-    bot.send_message(chat_id="@stephenreid321", text="hey there")
+    await bot.send_message(chat_id="@stephenreid321", text="hey there")
 
 
 if __name__ == "__main__":
-    send_message()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(send_message())
