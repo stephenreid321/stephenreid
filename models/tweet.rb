@@ -190,7 +190,7 @@ class Tweet
   end
 
   def get_image
-    # added chrome buildpack
+    # add https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/google-chrome.tgz
     f = Ferrum::Browser.new
     f.go_to("https://platform.twitter.com/embed/Tweet.html?id=#{tweet_id}")
     sleep 1
