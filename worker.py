@@ -1,14 +1,12 @@
-# worker.py
-import requests
+import os
+from telegram import Bot
 
 
-def make_get_request():
-    response = requests.get('https://stephenreid.net/python')
-    if response.status_code == 200:
-        print(response.json())
-    else:
-        print(f"Error {response.status_code}: {response.text}")
+def send_message():
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    bot = Bot(token=token)
+    bot.send_message(chat_id="@stephenreid321", text=message)
 
 
 if __name__ == "__main__":
-    make_get_request()
+    send_message()
