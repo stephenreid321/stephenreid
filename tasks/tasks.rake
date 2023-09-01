@@ -19,10 +19,11 @@ end
 
 namespace :tweets do
   task import: :environment do
-    Tweet.import
+    Tweet.import if ENV['TWEETS_IMPORT']
+  end
   end
   task nitter: :environment do
-    Tweet.nitter
+    Tweet.nitter if ENV['TWEETS_IMPORT']
   end
 end
 
