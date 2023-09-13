@@ -1,14 +1,14 @@
 ### Technical
 
-*   *[Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence?advocate_source=dashboard&coupon=STEPH%3A11-8ICI43C&utm_campaign=incentivized_referrals&utm_content=SO+-+Berkeley+Professional+Certificate+in+ML+%26+AI&utm_medium=personal_url&utm_source=referral#referrals-email-capture-modal), UC Berkeley (2023)*
-*   MPhys in Physics, University of Oxford (2004-2008)
-    *   Graduated with first-class honours
-    *   Final year specialisations in quantum field theory and condensed matter physics
-    *   [Dissertation](https://stephenreid.net/reid_report_final.pdf) on community detection in complex networks supervised by [Prof. Mason Porter](https://en.wikipedia.org/wiki/Mason_Porter)
+*   [Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence?advocate_source=dashboard&coupon=STEPH%3A11-8ICI43C&utm_campaign=incentivized_referrals&utm_content=SO+-+Berkeley+Professional+Certificate+in+ML+%26+AI&utm_medium=personal_url&utm_source=referral#referrals-email-capture-modal), UC Berkeley (2023)
 *   MRes in Complexity Science, [Bristol Centre for Complexity Sciences](http://www.bristol.ac.uk/bccs/), University of Bristol (2008-2009)
     *   Graduated with distinction
     *   Research projects on automated trading agents in financial markets and synthetic biology
     *   Lead developer of the software that won Best Model at the [iGEM 2009](https://igem.org/Results?year=2009) competition
+*   MPhys in Physics, University of Oxford (2004-2008)
+    *   Graduated with first-class honours
+    *   Final year specialisations in quantum field theory and condensed matter physics
+    *   [Dissertation](https://stephenreid.net/reid_report_final.pdf) on community detection in complex networks supervised by [Prof. Mason Porter](https://en.wikipedia.org/wiki/Mason_Porter)
 
 ### Coaching & psychotherapy
 
@@ -18,7 +18,7 @@
 
 ### Meditation
 
-*   *[The Eye of the Heart: Tracing a Path from Heartfulness to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)*
+*   [The Eye of the Heart: Tracing a Path from Heartfulness to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)
 *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Yahel Avigur (Oct 2022, 7 days)
 *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely (Jan – Mar 2023)
 *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
