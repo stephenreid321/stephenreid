@@ -1,7 +1,7 @@
 ### Technical
 
 *   [Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence?advocate_source=dashboard&coupon=STEPH%3A11-8ICI43C&utm_campaign=incentivized_referrals&utm_content=SO+-+Berkeley+Professional+Certificate+in+ML+%26+AI&utm_medium=personal_url&utm_source=referral#referrals-email-capture-modal), UC Berkeley (2023)
-*   MRes in Complexity Science, [Bristol Centre for Complexity Sciences](http://www.bristol.ac.uk/bccs/), University of Bristol (2008-2009)
+*   MRes in Complexity Science, Bristol Centre for Complexity Sciences, University of Bristol (2008-2009)
     *   Graduated with distinction
     *   Research projects on automated trading agents in financial markets and synthetic biology
     *   Lead developer of the software that won Best Model at the [iGEM 2009](https://igem.org/Results?year=2009) competition
