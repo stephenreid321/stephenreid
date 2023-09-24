@@ -23,7 +23,6 @@
     *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) with Kirsten Kratz and Yahel Avigur (Oct 2022, 7 days)
     *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
     *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) at [Gaia House](https://gaiahouse.co.uk/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
-
 *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely (Jan – Mar 2023)
 *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
 *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
