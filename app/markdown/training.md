@@ -18,7 +18,7 @@
 ### Meditation
 
 *   Retreats at [Gaia House](https://gaiahouse.co.uk/):
-    *   [The Eye of the Heart: Tracing a Path from Heartfulness to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)
+    *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)
     *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) with Kirsten Kratz and Yahel Avigur (Oct 2022, 7 days)
     *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
     *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
