@@ -70,7 +70,7 @@ StephenReid::App.controller do
     200
   end
 
-  get '/knowlegraph/r' do
+  get '/knowledgegraph/r' do
     url = 'https://eu1.make.com/api/v2/scenarios/572363/run'
 
     conn = Faraday.new(url: url) do |faraday|
