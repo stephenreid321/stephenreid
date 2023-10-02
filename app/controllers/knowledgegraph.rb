@@ -79,7 +79,7 @@ StephenReid::App.controller do
       faraday.ssl.verify = false
     end
 
-    response = conn.post do |req|
+    conn.post do |req|
       req.headers['Authorization'] = "Token #{ENV['MAKE_API_KEY']}"
       req.headers['Content-Type'] = 'application/json'
     end
