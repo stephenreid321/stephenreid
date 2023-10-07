@@ -81,10 +81,27 @@ Oliver har en hund. Hon älskar **sin** hund.
 
 ## Uttal
 
-|      | + a o u å = hårt uttal                     |      | + e i y ä ö = mjukt uttal                                    |
+### Hårda och mjuka vokaler
+
+|      | + a o u å = hårt                           |      | + e i y ä ö = mjukt                                          |
 | ---- | ------------------------------------------ | ---- | ------------------------------------------------------------ |
 | g    | gammal, ganska, gata, god, gurka, gå       | [j]  | igen [ijen], gift [jift], gillar [jilar], gitarr [jitar], gym [jym], gärna [järna], gäster [jäster], gör [jör], Göteborg [jöteborj] |
 | k    | kaffe, kan, kollega, kul, kund, kusin, kål | [ç]  | kemi [çemi], kil [çilo], kinesis [çinesisk], förkyld [förçyld], köp [çöp] |
 | sk   | ska, skoj, sko, skulle, skål               | [ʃ]  | kanske [kanʃe], skidor [ʃidor], skylt [ʃylt], sköterska [ʃöterska] |
 
 SPECIAL: Några ord med e, i, y, ä, ö uttalar man som man skriver: en kille, en kör
+
+### Långa och korta vokaler
+
+| vokal | lång | kort |
+| ----- | ---- | ---- |
+| a     | vas  | vass |
+| o     | bot  | bott |
+| u     | rut  | rutt |
+| å     | hål  | håll |
+| e     | get  | gett |
+| i     | vit  | vitt |
+| y     | byt  | bytt |
+| ä     | rät  | rätt |
+| ö     | röt  | rött |
+

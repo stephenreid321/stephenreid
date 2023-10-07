@@ -12,7 +12,8 @@
     });
 
     $('#svensk-grammatik td').click(function() {
-      var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + $(this).text().split('(')[0];
+      var text = $(this).text().replace(/\[.*?\]/g, '').split('(')[0];
+      var url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=sv&client=tw-ob&q=' + text;
       var audioEl = $('#sa')[0]
       audioEl.src = url;
       audioEl.play();
