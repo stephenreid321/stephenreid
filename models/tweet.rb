@@ -68,7 +68,7 @@ class Tweet
 
   def self.nitter_user(username, timeline, cursor: nil)
     a = Mechanize.new
-    a.set_proxy(ENV['PROXY'].split(':')[0], ENV['PROXY'].split(':')[1], ENV['PROXY_USERNAME'], ENV['PROXY_PASSWORD'])
+    a.set_proxy(ENV['PROXY'].split(':')[0], ENV['PROXY'].split(':')[1], ENV['PROXY_USERNAME'], ENV['PROXY_PASSWORD']) if ENV['PROXY_ACTIVATED']
     oldest_tweet_in_cursor_created_at = nil
     url = "https://#{ENV['NITTER_DOMAIN']}/#{username}?cursor=#{cursor}"
     puts url
