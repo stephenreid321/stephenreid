@@ -204,7 +204,7 @@ class Strategy
     without_multipliers = {}
     strategies = Strategy.active_mature.and(:ticker.ne => 'DECENTCOOP', :nscore_score.ne => nil)
     count = strategies.count
-    raise Strategy::NotEnoughStrategies if count < 100
+    raise Strategy::NotEnoughStrategies if count < 50
 
     strategies.each_with_index do |strategy, i|
       puts "#{i + 1}/#{count}"
