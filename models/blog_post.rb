@@ -80,7 +80,7 @@ class BlogPost
      %(## Training and teachers
       #{open("#{Padrino.root}/app/markdown/training.md").read.force_encoding('utf-8')}),
      %(## Books I've read
-      #{Book.all(sort: { 'ID' => 'asc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")}),
+      #{Book.all(sort: { 'Number' => 'desc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")}),
      %(## Content I've shared recently
       #{Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).first(10).map { |post| "[#{post['Title']}](#{post['Link']})\n#{post['Body']}" }.join("\n\n")})]
     # %(## Speaking engagements
