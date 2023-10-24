@@ -23,7 +23,6 @@ StephenReid::App.controller do
       @post.save
     end
     @post.tagify
-    @post.cast
     200
   end
 
