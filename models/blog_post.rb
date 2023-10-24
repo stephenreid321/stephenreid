@@ -74,7 +74,8 @@ class BlogPost
 
   def self.prompt
     [%(Hi! I'm Stephen.
-      I live in Totnes, Devon, UK, half an hour from Dartmoor, and half an hour from the South Devon coast.
+      I live between Totnes, Devon, UK, and Stockholm, Sweden.
+
       ## Short bio in the third person
       #{open("#{Padrino.root}/app/markdown/bio.md").read.force_encoding('utf-8')}),
      %(## Training and teachers

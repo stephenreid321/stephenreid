@@ -1,4 +1,4 @@
-Stephen Reid is a transdisciplinary technologist and coach devoted to the flourishing of Life on Earth who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine. Current projects include:
+Stephen Reid is a transdisciplinary technologist and [coach](/coaching) devoted to the flourishing of Life on Earth who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine. Current projects include:
 
 - teaching the [Introduction to AI](https://dandelion.events/e/intro-to-ai-jan-2024) online course
 - co-facilitating the [Futurecraft Residency](https://dandelion.events/e/futurecraft-brave-earth) at [Brave Earth](https://www.braveearth.com/) in Costa Rica in December

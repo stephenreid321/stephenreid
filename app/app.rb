@@ -55,6 +55,11 @@ module StephenReid
       erb :not_found, layout: :application
     end
 
+    get '/cast' do
+      halt unless Padrino.env == :development || params[:farcaster_auth] == ENV['FARCASTER_AUTH']
+      `python #{Padrino.root}/tasks/cast.py "#{params[:text].gsub('"', '\"')}"`
+    end
+
     get '/metacrisis-wall' do
       erb :metacrisis_wall
     end

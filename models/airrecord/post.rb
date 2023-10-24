@@ -6,6 +6,11 @@ class Post < Airrecord::Table
 
   belongs_to :organisation, class: 'Organisation', column: 'Organisation'
 
+  def cast
+    post = self
+    `python #{Padrino.root}/tasks/cast.py "#{post['Twitter text'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}"`
+  end
+
   def tagify(skip_linking: false)
     post = self
     json = JSON.parse(post['Iframely'])
