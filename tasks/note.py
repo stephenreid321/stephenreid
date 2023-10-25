@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-tweet = sys.argv[1]
+text = sys.argv[1]
 # url = sys.argv[2]
 
 # Start a session.
@@ -36,7 +36,7 @@ note_headers = {
 }
 
 note_content = []
-for line in tweet.split("\n"):
+for line in text.split("\n"):
     if line:
         note_content.append(
             {"type": "paragraph", "content": [{"type": "text", "text": line}]}
