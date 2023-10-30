@@ -1,5 +1,5 @@
 <p class="lead">
-  Last updated <%= time_ago_in_words Date.parse(SpeakingEngagement.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
+  Last updated <%= time_ago_in_words Time.parse(SpeakingEngagement.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
 </p>
 
 <dl class="row">

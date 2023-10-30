@@ -1,6 +1,6 @@
 <p class="lead">
   Podcasts I follow on Spotify,
-  last updated <%= time_ago_in_words Date.parse(Podcast.all(sort: { 'Created at' => 'desc'}).first['Created at']) %> ago
+  last updated <%= time_ago_in_words Time.parse(Podcast.all(sort: { 'Created at' => 'desc'}).first['Created at']) %> ago
 </p>
 
 <div class="row">

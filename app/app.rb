@@ -113,7 +113,7 @@ module StephenReid
       redirect '/'
     end
 
-    %w[books podcasts software discord tarot events svenska-ord svensk-grammatik diet speaking-engagements].each do |r|
+    %w[books films podcasts software discord tarot events svenska-ord svensk-grammatik diet speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i
         @title = r.gsub('-', ' ').capitalize
@@ -206,6 +206,17 @@ module StephenReid
         software.save
       end
       redirect '/software?r=1'
+    end
+
+    get '/films/update' do
+      agent = Mechanize.new
+      Film.all(filter: "AND({Images} = '')").each do |film|
+        result = agent.get("https://iframe.ly/api/iframely?url=#{film['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+        json = JSON.parse(result.body.force_encoding('UTF-8'))
+        film['Images'] = [{ url: json['links']['thumbnail'].first['href'] }] if json['links']['thumbnail'] && !film['Images']
+        film.save
+      end
+      redirect '/films?r=1'
     end
 
     get '/master-lover-course' do

@@ -1,5 +1,5 @@
 <p class="lead">
-  Last updated <%= time_ago_in_words Date.parse(DiscordServer.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
+  Last updated <%= time_ago_in_words Time.parse(DiscordServer.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
 </p>
 
 <div class="row">
