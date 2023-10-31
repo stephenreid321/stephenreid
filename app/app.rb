@@ -55,49 +55,6 @@ module StephenReid
       erb :not_found, layout: :application
     end
 
-    get '/cast' do
-      halt unless Padrino.env == :development || params[:farcaster_auth] == ENV['FARCASTER_AUTH']
-      `python #{Padrino.root}/tasks/cast.py "#{params[:text].gsub('"', '\"')}"`
-    end
-
-    get '/metacrisis-wall' do
-      erb :metacrisis_wall
-    end
-
-    post '/talk', provides: :json do
-      @title = 'Talk'
-      openai_response = OPENAI.post('chat/completions') do |req|
-        req.body = { model: 'gpt-4', messages: [{ role: 'user', content: (audio_prompt + params[:messages]).join("\n\n") }] }.to_json
-      end
-      content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
-      content = content.split('Stephen: ').last
-      content = content.split('Me: ').last
-      content = content.gsub(/^\.+/, '').strip
-
-      elevenlabs_response = ELEVENLABS.post("text-to-speech/#{ENV['ELEVENLABS_VOICE_ID']}") do |req|
-        req.body = {
-          text: content,
-          voice_settings: {
-            stability: 0,
-            similarity_boost: 0
-          }
-        }.to_json
-      end
-
-      {
-        text: content,
-        audio: Base64.encode64(elevenlabs_response.body)
-      }.to_json
-    end
-
-    get '/talk' do
-      erb :talk
-    end
-
-    get '/talk/prompt' do
-      (audio_prompt + ["Friend: Hi there, how's it going?", 'Stephen: Good thanks!']).join("\n\n").gsub("\n", '<br>')
-    end
-
     get '/', cache: true do
       expires 1.hour.to_i
       @og_image = "#{ENV['BASE_URI']}/images/og-image.jpg"
@@ -121,21 +78,8 @@ module StephenReid
       end
     end
 
-    get '/coaching' do
-      @title = 'Coaching'
-      @og_desc = 'What do you really want, and how can you move towards it?'
-      @hide_subscribe = true
-      erb :coaching
-    end
-
-    get '/lunarpunk-dreams' do
-      @title = 'Lunarpunk Dreams'
-      @og_desc = 'Lunarpunk is what happens when the sun goes down in a Solarpunk village/town/city.'
-      @og_image = "#{ENV['BASE_URI']}/images/lunarpunk_dreams_horizontal.png"
-      erb :lunarpunk_dreams
-    end
-
     {
+      '/z' => 'https://zoom.us/j/9082171779',
       '/calendly' => 'https://calendly.com/stephenreid321',
       '/1' => 'https://calendly.com/stephenreid321/1-min-call',
       '/5' => 'https://calendly.com/stephenreid321/5-min-call',
@@ -160,25 +104,6 @@ module StephenReid
       '/maps' => '/life-as-practice'
     }.each { |k, v| get k.to_s do; redirect v; end }
 
-    get '/substack' do
-      @from = params[:from] ? Date.parse(params[:from]) : Date.today
-      erb :format_for_substack
-    end
-
-    get '/pocket' do
-      # code = Pocket.get_code(:redirect_uri => 'https://stephenreid.net')
-      # redirect Pocket.authorize_url(:code => code, :redirect_uri => 'https://stephenreid.net')
-      # Pocket.get_result(code, :redirect_uri => 'https://stephenreid.net')
-      erb :process_pocket
-    end
-
-    get '/pocket/:id/delete' do
-      client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
-      url = client.retrieve(detailType: :complete)['list'][params[:id]]['resolved_url']
-      client.modify([{ action: 'delete', item_id: params[:id] }])
-      redirect url
-    end
-
     get '/to/:slug' do
       @product = Product.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
       redirect @product['URL']
@@ -196,27 +121,53 @@ module StephenReid
       erb :redirect
     end
 
+    get '/coaching' do
+      @title = 'Coaching'
+      @og_desc = 'What do you really want, and how can you move towards it?'
+      @hide_subscribe = true
+      erb :coaching
+    end
+
+    get '/lunarpunk-dreams' do
+      @title = 'Lunarpunk Dreams'
+      @og_desc = 'Lunarpunk is what happens when the sun goes down in a Solarpunk village/town/city.'
+      @og_image = "#{ENV['BASE_URI']}/images/lunarpunk_dreams_horizontal.png"
+      erb :lunarpunk_dreams
+    end
+
+    ##############################
+
+    get '/pocket' do
+      # code = Pocket.get_code(:redirect_uri => 'https://stephenreid.net')
+      # redirect Pocket.authorize_url(:code => code, :redirect_uri => 'https://stephenreid.net')
+      # Pocket.get_result(code, :redirect_uri => 'https://stephenreid.net')
+      erb :process_pocket
+    end
+
+    get '/pocket/:id/delete' do
+      client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
+      url = client.retrieve(detailType: :complete)['list'][params[:id]]['resolved_url']
+      client.modify([{ action: 'delete', item_id: params[:id] }])
+      redirect url
+    end
+
     get '/software/update' do
-      agent = Mechanize.new
-      Software.all(filter: "AND({Featured} = 1, {Description} = '')").each do |software|
-        result = agent.get("https://iframe.ly/api/iframely?url=#{software['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-        json = JSON.parse(result.body.force_encoding('UTF-8'))
-        software['Description'] = json['meta']['description']
-        software['Images'] = [{ url: json['links']['thumbnail'].first['href'] }] if json['links']['thumbnail'] && !software['Images']
-        software.save
-      end
+      Software.iframely
       redirect '/software?r=1'
     end
 
     get '/films/update' do
-      agent = Mechanize.new
-      Film.all(filter: "AND({Images} = '')").each do |film|
-        result = agent.get("https://iframe.ly/api/iframely?url=#{film['URL']}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-        json = JSON.parse(result.body.force_encoding('UTF-8'))
-        film['Images'] = [{ url: json['links']['thumbnail'].first['href'] }] if json['links']['thumbnail'] && !film['Images']
-        film.save
-      end
+      Film.iframely
       redirect '/films?r=1'
+    end
+
+    get '/cast' do
+      halt unless Padrino.env == :development || params[:farcaster_auth] == ENV['FARCASTER_AUTH']
+      `python #{Padrino.root}/tasks/cast.py "#{params[:text].gsub('"', '\"')}"`
+    end
+
+    get '/metacrisis-wall' do
+      erb :metacrisis_wall
     end
 
     get '/master-lover-course' do
