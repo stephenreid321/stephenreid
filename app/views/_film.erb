@@ -3,7 +3,7 @@
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= film['Images'].first['url'] if film['Images'] %>">
   </a>
   <div class="card-body">
-    <h5 class="card-title">
+    <h5 class="card-title mb-0">
       <a href="<%= film['URL'] %>" class="text-contrast"><%= film['Name'] %></a>
       <span style="opacity: 0.33">
         <%= film['Year'] %>
