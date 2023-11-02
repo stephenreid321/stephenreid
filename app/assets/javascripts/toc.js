@@ -34,8 +34,9 @@
         const targetId = $(this).attr('href').substring(1);
         const targetElement = $('#' + targetId);
         if (targetElement.length) {
+          const headerMarginTop = parseInt(targetElement.css('margin-top'), 10);
           $('html, body').animate({
-            scrollTop: targetElement.offset().top + 1
+            scrollTop: targetElement.offset().top - headerMarginTop + 1
           }, 1000);
         }
       });
