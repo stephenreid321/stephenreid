@@ -35,7 +35,7 @@
         const targetElement = $('#' + targetId);
         if (targetElement.length) {
           $('html, body').animate({
-            scrollTop: targetElement.offset().top
+            scrollTop: targetElement.offset().top + 1
           }, 1000);
         }
       });
