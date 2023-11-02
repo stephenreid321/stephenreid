@@ -1,13 +1,15 @@
 $primary: #2DB963;
-$font-family-sans-serif: 'Overpass', sans-serif;
+$font-family-sans-serif: 'Plus Jakarta Sans', sans-serif;
 // $body-bg
 // $body-color
 // $code-color
 // $font-size-base
 // $lead-font-size
+//
+//
 @import "bootstrap/bootstrap";
 $highlight-color: #FDFFAA;
-$contrast-color: $body-color;
+$contrast-color: darken($body-color, 15%);
 
 @import "core";
 @import "blog";
@@ -15,3 +17,24 @@ $contrast-color: $body-color;
 @import "range_slider";
 @import "share";
 @import "toc";
+
+mark,
+.mark {
+  color: $body-color;
+  background: $highlight-color;
+  padding-left: 0;
+  padding-right: 0
+}
+
+blockquote {
+  border-left: 0.3em solid lighten($primary, 25%);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: $body-color;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+  color: $contrast-color;
+}

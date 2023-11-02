@@ -25,23 +25,23 @@ th {
 }
 
 .text-contrast {
-  color: $contrast-color  !important
+  color: $contrast-color !important
 }
 
 .text-contrast:hover {
-  color: $contrast-color  !important
+  color: $contrast-color !important
 }
 
 .text-standard {
-  color: $body-color  !important
+  color: $body-color !important
 }
 
 .text-standard:hover {
-  color: $contrast-color  !important
+  color: $contrast-color !important
 }
 
 .bg-standard {
-  background: $body-bg  !important
+  background: $body-bg !important
 }
 
 .btn-twitter {
@@ -61,17 +61,8 @@ pre code {
   color: $code-color
 }
 
-mark,
-.mark {
-  color: $body-color;
-  text-decoration: underline;
-  text-decoration-color: $highlight-color;
-  text-decoration-thickness: 2px;
-  background: none;
-}
-
 blockquote {
-  border-left: 0.3em solid $gray-300;
+  border-left: 0.3em solid lighten($primary, 15%);
   padding-left: 1em;
   font-style: italic
 }

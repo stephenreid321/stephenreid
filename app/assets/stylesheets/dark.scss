@@ -18,19 +18,8 @@ $contrast-color: white;
 @import "share";
 @import "toc";
 
-blockquote {
-  border-left: 0.3em solid white;
-}
-
-.overpass {
-  font-family: 'Overpass', sans-serif !important
-}
-
-.fira {
-  font-family: 'Fira Mono', sans-serif !important
-}
-
 $bg-dark: darken($body-bg, 5%);
+$dark-color: #343a40;
 
 .bg-dark {
   background-color: $bg-dark !important;
@@ -44,8 +33,6 @@ $bg-dark: darken($body-bg, 5%);
 .table td {
   border-color: $bg-dark
 }
-
-$dark-color: #343a40;
 
 .modal h1,
 .modal h2,
@@ -77,15 +64,6 @@ $dark-color: #343a40;
 .dropdown-item.active,
 .dropdown-item:active {
   background-color: $body-bg
-}
-
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
-  color: #B7BEC8;
-}
-
-.badge {
-  font-weight: normal
 }
 
 .btn-secondary {
@@ -120,7 +98,13 @@ $dark-color: #343a40;
   border-color: $contrast-color
 }
 
-mark {
+mark,
+.mark {
+  color: $body-color;
+  text-decoration: underline;
+  text-decoration-color: $highlight-color;
+  text-decoration-thickness: 2px;
+  background: none;
   padding-left: 0;
   padding-right: 0
 }
@@ -144,4 +128,21 @@ mark {
 .breadcrumb-item+.breadcrumb-item::before,
 .breadcrumb-item.active {
   color: darken($body-color, 25%)
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: $body-color;
+}
+
+blockquote {
+  border-left: 0.3em solid white;
+}
+
+.fira {
+  font-family: 'Fira Mono', sans-serif !important
+}
+
+.badge {
+  font-weight: normal
 }
