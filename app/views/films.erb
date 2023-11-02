@@ -3,16 +3,6 @@
   last updated <%= time_ago_in_words Time.parse(Film.all(sort: { 'Created at' => 'desc'}).first['Created at']) %> ago
 </p>
 
-
-<% [
-  'solarpunk',
-  'key thinkers',
-  'life',
-  'nature connection',  
-  'indigenous thinking',  
-  'meditation',
-  'silent'] %>
-
 <div class="row">
   <% Film.all(sort: {'Year' => 'desc'}).each { |film| %>
   <div class="col-6 col-lg-3 mb-3">
