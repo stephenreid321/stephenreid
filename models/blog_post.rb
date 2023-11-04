@@ -45,7 +45,7 @@ class BlogPost
 
   def set_body!
     openai_response = OPENAI.post('chat/completions') do |req|
-      req.body = { model: BlogPost.version, messages: [{ role: 'user', content: prompt.join("\n\n") }] }.to_json
+      req.body = { model: version, messages: [{ role: 'user', content: prompt.join("\n\n") }] }.to_json
     end
     content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
     self.body = content.split("\n")[1..-1].join("\n")
@@ -59,7 +59,7 @@ class BlogPost
 
   def set_image_word!
     openai_response = OPENAI.post('chat/completions') do |req|
-      req.body = { model: 'gpt-3.5-turbo', messages: [{ role: 'user', content: image_prompt }] }.to_json
+      req.body = { model: version, messages: [{ role: 'user', content: image_prompt }] }.to_json
     end
     content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
     self.image_word = content.downcase.match(/\w+/)[0]
