@@ -58,8 +58,8 @@ StephenReid::App.helpers do
     FrontMatterParser::Parser.new(:md).call(text)
   end
 
-  def cp(slug, key: slug, expires: 1.hours.to_i)
-    Padrino.env == :development ? partial(slug) : cache(key, expires: expires) { partial slug }
+  def cp(slug, locals: {}, key: slug, expires: 1.hours.to_i)
+    Padrino.env == :development ? partial(slug, locals: locals) : cache(key, expires: expires) { partial(slug, locals: locals) }
   end
 
   def current_account
