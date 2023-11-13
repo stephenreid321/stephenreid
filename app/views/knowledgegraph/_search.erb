@@ -1,3 +1,8 @@
+<% posts = Post.all(filter: "AND(
+        IS_AFTER({Created at}, '#{2.years.ago.to_s(:db)}'),
+        FIND('\"url\": ', {Iframely}) > 0
+      )", paginate: false) %>
+
 <div class="row justify-content-center">
   <div class="col-lg-6">
     <% form_tag '/search', method: :get do %>
@@ -10,10 +15,13 @@
     <% end %>
   </div>
 </div>
-<%= Padrino.env == :production ? cp(:'knowledgegraph/tags') : partial(:'knowledgegraph/tags') %>
+<%= Padrino.env == :production ? cp(:'knowledgegraph/tags', locals: {posts: posts}) : partial(:'knowledgegraph/tags', locals: {posts: posts}) %>
 <% if @full_network %>
   <div class="my-5">
-    <%= partial :'knowledgegraph/network', locals: { terms: Term.all, term_links: TermLink.all } %>
+    <%= partial :'knowledgegraph/network', locals: {
+      terms: Term.find_many(posts.map { |post| post['Terms']}.flatten.uniq),
+      term_links: TermLink.find_many(posts.map { |post| post['Term Links'] }.flatten.uniq)
+    } %>
   </div>
 <% elsif (terms = Term.find_many(@posts.first(100).map { |post| post['Terms']}.flatten.uniq)).length > 1 %>
   <div class="my-5">
