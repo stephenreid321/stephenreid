@@ -17,8 +17,5 @@
   <% end %>
 </div>
 <div class="my-5">
-  <%= partial :'knowledgegraph/network', locals: {
-      terms: Term.find_many(posts.map { |post| post['Terms']}.flatten.uniq),
-      term_links: TermLink.find_many(posts.map { |post| post['Term Links'] }.flatten.uniq)
-    } %>
+  <%= cp(:'knowledgegraph/full_network') %>
 </div>

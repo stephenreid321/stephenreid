@@ -1,0 +1,9 @@
+<% posts = Post.all(filter: "AND(
+        IS_AFTER({Created at}, '#{2.years.ago.to_s(:db)}'),
+        FIND('\"url\": ', {Iframely}) > 0
+      )", paginate: false) %>
+
+<%= partial :'knowledgegraph/network', locals: {
+  terms: Term.find_many(posts.map { |post| post['Terms']}.flatten.uniq),
+  term_links: TermLink.find_many(posts.map { |post| post['Term Links'] }.flatten.uniq)
+} %>
