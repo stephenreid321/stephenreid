@@ -42,7 +42,9 @@
          'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css',
          'iframe-resizer/4.2.1' => 'iframeResizer.min.js',
          'date-fns/1.30.1' => 'date_fns.js',
-         'typed.js/1.1.4' => 'typed.min.js'
+         'typed.js/1.1.4' => 'typed.min.js',
+         'font-awesome/4.7.0' => 'css/font-awesome.min.css',
+         'font-awesome/5.14.0' => 'css/fontawesome.min.css'
        }.each { |k,v| %>
 <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
 <% case f.split('.').last.to_sym; when :js %>
@@ -59,8 +61,7 @@
 <link rel="stylesheet" href="<%= f %>">
 <% } %>
 
-<% [
-       '//use.fontawesome.com/releases/v5.14.0/js/all.js',
+<% [        
        '//rawcdn.githack.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
        '//rawcdn.githack.com/tgdwyer/WebCola/aab7e61cd9580c4c89180cc0a30594e12743a242/WebCola/cola.min.js',
        '//rawcdn.githack.com/cytoscape/cytoscape.js-cola/8c78f9d5c11ff6162b7d902f0639e1f787277b9f/cytoscape-cola.js',

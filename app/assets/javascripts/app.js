@@ -48,6 +48,15 @@ $(function () {
     $('.showOnHover', this).removeClass('d-lg-inline')
   })
 
+  $('.block').hover(
+    function () {
+      $('.block-edit', this).show()
+    },
+    function () {
+      $('.block-edit', this).hide()
+    }
+  )
+
   $('.range-slider__range').on('input', function () {
     $(this).next().html($(this).val())
   })

@@ -122,8 +122,9 @@ count = strategies.count
   <tr>
     <td style="opacity: 0.5">
     </td>
-    <td>
+    <td class="block">
       <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>?ref=YGnZy"><%= strategy.name %></a>
+      <a style="display: none" target="_blank" class="block-edit" href="/admin/edit/Strategy/<%=strategy.id%>"><i class="text-white fa fa-pencil"></i></a>
       <br />
       <% if current_account %>
         <a target="_blank" href="/admin/edit/Asset/<%=asset.id%>" class="badge badge-primary"
