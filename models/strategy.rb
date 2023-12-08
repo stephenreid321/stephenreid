@@ -44,6 +44,7 @@ class Strategy
     {
       ticker: :text,
       name: :text,
+      holdings: :collection,
       score: :number,
       score_fee_weighted: :number,
       aum: :number,
@@ -57,8 +58,7 @@ class Strategy
       lastRebalanced: :datetime,
       monthlyRebalancedCount: :number,
       last_posted_at: :datetime,
-      status: :select,
-      holdings: :collection
+      status: :select
     }
       .merge(%w[day week month three_month six_month year].map do |t|
                ["r#{t}".to_sym, :number]

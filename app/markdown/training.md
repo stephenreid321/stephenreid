@@ -14,6 +14,7 @@
 
 ### Meditation
 
+*   Freedom in Everything, [Hermes Amara Foundation](https://hermesamara.org/) retreat with Juha Penttilä and Yahel Avigur (Dec 2023, 7 days)
 *   Retreats at [Gaia House](https://gaiahouse.co.uk/):
     *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)
     *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) with Kirsten Kratz and Yahel Avigur (Oct 2022, 7 days)
