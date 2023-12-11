@@ -1,11 +1,11 @@
-<div class="card shadow-sm post">  
+<div class="card shadow-sm post">
   <a href="<%= post['Link'] %>" target="_blank">
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] if json['links']['thumbnail'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
       <a href="<%= post['Link'] %>" target="_blank" class="text-contrast">
-        <%= post['Title'] %>
+        <%=h post['Title'] %>
       </a>
     </h5>
     <% if json['meta']['description'] %>
