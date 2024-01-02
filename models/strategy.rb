@@ -196,7 +196,7 @@ class Strategy
   end
 
   def self.active_mature(mature_period: 'THREE_MONTH')
-    self.or({ :monthlyRebalancedCount.gte => 1 }, { :last_posted_at.gte => 1.month.ago }).and(:"r#{mature_period.downcase}".ne => nil, :status => 'verified')
+    self.or({ :monthlyRebalancedCount.gte => 1 }, { :last_posted_at.gte => 1.month.ago }, { :aum.gte => 500_000 }).and(:"r#{mature_period.downcase}".ne => nil, :status => 'verified')
   end
 
   def self.assets_weighted
