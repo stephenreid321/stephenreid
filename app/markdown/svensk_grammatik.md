@@ -105,3 +105,15 @@ SPECIAL: Några ord med e, i, y, ä, ö uttalar man som man skriver: en kille, e
 | ä     | rät  | rätt |
 | ö     | röt  | rött |
 
+## Frågeord
+
+| Svenska      | Engelska                        |
+| ------------ | ------------------------------- |
+| Vem/Vems     | Who/Whose                       |
+| Vad          | What                            |
+| När          | When                            |
+| Var/Varifrån | Where/From where                |
+| Hur          | How                             |
+| Varför       | Why                             |
+| Vilken/Vilka | Which (singular)/Which (plural) |
+

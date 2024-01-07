@@ -1,7 +1,8 @@
 Stephen Reid is a transdisciplinary technologist and coach devoted to the flourishing of Life on Earth who has trained in the fields of AI/ML, complexity science, physics, transformative coaching, meditation and plant medicine. Current projects include:
 
-- hosting the [Futurecraft Residency](https://dandelion.events/e/futurecraft-brave-earth) at [Brave Earth](https://www.braveearth.com/) in Costa Rica in December
-- leading the development of the [Dandelion](https://dandelion.events/) platform for regenerative events and co-created gatherings as part of not-for-profit worker co-op [Symbiota](https://symbiota.coop/)
+- hosting the Futurecraft Residencies, with the next one taking place in Cornwall, UK in April
 - practicing as a [qualified coach](/coaching)
+- leading the development of the [Dandelion](https://dandelion.events/) platform for regenerative events and co-created gatherings as part of not-for-profit worker co-op [Symbiota](https://symbiota.coop/)
 
 Previously, he founded [The Psychedelic Society](https://psychedelicsociety.org.uk/), taught the [Introduction to AI](https://dandelion.earth/e/intro-to-ai-jan-2024), [Introduction to web3](https://dandelion.earth/events/623c3fccf9cf930011212aa1), [How to DAO](https://docs.google.com/document/d/1jxbb3YkrjAT1TUe6W2yCFUAsXUhdVt5JYoJwmMfykoQ/edit), [Tools for the Regenerative Renaissance](https://dandelion.earth/events/5fd23eae6824a9000d43006e), [The Promise of Decentralisation](https://dandelion.earth/events/605f1caeed084e000d44e844) & [Life as Practice](https://stephenreid.net/life-as-practice) courses, served as the youngest ever board member of [Greenpeace UK](https://www.greenpeace.org.uk/), and consulted for organisations including [Supermodular](https://supermodular.xyz/), the [New Economics Foundation](https://neweconomics.org/), and [350.org](https://350.org/). Stephen has an MPhys in Physics from the University of Oxford, where he specialised in quantum field theory, an MRes in Complexity Science from the University of Bristol, and a Professional Certificate in Machine Learning and Artificial Intelligence from UC Berkeley.
+
