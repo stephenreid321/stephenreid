@@ -55,7 +55,7 @@
     <p>
       <a target="_blank" href="<%= verse['Rarible URL'] %>" class="rarible">
         <% if (a = verse['Owner'].downcase) == '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324' && verse['Verse'] != 81 %>
-          <span class="d-inline-block px-1">NFT on sale</span>
+          <span class="d-inline-block px-1">Bid on NFT</span>
         <% else %>
           <span class="text-contrast d-inline-block px-1">NFT owned by <%= "#{a[0..5]}&hellip;#{a[-4..]}" %></span>
         <% end %>
