@@ -19,10 +19,15 @@ $contrast-color: white;
 @import "toc";
 
 $bg-dark: darken($body-bg, 5%);
+$border-dark: darken($body-bg, 10%);
 $dark-color: #343a40;
 
 .bg-dark {
   background-color: $bg-dark !important;
+}
+
+.border-dark {
+  border-color: $border-dark !important;
 }
 
 .card {
