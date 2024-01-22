@@ -13,7 +13,7 @@
         </a>
       </h6>
       <% if json['meta']['description'] %>
-        <p class="mb-1" style="font-size: 90%;">
+        <p class="mb-2" style="font-size: 90%;">
           <a href="<%= post['Link'] %>" target="_blank" class="text-contrast" style="text-decoration: none">
             <small class="text-muted" >
               <%= json['meta']['description'].truncate(150) %>
@@ -22,7 +22,34 @@
         </p>
       <% end %>
 
-    </div>
+      <p class="mb-0" style="font-size: 90%;">
+        <small class="text-muted">
+          <a class="text-muted" style="text-decoration: none" href="<%= post['Link'] %>" target="_blank">
+            <% if json['links']['icon'] %>
+              <img onerror="this.style.display='none'" style="max-height: 20px" src="<%= json['links']['icon'].first['href'] %>">
+            <% end %>
+            <% if json['meta']['site'] %>
+              <% case json['meta']['site']; when 'the Guardian'; %>
+              The Guardian
+              <% when 'BBC_Future' %>
+              BBC Future
+              <% when 'whatisemerging' %>
+              Emerge
+            <% else %>
+              <%= json['meta']['site'] %>
+            <% end %>
+          <% else %>
+            <%= URI(post['Link']).host.gsub('www.', '') %>
+          <% end %>
+        </a>
+        <% if post['Created at'] %>
+          &middot;
+          <%= Time.zone.parse(post['Created at']).to_date.to_s(:post) %>
+        <% end %>
+      </small>
+    </p>
+
   </div>
+</div>
 
 </div>
