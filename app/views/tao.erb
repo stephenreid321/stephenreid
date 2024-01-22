@@ -52,7 +52,7 @@
     <h2 class="mb-3 regular">
       <a class="bg-standard text-contrast" href="/tao-te-ching/<%= verse['Verse'] %>">Verse <%= verse['Verse'] %></a>
     </h2>
-    <p>
+    <p class="d-none">
       <a target="_blank" href="<%= verse['Rarible URL'] %>" class="rarible">
         <% if (a = verse['Owner'].downcase) == '0x72e1638bd8cd371bfb04cf665b749a0e4ae38324' && verse['Verse'] != 81 %>
           <span class="d-inline-block px-1">Bid on NFT</span>
