@@ -117,11 +117,11 @@ module StephenReid
       erb :redirect
     end
 
-    get '/ai-consultancy' do
-      @title = 'AI consultancy'
+    get '/ai-consulting' do
+      @title = 'AI consulting'
       @og_desc = 'Hire me to help you with your AI project'
       @hide_subscribe = true
-      erb :ai_consultancy
+      erb :ai_consulting
     end
 
     get '/facilitation' do
