@@ -15,7 +15,7 @@ My approach is rooted in a deep understanding of both the technical aspects of A
 
 * On the impact side, I'm a social entrepreneur, experienced facilitator and qualified coach who has worked with organisations including 38 Degrees, Greenpeace UK, the New Economics Foundation, and 350.org.
 
-This holistic perspective ensures that the AI solutions are not only technically sound but also accessible, ethical and aligned with your unique organisational culture.
+This holistic perspective ensures that AI solutions are not only technically sound but also accessible, ethical and aligned with your unique organisational culture.
 
 ### Step into the AI future
 
