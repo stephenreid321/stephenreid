@@ -4,9 +4,9 @@ There are times when teams get stuck, despite the best intentions of everyone in
 
 Across my career I've co-founded and worked with a range of organisation types, including:
 
-* <strong class="text-white">Worker co-operatives:</strong> I'm the co-founder of [Symbiota](https://symbiota.coop/), a not-for-profit worker co-operative that reaches over 70,000 people every month through its events brands
-* <strong class="text-white">Activist organisations:</strong> I co-founded [UK Uncut](https://www.theguardian.com/uk/uk-uncut), an anti-austerity movement with a reach of over 150,000, and subsequently advised the Occupy movement and Extinction Rebellion
-* <strong class="text-white">NGOs and thinktanks:</strong> I was the network organiser for the [New Economy Organisers Network](https://www.neweconomyorganisers.org/), a key player in the [38 Degrees](https://38degrees.org.uk/) digital team during its period of fastest growth, and the youngest ever board member of [Greenpeace UK](https://www.greenpeace.org.uk/)
+* <strong class="text-white">Worker co-operatives:</strong> I'm the co-founder of [Symbiota](https://symbiota.coop/), a not-for-profit worker co-operative that reaches over 70,000 people every month through its events brands.
+* <strong class="text-white">Activist organisations:</strong> I co-founded [UK Uncut](https://www.theguardian.com/uk/uk-uncut), an anti-austerity movement with a reach of over 150,000, and subsequently advised the Occupy movement and Extinction Rebellion.
+* <strong class="text-white">NGOs and thinktanks:</strong> I was the network organiser for the [New Economy Organisers Network](https://www.neweconomyorganisers.org/), a key player in the [38 Degrees](https://38degrees.org.uk/) digital team during its period of fastest growth, and the youngest ever board member of [Greenpeace UK](https://www.greenpeace.org.uk/).
 
 My diverse experience is complemented by a highly technical background in AI/ML, complexity science and physics, an ICF Level 2 qualification in transformative coaching, and extensive meditative practice.
 
