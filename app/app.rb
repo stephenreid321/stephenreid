@@ -117,6 +117,20 @@ module StephenReid
       erb :redirect
     end
 
+    get '/ai-consultancy' do
+      @title = 'AI consultancy'
+      @og_desc = 'Hire me to help you with your AI project'
+      @hide_subscribe = true
+      erb :ai_consultancy
+    end
+
+    get '/facilitation' do
+      @title = 'Group facilitation'
+      @og_desc = 'Hire me to facilitate your group process'
+      @hide_subscribe = true
+      erb :facilitation
+    end
+
     get '/coaching' do
       @title = 'Coaching'
       @og_desc = 'What do you really want, and how can you move towards it?'

@@ -1,12 +1,12 @@
 <div class="bg-dark p-3 <% unless p == 0 %> border-top border-dark<% end %>">
 
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <a href="<%= post['Link'] %>" target="_blank">
         <img class="w-100" onerror="this.style.display='none'" src="<%= json['links']['thumbnail'].first['href'] if json['links']['thumbnail'] %>">
       </a>
     </div>
-    <div class="col-8">
+    <div class="col-9">
       <h6>
         <a href="<%= post['Link'] %>" target="_blank" class="text-contrast">
           <%=h post['Title'] %>
