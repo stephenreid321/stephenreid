@@ -18,7 +18,7 @@
     </p>
     <p class="lead">
       Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?ref=YGnZy&sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
-      Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| (other_strategy.ryear || 0) < strategy.ryear }).count%> of them over the 6-month timeframe:
+      Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| (other_strategy.ryear || 0) < strategy.ryear }).count%> of them over the 1-year timeframe:
       <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
       If you're already copying these strategies, you're probably better off switching to Metastrategy.
       <a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group &rarr;</a>
