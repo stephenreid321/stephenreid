@@ -16,9 +16,9 @@
     <p class="lead">
       Metastrategy is currently the #<%=acs_index = strategy.nscore_index('aum', strategies: strategies)[1]%> most copied strategy on ICONOMI (by value).
     </p>
-    <p class="lead d-none">
+    <p class="lead">
       Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?ref=YGnZy&sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
-      Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| (other_strategy.nscore_score || 0) < strategy.nscore_score }).count%> of them:
+      Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| (other_strategy.rsix_month || 0) < strategy.rsix_month }).count%> of them over the 6-month timeframe:
       <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
       If you're already copying these strategies, you're probably better off switching to Metastrategy.
       <a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group &rarr;</a>
