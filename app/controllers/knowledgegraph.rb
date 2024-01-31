@@ -72,19 +72,7 @@ StephenReid::App.controller do
   end
 
   get '/knowledgegraph/r' do
-    url = 'https://eu1.make.com/api/v2/scenarios/572363/run'
-
-    conn = Faraday.new(url: url) do |faraday|
-      faraday.request  :url_encoded
-      faraday.adapter  Faraday.default_adapter
-      faraday.ssl.verify = false
-    end
-
-    conn.post do |req|
-      req.headers['Authorization'] = "Token #{ENV['MAKE_API_KEY']}"
-      req.headers['Content-Type'] = 'application/json'
-    end
-
+    Post.sync_with_pocket
     redirect '/knowledgegraph?r=1'
   end
 
