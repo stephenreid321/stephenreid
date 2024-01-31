@@ -65,9 +65,10 @@
     <p class="text-contrast text-center">
       What I'm reading and listening to
     </p>
-    <% p = 0; @posts.first(5).each { |post|
+    <% p = 0; @posts.first(10).each { |post|
     json = JSON.parse(post['Iframely'])
     next unless json['links']
+    next unless json['links']['thumbnail']
     next unless json['meta']['description'] && json['meta']['description'].length > 20
     %>
     <%= partial :recent_post, locals: {post: post, json: json, p: p} %>
