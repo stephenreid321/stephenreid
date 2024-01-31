@@ -6,34 +6,28 @@ class Post < Airrecord::Table
 
   belongs_to :organisation, class: 'Organisation', column: 'Organisation'
 
-  def cast
-    post = self
-    `python #{Padrino.root}/tasks/cast.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}"`
-  end
+  def self.sync_with_pocket
+    client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
+    client.retrieve(detailType: :complete, state: :archive, count: 10)['list'].each do |_k, p|
+      puts p['resolved_url']
+      break if Post.all(filter: "{Link} = '#{p['resolved_url']}'").first
 
-  def countdown(n)
-    n.downto(1) do |i|
-      puts i
-      sleep 1
+      post = Post.create(
+        'Title' => p['resolved_title'],
+        'Link' => p['resolved_url'],
+        'Body' => p['excerpt'],
+        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{p['resolved_url']}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
+        'Created at' => Time.now
+      )
+      unless post['Title']
+        json = JSON.parse(post['Iframely'])
+        post['Title'] = json['meta']['title']
+        post['Body'] = json['meta']['description']
+        post.save
+      end
+      post.tagify
+      post.cast
     end
-  end
-
-  def note
-    post = self
-    browser = Ferrum::Browser.new
-    browser.go_to('https://substack.com/sign-in')
-    browser.at_css('a.login-option').click
-    browser.at_css("input[name='email']").focus.type(ENV['SUBSTACK_EMAIL'])
-    browser.at_css("input[name='password']").focus.type(ENV['SUBSTACK_PASSWORD'])
-    browser.at_css('button[type="submit"]').click
-    countdown 5
-    browser.screenshot(path: '1.png')
-    browser.at_css('div[class*=sideNav] button.pencraft').click
-    browser.at_css('div.tiptap').focus.type(post['Title'], :Enter, :Enter, post['Link'], :Enter)
-    countdown 5
-    browser.at_css('div[class*=composerModal] button[class*=priority_primary]').click
-    countdown 5
-    browser.screenshot(path: '2.png')
   end
 
   def tagify(skip_linking: false)
@@ -122,5 +116,35 @@ class Post < Airrecord::Table
     end
 
     self['Twitter text']
+  end
+
+  def cast
+    post = self
+    `python #{Padrino.root}/tasks/cast.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}"`
+  end
+
+  def countdown(n)
+    n.downto(1) do |i|
+      puts i
+      sleep 1
+    end
+  end
+
+  def note
+    post = self
+    browser = Ferrum::Browser.new
+    browser.go_to('https://substack.com/sign-in')
+    browser.at_css('a.login-option').click
+    browser.at_css("input[name='email']").focus.type(ENV['SUBSTACK_EMAIL'])
+    browser.at_css("input[name='password']").focus.type(ENV['SUBSTACK_PASSWORD'])
+    browser.at_css('button[type="submit"]').click
+    countdown 5
+    browser.screenshot(path: '1.png')
+    browser.at_css('div[class*=sideNav] button.pencraft').click
+    browser.at_css('div.tiptap').focus.type(post['Title'], :Enter, :Enter, post['Link'], :Enter)
+    countdown 5
+    browser.at_css('div[class*=composerModal] button[class*=priority_primary]').click
+    countdown 5
+    browser.screenshot(path: '2.png')
   end
 end

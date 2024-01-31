@@ -147,20 +147,6 @@ module StephenReid
 
     ##############################
 
-    get '/pocket' do
-      # code = Pocket.get_code(:redirect_uri => 'https://stephenreid.net')
-      # redirect Pocket.authorize_url(:code => code, :redirect_uri => 'https://stephenreid.net')
-      # Pocket.get_result(code, :redirect_uri => 'https://stephenreid.net')
-      erb :process_pocket
-    end
-
-    get '/pocket/:id/delete' do
-      client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
-      url = client.retrieve(detailType: :complete)['list'][params[:id]]['resolved_url']
-      client.modify([{ action: 'delete', item_id: params[:id] }])
-      redirect url
-    end
-
     get '/software/update' do
       Software.iframely
       redirect '/software?r=1'
@@ -169,10 +155,6 @@ module StephenReid
     get '/films/update' do
       Film.iframely
       redirect '/films?r=1'
-    end
-
-    get '/metacrisis-wall' do
-      erb :metacrisis_wall
     end
 
     get '/master-lover-course' do
