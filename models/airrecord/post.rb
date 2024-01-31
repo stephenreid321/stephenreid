@@ -8,7 +8,7 @@ class Post < Airrecord::Table
 
   def self.sync_with_pocket
     client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
-    client.retrieve(detailType: :complete, state: :archive, count: 10)['list'].each do |_k, p|
+    client.retrieve(detailType: :complete, state: :archive, count: 50)['list'].each do |_k, p|
       puts p['resolved_url']
       break if Post.all(filter: "{Link} = '#{p['resolved_url']}'").first
 
