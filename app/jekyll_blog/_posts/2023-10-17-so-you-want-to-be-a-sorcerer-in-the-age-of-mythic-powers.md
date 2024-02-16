@@ -1,9 +1,8 @@
 ---
-title: "So You Want to Be a Sorcerer in the Age of Mythic Powers..."
+title: So You Want to Be a Sorcerer in the Age of Mythic Powers...
 excerpt: The rise of AI might cause us to re-familiarize ourselves with our own innate ways of knowing, to ask ourselves what intelligence actually is, as we find our way back to the foundational understanding that knowledge lives in bodies.
-header_image_url: assets/image/2023-10-17-so-you-want-to-be-a-sorcerer-in-the-age-of-mythic-powers-1697541366398.jpeg
+header_image_url: assets/image/2023-10-17-so-you-want-to-be-a-sorcerer-in-the-age-of-mythic-powers-1708071385822.jpeg
 ---
-
 *Transcript of [So You Want to Be a Sorcerer in the Age of Mythic Powers... (The AI Episode) by The Emerald](https://open.spotify.com/episode/22QF1duMlwvws0QbMFJVLA)*
 
 There's an old story, an old, old story, and I'm sure you've heard it.
