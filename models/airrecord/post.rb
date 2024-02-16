@@ -9,14 +9,16 @@ class Post < Airrecord::Table
   def self.sync_with_pocket
     client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
     client.retrieve(detailType: :complete, state: :archive, count: 50)['list'].each do |_k, p|
-      puts p['resolved_url']
-      break if Post.all(filter: "{Link} = '#{p['resolved_url']}'").first
+      url = p['resolved_url']
+      url = url.gsub('youtu.be/', 'youtube.com/watch?v=')
+      puts url
+      break if Post.all(filter: "{Link} = '#{url}'").first
 
       post = Post.create(
         'Title' => p['resolved_title'],
-        'Link' => p['resolved_url'],
+        'Link' => url,
         'Body' => p['excerpt'],
-        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{p['resolved_url']}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
+        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{url}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
         'Created at' => Time.now
       )
       unless post['Title']
@@ -37,8 +39,6 @@ class Post < Airrecord::Table
     facebook = post['Title']
     replacements = []
     additions = []
-
-    post['Link'] = post['Link'].gsub('youtu.be/', 'youtube.com/watch?v=')
 
     Term.all(sort: { 'Priority' => 'desc' }).each do |term|
       i = term['Case sensitive'] ? false : true
