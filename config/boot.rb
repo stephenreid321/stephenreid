@@ -20,6 +20,11 @@ Mongoid.raise_not_found_error = false
 Delayed::Worker.max_attempts = 1
 
 Airrecord.api_key = ENV['AIRTABLE_API_KEY']
+class Airrecord::Table
+  def self.since(time)
+    all(filter: "{Created at} >= '#{time.to_s(:db)}'")
+  end
+end
 
 Pocket.configure do |config|
   config.consumer_key = ENV['POCKET_CONSUMER_KEY']
