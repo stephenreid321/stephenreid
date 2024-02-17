@@ -7,7 +7,7 @@ load_dotenv()
 
 text = sys.argv[1]
 url = sys.argv[2]
-channel = sys.argv[3] if len(sys.argv) > 2 else None
+channel = sys.argv[3] if len(sys.argv) > 3 else None
 
 client = Warpcast(mnemonic=os.environ.get("FARCASTER_MNEMONIC"))
 response = client.post_cast(text=text, embeds=[url], channel_key=channel)
