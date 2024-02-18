@@ -41,7 +41,7 @@ StephenReid::App.controller do
         ", sort: { 'Created at' => 'desc' }).map(&:id)
     end
     post_ids = post_ids.uniq
-    if post_ids.length > 0
+    unless post_ids.empty?
       puts "#{c = post_ids.length} posts"
       Post.find_many(post_ids).each_with_index do |post, i|
         puts "#{post['Title']} (#{i}/#{c})"
@@ -195,14 +195,14 @@ StephenReid::App.controller do
     end
 
     terms = Term.all.map { |term| term['Name'].downcase }
-    term_words = terms.map { |term| term.split(' ') }.flatten
+    term_words = terms.map(&:split).flatten
 
     stops = STOPS
     stops += terms
     stops += term_words
 
     text = text.flatten.join(' ').downcase
-    words = text.split(' ')
+    words = text.split
     @word_frequency = words.reject { |a| stops.include?(a) || a.length < 4 }.each_with_object(Hash.new(0)) { |word, counts| counts[word] += 1 }
     @phrase2_frequency = words.each_cons(2).reject { |a, b| stops.include?("#{a} #{b}") || (stops.include?(a) || stops.include?(b)) || (a.length < 4 || b.length < 4) }.each_with_object(Hash.new(0)) { |word, counts| counts[word.join(' ')] += 1 }
 

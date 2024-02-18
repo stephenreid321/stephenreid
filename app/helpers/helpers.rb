@@ -27,7 +27,7 @@ StephenReid::App.helpers do
 [A Prayer for the Crown-Shy (Monk & Robot, #2)](https://www.goodreads.com/book/show/40864030-a-prayer-for-the-crown-shy) by Becky Chambers
 
 [A Psalm for the Wild-Built (Monk & Robot, #1)](https://www.goodreads.com/book/show/40864002-a-psalm-for-the-wild-built) by Becky Chambers)
-    p << open("#{Padrino.root}/app/jekyll_blog/_posts/2020-03-20-karuna-journey.md").read.force_encoding('utf-8')
+    p << File.read("#{Padrino.root}/app/jekyll_blog/_posts/2020-03-20-karuna-journey.md").force_encoding('utf-8')
     p << %(My girlfriend's name is Laura. She lives in Stockholm, Sweden and is finishing her PhD on relational sensitivity in participatory design. We met at the Emerge conference in Berlin in 2019.)
     p << %(My best friends include Ronan Harrington, Gaia Harvey Jackson, Rita Issa and Paul Powlesland.)
     p << %(---
@@ -40,7 +40,7 @@ StephenReid::App.helpers do
 
   def md(slug, render: true)
     begin
-      text = open("#{Padrino.root}/app/markdown/#{slug}.md").read.force_encoding('utf-8')
+      text = File.read("#{Padrino.root}/app/markdown/#{slug}.md").force_encoding('utf-8')
       text = text.gsub(/\A---(.|\n)*?---/, '')
     rescue StandardError
       text = slug
@@ -54,7 +54,7 @@ StephenReid::App.helpers do
   end
 
   def front_matter(slug)
-    text = open("#{Padrino.root}/app/markdown/#{slug}.md").read.force_encoding('utf-8')
+    text = File.read("#{Padrino.root}/app/markdown/#{slug}.md").force_encoding('utf-8')
     FrontMatterParser::Parser.new(:md).call(text)
   end
 

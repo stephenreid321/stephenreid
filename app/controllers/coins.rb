@@ -54,7 +54,7 @@ StephenReid::App.controller do
 
   get '/coins/delete_tag/:tag' do
     sign_in_required!
-    tag = current_account.tags.find_by(name: params[:tag]).destroy
+    current_account.tags.find_by(name: params[:tag]).destroy
     redirect "/u/#{current_account.username}/tags"
   end
 
@@ -67,7 +67,7 @@ StephenReid::App.controller do
 
   post '/coins/tag/:tag' do
     sign_in_required!
-    if coin = (Coin.symbol(params[:symbol]) || Coin.find_by(slug: params[:symbol]))
+    if (coin = Coin.symbol(params[:symbol]) || Coin.find_by(slug: params[:symbol]))
       coinship = current_account.coinships.find_or_create_by(coin: coin)
       coinship.tag = current_account.tags.find_by(name: params[:tag])
       coinship.save

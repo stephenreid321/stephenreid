@@ -28,15 +28,15 @@ class Coinship
   end
 
   def market_cap_at_predicted_rank
-    if (p = market_cap_rank_prediction)
-      mc = nil
-      until mc
-        mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
-        p += 1
-        break if p > market_cap_rank_prediction + 3
-      end
-      mc
+    return unless (p = market_cap_rank_prediction)
+
+    mc = nil
+    until mc
+      mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
+      p += 1
+      break if p > market_cap_rank_prediction + 3
     end
+    mc
   end
 
   def market_cap_change_prediction
@@ -45,12 +45,10 @@ class Coinship
 
   def self.units_elsewhere_sum(units_elsewhere)
     if units_elsewhere
-      units_elsewhere.split(' ').map do |x|
-        begin
-          Float(x.gsub(',', ''))
-        rescue StandardError
-          nil
-        end
+      units_elsewhere.split.map do |x|
+        Float(x.gsub(',', ''))
+      rescue StandardError
+        nil
       end.compact.sum
     else
       0
@@ -79,11 +77,11 @@ class Coinship
       begin
         if coin.platform == 'ethereum'
           account.eth_address_hashes.each do |a|
-            u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
+            u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / (10**(coin.decimals || 18).to_f)
           end
         elsif coin.symbol == 'ETH'
           account.eth_address_hashes.each do |a|
-            u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
+            u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / (10**(coin.decimals || 18).to_f)
           end
         end
       rescue StandardError => e

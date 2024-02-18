@@ -48,7 +48,7 @@ class BlogPost
       req.body = { model: version, messages: [{ role: 'user', content: prompt.join("\n\n") }] }.to_json
     end
     content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
-    self.body = content.split("\n")[1..-1].join("\n")
+    self.body = content.split("\n")[1..].join("\n")
     save
   end
   handle_asynchronously :set_body!
@@ -77,9 +77,9 @@ class BlogPost
       I live between Totnes, Devon, UK, and Stockholm, Sweden.
 
       ## Short bio in the third person
-      #{open("#{Padrino.root}/app/markdown/bio.md").read.force_encoding('utf-8')}),
+      #{File.read("#{Padrino.root}/app/markdown/bio.md").force_encoding('utf-8')}),
      %(## Training and teachers
-      #{open("#{Padrino.root}/app/markdown/training.md").read.force_encoding('utf-8')}),
+      #{File.read("#{Padrino.root}/app/markdown/training.md").force_encoding('utf-8')}),
      %(## Books I've read
       #{Book.all(sort: { 'Number' => 'desc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")}),
      %(## Content I've shared recently

@@ -4,24 +4,45 @@ Layout/EndAlignment:
   AutoCorrect: true
 Style/SymbolArray:
   MinSize: 3
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never 
+Naming/MethodParameterName:
+  Enabled: false
+Naming/PredicateName:
+  Enabled: false
+Naming/AccessorMethodName:
+  Enabled: false  
+Style/MultilineBlockChain:
+  Enabled: false
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: false  
 
 Metrics:
   Enabled: false
+
+Layout/LineLength:
+  Enabled: false  
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/SafeNavigation:
   Enabled: false
-Style/RedundantBegin:
+Style/FetchEnvVar:
   Enabled: false
+Style/HashLikeCase:
+  Enabled: false  
 Style/Documentation:
   Enabled: false
-Style/FetchEnvVar:
+Style/OpenStructUse:
   Enabled: false  
-Layout/LineLength:
+Style/NumericPredicate:
   Enabled: false
+
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
-Lint/Debugger:
+Lint/DuplicateBranch:
   Enabled: false
-Lint/UriEscapeUnescape:
-  Enabled: false
+Lint/SuppressedException:
+  Enabled: false  
+
+

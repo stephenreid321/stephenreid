@@ -62,7 +62,7 @@ StephenReid::App.controller do
       text << video.text
     end
     text = text.flatten.join(' ').downcase
-    words = text.split(' ')
+    words = text.split
     @word_frequency = words.reject { |a| stops.include?(a) || a.length < 4 }.each_with_object(Hash.new(0)) { |word, counts| counts[word] += 1 }
     @phrase2_frequency = words.each_cons(2).reject { |a, b| stops.include?("#{a} #{b}") || (stops.include?(a) || stops.include?(b)) || (a.length < 4 || b.length < 4) }.each_with_object(Hash.new(0)) { |word, counts| counts[word.join(' ')] += 1 }
     erb :'k/discover'

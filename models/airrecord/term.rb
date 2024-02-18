@@ -15,7 +15,10 @@ class Term < Airrecord::Table
           FIND(LOWER('#{term['Name']}'), LOWER({Iframely})) > 0
         )
       ", sort: { 'Created at' => 'desc' })
-    posts.each { |post| puts post['Title']; post.tagify(skip_linking: true) }
+    posts.each do |post|
+      puts post['Title']
+      post.tagify(skip_linking: true)
+    end
   end
 
   def self.create_edges
@@ -29,7 +32,7 @@ class Term < Airrecord::Table
 
         posts = TermLink.get_posts(source['Name'], sink['Name'])
 
-        next unless posts.length > 0
+        next if posts.empty?
 
         puts "found #{posts.length} posts"
 

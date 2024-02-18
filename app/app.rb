@@ -98,7 +98,11 @@ module StephenReid
       '/featured' => '/knowledgegraph',
       '/recommended' => '/knowledgegraph',
       '/maps' => '/life-as-practice'
-    }.each { |k, v| get k.to_s do; redirect v; end }
+    }.each do |k, v|
+      get k.to_s do
+        redirect v
+      end
+    end
 
     get '/to/:slug' do
       @product = Product.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found

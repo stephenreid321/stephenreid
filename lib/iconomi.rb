@@ -19,7 +19,7 @@ class Iconomi
       'ICN-SIGN' => signature,
       'ICN-TIMESTAMP' => t
     }
-    agent.get('https://api.iconomi.com' + path + (parameters ? "?#{parameters}" : '')).body
+    agent.get("https://api.iconomi.com#{path}#{parameters ? "?#{parameters}" : ''}").body
   end
 
   def self.post(path, request_body)
@@ -42,6 +42,6 @@ class Iconomi
       'ICN-SIGN' => signature,
       'ICN-TIMESTAMP' => t
     }
-    agent.post('https://api.iconomi.com' + path, request_body, { 'Content-Type' => 'application/json' }).body
+    agent.post("https://api.iconomi.com#{path}", request_body, { 'Content-Type' => 'application/json' }).body
   end
 end

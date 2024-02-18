@@ -12,7 +12,7 @@ StephenReid::App.controller do
   end
 
   get '/blog/full' do
-    Dir['app/jekyll_blog/_posts/*.md'].sort.reverse.map do |path|
+    Dir['app/jekyll_blog/_posts/*.md'].reverse.map do |path|
       File.read(path).sub(/^---/, "---\ndate: #{path.split('/').last.split('-')[0..2].join('-')}")
     end.join("\n\n")
   end

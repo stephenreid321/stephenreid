@@ -56,7 +56,7 @@ namespace :posts do
     dupes = links.select { |link| links.count(link) > 1 }
     dupes.uniq.each do |link|
       posts = Post.all(filter: "{Link} = '#{link}'", sort: { 'Created at' => 'desc' })
-      posts[1..-1].each do |post|
+      posts[1..].each do |post|
         puts "destroying #{post['Link']} created #{post['Created at']}"
         post.destroy
       end

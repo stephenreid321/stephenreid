@@ -60,15 +60,15 @@ class Strategy
       last_posted_at: :datetime,
       status: :select
     }
-      .merge(%w[day week month three_month six_month year].map do |t|
-               ["r#{t}".to_sym, :number]
-             end.to_h)
-      .merge(%w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].map do |x|
-               [
-                 ["nscore_#{x}".to_sym, :number],
-                 ["index_#{x}".to_sym, :number]
-               ]
-             end.flatten(1).to_h)
+                .merge(%w[day week month three_month six_month year].to_h do |t|
+                         [:"r#{t}", :number]
+                       end)
+                .merge(%w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].map do |x|
+                         [
+                           [:"nscore_#{x}", :number],
+                           [:"index_#{x}", :number]
+                         ]
+                       end.flatten(1).to_h)
   end
 
   has_many :holdings, dependent: :destroy
@@ -139,7 +139,7 @@ class Strategy
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/price"))
     self.aum = j['aum']
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/posts"))
-    if (last_post = j['posts'].sort_by { |x| x['timestamp'] }.last)
+    if (last_post = j['posts'].max_by { |x| x['timestamp'] })
       self.last_posted_at = Time.at(last_post['timestamp'] / 1000)
     end
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}/structure"))
@@ -240,10 +240,10 @@ class Strategy
     # restrict to top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(Stash.find_by(key: 'number_of_assets').value.to_i - 1)]
     t = assets.map { |_k, v| v }.sum
-    assets = assets.map { |k, v| [k, v / t] }.to_h
+    assets = assets.transform_values { |v| v / t }
 
     # make sure asset weights sum to exactly 1
-    assets = assets.map { |k, v| [k, v.floor(4)] }.to_h
+    assets = assets.transform_values { |v| v.floor(4) }
     t = assets.map { |_k, v| v }.sum
     k = assets.keys.first
     assets[k] += (1 - t)

@@ -13,5 +13,4 @@ class Upload
   end
 
   dragonfly_accessor :file
-
 end

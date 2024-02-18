@@ -103,9 +103,7 @@ class Coin
   end
 
   def self.remote_update
-    Coin.all.each do |coin|
-      coin.remote_update
-    end
+    Coin.all.each(&:remote_update)
   end
 
   def remote_update

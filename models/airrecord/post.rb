@@ -8,7 +8,7 @@ class Post < Airrecord::Table
 
   def self.sync_with_pocket
     client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
-    client.retrieve(detailType: :complete, state: :archive, count: 50)['list'].each do |_k, p|
+    client.retrieve(detailType: :complete, state: :archive, count: 50)['list'].each_value do |p|
       url = p['resolved_url']
       url = url.gsub('youtu.be/', 'youtube.com/watch?v=')
       puts url

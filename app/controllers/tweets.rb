@@ -42,5 +42,4 @@ StephenReid::App.controller do
     tweet.update_attribute(:hidden, true)
     200
   end
-  
 end

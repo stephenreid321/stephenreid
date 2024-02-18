@@ -51,7 +51,7 @@ class Tweet
     c = twitter_friends.count
     twitter_friends.each_with_index do |tf, i|
       username = tf['Username']
-      username = username[1..-1] if username[0] == '@'
+      username = username[1..] if username[0] == '@'
       timeline = tf['Timeline']
       puts "#{i + 1}/#{c} #{username}"
       if Tweet.find_by(:'data.user.username' => username, :timeline => timeline, :hidden.ne => true)

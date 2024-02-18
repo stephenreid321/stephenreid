@@ -46,7 +46,7 @@ StephenReid::App.controller do
     sign_in_required!
     Stash.find_by(key: 'number_of_assets').update(value: params[:n])
     200
-  end  
+  end
 
   get '/assets/:id/multiplier' do
     asset = Asset.find(params[:id])

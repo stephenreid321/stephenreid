@@ -11,7 +11,7 @@ class TarotCard < Airrecord::Table
     srcs = page.search('.entry-body img').map { |img| img.parent.attr('href') }
     srcs.delete_at(1)
     suits = %w[wands cups swords pentacles]
-    offset = tarot_suit ? (21 + suits.index(tarot_suit['Name']) * 14) : 0
+    offset = tarot_suit ? (21 + (suits.index(tarot_suit['Name']) * 14)) : 0
     self['Image'] = [{ url: srcs[offset + tarot_number['Value']] }]
     save
   end

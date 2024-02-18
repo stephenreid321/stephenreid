@@ -45,7 +45,7 @@ class Account
   end
 
   def firstname
-    name.split(' ').first
+    name.split.first
   end
 
   def self.time_zones

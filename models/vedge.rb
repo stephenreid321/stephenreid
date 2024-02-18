@@ -35,5 +35,4 @@ class Vedge
   def set_weight
     self.weight = videos.count
   end
-
 end

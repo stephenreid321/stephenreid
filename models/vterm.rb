@@ -74,7 +74,7 @@ class Vterm
     end
 
     see_also = JSON.parse(openapi_response.body)['choices'].first['text'].strip
-    see_also = see_also.split(', ').map { |term| term.downcase }.select { |term| network.interesting.include?(term) && term != self.term }.join(', ')
+    see_also = see_also.split(', ').map(&:downcase).select { |term| network.interesting.include?(term) && term != self.term }.join(', ')
     self.see_also = see_also
     save
   end
