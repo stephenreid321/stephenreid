@@ -33,7 +33,7 @@ gem 'airrecord'
 gem 'delayed_job_mongoid'
 gem 'dragonfly'
 gem 'dragonfly-s3_data_store'
-gem 'mongoid'
+gem 'mongoid', '~> 7.0'
 
 # Interacting with other websites
 gem 'airbrake'
