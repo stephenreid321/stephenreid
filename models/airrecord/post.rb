@@ -7,8 +7,25 @@ class Post < Airrecord::Table
   belongs_to :organisation, class: 'Organisation', column: 'Organisation'
 
   def self.sync_with_pocket
-    client = Pocket.client(access_token: ENV['POCKET_ACCESS_TOKEN'])
-    client.retrieve(detailType: :complete, state: :archive, count: 50)['list'].each_value do |p|
+    conn = Faraday.new(url: 'https://getpocket.com/v3/get') do |faraday|
+      faraday.request :url_encoded
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.post do |req|
+      req.headers['Content-Type'] = 'application/json; charset=UTF8'
+      req.headers['X-Accept'] = 'application/json'
+      req.body = {
+        consumer_key: ENV['POCKET_CONSUMER_KEY'],
+        access_token: ENV['POCKET_ACCESS_TOKEN'],
+        detailType: :complete,
+        state: :archive,
+        count: 50
+      }.to_json
+    end
+
+    data = JSON.parse(response.body)
+    data['list'].each_value do |p|
       url = p['resolved_url']
       url = url.gsub('youtu.be/', 'youtube.com/watch?v=')
       puts url
