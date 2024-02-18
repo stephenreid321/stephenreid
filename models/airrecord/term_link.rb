@@ -20,7 +20,7 @@ class TermLink < Airrecord::Table
   end
 
   def self.find_or_create(source, sink)
-    if !(term_link = TermLink.all(filter: "AND({Source} = '#{source['Name']}', {Sink}  = '#{sink['Name']}')").first) && !(term_link = TermLink.all({ filter: "AND({Source} = '#{sink['Name']}', {Sink}  = '#{source['Name']}')" }).first)
+    if !(term_link = TermLink.all(filter: "AND({Source} = '#{source['Name']}', {Sink}  = '#{sink['Name']}')").first) && !(term_link = TermLink.all(filter: "AND({Source} = '#{sink['Name']}', {Sink}  = '#{source['Name']}')").first)
       term_link = TermLink.create('Source' => [source.id], 'Sink' => [sink.id])
     end
     term_link
