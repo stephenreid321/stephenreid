@@ -240,10 +240,10 @@ class Strategy
     # restrict to top n assets
     assets = assets.sort_by { |_k, v| -v }[0..(Stash.find_by(key: 'number_of_assets').value.to_i - 1)]
     t = assets.map { |_k, v| v }.sum
-    assets = assets.transform_values { |v| v / t }
+    assets = assets.to_h { |k, v| [k, v / t] }
 
     # make sure asset weights sum to exactly 1
-    assets = assets.transform_values { |v| v.floor(4) }
+    assets = assets.to_h { |k, v| [k, v.floor(4)] }
     t = assets.map { |_k, v| v }.sum
     k = assets.keys.first
     assets[k] += (1 - t)

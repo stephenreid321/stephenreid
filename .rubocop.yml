@@ -16,6 +16,8 @@ Style/MultilineBlockChain:
   Enabled: false
 Lint/NoReturnInBeginEndBlocks:
   Enabled: false  
+Style/HashTransformValues:
+  Enabled: false  
 
 Metrics:
   Enabled: false
