@@ -74,7 +74,7 @@ module StephenReid
       redirect '/'
     end
 
-    %w[books films podcasts software discord tarot events svenska-ord svensk-grammatik diet speaking-engagements].each do |r|
+    %w[books films podcasts events speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i
         @title = r.gsub('-', ' ').capitalize
