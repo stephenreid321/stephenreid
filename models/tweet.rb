@@ -70,7 +70,7 @@ class Tweet
     a = Mechanize.new
     a.set_proxy(ENV['PROXY'].split(':')[0], ENV['PROXY'].split(':')[1], ENV['PROXY_USERNAME'], ENV['PROXY_PASSWORD']) if ENV['PROXY_ACTIVATED']
     oldest_tweet_in_cursor_created_at = nil
-    url = "https://#{ENV['NITTER_DOMAIN']}/#{username}?cursor=#{cursor}"
+    url = "#{ENV['NITTER_BASE_URI']}/#{username}?cursor=#{cursor}"
     puts url
     page = begin; a.get(url); rescue Mechanize::ResponseCodeError; return; end
     page.search('.timeline .timeline-item .tweet-body').each do |item|
@@ -106,6 +106,12 @@ class Tweet
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
     puts cursor
     Tweet.nitter_user(username, timeline, cursor: cursor)
+  end
+
+  def self.count_tweets_by_username
+    Tweet.pluck('data.user.username').map { |t| t['user']['username'] }.each_with_object(Hash.new(0)) do |element, counts|
+      counts[element] += 1
+    end.sort_by { |_k, v| -v }
   end
 
   def self.api
@@ -218,7 +224,8 @@ class Tweet
       'AI' => ['lists/1671431015573733381/tweets', nil],
       'Crypto Twitter' => ['lists/1585548222935736321/tweets', nil],
       'Greenpill' => ['lists/1610587490670317573/tweets', 24.hours.ago],
-      'Contemplatives' => ['lists/1610571716199055360/tweets', 24.hours.ago]
+      'Contemplatives' => ['lists/1610571716199055360/tweets', 24.hours.ago],
+      'algekalipso' => ['lists/1761357391386308871/tweets', 24.hours.ago]
     }
   end
 
