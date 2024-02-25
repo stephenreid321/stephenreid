@@ -49,18 +49,7 @@
         <td class="assetName" style="white-space: nowrap;">
           <a
       data-toggle="tooltip"
-<% if coin = Coin.find_by(symbol: asset.ticker) %>
-      title="$<%= coin.usd_price
-      if coin.usd_price < 1
-      Float("%.#{3}g" % coin.usd_price)
-      else
-      number_with_precision coin.usd_price, precision: 2, delimiter: ','
-      end
-
-      %><br />Updated <%=time_ago_in_words coin.updated_at%> ago"
-<% end %>
-
-      target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
+      target="_blank" href="https://coingecko.com/en/coins/<%=Coin.find_by(symbol: asset.ticker).try(:slug)%>">
             <%= asset.name %> (<%= k %>)
           </a>
           <%= partial :'crypto/multiplier', locals: { asset: asset } %>
