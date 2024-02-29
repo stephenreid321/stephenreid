@@ -72,7 +72,7 @@ class BlogPost
     self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{image_word}").headers[:location]
   end
 
-  def self.prompt
+  def self.prompt(n: nil)
     [%(Hi! I'm Stephen.
       I live between Totnes, Devon, UK, and Stockholm, Sweden.
 
@@ -83,18 +83,20 @@ class BlogPost
      %(## Books I've read
       #{Book.all(sort: { 'Number' => 'desc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com#{b['URL']}) by #{b['Author']}" }.join("\n\n")}),
      %(## Content I've shared recently
-      #{Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).first(10).map { |post| "[#{post['Title']}](#{post['Link']})\n#{post['Body']}" }.join("\n\n")})]
-    # %(## Speaking engagements
-    # #{SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")}),
-    # %(## Blog posts I've written
-    #   #{Dir['app/jekyll_blog/_posts/*.md'].sort.reverse.map do |f|
-    #       content = File.read(f)
-    #       yaml = YAML.load(content)
-    #       "### #{yaml['title']}\n#{yaml['excerpt']}"
-    #     end.join("\n\n")})
+      #{Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).first(10).map { |post| "[#{post['Title']}](#{post['Link']})\n#{post['Body']}" }.join("\n\n")}),
+     %(## Speaking engagements
+    #{SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")}),
+     (if n
+        %(## Blog posts I've written
+        #{Dir['app/jekyll_blog/_posts/*.md'].reverse[0..(n - 1)].map do |f|
+            File.read(f)
+          end.join("\n\n")})
+      end)].compact
+    # Event descriptions
+    # Course notes
   end
 
-  def prompt
+  def prompt(n: nil)
     [
       %(
 Write a 700-word blog post in the first person, as if written by the person below, on the topic of '#{title}'.
@@ -110,7 +112,7 @@ Write a 700-word blog post in the first person, as if written by the person belo
 - Assume the audience is highly intelligent.
 - Make sure the post has a proper conclusion.
 ---)
-    ] + BlogPost.prompt
+    ] + BlogPost.prompt(n: n)
   end
 
   before_validation do

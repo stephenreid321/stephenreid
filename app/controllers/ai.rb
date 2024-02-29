@@ -1,6 +1,6 @@
 StephenReid::App.controller do
   get '/ai/prompt' do
-    BlogPost.first.prompt.join("\n\n").gsub("\n", '<br />')
+    BlogPost.first.prompt(n: (params[:n].to_i if params[:n])).join("\n\n").gsub("\n", '<br />')
   end
 
   get '/ai' do

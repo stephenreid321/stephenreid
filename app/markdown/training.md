@@ -56,7 +56,7 @@
 ### Other
 
 *   [PADI Open Water Scuba Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
-*   [Microsolidarity](https://www.microsolidarity.cc/) Gatherings (Jul 2023, *Feb 2024*)
+*   [Microsolidarity](https://www.microsolidarity.cc/) Gatherings (Jul 2023, Feb 2024)
 *   [Navigating the Mysteries](https://schoolofmyth.com/event/navigating-the-mysteries/) with [Dr. Martin Shaw](https://drmartinshaw.com/) (Mar 2023)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
