@@ -38,6 +38,7 @@ StephenReid::App.controller do
   end
 
   get '/tweets/:id/hide' do
+    sign_in_required!
     tweet = Tweet.find(params[:id])
     tweet.update_attribute(:hidden, true)
     200
