@@ -27,7 +27,7 @@ StephenReid::App.controller do
 
   get '/metastrategy/rebalance' do
     sign_in_required!
-    Strategy.delay.rebalance(skip_update: true)
+    Strategy.delay.rebalance_without_update
     redirect '/metastrategy'
   end
 

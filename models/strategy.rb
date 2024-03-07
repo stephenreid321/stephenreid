@@ -274,4 +274,8 @@ class Strategy
     puts data.to_json
     Iconomi.post('/v1/strategies/DECENTCOOP/structure', data.to_json)
   end
+
+  def self.rebalance_without_update
+    rebalance(skip_update: true)
+  end
 end
