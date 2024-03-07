@@ -146,6 +146,10 @@ module StephenReid
       redirect '/blog/2022/09/30/beyond-privacy-the-seven-darknesses-of-lunarpunk.html'
     end
 
+    get '/substack', provides: :txt do
+      erb :substack, layout: false
+    end
+
     ##############################
 
     get '/software/update' do

@@ -26,6 +26,7 @@ gem 'chroma'
 gem 'front_matter_parser'
 gem 'mail'
 gem 'redcarpet'
+gem 'reverse_markdown'
 gem 'rss'
 
 # Data

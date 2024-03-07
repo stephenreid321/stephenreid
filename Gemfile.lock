@@ -283,6 +283,8 @@ GEM
     regexp_parser (2.9.0)
     reline (0.4.2)
       io-console (~> 0.5)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.6)
     rss (0.3.0)
       rexml
@@ -362,6 +364,7 @@ DEPENDENCIES
   rack (~> 2.0)
   rake
   redcarpet
+  reverse_markdown
   rss
   rubocop
   sass
