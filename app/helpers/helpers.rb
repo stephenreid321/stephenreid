@@ -57,4 +57,32 @@ StephenReid::App.helpers do
     end
     %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
   end
+
+  def substack_posts
+    Dir["#{Padrino.root}/app/substack/posts/*.html"]
+      .sort_by { |file| file.split('/').last.split('.').first.to_i }
+      .map do |file|
+      posts = CSV.read("#{Padrino.root}/app/substack/posts.csv", headers: true)
+      post_id = file.split('/').last.gsub('.html', '')
+      post = posts.find { |row| row['post_id'] == post_id }
+
+      doc = Nokogiri::HTML(
+        "<h1>#{post['title']}, #{post['post_date']}</h1>
+            #{File.read(file).gsub(/<source.*?>/, '')}"
+      )
+      doc.search('div.image2-inset').each do |tag|
+        tag.replace(tag.children)
+      end
+      doc.search('picture').each do |tag|
+        tag.replace(tag.children)
+      end
+      doc.search('div.image-link-expand').remove
+      doc.search('img').each do |tag|
+        tag['src'] = tag['srcset'].split(' ')[-2] if tag['srcset']
+      end
+
+      # doc.to_html.gsub('<div></div>', '')
+      ReverseMarkdown.convert(doc.to_html.gsub('<div></div>', ''))
+    end.join("\n")
+  end
 end

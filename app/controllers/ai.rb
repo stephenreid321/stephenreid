@@ -1,8 +1,4 @@
 StephenReid::App.controller do
-  get '/ai/prompt', provides: :txt do
-    BlogPost.prompt(n: (params[:n].to_i if params[:n])).join("\n\n")
-  end
-
   get '/ai' do
     redirect '/ai/public/true' if current_account
     @blog_posts = BlogPost.where(public: true)

@@ -147,7 +147,11 @@ module StephenReid
     end
 
     get '/substack', provides: :txt do
-      erb :substack, layout: false
+      substack_posts
+    end
+
+    get '/prompt', provides: :txt do
+      "#{BlogPost.prompt.join("\n\n")}\n\n#{substack_posts}"
     end
 
     ##############################
