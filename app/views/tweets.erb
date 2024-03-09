@@ -43,7 +43,7 @@
       ) %>
     <div class="mb-3">
       <% if current_account %>
-        <a href="javascript:;" onclick="$.get('/tweets/<%=tweet.id%>/hide', function() { $(this).parent().hide() })" class="btn bg-dark btn-lg text-muted float-right"><i class="fa fa-times"></i></a>
+        <a href="javascript:;" onclick="var a = this; $.get('/tweets/<%=tweet.id%>/hide', function() { $(a).parent().hide() })" class="btn bg-dark btn-lg text-muted float-right"><i class="fa fa-times"></i></a>
       <% end %>
       <%=tweet.update_attribute(:html, tweet.get_html) if tweet.html.blank?; tweet.html%>
     </div>
