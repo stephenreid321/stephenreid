@@ -90,7 +90,7 @@ class BlogPost
       %(## Books I've read),
       Book.all(sort: { 'Number' => 'desc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com/book/show/#{b['ID']}) by #{b['Author']}" }.join("\n\n"),
       %(## Content I've shared recently),
-      Post.all(filter: "IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).first(10).map { |post| "[#{post['Title']}](#{post['Link']}), #{post['Created at']}\n#{post['Body']}" }.join("\n\n"),
+      Post.all(filter: "IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).map { |post| "[#{post['Title']}](#{post['Link']}), #{post['Created at']}\n#{post['Body']}" }.join("\n\n"),
       %(## Speaking engagements),
       SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")
     ]
