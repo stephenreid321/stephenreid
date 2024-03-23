@@ -17,6 +17,16 @@
   </div>
 </div>
 
+<div class="my-5">
+  <p class="text-center">I've previously delivered talks and trainings for:</p>
+  <div class="row align-items-center justify-content-center">
+    <% Organisation.all(filter: "{Client} = 1", sort: { 'Client order' => 'asc' }).each { |organisation| %>
+    <div class="col-lg-2 col-6">
+      <img class="w-100 px-3 py-3 py-lg-0" src="<%= organisation['Logo'].first['url'] %>" />
+    </div>
+    <% } %>
+  </div>
+</div>
 
 <div class="row justify-content-center mt-3">
   <div class="col-lg-9">
