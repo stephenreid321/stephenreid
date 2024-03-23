@@ -18,11 +18,11 @@
 </div>
 
 <div class="my-5">
-  <p class="text-center">I've previously delivered tech talks and trainings for:</p>
+  <p class="text-center">I've delivered tech talks and trainings for organisations including:</p>
   <div class="row align-items-center justify-content-center">
     <% Organisation.all(filter: "{Client} = 1", sort: { 'Client order' => 'asc' }).each { |organisation| %>
-    <div class="col-lg-2 col-6">
-      <img class="w-100 px-3 py-3 py-lg-0" src="<%= organisation['Logo'].first['url'] %>" />
+    <div class="col-lg-2 col-4">
+      <img class="w-100 px-3" src="<%= organisation['Logo'].first['url'] %>" />
     </div>
     <% } %>
   </div>
@@ -35,12 +35,15 @@
       <a class="mb-3 btn btn-primary" target="_blank" href="mailto:stephen@stephenreid.net">Get in touch</a>
     </div>
 
-    <div class="text-center my-3">
-      <img class="w-75 w-lg-50" src="/images/berkeley.png">
-      <p style="text-transform: uppercase; font-size: 85%; letter-spacing: 2px;" class="text-white">
-        Professional Certificate in Machine Learning and Artificial Intelligence
-      </p>
+    <div class="row mt-3 justify-content-center">
+      <div class="col-12 col-lg-9">
+        <img class="w-100 mb-3 mb-lg-0" src="/images/berkeley.png">
+      </div>
     </div>
+
+    <p style="text-transform: uppercase; font-size: 85%; letter-spacing: 2px;" class="text-center text-white">
+      Professional Certificate in Machine Learning and Artificial Intelligence
+    </p>
 
 
   </div>
