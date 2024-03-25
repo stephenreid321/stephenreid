@@ -9,7 +9,7 @@ namespace :strategies do
   end
 
   task rebalance_without_update: :environment do
-    Strategy.rebalance(skip_update: true)
+    Strategy.rebalance(skip_update: true) if Time.now.wday == 0
   end
 
   task propose: :environment do
