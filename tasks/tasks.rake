@@ -5,7 +5,7 @@ namespace :strategies do
   end
 
   task rebalance: :environment do
-    Strategy.rebalance
+    Strategy.rebalance if Time.now.wday == 0
   end
 
   task rebalance_without_update: :environment do
