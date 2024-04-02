@@ -225,7 +225,8 @@ class Tweet
       'Crypto Twitter' => ['lists/1585548222935736321/tweets', nil],
       'Greenpill' => ['lists/1610587490670317573/tweets', 24.hours.ago],
       'Contemplatives' => ['lists/1610571716199055360/tweets', 24.hours.ago],
-      'algekalipso' => ['lists/1761357391386308871/tweets', 24.hours.ago]
+      'algekalipso' => ['lists/1761357391386308871/tweets', 24.hours.ago],
+      'burny_tech' => ['lists/1774072482816782826/tweets', 24.hours.ago]
     }
   end
 
