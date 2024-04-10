@@ -15,18 +15,17 @@
 ### Meditation
 
 *   Retreats with teachers qualified by [Rob Burbea](https://hermesamara.org/teachers):
-    *   Freedom in Everything, [Hermes Amara Foundation](https://hermesamara.org/) annual retreat with Juha Penttilä and Yahel Avigur (Dec 2023, 7 days)
-    *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur at Gaia House (Sep 2023, 8 days)
-    *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely, online (Jan – Mar 2023)
-    *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) with Kirsten Kratz and Yahel Avigur at Gaia House (Oct 2022, 7 days)
-
+  *   Freedom in Everything, [Hermes Amara Foundation](https://hermesamara.org/) annual retreat with Juha Penttilä and Yahel Avigur (Dec 2023, 7 days)
+  *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur at Gaia House (Sep 2023, 8 days)
+  *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely, online (Jan – Mar 2023)
+  *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) with Kirsten Kratz and Yahel Avigur at Gaia House (Oct 2022, 7 days)
 *   Also at [Gaia House](https://gaiahouse.co.uk/):
-    *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
-    *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
+  *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
+  *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
 *   Other retreats:
-    *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats) (Apr 2024, 7 days)
-    *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
-    *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
+  *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats) (Apr 2024, 7 days)
+  *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
+  *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
 
 
 ### Shipibo plant medicine
