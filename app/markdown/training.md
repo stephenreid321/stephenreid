@@ -14,15 +14,20 @@
 
 ### Meditation
 
-*   Freedom in Everything, [Hermes Amara Foundation](https://hermesamara.org/) retreat with Juha Penttilä and Yahel Avigur (Dec 2023, 7 days)
-*   Retreats at [Gaia House](https://gaiahouse.co.uk/):
-    *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur (Sep 2023, 8 days)
-    *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) with Kirsten Kratz and Yahel Avigur (Oct 2022, 7 days)
+*   Retreats with teachers qualified by [Rob Burbea](https://hermesamara.org/teachers):
+    *   Freedom in Everything, [Hermes Amara Foundation](https://hermesamara.org/) annual retreat with Juha Penttilä and Yahel Avigur (Dec 2023, 7 days)
+    *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://gaiahouse.co.uk/programme-2023/the-eye-of-the-heart/) with Catherine McGee and Yahel Avigur at Gaia House (Sep 2023, 8 days)
+    *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely, online (Jan – Mar 2023)
+    *   [Liberating Ways of Looking](https://gaiahouse.co.uk/programme-2022/liberating-ways-of-looking/) with Kirsten Kratz and Yahel Avigur at Gaia House (Oct 2022, 7 days)
+
+*   Also at [Gaia House](https://gaiahouse.co.uk/):
     *   [The Boundless Heart of Metta](https://gaiahouse.co.uk/programme-2022/the-boundless-heart/) with Zohar Lavie and Jake Dartington (Mar 2022, 4 days)
     *   [The Courageous Heart](https://gaiahouse.co.uk/programme-2021/the-courageous-heart/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
-*   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely (Jan – Mar 2023)
-*   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
-*   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
+*   Other retreats:
+    *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats) (Apr 2024, 7 days)
+    *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
+    *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
+
 
 ### Shipibo plant medicine
 
@@ -55,6 +60,7 @@
 
 ### Other
 
+*   [Feÿtopia](https://feytopia.com/) (Mar 2024)
 *   [PADI Open Water Scuba Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
 *   [Microsolidarity](https://www.microsolidarity.cc/) Gatherings (Jul 2023, Feb 2024)
 *   [Navigating the Mysteries](https://schoolofmyth.com/event/navigating-the-mysteries/) with [Dr. Martin Shaw](https://drmartinshaw.com/) (Mar 2023)
