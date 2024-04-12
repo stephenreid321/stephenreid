@@ -55,7 +55,7 @@
 *   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
-*   Deep Magic retreat with [Julian Vayne](https://theblogofbaphomet.com/) and [Nikki Wyrd](https://twitter.com/nikkiwyrd) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
+*   Deep Magic retreat with [Julian Vayne](https://julianvayne.com/) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://biologyofwonder.org/) (Mar 2018)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
