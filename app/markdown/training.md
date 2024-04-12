@@ -19,7 +19,7 @@
   *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://dharmaseed.org/retreats/5700/) with Catherine McGee and Yahel Avigur at Gaia House (Sep 2023, 8 days)
   *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely, online (Jan – Mar 2023)
   *   [Liberating Ways of Looking](https://dharmaseed.org/retreats/5347) with Kirsten Kratz and Yahel Avigur at Gaia House (Oct 2022, 7 days)
-  *   [The Courageous Heart](https://dharmaseed.org/retreats/5054/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
+  *   [The Courageous Heart](https://dharmaseed.org/retreats/5054/) with Kirsten Kratz and Laura Bridgman at Gaia House (Dec 2021, 3 days)
 *   Other retreats:
   *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats), online (Apr 2024, 7 days)
   *   [The Boundless Heart of Metta](https://dharmaseed.org/retreats/5099) with Zohar Lavie and Jake Dartington at Gaia House (Mar 2022, 4 days)
