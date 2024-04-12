@@ -21,7 +21,7 @@
   *   [Liberating Ways of Looking](https://dharmaseed.org/retreats/5347) with Kirsten Kratz and Yahel Avigur at Gaia House (Oct 2022, 7 days)
   *   [The Courageous Heart](https://dharmaseed.org/retreats/5054/) with Kirsten Kratz and Laura Bridgman (Dec 2021, 3 days)
 *   Other retreats:
-  *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats) (Apr 2024, 7 days)
+  *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats), online (Apr 2024, 7 days)
   *   [The Boundless Heart of Metta](https://dharmaseed.org/retreats/5099) with Zohar Lavie and Jake Dartington at Gaia House (Mar 2022, 4 days)
   *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
   *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
