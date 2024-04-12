@@ -44,13 +44,6 @@
 *   Ma Ananda Sarita's [Tantra Essence](https://www.tantra-garden.com/the-master-lover/) course (2020)
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 
-### Online
-
-*   [Capra Course](https://www.capracourse.net/) with [Fritjof Capra](https://www.fritjofcapra.net/) on the [The Systems View of Life](https://www.goodreads.com/en/book/show/18554985) (Fall 2022)
-*   [KERNEL](https://kernel.community/) KB7 (Sep – Nov 2022)
-*   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
-*   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
-
 ### Other
 
 *   [Feÿtopia](https://feytopia.com/) (Mar 2024)
@@ -67,6 +60,13 @@
 *   Short course in Erotic Ecology at [Schumacher College](https://schumachercollege.org.uk) with [Andreas Weber](https://biologyofwonder.org/) (Mar 2018)
 *   Mushroom cultivation at [Fungi Academy](http://fungiacademy.com/), Lake Atitlán, Guatemala (Jan 2018)
 *   Awakening of Love by [Path Retreats](http://pathretreats.com) (Mar 2017)
+
+### Online
+
+*   [Capra Course](https://www.capracourse.net/) with [Fritjof Capra](https://www.fritjofcapra.net/) on the [The Systems View of Life](https://www.goodreads.com/en/book/show/18554985) (Fall 2022)
+*   [KERNEL](https://kernel.community/) KB7 (Sep – Nov 2022)
+*   [Recapture the Rapture](https://www.flowgenomeproject.com/future-proof-your-life) with [Jamie Wheal](https://www.flowgenomeproject.com/our-story) (Aug 2021)
+*   [Platform Co-ops Now!](https://platform.coop/blog/platform-co-ops-now-2nd-edition/) by The New School & Mondragon University (Oct 2020)
 
 ### Burns
 
