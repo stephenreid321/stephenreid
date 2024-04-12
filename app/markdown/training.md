@@ -14,7 +14,7 @@
 
 ### Meditation
 
-*   Retreats and courses with teachers qualified by [Rob Burbea](https://hermesamara.org/teachers):
+*   Retreats and courses with teachers qualified by [Rob Burbea](https://hermesamara.org):
   *   [Freedom in Everything](https://hermesamara.org/), Hermes Amara Foundation annual retreat with Juha Penttilä and Yahel Avigur (Dec 2023, 7 days)
   *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://dharmaseed.org/retreats/5700/) with Catherine McGee and Yahel Avigur at Gaia House (Sep 2023, 8 days)
   *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely, online (Jan – Mar 2023)
