@@ -10,7 +10,7 @@
 ### Coaching & psychotherapy
 
 *   [Accredited Diploma in Transformative Coaching](https://www.animascoaching.com/coach-training-course/) (ICF Level 2), Animas Coaching (2022)
-*   [Foundation in Core Process Psychotherapy](https://www.karunadartmoor.co.uk/introduction-to-core-process-psychotherapy), Karuna Institute (Mar 2020)
+*   [Foundation in Core Process Psychotherapy](https://www.karunadartmoor.co.uk/), Karuna Institute (Mar 2020)
 
 ### Meditation
 
