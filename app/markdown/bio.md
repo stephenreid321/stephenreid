@@ -4,4 +4,4 @@ Previously, he founded [The Psychedelic Society](https://psychedelicsociety.org.
 
 Stephen has an MPhys in Physics from the University of Oxford, where he specialised in quantum field theory, an MRes in Complexity Science from the University of Bristol, and a Professional Certificate in Machine Learning and Artificial Intelligence from UC Berkeley.
 
-He lives in Stockholm with his partner Laura.
+He lives in Stockholm, Sweden with his partner Laura.
