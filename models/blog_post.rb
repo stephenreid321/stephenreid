@@ -74,7 +74,7 @@ class BlogPost
 
   def self.prompt
     [
-      %(Hi! I'm Stephen. I live between Totnes, Devon, UK, and Stockholm, Sweden.),
+      %(Hi! I'm Stephen Reid.),
       %(## Short bio in the third person),
       File.read("#{Padrino.root}/app/markdown/bio.md").force_encoding('utf-8'),
       %(## Training and teachers),
