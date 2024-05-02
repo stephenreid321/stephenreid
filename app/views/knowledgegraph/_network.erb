@@ -16,11 +16,11 @@
           container: $('#cy'),
                   elements: [
   <% terms.each { |term| %>
-                    { data: {id: '<%= term.id %>', name: '<%= term['Name'] %>', weight: <%= w = (term['Posts'].try(:length) || 0) %>, width: (node_min_width +<%= w %>), color: scale(node_min_color + (<%= w %> / node_color_scale)).hex()} },
+                    { data: {id: '<%= term.id %>', name: '<%= term['Name'] %>', weight: <%= w = term['Recent posts count'] %>, width: (node_min_width +<%= w %>), color: scale(node_min_color + (<%= w %> / node_color_scale)).hex()} },
   <% } %>
   <% term_links.each { |term_link| %>
                     {
-                    data: {id: '<%= term_link['Autonumber'] %>', source: '<%= term_link['Source'].first %>', target: '<%= term_link['Sink'].first %>', weight: <%= w = (term_link['Posts'].try(:length) || 0) %>, color: scale(edge_min_color + (<%= w %> / edge_color_scale)).hex(), opacity: (edge_min_opacity + (<%= w %> / edge_opacity_scale))}
+                    data: {id: '<%= term_link['Autonumber'] %>', source: '<%= term_link['Source'].first %>', target: '<%= term_link['Sink'].first %>', weight: <%= w = term_link['Recent posts count'] %>, color: scale(edge_min_color + (<%= w %> / edge_color_scale)).hex(), opacity: (edge_min_opacity + (<%= w %> / edge_opacity_scale))}
                     },
   <% } %>
                   ],

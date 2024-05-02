@@ -75,4 +75,15 @@ class Term < Airrecord::Table
       term_link.save
     end
   end
+
+  def get_posts(since: nil)
+    term = self
+    Term.get_posts(term['Name'], since: since)
+  end
+
+  def self.get_posts(name, since: nil)
+    filter = "FIND(', #{name},', {Terms joined}) > 0"
+    filter = "AND(#{filter}, {Created at} > '#{since.to_s(:db)}')" if since
+    Post.all(filter: filter)
+  end
 end

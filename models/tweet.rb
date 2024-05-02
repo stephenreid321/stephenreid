@@ -22,7 +22,7 @@ class Tweet
     }
   end
 
-  validates_uniqueness_of :tweet_id
+  validates_uniqueness_of :tweet_id, scope: :timeline
 
   dragonfly_accessor :image
   before_validation do
@@ -99,7 +99,14 @@ class Tweet
       t['quotes_per_follower_per_second'] = t['public_metrics']['quote_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
 
       oldest_tweet_in_cursor_created_at = Time.iso8601(t['created_at'])
-      Tweet.create(tweet_id: t['id'], data: t, timeline: timeline) if item.search('.retweet-header').empty?
+      puts oldest_tweet_in_cursor_created_at
+      next unless item.search('.retweet-header').empty?
+
+      t = Tweet.create(tweet_id: t['id'], data: t, timeline: timeline)
+      next unless t.errors.any?
+
+      puts t.errors.full_messages
+      puts t.data
     end
     return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 14.days.ago
 

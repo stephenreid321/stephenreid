@@ -20,10 +20,10 @@
   <div class="my-5">
     <%= cp(:'knowledgegraph/full_network') %>
   </div>
-<% elsif (terms = Term.find_many(@posts.first(100).map { |post| post['Terms']}.flatten.uniq)).length > 1 %>
+<% elsif (terms = Term.find_many(@posts.map { |post| post['Terms']}.flatten.uniq)).length > 1 %>
   <div class="my-5">
     <%= partial :'knowledgegraph/network', locals: {
-          term_links: TermLink.find_many(@posts.first(100).map { |post| post['Term Links'] }.flatten.uniq),
+          term_links: TermLink.find_many(@posts.map { |post| post['Term Links'] }.flatten.uniq),
           terms: terms
         }, edge_labels: true %>
   </div>
