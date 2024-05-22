@@ -85,10 +85,10 @@ module StephenReid
 
     {
       '/z' => 'https://zoom.us/j/9082171779',
-      '/calendly' => 'https://calendly.com/stephenreid321',
-      '/15' => 'https://calendly.com/stephenreid321/15-min-call',
-      '/30' => 'https://calendly.com/stephenreid321/30-min-call',
-      '/60' => 'https://calendly.com/stephenreid321/60-min-call',
+      '/cal' => 'https://cal.com/stephenreid',
+      '/15' => 'https://cal.com/stephenreid/15',
+      '/30' => 'https://cal.com/stephenreid/30',
+      '/60' => 'https://cal.com/stephenreid/60',
       '/about' => '/',
       '/link' => '/',
       '/training' => '/about',
