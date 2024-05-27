@@ -24,7 +24,7 @@
   *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats), online (Apr 2024, 7 days)
   *   [The Boundless Heart of Metta](https://dharmaseed.org/retreats/5099) with Zohar Lavie and Jake Dartington at Gaia House (Mar 2022, 4 days)
   *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
-  *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015)
+  *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015, 2 days)
 
 
 ### Shipibo plant medicine
