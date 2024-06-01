@@ -39,9 +39,15 @@ class Book < Airrecord::Table
 
   def summarise!
     book = self
-    prompt = book['Full text'] ? "Please summarise this book:\n\n#{book['Title']} by #{book['Author']}\n\n#{URI.open(book['Full text'][0]['url']).read}" : "Please provide a comprehensive summary of the book #{book['Title']} by #{book['Author']}"
+    if book['Full text']
+      prompt = "Please summarise this book:\n\n#{book['Title']} by #{book['Author']}\n\n#{URI.open(book['Full text'][0]['url']).read}"
+      gemini = GEMINI_FLASH
+    else
+      prompt = "Please provide a comprehensive summary of the book #{book['Title']} by #{book['Author']}"
+      gemini
+    end
 
-    response = GEMINI.generate_content(
+    response = gemini.generate_content(
       {
         contents: { role: 'user', parts: { text: prompt } },
         generationConfig: { maxOutputTokens: 8192 }
