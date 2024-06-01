@@ -27,3 +27,17 @@ module Airrecord
     end
   end
 end
+
+Anthropic.configure do |config|
+  config.access_token = ENV['ANTHROPIC_API_KEY']
+end
+
+if ENV['GEMINI_API_KEY']
+  GEMINI = Gemini.new(
+    credentials: {
+      service: 'generative-language-api',
+      api_key: ENV['GEMINI_API_KEY']
+    },
+    options: { model: 'gemini-1.5-pro', server_sent_events: true }
+  )
+end

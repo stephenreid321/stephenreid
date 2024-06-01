@@ -72,8 +72,8 @@ class BlogPost
     self.image_url = Faraday.get("https://source.unsplash.com/random/800x600?#{image_word}").headers[:location]
   end
 
-  def self.prompt
-    [
+  def self.prompt(book_summaries: false)
+    p = [
       %(Hi! I'm Stephen Reid.),
       %(## Short bio in the third person),
       File.read("#{Padrino.root}/app/markdown/bio.md").force_encoding('utf-8'),
@@ -87,15 +87,21 @@ class BlogPost
       File.read("#{Padrino.root}/app/markdown/facilitation.md").force_encoding('utf-8'),
       %(## Coaching),
       File.read("#{Padrino.root}/app/markdown/coaching.md").force_encoding('utf-8'),
-      %(## Books I've read),
-      Book.all(sort: { 'Number' => 'desc' }).first(50).map { |b| "[#{b['Title']}](https://www.goodreads.com/book/show/#{b['ID']}) by #{b['Author']}" }.join("\n\n"),
       %(## Content I've shared recently),
       Post.all(filter: "IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).map { |post| "[#{post['Title']}](#{post['Link']}), #{post['Created at']}\n#{post['Body']}" }.join("\n\n"),
       %(## Speaking engagements),
       SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")
     ]
+    if book_summaries
+      p << %(## Books I've read, with summaries)
+      p << Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| "### #{b['Title']} by #{b['Author']} (read #{b['Date Read']})\n\n#{b['Summary'] ? b['Summary'].split("\n\n")[1..-1].join("\n\n") : '(summary missing)'}" }.join("\n\n")
+    else
+      p << %(## Books I've read)
+      p << Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| "#{b['Title']} by #{b['Author']} (read #{b['Date Read']})\n" }.join("\n")
+    end
     # Event descriptions
     # Course notes
+    p
   end
 
   def prompt

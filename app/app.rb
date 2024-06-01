@@ -153,7 +153,7 @@ module StephenReid
     end
 
     get '/prompt', provides: :txt do
-      "#{BlogPost.prompt.join("\n\n")}\n\n#{substack_posts}"
+      "#{BlogPost.prompt(book_summaries: params[:book_summaries]).join("\n\n")}\n\n#{substack_posts}"
     end
 
     ##############################
