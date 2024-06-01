@@ -44,7 +44,7 @@ class Book < Airrecord::Table
       gemini = GEMINI_FLASH
     else
       prompt = "Please provide a comprehensive summary of the book #{book['Title']} by #{book['Author']}"
-      gemini
+      gemini = GEMINI_PRO
     end
 
     response = gemini.generate_content(
