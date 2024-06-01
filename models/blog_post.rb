@@ -94,7 +94,7 @@ class BlogPost
     ]
     if book_summaries
       p << %(## Books I've read, with summaries)
-      p << Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| "### #{b['Title']} by #{b['Author']} (read #{b['Date Read']})\n\n#{b['Summary'] ? b['Summary'].split("\n\n")[1..-1].join("\n\n") : '(summary missing)'}" }.join("\n\n")
+      p << Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| "### #{b['Title']} by #{b['Author']} (read #{b['Date Read']})\n\n#{b['Summary'].blank? ? '(summary missing)' : b['Summary'].split("\n\n")[1..-1].join("\n\n")}" }.join("\n\n")
     else
       p << %(## Books I've read)
       p << Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| "#{b['Title']} by #{b['Author']} (read #{b['Date Read']})\n" }.join("\n")
