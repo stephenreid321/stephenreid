@@ -1,6 +1,10 @@
+<p class="lead">
+  Books I've read,
+  last updated <%= time_ago_in_words Time.parse(Book.all(sort: { 'Created' => 'desc'}).first['Created']) %> ago
+</p>
 
 <div class="row">
-  <% Book.all(sort: { 'Original Publication Year or Year Published' => 'desc' }, filter: "{Date Read} != ''").each { |book| %>
+  <% Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} != ''").each { |book| %>
   <div class="col-6 col-lg-2 mb-3">
     <%= partial :book, locals: { book: book } %>
   </div>

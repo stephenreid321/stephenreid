@@ -1,3 +1,3 @@
 <a href="/books/<%= book['Slug'] %>">
-  <img class="w-100" src="<%= book['Cover image'][0]['url'] %>">
+  <img <% if Date.parse(book['Date Read']) > Date.parse('2020-01-01') %> data-toggle="tooltip" title="Read <%=Date.parse(book['Date Read']).strftime('%b %Y')%>" <% end %> class="w-100" src="<%= book['Cover image'][0]['url'] %>">
 </a>
