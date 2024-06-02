@@ -1,77 +1,12 @@
-<style type="text/css" media="screen">
-  .gr_grid_container {
-    /* customize grid container div here. eg: width: 500px; */
-  }
-  .gr_grid_book_container {
-    /* customize book cover container div here */
-    float: left;
-    width: 98px;
-    height: 160px;
-    padding: 0px 0px;
-    overflow: hidden;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-  .gr_grid_branding { display: none }
-</style>
-<script>
-  $(function() {
-    $('#toc').toc({
-      'container': '#books',
-      'selectors': 'h2'
-    });
-  })
-</script>
-<% opts = 'cover_size=medium&hide_link=&hide_title=true' %>
-
 
 <div class="row">
-  <div class="col-lg-2">
-    <div class="d-none d-lg-block" id="toc"></div>
+  <% Book.all(sort: { 'Original Publication Year or Year Published' => 'desc' }, filter: "{Date Read} != ''").each { |book| %>
+  <div class="col-6 col-lg-2 mb-3">
+    <%= partial :book, locals: { book: book } %>
   </div>
-  <div id="books" class="col-lg-8">
-
-    <h2 id="currently-reading">Currently reading</h2>
-    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=currently-reading&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
-
-    <h2 id="recently-read">Recently read</h2>
-    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=read&num_books=9&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
-
-    <h2 id="recently-published">Recently published</h2>
-    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=read&num_books=9&sort=date_pub_edition&order=d" type="text/javascript" charset="utf-8"></script>
-
-    <%
-%w(better-catastrophe
-philosophy
-buddhism
-complexity
-conscious-sexuality
-david-bohm
-fiction
-fritjof-capra
-indigenous-thinking
-Black-writers
-life
-magic
-metamodernism
-myth
-poetry
-psychedelics
-psychotherapy
-somatics
-).each { |shelf| %>
-
-    <h2 id="<%=shelf%>"><%=shelf%></h2>
-    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=<%=shelf.downcase%>&num_books=100&sort=avg_rating&order=d" type="text/javascript" charset="utf-8"></script>
-
-    <% } %>
-
-    <h2 id="reading-soon">Reading soon</h2>
-    <script src="https://www.goodreads.com/review/grid_widget/55629816?<%= opts %>&shelf=reading-soon&num_books=100&sort=date_read&order=d" type="text/javascript" charset="utf-8"></script>
-
-
-  </div>
+  <% } %>
 </div>
+
 
 <div class="row justify-content-center mt-5">
   <div class="col-auto">

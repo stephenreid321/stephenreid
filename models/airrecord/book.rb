@@ -2,6 +2,52 @@ class Book < Airrecord::Table
   self.base_key = ENV['AIRTABLE_BASE_KEY']
   self.table_name = 'Books'
 
+  def sync_with_goodreads
+    csv = CSV.parse(open("#{Padrino.root}/app/assets/goodreads_library_export.csv"), headers: true)
+
+    csv.each do |row|
+      puts row['Title']
+      book = Book.all(filter: "{Book Id} = #{row['Book Id']}").first
+      if book
+        book['Date Added'] = row['Date Added']
+        book['Date Read'] = row['Date Read']
+        book['My Rating'] = row['My Rating'].to_f
+        book['Average Rating'] = row['Average Rating'].to_f
+        book['Bookshelves'] = row['Bookshelves']
+        book['Bookshelves with positions'] = row['Bookshelves with positions']
+        book['Exclusive Shelf'] = row['Exclusive Shelf']
+        # book['ISBN'] = row['ISBN'].gsub('=', '').gsub('"', '')
+        # book['ISBN13'] = row['ISBN13'].gsub('=', '').gsub('"', '')
+        book.save
+      else
+        puts "creating #{row['Title']}"
+        data = row.to_h
+        data['ISBN'] = data['ISBN'].gsub('=', '').gsub('"', '')
+        data['ISBN13'] = data['ISBN13'].gsub('=', '').gsub('"', '')
+        data = data.map do |k, v|
+          if v.blank?
+            [k, nil]
+          elsif !k.in?(%w[ISBN ISBN13])
+            [k, v.match?(/^\d+(\.\d+)?$/) ? v.to_f : v]
+          else
+            [k, v]
+          end
+        end.to_h
+        puts data
+        book = Book.new(data)
+        book.save
+      end
+    end
+    #  end
+    csv_ids = csv.map { |row| row['Book Id'].to_i }
+    book_ids = Book.all.map { |book| book['Book Id'] }
+    (book_ids - csv_ids).each do |id|
+      book = Book.all(filter: "{Book Id} = #{id}").first
+      puts "#{book['Title']} (#{book['Book Id']}) no longer in CSV"
+      #  book.destroy
+    end
+  end
+
   # https://www.goodreads.com/review/import
   def self.summarise!
     books = Book.all(filter: "AND({Summary} = '', {Dandelion} != '')")
