@@ -44,6 +44,7 @@ StephenReid::App.controller do
   get '/k/:slug/terms/:term' do
     redirect "/k/#{params[:slug]}/terms/#{params[:term].singularize}" if params[:term] != params[:term].singularize && @network.vterms.find_by(term: params[:term].singularize)
     @vterm = @network.vterms.find_by(term: params[:term]) || not_found
+    @title = "#{@vterm.term} · #{@network.name}'s knowledgegraph"
     erb :'k/term'
   end
 
