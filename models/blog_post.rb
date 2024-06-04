@@ -28,7 +28,7 @@ class BlogPost
   end
 
   def self.version
-    'gpt-4'
+    'gpt-4o'
   end
 
   def previous
