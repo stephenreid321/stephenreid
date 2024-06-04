@@ -47,33 +47,31 @@ class Vterm
     set_definition! if definition.blank?
   end
   def set_definition!
-    n = 1
     context = prompt || network.prompt
-    openapi_response = OPENAI.post('completions') do |req|
-      req.body = { model: 'text-davinci-003', max_tokens: 1024, n: n, prompt:
-        "Provide a postgraduate-level definition of the term '#{term}', #{context}.
 
-        The definition should be 1 paragraph, maximum 150 words." }.to_json
+    openai_response = OPENAI.post('chat/completions') do |req|
+      req.body = { model: 'gpt-4o', messages: [{ role: 'user', content: "Provide a high-level definition of the term '#{term}', #{context}. The definition should be 1 paragraph, maximum 150 words." }] }.to_json
     end
-    self.definition = JSON.parse(openapi_response.body)['choices'].first['text']
+    content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
+    self.definition = content
     tidy_definition
     save
   end
   handle_asynchronously :set_definition!
 
   def set_see_also!
-    openapi_response = OPENAI.post('completions') do |req|
-      req.body = { model: 'text-davinci-003', max_tokens: 1024, prompt:
-        "Select the 5 terms from the list below that are most relevant to the term '#{term}'.
+    openai_response = OPENAI.post('chat/completions') do |req|
+      req.body = { model: 'gpt-4o', messages: [{ role: 'user', content: "Select the 5 terms from the list below that are most relevant to the term '#{term}'.
 
-        #{(network.interesting - [term]).join(', ')}.
+      #{(network.interesting - [term]).join(', ')}.
 
-        Return the result as a comma-separated list, e.g. 'term1, term2, term3, term4, term5'.
+      Return the result as a comma-separated list, e.g. 'term1, term2, term3, term4, term5'.
 
-        " }.to_json
+      " }] }.to_json
     end
+    content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
 
-    see_also = JSON.parse(openapi_response.body)['choices'].first['text'].strip
+    see_also = content
     see_also = see_also.split(', ').map(&:downcase).select { |term| network.interesting.include?(term) && term != self.term }.join(', ')
     self.see_also = see_also
     save
