@@ -87,6 +87,7 @@ module StephenReid
       '/z' => 'https://zoom.us/j/9082171779',
       '/cal' => 'https://cal.com/stephenreid',
       '/meet' => 'https://cal.com/stephenreid/meet',
+      '/ooo' => 'https://app.cal.com/settings/my-account/out-of-office',
       '/15' => 'https://cal.com/stephenreid/15',
       '/30' => 'https://cal.com/stephenreid/30',
       '/60' => 'https://cal.com/stephenreid/60',
