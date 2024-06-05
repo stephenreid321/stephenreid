@@ -50,7 +50,7 @@ class Vterm
     context = prompt || network.prompt
 
     openai_response = OPENAI.post('chat/completions') do |req|
-      req.body = { model: 'gpt-4o', messages: [{ role: 'user', content: "Provide a definition of the term '#{term}', #{context}. The definition should be 1 paragraph, maximum 150 words." }] }.to_json
+      req.body = { model: 'gpt-4o', messages: [{ role: 'user', content: "Provide a definition of the term '#{term}', #{context}, in the third person. The definition should be 1 paragraph, maximum 150 words." }] }.to_json
     end
     content = JSON.parse(openai_response.body)['choices'][0]['message']['content']
     self.definition = content
