@@ -75,6 +75,7 @@
 
 ### Triathlons
 
+* ÖTILLÖ Sprint Utö Swimrun 2024 (2h56m)
 * Weymouth Classic Triathlon 2023 (3h26m)
 * Weymouth Sprint Triathlon 2022 (1h38m)
 
