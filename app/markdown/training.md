@@ -69,7 +69,7 @@
 
 ### Burns
 
-*   [The Borderland](http://theborderland.se) (2016, 2017, 2019, 2022)
+*   [The Borderland](http://theborderland.se) (2016, 2017, 2019, 2022, *2024*)
 *   [Kiez Burn](https://kiezburn.org/) (2019)
 *   [Nowhere](http://goingnowhere.org) (2014, 2015, 2016)
 

@@ -50,8 +50,10 @@ class Video
   end
 
   def set_transcript
-    r = Faraday.get("https://youtubetranscript.com/?server_vid=#{youtube_id}")
-    self.transcript = r.body.force_encoding('UTF-8')
+    xml = `python tasks/youtube_transcript.py #{youtube_id}`
+    xml = xml.strip.downcase.gsub('[', '').gsub(']', '')
+    body = Nokogiri::XML(xml.gsub('</text><text', '</text> <text')).text
+    self.transcript = body.force_encoding('UTF-8')
   end
 
   def set_text
