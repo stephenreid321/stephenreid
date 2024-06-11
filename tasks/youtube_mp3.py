@@ -1,3 +1,4 @@
+# requires ffmpeg
 import sys
 from pytube import YouTube
 from pydub import AudioSegment
