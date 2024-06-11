@@ -147,6 +147,16 @@ class Post < Airrecord::Table
     end
   end
 
+  def wizper!
+    post = self
+    mp3_path = `python tasks/youtube_mp3.py "#{post['Link']}"`.strip
+    upload = Upload.create(file: File.open(mp3_path))
+    r = `python tasks/wizper.py "#{upload.file.url}"`
+    post['Wizper transcript'] = JSON.parse(r)['text']
+    upload.destroy
+    post.save
+  end
+
   def note
     post = self
     browser = Ferrum::Browser.new
