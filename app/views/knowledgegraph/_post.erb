@@ -1,16 +1,18 @@
+<% link = post['Essay'] ? "/posts/#{post.id}" : post['Link'] %>
+
 <div class="card shadow-sm post">
-  <a href="<%= post['Link'] %>" target="_blank">
+  <a href="<%= link %>" target="_blank">
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] if json['links']['thumbnail'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
-      <a href="<%= post['Link'] %>" target="_blank" class="text-contrast">
+      <a href="<%= link %>" target="_blank" class="text-contrast">
         <%=h post['Title'] %>
       </a>
     </h5>
     <% if json['meta']['description'] %>
       <p class="mb-1 card-text">
-        <a href="<%= post['Link'] %>" target="_blank" class="text-contrast" style="text-decoration: none">
+        <a href="<%= link %>" target="_blank" class="text-contrast" style="text-decoration: none">
           <small class="text-muted">
             <%= json['meta']['description'].truncate(150) %>
           </small>
@@ -35,30 +37,30 @@
               <% end %>
               <% if json['meta']['site'] %>
                 <% case json['meta']['site']; when 'the Guardian'; %>
-                The Guardian
+                  The Guardian
                 <% when 'BBC_Future' %>
-                BBC Future
+                  BBC Future
                 <% when 'whatisemerging' %>
-                Emerge
+                  Emerge
+                <% else %>
+                  <%= json['meta']['site'] %>
+                <% end %>
               <% else %>
-                <%= json['meta']['site'] %>
+                <%= URI(post['Link']).host.gsub('www.', '') %>
               <% end %>
-            <% else %>
-              <%= URI(post['Link']).host.gsub('www.', '') %>
+            </a>
+            <% if post['Created at'] %>
+              &middot;
+              <%= Time.zone.parse(post['Created at']).to_date.to_s(:post) %>
             <% end %>
-          </a>
-          <% if post['Created at'] %>
-            &middot;
-            <%= Time.zone.parse(post['Created at']).to_date.to_s(:post) %>
-          <% end %>
-        </small>
-      </p>
-    </div>
-    <div class="col-auto showOnHover d-none">
-      <a class="text-contrast" style="text-decoration: none" href="/posts/<%= post.id %>">
-        <i class="fas fa-link"></i>
-      </a>
+          </small>
+        </p>
+      </div>
+      <div class="col-auto showOnHover d-none">
+        <a class="text-contrast" style="text-decoration: none" href="/posts/<%= post.id %>">
+          <i class="fas fa-link"></i>
+        </a>
+      </div>
     </div>
   </div>
-</div>
 </div>
