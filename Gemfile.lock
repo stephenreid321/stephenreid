@@ -392,6 +392,7 @@ DEPENDENCIES
   reverse_markdown
   rss
   rubocop
+  ruby-progressbar
   sass
   sinatra
   stripe

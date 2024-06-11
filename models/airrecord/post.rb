@@ -150,7 +150,25 @@ class Post < Airrecord::Table
   def wizper!
     post = self
     stream_url = `python tasks/youtube_audio.py "#{post['Link']}"`.strip
-    upload = Upload.create(file_url: stream_url)
+
+    uri = URI.parse(stream_url)
+    Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+      request = Net::HTTP::Get.new uri
+
+      http.request request do |response|
+        total = response.content_length
+        progressbar = ProgressBar.create(title: 'Downloading', total: total, format: '%a %bᗧ%i %p%% %t')
+
+        File.open('downloaded_file.mp3', 'wb') do |io|
+          response.read_body do |chunk|
+            io.write chunk
+            progressbar.progress += chunk.size
+          end
+        end
+      end
+    end
+
+    upload = Upload.create(file: File.open('downloaded_file.mp3'))
     r = `python tasks/wizper.py "#{upload.file.url}"`
     post['Wizper transcript'] = JSON.parse(r)['text']
     upload.destroy
