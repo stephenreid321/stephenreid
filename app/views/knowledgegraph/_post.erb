@@ -1,18 +1,18 @@
-<% link = post['Essay'] ? "/posts/#{post.id}" : post['Link'] %>
+<% link = !post['Essay'].blank? ? (essay = true; "/posts/#{post.id}") : (essay = false; post['Link']) %>
 
 <div class="card shadow-sm post">
-  <a href="<%= link %>" target="_blank">
+  <a href="<%= link %>" <% if essay %> target="_blank" <% end %>>
     <img onerror="this.style.display='none'" class="card-img-top" src="<%= json['links']['thumbnail'].first['href'] if json['links']['thumbnail'] %>">
   </a>
   <div class="card-body">
     <h5 class="card-title">
-      <a href="<%= link %>" target="_blank" class="text-contrast">
+      <a href="<%= link %>" <% if essay %> target="_blank" <% end %> class="text-contrast">
         <%=h post['Title'] %>
       </a>
     </h5>
     <% if json['meta']['description'] %>
       <p class="mb-1 card-text">
-        <a href="<%= link %>" target="_blank" class="text-contrast" style="text-decoration: none">
+        <a href="<%= link %>" <% if essay %> target="_blank" <% end %> class="text-contrast" style="text-decoration: none">
           <small class="text-muted">
             <%= json['meta']['description'].truncate(150) %>
           </small>
