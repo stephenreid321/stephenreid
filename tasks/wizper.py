@@ -1,9 +1,9 @@
 import fal_client
-import dotenv
 import sys
 import json
+from dotenv import load_dotenv
 
-dotenv.load_dotenv()
+load_dotenv()
 
 url = sys.argv[1].replace(" ", "%20")
 

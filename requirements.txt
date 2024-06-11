@@ -4,4 +4,3 @@ youtube_transcript_api
 pytube
 pydub
 fal_client
-dotenv
