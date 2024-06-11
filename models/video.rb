@@ -52,8 +52,7 @@ class Video
   def set_transcript
     xml = `python tasks/youtube_transcript.py #{youtube_id}`
     xml = xml.strip.downcase.gsub('[', '').gsub(']', '')
-    body = Nokogiri::XML(xml.gsub('</text><text', '</text> <text')).text
-    self.transcript = body.force_encoding('UTF-8')
+    self.transcript = xml
   end
 
   def set_text
