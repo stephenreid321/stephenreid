@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url = sys.argv[1].replace(" ", "%20")
+url = sys.argv[1]
 
 handler = fal_client.submit(
     "fal-ai/wizper",
