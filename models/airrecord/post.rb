@@ -149,8 +149,11 @@ class Post < Airrecord::Table
 
   def wizper!
     post = self
+    puts 'downloading'
     path = `python tasks/youtube_audio.py "#{post['Link']}"`.strip
+    puts 'uploading'
     upload = Upload.create(file: File.open(path))
+    puts 'getting transcript'
     r = `python tasks/wizper.py "#{upload.file.url}"`
     post['Wizper transcript'] = JSON.parse(r)['text']
     upload.destroy
