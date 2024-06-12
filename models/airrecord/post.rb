@@ -163,13 +163,15 @@ class Post < Airrecord::Table
     audio_upload.destroy
 
     puts 'saving txt'
+    txt = JSON.parse(r)['text']
     txt_path = "#{post['Title'].parameterize}.txt"
-    File.write(txt_path, JSON.parse(r)['text'])
+    File.write(txt_path, txt)
     txt_upload = Upload.create(file: File.open(txt_path))
     post['Wizper txt'] = [{ url: txt_upload.file.url }]
 
     post.save
     txt_upload.destroy
+    txt
   end
 
   def essay!
