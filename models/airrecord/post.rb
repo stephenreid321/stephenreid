@@ -167,9 +167,9 @@ class Post < Airrecord::Table
     File.write(txt_path, JSON.parse(r)['text'])
     txt_upload = Upload.create(file: File.open(txt_path))
     post['Wizper txt'] = [{ url: txt_upload.file.url }]
-    txt_upload.destroy
 
     post.save
+    txt_upload.destroy
   end
 
   def essay!
