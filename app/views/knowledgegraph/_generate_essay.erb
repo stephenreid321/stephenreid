@@ -1,0 +1,12 @@
+    <% if current_account && URI(post['Link']).host.include?('youtube.com') %>
+  <div class="mt-3">
+    <% if post['Generating essay'] %>
+      <p>Generating essay...</p>
+    <% else %>
+      <% form_tag "/posts/#{post.id}/essay" do %>
+        <%= text_area_tag :prompt, value: post['Prompt'], class: 'form-control', style: 'height: 10em' %>
+        <%= submit_tag 'Generate', class: 'btn btn-primary mt-1' %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

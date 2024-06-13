@@ -36,6 +36,7 @@
     <% if @json['links']['player'] %>
       <div class="col-lg-9">
         <%= @json['html'] %>
+        <%= partial :'knowledgegraph/generate_essay', locals: {post: @post} %>
       </div>
     <% else %>
       <div class="col-lg-4">
