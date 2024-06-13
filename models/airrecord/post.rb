@@ -176,7 +176,7 @@ class Post < Airrecord::Table
 
   def generate_essay
     post = self
-    wizper if post['Wizper txt'].empty?
+    wizper unless post['Wizper txt']
 
     prompt = "#{post['Prompt']}\n\n#{URI.open(post['Wizper txt'][0]['url']).read}"
 
