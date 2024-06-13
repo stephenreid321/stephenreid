@@ -9,10 +9,17 @@ StephenReid::App.controller do
     @title = 'Knowledgegraph'
     @og_desc = "Network view of posts I've shared"
     @full_network = true
-    @posts = Post.all(filter: "AND(
+    @posts = if params[:essays]
+               Post.all(filter: "AND(
+        {Essay} != '',
+        FIND('\"url\": ', {Iframely}) > 0
+      )", sort: { 'Created at' => 'desc' }, paginate: false)
+             else
+               Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
+             end
     erb :'knowledgegraph/knowledgegraph'
   end
 
