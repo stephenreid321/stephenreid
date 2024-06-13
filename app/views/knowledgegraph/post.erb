@@ -24,8 +24,7 @@
         </div>
 
         <div>
-          <% first_line = @post['Essay'].split("\n").first %>
-          <%= md first_line.starts_with?('#') ? @post['Essay'].split("\n")[1..-1].join("\n") : @post['Essay'] %>
+          <%= md '## ' +@post['Essay'].split("## ")[1..-1].join("## ") %>
         </div>
 
       </div>

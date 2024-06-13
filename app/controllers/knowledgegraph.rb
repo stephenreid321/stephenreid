@@ -64,7 +64,7 @@ StephenReid::App.controller do
   end
 
   get '/posts/:id' do
-    #  expires 1.hour.to_i
+    # expires 1.hour.to_i
     @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
     @json = JSON.parse(@post['Iframely'])
     @full_title = @post['Title']
