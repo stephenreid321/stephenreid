@@ -36,7 +36,7 @@ StephenReid::App.controller do
     @post['Prompt'] = params[:prompt]
     @post['Generating essay'] = true
     @post.save
-    @post.generate_essay
+    Padrino.env == :development ? @post.generate_essay_without_delay : @post.generate_essay
     redirect "/posts/#{@post.id}"
   end
 

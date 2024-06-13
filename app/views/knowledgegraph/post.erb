@@ -10,7 +10,7 @@
       <div class="blog_post">
         <h1 class="post-title">
           <a class="text-contrast" href="/posts/<%=@post.id%>">
-            <%= first_line = @post['Essay'].split("\n").first; first_line.starts_with?('#') ? first_line.gsub(/#+/, '') : @post['Title'] %>
+            <%= @post['Title'] %>
           </a>
         </h1>
 
@@ -24,6 +24,7 @@
         </div>
 
         <div>
+          <% first_line = @post['Essay'].split("\n").first %>
           <%= md first_line.starts_with?('#') ? @post['Essay'].split("\n")[1..-1].join("\n") : @post['Essay'] %>
         </div>
 

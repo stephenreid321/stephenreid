@@ -147,11 +147,29 @@ class Post < Airrecord::Table
     end
   end
 
+  def essayable?
+    post = self
+    post['Link'] && (URI(post['Link']).host.include?('youtube.com') || URI(post['Link']).host.include?('substack.com'))
+  end
+
   def wizper
     post = self
 
     puts 'downloading'
-    audio_path = `python tasks/youtube_audio.py "#{post['Link']}"`.strip
+    if URI(post['Link']).host.include?('youtube.com')
+      audio_path = `python tasks/youtube_audio.py "#{post['Link']}"`.strip
+    elsif URI(post['Link']).host.include?('substack.com')
+      agent = Mechanize.new
+      r = agent.get(post['Link'])
+      feed_id = r.body.match(/"pub:(\d+)"/)[1]
+      r = agent.get("https://api.substack.com/feed/podcast/#{feed_id}.rss")
+      xml = Nokogiri::XML(r.body)
+      title_node = xml.xpath("//title[contains(text(), '#{post['Title']}')]")[0]
+      remote_path = title_node.parent.search('enclosure')[0]['url']
+      audio = URI.open(remote_path).read
+      audio_path = "#{post['Title'].parameterize}.mp4"
+      File.write(audio_path, audio)
+    end
 
     puts 'uploading'
     new_audio_path = "#{post['Title'].parameterize}.mp4"
