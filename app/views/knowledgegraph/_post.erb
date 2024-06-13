@@ -63,7 +63,9 @@
       </div>
     </div>
 
-    <%= partial :'knowledgegraph/generate_essay', locals: {post: post} %>
+    <% unless post['Essay'] %>
+      <%= partial :'knowledgegraph/generate_essay', locals: {post: post} %>
+    <% end %>
 
   </div>
 </div>
