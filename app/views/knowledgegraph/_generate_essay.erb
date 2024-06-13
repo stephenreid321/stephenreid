@@ -1,10 +1,12 @@
+<% prompt = "Write a comprehensive markdown-formatted summary of this podcast transcript. Start with a # first level header, and then use ## second level headers for each topic covered. Divide the summary into at least 5 topics, and write at least 2 paragraphs for each topic, explaining the speaker's views in detail." %>
+
 <% if current_account && post.essayable? %>
   <div class="mt-3">
     <% if post['Generating essay'] %>
       <p>Generating essay...</p>
     <% else %>
       <% form_tag "/posts/#{post.id}/essay" do %>
-        <%= text_area_tag :prompt, value: post['Prompt'], class: 'form-control', style: 'height: 10em' %>
+        <%= text_area_tag :prompt, value: (post['Prompt'] || prompt), class: 'form-control', style: 'height: 10em' %>
         <%= submit_tag 'Generate', class: 'btn btn-primary mt-1' %>
       <% end %>
     <% end %>
