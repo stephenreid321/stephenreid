@@ -1,5 +1,32 @@
 <% if !@post['Essay'].blank? %>
 
+  <style>
+    mark { color: white }
+  </style>
+  <script>
+    $(function() {
+      $('.blog_content p').each(function() {
+        // replace “ and ” with "
+        $(this).html($(this).html().replace(/“/g, '"').replace(/”/g, '"'));
+        // if the whole paragraph is a quote, convert it into a blockquote
+        if (!$(this).parent().is('blockquote')) {
+          if ($(this).text().trim().match(/^".*"$/)) {
+            $(this).replaceWith('<blockquote><p>' + $(this).html() + '</p></blockquote>')
+          } else {
+            $(this).html($(this).html().replace(/"([^"]*)"/g, function(match, group) {
+              // Check if the quote contains at least 5 words
+              if (group.split(' ').length >= 2) {
+                return '<mark>"' + group + '"</mark>';
+              } else {
+                return match;
+              }
+            }));
+          }
+        }
+      })
+    })
+  </script>
+
   <div class="row">
     <div class="col-lg-2">
       <div class="d-none d-lg-block" id="toc">
@@ -23,8 +50,8 @@
           <%= @json['html'] %>
         </div>
 
-        <div>
-          <%= md '## ' +@post['Essay'].split("## ")[1..-1].join("## ") %>
+        <div class="blog_content">
+          <%= md @post['Essay'].split("\n")[1..-1].join("\n") %>
         </div>
 
       </div>

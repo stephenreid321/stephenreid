@@ -141,7 +141,8 @@ mark,
 }
 
 blockquote {
-  border-left: 0.3em solid white;
+  color: white;
+  border-left: 0.3em solid $highlight-color;
 }
 
 .fira {
