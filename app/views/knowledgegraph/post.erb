@@ -9,7 +9,11 @@
         // replace “ and ” with "
         $(this).html($(this).html().replace(/“/g, '"').replace(/”/g, '"'));
         // if the whole paragraph is a quote, convert it into a blockquote
-        if (!$(this).parent().is('blockquote')) {
+        if ($(this).parent().is('blockquote')) {
+          if (!$(this).text().trim().match(/^".*"$/)) {
+            $(this).html('"' + $(this).html() + '"');
+          }
+        } else {
           if ($(this).text().trim().match(/^".*"$/)) {
             $(this).replaceWith('<blockquote><p>' + $(this).html() + '</p></blockquote>')
           } else {

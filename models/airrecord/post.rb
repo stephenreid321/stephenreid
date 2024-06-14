@@ -195,17 +195,17 @@ class Post < Airrecord::Table
   def self.prompt
     %(Write a comprehensive, markdown-formatted summary of this podcast for a well-educated audience.
 
-    * Don't simply mention the topics discussed; explain the speaker's views and opinions in detail.
-    * Start with a # first level header, and then use ## second level headers for each topic covered.
-    * Divide the summary into at least 5 topics.
-    * Write at least 2 paragraphs for each topic.
-    * Write at least 70 words per paragraph.
-    * Include quotes of things the speaker actually said, including a key pull-out quote for each topic that perfectly fits the topic.
-    * Put pull-out quotes midway through topic sections, not at the beginning or end of sections.
-    * Pull-out quotes should be at least 2 sentences long.
-    * Don't repeat a quote as a pull-out if it's already featured in the summary.
-    * Don't start a pull-out quote with 'And', 'But', or 'It's like'.
-    * Don't attribute pull-out quotes.)
+* Don't simply mention the topics discussed; explain the speaker's views and opinions in detail.
+* Start with a # first level header, and then use ## second level headers for each topic covered.
+* Divide the summary into at least 5 topics.
+* Write at least 2 paragraphs for each topic.
+* Write at least 70 words per paragraph.
+* Include quotes of things the speaker actually said, including a key pull-out quote for each topic that perfectly fits the topic.
+* Put pull-out quotes midway through topic sections, not at the beginning or end of sections.
+* Pull-out quotes should be at least 2 sentences long.
+* Don't repeat a quote as a pull-out if it's already featured in the summary.
+* Don't start a pull-out quote with 'And', 'But', or 'It's like'.
+* Don't attribute pull-out quotes.)
   end
 
   def generate_essay
