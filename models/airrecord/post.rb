@@ -192,6 +192,12 @@ class Post < Airrecord::Table
     txt
   end
 
+  def correct(a, b)
+    post = self
+    post['Essay'] = post['Essay'].gsub(a, b)
+    post.save
+  end
+
   def self.prompt
     %(Write a comprehensive, markdown-formatted summary of this podcast for a well-educated audience.
 
