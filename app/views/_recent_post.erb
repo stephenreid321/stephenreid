@@ -26,7 +26,7 @@
 
       <p class="mb-0" style="font-size: 90%;">
         <small class="text-muted">
-          <a class="text-muted" style="text-decoration: none" href="<%= link %>" target="_blank">
+          <a class="text-muted" style="text-decoration: none" href="<%= post['Link'] %>" target="_blank">
             <% if json['links']['icon'] %>
               <img onerror="this.style.display='none'" style="max-height: 20px" src="<%= json['links']['icon'].first['href'] %>">
             <% end %>
