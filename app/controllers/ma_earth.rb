@@ -1,6 +1,7 @@
 StephenReid::App.controller do
   get '/ma-earth' do
     @title = 'Ma Earth'
+    @container_class = 'container-fluid'
     erb :ma_earth
   end
 
