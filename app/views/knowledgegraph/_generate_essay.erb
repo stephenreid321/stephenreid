@@ -4,7 +4,7 @@
       <p>Generating essay...</p>
     <% else %>
       <% form_tag "/posts/#{post.id}/essay" do %>
-        <%= text_area_tag :prompt, value: (post['Prompt'] || Post.prompt), class: 'form-control', style: 'height: 10em' %>
+        <%= text_area_tag :prompt, value: (post['Prompt'] || post.prompt), class: 'form-control', style: 'height: 10em' %>
         <%= submit_tag 'Generate', class: 'btn btn-primary mt-1' %>
       <% end %>
     <% end %>

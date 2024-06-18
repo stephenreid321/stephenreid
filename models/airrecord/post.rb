@@ -198,8 +198,10 @@ class Post < Airrecord::Table
     post.save
   end
 
-  def self.prompt
-    %(Write a comprehensive, markdown-formatted summary of this podcast for a well-educated audience.
+  def prompt
+    post = self
+
+    %(Write a comprehensive, markdown-formatted summary of this podcast episode for a well-educated audience.
 
 * Don't simply mention the topics discussed; explain the speaker's views and opinions in detail.
 * Start with a # first level header, and then use ## second level headers for each topic covered.
