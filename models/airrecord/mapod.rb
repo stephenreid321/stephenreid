@@ -49,6 +49,9 @@ class Mapod < Airrecord::Table
     post = self
     wizper unless post['Wizper txt']
 
+    post['Generating essay'] = true
+    post.save
+
     prompt = "#{post['Prompt'] || Mapod.prompt}\n\n#{URI.open(post['Wizper txt'][0]['url']).read}"
 
     begin
@@ -66,6 +69,7 @@ class Mapod < Airrecord::Table
 
     puts "#{content}\n\n"
     post['Essay'] = content
+    post['Generating essay'] = false
     post.save
   end
 

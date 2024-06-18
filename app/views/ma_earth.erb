@@ -1,0 +1,29 @@
+<style>
+  .image-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* for an aspect ratio of 4:3 - adjust as needed */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .crop-image {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<div class="row">
+  <% Mapod.all(filter: "{Essay} != ''", sort: {'Order' => 'desc'}).each { |mapod| %>
+  <div class="col-6 col-lg-3">
+    <a href="/ma-earth/<%=mapod['Slug']%>" class="d-block mb-3">
+      <div class="image-container">
+        <img class="crop-image" src="https://img.youtube.com/vi/<%=mapod['Link'].split('=').last%>/hqdefault.jpg" />
+        <span style="font-size: 0"><%= mapod['Title'] %></span>
+      </div>
+    </a>
+  </div>
+  <% } %>
+</div>
