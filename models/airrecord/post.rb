@@ -199,8 +199,6 @@ class Post < Airrecord::Table
   end
 
   def prompt
-    post = self
-
     %(Write a comprehensive, markdown-formatted summary of this podcast episode for a well-educated audience.
 
 * Don't simply mention the topics discussed; explain the speaker's views and opinions in detail.
