@@ -68,6 +68,7 @@ class Tweet
 
   def self.nitter_user(username, timeline, cursor: nil)
     a = Mechanize.new
+    a.add_auth(ENV['NITTER_BASE_URI'], 'nitter', 'nitter')
     a.set_proxy(ENV['PROXY'].split(':')[0], ENV['PROXY'].split(':')[1], ENV['PROXY_USERNAME'], ENV['PROXY_PASSWORD']) if ENV['PROXY_ACTIVATED']
     oldest_tweet_in_cursor_created_at = nil
     url = "#{ENV['NITTER_BASE_URI']}/#{username}?cursor=#{cursor}"
@@ -82,9 +83,9 @@ class Tweet
       t['age'] = Time.now - Time.iso8601(t['created_at'])
 
       t['public_metrics'] = {}
-      t['public_metrics']['like_count'] = item.search('.icon-heart')[0].parent.text
-      t['public_metrics']['retweet_count'] = item.search('.icon-retweet')[0].parent.text
-      t['public_metrics']['quote_count'] = item.search('.icon-quote')[0].parent.text
+      t['public_metrics']['like_count'] = item.search('.tweet-stats .icon-heart')[0].parent.text
+      t['public_metrics']['retweet_count'] = item.search('.tweet-stats .icon-retweet')[0].parent.text
+      t['public_metrics']['quote_count'] = item.search('.tweet-stats .icon-quote')[0].parent.text
       t['user']['public_metrics'] = {}
       t['user']['public_metrics']['followers_count'] = page.search('.followers .profile-stat-num').text.gsub(',', '').to_i
 
