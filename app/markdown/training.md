@@ -69,9 +69,19 @@
 
 ### Burns
 
-*   [The Borderland](http://theborderland.se) (2016, 2017, 2019, 2022, *2024*)
-*   [Kiez Burn](https://kiezburn.org/) (2019)
-*   [Nowhere](http://goingnowhere.org) (2014, 2015, 2016)
+*   [The Borderland](http://theborderland.se)
+    *   Hyperstition (2024)
+    *   The Inner Cartographers' Club (2022)
+    *   Camp Croquis (2019)
+    *   La Botica Exótica (2017)
+    *   Hampus Campus (2016)
+*   [Kiez Burn](https://kiezburn.org/)
+    *   The Beehive (2019)
+
+*   [Nowhere](http://goingnowhere.org)
+    *   La Botica Exótica (2016)
+    *   Sentimos (2015)
+    *   Übertown (2014)
 
 ### Triathlons
 
