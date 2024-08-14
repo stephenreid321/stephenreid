@@ -13,6 +13,7 @@ StephenReid::App.controller do
     @title = "Verse #{params[:i]} · Tao Te Ching"
     @favicon = 'tao-sq.png'
     verse = Verse.all(filter: "{Verse} = #{params[:i]}").first
+    not_found if verse.nil?
     @og_image = verse['Images'].first['thumbnails']['full']['url']
     @og_desc = verse['Text'].split("\n\n").first
     erb :tao
