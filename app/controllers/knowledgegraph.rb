@@ -75,6 +75,7 @@ StephenReid::App.controller do
   get '/posts/:id' do
     # expires 1.hour.to_i
     @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
+    not_found if @post['Iframely'].nil?
     @json = JSON.parse(@post['Iframely'])
     @full_title = @post['Title']
     @og_desc = @json['meta']['description']
