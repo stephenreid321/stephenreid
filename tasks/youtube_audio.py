@@ -1,5 +1,5 @@
 import sys
-from pytube import YouTube
+from pytubefix import YouTube
 
 url = sys.argv[1]
 path = (
