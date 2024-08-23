@@ -57,7 +57,7 @@ module StephenReid
 
     get '/', cache: true do
       expires 1.hour.to_i
-      @og_image = "#{ENV['BASE_URI']}/images/og-image.jpg"
+      @og_image = "#{ENV['BASE_URI']}/images/link.jpg"
       @og_desc = 'Technologist, facilitator and coach'
       @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
