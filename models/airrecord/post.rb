@@ -158,6 +158,8 @@ class Post < Airrecord::Table
     puts 'downloading'
     if URI(post['Link']).host.include?('youtube.com')
       audio_path = `python tasks/youtube_audio.py "#{post['Link']}"`.strip
+    elsif URI(post['Link']).host.include?('spotify.com')
+      audio_path = `python tasks/youtube_audio.py "#{post['Link']}"`.strip
     elsif URI(post['Link']).host.include?('substack.com')
       agent = Mechanize.new
       r = agent.get(post['Link'])

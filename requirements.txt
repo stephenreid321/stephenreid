@@ -1,6 +1,6 @@
 python-telegram-bot
 farcaster
 youtube_transcript_api
-pytube
+pytube==15.0.0
 pydub
 fal_client
