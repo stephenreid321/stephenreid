@@ -46,6 +46,7 @@ class Post < Airrecord::Table
       end
       post.tagify
       post.cast
+      post.bluesky
     end
   end
 
@@ -138,6 +139,12 @@ class Post < Airrecord::Table
   def cast
     post = self
     `python #{Padrino.root}/tasks/cast.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}"`
+  end
+
+  def bluesky
+    post = self
+    json = JSON.parse(post['Iframely'])
+    `python #{Padrino.root}/tasks/bluesky.py "#{post['Title'].gsub('"', '\"')}" "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}" "#{json['meta']['description'].truncate(150).gsub('"', '\"')}" "#{json['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
   end
 
   def countdown(n)

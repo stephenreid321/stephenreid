@@ -1,9 +1,9 @@
 import sys
 import os
-from farcaster import Warpcast
 from dotenv import load_dotenv
-
 load_dotenv()
+
+from farcaster import Warpcast
 
 text = sys.argv[1]
 url = sys.argv[2]
