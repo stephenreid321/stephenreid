@@ -4,4 +4,4 @@ youtube_transcript_api
 pytubefix
 pydub
 fal_client
-atproto
+atproto>=0.0.52
