@@ -19,14 +19,19 @@ client.login(os.environ.get("BLUESKY_EMAIL"), os.environ.get("BLUESKY_PASSWORD")
 response = requests.get(image_url)
 img_data = response.content
 
-thumb = client.upload_blob(img_data)
+# Check if the image is under 1 MB
+if len(img_data) < 1_000_000:
+    thumb = client.upload_blob(img_data)
+    thumb_blob = thumb.blob
+else:
+    thumb_blob = None
 
 embed = models.AppBskyEmbedExternal.Main(
     external=models.AppBskyEmbedExternal.External(
         title=title,
         description=description,
         uri=url,
-        thumb=thumb.blob,
+        thumb=thumb_blob
     )
 )
 post = client.send_post(text, embed=embed)
