@@ -4,3 +4,4 @@ youtube_transcript_api
 pytubefix
 pydub
 fal_client
+atproto
