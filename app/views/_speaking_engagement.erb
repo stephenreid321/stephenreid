@@ -8,7 +8,7 @@
       <i class="fab fa-spotify"></i>
     <% elsif speaking_engagement['URL'] =~ /google/ %>
       <i class="fab fa-google-drive"></i>
-    <% elsif speaking_engagement['URL'] =~ /facebook/ %>
+    <% elsif speaking_engagement['URL'] =~ /facebook\.com\/events\// %>
       <i class="fab fa-facebook"></i>
     <% end %>
     <%= speaking_engagement['Name'] %>
