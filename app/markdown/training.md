@@ -82,9 +82,9 @@
     *   Sentimos (2015)
     *   Übertown (2014)
 
-### Triathlons
+### Swimrun & triathlon
 
-* ÖTILLÖ Sprint Final 15k 2024 (2h09m)
+* ÖTILLÖ Sprint Final 15k Swimrun 2024 (2h09m)
 * ÖTILLÖ Sprint Utö Swimrun 2024 (2h56m)
 * Weymouth Classic Triathlon 2023 (3h26m)
 * Weymouth Sprint Triathlon 2022 (1h38m)
