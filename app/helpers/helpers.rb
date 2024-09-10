@@ -58,10 +58,13 @@ StephenReid::App.helpers do
     %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
   end
 
-  def substack_posts
-    Dir["#{Padrino.root}/app/substack/posts/*.html"]
-      .sort_by { |file| file.split('/').last.split('.').first.to_i }
-      .map do |file|
+  def substack_posts(limit: nil)
+    posts = Dir["#{Padrino.root}/app/substack/posts/*.html"]
+            .sort_by { |file| file.split('/').last.split('.').first.to_i }
+    posts = posts.reverse
+    posts = posts[0..(limit.to_i - 1)] if limit
+
+    posts.reverse.map do |file|
       posts = CSV.read("#{Padrino.root}/app/substack/posts.csv", headers: true)
       post_id = file.split('/').last.gsub('.html', '')
       post = posts.find { |row| row['post_id'] == post_id }

@@ -2,7 +2,7 @@ class Book < Airrecord::Table
   self.base_key = ENV['AIRTABLE_BASE_KEY']
   self.table_name = 'Books'
 
-  def sync_with_goodreads
+  def self.import
     csv = CSV.parse(open("#{Padrino.root}/app/assets/goodreads_library_export.csv"), headers: true)
 
     csv.each do |row|
@@ -36,6 +36,7 @@ class Book < Airrecord::Table
         puts data
         book = Book.new(data)
         book.save
+        book.grab_image!
       end
     end
     #  end
@@ -44,7 +45,7 @@ class Book < Airrecord::Table
     (book_ids - csv_ids).each do |id|
       book = Book.all(filter: "{Book Id} = #{id}").first
       puts "#{book['Title']} (#{book['Book Id']}) no longer in CSV"
-      #  book.destroy
+      # book.destroy
     end
   end
 
