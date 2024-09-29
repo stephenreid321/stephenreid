@@ -18,6 +18,7 @@ class Book < Airrecord::Table
         book['Exclusive Shelf'] = row['Exclusive Shelf']
         # book['ISBN'] = row['ISBN'].gsub('=', '').gsub('"', '')
         # book['ISBN13'] = row['ISBN13'].gsub('=', '').gsub('"', '')
+        book.set_additional_info! unless book['Genres'] && book['Number of Ratings'] && book['Cover image']
         book.save
       else
         puts "creating #{row['Title']}"
@@ -35,8 +36,8 @@ class Book < Airrecord::Table
         end.to_h
         puts data
         book = Book.new(data)
-        book.save
-        book.grab_image!
+        book.set_additional_info!
+        # book.save
       end
     end
     #  end
@@ -63,24 +64,34 @@ class Book < Airrecord::Table
     end
   end
 
-  def self.grab_images!
-    books = Book.all(filter: "{Cover image} = ''")
-    count = books.length
-    books.each_with_index do |book, i|
-      puts "#{book['Title']} (#{i + 1}/#{count})"
-      begin
-        book.grab_image!
-      rescue StandardError => e
-        puts e
+  def self.set_additional_info!
+    # Create a thread pool with a fixed number of threads (e.g., 5)
+    pool = Concurrent::FixedThreadPool.new(100)
+
+    futures = []
+
+    Book.all.each do |book|
+      futures << Concurrent::Future.execute(executor: pool) do
+        puts book['Title']
+        book.set_additional_info! unless book['Genres'] && book['Number of Ratings'] && book['Cover image']
       end
     end
+
+    # Wait for all futures to complete
+    futures.each(&:wait)
+
+    # Shutdown the pool after work is done
+    pool.shutdown
+    pool.wait_for_termination
   end
 
-  def grab_image!
+  def set_additional_info!
     book = self
-    agent = Mechanize.new
-    response = agent.get("https://www.goodreads.com/book/show/#{book['Book Id']}")
-    book['Cover image'] = [{ url: response.at_css('.BookCover__image img')['src'] }]
+    a = Mechanize.new
+    page = a.get("https://www.goodreads.com/book/show/#{book['Book Id']}")
+    book['Genres'] = page.search('[data-testid=genresList] .Button__labelItem').map { |el| el.text }.reject { |g| g.starts_with?('...') }.join(', ')
+    book['Number of Ratings'] = page.search('[data-testid=ratingsCount]').text.gsub(',', '').to_i
+    book['Cover image'] = [{ url: page.at_css('.BookCover__image img')['src'] }]
     book.save
   end
 

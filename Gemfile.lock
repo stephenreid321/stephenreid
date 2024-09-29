@@ -372,6 +372,7 @@ DEPENDENCIES
   bcrypt
   better_html
   chroma
+  concurrent-ruby
   delayed_job_mongoid
   dragonfly
   dragonfly-s3_data_store

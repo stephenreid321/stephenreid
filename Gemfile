@@ -39,11 +39,11 @@ gem 'mongoid', '~> 7.0'
 # Interacting with other websites
 gem 'airbrake'
 gem 'anthropic'
+gem 'concurrent-ruby'
 gem 'dropbox_api'
 gem 'ferrum'
 gem 'gemini-ai'
 gem 'mechanize'
+gem 'ruby-progressbar'
 gem 'stripe'
 gem 'telegram-bot-ruby'
-
-gem 'ruby-progressbar'

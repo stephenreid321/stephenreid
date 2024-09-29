@@ -42,7 +42,7 @@ class Tweet
 
   def self.import
     Tweet.and(:hidden.ne => true).delete_all
-    Tweet.and(:'data.age'.gt => 14.days).delete_all
+    Tweet.and(:'data.age'.gt => 1.month).delete_all
     Tweet.nitter
   end
 
@@ -109,7 +109,7 @@ class Tweet
       puts t.errors.full_messages
       puts t.data
     end
-    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 14.days.ago
+    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 1.month
 
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
     puts cursor
