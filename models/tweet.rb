@@ -53,7 +53,9 @@ class Tweet
       username = tf['Username']
       username = username[1..] if username[0] == '@'
       timeline = tf['Timeline']
-      puts "#{i + 1}/#{c} #{username}"
+      next unless Tweet.timelines.keys.include?(timeline)
+
+      puts "#{i + 1}/#{c} #{username} (#{timeline})"
       if Tweet.find_by(:'data.user.username' => username, :timeline => timeline, :hidden.ne => true)
         puts 'already imported, skipping'
         next
