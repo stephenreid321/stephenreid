@@ -33,7 +33,7 @@ StephenReid::App.controller do
       path = temp_file.path
 
       # transcribe the audio
-      client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
+      client = OpenAI::Client.new
       response = client.audio.transcribe(
         parameters: {
           model: 'whisper-1',
