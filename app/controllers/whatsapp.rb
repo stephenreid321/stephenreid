@@ -8,84 +8,55 @@ StephenReid::App.controller do
     body = JSON.parse(request.body.read)
     message = body['entry'][0]['changes'][0]['value']['messages'][0]
 
+    token = ENV['WHATSAPP_ACCESS_TOKEN']
+    phone_number_id = ENV['WHATSAPP_PHONE_NUMBER_ID']
+
     puts message.inspect
 
     if message['type'] == 'audio'
       media_id = message['audio']['id']
-      audio_url = get_media_url(media_id)
-      transcription = transcribe_audio(audio_url)
-      send_whatsapp_message(message['from'], transcription)
-    end
 
-    status 200
-  end
+      # get the media url
+      url = "https://graph.facebook.com/v21.0/#{media_id}"
+      response = HTTP.auth("Bearer #{token}").get(url)
+      data = JSON.parse(response.body)
+      url = data['url']
+      puts puts "media url: #{url}"
 
-  private
-
-  def get_media_url(media_id)
-    token = ENV['WHATSAPP_ACCESS_TOKEN']
-    url = "https://graph.facebook.com/v21.0/#{media_id}"
-
-    response = HTTP.auth("Bearer #{token}").get(url)
-    data = JSON.parse(response.body)
-
-    if data['url']
-      puts "media url: #{data['url']}"
-      download_media(data['url'], token)
-    else
-      logger.error "Failed to get media URL: #{response.body}"
-      nil
-    end
-  end
-
-  def download_media(url, token)
-    response = HTTP.auth("Bearer #{token}").get(url)
-
-    if response.status.success?
+      # download the media
+      response = HTTP.auth("Bearer #{token}").get(url)
       puts 'saving media to temp file'
       temp_file = Tempfile.new(['whatsapp_media', File.extname(url)])
       temp_file.binmode
       temp_file.write(response.body)
       temp_file.rewind
-      temp_file.path
-    else
-      logger.error "Failed to download media: #{response.body}"
-      nil
-    end
-  end
+      path = temp_file.path
 
-  def transcribe_audio(audio_file_path)
-    return 'Failed to download audio' unless audio_file_path
+      # transcribe the audio
+      client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
+      response = client.audio.transcribe(
+        parameters: {
+          model: 'whisper-1',
+          file: File.open(path)
+        }
+      )
+      text = response.dig('text')
+      puts text
 
-    client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
-    response = client.audio.transcribe(
-      parameters: {
-        model: 'whisper-1',
-        file: File.open(audio_file_path)
+      # send the transcription to the user
+      url = "https://graph.facebook.com/v21.0/#{phone_number_id}/messages"
+      to = message['from']
+      payload = {
+        messaging_product: 'whatsapp',
+        to: to,
+        type: 'text',
+        text: { body: text }
       }
-    )
-    text = response.dig('text')
-    puts text
-    text
-  end
+      HTTP.auth("Bearer #{token}")
+          .post(url, json: payload)
 
-  def send_whatsapp_message(to, message)
-    token = ENV['WHATSAPP_ACCESS_TOKEN']
-    phone_number_id = ENV['WHATSAPP_PHONE_NUMBER_ID']
-    url = "https://graph.facebook.com/v21.0/#{phone_number_id}/messages"
+    end
 
-    payload = {
-      messaging_product: 'whatsapp',
-      to: to,
-      type: 'text',
-      text: { body: message }
-    }
-
-    response = HTTP.auth("Bearer #{token}")
-                   .post(url, json: payload)
-
-    return if response.status.success?
-
-    logger.error "Failed to send WhatsApp message: #{response.body}"
+    200
   end
 end
