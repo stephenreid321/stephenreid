@@ -8,6 +8,8 @@ StephenReid::App.controller do
     body = JSON.parse(request.body.read)
     message = body['entry'][0]['changes'][0]['value']['messages'][0]
 
+    puts message.inspect
+
     if message['type'] == 'voice'
       media_id = message['voice']['id']
       voice_url = get_media_url(media_id)
