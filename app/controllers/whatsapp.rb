@@ -51,16 +51,15 @@ StephenReid::App.controller do
       puts text
 
       # send the transcription to the user
-      url = "https://graph.facebook.com/v21.0/#{phone_number_id}/messages"
       to = message['from']
+      url = "https://graph.facebook.com/v21.0/#{phone_number_id}/messages"
       payload = {
         messaging_product: 'whatsapp',
         to: to,
         type: 'text',
         text: { body: text }
       }
-      HTTP.auth("Bearer #{token}")
-          .post(url, json: payload)
+      HTTP.auth("Bearer #{token}").post(url, json: payload)
 
     end
 
