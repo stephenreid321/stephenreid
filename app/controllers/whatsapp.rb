@@ -1,5 +1,5 @@
 StephenReid::App.controller do
   get '/whatsapp' do
-    params[:hub_challenge]
+    params[:'hub.challenge']
   end
 end
