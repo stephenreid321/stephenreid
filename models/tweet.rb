@@ -85,9 +85,9 @@ class Tweet
       t['age'] = Time.now - Time.iso8601(t['created_at'])
 
       t['public_metrics'] = {}
-      t['public_metrics']['like_count'] = item.search('.tweet-stats .icon-heart')[0].parent.text
-      t['public_metrics']['retweet_count'] = item.search('.tweet-stats .icon-retweet')[0].parent.text
-      t['public_metrics']['quote_count'] = item.search('.tweet-stats .icon-quote')[0].parent.text
+      t['public_metrics']['like_count'] = item.search('.tweet-stats .icon-heart')[0].parent.text.gsub(',', '').to_i
+      t['public_metrics']['retweet_count'] = item.search('.tweet-stats .icon-retweet')[0].parent.text.gsub(',', '').to_i
+      t['public_metrics']['quote_count'] = item.search('.tweet-stats .icon-quote')[0].parent.text.gsub(',', '').to_i
       t['user']['public_metrics'] = {}
       t['user']['public_metrics']['followers_count'] = page.search('.followers .profile-stat-num').text.gsub(',', '').to_i
 
@@ -101,9 +101,10 @@ class Tweet
       t['quotes_per_second'] = t['public_metrics']['quote_count'].to_f / t['age']
       t['quotes_per_follower_per_second'] = t['public_metrics']['quote_count'].to_f / (t['user']['public_metrics']['followers_count'] * t['age'])
 
+      next unless item.search('.retweet-header').empty?
+
       oldest_tweet_in_cursor_created_at = Time.iso8601(t['created_at'])
       puts oldest_tweet_in_cursor_created_at
-      next unless item.search('.retweet-header').empty?
 
       t = Tweet.create(tweet_id: t['id'], data: t, timeline: timeline)
       next unless t.errors.any?
@@ -111,7 +112,7 @@ class Tweet
       puts t.errors.full_messages
       puts t.data
     end
-    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 1.month
+    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 1.month.ago
 
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
     puts cursor
