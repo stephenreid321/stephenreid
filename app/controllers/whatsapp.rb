@@ -33,14 +33,21 @@ StephenReid::App.controller do
       path = temp_file.path
 
       # transcribe the audio
-      client = OpenAI::Client.new
-      response = client.audio.transcribe(
-        parameters: {
+      conn = Faraday.new(url: 'https://api.openai.com/v1') do |f|
+        f.request :multipart
+        f.request :url_encoded
+        f.adapter Faraday.default_adapter
+      end
+
+      response = conn.post('/v1/audio/transcriptions') do |req|
+        req.headers['Authorization'] = "Bearer #{ENV['OPENAI_API_KEY']}"
+        req.body = {
           model: 'whisper-1',
-          file: File.open(path)
+          file: Faraday::UploadIO.new(path, 'audio/ogg')
         }
-      )
-      text = response.dig('text')
+      end
+
+      text = JSON.parse(response.body)['text']
       puts text
 
       # send the transcription to the user
