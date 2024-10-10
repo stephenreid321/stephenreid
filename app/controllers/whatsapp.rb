@@ -5,11 +5,12 @@ StephenReid::App.controller do
   end
 
   post '/whatsapp' do
-    body = JSON.parse(request.body.read)
-    message = body['entry'][0]['changes'][0]['value']['messages'][0]
-
     token = ENV['WHATSAPP_ACCESS_TOKEN']
     phone_number_id = ENV['WHATSAPP_PHONE_NUMBER_ID']
+
+    body = JSON.parse(request.body.read)
+    message = body.dig('entry', 0, 'changes', 0, 'value', 'messages', 0)
+    halt 200 unless message && message['type'] == 'audio'
 
     puts message.inspect
 
@@ -21,7 +22,7 @@ StephenReid::App.controller do
       response = HTTP.auth("Bearer #{token}").get(url)
       data = JSON.parse(response.body)
       url = data['url']
-      puts puts "media url: #{url}"
+      puts "media url: #{url}"
 
       # download the media
       response = HTTP.auth("Bearer #{token}").get(url)
