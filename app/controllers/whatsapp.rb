@@ -10,10 +10,10 @@ StephenReid::App.controller do
 
     puts message.inspect
 
-    if message['type'] == 'voice'
-      media_id = message['voice']['id']
-      voice_url = get_media_url(media_id)
-      transcription = transcribe_audio(voice_url)
+    if message['type'] == 'audio'
+      media_id = message['audio']['id']
+      audio_url = get_media_url(media_id)
+      transcription = transcribe_audio(audio_url)
       send_whatsapp_message(message['from'], transcription)
     end
 
@@ -24,23 +24,49 @@ StephenReid::App.controller do
 
   def get_media_url(media_id)
     token = ENV['WHATSAPP_ACCESS_TOKEN']
-    phone_number_id = ENV['WHATSAPP_PHONE_NUMBER_ID']
-    url = "https://graph.facebook.com/v21.0/#{phone_number_id}/media/#{media_id}"
+    url = "https://graph.facebook.com/v21.0/#{media_id}"
 
     response = HTTP.auth("Bearer #{token}").get(url)
     data = JSON.parse(response.body)
-    data['url']
+
+    if data['url']
+      puts "media url: #{data['url']}"
+      download_media(data['url'], token)
+    else
+      logger.error "Failed to get media URL: #{response.body}"
+      nil
+    end
   end
 
-  def transcribe_audio(audio_url)
+  def download_media(url, token)
+    response = HTTP.auth("Bearer #{token}").get(url)
+
+    if response.status.success?
+      puts 'saving media to temp file'
+      temp_file = Tempfile.new(['whatsapp_media', File.extname(url)])
+      temp_file.binmode
+      temp_file.write(response.body)
+      temp_file.rewind
+      temp_file.path
+    else
+      logger.error "Failed to download media: #{response.body}"
+      nil
+    end
+  end
+
+  def transcribe_audio(audio_file_path)
+    return 'Failed to download audio' unless audio_file_path
+
     client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
     response = client.audio.transcribe(
       parameters: {
         model: 'whisper-1',
-        file: URI.open(audio_url)
+        file: File.open(audio_file_path)
       }
     )
-    response.dig('text')
+    text = response.dig('text')
+    puts text
+    text
   end
 
   def send_whatsapp_message(to, message)
