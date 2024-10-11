@@ -59,9 +59,20 @@ StephenReid::App.controller do
       to = message['from']
       url = "https://graph.facebook.com/v21.0/#{phone_number_id}/messages"
 
-      # split the text into chunks of 2048 tokens or less
-      chunks = text.scan(/.{1,2048}/)
+      # Split the text into chunks of approximately 2048 characters at word boundaries
+      chunks = []
+      current_chunk = ''
+      text.split.each do |word|
+        if (current_chunk + ' ' + word).length <= 2048
+          current_chunk += (current_chunk.empty? ? '' : ' ') + word
+        else
+          chunks << current_chunk
+          current_chunk = word
+        end
+      end
+      chunks << current_chunk unless current_chunk.empty?
       total_chunks = chunks.size
+
       chunks.each_with_index do |chunk, index|
         payload = {
           messaging_product: 'whatsapp',
