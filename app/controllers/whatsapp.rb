@@ -78,7 +78,9 @@ StephenReid::App.controller do
           messaging_product: 'whatsapp',
           to: to,
           type: 'text',
-          text: { body: "#{chunk} (#{index + 1}/#{total_chunks})" }
+          text: {
+            body: total_chunks > 1 ? "#{chunk} (#{index + 1}/#{total_chunks})" : chunk
+          }
         }
         HTTP.auth("Bearer #{token}").post(url, json: payload)
       end
