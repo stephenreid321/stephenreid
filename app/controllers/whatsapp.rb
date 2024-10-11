@@ -51,16 +51,26 @@ StephenReid::App.controller do
       text = JSON.parse(response.body)['text']
       puts text
 
+      # Close and delete the temporary file
+      temp_file.close
+      temp_file.unlink
+
       # send the transcription to the user
       to = message['from']
       url = "https://graph.facebook.com/v21.0/#{phone_number_id}/messages"
-      payload = {
-        messaging_product: 'whatsapp',
-        to: to,
-        type: 'text',
-        text: { body: text }
-      }
-      HTTP.auth("Bearer #{token}").post(url, json: payload)
+
+      # split the text into chunks of 2048 tokens or less
+      chunks = text.scan(/.{1,2048}/)
+      total_chunks = chunks.size
+      chunks.each_with_index do |chunk, index|
+        payload = {
+          messaging_product: 'whatsapp',
+          to: to,
+          type: 'text',
+          text: { body: "#{chunk} (#{index + 1}/#{total_chunks})" }
+        }
+        HTTP.auth("Bearer #{token}").post(url, json: payload)
+      end
 
     end
 
