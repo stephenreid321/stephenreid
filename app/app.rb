@@ -100,7 +100,8 @@ module StephenReid
       '/books-videos' => '/knowledgegraph',
       '/featured' => '/knowledgegraph',
       '/recommended' => '/knowledgegraph',
-      '/maps' => '/life-as-practice'
+      '/maps' => '/life-as-practice',
+      '/technological-metamodernism' => 'https://stephenreid.substack.com/p/technological-metamodernism-course'
     }.each do |k, v|
       get k.to_s do
         redirect v
