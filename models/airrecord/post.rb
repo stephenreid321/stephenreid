@@ -25,7 +25,7 @@ class Post < Airrecord::Table
     end
 
     data = JSON.parse(response.body)
-    data['list'].each_value do |p|
+    data['list'].sort_by { |_, p| -p['time_updated'].to_i }.each do |_, p|
       url = p['resolved_url']
       url = url.gsub('youtu.be/', 'youtube.com/watch?v=')
       puts url
