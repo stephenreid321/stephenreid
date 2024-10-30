@@ -75,6 +75,13 @@ module StephenReid
       redirect '/'
     end
 
+    get '/events', cache: true do
+      expires 1.hour.to_i
+      @title = 'Events'
+      @container_class = 'container-fluid'
+      erb :events
+    end
+
     %w[films podcasts events speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 1.hour.to_i
