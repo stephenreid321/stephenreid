@@ -92,5 +92,5 @@
 ### Scuba diving
 
 * [SSI Advanced Adventurer](https://www.divessi.com/en/advanced-training/scuba-diving/advanced-adventurer) (Nov 2024)
-* [PADI Open Water Scuba Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
+* [PADI Open Water Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
 
