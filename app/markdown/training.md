@@ -84,8 +84,8 @@
 
 ### Swimrun & triathlon
 
-* ÖTILLÖ Sprint Final 15k Swimrun 2024 (2h09m)
-* ÖTILLÖ Sprint Utö Swimrun 2024 (2h56m)
+* [ÖTILLÖ Sprint Final 15k](https://otilloswimrun.com/races/otillo-sprint-final-15k-sweden/) Swimrun 2024 (2h09m)
+* [ÖTILLÖ Sprint Utö](https://otilloswimrun.com/races/uto-sweden/uto-sprint/) Swimrun 2024 (2h56m)
 * Weymouth Classic Triathlon 2023 (3h26m)
 * Weymouth Sprint Triathlon 2022 (1h38m)
 
