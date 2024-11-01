@@ -48,7 +48,6 @@
 ### Other
 
 *   [Feÿtopia](https://feytopia.com/) (Mar 2024)
-*   [PADI Open Water Scuba Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
 *   [Microsolidarity](https://www.microsolidarity.cc/) Gatherings (Jul 2023, Feb 2024)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
 *   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
@@ -89,4 +88,9 @@
 * ÖTILLÖ Sprint Utö Swimrun 2024 (2h56m)
 * Weymouth Classic Triathlon 2023 (3h26m)
 * Weymouth Sprint Triathlon 2022 (1h38m)
+
+### Scuba diving
+
+* [SSI Advanced Adventurer](https://www.divessi.com/en/advanced-training/scuba-diving/advanced-adventurer) (Nov 2024)
+* [PADI Open Water Scuba Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
 
