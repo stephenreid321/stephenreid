@@ -10,6 +10,10 @@ class Tweet
   field :image_uid, type: String
   field :hidden, type: Boolean
 
+  def self.timeframe
+    6.weeks
+  end
+
   def self.admin_fields
     {
       tweet_id: { type: :number, disabled: true },
@@ -42,7 +46,7 @@ class Tweet
 
   def self.import
     Tweet.and(:hidden.ne => true).delete_all
-    Tweet.and(:'data.age'.gt => 1.month).delete_all
+    Tweet.and(:'data.age'.gt => Tweet.timeframe).delete_all
     Tweet.nitter
   end
 
@@ -75,7 +79,19 @@ class Tweet
     oldest_tweet_in_cursor_created_at = nil
     url = "#{ENV['NITTER_BASE_URI']}/#{username}?cursor=#{cursor}"
     puts url
-    page = begin; a.get(url); rescue Mechanize::ResponseCodeError; return; end
+    page = nil
+    begin
+      while page.nil?
+        page = a.get(url)
+        next unless page.search('.timeline-container').empty?
+
+        page = nil
+        puts 'sleeping...'
+        sleep 10
+      end
+    rescue Mechanize::ResponseCodeError
+      return
+    end
     page.search('.timeline .timeline-item .tweet-body').each do |item|
       t = {}
       t['user'] = {}
@@ -112,7 +128,7 @@ class Tweet
       puts t.errors.full_messages
       puts t.data
     end
-    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < 1.month.ago
+    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < Tweet.timeframe
 
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
     puts cursor
