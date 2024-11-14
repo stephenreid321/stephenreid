@@ -45,7 +45,7 @@
 *   Ma Ananda Sarita's [Tantra Essence](https://www.anandasarita.com/master-lover) course (2020)
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 
-### Other
+### Other residencies and retreats
 
 *   Retreats on Ekskäret ([Come Together](https://ekskaret.confetti.events/come-together-ekskaret-okt/), Oct 2023; [Elevate](https://ekskaret.confetti.events/elevate-2024-hibernate/), Nov 2024)
 *   [Feÿtopia](https://feytopia.com/) (Mar 2024)
