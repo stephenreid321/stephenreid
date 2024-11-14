@@ -47,6 +47,7 @@
 
 ### Other
 
+*   Retreats on Ekskäret ([Come Together](https://ekskaret.confetti.events/come-together-ekskaret-okt/), Oct 2023; [Elevate](https://ekskaret.confetti.events/elevate-2024-hibernate/), Nov 2024)
 *   [Feÿtopia](https://feytopia.com/) (Mar 2024)
 *   [Microsolidarity](https://www.microsolidarity.cc/) Gatherings (Jul 2023, Feb 2024)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
@@ -93,4 +94,3 @@
 
 * [SSI Advanced Adventurer](https://www.divessi.com/en/advanced-training/scuba-diving/advanced-adventurer) (Nov 2024)
 * [PADI Open Water Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
-
