@@ -11,7 +11,7 @@ class Tweet
   field :hidden, type: Boolean
 
   def self.timeframe
-    6.weeks
+    90.days
   end
 
   def self.admin_fields
@@ -79,19 +79,24 @@ class Tweet
     oldest_tweet_in_cursor_created_at = nil
     url = "#{ENV['NITTER_BASE_URI']}/#{username}?cursor=#{cursor}"
     puts url
-    page = nil
-    begin
-      while page.nil?
-        page = a.get(url)
-        next unless page.search('.timeline-container').empty?
+    page = a.get(url)
 
-        page = nil
-        puts 'sleeping...'
-        sleep 10
-      end
-    rescue Mechanize::ResponseCodeError
-      return
-    end
+    # page = nil
+    # begin
+    #   while page.nil?
+    #     page = a.get(url)
+    #     # keep going if there is a timeline container
+    #     next unless page.search('.timeline-container').empty?
+
+    #     # otherwise try to get the page again
+    #     page = nil
+    #     puts 'sleeping...'
+    #     sleep 10
+    #   end
+    # rescue Mechanize::ResponseCodeError
+    #   return
+    # end
+
     page.search('.timeline .timeline-item .tweet-body').each do |item|
       t = {}
       t['user'] = {}
@@ -120,7 +125,7 @@ class Tweet
       next unless item.search('.retweet-header').empty?
 
       oldest_tweet_in_cursor_created_at = Time.iso8601(t['created_at'])
-      puts oldest_tweet_in_cursor_created_at
+      # puts oldest_tweet_in_cursor_created_at
 
       t = Tweet.create(tweet_id: t['id'], data: t, timeline: timeline)
       next unless t.errors.any?
@@ -128,10 +133,10 @@ class Tweet
       puts t.errors.full_messages
       puts t.data
     end
-    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < Tweet.timeframe
+    return if !oldest_tweet_in_cursor_created_at || oldest_tweet_in_cursor_created_at < Tweet.timeframe.ago
 
     cursor = page.search('.show-more a').last['href'].split('cursor=').last
-    puts cursor
+    # puts cursor
     Tweet.nitter_user(username, timeline, cursor: cursor)
   end
 
