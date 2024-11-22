@@ -67,7 +67,8 @@ module StephenReid
       erb :about
     end
 
-    get '/telegram_webhook' do
+    post '/telegram_webhook' do
+      puts request.env['X-Telegram-Bot-Api-Secret-Token']
       puts request.body.read
       200
     end
