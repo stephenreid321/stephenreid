@@ -69,6 +69,7 @@ module StephenReid
 
     post '/telegram_webhook' do
       puts request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN']
+      halt unless request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] == ENV['TELEGRAM_BOT_SECRET_TOKEN']
       puts json = JSON.parse(request.body.read)
       `python #{Padrino.root}/tasks/cast.py "#{json['message']['text']}"`
       200
