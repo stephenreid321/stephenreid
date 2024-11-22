@@ -68,7 +68,7 @@ module StephenReid
     end
 
     post '/telegram_webhook' do
-      puts request.env['X-Telegram-Bot-Api-Secret-Token']
+      puts request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN']
       `python #{Padrino.root}/tasks/cast.py "#{JSON.parse(request.body.read)['message']['text']}"`
       200
     end
