@@ -67,6 +67,11 @@ module StephenReid
       erb :about
     end
 
+    get '/telegram_webhook' do
+      puts request.body.read
+      200
+    end
+
     get '/sign_in/:code' do
       if params[:code].to_i == ENV['SIGN_IN_CODE']
         session[:account_id] = Account.find_by(admin: true)
