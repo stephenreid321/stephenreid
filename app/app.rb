@@ -73,8 +73,15 @@ module StephenReid
       puts json = JSON.parse(request.body.read)
       halt 200 unless json['message']['chat']['id'] == ENV['TELEGRAM_BOT_CHAT_ID'].to_i
       text = json['message']['text']
-      `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}"`
-      `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}"`
+      if text.split.last.starts_with?('https://')
+        text = text.split[0..-2].join(' ')
+        url = text.split.last
+        `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}"`
+        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}"`
+      else
+        `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}"`
+        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}"`
+      end
       200
     end
 

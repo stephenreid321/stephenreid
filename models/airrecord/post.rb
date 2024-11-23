@@ -144,7 +144,7 @@ class Post < Airrecord::Table
   def bluesky
     post = self
     json = JSON.parse(post['Iframely'])
-    `python #{Padrino.root}/tasks/bluesky.py "#{post['Title'].gsub('"', '\"')}" "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}" "#{json['meta']['description'].truncate(150).gsub('"', '\"')}" "#{json['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
+    `python #{Padrino.root}/tasks/bluesky.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}" "#{post['Title'].gsub('"', '\"')}" "#{json['meta']['description'].truncate(150).gsub('"', '\"')}" "#{json['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
   end
 
   def countdown(n)
