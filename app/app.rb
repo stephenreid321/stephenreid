@@ -71,13 +71,14 @@ module StephenReid
       puts request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN']
       halt unless request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] == ENV['TELEGRAM_BOT_SECRET_TOKEN']
       puts json = JSON.parse(request.body.read)
-      halt 200 unless json['message']['chat']['id'] == ENV['TELEGRAM_BOT_CHAT_ID'].to_i
+      halt 200 unless json.dig('message', 'chat', 'id') == ENV['TELEGRAM_BOT_CHAT_ID'].to_i
       text = json['message']['text']
       if text.split.last =~ %r{^https?://}
         url = text.split.last
         text = text.split[0..-2].join(' ')
+        iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{url}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
         `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}"`
-        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}"`
+        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}" "#{iframely['meta']['title'].gsub('"', '\"')}" "#{iframely['meta']['description'].truncate(150).gsub('"', '\"')}" "#{iframely['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
       else
         `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}"`
         `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}"`
