@@ -71,7 +71,7 @@ module StephenReid
       puts request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN']
       halt unless request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] == ENV['TELEGRAM_BOT_SECRET_TOKEN']
       puts json = JSON.parse(request.body.read)
-      halt 200 unless json['message']['chat']['id'] == ENV['TELEGRAM_BOT_CHAT_ID']
+      halt 200 unless json['message']['chat']['id'] == ENV['TELEGRAM_BOT_CHAT_ID'].to_i
       text = json['message']['text']
       `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}"`
       `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}"`
