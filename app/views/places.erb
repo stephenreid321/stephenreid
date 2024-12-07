@@ -1,0 +1,12 @@
+<% @places.each do |folder| %>
+  <strong><%= folder[:name] %></strong>
+  <ul>
+    <% folder[:places].each do |place| %>
+      <li>
+        <a href="https://www.google.com/maps?q=<%= place[:lat] %>,<%= place[:lng] %>" target="_blank">
+          <%= place[:name] %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

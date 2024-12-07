@@ -78,7 +78,7 @@ module StephenReid
         text = text.split[0..-2].join(' ')
         iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{url}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
         `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}"`
-        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}" "#{iframely['meta']['title'].gsub('"', '\"')}" "#{iframely['meta']['description'].truncate(150).gsub('"', '\"')}" "#{iframely['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
+        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}" "#{iframely['meta']['title'].gsub('"', '\"')}" "#{iframely['meta']['description'].truncate(150).gsub('"', '\"') if iframely['meta']['description']}" "#{iframely['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
       else
         `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}"`
         `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}"`
@@ -182,6 +182,28 @@ module StephenReid
 
     get '/prompt', provides: :txt do
       "#{BlogPost.prompt(book_summaries: params[:book_summaries]).join("\n\n")}\n\n#{substack_posts(limit: params[:limit]) unless params[:skip_substack_posts]}"
+    end
+
+    get '/places' do
+      KML_NS = { 'kml' => 'http://www.opengis.net/kml/2.2' }
+      kml = Faraday.get('https://www.google.com/maps/d/kml?forcekml=1&mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8').body
+      doc = Nokogiri::XML(kml)
+
+      @places = doc.xpath('//kml:Folder', KML_NS).map do |folder|
+        {
+          name: folder.at_xpath('./kml:name', KML_NS).text,
+          places: folder.xpath('.//kml:Placemark', KML_NS).map do |place|
+            name = place.at_xpath('./kml:name', KML_NS).text
+            coords = place.at_xpath('.//kml:coordinates', KML_NS).text.strip.split(',')
+            {
+              name: name,
+              lat: coords[1],
+              lng: coords[0]
+            }
+          end
+        }
+      end
+      erb :places
     end
 
     ##############################
