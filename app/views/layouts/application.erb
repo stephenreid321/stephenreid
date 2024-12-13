@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <% unless params[:no_modal] %>
+    <% unless @no_modal || params[:no_modal] %>
       <script>
         $(function () {
           // $('#modal').modal('show')

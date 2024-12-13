@@ -30,6 +30,7 @@ module StephenReid
 
     before do
       @hide_sponsors = true
+      @no_modal = request.user_agent =~ /headless|bot|crawler|spider/i
       @stylesheet = params[:stylesheet] || 'dark'
       @cachebuster = Padrino.env == :development ? SecureRandom.uuid : ENV['HEROKU_SLUG_COMMIT']
       redirect "#{ENV['BASE_URI']}#{request.path}" if ENV['BASE_URI'] && (ENV['BASE_URI'] != "#{request.scheme}://#{request.env['HTTP_HOST']}")
