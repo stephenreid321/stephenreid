@@ -29,6 +29,7 @@ module StephenReid
     end
 
     before do
+      puts request.user_agent
       @hide_sponsors = true
       @no_modal = request.user_agent =~ /headless|bot|crawler|spider/i
       @stylesheet = params[:stylesheet] || 'dark'
