@@ -39,7 +39,7 @@ module StephenReid
       end
       fix_params!
       Time.zone = 'London'
-      @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=#{URI.encode_www_form_component("#{ENV['BASE_URI']}#{request.path}#{request.path.include?('?') ? '&' : '?'}no_modal=1")}&width=1280&height=672&ttl=2592000" unless Padrino.env == :development
+      @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=#{URI.encode_www_form_component("#{ENV['BASE_URI']}#{request.path}?no_modal=1")}&width=1280&height=672&ttl=2592000" unless Padrino.env == :development
     end
 
     error do
