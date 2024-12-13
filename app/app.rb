@@ -29,9 +29,7 @@ module StephenReid
     end
 
     before do
-      puts request.user_agent
       @hide_sponsors = true
-      @no_modal = request.user_agent =~ /headless|bot|crawler|spider/i
       @stylesheet = params[:stylesheet] || 'dark'
       @cachebuster = Padrino.env == :development ? SecureRandom.uuid : ENV['HEROKU_SLUG_COMMIT']
       redirect "#{ENV['BASE_URI']}#{request.path}" if ENV['BASE_URI'] && (ENV['BASE_URI'] != "#{request.scheme}://#{request.env['HTTP_HOST']}")
@@ -41,7 +39,7 @@ module StephenReid
       end
       fix_params!
       Time.zone = 'London'
-      @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=#{ENV['BASE_URI']}#{request.path}&width=1280&height=672&ttl=2592000" unless Padrino.env == :development
+      @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=#{URI.encode_www_form_component("#{ENV['BASE_URI']}#{request.path}#{request.path.include?('?') ? '&' : '?'}no_modal=1")}&width=1280&height=672&ttl=2592000" unless Padrino.env == :development
     end
 
     error do
