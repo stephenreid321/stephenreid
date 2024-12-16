@@ -15,7 +15,7 @@ Coaching is a collaborative, non-directive dialogue practice that seeks to bring
 
 It's based on the belief that people are creative, resourceful and capable of change, and already have, or otherwise can find, answers to their challenges.
 
-I trained in a coaching style called *[transformative coaching](https://www.animascoaching.com/coach-training-course/)*, which has a particular focus on exploring the inner world of beliefs, assumptions, values and expectations.
+I trained in a coaching style called *[transformative coaching](https://www.animascoaching.com/coach-training-course/)*, which has a particular focus on exploring the inner world of beliefs, assumptions, values and expectations. I also weave in my experience with the work of [Rob Burbea](https://hermesamara.org/), including the *[Ways of Looking/Seeing Through Dualities](https://hermesamara.org/teachings/ways-of-looking)* frameworks, the *[Soulmaking Dharma](https://hermesamara.org/teachings/soulmaking-dharma)* (and its resonances with Bill Plotkin's *[Soulcraft](https://www.animas.org/books/soulcraft/)*), and extensive [mettā](https://hermesamara.org/teachings/metta) practice.
 
 ### Who can benefit?
 

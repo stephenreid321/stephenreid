@@ -51,7 +51,7 @@
 *   [Feÿtopia](https://feytopia.com/) (Mar 2024)
 *   [Microsolidarity](https://www.microsolidarity.cc/) Gatherings (Jul 2023, Feb 2024)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
-*   [Integral facilitation](https://www.dianemushohamilton.com/event/active-and-receptive-skills/) with Zen teacher [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022)
+*   Retreats with Zen teacher and mediator [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022, Dec 2024)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
 *   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
@@ -70,18 +70,9 @@
 
 ### Burns
 
-*   [The Borderland](http://theborderland.se)
-    *   Hyperstition (2024)
-    *   The Inner Cartographers' Club (2022)
-    *   Camp Croquis (2019)
-    *   La Botica Exótica (2017)
-    *   Hampus Campus (2016)
-*   [Kiez Burn](https://kiezburn.org/)
-    *   The Beehive (2019)
-*   [Nowhere](http://goingnowhere.org)
-    *   La Botica Exótica (2016)
-    *   Sentimos (2015)
-    *   Übertown (2014)
+*   [The Borderland](http://theborderland.se) (Hyperstition, 2024; The Inner Cartographers' Club, 2022; Camp Croquis, 2019; La Botica Exótica, 2017; Hampus Campus, 2016)
+*   [Kiez Burn](https://kiezburn.org/) (The Beehive, 2019)
+*   [Nowhere](http://goingnowhere.org) (La Botica Exótica, 2016; Sentimos, 2015; Übertown 2014)
 
 ### Swimrun & triathlon
 
