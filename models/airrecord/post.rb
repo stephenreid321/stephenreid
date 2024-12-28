@@ -6,6 +6,50 @@ class Post < Airrecord::Table
 
   belongs_to :organisation, class: 'Organisation', column: 'Organisation'
 
+  def self.sync_with_readwise
+    conn = Faraday.new(url: 'https://readwise.io/api/v3') do |faraday|
+      faraday.request :url_encoded
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.get('list', {
+                          location: 'archive',
+                          updatedAfter: 7.days.ago.iso8601
+                        }) do |req|
+      req.headers['Authorization'] = "Token #{ENV['READWISE_ACCESS_TOKEN']}"
+      req.headers['Content-Type'] = 'application/json'
+    end
+
+    data = JSON.parse(response.body)
+    data['results'].first(50).each do |r|
+      url = r['source_url']
+      url = url.gsub('youtu.be/', 'youtube.com/watch?v=')
+      next if Time.parse(r['last_moved_at']) < 7.days.ago
+      next if Post.all(filter: "{Link} = '#{url}'").first
+
+      puts url
+
+      post = Post.create(
+        'Title' => r['title'],
+        'Link' => url,
+        'Body' => r['summary'],
+        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{url}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
+        'Created at' => Time.now
+      )
+
+      unless post['Title']
+        json = JSON.parse(post['Iframely'])
+        post['Title'] = json['meta']['title']
+        post['Body'] = json['meta']['description']
+        post.save
+      end
+
+      post.tagify
+      post.cast
+      post.bluesky
+    end
+  end
+
   def self.sync_with_pocket
     conn = Faraday.new(url: 'https://getpocket.com/v3/get') do |faraday|
       faraday.request :url_encoded
@@ -144,7 +188,7 @@ class Post < Airrecord::Table
   def bluesky
     post = self
     json = JSON.parse(post['Iframely'])
-    `python #{Padrino.root}/tasks/bluesky.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}" "#{post['Title'].gsub('"', '\"')}" "#{json['meta']['description'].truncate(150).gsub('"', '\"')}" "#{json['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
+    `python #{Padrino.root}/tasks/bluesky.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}" "#{post['Title'].gsub('"', '\"')}" "#{json['meta']['description'].truncate(150).gsub('"', '\"') if json['meta'] && json['meta']['description']}" "#{json['links']['thumbnail'].first['href'].gsub('"', '\"') if json['links'] && json['links']['thumbnail']}"`
   end
 
   def countdown(n)
