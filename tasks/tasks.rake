@@ -47,8 +47,9 @@ namespace :terms do
 end
 
 namespace :posts do
-  task sync_with_pocket: :environment do
-    Post.sync_with_pocket
+  task sync: :environment do
+    # Post.sync_with_pocket
+    Post.sync_with_readwise
   end
 
   task delete_duplicates: :environment do

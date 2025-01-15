@@ -1,6 +1,6 @@
 StephenReid::App.controller do
   get '/knowledgegraph/r' do
-    Post.sync_with_pocket
+    # Post.sync_with_pocket
     Post.sync_with_readwise
     redirect '/knowledgegraph?r=1'
   end
