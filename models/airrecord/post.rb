@@ -21,11 +21,15 @@ class Post < Airrecord::Table
     end
 
     data = JSON.parse(response.body)
-    data['results'].first(50).each do |r|
+    data['results'].first(50).sort_by { |r| -Time.parse(r['last_moved_at']).to_i }.each do |r|
       url = r['source_url']
       url = url.gsub('youtu.be/', 'youtube.com/watch?v=')
       next if Time.parse(r['last_moved_at']) < 7.days.ago
-      next if Post.all(filter: "{Link} = '#{url}'").first
+
+      if Post.all(filter: "{Link} = '#{url}'").first
+        puts "found #{url}"
+        next
+      end
 
       puts url
 

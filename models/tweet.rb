@@ -11,7 +11,7 @@ class Tweet
   field :hidden, type: Boolean
 
   def self.timeframe
-    90.days
+    60.days
   end
 
   def self.admin_fields
