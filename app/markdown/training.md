@@ -45,6 +45,12 @@
 *   Ma Ananda Sarita's [Tantra Essence](https://www.anandasarita.com/master-lover) course (2020)
 *   The Tantric Opening with [Gaia Ma](https://gaiagasm.com/) at [Inanitah](https://www.inanitah.com/), Ometepe, Nicaragua (Nov 2017)
 
+### Futurecraft residencies
+
+* Feÿtopia, France ([Feb 2025](https://dandelion.events/e/futurecraft-feytopia))
+* Cornwall, UK ([Apr 2023](https://dandelion.events/e/futurecraft-residency), [Apr 2024](https://dandelion.events/e/c24x0))
+* Brave Earth, Costa Rica ([Dec 2023](https://dandelion.events/e/futurecraft-brave-earth))
+
 ### Other residencies and retreats
 
 *   Retreats on Ekskäret ([Come Together](https://ekskaret.confetti.events/come-together-ekskaret-okt/), Oct 2023; [Elevate](https://ekskaret.confetti.events/elevate-2024-hibernate/), Nov 2024)
