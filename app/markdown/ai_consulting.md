@@ -11,7 +11,7 @@ AI is not just another incremental technological advancement; it's a paradigm sh
 
 My approach is rooted in a deep understanding of both the technical aspects of AI, and how technology can be used for social and environmental good.
 
-* On the technical side, I have over 20 years experience as a software engineer, have recently completed a Professional Certificate in Machine Learning and Artificial Intelligence with UC Berkeley, and teach the celebrated [Introduction to AI](https://dandelion.events/e/intro-to-ai-jan-2024) course.
+* On the technical side, I have over 20 years experience as a software engineer, have recently completed a Professional Certificate in Machine Learning and Artificial Intelligence with UC Berkeley, and teach the highly-rated [Introduction to AI](https://docs.google.com/document/d/1KbfsWdPW0ZjPgvvqfU1ULVtdLOw88SdFRAKr03hul_w/edit?tab=t.0) course.
 
 * On the impact side, I'm a social entrepreneur, experienced facilitator and qualified coach who has worked with organisations including 38 Degrees, Greenpeace UK, the New Economics Foundation, and 350.org.
 
