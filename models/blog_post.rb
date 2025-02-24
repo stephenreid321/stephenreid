@@ -74,7 +74,6 @@ class BlogPost
 
   def self.prompt(book_summaries: false)
     p = [
-      %(Hi! I'm Stephen Reid.),
       %(## Short bio in the third person),
       File.read("#{Padrino.root}/app/markdown/bio.md").force_encoding('utf-8'),
       %(## Training and teachers),
