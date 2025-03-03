@@ -30,6 +30,55 @@
   </div>
 </div>
 
+<style>
+  .carousel-item {
+    height: auto;
+    min-height: 320px; /* Set a minimum height if needed */
+  }
+
+  .testimonial-text {
+    height: auto; /* Remove fixed height */
+    overflow-y: visible; /* Remove scrolling */
+  }
+
+  /* Position carousel controls outside */
+  .carousel-control-prev {
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+    width: auto;
+    height: auto;
+  }
+
+  .carousel-control-next {
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+    width: auto;
+    height: auto;
+  }
+
+  /* Make arrows darker for better visibility */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  /* Responsive positioning for carousel controls */
+  @media (max-width: 767px) {
+    .carousel-control-prev {
+      left: 5px;
+    }
+
+    .carousel-control-next {
+      right: 5px;
+    }
+  }
+</style>
+
 <div class="row justify-content-center mt-3">
   <div class="col-lg-9">
     <%= md :coaching %>
@@ -43,43 +92,91 @@
     </div>
 
     <h3>Testimonials</h3>
-    <div class="row mb-3">
-      <div class="col-auto"><i class="fa fa-quote-left"></i></div>
-      <div class="col">
-        <p class="lead mb-0">
-          Working with Stephen was something else. He held space for me to tap into a truly authentic and deeply honest version of myself, and guided me through a journey that really helped me understand my values and how to use them to make challenging life decisions at a key inflection point in my life. I felt so "seen" by Stephen whenever we spoke: he both allowed me to be my complete self whilst also challenging me on some of the stories I was telling myself. I'd highly recommend Stephen as a coach and truly think he's one of the best people to have by your side through the ups the downs of life.
-        </p>
-      </div>
-    </div>
 
-    <div class="row mb-3">
-      <div class="col-auto"><i class="fa fa-quote-left"></i></div>
-      <div class="col">
-        <p class="lead mb-0">
-          I am not the kind of person who ever thought I needed a coach. I am super productive and good at making decisions but working with Stephen for a few months was transformative. Stephen has a magical ability to hold a safe space, ask the right questions and challenge. Working with him I reevaluated some of my limiting beliefs on scaling my business which has meant that this year business is booming! But he is also more than a business coach - he looks at the whole person. In our time together we dived into money, relationships and other areas of my life where I felt stuck. I would highly recommend working with Stephen. It might just change your life.
-        </p>
-      </div>
-    </div>
+    <% testimonials = [
+      "Working with Stephen was something else. He held space for me to tap into a truly authentic and deeply honest version of myself, and guided me through a journey that really helped me understand my values and how to use them to make challenging life decisions at a key inflection point in my life. I felt so \"seen\" by Stephen whenever we spoke: he both allowed me to be my complete self whilst also challenging me on some of the stories I was telling myself. I'd highly recommend Stephen as a coach and truly think he's one of the best people to have by your side through the ups the downs of life.",
+      
+      "I am not the kind of person who ever thought I needed a coach. I am super productive and good at making decisions but working with Stephen for a few months was transformative. Stephen has a magical ability to hold a safe space, ask the right questions and challenge. Working with him I reevaluated some of my limiting beliefs on scaling my business which has meant that this year business is booming! But he is also more than a business coach - he looks at the whole person. In our time together we dived into money, relationships and other areas of my life where I felt stuck. I would highly recommend working with Stephen. It might just change your life.",
+      
+      "I've admired Stephen's work from afar for several years now, since I heard about his Tools for Regenerative Renaissance course. I decided to work with him as a coach after realizing he managed to successful navigate a lot of the dimensions I deeply cared about: regeneration, technology, conscious sexuality, community. He not only helped inquire in ways that opened up my mind but also has a brilliant logical way of seeing things, breaking down complexity and making life seem easier. Working with Stephen as a coach was a pleasure, I highly recommend it if you resonate with him and his work!",
+      
+      "My conversations with Stephen have been an expansive journey of self-discovery. He has a well-honed ability to hold a judgment-free, all-welcoming, safe, and light container, helping me uncover deeper behavioral patterns and unconscious beliefs. Importantly, he didn't push or impose his way of being—he helped me see that all the answers are within me by asking sharp, non-directive questions. It has been a gift to have him coach me through my journey, and I strongly endorse him as a coach!"
+    ] %>
 
-    <div class="row mb-3">
-      <div class="col-auto"><i class="fa fa-quote-left"></i></div>
-      <div class="col">
-        <p class="lead mb-0">
-          I've admired Stephen's work from afar for several years now, since I heard about his Tools for Regenerative Renaissance course. I decided to work with him as a coach after realizing he managed to successful navigate a lot of the dimensions I deeply cared about: regeneration, technology, conscious sexuality, community. He not only helped inquire in ways that opened up my mind but also has a brilliant logical way of seeing things, breaking down complexity and making life seem easier. 
-          Working with Stephen as a coach was a pleasure, I highly recommend it if you resonate with him and his work!
-        </p>
+    <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <% testimonials.each_with_index do |testimonial, index| %>
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <div class="row mb-3">
+              <div class="col-auto"><i class="fa fa-quote-left"></i></div>
+              <div class="col">
+                <p class="lead mb-0"><%= testimonial %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
 
-    <div class="row mb-3">
-      <div class="col-auto"><i class="fa fa-quote-left"></i></div>
-      <div class="col">
-        <p class="lead mb-0">
-          My conversations with Stephen have been an expansive journey of self-discovery. He has a well-honed ability to hold a judgment-free, all-welcoming, safe, and light container, helping me uncover deeper behavioral patterns and unconscious beliefs. Importantly, he didn’t push or impose his way of being—he helped me see that all the answers are within me by asking sharp, non-directive questions. It has been a gift to have him coach me through my journey, and I strongly endorse him as a coach!
-        </p>
-      </div>
-    </div>
+      <ol class="carousel-indicators">
+        <% testimonials.each_with_index do |_, index| %>
+          <li data-target="#testimonialCarousel" data-slide-to="<%= index %>" <%= 'class="active"' if index == 0 %>></li>
+        <% end %>
+      </ol>
 
+      <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
 
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function setCarouselHeight() {
+      // Find the tallest testimonial
+      let maxHeight = 0;
+      const testimonialItems = document.querySelectorAll('#testimonialCarousel .carousel-item');
+
+      // Reset heights first
+      testimonialItems.forEach(function(item) {
+        item.style.height = '';
+      });
+
+      // First pass: measure all heights
+      testimonialItems.forEach(function(item) {
+        // Make all items visible but not displayed to measure true height
+        item.style.display = 'block';
+        item.style.position = 'absolute';
+        item.style.visibility = 'hidden';
+
+        const height = item.offsetHeight;
+        maxHeight = Math.max(maxHeight, height);
+
+        // Reset display properties
+        item.style.display = '';
+        item.style.position = '';
+        item.style.visibility = '';
+      });
+
+      // Second pass: set all to the max height
+      testimonialItems.forEach(function(item) {
+        item.style.height = maxHeight + 'px';
+      });
+    }
+
+    // Set heights initially
+    setCarouselHeight();
+
+    // Reset heights on window resize
+    window.addEventListener('resize', setCarouselHeight);
+
+    // Initialize the carousel
+    $('#testimonialCarousel').carousel();
+  });
+</script>
