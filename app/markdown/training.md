@@ -15,22 +15,24 @@
 ### Meditation
 
 *   Retreats and courses with teachers qualified by [Rob Burbea](https://hermesamara.org):
-  *   [Freedom in Everything](https://hermesamara.org/), Hermes Amara Foundation annual retreat with Juha Penttilä and Yahel Avigur (Dec 2023, 7 days)
-  *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://dharmaseed.org/retreats/5700/) with Catherine McGee and Yahel Avigur at Gaia House (Sep 2023, 8 days)
+  *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://nirodha.fi/retreat-03-25/) with Catherine McGee and Juha Penttilä at The Friendship Inn, Finland (Mar 2025, 8 days)
+  *   [Freedom in Everything](https://hermesamara.org/), Hermes Amara Foundation annual retreat with Yahel Avigur and Juha Penttilä at Colehayes Park, UK (Dec 2023, 7 days)
+  *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://dharmaseed.org/retreats/5700/) with Yahel Avigur and Catherine McGee at Gaia House (Sep 2023, 8 days)
   *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely, online (Jan – Mar 2023)
-  *   [Liberating Ways of Looking](https://dharmaseed.org/retreats/5347) with Kirsten Kratz and Yahel Avigur at Gaia House (Oct 2022, 7 days)
+  *   [Liberating Ways of Looking](https://dharmaseed.org/retreats/5347) with Yahel Avigur and Kirsten Kratz at Gaia House (Oct 2022, 7 days)
   *   [The Courageous Heart](https://dharmaseed.org/retreats/5054/) with Kirsten Kratz and Laura Bridgman at Gaia House (Dec 2021, 3 days)
 *   Other retreats:
   *   Jhana retreat with [Jhourney](https://pages.jhourney.io/spring-retreats), online (Apr 2024, 7 days)
   *   [The Boundless Heart of Metta](https://dharmaseed.org/retreats/5099) with Zohar Lavie and Jake Dartington at Gaia House (Mar 2022, 4 days)
   *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
-  *   Sensory Awareness at the [Esalen Institute](https://www.esalen.org/) with [Lee Lesser](http://www.returntooursenses.com/) (Nov 2015, 2 days)
+  *   Sensory Awareness with [Lee Lesser](http://www.returntooursenses.com/) at the [Esalen Institute](https://www.esalen.org/) (Nov 2015, 2 days)
 
 
 ### Shipibo plant medicine
 
 *   [Ceremonies](https://niweraoxobo.com/project/schedule) with Maestras Laura and Lila near Sintra, Portugal (Jul 2023, 6 days)
 *   [Guayusa dieta](https://niweraoxobo.com/project/schedule) with Maestras Ynes, Laura and Lila near La Fortuna, Costa Rica (Oct 2021, 10 days)
+*   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 *   [Noya Rao dieta](https://medium.com/@stephenreid321/dieta-with-noya-rao-part-1-welcome-to-the-jungle-23bdefec1dad) with Maestra Manuela near Pucallpa, Peru (Dec 2017, 10 days)
 
 ### Soulcraft & Wild Mind
@@ -48,8 +50,8 @@
 ### Futurecraft residencies
 
 * Feÿtopia, France ([Feb 2025](https://dandelion.events/e/futurecraft-feytopia))
-* Cornwall, UK ([Apr 2023](https://dandelion.events/e/futurecraft-residency), [Apr 2024](https://dandelion.events/e/c24x0))
 * Brave Earth, Costa Rica ([Dec 2023](https://dandelion.events/e/futurecraft-brave-earth))
+* Calamansac, Cornwall, UK ([Apr 2023](https://dandelion.events/e/futurecraft-residency))
 
 ### Other residencies and retreats
 
@@ -59,7 +61,6 @@
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
 *   Retreats with Zen teacher and mediator [Diane Musho Hamilton](https://www.dianemushohamilton.com/) (Oct 2022, Dec 2024)
 *   [HER men's retreat](https://www.braveearth.com/experiences/her20-dp5h6) with coach [Alain Lagger](http://www.alainlagger.com/bio-2) at [Brave Earth](https://www.braveearth.com/), Costa Rica (Oct 2021)
-*   Music retreats with [Rainer Scheurenbrand](https://open.spotify.com/artist/2ZQinGoK9FA6ohO68q65A5) (Mar 2018, Feb 2020)
 *   Clowning at the [Divine Ridiculous](https://www.facebook.com/groups/divine.ridiculous/) Lupercalia (Feb 2020)
 *   Haka with [Matiu Te Huki](https://rainbowwarrior.nz/) at Canaan Downs, Golden Bay, Aotearoa New Zealand (Feb 2019)
 *   Deep Magic retreat with [Julian Vayne](https://julianvayne.com/) at [St. Nectan's Glen](https://www.st-nectansglen.co.uk/) (May 2018)
