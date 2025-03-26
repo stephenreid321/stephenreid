@@ -17,7 +17,7 @@
 *   Retreats and courses with teachers qualified by [Rob Burbea](https://hermesamara.org):
   *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://nirodha.fi/retreat-03-25/) with Catherine McGee and Juha Penttilä at The Friendship Inn, Finland (Mar 2025, 8 days)
   *   [Freedom in Everything](https://hermesamara.org/), Hermes Amara Foundation annual retreat with Yahel Avigur and Juha Penttilä at Colehayes Park, UK (Dec 2023, 7 days)
-  *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://dharmaseed.org/retreats/5700/) with Yahel Avigur and Catherine McGee at Gaia House (Sep 2023, 8 days)
+  *   [The Eye of the Heart: Tracing a Path to Soulfulness](https://dharmaseed.org/retreats/5700/) with Catherine McGee and Yahel Avigur at Gaia House (Sep 2023, 8 days)
   *   [Seeing Through Dualities, Deepening in Emptiness](https://dharmacourse.org/seeing-through-dualities-deepening-in-emptiness/) with Yahel Avigur and Susy Keely, online (Jan – Mar 2023)
   *   [Liberating Ways of Looking](https://dharmaseed.org/retreats/5347) with Yahel Avigur and Kirsten Kratz at Gaia House (Oct 2022, 7 days)
   *   [The Courageous Heart](https://dharmaseed.org/retreats/5054/) with Kirsten Kratz and Laura Bridgman at Gaia House (Dec 2021, 3 days)
