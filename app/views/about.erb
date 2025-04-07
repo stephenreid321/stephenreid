@@ -90,7 +90,7 @@
 
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 <ul>
-  <% Affiliation.all(filter: "{Current} = ''", sort: { 'Order' => 'asc' }).each { |affiliation| %>
+  <% Affiliation.all(filter: "AND({Current} = '', {Hidden} = '')", sort: { 'Order' => 'asc' }).each { |affiliation| %>
   <li>
     <% if affiliation.fields['Organisation'] %>
       <a href="<%= affiliation.organisation['URL'] %>"><%= affiliation.organisation['Name'] %></a>,
@@ -98,6 +98,12 @@
     <%= affiliation['Position'] %>
   </li>
   <% } %>
+  <li>
+    Digital consultancy work for organisations including Supermodular, the New Economics Foundation, 38 Degrees, the Labour Party, the Green Party, 350.org, the Living Wage Foundation, Positive Money, SumOfUs, 10:10 and Brandalism
+  </li>
+  <li>
+    Activism with Camp for Climate Action and Extinction Rebellion, and as a co-founder of UK Uncut and The Intruders
+  </li>
 </ul>
 
 <h2 class="mt-5" id="research">Peer-reviewed research</h2>
@@ -111,8 +117,8 @@
   <% } %>
 </dl>
 
-<h2 class="mt-5" id="places-lived">Places I've lived</h2>
-<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1RYx2yMMqOlVVzJtp79kXHUIcyX0dTY8&ehbc=2E312F&ll=55.88678154374715%2C6.838697200000006&z=4" style="height: 400px; width: 100%; border: 0;"></iframe>
+<h2 class="mt-5" id="places-lived">Treasure Map</h2>
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8&ehbc=2E312F" style="height: 400px; width: 100%; border: 0;"></iframe>
 
 
 <h2 class="mt-5" id="feedback">Feedback on my courses and events</h2>
