@@ -11,7 +11,7 @@ StephenReid::App.controller do
     @og_desc = "Network view of posts I've shared"
     @full_network = true
     @posts = Post.all(filter: "AND(
-        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
+        IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
     erb :'knowledgegraph/knowledgegraph'
@@ -42,7 +42,7 @@ StephenReid::App.controller do
     else
       @full_network = true
       @posts = Post.all(filter: "AND(
-        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
+        IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
     end
@@ -52,7 +52,7 @@ StephenReid::App.controller do
   get '/feed', provides: :rss, cache: true do
     expires 1.hour.to_i
     @posts = Post.all(filter: "AND(
-        IS_AFTER({Created at}, '#{1.month.ago.to_s(:db)}'),
+        IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
       )", sort: { 'Created at' => 'desc' }, paginate: false)
     RSS::Maker.make('atom') do |maker|
