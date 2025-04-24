@@ -180,7 +180,12 @@ module StephenReid
     end
 
     get '/prompt', provides: :txt do
-      "#{BlogPost.prompt(book_summaries: params[:book_summaries]).join("\n\n")}\n\n#{substack_posts(limit: params[:limit]) unless params[:skip_substack_posts]}"
+      [
+        BlogPost.prompt(book_summaries: params[:book_summaries]).join("\n\n"),
+        '## Substack notes',
+        File.read("#{Padrino.root}/app/substack/notes.md").force_encoding('utf-8'),
+        (substack_posts(limit: params[:limit]) unless params[:skip_substack_posts])
+      ].compact.join("\n\n")
     end
 
     get '/places' do

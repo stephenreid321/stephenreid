@@ -94,23 +94,24 @@
     <h3>Testimonials</h3>
 
     <% testimonials = [
-      "Working with Stephen was something else. He held space for me to tap into a truly authentic and deeply honest version of myself, and guided me through a journey that really helped me understand my values and how to use them to make challenging life decisions at a key inflection point in my life. I felt so \"seen\" by Stephen whenever we spoke: he both allowed me to be my complete self whilst also challenging me on some of the stories I was telling myself. I'd highly recommend Stephen as a coach and truly think he's one of the best people to have by your side through the ups the downs of life.",
+      ["Working with Stephen was something else. He held space for me to tap into a truly authentic and deeply honest version of myself, and guided me through a journey that really helped me understand my values and how to use them to make challenging life decisions at a key inflection point in my life. I felt so \"seen\" by Stephen whenever we spoke: he both allowed me to be my complete self whilst also challenging me on some of the stories I was telling myself. I'd highly recommend Stephen as a coach and truly think he's one of the best people to have by your side through the ups the downs of life.", "Jun 2022"],
       
-      "I am not the kind of person who ever thought I needed a coach. I am super productive and good at making decisions but working with Stephen for a few months was transformative. Stephen has a magical ability to hold a safe space, ask the right questions and challenge. Working with him I reevaluated some of my limiting beliefs on scaling my business which has meant that this year business is booming! But he is also more than a business coach - he looks at the whole person. In our time together we dived into money, relationships and other areas of my life where I felt stuck. I would highly recommend working with Stephen. It might just change your life.",
+      ["I am not the kind of person who ever thought I needed a coach. I am super productive and good at making decisions but working with Stephen for a few months was transformative. Stephen has a magical ability to hold a safe space, ask the right questions and challenge. Working with him I reevaluated some of my limiting beliefs on scaling my business which has meant that this year business is booming! But he is also more than a business coach - he looks at the whole person. In our time together we dived into money, relationships and other areas of my life where I felt stuck. I would highly recommend working with Stephen. It might just change your life.", "Mar 2023"],
       
-      "I've admired Stephen's work from afar for several years now, since I heard about his Tools for Regenerative Renaissance course. I decided to work with him as a coach after realizing he managed to successful navigate a lot of the dimensions I deeply cared about: regeneration, technology, conscious sexuality, community. He not only helped inquire in ways that opened up my mind but also has a brilliant logical way of seeing things, breaking down complexity and making life seem easier. Working with Stephen as a coach was a pleasure, I highly recommend it if you resonate with him and his work!",
+      ["I've admired Stephen's work from afar for several years now, since I heard about his Tools for Regenerative Renaissance course. I decided to work with him as a coach after realizing he managed to successful navigate a lot of the dimensions I deeply cared about: regeneration, technology, conscious sexuality, community. He not only helped inquire in ways that opened up my mind but also has a brilliant logical way of seeing things, breaking down complexity and making life seem easier. Working with Stephen as a coach was a pleasure, I highly recommend it if you resonate with him and his work!", "Aug 2024"],
       
-      "My conversations with Stephen have been an expansive journey of self-discovery. He has a well-honed ability to hold a judgment-free, all-welcoming, safe, and light container, helping me uncover deeper behavioral patterns and unconscious beliefs. Importantly, he didn't push or impose his way of being—he helped me see that all the answers are within me by asking sharp, non-directive questions. It has been a gift to have him coach me through my journey, and I strongly endorse him as a coach!"
+      ["My conversations with Stephen have been an expansive journey of self-discovery. He has a well-honed ability to hold a judgment-free, all-welcoming, safe, and light container, helping me uncover deeper behavioral patterns and unconscious beliefs. Importantly, he didn't push or impose his way of being—he helped me see that all the answers are within me by asking sharp, non-directive questions. It has been a gift to have him coach me through my journey, and I strongly endorse him as a coach!", "Feb 2025"]
     ] %>
 
     <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-        <% testimonials.each_with_index do |testimonial, index| %>
+        <% testimonials.reverse.each_with_index do |testimonial, index| %>
           <div class="carousel-item <%= 'active' if index == 0 %>">
             <div class="row mb-3">
               <div class="col-auto"><i class="fa fa-quote-left"></i></div>
               <div class="col">
-                <p class="lead mb-0"><%= testimonial %></p>
+                <p class="lead mb-0"><%= testimonial[0] %></p>
+                <p class="text-muted text-right mt-2"><%= testimonial[1] %></p>
               </div>
             </div>
           </div>

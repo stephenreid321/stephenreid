@@ -78,18 +78,18 @@ class BlogPost
       File.read("#{Padrino.root}/app/markdown/bio.md").force_encoding('utf-8'),
       %(## Training and teachers),
       File.read("#{Padrino.root}/app/markdown/training.md").force_encoding('utf-8'),
-      %(## Diet),
-      File.read("#{Padrino.root}/app/markdown/diet.md").force_encoding('utf-8'),
-      %(## AI consulting),
-      File.read("#{Padrino.root}/app/markdown/ai_consulting.md").force_encoding('utf-8'),
-      %(## Facilitation),
-      File.read("#{Padrino.root}/app/markdown/facilitation.md").force_encoding('utf-8'),
+      %(## Speaking engagements),
+      SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n"),
+      # %(## Diet),
+      # File.read("#{Padrino.root}/app/markdown/diet.md").force_encoding('utf-8'),
+      # %(## AI consulting),
+      # File.read("#{Padrino.root}/app/markdown/ai_consulting.md").force_encoding('utf-8'),
+      # %(## Facilitation),
+      # File.read("#{Padrino.root}/app/markdown/facilitation.md").force_encoding('utf-8'),
       %(## Coaching),
       File.read("#{Padrino.root}/app/markdown/coaching.md").force_encoding('utf-8'),
       %(## Content I've shared recently),
-      Post.all(filter: "IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).map { |post| "[#{post['Title']}](#{post['Link']}), #{post['Created at']}\n#{post['Body']}" }.join("\n\n"),
-      %(## Speaking engagements),
-      SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")
+      Post.all(filter: "IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).map { |post| "[#{post['Title']}](#{post['Link']}), #{post['Created at']}\n#{post['Body']}" }.join("\n\n")
     ]
     if book_summaries
       p << %(## Books I've read, with summaries)
