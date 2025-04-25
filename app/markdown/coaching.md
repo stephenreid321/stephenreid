@@ -34,10 +34,10 @@ Coaching can be distinguished from mentoring and teaching (where the mentor/teac
 
 ### Interested in working together?
 
-I offer an initial free half-hour exploratory call, so we can see if we are well-suited to one another. All being well, typically we'd then meet for an hour every other week via Zoom for an initial run of four sessions across two months.
+I offer an initial free half-hour exploratory call, so we can see if we are well-suited to one another. All being well, typically we'd then meet for an hour every other week, in person in Stockholm or via Zoom, for an initial run of four sessions across two months.
 
-I would expect you to attend sessions on time and from a quiet place, free from distractions. If you need to cancel or reschedule a session, I would not charge as long as you provide at least 24 hours notice.
+If joining via Zoom, I ask you to attend sessions on time and from a quiet place, free from distractions.  Sessions are recorded (unless you request otherwise), with recordings shared with you confidentially shortly after each session for your reflection and review. I might occasionally ask your permission to share a recording with a supervisor.
 
-Sessions are recorded (unless you request otherwise), with recordings shared with you confidentially shortly after each session for your reflection and review. I might occasionally ask your permission to share a recording with a supervisor.
+If you need to cancel or reschedule a session, I do not charge as long as you provide at least 24 hours notice.
 
 I sometimes am able to offer reduced rates for those on low incomes (make a note in the form linked below if this is of interest to you).
