@@ -1,9 +1,9 @@
 $primary: #B16DC6;
-$font-family-sans-serif: 'Fira Mono', sans-serif;
+$font-family-sans-serif: 'Space Grotesk', sans-serif;
 $body-bg: #292C35;
 $body-color: #c4cbd4;
 $code-color: #C5636C;
-$font-size-base: 1rem;
+$font-size-base: 1.125rem;
 $lead-font-size: (
   $font-size-base * 1.1
 );
@@ -146,7 +146,7 @@ blockquote {
 }
 
 .fira {
-  font-family: 'Fira Mono', sans-serif !important
+  font-family: 'Space Grotesk', sans-serif !important
 }
 
 .badge {

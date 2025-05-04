@@ -18,6 +18,24 @@ $contrast-color: darken($body-color, 15%);
 @import "share";
 @import "toc";
 
+body,
+small {
+  font-weight: 300
+}
+
+.form-control {
+  font-weight: 300
+}
+
+b,
+strong {
+  font-weight: 600
+}
+
+.dropdown-item {
+  font-weight: 300
+}
+
 mark,
 .mark {
   color: $body-color;
