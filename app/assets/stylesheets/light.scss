@@ -19,21 +19,15 @@ $contrast-color: darken($body-color, 15%);
 @import "toc";
 
 body,
-small {
-  font-weight: 300
-}
-
-.form-control {
+small,
+.form-control,
+.dropdown-item {
   font-weight: 300
 }
 
 b,
 strong {
   font-weight: 600
-}
-
-.dropdown-item {
-  font-weight: 300
 }
 
 mark,
