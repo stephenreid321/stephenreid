@@ -141,7 +141,7 @@ class Post < Airrecord::Table
       end
     end
 
-    if (organisation = Organisation.all(filter: "{Domain} = '#{URI(post['Link']).host.gsub('www.', '')}'").first)
+    if (organisation = Organisation.all(filter: "{Domain} = '#{URI(post['Link']).host.gsub('www.', '').split('.').last(2).join('.')}'").first)
       post.organisation = organisation
       unless organisation['No domain tag']
         twitter_add << "@#{organisation['Twitter username']}"
