@@ -28,8 +28,12 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+*.clicks.csv
+*.delivers.csv
+*.opens.csv
 
 # YARD artifacts
 .yardoc
 _yardoc
 doc/
+
