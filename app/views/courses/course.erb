@@ -87,12 +87,34 @@ end
         margin-right: 5px;
         display: inline;
       }
+      .mobile-hidden {
+        display: inline;
+      }
+      .mobile-visible {
+        display: none;
+      }
+      @media (max-width: 768px) {
+        .mobile-hidden {
+          display: none;
+        }
+        .mobile-visible {
+          display: inline;
+        }
+      }
     </style>
   </head>
   <body>
     <% if @course['URL'] %>
       <div class="source-banner">
-        A course by <a href="https://stephenreid.net" target="_blank">Stephen Reid</a> &middot; Original notes available on <a href="<%= @course['URL'] %>" target="_blank">Google Docs</a>
+        A course by <a href="https://stephenreid.net" target="_blank">Stephen Reid</a>
+        &middot;
+        <span class="mobile-visible">
+          <a href="<%= @course['URL'] %>" target="_blank">Original notes</a>
+        </span>
+        <span class="mobile-hidden">
+          Original notes available on
+          <a href="<%= @course['URL'] %>" target="_blank">Google Docs</a>
+        </span>
       </div>
     <% end %>
     <div class="container">
