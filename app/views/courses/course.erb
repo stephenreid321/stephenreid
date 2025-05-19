@@ -14,6 +14,9 @@ body.search('img').each { |img|
   end
   if img.parent.name == 'span'
     img.parent.remove_attribute('style')
+  end  
+  if img.ancestors('table').any?
+    img.remove_attribute('style')
   end
 }
 
