@@ -126,7 +126,7 @@ module StephenReid
       '/featured' => '/knowledgegraph',
       '/recommended' => '/knowledgegraph',
       '/maps' => '/life-as-practice',
-      '/life-as-practice' => 'https://docs.google.com/document/d/1DIiTAPJzC0_Bn0Zd8zbBkWo0jHNpT9xKGiy8m2UyGgE/edit',
+      '/life-as-practice' => 'https://lifeaspractice.com/',
       '/technological-metamodernism' => 'https://stephenreid.substack.com/p/technological-metamodernism-course'
     }.each do |k, v|
       get k.to_s do
