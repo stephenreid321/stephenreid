@@ -17,16 +17,21 @@ body.search('img').each { |img|
   end
 }
 
-# Add class to the first image instead of inline style
+# Add class to the first image
 first_img = body.at('img')
 if first_img
   first_img['class'] = 'first-image'
 end
 
-# Add movie emoji to YouTube links only if the link is the first child of its parent
+# Add movie emoji to YouTube links
 body.search('a').each do |link|
   if link['href'] && link['href'].include?('youtube') && link.parent == link.parent.parent.children.first
     link.inner_html = %Q{<img src="/images/youtube.png" class="youtube-icon" />#{link.inner_html}}
+  end
+  
+  # Remove Google redirect from URLs
+  if link['href'] && link['href'].match?(/google\.com\/url\?q=(.+?)(&|$)/)
+    link['href'] = URI.decode_www_form_component(link['href'].match(/google\.com\/url\?q=(.+?)(&|$)/)[1])
   end
   
   # Shorten very long link text
