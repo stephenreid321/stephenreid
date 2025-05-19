@@ -27,8 +27,8 @@
             # ['Group facilitation', '/facilitation'],
             # ['Technological Metamodernism', '/technological-metamodernism'],
             # ['Podcast', '/podcast']        
-            ['Courses', Course.all.sort_by { |c| c['Date'] || Time.now }.reverse.map { |c| [c['Name'], '/courses/'+c['Slug']] }],                         
             ['Coaching', '/coaching'],                        
+            ['Courses', Course.all.sort_by { |c| c['Date'] || Time.now }.reverse.map { |c| [c['Name'], '/courses/'+c['Slug']] }],                                     
             ['Events', '/events'],                        
             ['Metastrategy', '/metastrategy'],               
             ['Knowledge',
