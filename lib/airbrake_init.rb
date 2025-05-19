@@ -3,7 +3,12 @@ Airbrake.configure do |config|
   config.project_id = (ENV['AIRBRAKE_PROJECT_ID'] or 1)
   config.project_key = (ENV['AIRBRAKE_PROJECT_KEY'] or ENV['AIRBRAKE_API_KEY'] or 'project_key')
   config.environment = Padrino.env
-  config.remote_config = (ENV['AIRBRAKE_REMOTE_CONFIG'] != 'false')
+  if ENV['AIRBRAKE_HOST']
+    config.job_stats = false
+    config.query_stats = false
+    config.performance_stats = false
+    config.remote_config = false
+  end
 end
 
 Airbrake.add_filter do |notice|
