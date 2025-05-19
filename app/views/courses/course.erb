@@ -30,7 +30,7 @@ body.search('a').each do |link|
   end
   
   # Shorten very long link text
-  if link.content.starts_with?('https://') && link.content.length > 60
+  if link.content.starts_with?('https://') && link.content.length >= 100
     link.content = link.content.split('/').first(3).join('/') + '/...'
   end
 end
