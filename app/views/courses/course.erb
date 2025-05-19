@@ -9,9 +9,9 @@ body.search('a[id^=cmnt]').each { |a| a.parent.parent.remove }
 
 body.search('img').each { |img|
   img['src'] = "#{base_uri}/#{img['src']}"
-  img.remove_attribute('width')
-  img.remove_attribute('height')
-  img.remove_attribute('style')
+  if img['style'] && img['style'].match(/width:\s*([\d\.]+)px/) && $1.to_i >= 576
+    img.remove_attribute('style')
+  end
   if img.parent.name == 'span'
     img.parent.remove_attribute('style')
   end
