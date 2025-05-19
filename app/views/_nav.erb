@@ -31,7 +31,8 @@
             # ['Intro to AI', 'https://dandelion.events/e/intro-to-ai-feb-2024'],            
             # ['Podcast', '/podcast']        
             ['Events', '/events'],                        
-            ['Metastrategy', '/metastrategy'],                            
+            ['Metastrategy', '/metastrategy'],   
+            ['Courses', Course.all.map { |c| [c['Name'], '/courses/'+c['Slug']] }],                         
             ['Knowledge',
              [
                ['My knowledgegraph', '/knowledgegraph'],
@@ -85,6 +86,7 @@
 </div>
 <script>
   $("#nav a[href^=http]").attr('target', '_blank')
+  $("#nav a[href^='/courses']").attr('target', '_blank')
   $.map(['blog', 'tao-te-ching', 'coins'], function(x,i) {
     if (window.location.href.includes('/'+x))
       $("#nav a[href='/"+x+"']").addClass('active')

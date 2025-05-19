@@ -23,9 +23,9 @@ if first_img
   first_img['class'] = 'first-image'
 end
 
-# Add movie emoji to YouTube links
+# Add movie emoji to YouTube links only if the link is the first child of its parent
 body.search('a').each do |link|
-  if link['href'] && link['href'].include?('youtube')
+  if link['href'] && link['href'].include?('youtube') && link.parent == link.parent.parent.children.first
     link.inner_html = %Q{<img src="/images/youtube.png" class="youtube-icon" />#{link.inner_html}}
   end
 end
