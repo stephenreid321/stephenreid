@@ -53,6 +53,7 @@ end
 <html>
   <head>
     <%= head.inner_html.to_s.gsub('"Overpass"', 'sans-serif') %>
+    <title><%= @course['Name'] %></title>
     <style>
       body { margin: 0 !important; font-family: sans-serif;  }
       .container { padding: 20px !important; max-width: 800px; margin: 0 auto;}
