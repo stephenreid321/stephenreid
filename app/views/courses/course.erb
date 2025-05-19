@@ -30,7 +30,7 @@ body.search('a').each do |link|
   end
   
   # Shorten very long link text
-  if link.content.length > 60
+  if link.content.starts_with?('https://') && link.content.length > 60
     link.content = link.content.split('/').first(3).join('/') + '/...'
   end
 end
@@ -92,7 +92,7 @@ end
   <body>
     <% if @course['URL'] %>
       <div class="source-banner">
-        📝 Original notes available on <a href="<%= @course['URL'] %>" target="_blank">Google Docs</a>
+        A course by <a href="https://stephenreid.net" target="_blank">Stephen Reid</a> &middot; Original notes available on <a href="<%= @course['URL'] %>" target="_blank">Google Docs</a>
       </div>
     <% end %>
     <div class="container">

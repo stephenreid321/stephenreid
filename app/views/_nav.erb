@@ -25,14 +25,14 @@
       <%= ul_nav [
             # ['AI consulting', '/ai-consulting'],
             # ['Group facilitation', '/facilitation'],
-            ['Technological Metamodernism', '/technological-metamodernism'],
+            # ['Technological Metamodernism', '/technological-metamodernism'],
             ['Coaching', '/coaching'],            
             # ['Futurecraft', 'https://dandelion.events/e/futurecraft-apr-2024'],
             # ['Intro to AI', 'https://dandelion.events/e/intro-to-ai-feb-2024'],            
             # ['Podcast', '/podcast']        
             ['Events', '/events'],                        
             ['Metastrategy', '/metastrategy'],   
-            ['Courses', Course.all.map { |c| [c['Name'], '/courses/'+c['Slug']] }],                         
+            ['Courses', Course.all.sort_by { |c| c['Date'] || Time.now }.reverse.map { |c| [c['Name'], '/courses/'+c['Slug']] }],                         
             ['Knowledge',
              [
                ['My knowledgegraph', '/knowledgegraph'],
