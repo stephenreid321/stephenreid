@@ -1,7 +1,6 @@
 <% 
-# Find the only HTML file in the course directory
-html_file = Dir.glob("#{Padrino.root}/app/assets/courses/#{@course['Name']}/*.html").first
-doc = Nokogiri::HTML(open(html_file))
+base_uri = "https://stephenreid.ams3.cdn.digitaloceanspaces.com/courses/#{@course['Name'].gsub(' ', '%20')}"
+doc = Nokogiri::HTML(URI.open("#{base_uri}/course.html"))
 head = doc.search('head')
 body = doc.search('body')
 
@@ -9,7 +8,7 @@ body.search('a[id^=cmnt_ref]').each { |a| a.parent.remove }
 body.search('a[id^=cmnt]').each { |a| a.parent.parent.remove }
 
 body.search('img').each { |img|
-  img['src'] = "/courses/#{@course['Name']}/#{img['src']}"
+  img['src'] = "#{base_uri}/#{img['src']}"
   img.remove_attribute('width')
   img.remove_attribute('height')
   img.remove_attribute('style')
