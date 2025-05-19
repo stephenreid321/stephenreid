@@ -18,6 +18,12 @@ body.search('img').each { |img|
   if img.ancestors('table').any?
     img.remove_attribute('style')
   end
+  # Remove negative margin values from image style
+  if img['style'] && img['style'].match(/margin(-\w+)?:\s*-[\d\.]+/)
+    img['style'] = img['style'].gsub(/margin(-\w+)?:\s*-[\d\.]+[^;]*;?/, '')
+    # Remove style attribute if it's empty after the replacement
+    img.remove_attribute('style') if img['style'].strip.empty?
+  end
 }
 
 # Add class to the first image
