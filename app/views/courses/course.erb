@@ -28,6 +28,11 @@ body.search('a').each do |link|
   if link['href'] && link['href'].include?('youtube') && link.parent == link.parent.parent.children.first
     link.inner_html = %Q{<img src="/images/youtube.png" class="youtube-icon" />#{link.inner_html}}
   end
+  
+  # Shorten very long link text
+  if link.content.length > 60
+    link.content = link.content.split('/').first(3).join('/') + '/...'
+  end
 end
 
 # Remove empty paragraph elements before and after unordered lists
