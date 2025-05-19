@@ -54,7 +54,8 @@ end
   <head>
     <%= head.inner_html.to_s.gsub('"Overpass"', 'sans-serif') %>
     <style>
-      body { font-family: sans-serif; padding: 20px !important; padding-top: 0 !important; max-width: 800px; margin: 0 auto; }
+      body { margin: 0 !important; font-family: sans-serif;  }
+      .container { padding: 20px !important; max-width: 800px; margin: 0 auto;}
       img { max-width: 100%; margin-bottom: 20px }
       .first-image { margin-top: 20px; margin-bottom: 20px; }
       ul { margin-top: 20px !important; margin-bottom: 20px !important; }
@@ -70,10 +71,6 @@ end
         font-size: 14px;
         position: sticky;
         top: 0;
-        left: 0;
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-        box-sizing: border-box;
         z-index: 1000;
         margin-bottom: 20px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -93,6 +90,8 @@ end
         📝 Original notes available on <a href="<%= @course['URL'] %>" target="_blank">Google Docs</a>
       </div>
     <% end %>
-    <%= body.inner_html %>
+    <div class="container">
+      <%= body.inner_html %>
+    </div>
   </body>
 </html>
