@@ -67,6 +67,16 @@ body.search('p').each do |paragraph|
   end
 end
 
+# Set margin-bottom: 0 for paragraphs containing anchor links that start with #
+body.search('a').each do |link|
+  if link['href'] && link['href'].start_with?('#')
+    parent_p = link.ancestors('p').first
+    if parent_p
+      parent_p['class'] = "#{parent_p['class'] || ''} bottom-padding-10".strip
+    end
+  end
+end
+
 %>
 
 <html>
@@ -85,6 +95,7 @@ end
       ul + ul { margin-top: -20px !important; }
       li { padding-bottom: 0 !important; padding-top: 5px !important; }
       table { margin-left: auto !important; margin-bottom: 20px !important; }
+      .bottom-padding-10 { padding-bottom: 10px !important; }
 
       :target {
         scroll-margin-top: 20px;
