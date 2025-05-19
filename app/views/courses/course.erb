@@ -1,0 +1,94 @@
+<% 
+# Find the only HTML file in the course directory
+html_file = Dir.glob("#{Padrino.root}/app/assets/courses/#{@course['Name']}/*.html").first
+doc = Nokogiri::HTML(open(html_file))
+head = doc.search('head')
+body = doc.search('body')
+
+body.search('a[id^=cmnt_ref]').each { |a| a.parent.remove }
+body.search('a[id^=cmnt]').each { |a| a.parent.parent.remove }
+
+body.search('img').each { |img|
+  img['src'] = "/courses/#{@course['Name']}/#{img['src']}"
+  img.remove_attribute('width')
+  img.remove_attribute('height')
+  img.remove_attribute('style')
+  if img.parent.name == 'span'
+    img.parent.remove_attribute('style')
+  end
+}
+
+# Add class to the first image instead of inline style
+first_img = body.at('img')
+if first_img
+  first_img['class'] = 'first-image'
+end
+
+# Add movie emoji to YouTube links
+body.search('a').each do |link|
+  if link['href'] && link['href'].include?('youtube')
+    link.inner_html = %Q{<img src="/images/youtube.png" class="youtube-icon" />#{link.inner_html}}
+  end
+end
+
+# Remove empty paragraph elements before and after unordered lists
+body.search('ul').each do |ul|
+  # Check previous sibling
+  if ul.previous_element && ul.previous_element.name == 'p' && ul.previous_element.text.strip.empty?
+    ul.previous_element.remove
+  end
+  
+  # Check next sibling
+  if ul.next_element && ul.next_element.name == 'p' && ul.next_element.text.strip.empty?
+    ul.next_element.remove
+  end
+end
+
+%>
+
+<html>
+  <head>
+    <%= head.inner_html.to_s.gsub('"Overpass"', 'sans-serif') %>
+    <style>
+      body { font-family: sans-serif; padding: 20px !important; padding-top: 0 !important; max-width: 800px; margin: 0 auto; }
+      img { max-width: 100%; margin-bottom: 20px }
+      .first-image { margin-top: 20px; margin-bottom: 20px; }
+      ul { margin-top: 20px !important; margin-bottom: 20px !important; }
+      :target {
+        scroll-margin-top: 20px;
+      }
+      html {
+        scroll-padding-top: 20px;
+      }
+      .source-banner {
+        background-color: #f8f9fa;
+        padding: 10px 15px;
+        font-size: 14px;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        box-sizing: border-box;
+        z-index: 1000;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      a .youtube-icon {
+        text-decoration: none;
+        width: 20px;
+        margin-bottom: 0;
+        margin-right: 5px;
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <% if @course['URL'] %>
+      <div class="source-banner">
+        📝 Original notes available on <a href="<%= @course['URL'] %>" target="_blank">Google Docs</a>
+      </div>
+    <% end %>
+    <%= body.inner_html %>
+  </body>
+</html>
