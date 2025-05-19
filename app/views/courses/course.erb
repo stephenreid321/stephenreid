@@ -43,12 +43,16 @@ end
 # Remove empty paragraph elements before and after unordered lists
 body.search('ul').each do |ul|
   # Check previous sibling
-  if ul.previous_element && ul.previous_element.name == 'p' && ul.previous_element.text.strip.empty?
+  if ul.previous_element && ul.previous_element.name == 'p' && 
+     ul.previous_element.text.strip.empty? && 
+     ul.previous_element.search('img').empty?
     ul.previous_element.remove
   end
   
   # Check next sibling
-  if ul.next_element && ul.next_element.name == 'p' && ul.next_element.text.strip.empty?
+  if ul.next_element && ul.next_element.name == 'p' && 
+     ul.next_element.text.strip.empty? && 
+     ul.next_element.search('img').empty?
     ul.next_element.remove
   end
 end
