@@ -40,7 +40,7 @@
 * [Betwixt: Exploring the Threshold between Worlds](https://naturewisdom.life/event/betwixt-exploring-the-threshold-between-worlds/) with [Rebecca Card](http://naturewisdom.life/) and [Bell Selkie Lovelock](https://www.bellselkie.co.uk/) (Mar 2022)
 * [Wild Mind](https://www.goodreads.com/en/book/show/16000440) Intensive at [Lūžņa](https://www.soulcraft.eu/about), Latvia with [Sage Magdalene](https://sagemagdalene.com/) and [Sara McFarland](https://www.saramcfarland.com/) (Aug 2021)
 
-### Tantra & Conscious Sexuality
+### Tantra & conscious sexuality
 
 *   [The Body: Temple of the Divine](https://www.angsbacka.com/product/the-body-temple-of-the-devine-with-daniel-odier/) with [Daniel Odier](https://www.danielodier.com/) (May 2025)
 *   [The Pleasure Journey](https://www.elaineyonge.com/tpj) with [Elaine Yonge](https://www.elaineyonge.com/) (Oct 2024)
