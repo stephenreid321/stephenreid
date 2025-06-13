@@ -91,7 +91,9 @@ class Book < Airrecord::Table
     page = a.get("https://www.goodreads.com/book/show/#{book['Book Id']}")
     book['Genres'] = page.search('[data-testid=genresList] .Button__labelItem').map { |el| el.text }.reject { |g| g.starts_with?('...') }.join(', ')
     book['Number of Ratings'] = page.search('[data-testid=ratingsCount]').text.gsub(',', '').to_i
-    book['Cover image'] = [{ url: page.at_css('.BookCover__image img')['src'] }]
+    if img = page.at_css('.BookCover__image img')
+      book['Cover image'] = [{ url: img['src'] }]
+    end
     book.save
   end
 
