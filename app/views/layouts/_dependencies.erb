@@ -1,0 +1,44 @@
+<% {
+         'jquery/3.2.0' => 'jquery.min.js',
+         'jqueryui/1.12.1' => 'jquery-ui.min.js',
+         'popper.js/1.11.0' => 'umd/popper.min.js',
+         'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
+         'select2/3.5.2' => 'select2.min.js select2.min.css',
+         'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',
+         'Chart.js/3.5.1' => 'chart.js',
+         'js-cookie/2.2.1' => 'js.cookie.min.js',
+         'cytoscape/3.9.4' => 'cytoscape.min.js',
+         'chroma-js/2.0.6' => 'chroma.min.js',
+         'lightgallery/1.7.2' => 'js/lightgallery.min.js css/lightgallery.min.css',
+         'lg-thumbnail/1.2.1' => 'lg-thumbnail.min.js',
+         'sticky-table-headers/0.1.24' => 'js/jquery.stickytableheaders.min.js',
+         'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css',
+         'iframe-resizer/4.2.1' => 'iframeResizer.min.js',
+         'date-fns/1.30.1' => 'date_fns.js',
+         'typed.js/1.1.4' => 'typed.min.js',
+         'font-awesome/5.14.0' => 'css/all.min.css',
+         'font-awesome/4.7.0' => 'css/font-awesome.min.css',         
+       }.each { |k,v| %>
+<% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
+<% case f.split('.').last.to_sym; when :js %>
+  <script src="<%= u %>"></script>
+<% when :css %>
+  <link rel="stylesheet" href="<%= u %>">
+<% end %>
+<% } %>
+<% } %>
+
+<% [        
+       '//rawcdn.githack.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
+       '//rawcdn.githack.com/tgdwyer/WebCola/aab7e61cd9580c4c89180cc0a30594e12743a242/WebCola/cola.min.js',
+       '//rawcdn.githack.com/cytoscape/cytoscape.js-cola/8c78f9d5c11ff6162b7d902f0639e1f787277b9f/cytoscape-cola.js',
+       '//rawcdn.githack.com/kudago/oembed-all/ef03c7332cd2538a093ed756846e86319155553a/oembed.js',
+       '//cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js',
+       '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
+       '//platform.twitter.com/widgets.js',
+       '/javascripts/toc.js',
+       "/javascripts/pagelets.js?#{@cachebuster}",
+       "/javascripts/app.js?#{@cachebuster}"
+     ].each { |f| %>
+<script src="<%= f %>"></script>
+<% } %>

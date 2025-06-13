@@ -56,7 +56,7 @@
 
 ### Other residencies and retreats
 
-*   Retreats on Ekskäret ([Come Together](https://ekskaret.confetti.events/come-together-ekskaret-okt/): Oct 2023; [Elevate](https://ekskaret.confetti.events/elevate-2024-hibernate/): Nov 2024, Mar 2025)
+*   Retreats on Ekskäret ([Come Together](https://ekskaret.confetti.events/come-together-ekskaret-okt/): Oct 2023; [Elevate](https://ekskaret.confetti.events/elevate-2024-hibernate/): Nov 2024, Mar 2025, Jun 2025)
 *   [Feÿtopia](https://feytopia.com/) (Mar 2024)
 *   [Microsolidarity](https://www.microsolidarity.cc/) Gatherings (Jul 2023, Feb 2024)
 *   [Life Itself](https://lifeitself.us/)’s [Embodying Collective Transformation](https://lifeitself.us/embodying-collective-transformation/) residency (Nov 2022)
