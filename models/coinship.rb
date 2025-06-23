@@ -85,7 +85,7 @@ class Coinship
           end
         end
       rescue StandardError => e
-        Airbrake.notify(e)
+        # Airbrake.notify(e)
         return
       end
 

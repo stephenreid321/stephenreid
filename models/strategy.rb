@@ -187,7 +187,7 @@ class Strategy
           rescue StandardError => e
             puts "error: #{strategy.ticker}, deleting"
             strategy.destroy
-            Airbrake.notify(e)
+            # Airbrake.notify(e)
           end
         end
       end

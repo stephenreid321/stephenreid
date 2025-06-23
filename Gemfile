@@ -37,7 +37,6 @@ gem 'dragonfly-s3_data_store'
 gem 'mongoid', '~> 7.0'
 
 # Interacting with other websites
-gem 'airbrake'
 gem 'anthropic'
 gem 'concurrent-ruby'
 gem 'dropbox_api'

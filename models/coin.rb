@@ -134,7 +134,7 @@ class Coin
         sleep 1
         remote_update
       else
-        Airbrake.notify(e)
+        # Airbrake.notify(e)
       end
       return
     end

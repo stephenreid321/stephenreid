@@ -43,11 +43,6 @@ module StephenReid
     end
 
     error do
-      Airbrake.notify(env['sinatra.error'],
-                      url: "#{ENV['BASE_URI']}#{request.path}",
-                      params: params,
-                      request: request.env.select { |_k, v| v.is_a?(String) },
-                      session: session)
       erb :error, layout: :application
     end
 
