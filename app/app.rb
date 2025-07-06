@@ -6,6 +6,10 @@ module StephenReid
     helpers Activate::ParamHelpers
     helpers Activate::NavigationHelpers
 
+    use Honeybadger::Rack::UserFeedback
+    use Honeybadger::Rack::UserInformer
+    use Honeybadger::Rack::ErrorNotifier
+
     register Padrino::Cache
     enable :caching unless Padrino.env == :development
 

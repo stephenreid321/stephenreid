@@ -8,8 +8,6 @@ Style/HashSyntax:
   EnforcedShorthandSyntax: never 
 Naming/MethodParameterName:
   Enabled: false
-Naming/PredicateName:
-  Enabled: false
 Naming/AccessorMethodName:
   Enabled: false  
 Style/MultilineBlockChain:
