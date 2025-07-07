@@ -9,7 +9,8 @@ Honeybadger.configure do |config|
       error_type == 'Sinatra::BadRequest' && error_message && error_message.include?('Invalid multipart/form-data: EOFError'),
       error_type == 'ThreadError' && error_message && error_message.include?("can't be called from trap context"),
       error_type == 'Errno::EIO' && error_message && error_message.include?('Input/output error'),
-      error_type == 'Encoding::CompatibilityError' && error_message && error_message.include?('invalid byte sequence in UTF-8')
+      error_type == 'Encoding::CompatibilityError' && error_message && error_message.include?('invalid byte sequence in UTF-8'),
+      error_type == 'ArgumentError' && error_message && error_message.include?('invalid byte sequence in UTF-8')
     ].any?
 
     notice.halt! if should_ignore
