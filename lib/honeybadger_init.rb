@@ -11,7 +11,8 @@ Honeybadger.configure do |config|
       error_type == 'Errno::EIO' && error_message && error_message.include?('Input/output error'),
       error_type == 'Encoding::CompatibilityError' && error_message && error_message.include?('invalid byte sequence in UTF-8'),
       error_type == 'ArgumentError' && error_message && error_message.include?('invalid byte sequence in UTF-8'),
-      error_type == 'Airrecord::Error' && error_message && error_message.include?('HTTP 503: Communication error')
+      error_type == 'Airrecord::Error' && error_message && error_message.include?('HTTP 503: Communication error'),
+      error_type == 'Errno::ECONNRESET' && error_message && error_message.include?('Connection reset by peer')
     ].any?
 
     notice.halt! if should_ignore
