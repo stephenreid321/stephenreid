@@ -1,6 +1,160 @@
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid?)
+[1h](https://substack.com/@stephenreid/note/c-139419995?)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+My latest newsletter, with tips for the LLM connoisseur
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!fuSC!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da37095-e69b-4ddf-b08b-f44943517d61_2448x1634.jpeg)
+
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com/)
+
+In Correspondence #50
+
+](https://stephenreid.substack.com/p/in-correspondence-50)
+
+Jul 27
+
+at
+
+1:35 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid?)
+[7d](https://substack.com/@stephenreid/note/c-137185162?)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Chapter 2, part 1 of Technological Metamodernism by 
+[Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing)
+ and me
+
+[
+
+Playback speed
+
+×
+
+Share post
+
+Share post at current time
+
+0:00
+
+/
+
+0:00
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+The Techno-Optimists: e/acc
+
+](https://technologicalmetamodernism.substack.com/p/the-techno-optimists-eacc)
+
+Jul 20
+
+at
+
+6:01 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid?)
+[Jul 8](https://substack.com/@stephenreid/note/c-133322931?)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Latest from me and 
+[Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing)
+
+[
+
+Playback speed
+
+×
+
+Share post
+
+Share post at current time
+
+0:00
+
+/
+
+0:00
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+The Techno-Skeptics
+
+](https://technologicalmetamodernism.substack.com/p/the-techno-skeptics)
+
+Jul 8
+
+at
+
+7:27 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid?)
+[Jun 16](https://substack.com/@stephenreid/note/c-126332564?)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Just published my latest newsletter!
+
+[
+
+I’m preparing to move into Emerge Lakefront later today– if you’re curious about the place, you’re welcome to join the Virtual Open House at 5pm CET.
+
+Stephen Reid
+
+](https://stephenreid.substack.com/p/in-correspondence-49?selection=1661f372-a49c-4797-918d-e67ee25f4b95)
+
+Jun 16
+
+at
+
+7:59 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -11,11 +165,11 @@
 
 Just posted my latest newsletter ✨
 
- ![](https://substackcdn.com/image/fetch/w_370,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2848c146-2fe4-4e5b-8978-4251f95b8485_740x721.png)
+ ![](https://substackcdn.com/image/fetch/$s_!O3sH!,w_370,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2848c146-2fe4-4e5b-8978-4251f95b8485_740x721.png)
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -33,7 +187,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -48,7 +202,7 @@ We've created this offering to complement the transformative power of retreats, 
 
 [lifeaspractice.com](https://lifeaspractice.com/)
 
- ![](https://substackcdn.com/image/fetch/w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4fa5ee44-70e1-4b77-8741-2cf7c0eae16c_1200x630.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!OZB4!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4fa5ee44-70e1-4b77-8741-2cf7c0eae16c_1200x630.jpeg)
 
 May 1
 
@@ -60,7 +214,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -83,7 +237,7 @@ sfwhgse.com
 
 Home | SFW Conference
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb07a4701-5098-43c7-8779-c56d75dce4de_1792x1024.jpeg)](https://www.sfwhgse.com/)
+ ![](https://substackcdn.com/image/fetch/$s_!j1JZ!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb07a4701-5098-43c7-8779-c56d75dce4de_1792x1024.jpeg)](https://www.sfwhgse.com/)
 
 Apr 24
 
@@ -95,7 +249,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -112,7 +266,7 @@ docs.google.com
 
 Rob Burbea
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F41ae18f6-422d-40ee-b875-77ae3e160952_1200x630.png)](https://docs.google.com/document/d/1GkXUYqOCRRf1lNlpHQxsCS503RJUuxqyqNeA8SlSVo8/edit?usp=drivesdk)
+ ![](https://substackcdn.com/image/fetch/$s_!ULr8!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F41ae18f6-422d-40ee-b875-77ae3e160952_1200x630.png)](https://docs.google.com/document/d/1GkXUYqOCRRf1lNlpHQxsCS503RJUuxqyqNeA8SlSVo8/edit?usp=drivesdk)
 
 Apr 5
 
@@ -124,7 +278,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -136,9 +290,9 @@ at
 I just published my latest _In Correspondence_ from the beautiful Ekskäret island where I’m attending my second Elevate co-created gathering.
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbb707744-17a5-4634-ba70-2e4a52ccab95_3951x2975.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!bVku!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbb707744-17a5-4634-ba70-2e4a52ccab95_3951x2975.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -156,7 +310,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -177,7 +331,7 @@ goodreads.com
 
 There Is No Antimemetics Division
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb503b94e-df8a-4669-903d-0e73514bf620_1563x2500.jpeg)](https://www.goodreads.com/book/show/54870256-there-is-no-antimemetics-division)
+ ![](https://substackcdn.com/image/fetch/$s_!j_Hb!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb503b94e-df8a-4669-903d-0e73514bf620_1563x2500.jpeg)](https://www.goodreads.com/book/show/54870256-there-is-no-antimemetics-division)
 
 Mar 29
 
@@ -189,7 +343,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -216,7 +370,7 @@ Linguistic aside: Something else I find interesting about this triangle is that 
 
 Finnish is as different to Swedish and Latvian as they are to Japanese, Mandarin Chinese or Arabic, representing entirely separate language families with fundamentally different grammatical structures, vocabulary roots, and linguistic evolution 🤯
 
- ![](https://substackcdn.com/image/fetch/w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f9a2624-9a51-44e9-b7fa-401c3b1d904d_2052x1360.png)
+ ![](https://substackcdn.com/image/fetch/$s_!Xuyn!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f9a2624-9a51-44e9-b7fa-401c3b1d904d_2052x1360.png)
 
 Mar 28
 
@@ -228,7 +382,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -285,7 +439,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -321,7 +475,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -516,7 +670,7 @@ Together, they demonstrate the continued evolution of spiritual thought in the 2
 
 (co-authored with Claude 3.7)
 
- ![](https://substackcdn.com/image/fetch/w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337c68a2-440f-4f9b-8fe2-9f365f755dea_1102x714.png)
+ ![](https://substackcdn.com/image/fetch/$s_!5wUF!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337c68a2-440f-4f9b-8fe2-9f365f755dea_1102x714.png)
 
 Mar 13
 
@@ -528,7 +682,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -539,7 +693,7 @@ at
 
 Greetings from Oodi, Helsinki’s lovely central library. I’m in Finland for a 10-day Soulmaking retreat with Catherine McGee & Juha Penttilä (my second, after a similar retreat at Gaia House in Sep 2023)
 
- ![](https://substackcdn.com/image/fetch/w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F69bae3b2-13a5-405c-ad21-8659ece97eac_1400x934.png)
+ ![](https://substackcdn.com/image/fetch/$s_!Oi3E!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F69bae3b2-13a5-405c-ad21-8659ece97eac_1400x934.png)
 
 [
 
@@ -547,7 +701,7 @@ nirodha.fi
 
 A Brahma Viharas and Soulmaking Dharma Retreat 14.–23.3.2025 in Kruusila: Catherine McGee & Juha Penttilä | Nirodha
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7137a969-ca37-425c-b463-2e636a2cd41b_480x640.jpeg)](https://nirodha.fi/retreat-03-25/)
+ ![](https://substackcdn.com/image/fetch/$s_!mrM7!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7137a969-ca37-425c-b463-2e636a2cd41b_480x640.jpeg)](https://nirodha.fi/retreat-03-25/)
 
 Mar 13
 
@@ -559,7 +713,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -576,7 +730,7 @@ dandelion.events
 
 Dandelion
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f5eca38-cf7c-4bd7-a13b-61f0b57e60ff_1200x630.jpeg)](https://dandelion.events/)
+ ![](https://substackcdn.com/image/fetch/$s_!WPAO!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f5eca38-cf7c-4bd7-a13b-61f0b57e60ff_1200x630.jpeg)](https://dandelion.events/)
 
 Mar 9
 
@@ -588,7 +742,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -617,7 +771,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -668,7 +822,7 @@ docs.google.com
 
 Five Approaches to Technological Metamodernism
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc35350f5-4c64-4fa6-8552-bd3c5f34ae54_1200x630.png)](https://docs.google.com/document/d/1lIoPO8XqrUDckmW1-MQZbTSbFsholmVg6Wb25QBYBfU/edit?tab=t.0)
+ ![](https://substackcdn.com/image/fetch/$s_!FN3P!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc35350f5-4c64-4fa6-8552-bd3c5f34ae54_1200x630.png)](https://docs.google.com/document/d/1lIoPO8XqrUDckmW1-MQZbTSbFsholmVg6Wb25QBYBfU/edit?tab=t.0)
 
 Feb 12
 
@@ -680,7 +834,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -710,9 +864,9 @@ I just published my latest newsletter, featuring:
 and much more…
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F335017c2-7b36-4cb1-9066-f43c0a6d7c08_1440x1080.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!ldo9!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F335017c2-7b36-4cb1-9066-f43c0a6d7c08_1440x1080.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -730,7 +884,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -767,7 +921,7 @@ dandelion.events
 
 Futurecraft at Feÿtopia
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fff8d1354-2105-4414-95b0-239d16094fb1_1920x1076.jpeg)](https://dandelion.events/e/futurecraft-feytopia)
+ ![](https://substackcdn.com/image/fetch/$s_!zM9q!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fff8d1354-2105-4414-95b0-239d16094fb1_1920x1076.jpeg)](https://dandelion.events/e/futurecraft-feytopia)
 
 Feb 2
 
@@ -779,7 +933,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -847,9 +1001,9 @@ And as a true post-cyberpunk near-integral metamodernist product, the course is 
 \* recordings of four two-hour webinars by Reid with invited experts [youtube.com/watch?v=ahZ…](https://www.youtube.com/watch?v=ahZmxVPSRmI&list=PLMAEqstRcvnugg6elPXy7dQCxNr6y0pB2&index=2)
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1fb96c06-cbff-4080-844c-0eeb940bd8e2_1536x768.png)
+ ![](https://substackcdn.com/image/fetch/$s_!3Nbm!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1fb96c06-cbff-4080-844c-0eeb940bd8e2_1536x768.png)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -867,7 +1021,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -900,7 +1054,7 @@ This creates a new model v2 that starts from a higher base of capabilities; but 
 
 Separate to this feedback loop, we also have easy wins from scaling RL training data and flops much further. Next token prediction pre-training compute scaling still works as well, but it doesn’t currently look like the highest capability return on compute investment compared to these new methods.”
 
- ![](https://substackcdn.com/image/fetch/w_340,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80c8e84c-ace7-4b29-bf55-0f60bb72175c_680x424.png)
+ ![](https://substackcdn.com/image/fetch/$s_!cRRJ!,w_340,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80c8e84c-ace7-4b29-bf55-0f60bb72175c_680x424.png)
 
 Jan 17
 
@@ -912,7 +1066,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -941,7 +1095,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -968,7 +1122,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1022,9 +1176,9 @@ Projects:
 • Getting more involved with the Qualia Research Institute(?)
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ad57209-be5c-407b-abcc-1547f4e7bbcc_962x641.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!2Yer!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ad57209-be5c-407b-abcc-1547f4e7bbcc_962x641.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1042,7 +1196,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1155,7 +1309,7 @@ google.com
 
 The Dandelion Treasure Map - Google My Maps
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d54b4cb-1e2e-466d-b10c-a31e87a6d1a1_504x520.jpeg)](https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8)
+ ![](https://substackcdn.com/image/fetch/$s_!WZrJ!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d54b4cb-1e2e-466d-b10c-a31e87a6d1a1_504x520.jpeg)](https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8)
 
 Dec 7
 
@@ -1167,7 +1321,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1179,9 +1333,9 @@ at
 Just published my latest newsletter, featuring an invitation to Futurecraft at Feÿtopia, the beautiful Ekskäret island in the Stockholm Archipelago, Tyson Yunkaporta’s _Right Story, Wrong Story_ and much more…
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01f8d400-bda2-4122-b57e-726039c45cbc_1920x1076.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!jxHg!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01f8d400-bda2-4122-b57e-726039c45cbc_1920x1076.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1199,7 +1353,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1226,7 +1380,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1254,9 +1408,9 @@ Featuring:
 🕺 Time for co-creation and emergence
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01f8d400-bda2-4122-b57e-726039c45cbc_1920x1076.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!jxHg!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01f8d400-bda2-4122-b57e-726039c45cbc_1920x1076.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb1306-a81d-47f0-8bce-de581e4f2e29_108x108.png)
+ ![](https://substackcdn.com/image/fetch/$s_!ZKf-!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb1306-a81d-47f0-8bce-de581e4f2e29_108x108.png)
 
 [Futurecraft](https://futurecrafters.substack.com/)
 
@@ -1274,7 +1428,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1296,9 +1450,9 @@ I would say this is most important and cutting-edge course I’ve taught, bringi
 , the course participants, and everyone whose work featured, especially Hanzi Freinacht, The Consilience Project, Vitalik Buterin, Alnoor Ladha, Josh Schrei, Sophie Strand and Andrés Gómez Emilsson.
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1fb96c06-cbff-4080-844c-0eeb940bd8e2_1536x768.png)
+ ![](https://substackcdn.com/image/fetch/$s_!3Nbm!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1fb96c06-cbff-4080-844c-0eeb940bd8e2_1536x768.png)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1316,7 +1470,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1341,7 +1495,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1359,9 +1513,9 @@ I would be enormously grateful if you would chip in just a few £/$/€, as your
 Thanks in anticipation 🙏
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff63a7d10-f72a-4dfe-9f26-4499c5bede2c_1456x816.png)
+ ![](https://substackcdn.com/image/fetch/$s_!jVr0!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff63a7d10-f72a-4dfe-9f26-4499c5bede2c_1456x816.png)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1379,7 +1533,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1391,9 +1545,9 @@ at
 Just published my latest newsletter [stephenreid.substack.co…](https://stephenreid.substack.com/p/in-correspondence-41) 🏕️
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc9c5528-2b80-4f40-899c-dc4cf579f406_1461x1104.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!m3iP!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc9c5528-2b80-4f40-899c-dc4cf579f406_1461x1104.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1411,12 +1565,12 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
 [Stephen Reid](https://substack.com/@stephenreid?)
-[Jul 12](https://substack.com/@stephenreid/note/c-61745574?)
+[Jul 12, 2024](https://substack.com/@stephenreid/note/c-61745574?)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1434,9 +1588,9 @@ futurecraft.life
 
 Technological Metamodernism — Futurecraft
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9161183-5e56-4caf-a2e2-b1694c1b6f3f_1500x844.jpeg)](https://futurecraft.life/technological-metamodernism)
+ ![](https://substackcdn.com/image/fetch/$s_!RryL!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9161183-5e56-4caf-a2e2-b1694c1b6f3f_1500x844.jpeg)](https://futurecraft.life/technological-metamodernism)
 
-Jul 12
+Jul 12, 2024
 
 at
 
@@ -1446,7 +1600,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1458,9 +1612,9 @@ at
 Just published my latest newsletter. Image from the highly recommended Scavengers Reign animated series
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F68368f3a-ae73-4e58-9a3f-25f533ff9c1d_1920x1080.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!W0yZ!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F68368f3a-ae73-4e58-9a3f-25f533ff9c1d_1920x1080.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1478,7 +1632,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1503,13 +1657,13 @@ and
 
 [Richard D. Bartlett](https://substack.com/profile/1967267-richard-d-bartlett)
 
- ![](https://substackcdn.com/image/fetch/w_187,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fc5614d-adc5-4a0f-9350-5c2ef9bc9def_374x442.png)
+ ![](https://substackcdn.com/image/fetch/$s_!e_0e!,w_187,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fc5614d-adc5-4a0f-9350-5c2ef9bc9def_374x442.png)
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_288,h_288,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_288,h_288,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
- ![](https://substackcdn.com/image/fetch/w_568,h_297,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_568,h_297,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [stephenreid](https://stephenreid.substack.com/)
 
@@ -1527,7 +1681,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1539,9 +1693,9 @@ at
 I just published my latest newsletter, featuring Introduction to AI, I Want A Better Catastrophe, Building Our Regenerative Future and much more.
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00d7b71a-6860-40cc-8dc7-246fc3100d07_1574x1106.png)
+ ![](https://substackcdn.com/image/fetch/$s_!x4b5!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00d7b71a-6860-40cc-8dc7-246fc3100d07_1574x1106.png)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1559,7 +1713,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1586,7 +1740,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1598,9 +1752,9 @@ at
 I just published my latest newsletter, featuring the final room at the upcoming Futurecraft Residency in Costa Rica, solarpunk fiction, the Introduction to AI course and much more
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcf6c2523-05c8-4889-9d35-95888f9fbe63_1920x1080.png)
+ ![](https://substackcdn.com/image/fetch/$s_!3ZBc!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcf6c2523-05c8-4889-9d35-95888f9fbe63_1920x1080.png)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1618,7 +1772,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1639,7 +1793,7 @@ docs.google.com
 
 Futurecraft reading/watching list
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65ab1e91-736e-4bbb-8d38-c5c9d0ac3d6a_1200x630.png)](https://docs.google.com/document/d/1DND4gidDvHU0hNAwTs68BL4L5GSKpRVAuyap2YihjKo/edit)
+ ![](https://substackcdn.com/image/fetch/$s_!qsCD!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65ab1e91-736e-4bbb-8d38-c5c9d0ac3d6a_1200x630.png)](https://docs.google.com/document/d/1DND4gidDvHU0hNAwTs68BL4L5GSKpRVAuyap2YihjKo/edit)
 
 Nov 3, 2023
 
@@ -1651,7 +1805,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1692,7 +1846,7 @@ stephenreid.net
 
 Films · Stephen Reid
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeefbf7b-729d-4fcb-a3f8-b115b0658848_1280x672.jpeg)](https://stephenreid.net/films)
+ ![](https://substackcdn.com/image/fetch/$s_!fBU-!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeefbf7b-729d-4fcb-a3f8-b115b0658848_1280x672.jpeg)](https://stephenreid.net/films)
 
 Oct 30, 2023
 
@@ -1704,7 +1858,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1716,9 +1870,9 @@ at
 I just published my latest newsletter, featuring the Planet Local and Inner Development Goals summits, the upcoming Futurecraft Residency in Costa Rica in Dec, the next Intro to AI course in Jan, a great intro to the metacrisis, and much more. Check it out at
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff32991a9-e7b0-4d42-abc0-343a5775eabf_900x706.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!fcrf!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff32991a9-e7b0-4d42-abc0-343a5775eabf_900x706.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1736,7 +1890,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1765,7 +1919,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1777,9 +1931,9 @@ at
 I just published my latest newsletter:
 
 [
- ![](https://substackcdn.com/image/fetch/w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9acfd9a5-c9bd-43eb-8b1a-64450ccd705f_720x479.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!ec9L!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9acfd9a5-c9bd-43eb-8b1a-64450ccd705f_720x479.jpeg)
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1797,7 +1951,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1824,7 +1978,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1849,7 +2003,7 @@ at
 
 [
 
- ![](https://substackcdn.com/image/fetch/w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
@@ -1866,7 +2020,7 @@ stephenreid.net
 
 Stephen Reid
 
- ![](https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0205305b-8e39-4343-9266-fe767fd921b3_900x473.jpeg)](https://stephenreid.net/)
+ ![](https://substackcdn.com/image/fetch/$s_!QrBy!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0205305b-8e39-4343-9266-fe767fd921b3_900x473.jpeg)](https://stephenreid.net/)
 
 Apr 12, 2023
 
