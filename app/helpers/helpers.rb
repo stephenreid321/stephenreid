@@ -67,11 +67,11 @@ StephenReid::App.helpers do
     csv_posts = CSV.read("#{Padrino.root}/app/substack/posts.csv", headers: true)
 
     # Filter posts to only include those with 'In Correspondence' in the title
-    posts = posts.select do |file|
-      post_id = file.split('/').last.gsub('.html', '')
-      post = csv_posts.find { |row| row['post_id'] == post_id }
-      post && post['title'].include?('In Correspondence')
-    end
+    # posts = posts.select do |file|
+    #   post_id = file.split('/').last.gsub('.html', '')
+    #   post = csv_posts.find { |row| row['post_id'] == post_id }
+    #   post && post['title'].include?('In Correspondence')
+    # end
 
     posts = posts[0..(limit.to_i - 1)] if limit
 
