@@ -10,6 +10,8 @@ module StephenReid
     use Honeybadger::Rack::UserInformer
     use Honeybadger::Rack::ErrorNotifier
 
+    use Rack::Attack
+
     register Padrino::Cache
     enable :caching unless Padrino.env == :development
 

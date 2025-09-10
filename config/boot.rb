@@ -12,10 +12,10 @@ Bundler.require(:default, RACK_ENV)
 
 String.send(:define_method, :html_safe?) { true }
 
-Padrino.load!
-
 Mongoid.load!("#{PADRINO_ROOT}/config/mongoid.yml")
 Mongoid.raise_not_found_error = false
+
+Padrino.load!
 
 Delayed::Worker.max_attempts = 1
 
