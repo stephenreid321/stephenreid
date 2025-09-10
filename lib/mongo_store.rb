@@ -10,6 +10,15 @@ module ActiveSupport
       def initialize(collection = nil, options = {})
         super(options)
         @collection = collection || Mongoid.default_client[options[:collection] || DEFAULT_COLLECTION]
+
+        # Optionally ensure TTL index for automatic expiry cleanup
+        return unless options.fetch(:ensure_ttl_index, true)
+
+        begin
+          @collection.indexes.create_one({ expires_at: 1 }, expire_after_seconds: 0)
+        rescue StandardError
+          # Index creation failures shouldn't break the app
+        end
       end
 
       # Public API expected by ActiveSupport/Rack::Attack
