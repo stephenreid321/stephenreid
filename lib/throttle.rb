@@ -8,10 +8,16 @@ Rack::Attack.throttle('requests by ip', limit: 300, period: 5.minutes) do |reque
   request.ip unless %w[/fonts/ /images/ /javascripts/ /stylesheets/].any? { |path| request.path.starts_with?(path) }
 end
 
-Rack::Attack.throttle('/posts/', limit: 10, period: 10.seconds) do |request|
-  request.ip if request.path.starts_with?('/posts/')
-end
+# Define throttled paths with their limits and periods
+THROTTLED_PATHS = {
+  '/posts/' => { limit: 10, period: 10.seconds },
+  '/tao-te-ching/' => { limit: 10, period: 10.seconds },
+  '/books/' => { limit: 10, period: 10.seconds }
+}.freeze
 
-Rack::Attack.throttle('/tao-te-ching/', limit: 10, period: 10.seconds) do |request|
-  request.ip if request.path.starts_with?('/tao-te-ching/')
+# Apply throttling rules for each path
+THROTTLED_PATHS.each do |path, config|
+  Rack::Attack.throttle(path, limit: config[:limit], period: config[:period]) do |request|
+    request.ip if request.path.starts_with?(path)
+  end
 end
