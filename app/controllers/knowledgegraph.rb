@@ -114,7 +114,7 @@ StephenReid::App.controller do
       post_text = []
       json = JSON.parse(post['Iframely'])
       post_text << post['Title']
-      if (b = post['Body']) && (!b.include?('use cookies') && !b.include?('use of cookies'))
+      if (b = post['Body']) && !b.include?('use cookies') && !b.include?('use of cookies')
         b = b.gsub(/Read [\d,]+ reviews from the world's largest community for readers. /, '')
         post_text << b
       end

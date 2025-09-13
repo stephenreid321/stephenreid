@@ -10,9 +10,9 @@ end
 
 # Define throttled paths with their limits and periods
 THROTTLED_PATHS = {
-  '/posts/' => { limit: 10, period: 10.seconds },
-  '/tao-te-ching/' => { limit: 10, period: 10.seconds },
-  '/books/' => { limit: 10, period: 10.seconds }
+  '/posts/' => { limit: 5, period: 10.seconds },
+  '/tao-te-ching/' => { limit: 5, period: 10.seconds },
+  '/books/' => { limit: 5, period: 10.seconds }
 }.freeze
 
 # Apply throttling rules for each path
