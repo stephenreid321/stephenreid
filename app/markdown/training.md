@@ -28,6 +28,21 @@
   *   Vipassana at [Dhamma Dipa](https://www.dipa.dhamma.org/) (Feb 2017, 10 days)
   *   Sensory Awareness with [Lee Lesser](http://www.returntooursenses.com/) at the [Esalen Institute](https://www.esalen.org/) (Nov 2015, 2 days)
 
+### Swimrun & triathlon
+
+* [ÖTILLÖ](https://otilloswimrun.com/) Sprint swimruns:
+  * Åland 2025 (3h56m, 3.3km swim, 12.5km run)
+  * Gothenburg 2025 (5h11m, 3.9km swim, 18.5km run)
+  * Final 15k 2024 (2h09m, 1.1km swim, 13.8km run)
+  * Utö 2024 (2h56m, 2.8km swim, 13.9km run)
+* Weymouth Classic Triathlon 2023 (3h26m)
+* Weymouth Sprint Triathlon 2022 (1h38m)
+
+### Scuba diving
+
+* [SSI Advanced Adventurer](https://www.divessi.com/en/advanced-training/scuba-diving/advanced-adventurer) (Nov 2024)
+* [PADI Open Water Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
+
 
 ### Shipibo plant medicine
 
@@ -82,19 +97,3 @@
 *   [The Borderland](http://theborderland.se) (Hyperstition, 2024; The Inner Cartographers' Club, 2022; Camp Croquis, 2019; La Botica Exótica, 2017; Hampus Campus, 2016)
 *   [Kiez Burn](https://kiezburn.org/) (The Beehive, 2019)
 *   [Nowhere](http://goingnowhere.org) (La Botica Exótica, 2016; Sentimos, 2015; Übertown 2014)
-
-### Swimrun & triathlon
-
-* [ÖTILLÖ](https://otilloswimrun.com/) Sprint swimruns:
-    * Åland 2025 (3h56m, 3.3km swim, 12.5km run)
-    * Gothenburg 2025 (5h11m, 3.9km swim, 18.5km run)
-    * Final 15k 2024 (2h09m, 1.1km swim, 13.8km run)
-    * Utö 2024 (2h56m, 2.8km swim, 13.9km run)
-* Weymouth Classic Triathlon 2023 (3h26m)
-* Weymouth Sprint Triathlon 2022 (1h38m)
-
-### Scuba diving
-
-* [SSI Advanced Adventurer](https://www.divessi.com/en/advanced-training/scuba-diving/advanced-adventurer) (Nov 2024)
-* [PADI Open Water Diver](https://www.padi.com/courses/open-water-diver) (Feb 2024)
-
