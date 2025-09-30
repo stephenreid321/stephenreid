@@ -6,7 +6,7 @@ StephenReid::App.controller do
   end
 
   get '/knowledgegraph', cache: true do
-    expires 1.hour.to_i
+    expires 6.hours.to_i
     @title = 'Knowledgegraph'
     @og_desc = "Network view of posts I've shared"
     @full_network = true
@@ -18,7 +18,7 @@ StephenReid::App.controller do
   end
 
   get '/knowledgegraph/essays', cache: true do
-    expires 1.hour.to_i
+    expires 6.hours.to_i
     @title = 'Knowledgegraph'
     @og_desc = "Network view of posts I've shared"
     @full_network = true
@@ -50,7 +50,7 @@ StephenReid::App.controller do
   end
 
   get '/feed', provides: :rss, cache: true do
-    expires 1.hour.to_i
+    expires 6.hours.to_i
     @posts = Post.all(filter: "AND(
         IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}'),
         FIND('\"url\": ', {Iframely}) > 0
@@ -73,8 +73,8 @@ StephenReid::App.controller do
     end.to_s
   end
 
-  get '/posts/:id' do
-    # expires 1.hour.to_i
+  get '/posts/:id', cache: true do
+    expires 6.hours.to_i
     @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
     not_found if @post['Iframely'].nil?
     @json = JSON.parse(@post['Iframely'])
@@ -85,7 +85,7 @@ StephenReid::App.controller do
   end
 
   get '/terms/:source_id/:sink_id', cache: true do
-    expires 1.hour.to_i
+    expires 6.hours.to_i
     @source = Term.find(params[:source_id])
     @sink = Term.find(params[:sink_id])
     @posts = Post.all(filter: "AND(
@@ -96,13 +96,13 @@ StephenReid::App.controller do
   end
 
   get '/terms/:term', cache: true do
-    expires 1.hour.to_i
+    expires 6.hours.to_i
     @posts = Post.all(filter: "FIND(', #{params[:term]},', {Terms joined}) > 0", sort: { 'Created at' => 'desc' })
     erb :'knowledgegraph/knowledgegraph'
   end
 
   get '/organisations/:organisation', cache: true do
-    expires 1.hour.to_i
+    expires 6.hours.to_i
     @posts = Post.all(filter: "{Organisation} = '#{params[:organisation]}'", sort: { 'Created at' => 'desc' })
     erb :'knowledgegraph/knowledgegraph'
   end

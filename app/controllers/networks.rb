@@ -32,7 +32,7 @@ StephenReid::App.controller do
   end
 
   get '/k/:slug', cache: true do
-    expires 1.hour.to_i
+    expires 6.hours.to_i
     erb :'k/network'
   end
 

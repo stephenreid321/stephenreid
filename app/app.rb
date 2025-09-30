@@ -95,7 +95,7 @@ module StephenReid
     end
 
     get '/events', cache: true do
-      expires 1.hour.to_i
+      expires 6.hours.to_i
       @title = 'Events'
       @container_class = 'container-fluid'
       erb :events
@@ -103,7 +103,7 @@ module StephenReid
 
     %w[films podcasts events speaking-engagements].each do |r|
       get "/#{r}", cache: true do
-        expires 1.hour.to_i
+        expires 6.hours.to_i
         @title = r.gsub('-', ' ').capitalize
         erb :"#{r.underscore}"
       end

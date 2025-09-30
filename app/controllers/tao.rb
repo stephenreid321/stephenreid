@@ -9,7 +9,8 @@ StephenReid::App.controller do
     # erb :tao
   end
 
-  get '/tao-te-ching/:i' do
+  get '/tao-te-ching/:i', cache: true do
+    expires 6.hours.to_i
     @title = "Verse #{params[:i]} · Tao Te Ching"
     @favicon = 'tao-sq.png'
     verse = Verse.all(filter: "{Verse} = #{params[:i]}").first
