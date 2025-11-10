@@ -5,11 +5,11 @@ namespace :strategies do
   end
 
   task rebalance: :environment do
-    Strategy.rebalance if Time.now.wday == 0
+    Strategy.rebalance if Time.now.wday == 5
   end
 
   task rebalance_without_update: :environment do
-    Strategy.rebalance(skip_update: true) if Time.now.wday == 0
+    Strategy.rebalance(skip_update: true) if Time.now.wday == 5
   end
 
   task propose: :environment do
