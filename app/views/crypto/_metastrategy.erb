@@ -26,9 +26,17 @@
           <th>Asset</th>
           <th></th>
           <th style="width: 8em">Current weight</th>
-          <th style="width: 8em">With multipliers<br/>
-            (next rebalance)</th>
-          <th style="width: 8em">Without multipliers</th>
+          <th style="width: 8em">
+            <% if current_account %>
+              With multipliers<br/>
+              (next rebalance)
+            <% else %>
+              Next rebalance
+            <% end %>
+          </th>
+          <% if current_account %>
+            <th style="width: 8em">Without multipliers</th>
+          <% end %>
         </tr>
       </thead>
       <% tickers = (proposed_with_multipliers.keys + proposed_without_multipliers.keys + actual.keys + Asset.and(:multiplier.ne => nil).order('multiplier desc').pluck(:ticker)) %>
@@ -52,7 +60,9 @@
       target="_blank" href="https://coingecko.com/en/coins/<%=Coin.find_by(symbol: asset.ticker).try(:slug)%>">
             <%= asset.name %> (<%= k %>)
           </a>
-          <%= partial :'crypto/multiplier', locals: { asset: asset } %>
+          <% if current_account %>
+            <%= partial :'crypto/multiplier', locals: { asset: asset } %>
+          <% end %>
         </td>
         <td style="vertical-align: middle; width: 10vw">
           <% if actual[k] %>
@@ -84,11 +94,13 @@
             <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 1 %>
           <% end %>
         </td>
-        <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
-          <% if proposed_without_multipliers[k] %>
-            <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 1 %>
-          <% end %>
-        </td>
+        <% if current_account %>
+          <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
+            <% if proposed_without_multipliers[k] %>
+              <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 1 %>
+            <% end %>
+          </td>
+        <% end %>
       </tr>
       <% } %>
     </table>
