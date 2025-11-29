@@ -101,7 +101,7 @@ module StephenReid
       erb :events
     end
 
-    %w[films podcasts events speaking-engagements].each do |r|
+    %w[films podcasts events speaking-engagements background].each do |r|
       get "/#{r}", cache: true do
         expires 6.hours.to_i
         @title = r.gsub('-', ' ').capitalize
