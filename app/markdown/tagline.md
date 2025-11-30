@@ -1,0 +1,1 @@
+Founder of [Dandelion](https://dandelion.events) · Writing a book on [Technological Metamodernism](https://technologicalmetamodernism.substack.com/) · Based in Stockholm, Sweden 🇸🇪
