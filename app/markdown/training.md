@@ -1,7 +1,7 @@
 ### Technical
 
 *   [Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence), UC Berkeley (2023)
-    *   Post-graduate certificate with capstone on collaborative filtering recommender systems and NLP-based tagging
+    *   Graduate-level qualification with capstone on collaborative filtering recommender systems and NLP-based tagging
 *   MRes (Distinction) in Complexity Science, University of Bristol (2008-2009) 
     *   Dissertations supervised by [Prof. Dave Cliff](https://en.wikipedia.org/wiki/Dave_Cliff_(computer_scientist)) and [Prof. Karoline Wiesner](https://www.karowiesner.org/)
     *   Lead developer of the software that won Best Model at [iGEM](https://igem.org/) 2009
