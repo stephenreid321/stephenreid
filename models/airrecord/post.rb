@@ -195,6 +195,14 @@ class Post < Airrecord::Table
     `python #{Padrino.root}/tasks/bluesky.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}" "#{post['Title'].gsub('"', '\"')}" "#{json['meta']['description'].truncate(150).gsub('"', '\"') if json['meta'] && json['meta']['description']}" "#{json['links']['thumbnail'].first['href'].gsub('"', '\"') if json['links'] && json['links']['thumbnail']}"`
   end
 
+  def refresh_iframely
+    post = self
+    agent = Mechanize.new
+    result = agent.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+    post['Iframely'] = result.body.force_encoding('UTF-8')
+    post.save
+  end
+
   def countdown(n)
     n.downto(1) do |i|
       puts i

@@ -11,10 +11,7 @@ StephenReid::App.controller do
 
   get '/posts/:id/iframely' do
     @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
-    agent = Mechanize.new
-    result = agent.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(@post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-    @post['Iframely'] = result.body.force_encoding('UTF-8')
-    @post.save
+    @post.refresh_iframely
     200
   end
 
