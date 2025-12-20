@@ -76,7 +76,7 @@ module StephenReid
       if text.split.last =~ %r{^https?://}
         url = text.split.last
         text = text.split[0..-2].join(' ')
-        iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{url}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
+        iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
         `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}"`
         `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}" "#{iframely['meta']['title'].gsub('"', '\"')}" "#{iframely['meta']['description'].truncate(150).gsub('"', '\"') if iframely['meta']['description']}" "#{iframely['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
       else

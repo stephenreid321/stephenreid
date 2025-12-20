@@ -37,7 +37,7 @@ class Post < Airrecord::Table
         'Title' => r['title'],
         'Link' => url,
         'Body' => r['summary'],
-        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{url}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
+        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
         'Created at' => Time.now
       )
 
@@ -83,7 +83,7 @@ class Post < Airrecord::Table
         'Title' => p['resolved_title'],
         'Link' => url,
         'Body' => p['excerpt'],
-        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{url}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
+        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
         'Created at' => Time.now
       )
       unless post['Title']

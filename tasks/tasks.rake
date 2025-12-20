@@ -68,7 +68,7 @@ namespace :posts do
     term_ids = []
     agent = Mechanize.new
     Post.all(filter: "{Title} = ''").each do |post|
-      result = agent.get("https://iframe.ly/api/iframely?url=#{post['Link'].split('#').first}&api_key=#{ENV['IFRAMELY_API_KEY']}")
+      result = agent.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}")
 
       post['Iframely'] = result.body.force_encoding('UTF-8')
 
