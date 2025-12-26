@@ -1,6 +1,8 @@
 post_id,post_date,is_published,email_sent_at,inbox_sent_at,type,audience,title,subtitle,podcast_url
+182168990.in-correspondence-54,2025-12-20T15:40:25.537Z,true,2025-12-20T15:40:25.835Z,2025-12-20T15:40:25.835Z,newsletter,everyone,In Correspondence #54,"40 years, Anki and Cursor",
+178090204.in-correspondence-53,2025-11-05T16:52:02.852Z,true,2025-11-05T16:52:03.396Z,2025-11-05T16:52:03.396Z,newsletter,everyone,In Correspondence #53,"Devon, Oxford and nesting in Stockholm",
 174907225.in-correspondence-52,2025-09-30T09:28:09.631Z,true,2025-09-30T09:28:09.782Z,2025-09-30T09:28:09.782Z,newsletter,everyone,In Correspondence #52,"A wedding, Deep Joy and post-capitalist solidarity",
-172465810.in-correspondence-51,2025-09-01T10:34:13.171Z,true,2025-09-01T10:34:13.255Z,2025-09-01T10:34:13.255Z,newsletter,everyone,In Correspondence #51,,
+172465810.in-correspondence-51,2025-09-01T10:34:13.171Z,true,2025-09-01T10:34:13.255Z,2025-09-01T10:34:13.255Z,newsletter,everyone,In Correspondence #51,"Autumn, Åland and Anna's album",
 169249535.in-correspondence-50,2025-07-27T09:00:54.574Z,true,2025-07-27T09:00:54.769Z,2025-07-27T09:00:54.769Z,newsletter,everyone,In Correspondence #50,More from Hilma and tips for the LLM connoisseur,
 168280583.two-upcoming-events-network-nations,2025-07-14T11:02:43.135Z,true,2025-07-14T11:02:43.224Z,2025-07-14T11:02:43.224Z,newsletter,everyone,Two upcoming events: Network Nations and Futurecraft,"Shoreditch &Soul in August, and The Garden in September",
 167573754.substack-surfacer-countering-substack,2025-07-05T09:12:51.202Z,true,2025-07-05T09:12:51.698Z,2025-07-05T09:12:51.698Z,newsletter,everyone,Substack Surfacer: countering Substack overwhelm,A Python script to rank Substack posts by likes per subscriber,
