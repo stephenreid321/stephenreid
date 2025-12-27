@@ -77,11 +77,14 @@ module StephenReid
         url = text.split.last
         text = text.split[0..-2].join(' ')
         iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
-        `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}"`
-        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}" "#{url.gsub('"', '\"')}" "#{iframely['meta']['title'].gsub('"', '\"')}" "#{iframely['meta']['description'].truncate(150).gsub('"', '\"') if iframely['meta']['description']}" "#{iframely['links']['thumbnail'].first['href'].gsub('"', '\"')}"`
+        title = iframely['meta']['title'] || ''
+        description = iframely['meta']['description'] ? iframely['meta']['description'].truncate(150) : ''
+        thumbnail = iframely['links'] && iframely['links']['thumbnail'] ? iframely['links']['thumbnail'].first['href'] : ''
+        # `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/cast.py #{Shellwords.escape(text)} #{Shellwords.escape(url)}`
+        `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{Shellwords.escape(text)} #{Shellwords.escape(url)} #{Shellwords.escape(title)} #{Shellwords.escape(description)} #{Shellwords.escape(thumbnail)}`
       else
-        `python #{Padrino.root}/tasks/cast.py "#{text.gsub('"', '\"')}"`
-        `python #{Padrino.root}/tasks/bluesky.py "#{text.gsub('"', '\"')}"`
+        # `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/cast.py #{Shellwords.escape(text)}`
+        `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{Shellwords.escape(text)}`
       end
       200
     end

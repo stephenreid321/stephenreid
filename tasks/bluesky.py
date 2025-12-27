@@ -51,7 +51,7 @@ if title or url:
     try:
         post = client.send_post(text, embed=embed)
     except Exception as e:
-        # retry without image
+        print(f"Failed to send post, retrying without image")
         embed = models.AppBskyEmbedExternal.Main(
             external=models.AppBskyEmbedExternal.External(
                 title=title or "",  # Use empty string if None

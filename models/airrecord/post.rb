@@ -1,3 +1,5 @@
+require 'shellwords'
+
 class Post < Airrecord::Table
   self.base_key = ENV['AIRTABLE_BASE_KEY']
   self.table_name = 'Posts'
@@ -49,7 +51,7 @@ class Post < Airrecord::Table
       end
 
       post.tagify
-      post.cast
+      # post.cast
       post.bluesky
     end
   end
@@ -93,7 +95,7 @@ class Post < Airrecord::Table
         post.save
       end
       post.tagify
-      post.cast
+      # post.cast
       post.bluesky
     end
   end
@@ -186,13 +188,17 @@ class Post < Airrecord::Table
 
   def cast
     post = self
-    `python #{Padrino.root}/tasks/cast.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}"`
+    `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/cast.py #{Shellwords.escape(post['Title'])} #{Shellwords.escape(post['Link'])}`
   end
 
   def bluesky
     post = self
     json = JSON.parse(post['Iframely'])
-    `python #{Padrino.root}/tasks/bluesky.py "#{post['Title'].gsub('"', '\"')}" "#{post['Link'].gsub('"', '\"')}" "#{post['Title'].gsub('"', '\"')}" "#{json['meta']['description'].truncate(150).gsub('"', '\"') if json['meta'] && json['meta']['description']}" "#{json['links']['thumbnail'].first['href'].gsub('"', '\"') if json['links'] && json['links']['thumbnail']}"`
+    title = post['Title']
+    link = post['Link']
+    description = json['meta'] && json['meta']['description'] ? json['meta']['description'].truncate(150) : ''
+    thumbnail = json['links'] && json['links']['thumbnail'] ? json['links']['thumbnail'].first['href'] : ''
+    `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{Shellwords.escape(title)} #{Shellwords.escape(link)} #{Shellwords.escape(title)} #{Shellwords.escape(description)} #{Shellwords.escape(thumbnail)}`
   end
 
   def refresh_iframely

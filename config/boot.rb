@@ -8,6 +8,7 @@ require 'bundler/setup'
 require 'open-uri'
 require 'active_support/all'
 require 'telegram/bot'
+require 'shellwords'
 Bundler.require(:default, RACK_ENV)
 
 String.send(:define_method, :html_safe?) { true }
