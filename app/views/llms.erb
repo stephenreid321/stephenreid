@@ -32,26 +32,12 @@
   <div class="form-row">
     <div class="form-group col-md-12 mb-2">
       <div class="d-flex flex-wrap gap-3">
-        <div class="form-group mb-0 mr-1">
-          <label for="min-score-intelligence" class="small">&gt;=Intelligence</label>
-          <%= number_field_tag :min_score_intelligence, value: params[:min_score_intelligence], id: 'min-score-intelligence', class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0' %>
-        </div>
-        <div class="form-group mb-0 mr-1">
-          <label for="min-score-agentic" class="small">&gt;=Agentic</label>
-          <%= number_field_tag :min_score_agentic, value: params[:min_score_agentic], id: 'min-score-agentic', class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0' %>
-        </div>
-        <div class="form-group mb-0 mr-1">
-          <label for="min-score-coding" class="small">&gt;=Coding</label>
-          <%= number_field_tag :min_score_coding, value: params[:min_score_coding], id: 'min-score-coding', class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0' %>
-        </div>
-        <div class="form-group mb-0 mr-1">
-          <label for="min-score-math" class="small">&gt;=Math</label>
-          <%= number_field_tag :min_score_math, value: params[:min_score_math], id: 'min-score-math', class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0' %>
-        </div>
-        <div class="form-group mb-0 mr-1">
-          <label for="min-score-openness" class="small">&gt;=Openness</label>
-          <%= number_field_tag :min_score_openness, value: params[:min_score_openness], id: 'min-score-openness', class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0' %>
-        </div>
+        <% %w[intelligence agentic coding math openness].each do |attr| %>
+          <div class="form-group mb-0 mr-1">
+            <label for="min-score-<%= attr %>" class="small">&gt;=<%= attr.capitalize %></label>
+            <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0', style: 'width: 8em' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -61,7 +47,7 @@
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0" id="chart-title"></h5>
-      <button id="reset-zoom" class="btn btn-sm btn-outline-secondary">Reset Zoom</button>
+      <button id="reset-zoom" class="btn btn-sm btn-outline-secondary">Reset zoom</button>
     </div>
     <div class="card-body">
       <div class="row">
