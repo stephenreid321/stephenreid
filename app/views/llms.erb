@@ -2,7 +2,7 @@
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
       <label for="index-selector">Y-axis</label>
-      <%= select_tag :index, options: @index_attributes.map { |i| [i.capitalize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
+      <%= select_tag :index, options: @index_attributes.map { |i| [i.titleize, i] }, selected: (params[:index] || 'terminal_bench_hard'), id: 'index-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
@@ -35,13 +35,13 @@
         <% @index_attributes.each do |attr| %>
           <div class="form-group mb-1 mr-1">
             <button type="button" class="btn btn-sm btn-outline-secondary toggle-score-field" data-attr="<%= attr %>">
-              <%= attr.capitalize %> &gt;=
+              <%= attr.titleize %> &gt;=
             </button>
             <div id="score-field-<%= attr %>" style="display: none;">
               <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
                   <span class="btn btn-sm btn-outline-secondary" id="label-<%= attr %>" style="cursor: pointer;">
-                    <%= attr.capitalize %> &gt;=
+                    <%= attr.titleize %> &gt;=
                   </span>
                 </div>
                 <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1 %>
@@ -85,7 +85,7 @@
         <th>Reasoning</th>
         <th>Open source</th>
         <% @index_attributes.each do |attr| %>
-          <th><%= attr.capitalize %></th>
+          <th><%= attr.titleize %></th>
         <% end %>
         <th>Speed</th>
         <th>Cost to Run</th>
@@ -152,7 +152,7 @@
   }.to_json %>;
 
   var indexLabels = <%==
-    @index_attributes.map { |attr| [attr, attr.capitalize] }.to_h.to_json
+    @index_attributes.map { |attr| [attr, attr.titleize] }.to_h.to_json
   %>;
 
   // Clean model names for display (remove reasoning/non-reasoning suffixes)
@@ -167,7 +167,7 @@
       info: false,
       order: [[2, 'desc']], // Sort by Release date descending
       columnDefs: [
-        { type: 'num', targets: [5, 6, 7, 8, 9, 10, 11] } // Numeric columns
+        { type: 'num', targets: [5, 6, 7, 8, 9, 10, 11, 12, 13] } // Numeric columns (index attributes + speed + cost)
       ]
     });
 
@@ -600,8 +600,15 @@
     });
 
 
+    // Convert snake_case to camelCase (e.g., terminal_bench_hard -> terminalBenchHard)
+    function snakeToCamel(str) {
+      return str.replace(/_([a-z])/g, function(match, letter) {
+        return letter.toUpperCase();
+      });
+    }
+
     function getIndexValue(model, indexType) {
-      return model[indexType + 'Index'];
+      return model[snakeToCamel(indexType) + 'Index'];
     }
 
     function getMinScores() {
@@ -668,7 +675,7 @@
         var scoreMatch = true;
         var indexValueMap = {};
         INDEX_ATTRIBUTES.forEach(function(attr) {
-          indexValueMap[attr] = model[attr + 'Index'];
+          indexValueMap[attr] = model[snakeToCamel(attr) + 'Index'];
         });
 
         INDEX_ATTRIBUTES.forEach(function(attr) {
