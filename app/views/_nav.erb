@@ -33,7 +33,8 @@
             [['Life as Practice (Sep 2025)', 'https://lifeaspractice.com/']] +
             Course.all.sort_by { |c| c['Date'] || Time.now }.reverse.map { |c| [c['Name'], '/courses/'+c['Slug']] }
             ],                                     
-            ['Events', '/events'],                        
+            ['Events', '/events'],              
+            ['LLMs', '/llms'],              
             ['Metastrategy', '/metastrategy'],               
             ['Knowledge',
              [
