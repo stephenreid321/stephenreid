@@ -2,7 +2,7 @@
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
       <label for="index-selector">Y-axis</label>
-      <%= select_tag :index, options: %w[intelligence agentic coding math openness].map { |i| [i.capitalize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
+      <%= select_tag :index, options: %w[intelligence agentic coding math openness omniscience].map { |i| [i == 'omniscience' ? 'AA-Omniscience' : i.capitalize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
@@ -32,17 +32,19 @@
   <div class="form-row">
     <div class="form-group col-md-12 mb-2">
       <div class="d-flex flex-wrap gap-3">
-        <% %w[intelligence agentic coding math openness].each do |attr| %>
-          <div class="form-group mb-0 mr-1">
+        <% %w[intelligence agentic coding math openness omniscience].each do |attr| %>
+          <div class="form-group mb-1 mr-1">
             <button type="button" class="btn btn-sm btn-outline-secondary toggle-score-field" data-attr="<%= attr %>">
-              &gt;=<%= attr.capitalize %>
+              <%= attr == 'omniscience' ? 'AA-Omniscience' : attr.capitalize %> &gt;=
             </button>
             <div id="score-field-<%= attr %>" style="display: none;">
               <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                  <span class="input-group-text small">&gt;=<%= attr.capitalize %></span>
+                  <span class="btn btn-sm btn-outline-secondary" id="label-<%= attr %>" style="border-radius: 0;">
+                    <%= attr == 'omniscience' ? 'AA-Omniscience' : attr.capitalize %> &gt;=
+                  </span>
                 </div>
-                <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0' %>
+                <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1 %>
               </div>
             </div>
           </div>
@@ -87,6 +89,7 @@
         <th>Coding Index</th>
         <th>Math Index</th>
         <th>Openness Index</th>
+        <th>AA-Omniscience</th>
         <th>Speed</th>
         <th>Cost to Run</th>
       </tr>
@@ -163,6 +166,14 @@
               <span class="text-muted">—</span>
             <% end %>
           </td>
+          <td data-order="<%= model['omniscience'] || -999 %>" class="omniscience-index-cell">
+            <% if (score = model['omniscience']) %>
+              <%= sprintf('%.1f', score) %>
+              <small class="text-muted rank-display"></small>
+            <% else %>
+              <span class="text-muted">—</span>
+            <% end %>
+          </td>
           <td data-order="<%= model['speed'] || 0 %>">
             <% if (speed = model['speed']) %>
               <%= sprintf('%.0f', speed) %> <small class="text-muted">tok/s</small>
@@ -193,6 +204,7 @@
       codingIndex: (m['coding_index'] || 0).to_f,
       mathIndex: (m['math_index'] || 0).to_f,
       opennessIndex: (m['openness_index'] || 0).to_f,
+      omniscienceIndex: m['omniscience']&.to_f,
       speed: (m['speed'] || 0).to_f,
       costToRun: (m['cost_to_run'] || 0).to_f,
       reasoningModel: !!m['reasoning_model'],
@@ -206,7 +218,8 @@
     agentic: 'Agentic Index',
     coding: 'Coding Index',
     math: 'Math Index',
-    openness: 'Openness Index'
+    openness: 'Openness Index',
+    omniscience: 'AA-Omniscience Index'
   };
 
   // Clean model names for display (remove reasoning/non-reasoning suffixes)
@@ -221,12 +234,12 @@
       info: false,
       order: [[2, 'desc']], // Sort by Release date descending
       columnDefs: [
-        { type: 'num', targets: [5, 6, 7, 8, 9, 10] } // Numeric columns
+        { type: 'num', targets: [5, 6, 7, 8, 9, 10, 11] } // Numeric columns
       ]
     });
 
     // Show fields that already have values on page load
-    <% %w[intelligence agentic coding math openness].each do |attr| %>
+    <% %w[intelligence agentic coding math openness omniscience].each do |attr| %>
       <% if params["min_score_#{attr}".to_sym].present? %>
         $('#score-field-<%= attr %>').show();
         $('button[data-attr="<%= attr %>"]').hide();
@@ -239,10 +252,51 @@
       var $button = $(this);
       var $field = $('#score-field-' + attr);
 
+      // Hide any other empty fields first
+      $('[id^="score-field-"]').each(function() {
+        var $otherField = $(this);
+        var otherAttr = $otherField.attr('id').replace('score-field-', '');
+        if (otherAttr !== attr) {
+          var $otherInput = $('#min-score-' + otherAttr);
+          var value = $otherInput.val();
+          if (!value || value.trim() === '') {
+            $otherField.hide();
+            $('button[data-attr="' + otherAttr + '"]').show();
+          }
+        }
+      });
+
       $button.hide();
       $field.show();
       $('#min-score-' + attr).focus();
+      updateLabelStyle(attr);
     });
+
+    // Function to update label styling based on input value
+    function updateLabelStyle(attr) {
+      var $input = $('#min-score-' + attr);
+      var $label = $('#label-' + attr);
+      var value = $input.val();
+
+      if (value && value.trim() !== '') {
+        $label.removeClass('btn-outline-secondary').addClass('btn-primary');
+      } else {
+        $label.removeClass('btn-primary').addClass('btn-outline-secondary');
+      }
+    }
+
+    // Update label styles on input change
+    $('[id^="min-score-"]').on('input change', function() {
+      var attr = $(this).attr('id').replace('min-score-', '');
+      updateLabelStyle(attr);
+    });
+
+    // Update label styles for fields with initial values on page load
+    <% %w[intelligence agentic coding math openness omniscience].each do |attr| %>
+      <% if params["min_score_#{attr}".to_sym].present? %>
+        updateLabelStyle('<%= attr %>');
+      <% end %>
+    <% end %>
 
     // Calculate and update ranks based on visible (filtered) rows
     function updateRanks() {
@@ -252,7 +306,8 @@
         { name: 'agentic_index', cellClass: 'agentic-index-cell', colIndex: 6 },
         { name: 'coding_index', cellClass: 'coding-index-cell', colIndex: 7 },
         { name: 'math_index', cellClass: 'math-index-cell', colIndex: 8 },
-        { name: 'openness_index', cellClass: 'openness-index-cell', colIndex: 9 }
+        { name: 'openness_index', cellClass: 'openness-index-cell', colIndex: 9 },
+        { name: 'omniscience', cellClass: 'omniscience-index-cell', colIndex: 10 }
       ];
 
       indexColumns.forEach(function(indexCol) {
@@ -502,6 +557,7 @@
         case 'coding': return model.codingIndex;
         case 'math': return model.mathIndex;
         case 'openness': return model.opennessIndex;
+        case 'omniscience': return model.omniscienceIndex;
         default: return model.intelligenceIndex;
       }
     }
@@ -517,7 +573,8 @@
         agentic: parseFloat($('#min-score-agentic').val()) || 0,
         coding: parseFloat($('#min-score-coding').val()) || 0,
         math: parseFloat($('#min-score-math').val()) || 0,
-        openness: parseFloat($('#min-score-openness').val()) || 0
+        openness: parseFloat($('#min-score-openness').val()) || 0,
+        omniscience: parseFloat($('#min-score-omniscience').val()) || null
       };
 
       // Update title and axis labels
@@ -566,8 +623,14 @@
         if (minScores.coding > 0 && model.codingIndex < minScores.coding) scoreMatch = false;
         if (minScores.math > 0 && model.mathIndex < minScores.math) scoreMatch = false;
         if (minScores.openness > 0 && model.opennessIndex < minScores.openness) scoreMatch = false;
+        if (minScores.omniscience != null && model.omniscienceIndex != null && model.omniscienceIndex < minScores.omniscience) scoreMatch = false;
 
-        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && indexValue > 0 && xAxisValue > 0;
+        // For omniscience, allow negative values; for others, require > 0
+        var indexValueValid = selectedIndex === 'omniscience'
+          ? (indexValue != null && !isNaN(indexValue))
+          : (indexValue > 0);
+
+        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && indexValueValid && xAxisValue > 0;
       });
 
       // Group by reasoning and open source
@@ -707,7 +770,8 @@
           agentic: parseFloat($('#min-score-agentic').val()) || 0,
           coding: parseFloat($('#min-score-coding').val()) || 0,
           math: parseFloat($('#min-score-math').val()) || 0,
-          openness: parseFloat($('#min-score-openness').val()) || 0
+          openness: parseFloat($('#min-score-openness').val()) || 0,
+          omniscience: parseFloat($('#min-score-omniscience').val()) || null
         };
 
         if (settings.nTable.id !== 'models-table') return true;
@@ -751,7 +815,8 @@
           'agentic': 6,
           'coding': 7,
           'math': 8,
-          'openness': 9
+          'openness': 9,
+          'omniscience': 10
         };
 
         if (minScores.intelligence > 0) {
@@ -774,13 +839,17 @@
           var score = parseFloat($(row).find('td:eq(' + indexColIndices.openness + ')').data('order')) || 0;
           if (score < minScores.openness) scoreMatch = false;
         }
+        if (minScores.omniscience != null) {
+          var score = parseFloat($(row).find('td:eq(' + indexColIndices.omniscience + ')').data('order'));
+          if (!isNaN(score) && score < minScores.omniscience) scoreMatch = false;
+        }
 
         return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch;
       }
     );
 
     // Apply filters when dropdowns change
-    $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #x-axis-selector, #min-score-intelligence, #min-score-agentic, #min-score-coding, #min-score-math, #min-score-openness').on('change input', function() {
+    $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #x-axis-selector, #min-score-intelligence, #min-score-agentic, #min-score-coding, #min-score-math, #min-score-openness, #min-score-omniscience').on('change input', function() {
       table.draw();
       updateRanks();
       updateChart();

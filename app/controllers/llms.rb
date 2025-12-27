@@ -3,6 +3,7 @@ StephenReid::App.controller do
   get '/llms', cache: true do
     @container_class = 'container-fluid'
     @stylesheet = 'light'
+    
     response = Faraday.get('https://artificialanalysis.ai/models') do |req|
       req.headers['RSC'] = '1'
     end
@@ -10,10 +11,12 @@ StephenReid::App.controller do
 
     # Extract the models array from the RSC response
     # The models are embedded in the React Server Components payload
-    models_match = body.match(/"models":\[(\{.+?\})\],"model_url"/)
+    # There are two "models":[ arrays - the second one contains omniscience data
+    first_models_idx = body.index('"models":[')
+    models_match = first_models_idx && body.index('"models":[', first_models_idx + 1)
     if models_match
-      # Find the full models array by locating its boundaries
-      start_idx = body.index('"models":[') + 9
+      # Find the full models array by locating its boundaries (use second occurrence)
+      start_idx = body.index('"models":[', first_models_idx + 1) + 9
       # Count brackets to find the end of the array
       bracket_count = 0
       end_idx = start_idx
