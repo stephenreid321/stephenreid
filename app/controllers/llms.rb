@@ -52,6 +52,8 @@ StephenReid::App.controller do
     @models.each do |model|
       model['openness_index'] = openness_by_model_id[model['id']]
       model['speed'] = speed_by_model_id[model['id']]
+      # Normalize omniscience to follow the same pattern as other indices
+      model['omniscience_index'] = model['omniscience'] if model['omniscience']
 
       token_counts = model['intelligence_index_token_counts']
       host_models = model['host_models']

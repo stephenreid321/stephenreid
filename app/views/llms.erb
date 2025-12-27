@@ -84,12 +84,9 @@
         <th>Release</th>
         <th>Reasoning</th>
         <th>Open source</th>
-        <th>Intelligence Index</th>
-        <th>Agentic Index</th>
-        <th>Coding Index</th>
-        <th>Math Index</th>
-        <th>Openness Index</th>
-        <th>Omniscience Index</th>
+        <% @index_attributes.each do |attr| %>
+          <th><%= attr.capitalize %> Index</th>
+        <% end %>
         <th>Speed</th>
         <th>Cost to Run</th>
       </tr>
@@ -105,32 +102,14 @@
           <td>
             <%= model.dig('model_creators', 'name') || 'N/A' %>
           </td>
-          <td data-order="<%= model['release_date'] || '0000-00-00' %>">
-            <% if model['release_date'] %>
-              <%= Date.parse(model['release_date']).strftime('%b %Y') rescue model['release_date'] %>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
-          <td>
-            <% if model['reasoning_model'] %>
-              <span class="badge badge-success">Reasoning</span>
-            <% else %>
-              <span class="badge badge-secondary">Non-reasoning</span>
-            <% end %>
-          </td>
-          <td>
-            <% if model['is_open_weights'] %>
-              <span class="badge badge-success">Yes</span>
-            <% else %>
-              <span class="badge badge-secondary">No</span>
-            <% end %>
-          </td>
+          <td data-order="<%= model['release_date'] || '0000-00-00' %>"><%= display_or_dash(model['release_date']) { |d| Date.parse(d).strftime('%b %Y') rescue d } %></td>
+          <td><%= bool_badge(model['reasoning_model'], yes_text: 'Reasoning', no_text: 'Non-reasoning') %></td>
+          <td><%= bool_badge(model['is_open_weights']) %></td>
           <% @index_attributes.each do |attr| %>
             <% 
-              score_key = attr == 'omniscience' ? 'omniscience' : "#{attr}_index"
+              score_key = "#{attr}_index"
               score = model[score_key]
-              data_order = attr == 'omniscience' ? (model['omniscience'] || -999) : (model[score_key] || 0)
+              data_order = attr == 'omniscience' ? (model[score_key] || -999) : (model[score_key] || 0)
               cell_class = "#{attr}-index-cell"
             %>
             <td data-order="<%= data_order %>" class="<%= cell_class %>">
@@ -142,20 +121,8 @@
               <% end %>
             </td>
           <% end %>
-          <td data-order="<%= model['speed'] || 0 %>">
-            <% if (speed = model['speed']) %>
-              <%= sprintf('%.0f', speed) %> <small class="text-muted">tok/s</small>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
-          <td data-order="<%= model['cost_to_run'] || 0 %>">
-            <% if model['cost_to_run'] %>
-              $<%= sprintf('%.0f', model['cost_to_run']) %>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
+          <td data-order="<%= model['speed'] || 0 %>"><%= display_or_dash(model['speed'], format: '%.0f', suffix: 'tok/s') %></td>
+          <td data-order="<%= model['cost_to_run'] || 0 %>"><%= display_or_dash(model['cost_to_run'], format: '%.0f', prefix: '$') %></td>
         </tr>
       <% end %>
     </tbody>
@@ -166,21 +133,22 @@
   var INDEX_ATTRIBUTES = <%== @index_attributes.to_json %>;
 
   var modelsData = <%== @models.map { |m|
-    {
+    result = {
       slug: m['slug'],
       name: m['name'],
-      intelligenceIndex: (m['intelligence_index'] || 0).to_f,
-      agenticIndex: (m['agentic_index'] || 0).to_f,
-      codingIndex: (m['coding_index'] || 0).to_f,
-      mathIndex: (m['math_index'] || 0).to_f,
-      opennessIndex: (m['openness_index'] || 0).to_f,
-      omniscienceIndex: m['omniscience']&.to_f,
       speed: (m['speed'] || 0).to_f,
       costToRun: (m['cost_to_run'] || 0).to_f,
       reasoningModel: !!m['reasoning_model'],
       isOpenWeights: !!m['is_open_weights'],
       releaseDate: m['release_date']
     }
+    @index_attributes.each do |attr|
+      score_key = "#{attr}_index"
+      js_prop = "#{attr.camelize(:lower)}Index"
+      # Preserve null for omniscience, default to 0 for others
+      result[js_prop.to_sym] = attr == 'omniscience' ? m[score_key]&.to_f : (m[score_key] || 0).to_f
+    end
+    result
   }.to_json %>;
 
   var indexLabels = <%==
@@ -291,7 +259,7 @@
       var visibleRows = table.rows({ search: 'applied' }).nodes();
       var indexColumns = INDEX_ATTRIBUTES.map(function(attr, idx) {
         return {
-          name: attr === 'omniscience' ? 'omniscience' : attr + '_index',
+          name: attr + '_index',
           cellClass: attr + '-index-cell',
           colIndex: idx + 5
         };
@@ -539,14 +507,7 @@
     });
 
     function getIndexValue(model, indexType) {
-      switch(indexType) {
-        case 'agentic': return model.agenticIndex;
-        case 'coding': return model.codingIndex;
-        case 'math': return model.mathIndex;
-        case 'openness': return model.opennessIndex;
-        case 'omniscience': return model.omniscienceIndex;
-        default: return model.intelligenceIndex;
-      }
+      return model[indexType + 'Index'];
     }
 
     function getMinScores() {
@@ -611,14 +572,10 @@
 
         // Check all min score filters
         var scoreMatch = true;
-        var indexValueMap = {
-          intelligence: model.intelligenceIndex,
-          agentic: model.agenticIndex,
-          coding: model.codingIndex,
-          math: model.mathIndex,
-          openness: model.opennessIndex,
-          omniscience: model.omniscienceIndex
-        };
+        var indexValueMap = {};
+        INDEX_ATTRIBUTES.forEach(function(attr) {
+          indexValueMap[attr] = model[attr + 'Index'];
+        });
 
         INDEX_ATTRIBUTES.forEach(function(attr) {
           if (attr === 'omniscience') {

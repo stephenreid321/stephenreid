@@ -58,6 +58,25 @@ StephenReid::App.helpers do
     %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
   end
 
+  def bool_badge(value, yes_text: 'Yes', no_text: 'No')
+    if value
+      %(<span class="badge badge-success">#{yes_text}</span>)
+    else
+      %(<span class="badge badge-secondary">#{no_text}</span>)
+    end
+  end
+
+  def display_or_dash(value, format: nil, prefix: nil, suffix: nil, &block)
+    if value
+      formatted = block ? yield(value) : (format ? sprintf(format, value) : value)
+      result = prefix.to_s + formatted.to_s
+      result += %( <small class="text-muted">#{suffix}</small>) if suffix
+      result
+    else
+      %(<span class="text-muted">—</span>)
+    end
+  end
+
   def substack_posts(limit: nil)
     posts = Dir["#{Padrino.root}/app/substack/posts/*.html"]
             .sort_by { |file| file.split('/').last.split('.').first.to_i }
