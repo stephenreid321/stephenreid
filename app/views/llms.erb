@@ -34,8 +34,17 @@
       <div class="d-flex flex-wrap gap-3">
         <% %w[intelligence agentic coding math openness].each do |attr| %>
           <div class="form-group mb-0 mr-1">
-            <label for="min-score-<%= attr %>" class="small">&gt;=<%= attr.capitalize %></label>
-            <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0', style: 'width: 8em' %>
+            <button type="button" class="btn btn-sm btn-outline-secondary toggle-score-field" data-attr="<%= attr %>">
+              &gt;=<%= attr.capitalize %>
+            </button>
+            <div id="score-field-<%= attr %>" style="display: none;">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <span class="input-group-text small">&gt;=<%= attr.capitalize %></span>
+                </div>
+                <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, placeholder: '0.0' %>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>
@@ -213,6 +222,25 @@
       columnDefs: [
         { type: 'num', targets: [5, 6, 7, 8, 9, 10] } // Numeric columns
       ]
+    });
+
+    // Show fields that already have values on page load
+    <% %w[intelligence agentic coding math openness].each do |attr| %>
+      <% if params["min_score_#{attr}".to_sym].present? %>
+        $('#score-field-<%= attr %>').show();
+        $('button[data-attr="<%= attr %>"]').hide();
+      <% end %>
+    <% end %>
+
+    // Toggle score field visibility on button click
+    $('.toggle-score-field').on('click', function() {
+      var attr = $(this).data('attr');
+      var $button = $(this);
+      var $field = $('#score-field-' + attr);
+
+      $button.hide();
+      $field.show();
+      $('#min-score-' + attr).focus();
     });
 
     // Calculate and update ranks based on visible (filtered) rows
