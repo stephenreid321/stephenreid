@@ -2,7 +2,7 @@
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
       <label for="index-selector">Y-axis</label>
-      <%= select_tag :index, options: %w[intelligence agentic coding math openness omniscience].map { |i| [i == 'omniscience' ? 'AA-Omniscience' : i.capitalize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
+      <%= select_tag :index, options: @index_attributes.map { |i| [i.capitalize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
@@ -32,16 +32,16 @@
   <div class="form-row">
     <div class="form-group col-md-12 mb-2">
       <div class="d-flex flex-wrap gap-3">
-        <% %w[intelligence agentic coding math openness omniscience].each do |attr| %>
+        <% @index_attributes.each do |attr| %>
           <div class="form-group mb-1 mr-1">
             <button type="button" class="btn btn-sm btn-outline-secondary toggle-score-field" data-attr="<%= attr %>">
-              <%= attr == 'omniscience' ? 'AA-Omniscience' : attr.capitalize %> &gt;=
+              <%= attr.capitalize %> &gt;=
             </button>
             <div id="score-field-<%= attr %>" style="display: none;">
               <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                  <span class="btn btn-sm btn-outline-secondary" id="label-<%= attr %>" style="border-radius: 0;">
-                    <%= attr == 'omniscience' ? 'AA-Omniscience' : attr.capitalize %> &gt;=
+                  <span class="btn btn-sm btn-outline-secondary" id="label-<%= attr %>" style="cursor: pointer;">
+                    <%= attr.capitalize %> &gt;=
                   </span>
                 </div>
                 <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1 %>
@@ -89,7 +89,7 @@
         <th>Coding Index</th>
         <th>Math Index</th>
         <th>Openness Index</th>
-        <th>AA-Omniscience</th>
+        <th>Omniscience Index</th>
         <th>Speed</th>
         <th>Cost to Run</th>
       </tr>
@@ -126,54 +126,22 @@
               <span class="badge badge-secondary">No</span>
             <% end %>
           </td>
-          <td data-order="<%= model['intelligence_index'] || 0 %>" class="intelligence-index-cell">
-            <% if (score = model['intelligence_index']) %>
-              <%= sprintf('%.1f', score) %>
-              <small class="text-muted rank-display"></small>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
-          <td data-order="<%= model['agentic_index'] || 0 %>" class="agentic-index-cell">
-            <% if (score = model['agentic_index']) %>
-              <%= sprintf('%.1f', score) %>
-              <small class="text-muted rank-display"></small>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
-          <td data-order="<%= model['coding_index'] || 0 %>" class="coding-index-cell">
-            <% if (score = model['coding_index']) %>
-              <%= sprintf('%.1f', score) %>
-              <small class="text-muted rank-display"></small>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
-          <td data-order="<%= model['math_index'] || 0 %>" class="math-index-cell">
-            <% if (score = model['math_index']) %>
-              <%= sprintf('%.1f', score) %>
-              <small class="text-muted rank-display"></small>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
-          <td data-order="<%= model['openness_index'] || 0 %>" class="openness-index-cell">
-            <% if (score = model['openness_index']) %>
-              <%= sprintf('%.1f', score) %>
-              <small class="text-muted rank-display"></small>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
-          <td data-order="<%= model['omniscience'] || -999 %>" class="omniscience-index-cell">
-            <% if (score = model['omniscience']) %>
-              <%= sprintf('%.1f', score) %>
-              <small class="text-muted rank-display"></small>
-            <% else %>
-              <span class="text-muted">—</span>
-            <% end %>
-          </td>
+          <% @index_attributes.each do |attr| %>
+            <% 
+              score_key = attr == 'omniscience' ? 'omniscience' : "#{attr}_index"
+              score = model[score_key]
+              data_order = attr == 'omniscience' ? (model['omniscience'] || -999) : (model[score_key] || 0)
+              cell_class = "#{attr}-index-cell"
+            %>
+            <td data-order="<%= data_order %>" class="<%= cell_class %>">
+              <% if score %>
+                <%= sprintf('%.1f', score) %>
+                <small class="text-muted rank-display"></small>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+          <% end %>
           <td data-order="<%= model['speed'] || 0 %>">
             <% if (speed = model['speed']) %>
               <%= sprintf('%.0f', speed) %> <small class="text-muted">tok/s</small>
@@ -195,6 +163,8 @@
 </div>
 
 <script>
+  var INDEX_ATTRIBUTES = <%== @index_attributes.to_json %>;
+
   var modelsData = <%== @models.map { |m|
     {
       slug: m['slug'],
@@ -213,14 +183,9 @@
     }
   }.to_json %>;
 
-  var indexLabels = {
-    intelligence: 'Intelligence Index',
-    agentic: 'Agentic Index',
-    coding: 'Coding Index',
-    math: 'Math Index',
-    openness: 'Openness Index',
-    omniscience: 'AA-Omniscience Index'
-  };
+  var indexLabels = <%==
+    @index_attributes.map { |attr| [attr, "#{attr.capitalize} Index"] }.to_h.to_json
+  %>;
 
   // Clean model names for display (remove reasoning/non-reasoning suffixes)
   function cleanModelName(name) {
@@ -239,7 +204,7 @@
     });
 
     // Show fields that already have values on page load
-    <% %w[intelligence agentic coding math openness omniscience].each do |attr| %>
+    <% @index_attributes.each do |attr| %>
       <% if params["min_score_#{attr}".to_sym].present? %>
         $('#score-field-<%= attr %>').show();
         $('button[data-attr="<%= attr %>"]').hide();
@@ -292,23 +257,45 @@
     });
 
     // Update label styles for fields with initial values on page load
-    <% %w[intelligence agentic coding math openness omniscience].each do |attr| %>
+    <% @index_attributes.each do |attr| %>
       <% if params["min_score_#{attr}".to_sym].present? %>
         updateLabelStyle('<%= attr %>');
       <% end %>
     <% end %>
 
+    // Handle label click to reset field to blank and hide
+    $('[id^="label-"]').on('click', function() {
+      var attr = $(this).attr('id').replace('label-', '');
+      var $input = $('#min-score-' + attr);
+      var $field = $('#score-field-' + attr);
+      var $toggleButton = $('button[data-attr="' + attr + '"]');
+
+      // Set field to blank
+      $input.val('');
+
+      // Hide the field container
+      $field.hide();
+
+      // Show the toggle button
+      $toggleButton.show();
+
+      // Update label style
+      updateLabelStyle(attr);
+
+      // Trigger change event to update filters
+      $input.trigger('change');
+    });
+
     // Calculate and update ranks based on visible (filtered) rows
     function updateRanks() {
       var visibleRows = table.rows({ search: 'applied' }).nodes();
-      var indexColumns = [
-        { name: 'intelligence_index', cellClass: 'intelligence-index-cell', colIndex: 5 },
-        { name: 'agentic_index', cellClass: 'agentic-index-cell', colIndex: 6 },
-        { name: 'coding_index', cellClass: 'coding-index-cell', colIndex: 7 },
-        { name: 'math_index', cellClass: 'math-index-cell', colIndex: 8 },
-        { name: 'openness_index', cellClass: 'openness-index-cell', colIndex: 9 },
-        { name: 'omniscience', cellClass: 'omniscience-index-cell', colIndex: 10 }
-      ];
+      var indexColumns = INDEX_ATTRIBUTES.map(function(attr, idx) {
+        return {
+          name: attr === 'omniscience' ? 'omniscience' : attr + '_index',
+          cellClass: attr + '-index-cell',
+          colIndex: idx + 5
+        };
+      });
 
       indexColumns.forEach(function(indexCol) {
         // First, clear all rank displays for this column
@@ -562,20 +549,26 @@
       }
     }
 
+    function getMinScores() {
+      var scores = {};
+      INDEX_ATTRIBUTES.forEach(function(attr) {
+        if (attr === 'omniscience') {
+          var val = $('#min-score-' + attr).val();
+          scores[attr] = val === '' || val === null ? null : parseFloat(val);
+        } else {
+          scores[attr] = parseFloat($('#min-score-' + attr).val()) || 0;
+        }
+      });
+      return scores;
+    }
+
     function updateChart() {
       var selectedIndex = $('#index-selector').val();
       var xAxisType = $('#x-axis-selector').val();
       var reasoningFilter = $('#reasoning-filter').val();
       var openSourceFilter = $('#open-source-filter').val();
       var releaseFilter = $('#release-filter').val();
-      var minScores = {
-        intelligence: parseFloat($('#min-score-intelligence').val()) || 0,
-        agentic: parseFloat($('#min-score-agentic').val()) || 0,
-        coding: parseFloat($('#min-score-coding').val()) || 0,
-        math: parseFloat($('#min-score-math').val()) || 0,
-        openness: parseFloat($('#min-score-openness').val()) || 0,
-        omniscience: parseFloat($('#min-score-omniscience').val()) || null
-      };
+      var minScores = getMinScores();
 
       // Update title and axis labels
       var indexLabel = indexLabels[selectedIndex];
@@ -618,12 +611,26 @@
 
         // Check all min score filters
         var scoreMatch = true;
-        if (minScores.intelligence > 0 && model.intelligenceIndex < minScores.intelligence) scoreMatch = false;
-        if (minScores.agentic > 0 && model.agenticIndex < minScores.agentic) scoreMatch = false;
-        if (minScores.coding > 0 && model.codingIndex < minScores.coding) scoreMatch = false;
-        if (minScores.math > 0 && model.mathIndex < minScores.math) scoreMatch = false;
-        if (minScores.openness > 0 && model.opennessIndex < minScores.openness) scoreMatch = false;
-        if (minScores.omniscience != null && model.omniscienceIndex != null && model.omniscienceIndex < minScores.omniscience) scoreMatch = false;
+        var indexValueMap = {
+          intelligence: model.intelligenceIndex,
+          agentic: model.agenticIndex,
+          coding: model.codingIndex,
+          math: model.mathIndex,
+          openness: model.opennessIndex,
+          omniscience: model.omniscienceIndex
+        };
+
+        INDEX_ATTRIBUTES.forEach(function(attr) {
+          if (attr === 'omniscience') {
+            if (minScores[attr] != null && indexValueMap[attr] != null && indexValueMap[attr] < minScores[attr]) {
+              scoreMatch = false;
+            }
+          } else {
+            if (minScores[attr] > 0 && indexValueMap[attr] < minScores[attr]) {
+              scoreMatch = false;
+            }
+          }
+        });
 
         // For omniscience, allow negative values; for others, require > 0
         var indexValueValid = selectedIndex === 'omniscience'
@@ -765,14 +772,7 @@
         var openSourceFilter = $('#open-source-filter').val();
         var releaseFilter = $('#release-filter').val();
         var selectedIndex = $('#index-selector').val();
-        var minScores = {
-          intelligence: parseFloat($('#min-score-intelligence').val()) || 0,
-          agentic: parseFloat($('#min-score-agentic').val()) || 0,
-          coding: parseFloat($('#min-score-coding').val()) || 0,
-          math: parseFloat($('#min-score-math').val()) || 0,
-          openness: parseFloat($('#min-score-openness').val()) || 0,
-          omniscience: parseFloat($('#min-score-omniscience').val()) || null
-        };
+        var minScores = getMinScores();
 
         if (settings.nTable.id !== 'models-table') return true;
 
@@ -810,46 +810,32 @@
         }
 
         // Check all min score filters
-        var indexColIndices = {
-          'intelligence': 5,
-          'agentic': 6,
-          'coding': 7,
-          'math': 8,
-          'openness': 9,
-          'omniscience': 10
-        };
+        var indexColIndices = {};
+        INDEX_ATTRIBUTES.forEach(function(attr, idx) {
+          indexColIndices[attr] = idx + 5;
+        });
 
-        if (minScores.intelligence > 0) {
-          var score = parseFloat($(row).find('td:eq(' + indexColIndices.intelligence + ')').data('order')) || 0;
-          if (score < minScores.intelligence) scoreMatch = false;
-        }
-        if (minScores.agentic > 0) {
-          var score = parseFloat($(row).find('td:eq(' + indexColIndices.agentic + ')').data('order')) || 0;
-          if (score < minScores.agentic) scoreMatch = false;
-        }
-        if (minScores.coding > 0) {
-          var score = parseFloat($(row).find('td:eq(' + indexColIndices.coding + ')').data('order')) || 0;
-          if (score < minScores.coding) scoreMatch = false;
-        }
-        if (minScores.math > 0) {
-          var score = parseFloat($(row).find('td:eq(' + indexColIndices.math + ')').data('order')) || 0;
-          if (score < minScores.math) scoreMatch = false;
-        }
-        if (minScores.openness > 0) {
-          var score = parseFloat($(row).find('td:eq(' + indexColIndices.openness + ')').data('order')) || 0;
-          if (score < minScores.openness) scoreMatch = false;
-        }
-        if (minScores.omniscience != null) {
-          var score = parseFloat($(row).find('td:eq(' + indexColIndices.omniscience + ')').data('order'));
-          if (!isNaN(score) && score < minScores.omniscience) scoreMatch = false;
-        }
+        INDEX_ATTRIBUTES.forEach(function(attr) {
+          if (attr === 'omniscience') {
+            if (minScores[attr] != null) {
+              var score = parseFloat($(row).find('td:eq(' + indexColIndices[attr] + ')').data('order'));
+              if (!isNaN(score) && score < minScores[attr]) scoreMatch = false;
+            }
+          } else {
+            if (minScores[attr] > 0) {
+              var score = parseFloat($(row).find('td:eq(' + indexColIndices[attr] + ')').data('order')) || 0;
+              if (score < minScores[attr]) scoreMatch = false;
+            }
+          }
+        });
 
         return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch;
       }
     );
 
     // Apply filters when dropdowns change
-    $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #x-axis-selector, #min-score-intelligence, #min-score-agentic, #min-score-coding, #min-score-math, #min-score-openness, #min-score-omniscience').on('change input', function() {
+    var minScoreSelectors = INDEX_ATTRIBUTES.map(function(attr) { return '#min-score-' + attr; }).join(', ');
+    $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #x-axis-selector, ' + minScoreSelectors).on('change input', function() {
       table.draw();
       updateRanks();
       updateChart();
