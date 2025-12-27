@@ -77,14 +77,18 @@ module StephenReid
         url = text.split.last
         text = text.split[0..-2].join(' ')
         iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
-        title = iframely['meta']['title'] || ''
-        description = iframely['meta']['description'] ? iframely['meta']['description'].truncate(150) : ''
-        thumbnail = iframely['links'] && iframely['links']['thumbnail'] ? iframely['links']['thumbnail'].first['href'] : ''
-        # `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/cast.py #{Shellwords.escape(text)} #{Shellwords.escape(url)}`
-        `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{Shellwords.escape(text)} #{Shellwords.escape(url)} #{Shellwords.escape(title)} #{Shellwords.escape(description)} #{Shellwords.escape(thumbnail)}`
+        metadata = Post.extract_iframely_metadata(iframely)
+        Post.post_to_bluesky(
+          text,
+          url: url,
+          title: metadata[:title],
+          description: metadata[:description],
+          thumbnail: metadata[:thumbnail]
+        )
+        Post.post_to_x("#{text} #{url}".strip)
       else
-        # `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/cast.py #{Shellwords.escape(text)}`
-        `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{Shellwords.escape(text)}`
+        Post.post_to_bluesky(text)
+        Post.post_to_x(text)
       end
       200
     end

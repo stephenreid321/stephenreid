@@ -1,4 +1,5 @@
 require 'shellwords'
+require 'oauth'
 
 class Post < Airrecord::Table
   self.base_key = ENV['AIRTABLE_BASE_KEY']
@@ -191,14 +192,48 @@ class Post < Airrecord::Table
     `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/cast.py #{Shellwords.escape(post['Title'])} #{Shellwords.escape(post['Link'])}`
   end
 
+  def self.extract_iframely_metadata(iframely_json)
+    json = iframely_json.is_a?(String) ? JSON.parse(iframely_json) : iframely_json
+    {
+      title: json['meta'] && json['meta']['title'] ? json['meta']['title'] : '',
+      description: json['meta'] && json['meta']['description'] ? json['meta']['description'].truncate(150) : '',
+      thumbnail: json['links'] && json['links']['thumbnail'] ? json['links']['thumbnail'].first['href'] : ''
+    }
+  end
+
+  def self.post_to_bluesky(text, url: nil, title: nil, description: nil, thumbnail: nil)
+    args = [Shellwords.escape(text)]
+    args << Shellwords.escape(url) if url
+    args << Shellwords.escape(title) if title
+    args << Shellwords.escape(description) if description
+    args << Shellwords.escape(thumbnail) if thumbnail
+    `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{args.join(' ')}`
+  end
+
+  def self.post_to_x(text)
+    consumer = OAuth::Consumer.new(
+      ENV['TWITTER_KEY'],
+      ENV['TWITTER_SECRET'],
+      site: 'https://api.twitter.com'
+    )
+    access_token = OAuth::AccessToken.new(
+      consumer,
+      ENV['TWITTER_ACCESS_TOKEN'],
+      ENV['TWITTER_ACCESS_TOKEN_SECRET']
+    )
+    response = access_token.post('/2/tweets', { text: text }.to_json, 'Content-Type' => 'application/json')
+    JSON.parse(response.body)
+  end
+
   def bluesky
-    post = self
-    json = JSON.parse(post['Iframely'])
-    title = post['Title']
-    link = post['Link']
-    description = json['meta'] && json['meta']['description'] ? json['meta']['description'].truncate(150) : ''
-    thumbnail = json['links'] && json['links']['thumbnail'] ? json['links']['thumbnail'].first['href'] : ''
-    `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{Shellwords.escape(title)} #{Shellwords.escape(link)} #{Shellwords.escape(title)} #{Shellwords.escape(description)} #{Shellwords.escape(thumbnail)}`
+    metadata = Post.extract_iframely_metadata(self['Iframely'])
+    Post.post_to_bluesky(
+      self['Title'],
+      url: self['Link'],
+      title: self['Title'],
+      description: metadata[:description],
+      thumbnail: metadata[:thumbnail]
+    )
   end
 
   def refresh_iframely
