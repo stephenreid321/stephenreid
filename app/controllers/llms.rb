@@ -1,6 +1,6 @@
 StephenReid::App.controller do
   
-  get '/llms' do
+  get '/llms', cache: true do
     @container_class = 'container-fluid'
     @stylesheet = 'light'
     response = Faraday.get('https://artificialanalysis.ai/models') do |req|
