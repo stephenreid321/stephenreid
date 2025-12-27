@@ -95,7 +95,7 @@
       <% @models.each do |model| %>
         <tr data-slug="<%= model['slug'] %>">
           <td>
-            <strong><a href="https://artificialanalysis.ai/models/<%= model['slug'] %>" target="_blank" class="text-dark"><%= model['name'].gsub(/\s*\(Reasoning\)\s*/i, '').gsub(/\s*\(Non-reasoning\)\s*/i, '').strip %></a><% if model['reasoning_model'] %> <i class="bi bi-lightbulb"></i><% end %></strong>
+            <strong><a href="https://artificialanalysis.ai/models/<%= model['slug'] %>" target="_blank" class="text-dark"><%= model['name'].gsub(/\s*\(Reasoning\)\s*/i, '').gsub(/\s*\(Non-reasoning\)\s*/i, '').strip %></a><% if model['reasoning_model'] %> ▲<% end %></strong>
             <br>
             <small class="text-muted"><code><%= model['slug'] %></code></small>
           </td>
@@ -813,7 +813,7 @@
       if (paretoPoints.length > 0) {
         var sortedPareto = paretoPoints.slice().sort(function(a, b) { return b.x - a.x; });
         var paretoHtml = '<ul class="list-unstyled mb-0">' + sortedPareto.map(function(p) {
-          var lightbulbIcon = p.reasoningModel ? ' <i class="bi bi-lightbulb"></i>' : '';
+          var lightbulbIcon = p.reasoningModel ? ' ▲' : '';
           var xDisplay = xAxisType === 'speed' ? p.x.toFixed(0) + ' tok/s' : '$' + p.x.toFixed(0);
           return '<li><strong><a href="https://artificialanalysis.ai/models/' + p.slug + '" target="_blank" class="text-dark">' + cleanModelName(p.label) + '</a>' + lightbulbIcon + '</strong> <span class="text-muted">(' + xDisplay + ' @ ' + p.y.toFixed(1) + ')</span></li>';
         }).join('') + '</ul>';
