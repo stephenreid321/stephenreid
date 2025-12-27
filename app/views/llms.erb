@@ -488,7 +488,21 @@
             position: 'bottom',
             labels: {
               usePointStyle: true,
-              padding: 20
+              padding: 20,
+              generateLabels: function(chart) {
+                var original = Chart.defaults.plugins.legend.labels.generateLabels;
+                var labels = original.call(this, chart);
+                // Override colors to use solid colors from dataset metadata
+                labels.forEach(function(label) {
+                  var datasetIndex = label.datasetIndex;
+                  var dataset = chart.data.datasets[datasetIndex];
+                  if (dataset && dataset.legendColor) {
+                    label.fillStyle = dataset.legendColor;
+                    label.strokeStyle = dataset.legendColor;
+                  }
+                });
+                return labels;
+              }
             }
           },
           zoom: {
@@ -761,6 +775,7 @@
             backgroundColor: dataPoints.map(function(point) {
               return group.color + (point.isPareto ? 'ff' : '33');
             }),
+            legendColor: group.color, // Solid color for legend
             borderWidth: 0,
             pointStyle: group.pointStyle,
             pointRadius: 10,
