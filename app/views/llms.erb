@@ -1,12 +1,12 @@
 <div class="mb-3">
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
-      <label for="index-selector">Y-axis</label>
-      <%= select_tag :index, options: @index_attributes.map { |i| [i.capitalize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
-    </div>
-    <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
       <%= select_tag :x_axis, options: [['Cost', 'cost'], ['Speed', 'speed']], selected: (params[:x_axis] || 'cost'), id: 'x-axis-selector', class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-2 mb-2">
+      <label for="index-selector">Y-axis</label>
+      <%= select_tag :index, options: @index_attributes.map { |i| [i.capitalize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="reasoning-filter">Reasoning</label>
@@ -85,7 +85,7 @@
         <th>Reasoning</th>
         <th>Open source</th>
         <% @index_attributes.each do |attr| %>
-          <th><%= attr.capitalize %> Index</th>
+          <th><%= attr.capitalize %></th>
         <% end %>
         <th>Speed</th>
         <th>Cost to Run</th>
@@ -152,7 +152,7 @@
   }.to_json %>;
 
   var indexLabels = <%==
-    @index_attributes.map { |attr| [attr, "#{attr.capitalize} Index"] }.to_h.to_json
+    @index_attributes.map { |attr| [attr, attr.capitalize] }.to_h.to_json
   %>;
 
   // Clean model names for display (remove reasoning/non-reasoning suffixes)
@@ -510,7 +510,7 @@
             grid: { color: 'rgba(0,0,0,0.05)' }
           },
           y: {
-            title: { display: true, text: 'Intelligence Index', font: { weight: 'bold' } },
+            title: { display: true, text: 'Intelligence', font: { weight: 'bold' } },
             grid: { color: 'rgba(0,0,0,0.05)' }
           }
         },
