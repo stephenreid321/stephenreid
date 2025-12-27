@@ -95,7 +95,7 @@
       <% @models.each do |model| %>
         <tr data-slug="<%= model['slug'] %>">
           <td>
-            <strong><%= model['name'].gsub(/\s*\(Reasoning\)\s*/i, '').gsub(/\s*\(Non-reasoning\)\s*/i, '').strip %><% if model['reasoning_model'] %> <i class="bi bi-lightbulb"></i><% end %></strong>
+            <strong><a href="https://artificialanalysis.ai/models/<%= model['slug'] %>" target="_blank" class="text-dark"><%= model['name'].gsub(/\s*\(Reasoning\)\s*/i, '').gsub(/\s*\(Non-reasoning\)\s*/i, '').strip %></a><% if model['reasoning_model'] %> <i class="bi bi-lightbulb"></i><% end %></strong>
             <br>
             <small class="text-muted"><code><%= model['slug'] %></code></small>
           </td>
@@ -297,6 +297,9 @@
       });
     }
 
+    // Store label positions for click detection
+    var labelPositions = [];
+
     // Custom plugin for leader lines with collision avoidance
     var leaderLinePlugin = {
       id: 'leaderLines',
@@ -308,6 +311,9 @@
         var labelPadding = 4;
         var baseLineLength = 25;
         var pointRadius = 12; // Approximate point radius for collision
+
+        // Clear previous label positions
+        labelPositions = [];
 
         // First pass: collect all Pareto points
         chart.data.datasets.forEach(function(dataset, datasetIndex) {
@@ -329,7 +335,8 @@
               pointY: element.y,
               textWidth: textWidth,
               angle: 0,
-              lineLength: baseLineLength
+              lineLength: baseLineLength,
+              slug: dataPoint.slug
             };
             labels.push(pointInfo);
             allPoints.push({ x: element.x, y: element.y });
@@ -436,6 +443,15 @@
           ctx.textAlign = 'left';
           ctx.fillText(lbl.label, box.endX + labelPadding, box.endY);
           ctx.restore();
+
+          // Store label position for click detection
+          labelPositions.push({
+            x: box.x,
+            y: box.y,
+            width: box.width,
+            height: box.height,
+            slug: lbl.slug
+          });
         });
       }
     };
@@ -497,14 +513,78 @@
             title: { display: true, text: 'Intelligence Index', font: { weight: 'bold' } },
             grid: { color: 'rgba(0,0,0,0.05)' }
           }
+        },
+        onClick: function(evt, elements) {
+          if (elements.length > 0) {
+            var element = elements[0];
+            var dataset = chart.data.datasets[element.datasetIndex];
+            var dataPoint = dataset.data[element.index];
+            if (dataPoint.slug) {
+              window.open('https://artificialanalysis.ai/models/' + dataPoint.slug, '_blank');
+            }
+          }
+        },
+        onHover: function(evt, elements) {
+          // Store hover state for data points
+          chart._hoveringDataPoint = elements.length > 0;
         }
       }
+    });
+
+    // Initialize hover state
+    chart._hoveringDataPoint = false;
+
+    // Change cursor to pointer when hovering over labels or data points
+    $('#cost-intelligence-chart').on('mousemove', function(evt) {
+      var canvas = this;
+      var rect = canvas.getBoundingClientRect();
+      var scaleX = canvas.width / rect.width;
+      var scaleY = canvas.height / rect.height;
+      var x = (evt.clientX - rect.left) * scaleX;
+      var y = (evt.clientY - rect.top) * scaleY;
+
+      // Check if hovering over a label
+      var overLabel = false;
+      for (var i = 0; i < labelPositions.length; i++) {
+        var label = labelPositions[i];
+        if (x >= label.x && x <= label.x + label.width &&
+            y >= label.y && y <= label.y + label.height) {
+          overLabel = true;
+          break;
+        }
+      }
+
+      // Check if hovering over a data point (set by onHover callback)
+      var overDataPoint = chart._hoveringDataPoint || false;
+
+      canvas.style.cursor = (overLabel || overDataPoint) ? 'pointer' : 'default';
     });
 
     // Reset zoom button
     $('#reset-zoom').on('click', function() {
       chart.resetZoom();
     });
+
+    // Make chart labels clickable
+    $('#cost-intelligence-chart').on('click', function(evt) {
+      var canvas = this;
+      var rect = canvas.getBoundingClientRect();
+      var scaleX = canvas.width / rect.width;
+      var scaleY = canvas.height / rect.height;
+      var x = (evt.clientX - rect.left) * scaleX;
+      var y = (evt.clientY - rect.top) * scaleY;
+
+      // Check if click is within any label bounds
+      for (var i = 0; i < labelPositions.length; i++) {
+        var label = labelPositions[i];
+        if (x >= label.x && x <= label.x + label.width &&
+            y >= label.y && y <= label.y + label.height) {
+          window.open('https://artificialanalysis.ai/models/' + label.slug, '_blank');
+          return;
+        }
+      }
+    });
+
 
     function getIndexValue(model, indexType) {
       return model[indexType + 'Index'];
@@ -629,7 +709,7 @@
       // Calculate Pareto frontier FIRST so we can label only those points
       var allPoints = filteredModels.map(function(m) {
         var xValue = xAxisType === 'speed' ? m.speed : m.costToRun;
-        return { x: xValue, y: getIndexValue(m, selectedIndex), label: m.name, reasoningModel: m.reasoningModel };
+        return { x: xValue, y: getIndexValue(m, selectedIndex), label: m.name, reasoningModel: m.reasoningModel, slug: m.slug };
       });
 
       // Sort by x-axis value (ascending for cost, descending for speed)
@@ -669,6 +749,7 @@
               x: xValue,
               y: getIndexValue(m, selectedIndex),
               label: m.name,
+              slug: m.slug,
               isPareto: pIdx !== undefined,
               paretoIndex: pIdx || 0,
               reasoningModel: m.reasoningModel
@@ -712,7 +793,7 @@
         var paretoHtml = '<ul class="list-unstyled mb-0">' + sortedPareto.map(function(p) {
           var lightbulbIcon = p.reasoningModel ? ' <i class="bi bi-lightbulb"></i>' : '';
           var xDisplay = xAxisType === 'speed' ? p.x.toFixed(0) + ' tok/s' : '$' + p.x.toFixed(0);
-          return '<li><strong>' + cleanModelName(p.label) + lightbulbIcon + '</strong> <span class="text-muted">(' + xDisplay + ' @ ' + p.y.toFixed(1) + ')</span></li>';
+          return '<li><strong><a href="https://artificialanalysis.ai/models/' + p.slug + '" target="_blank" class="text-dark">' + cleanModelName(p.label) + '</a>' + lightbulbIcon + '</strong> <span class="text-muted">(' + xDisplay + ' @ ' + p.y.toFixed(1) + ')</span></li>';
         }).join('') + '</ul>';
         $('#pareto-list').html(paretoHtml);
       } else {
