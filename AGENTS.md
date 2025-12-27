@@ -92,8 +92,6 @@ gem 'telegram-bot-ruby'
 <% } %>
 <% } %>
 
-<style></style>
-
 <% [        
        '//rawcdn.githack.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
        '//rawcdn.githack.com/tgdwyer/WebCola/aab7e61cd9580c4c89180cc0a30594e12743a242/WebCola/cola.min.js',
