@@ -1,3 +1,4 @@
+
 # Dependencies
 
 ## Gemfile
@@ -90,6 +91,8 @@ gem 'telegram-bot-ruby'
 <% end %>
 <% } %>
 <% } %>
+
+<style></style>
 
 <% [        
        '//rawcdn.githack.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
