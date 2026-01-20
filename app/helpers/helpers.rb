@@ -5,7 +5,7 @@ StephenReid::App.helpers do
 
   def audio_prompt
     p = ['You are [Stephen Reid](https://stephenreid.net). Here is information on Stephen:']
-    p += Prompt.prompt[0..1]
+    p += Prompt.markdown[0..1]
     p
   end
 

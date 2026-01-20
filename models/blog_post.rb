@@ -88,7 +88,7 @@ Write a 700-word blog post in the first person, as if written by the person belo
 - Assume the audience is highly intelligent.
 - Make sure the post has a proper conclusion.
 ---)
-    ] + Prompt.prompt
+    ] + Prompt.markdown
   end
 
   before_validation do
