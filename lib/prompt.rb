@@ -13,18 +13,6 @@ module Prompt
         title: 'Speaking engagements',
         content: SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")
       },
-      # {
-      #   title: 'Diet',
-      #   content: File.read("#{Padrino.root}/app/markdown/diet.md").force_encoding('utf-8')
-      # },
-      # {
-      #   title: 'AI consulting',
-      #   content: File.read("#{Padrino.root}/app/markdown/ai_consulting.md").force_encoding('utf-8')
-      # },
-      # {
-      #   title: 'Facilitation',
-      #   content: File.read("#{Padrino.root}/app/markdown/facilitation.md").force_encoding('utf-8')
-      # },
       {
         title: 'Life as Practice',
         content: File.read("#{Padrino.root}/app/markdown/life_as_practice.md").force_encoding('utf-8')
@@ -50,9 +38,6 @@ module Prompt
         books: Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| { title: b['Title'], author: b['Author'], date_read: b['Date Read'] } }
       }
     end
-
-    # Event descriptions
-    # Course notes
 
     { document: { section: sections } }
   end
