@@ -271,12 +271,16 @@
 
         // Collect scores from visible rows
         var scores = [];
+        var isOmniscience = indexCol.name === 'omniscience_index';
+        var nullSentinel = -999;
         $(visibleRows).each(function() {
           var row = $(this);
           var cell = row.find('td.' + indexCol.cellClass);
-          var score = parseFloat(cell.data('order')) || 0;
+          var score = parseFloat(cell.data('order'));
+          if (isNaN(score)) score = isOmniscience ? nullSentinel : 0;
 
-          if (score > 0) {
+          // For omniscience: include any value except null sentinel; for others: only > 0
+          if (isOmniscience ? (score !== nullSentinel) : (score > 0)) {
             scores.push({ score: score, cell: cell });
           }
         });
