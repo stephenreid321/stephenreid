@@ -1,5 +1,13 @@
 <% default_min_score_attr = 'intelligence' %>
-<% default_min_score_value = '40' %>
+<%
+  sonnet_model = @models.find { |m| m['slug'] == 'claude-4-5-sonnet' }
+  default_min_score_values = @index_attributes.each_with_object({}) do |attr, defaults|
+    score = sonnet_model && sonnet_model["#{attr}_index"]
+    defaults[attr] = score ? score.to_f.floor.to_s : nil
+  end
+  default_min_score_values[default_min_score_attr] ||= '40'
+  %w[math omniscience openness].each { |a| default_min_score_values[a] = nil }
+%>
 
 <div class="mb-3">
   <div class="form-row">
@@ -47,12 +55,13 @@
                     <%= attr.titleize %> &gt;=
                   </span>
                 </div>
-                <%= number_field_tag "min_score_#{attr}".to_sym, value: (params["min_score_#{attr}".to_sym].presence || (attr == default_min_score_attr ? default_min_score_value : nil)), id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1 %>
+                <%= number_field_tag "min_score_#{attr}".to_sym, value: (params["min_score_#{attr}".to_sym].presence || default_min_score_values[attr]), id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, style: 'max-width: 4rem' %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
+      <small id="sonnet-level-note" class="text-muted">Sonnet 4.5 level</small>
     </div>
   </div>
 </div>
@@ -164,6 +173,8 @@
   }
 
   $(function() {
+    function hideSonnetNote() { $('#sonnet-level-note').hide(); }
+
     var table = $('#models-table').DataTable({
       paging: false,
       searching: true,
@@ -176,11 +187,16 @@
 
     // Show fields that already have values on page load
     <% @index_attributes.each do |attr| %>
-      <% if params["min_score_#{attr}".to_sym].present? || (attr == default_min_score_attr) %>
+      <% if params["min_score_#{attr}".to_sym].present? || default_min_score_values[attr].present? %>
         $('#score-field-<%= attr %>').show();
         $('button[data-attr="<%= attr %>"]').hide();
       <% end %>
     <% end %>
+
+    // Hide "Sonnet 4.5 level" note when any filter is interacted with
+    $('#index-selector, #x-axis-selector, #reasoning-filter, #open-source-filter, #release-filter').on('change', hideSonnetNote);
+    $('[id^="min-score-"]').on('input change', hideSonnetNote);
+    $('.toggle-score-field, [id^="label-"]').on('click', hideSonnetNote);
 
     // Toggle score field visibility on button click
     $('.toggle-score-field').on('click', function() {
@@ -229,7 +245,7 @@
 
     // Update label styles for fields with initial values on page load
     <% @index_attributes.each do |attr| %>
-      <% if params["min_score_#{attr}".to_sym].present? || (attr == default_min_score_attr) %>
+      <% if params["min_score_#{attr}".to_sym].present? || default_min_score_values[attr].present? %>
         updateLabelStyle('<%= attr %>');
       <% end %>
     <% end %>
