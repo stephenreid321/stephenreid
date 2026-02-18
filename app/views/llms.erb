@@ -900,6 +900,9 @@
       }
     );
 
+    // Redraw table to apply custom filter (including default min_score on initial load)
+    table.draw();
+
     // Apply filters when dropdowns change
     var minScoreSelectors = INDEX_ATTRIBUTES.map(function(attr) { return '#min-score-' + attr; }).join(', ');
     $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #x-axis-selector, ' + minScoreSelectors).on('change input', function() {
