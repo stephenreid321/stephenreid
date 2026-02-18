@@ -1,3 +1,6 @@
+<% default_min_score_attr = 'intelligence' %>
+<% default_min_score_value = '40' %>
+
 <div class="mb-3">
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
@@ -44,7 +47,7 @@
                     <%= attr.titleize %> &gt;=
                   </span>
                 </div>
-                <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1 %>
+                <%= number_field_tag "min_score_#{attr}".to_sym, value: (params["min_score_#{attr}".to_sym].presence || (attr == default_min_score_attr ? default_min_score_value : nil)), id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1 %>
               </div>
             </div>
           </div>
@@ -173,7 +176,7 @@
 
     // Show fields that already have values on page load
     <% @index_attributes.each do |attr| %>
-      <% if params["min_score_#{attr}".to_sym].present? %>
+      <% if params["min_score_#{attr}".to_sym].present? || (attr == default_min_score_attr) %>
         $('#score-field-<%= attr %>').show();
         $('button[data-attr="<%= attr %>"]').hide();
       <% end %>
@@ -226,7 +229,7 @@
 
     // Update label styles for fields with initial values on page load
     <% @index_attributes.each do |attr| %>
-      <% if params["min_score_#{attr}".to_sym].present? %>
+      <% if params["min_score_#{attr}".to_sym].present? || (attr == default_min_score_attr) %>
         updateLabelStyle('<%= attr %>');
       <% end %>
     <% end %>
