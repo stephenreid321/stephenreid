@@ -13,7 +13,7 @@
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
       <label for="index-selector">Y-axis</label>
-      <%= select_tag :index, options: @index_attributes.map { |i| [i.titleize, i] }, selected: (params[:index] || 'intelligence'), id: 'index-selector', class: 'form-control' %>
+      <%= select_tag :index, options: @index_attributes.map { |i| [i.titleize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
@@ -547,7 +547,7 @@
             grid: { color: 'rgba(0,0,0,0.05)' }
           },
           y: {
-            title: { display: true, text: 'Intelligence', font: { weight: 'bold' } },
+            title: { display: true, text: 'Agentic', font: { weight: 'bold' } },
             grid: { color: 'rgba(0,0,0,0.05)' }
           }
         },
@@ -767,7 +767,8 @@
       var paretoPoints = [];
       var paretoInfo = {}; // Store both membership and index
       var maxIntelligence = -Infinity;
-      var epsilon = 1.0; // Include points within 1 intelligence point of the frontier
+      var maxY = allPoints.length > 0 ? Math.max.apply(null, allPoints.map(function(p) { return p.y; })) : 0;
+      var epsilon = maxY * 0.02; // 2% tolerance
 
       for (var i = 0; i < allPoints.length; i++) {
         if (allPoints[i].y > maxIntelligence - epsilon) {
