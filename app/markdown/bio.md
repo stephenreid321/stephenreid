@@ -2,5 +2,5 @@ Stephen Reid is a technologist, facilitator and [coach](/coaching) who has train
 
 Previously, he founded [The Psychedelic Society](https://psychedelicsociety.org.uk/), which established the first legal [psilocybin retreat programme](https://www.alalaho.org/) in Europe. Stephen has an MPhys in Physics from the University of Oxford, where he specialised in quantum field theory, an MRes in Complexity Science from the University of Bristol, and a Professional Certificate in Machine Learning and Artificial Intelligence from UC Berkeley.
 
-He lives with his wife Laura in Stockholm, Sweden, where he enjoys [swimrunning](https://otilloswimrun.com/) in the archipelago.
+He lives with his wife Laura and daughter Runa in Stockholm, Sweden, where he enjoys [swimrunning](https://otilloswimrun.com/) in the archipelago.
 
