@@ -191,8 +191,8 @@ module StephenReid
     get '/prompt', provides: :txt do
       [
         Prompt.markdown(book_summaries: params[:book_summaries]).join("\n\n"),
-        '## Substack notes',
-        File.read("#{Padrino.root}/app/substack/notes.md").force_encoding('utf-8'),
+        # '## Substack notes',
+        # File.read("#{Padrino.root}/app/substack/notes.md").force_encoding('utf-8'),
         (substack_posts(limit: params[:limit]) unless params[:skip_substack_posts])
       ].compact.join("\n\n")
     end
