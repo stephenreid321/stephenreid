@@ -24,8 +24,8 @@ nodes_to_remove = %w[svg button]
 unless File.exist?('notes.html')
   output = ''
   agent = Mechanize.new
-  note_urls.each do |url|
-    url = "https://substack.com/@stephenreid/note/#{url.split('=').last}"
+  note_urls.each do |path|
+    url = "https://substack.com#{path}"
     puts url
     page = agent.get(url)
     if (note = page.search("[class*='feedPermalinkUnit']").first)

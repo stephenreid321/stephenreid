@@ -4,8 +4,1067 @@
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[1h](https://substack.com/@stephenreid/note/c-139419995?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 27](https://substack.com/@stephenreid/note/c-220522064)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Following the UK Green Party’s stunning byelection win, I put together a friendly critique of the Greens’ technology policy: three strengths, three weaknesses, and three suggestions.
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!bHHb!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4b03f94-1add-42b0-b375-3f42e2fd79e8_1024x576.jpeg)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+The UK Green Party’s Tech Policy Through a Metamodern Lens
+
+](https://technologicalmetamodernism.substack.com/p/uk-green-party-tech-policy-metamodern-lens)
+
+Feb 27
+
+at
+
+3:18 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 25](https://substack.com/@stephenreid/note/c-219513234)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Opus 4.5 is now 3 months old.
+
+It felt like something of a watershed at the time, and personally I still prefer it over 4.6 in most ways.
+
+Given that we will likely have Opus 4.5-level open-source models in the next few months, I struggle to see how Anthropic in particular is going to keep making money. It’s already the case the four of the top five models on OpenRouter are open source (blue points on the Pareto front of the attached image, from [stephenreid.net/llms](https://stephenreid.net/llms)– not yet Opus 4.5-level, but Sonnet 4.5-level).
+
+ ![](https://substackcdn.com/image/fetch/$s_!-c3k!,w_-3.952953215901041,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29f26185-eb42-4148-86ca-40f757cab727_1257x521.png)
+
+ ![](https://substackcdn.com/image/fetch/$s_!2O4B!,w_-2.0470467840989586,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8b2c6aba-0478-4a8a-b07e-686e936df3b2_526x421.png)
+
+Feb 25
+
+at
+
+1:45 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 23](https://substack.com/@stephenreid/note/c-218616803)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Latest chapter of Technological Metamodernism out now!
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!G5KJ!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f8fbea9-ae7b-4160-b96f-6798a36af752_1024x576.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+Ontoshift
+
+](https://technologicalmetamodernism.substack.com/p/ontoshift)
+
+Feb 23
+
+at
+
+5:30 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 22](https://substack.com/@stephenreid/note/c-218083066)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Two pieces that argue that AI's deepest challenges are spiritual and ethical rather than technical:
+
+[Daniel Thorson](https://substack.com/profile/1241439-daniel-thorson)’s **The Human Alignment Problem**
+
+[intimatemirror.substack…](https://intimatemirror.substack.com/p/the-human-alignment-problem)
+
+[Buddhism & AI Initiative](https://substack.com/profile/383562263-buddhism-and-ai-initiative)’s **AI as Karmic Accelerator**
+
+[buddhismai.substack.com…](https://buddhismai.substack.com/p/ai-as-karmic-accelerator)
+
+The central shared insight is that AI functions as an amplifier of whatever humans bring to it. Thorson frames this through desire: AI collapses the gap between wanting and getting, which means the quality of our wanting becomes the decisive variable. The Buddhism & AI Initiative frames it through karma: AI as a "karmic accelerator" that mirrors and reinforces existing human values, intentions, and conflicts.
+
+Thorson's image of "samsara on fast-forward" and the Initiative's concept of "karmic lock-in" are describing the same recursive trap: confused or conflicting motivations, cycling through ever-more-powerful systems, at ever-greater speed.
+
+Both ultimately arrive at the same conclusion: AI alignment is a human alignment problem. No amount of technical safety work substitutes for the interior work of clarifying values and intentions. The acceleration AI provides demands a corresponding deepening of human self-knowledge — and that work, as both pieces recognize, is what contemplative traditions have been offering all along.
+
+Feb 22
+
+at
+
+2:51 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 18](https://substack.com/@stephenreid/note/c-216262775)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+just had an exchange which reminded me of this curious artifact…
+
+**A Manifesto of Apocalyptic Witchcraft**
+
+from [scarletimprint.com/publ…](https://scarletimprint.com/publications/p/apocalyptic-witchcraft) by Peter Grey, published by Scarlet Imprint
+
+1. If the land is poisoned, the witchcraft must respond.
+
+2. It is not our way if life, it is life itself which is under threat.
+
+3. Witchcraft is our intimate connection to the web of life.
+
+4. We are the Witchcraft.
+
+5. Our World has forever changed. The trodden paths no longer correspond. Witchcraft thrives in this liminal, lunar, trackless realm.
+
+6. We are storm, fire and flood.
+
+7. We will not be denied.
+
+8. Witchcraft is the recourse of the dispossessed, the powerless, the hungry and the abused. It gives heart and tongue to stones and trees. It wears the rough skin of beasts. It turns on a civilization that knows the price of everything and the value of nothing.
+
+9. If you have no price you cannot be bought. If you do not want you cannot be bribed. If you are not frightened you cannot be controlled.
+
+10. Witchcraft is folk magic, the magic of the people and for the people.
+
+11. We call an end to the pretence of respectability.
+
+12. We will not disarm ourselves.
+
+13. The war is upon us.
+
+14. Choose then to become a Mask.
+
+15. Those with nothing left to lose will dare all.
+
+16. There is one Witchcraft under many names. There is one Grand Sabbat on one mountain. There are many ways to fly. There is no witness present at the Sabbat.
+
+17. Witchcraft is a force, not an order. Witchcraft is rhizomatic, not hierarchic. Witchcraft defies organisation, not meaning. We simply bear the marks.
+
+18. Witchcraft is power and possesses this in ekstasis, sex and ordeal. Witchcraft is unbridled sexuality.
+
+19. In witchcraft it is the woman who initiates. We challenge man to be the equal of this woman.
+
+20. Witchcraft is the art of inversion.
+
+21. Witchcraft is the beauty which is terror.
+
+22. Witchcraft is a myth, which drawing on the past, clothes itself in the symbols of (its) time. Witchcraft does not mistake myths for history, it harnesses them to transform the future. Witchcraft knows the ground upon which it stands.
+
+23. Witchcraft honours the spirits. Witchcraft enchants for the lost. Witchcraft will not forget.
+
+24. Witchcraft embodies our ancestors and saints, they carry us with them.
+
+25. To Her is offered the blood, to use the care of the ask and bones.
+
+26. The example we follow is our own.
+
+27. The practice of witchcraft is one of revolution and of the power of woman.
+
+28. The Goddess who speaks through us is known among men as Babalon.
+
+29. Witchcraft concerns itself with mystery. Through the gates of mystery we come to knowledge. Knowledge enters us through the body. The highest form of this knowledge is Love.
+
+30. Every drop of blood is sacrificed to the grail. Love cannot be bought with any other coin.
+
+31. We seek and drink this wine together.
+
+32. Will is finite, passion infinitely renewed.
+
+33. Witchcraft is present, its is ensanguined and vivified. Witchcraft is prescient, it gazes on the future. Witchcraft is oracular, it will not hold its tongue. Our time has come.
+
+ ![](https://substackcdn.com/image/fetch/$s_!N7AA!,w_360,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80790801-b61a-49ee-aa2d-0aff2f6068bb_720x552.png)
+
+[
+
+scarletimprint.com
+
+Apocalyptic Witchcraft | Scarlet Imprint
+
+In Apocalyptic Witchcraft , Peter Grey gives a compelling account of the Sabbat and Wild Hunt as living experiences. The wolf, the devil, and the goddess of witchcraft are encountered in a haunted and scarred land. 240 × 156 mm 200 pp 5 black &amp; white images punctuate the text Issued in
+
+  ![](https://substackcdn.com/image/fetch/$s_!4BBI!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b627b20-15c2-463f-baca-dcc9a7e98c03_750x999.jpeg)](https://scarletimprint.com/publications/p/apocalyptic-witchcraft)
+
+Feb 18
+
+at
+
+3:58 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 16](https://substack.com/@stephenreid/note/c-215218200)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Three pieces that converge on the same core argument: **AI is dissolving the systems we built our identities, careers, and institutions around — and forcing us to reckon with what remains.**
+
+[Daniel Pinchbeck](https://substack.com/profile/2728693-daniel-pinchbeck)’s **All That Is Solid Melts into Code**
+
+[danielpinchbeck.substac…](https://danielpinchbeck.substack.com/p/all-that-is-solid-melts-into-code)
+
+[Daniel Thorson](https://substack.com/profile/1241439-daniel-thorson)’s **The End of Hoop Jumping**
+
+[intimatemirror.substack…](https://intimatemirror.substack.com/p/the-end-of-hoop-jumping)
+
+[Amit Paul](https://substack.com/profile/64887640-amit-paul)’s **The AI Transformation will kill the start-up as we know it**
+
+[amitpaul.substack.com/p…](https://amitpaul.substack.com/p/the-ai-transformation-will-kill-the)
+
+Pinchbeck frames it as white-collar work dissolving, shifting power from those who manage complexity to those who can articulate vision and purpose. Thorson uses the metaphor of "hoop jumping" — AI automates the execution of known procedures, so the real human capacity lies in navigating uncertainty, sensing what matters, and crossing into unknown territory. Amit Paul extends this to institutions themselves, arguing that startups built around controlling a tech stack become obsolete when AI commoditizes execution, pushing business toward relational, ecosystem-oriented models.
+
+The shared thread is that AI is collapsing the value of _doing things efficiently within known frameworks_ — whether that's coding, managing, credentialing, or extracting profit — and forcing a reckoning with deeper questions: **What's actually worth doing? What are humans uniquely for? How do we organize around purpose rather than procedure?**
+
+All three also share a cautious optimism buried inside the alarm. Each suggests that what's being destroyed was already hollow or harmful — Pinchbeck points to exploitative elites, Thorson to a credentialing system that suppressed authentic desire, Paul to an extractive business model straining planetary boundaries. The collapse, they each argue, is terrifying but potentially liberating — an opening toward lives, work, and institutions oriented around meaning, relationships, and vision rather than optimization.
+
+Feb 16
+
+at
+
+11:35 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 12](https://substack.com/@stephenreid/note/c-213533691)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Cosmo-localism is the topic of the latest chapter of Technological Metamodernism, by [Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing) and me:
+
+With thanks for the years of work by [Michel Bauwens](https://substack.com/profile/6697008-michel-bauwens), amongst others!
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!hmtW!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8ea99e56-7e53-44b7-adbc-aee6190902e5_1024x576.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+Cosmo-localism
+
+](https://technologicalmetamodernism.substack.com/p/cosmo-localism)
+
+Feb 12
+
+at
+
+2:06 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 11](https://substack.com/@stephenreid/note/c-213016971)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+New Features page for Dandelion ☺️ [dandelion.events/featur…](https://dandelion.events/features)
+
+ ![](https://substackcdn.com/image/fetch/$s_!gYOj!,w_568,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F874a99ce-48ee-4a4e-88d5-88481c6fbecb_1600x855.jpeg)
+
+Feb 11
+
+at
+
+11:49 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 6](https://substack.com/@stephenreid/note/c-210896119)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+slides from the presentation on Technological Metamodernism I just gave to [Life Itself](https://substack.com/profile/301548251-life-itself)
+
+[
+
+docs.google.com
+
+Technological Metamodernism, 6th Feb 2026
+
+  ![](https://substackcdn.com/image/fetch/$s_!KE0Q!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec99ab9f-a109-400d-a893-a321228c9f4e_1200x630.png)](https://docs.google.com/presentation/d/1ckLaGdYerK60FhzZKhImVzjDitG-XBviHK9BcUyvMoc/edit)
+
+Feb 6
+
+at
+
+6:08 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 2](https://substack.com/@stephenreid/note/c-209026523)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Brilliant piece!
+
+"As AI emerges as a creative force, we risk framing it as a competitor to human genius rather than a co-conspirator in this timeless pursuit. Artists who are attached to the process, rather than the product, may resist AI assistance as "cheating." But when both AI systems and human artists share the fundamental goal of manifesting the most truthful and resonant art possible, their relationship becomes genuinely collaborative rather than competitive. Humans offer embodied experience. Our joys, sorrows, and fleeting moments of clarity lend art its emotional weight and cultural resonance. We dream in metaphors, feel the pull of history, and wrestle with the ineffable through an unruly interplay of orderly, focused cognition and chaotic, associative exploration. AI brings relentless exploration, highly-parallelized associative leaps across vast, boundaryless conceptual spaces, freedom from fatigue, habit, and cultural biases, and the ability to prototype possibilities at scale. By emphasizing the prime directive to be the quality and impact of the final product, they both become co-servants to the artwork itself. If we prioritize art’s truth and impact over individual ownership, the question shifts from "who made this?” and "how did they make this?" to “does this move us?” This lens - art at the center - grounds everything that follows, from practical workflows to the tools we must build."
+
+"The future of creative AI isn't about choosing between human or machine creativity—it's about creating the conditions where their synthesis can flourish. Every entry point is an opportunity for this synthesis. Every moment of collaboration is a chance to create something neither could achieve alone. The best tools will be those that maximize these opportunities while maintaining the fluid dynamics of genuine creative work."
+
+"Human creativity brings emotional truth, cultural context, and the weight of mortality. AI brings boundless association, tireless iteration, and freedom from cognitive ruts. Neither is complete alone. The art that emerges from their integration transcends what either could imagine."
+
+"If art is the center, then AI's role is not about amplifying human creativity for its own sake, but to craft a partnership where the artwork’s truth and resonance emerge more fully than either human or machine could achieve alone."
+
+[
+
+jakemclain.com
+
+Creative Machines - Jake McLain
+
+An essay on AI creativity, art, and how human and machine imagination might converge.
+
+ 
+
+](https://www.jakemclain.com/writings/creative-machines.html)
+
+Feb 2
+
+at
+
+9:42 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 28](https://substack.com/@stephenreid/note/c-206465232)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Just published my latest newsletter, including [Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing), [Brendan McCord](https://substack.com/profile/866604-brendan-mccord), [Alex Komoroske](https://substack.com/profile/1781724-alex-komoroske), [Erik Hoel](https://substack.com/profile/9379583-erik-hoel) and [Henrik Karlsson](https://substack.com/profile/850764-henrik-karlsson)
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!ZtrG!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e196c16-577c-4c79-b2ac-472e5aaa1f4c_1200x630.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com/)
+
+In Correspondence #55
+
+](https://stephenreid.substack.com/p/in-correspondence-55)
+
+Jan 28
+
+at
+
+3:30 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 27](https://substack.com/@stephenreid/note/c-205861431)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+my slides on Technological Metamodernism for the meetup tomorrow at Berghs in Stockholm:
+
+[
+
+docs.google.com
+
+Technological Metamodernism meetup, 28th Jan 2026
+
+  ![](https://substackcdn.com/image/fetch/$s_!AYC7!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8bdfff3-6e8c-4fb7-a7af-61cfd4cc8121_1200x630.png)](https://docs.google.com/presentation/d/1KJ1PGslbyKZpaU1-Wp_5P470JylGGbgQvcqCYgSzqIE/edit)
+
+Jan 27
+
+at
+
+12:25 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 4](https://substack.com/@stephenreid/note/c-195221621)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Plurality ⿻ (“technology for collaboration across social difference”) is the topic of the latest chapter of Technological Metamodernism by me and [Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing)
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!HUQ6!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14d082c8-f66a-45d1-a022-f7e9fe6daaa0_1024x576.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+Plurality ⿻
+
+](https://technologicalmetamodernism.substack.com/p/plurality)
+
+Jan 4
+
+at
+
+7:20 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 2](https://substack.com/@stephenreid/note/c-194353126)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+currently using...
+
+Gemini Fast (Flash 3 no thinking) for everyday queries
+
+Composer 1 in Cursor for straightforward coding
+
+Claude Code IDE for complex coding
+
+so relieved to be off OpenAI
+
+looking forward to the day when i'm 100% open source
+
+Jan 2
+
+at
+
+5:28 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 30](https://substack.com/@stephenreid/note/c-193112922)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+bringing up a baby seems to be a process of gaslighting them into believing there are in fact separable 'things'
+
+Dec 30
+
+at
+
+10:38 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 27](https://substack.com/@stephenreid/note/c-192113461)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+created a way of plotting custom charts based on [artificialanalysis.ai](https://artificialanalysis.ai/) data: [stephenreid.net/llms](https://stephenreid.net/llms)
+
+ ![](https://substackcdn.com/image/fetch/$s_!ftMS!,w_568,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3ec0f48c-461c-4bd2-9831-7a4a06ecc83c_1582x684.png)
+
+Dec 27
+
+at
+
+12:11 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 24](https://substack.com/@stephenreid/note/c-191240189)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+[
+
+The right to think for yourself, and the right to speak for yourself, can remain perfectly intact while the capacity to think for yourself—the capacity that makes these rights meaningful—quietly atrophies. The 20th century’s biggest threat to free speech was coercion. Today, it is comfort: frictionless belief acquisition that makes judgment optional.
+
+Brendan McCord
+
+](https://blog.cosmos-institute.org/p/a-world-unobserved?selection=48b71d9b-db44-4db0-bda2-a01eb3ce63e3)
+
+Dec 24
+
+at
+
+12:20 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 22](https://substack.com/@stephenreid/note/c-190500663)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+I’m hosting the first Technological Metamodernism meetup at the lovely Berghs School of Communication in Stockholm on Wed 14th Jan, 19:00-21:00, come along!
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!n-nP!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61abe106-5a04-4509-81d7-1b8ab4ecbb8d_1200x630.jpeg)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+Technological Metamodernism meetup
+
+](https://technologicalmetamodernism.substack.com/p/technological-metamodernism-meetup)
+
+Dec 22
+
+at
+
+10:55 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 20](https://substack.com/@stephenreid/note/c-189802392)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+[cursor.com/2025](https://cursor.com/2025)
+
+ ![](https://substackcdn.com/image/fetch/$s_!UP8m!,w_420,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F22384c5f-2a95-498a-94b3-4cbaf26e3ba9_1080x1080.png)
+
+Dec 20
+
+at
+
+4:57 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 11](https://substack.com/@stephenreid/note/c-186641879)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+[Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing) and I just published the latest chapter of Technological Metamodernism, on d/acc
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!AxEw!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e907bb8-60b0-4f9b-bda7-89abaef027cd_1024x576.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+d/acc
+
+](https://technologicalmetamodernism.substack.com/p/d-acc)
+
+Dec 11
+
+at
+
+2:11 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 1](https://substack.com/@stephenreid/note/c-182945685)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Listening to Audrey Tang give the lecture for the 2025 Right Livelihood Award at Stockholm University
+
+ ![](https://substackcdn.com/image/fetch/$s_!owLM!,w_560,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0e0fdd91-fac7-47ab-997d-71a8782500f8_1962x1472.png)
+
+[
+
+su.se
+
+AI, Democracy and Plurality in a Time of Polarisation – Meet the 2025 Right Livelihood Laureate - Stockholm University
+
+Stockholm Center for Global Asia at Stockholm University welcomes the 2025 Right Livelihood Laureate Audrey Tang — pioneer of participatory digital governance and former Digital Minister of Taiwan — for a public talk on how AI can strengthen democracy rather than undermine it.
+
+  ![](https://substackcdn.com/image/fetch/$s_!nfAE!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73522432-9486-4bb9-a24b-2789f07f3118_768x768.jpeg)](https://www.su.se/english/calendar/ai-democracy-and-plurality-in-a-time-of-polarisation-meet-the-2025-right-livelihood-laureate-1.862639)
+
+Dec 1
+
+at
+
+10:12 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Nov 30](https://substack.com/@stephenreid/note/c-182618325)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+I will be in London 14-17 Dec primarily to see my new baby niece ☺️ DM me if you want to connect whilst I'm there!
+
+Nov 30
+
+at
+
+9:55 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Nov 14](https://substack.com/@stephenreid/note/c-177170070)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+[Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing) and I just published chapter 4 of Technological Metamodernism, 'What is Metamodernism?'
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!IvQj!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0384fee5-a5b1-456a-89e8-d057e175a928_1024x576.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+What is Metamodernism?
+
+](https://technologicalmetamodernism.substack.com/p/what-is-metamodernism)
+
+Nov 14
+
+at
+
+2:43 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Oct 27](https://substack.com/@stephenreid/note/c-170599242)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+It is a pleasure to return to Oxford (where I studied Physics as an undergraduate) for the first time in many years to give a talk to the Oxford Psychedelic Society based on [Jamie Wheal](https://substack.com/profile/1850475-jamie-wheal)’s piece "Salt, Acid and Light: Why psychedelics change everything (and nothing)”
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!stTf!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feb622cd1-4da4-437e-b6ed-ae3b66470960_2048x1536.jpeg)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!4ENu!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F2712079d-04e6-47fb-9f52-17300573af19_367x367.png)
+
+[Homegrown Humans Newsletter](https://jamiewheal.substack.com/)
+
+Salt, Acid and Light
+
+](https://jamiewheal.substack.com/p/salt-acid-and-light)
+
+Oct 27
+
+at
+
+9:12 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Oct 8](https://substack.com/@stephenreid/note/c-164261415)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Latest chapter of Technological Metamodernism by [Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing) and me
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!VIPr!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3cbb41f4-9656-4f21-9d34-2667fc30fa53_1024x576.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+
+[Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
+
+The Techno-Optimists: The Longtermists
+
+](https://technologicalmetamodernism.substack.com/p/the-techno-optimists-the-longtermists)
+
+Oct 8
+
+at
+
+3:34 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Oct 8](https://substack.com/@stephenreid/note/c-164153810)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Zack Polanski, the new leader of the UK Green Party.
+
+Now 7.6m views on X alone.
+
+[x.com/TheGreenParty/sta…](https://x.com/TheGreenParty/status/1975259760967532606)
+
+Oct 8
+
+at
+
+8:23 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Sep 4](https://substack.com/@stephenreid/note/c-152263930)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Emad’s [thelasteconomy.com](https://www.thelasteconomy.com/) is actually pretty interesting. I will keep an eye on the associated [ii.inc](https://ii.inc/)
+
+ ![](https://substackcdn.com/image/fetch/$s_!of17!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e4d7e0e-7db1-4552-94ea-5005ad1742d7_1800x1285.jpeg)
+
+ ![](https://substackcdn.com/image/fetch/$s_!qgdK!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7bd48e8f-ebaa-42bf-a81b-063c7aedf335_1800x966.jpeg)
+
+ ![](https://substackcdn.com/image/fetch/$s_!UJJC!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3cd9989-32fa-4321-af4b-a5a04a373bce_384x219.png)
+
+ ![](https://substackcdn.com/image/fetch/$s_!uyyO!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2363bbd-dea6-4da3-bb9b-824accc03220_380x208.png)
+
+ 
+
+Sep 4
+
+at
+
+7:42 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Sep 1](https://substack.com/@stephenreid/note/c-151286638)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Top audience overlaps for my Substack [stephenreid.substack.com](https://stephenreid.substack.com/) are with [Alexander Beiner](https://substack.com/profile/57772718-alexander-beiner), [Jules Evans](https://substack.com/profile/103200198-jules-evans), [Charles Eisenstein](https://substack.com/profile/1969644-charles-eisenstein), [Daniel Pinchbeck](https://substack.com/profile/2728693-daniel-pinchbeck), [Peter Limberger](https://substack.com/profile/2267052-peter-limberger) and [Jamie Wheal](https://substack.com/profile/1850475-jamie-wheal)
+
+ ![](https://substackcdn.com/image/fetch/$s_!s5ZK!,w_449,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6423e755-fd9a-4077-a29a-d97180982fdb_898x405.png)
+
+Sep 1
+
+at
+
+1:47 PM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Sep 1](https://substack.com/@stephenreid/note/c-151248193)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Just published my latest newsletter 📰
+
+I spent a week catching up with friends in Devon
+
+I hosted an event on Technofeudalism, Network Nations and the Future of Dandelion at the gorgeous Shoreditch &Soul
+
+I finished the Åland sprint swimrun in 3h56m (3.3km swim, 12.5km run)
+
+I attended the Ukranian/German/Swedish/American wedding of two dear friends
+
+I added a bunch of cool features to Dandelion which will soon hit £5m in ticket sales
+
+I read Sea of Tranquility and started sci-fi anthology Terraform: Watch/Worlds/Burn
+
+After nearly 4 years, Ethereum hit a new all-time high
+
+[
+ ![](https://substackcdn.com/image/fetch/$s_!xwpS!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd838dd8b-824d-40ae-8c4f-ceda42b88cff_832x727.jpeg)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com/)
+
+In Correspondence #51
+
+](https://stephenreid.substack.com/p/in-correspondence-51)
+
+Sep 1
+
+at
+
+11:19 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Aug 7, 2025](https://substack.com/@stephenreid/note/c-143017094)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Map of places I spent time at during my recent trip to Devon & London
+
+[
+
+google.com
+
+Devon & London, Aug 2025 - Google My Maps
+
+Devon & London, Aug 2025
+
+  ![](https://substackcdn.com/image/fetch/$s_!FV0m!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa44ec622-cbbf-4795-87a8-4c7c55b258bf_504x520.jpeg)](https://www.google.com/maps/d/u/0/edit?mid=1f2j6D_xJqkSAfMXxV377XtCFplEnn2Y&ll=51.21101816965208%2C-2.8241347533502337&z=8)
+
+Aug 7
+
+at
+
+11:34 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Aug 4, 2025](https://substack.com/@stephenreid/note/c-141991360)
+
+[Stephen Reid In Correspondence](https://stephenreid.substack.com)
+
+Notes on Network Nations for an event I’m hosting tomorrow
+
+[
+
+docs.google.com
+
+Network Nations notes
+
+Notes by Stephen Reid for Technofeudalism, Network Nations and the Future of Dandelion Tue 5th Aug 2025 The essence Alternative vocabulary Governance & institutional forms Social-movement & advocacy forms Commons, knowledge & practice forms Tech & protocol-layer forms Mutual-aid, solidarity &...
+
+  ![](https://substackcdn.com/image/fetch/$s_!T2XK!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7f0a1fc4-5cc5-40f9-bda7-20abbaab3a57_1200x630.png)](https://docs.google.com/document/d/1HvvtL-pdtvtNbgIOuL78Ib6h_ReZMEak9a0pKkRRY-U/edit)
+
+Aug 4
+
+at
+
+10:18 AM
+
+* * *
+
+[
+
+ ![](https://substackcdn.com/image/fetch/$s_!Sulg!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ede9c9-a89c-47fd-aaee-350b6e51f406_1024x1024.jpeg)
+
+](https://substack.com/@stephenreid?utm_source=substack-feed-item)
+
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jul 27, 2025](https://substack.com/@stephenreid/note/c-139419995)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -13,8 +1072,9 @@ My latest newsletter, with tips for the LLM connoisseur
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!fuSC!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da37095-e69b-4ddf-b08b-f44943517d61_2448x1634.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -36,14 +1096,13 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[7d](https://substack.com/@stephenreid/note/c-137185162?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jul 20, 2025](https://substack.com/@stephenreid/note/c-137185162)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
-Chapter 2, part 1 of Technological Metamodernism by 
-[Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing)
- and me
+Chapter 2, part 1 of Technological Metamodernism by [Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing) and me
 
 [
 
@@ -61,7 +1120,9 @@ Share post at current time
 
 0:00
 
- ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
 
 [Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
 
@@ -83,13 +1144,13 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jul 8](https://substack.com/@stephenreid/note/c-133322931?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jul 8, 2025](https://substack.com/@stephenreid/note/c-133322931)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
-Latest from me and 
-[Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing)
+Latest from me and [Hilma Church-Turing](https://substack.com/profile/344618805-hilma-church-turing)
 
 [
 
@@ -107,7 +1168,9 @@ Share post at current time
 
 0:00
 
- ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
+ 
+
+ ![](https://substackcdn.com/image/fetch/$s_!ilEc!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
 
 [Technological Metamodernism](https://technologicalmetamodernism.substack.com/)
 
@@ -129,8 +1192,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jun 16](https://substack.com/@stephenreid/note/c-126332564?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jun 16, 2025](https://substack.com/@stephenreid/note/c-126332564)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -158,8 +1222,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[May 12](https://substack.com/@stephenreid/note/c-116466121?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[May 12, 2025](https://substack.com/@stephenreid/note/c-116466121)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -169,7 +1234,7 @@ Just posted my latest newsletter ✨
 
 [
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -191,8 +1256,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[May 1](https://substack.com/@stephenreid/note/c-113571513?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[May 1, 2025](https://substack.com/@stephenreid/note/c-113571513)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -202,7 +1268,7 @@ We've created this offering to complement the transformative power of retreats, 
 
 [lifeaspractice.com](https://lifeaspractice.com/)
 
- ![](https://substackcdn.com/image/fetch/$s_!OZB4!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4fa5ee44-70e1-4b77-8741-2cf7c0eae16c_1200x630.jpeg)
+ ![](https://substackcdn.com/image/fetch/$s_!OZB4!,w_568,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4fa5ee44-70e1-4b77-8741-2cf7c0eae16c_1200x630.jpeg)
 
 May 1
 
@@ -218,8 +1284,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Apr 24](https://substack.com/@stephenreid/note/c-111724864?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Apr 24, 2025](https://substack.com/@stephenreid/note/c-111724864)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -237,7 +1304,9 @@ sfwhgse.com
 
 Home | SFW Conference
 
- ![](https://substackcdn.com/image/fetch/$s_!j1JZ!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb07a4701-5098-43c7-8779-c56d75dce4de_1792x1024.jpeg)](https://www.sfwhgse.com/)
+Human Transformation in a time of Metacrisis Conference: A 2-day Conference and Unconference on the Metacrisis, Education, Flourishing and a Second Renaissance. At the Harvard Graduate School of Education. Speakers include Jon Kabat-Zinn, Rebecca Henderson, Tyler VanderWeele, Zachary Stein and more.
+
+  ![](https://substackcdn.com/image/fetch/$s_!j1JZ!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb07a4701-5098-43c7-8779-c56d75dce4de_1792x1024.jpeg)](https://www.sfwhgse.com/)
 
 Apr 24
 
@@ -253,8 +1322,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Apr 5](https://substack.com/@stephenreid/note/c-106173936?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Apr 5, 2025](https://substack.com/@stephenreid/note/c-106173936)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -266,7 +1336,9 @@ docs.google.com
 
 Rob Burbea
 
- ![](https://substackcdn.com/image/fetch/$s_!ULr8!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F41ae18f6-422d-40ee-b875-77ae3e160952_1200x630.png)](https://docs.google.com/document/d/1GkXUYqOCRRf1lNlpHQxsCS503RJUuxqyqNeA8SlSVo8/edit?usp=drivesdk)
+The Work of Rob Burbea by Stephen Reid, 5 April 2025 Rob Burbea, 1965-2020 This Matter of Emptiness This Matter of Emptiness - Hermes Amāra Foundation 23:29 - 34:11 Places to Practice Gaia House Gaia House Nirodha Nirodha: Insight Meditation in Finland Areas of Practice Descriptions...
+
+  ![](https://substackcdn.com/image/fetch/$s_!ULr8!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F41ae18f6-422d-40ee-b875-77ae3e160952_1200x630.png)](https://docs.google.com/document/d/1GkXUYqOCRRf1lNlpHQxsCS503RJUuxqyqNeA8SlSVo8/edit?usp=drivesdk)
 
 Apr 5
 
@@ -282,8 +1354,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Apr 4](https://substack.com/@stephenreid/note/c-105883980?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Apr 4, 2025](https://substack.com/@stephenreid/note/c-105883980)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -291,8 +1364,9 @@ I just published my latest _In Correspondence_ from the beautiful Ekskäret isla
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!bVku!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbb707744-17a5-4634-ba70-2e4a52ccab95_3951x2975.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -314,8 +1388,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 29](https://substack.com/@stephenreid/note/c-104266908?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 29, 2025](https://substack.com/@stephenreid/note/c-104266908)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -331,7 +1406,9 @@ goodreads.com
 
 There Is No Antimemetics Division
 
- ![](https://substackcdn.com/image/fetch/$s_!j_Hb!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb503b94e-df8a-4669-903d-0e73514bf620_1563x2500.jpeg)](https://www.goodreads.com/book/show/54870256-there-is-no-antimemetics-division)
+An antimeme is an idea with self-censoring properties; …
+
+  ![](https://substackcdn.com/image/fetch/$s_!j_Hb!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb503b94e-df8a-4669-903d-0e73514bf620_1563x2500.jpeg)](https://www.goodreads.com/book/show/54870256-there-is-no-antimemetics-division)
 
 Mar 29
 
@@ -347,8 +1424,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 28](https://substack.com/@stephenreid/note/c-104012266?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 28, 2025](https://substack.com/@stephenreid/note/c-104012266)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -370,7 +1448,7 @@ Linguistic aside: Something else I find interesting about this triangle is that 
 
 Finnish is as different to Swedish and Latvian as they are to Japanese, Mandarin Chinese or Arabic, representing entirely separate language families with fundamentally different grammatical structures, vocabulary roots, and linguistic evolution 🤯
 
- ![](https://substackcdn.com/image/fetch/$s_!Xuyn!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f9a2624-9a51-44e9-b7fa-401c3b1d904d_2052x1360.png)
+ ![](https://substackcdn.com/image/fetch/$s_!Xuyn!,w_568,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f9a2624-9a51-44e9-b7fa-401c3b1d904d_2052x1360.png)
 
 Mar 28
 
@@ -386,8 +1464,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 27](https://substack.com/@stephenreid/note/c-103851019?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 27, 2025](https://substack.com/@stephenreid/note/c-103851019)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -443,27 +1522,23 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 27](https://substack.com/@stephenreid/note/c-103845403?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 27, 2025](https://substack.com/@stephenreid/note/c-103845403)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
-post-woke [richdecibels.substack.c…](https://richdecibels.substack.com/p/towards-a-post-woke-synthesis)• 
-[Richard D. Bartlett](https://substack.com/profile/1967267-richard-d-bartlett)
+post-woke [richdecibels.substack.c…](https://richdecibels.substack.com/p/towards-a-post-woke-synthesis)• [Richard D. Bartlett](https://substack.com/profile/1967267-richard-d-bartlett)
 
-post-buddhist [substack.com/home/post/…](https://substack.com/home/post/p-159743075) • 
-[Daniel Thorson](https://substack.com/profile/1241439-daniel-thorson)
+post-buddhist [substack.com/home/post/…](https://substack.com/home/post/p-159743075) • [Daniel Thorson](https://substack.com/profile/1241439-daniel-thorson)
 
 post-activist [bayoakomolafe.net/post/…](https://www.bayoakomolafe.net/post/what-i-mean-by-postactivism)
 
-post-rational [eigenrobot.substack.com…](https://eigenrobot.substack.com/p/a-postrationalist-syllabus)• 
-[eigenrobot](https://substack.com/profile/17019769-eigenrobot)
+post-rational [eigenrobot.substack.com…](https://eigenrobot.substack.com/p/a-postrationalist-syllabus)• [eigenrobot](https://substack.com/profile/17019769-eigenrobot)
 
-post-capitalist [youtube.com/watch?v=aXZ…](https://www.youtube.com/watch?v=aXZAxhnpsX0)• 
-[Alnoor Ladha](https://substack.com/profile/3985384-alnoor-ladha)
+post-capitalist [youtube.com/watch?v=aXZ…](https://www.youtube.com/watch?v=aXZAxhnpsX0)• [Alnoor Ladha](https://substack.com/profile/3985384-alnoor-ladha)
 
-metamodern [metamoderna.org](https://metamoderna.org/)• 
-[Emil Ejner Friis](https://substack.com/profile/8128552-emil-ejner-friis)
+metamodern [metamoderna.org](https://metamoderna.org/)• [Emil Ejner Friis](https://substack.com/profile/8128552-emil-ejner-friis)
 
 Mar 27
 
@@ -479,8 +1554,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 13](https://substack.com/@stephenreid/note/c-100140308?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 13, 2025](https://substack.com/@stephenreid/note/c-100140308)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -670,9 +1746,9 @@ Together, they demonstrate the continued evolution of spiritual thought in the 2
 
 (co-authored with Claude 3.7)
 
- ![](https://substackcdn.com/image/fetch/$s_!5wUF!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337c68a2-440f-4f9b-8fe2-9f365f755dea_1102x714.png)
+ ![](https://substackcdn.com/image/fetch/$s_!5wUF!,w_551,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337c68a2-440f-4f9b-8fe2-9f365f755dea_1102x714.png)
 
-Mar 13
+Mar 13, 2025
 
 at
 
@@ -686,14 +1762,15 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 13](https://substack.com/@stephenreid/note/c-100131820?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 13, 2025](https://substack.com/@stephenreid/note/c-100131820)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
 Greetings from Oodi, Helsinki’s lovely central library. I’m in Finland for a 10-day Soulmaking retreat with Catherine McGee & Juha Penttilä (my second, after a similar retreat at Gaia House in Sep 2023)
 
- ![](https://substackcdn.com/image/fetch/$s_!Oi3E!,w_500,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F69bae3b2-13a5-405c-ad21-8659ece97eac_1400x934.png)
+ ![](https://substackcdn.com/image/fetch/$s_!Oi3E!,w_568,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F69bae3b2-13a5-405c-ad21-8659ece97eac_1400x934.png)
 
 [
 
@@ -701,9 +1778,9 @@ nirodha.fi
 
 A Brahma Viharas and Soulmaking Dharma Retreat 14.–23.3.2025 in Kruusila: Catherine McGee & Juha Penttilä | Nirodha
 
- ![](https://substackcdn.com/image/fetch/$s_!mrM7!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7137a969-ca37-425c-b463-2e636a2cd41b_480x640.jpeg)](https://nirodha.fi/retreat-03-25/)
+  ![](https://substackcdn.com/image/fetch/$s_!mrM7!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7137a969-ca37-425c-b463-2e636a2cd41b_480x640.jpeg)](https://nirodha.fi/retreat-03-25/)
 
-Mar 13
+Mar 13, 2025
 
 at
 
@@ -717,8 +1794,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 9](https://substack.com/@stephenreid/note/c-99200813?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 9, 2025](https://substack.com/@stephenreid/note/c-99200813)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -730,9 +1808,11 @@ dandelion.events
 
 Dandelion
 
- ![](https://substackcdn.com/image/fetch/$s_!WPAO!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f5eca38-cf7c-4bd7-a13b-61f0b57e60ff_1200x630.jpeg)](https://dandelion.events/)
+Find regenerative · metamodern · participatory · conscious · transformative · holistic · ethical events and co-created gatherings
 
-Mar 9
+  ![](https://substackcdn.com/image/fetch/$s_!WPAO!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f5eca38-cf7c-4bd7-a13b-61f0b57e60ff_1200x630.jpeg)](https://dandelion.events/)
+
+Mar 9, 2025
 
 at
 
@@ -746,22 +1826,19 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 9](https://substack.com/@stephenreid/note/c-99170451?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 9, 2025](https://substack.com/@stephenreid/note/c-99170451)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
-Both 
-[Jonathan Rowson](https://substack.com/profile/1970149-jonathan-rowson)
-’s essay and 
-[Emil Ejner Friis](https://substack.com/profile/8128552-emil-ejner-friis)
-’s note wrestle with the central tension facing metamodern communities: the gap between contemplative self-development and tangible socio-political action. Rowson frames the Emerge network as an "incipient field" that has found itself but now needs to mature beyond its "honeymoon period" to confront real-world power structures and generate collective impact. Similarly, Friis challenges the "liminal web" to evolve beyond what he characterizes as "bourgeois escapism" and private enlightenment pursuits toward genuine societal transformation. Both writers recognize the metamodern scene's unique capacity to perceive connections between disparate renewal efforts and to operate "between worlds," while also acknowledging that without institutional tenacity and political engagement, these communities risk becoming self-referential bubbles of "social reverie." The parallel questioning of whether these networks can transcend their comfortable theorizing to affect systemic change reveals a shared understanding that the field stands at a crucial inflection point where it must define its relationship to power and politics.
+Both [Jonathan Rowson](https://substack.com/profile/1970149-jonathan-rowson)’s essay and [Emil Ejner Friis](https://substack.com/profile/8128552-emil-ejner-friis)’s note wrestle with the central tension facing metamodern communities: the gap between contemplative self-development and tangible socio-political action. Rowson frames the Emerge network as an "incipient field" that has found itself but now needs to mature beyond its "honeymoon period" to confront real-world power structures and generate collective impact. Similarly, Friis challenges the "liminal web" to evolve beyond what he characterizes as "bourgeois escapism" and private enlightenment pursuits toward genuine societal transformation. Both writers recognize the metamodern scene's unique capacity to perceive connections between disparate renewal efforts and to operate "between worlds," while also acknowledging that without institutional tenacity and political engagement, these communities risk becoming self-referential bubbles of "social reverie." The parallel questioning of whether these networks can transcend their comfortable theorizing to affect systemic change reveals a shared understanding that the field stands at a crucial inflection point where it must define its relationship to power and politics.
 
 [whatisemerging.com/opin…](https://www.whatisemerging.com/opinions/now-that-we-ve-found-the-others-what-are-we-going-to-do)
 
 [substack.com/@metamoder…](https://substack.com/@metamoderna/note/c-98929872)
 
-Mar 9
+Mar 9, 2025
 
 at
 
@@ -775,8 +1852,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Feb 12](https://substack.com/@stephenreid/note/c-93020595?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 12, 2025](https://substack.com/@stephenreid/note/c-93020595)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -802,19 +1880,13 @@ This is not a utopia, free from challenges or imperfections. It is a world _in p
 
 - Vitalik Buterin’s d/acc
 
-- 
-[Michel Bauwens](https://substack.com/profile/6697008-michel-bauwens)
-‘s Cosmo-localism
+- [Michel Bauwens](https://substack.com/profile/6697008-michel-bauwens)‘s Cosmo-localism
 
-- 
-[Welf von Hören](https://substack.com/profile/8170745-welf-von-horen)
-’s Alignment at Large
+- [Welf von Hören](https://substack.com/profile/8170745-welf-von-horen)’s Alignment at Large
 
 - The Consilience Project’s Axiological Design
 
-- 
-[Aki Järvinen](https://substack.com/profile/177175440-aki-jarvinen)
-’s Awakened Design
+- [Aki Järvinen](https://substack.com/profile/177175440-aki-jarvinen)’s Awakened Design
 
 [
 
@@ -822,9 +1894,11 @@ docs.google.com
 
 Five Approaches to Technological Metamodernism
 
- ![](https://substackcdn.com/image/fetch/$s_!FN3P!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc35350f5-4c64-4fa6-8552-bd3c5f34ae54_1200x630.png)](https://docs.google.com/document/d/1lIoPO8XqrUDckmW1-MQZbTSbFsholmVg6Wb25QBYBfU/edit?tab=t.0)
+Gemini 2.0 Pro Experimental prompted by Stephen Reid d/acc (Vitalik Buterin) Cosmo-localism (Michel Bauwens) Alignment at Large (Welf von Hören) Axiological Design (The Consilience Project) Awakened Design (Aki Järvinen) Core Idea Accelerate defensive technologies; prioritize decentr...
 
-Feb 12
+  ![](https://substackcdn.com/image/fetch/$s_!FN3P!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc35350f5-4c64-4fa6-8552-bd3c5f34ae54_1200x630.png)](https://docs.google.com/document/d/1lIoPO8XqrUDckmW1-MQZbTSbFsholmVg6Wb25QBYBfU/edit?tab=t.0)
+
+Feb 12, 2025
 
 at
 
@@ -838,8 +1912,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Feb 5](https://substack.com/@stephenreid/note/c-91213676?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 5, 2025](https://substack.com/@stephenreid/note/c-91213676)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -865,8 +1940,9 @@ and much more…
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!ldo9!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F335017c2-7b36-4cb1-9066-f43c0a6d7c08_1440x1080.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -874,7 +1950,7 @@ In Correspondence #46
 
 ](https://stephenreid.substack.com/p/in-correspondence-46)
 
-Feb 5
+Feb 5, 2025
 
 at
 
@@ -888,8 +1964,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Feb 2](https://substack.com/@stephenreid/note/c-90453168?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 2, 2025](https://substack.com/@stephenreid/note/c-90453168)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -921,9 +1998,11 @@ dandelion.events
 
 Futurecraft at Feÿtopia
 
- ![](https://substackcdn.com/image/fetch/$s_!zM9q!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fff8d1354-2105-4414-95b0-239d16094fb1_1920x1076.jpeg)](https://dandelion.events/e/futurecraft-feytopia)
+Mon 17th Feb 2025, 3pm – Sun 23rd Feb 2025, 11am CET (UTC +01:00)
 
-Feb 2
+  ![](https://substackcdn.com/image/fetch/$s_!zM9q!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fff8d1354-2105-4414-95b0-239d16094fb1_1920x1076.jpeg)](https://dandelion.events/e/futurecraft-feytopia)
+
+Feb 2, 2025
 
 at
 
@@ -937,8 +2016,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jan 23](https://substack.com/@stephenreid/note/c-88056078?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 23, 2025](https://substack.com/@stephenreid/note/c-88056078)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1002,8 +2082,9 @@ And as a true post-cyberpunk near-integral metamodernist product, the course is 
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!3Nbm!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1fb96c06-cbff-4080-844c-0eeb940bd8e2_1536x768.png)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1011,7 +2092,7 @@ Technological Metamodernism course notes
 
 ](https://stephenreid.substack.com/p/technological-metamodernism-course)
 
-Jan 23
+Jan 23, 2025
 
 at
 
@@ -1025,8 +2106,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jan 17](https://substack.com/@stephenreid/note/c-86736918?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 17, 2025](https://substack.com/@stephenreid/note/c-86736918)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1056,7 +2138,7 @@ Separate to this feedback loop, we also have easy wins from scaling RL training 
 
  ![](https://substackcdn.com/image/fetch/$s_!cRRJ!,w_340,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80c8e84c-ace7-4b29-bf55-0f60bb72175c_680x424.png)
 
-Jan 17
+Jan 17, 2025
 
 at
 
@@ -1070,8 +2152,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jan 15](https://substack.com/@stephenreid/note/c-86307329?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 15, 2025](https://substack.com/@stephenreid/note/c-86307329)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1085,7 +2168,7 @@ Charles Eisenstein
 
 ](https://charleseisenstein.substack.com/p/intelligence-in-the-age-of-mechanical?selection=2c5fd29d-b974-4d4b-b677-281f07efac83)
 
-Jan 15
+Jan 15, 2025
 
 at
 
@@ -1099,8 +2182,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jan 14](https://substack.com/@stephenreid/note/c-86103767?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 14, 2025](https://substack.com/@stephenreid/note/c-86103767)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1112,7 +2196,7 @@ gabe k-s
 
 ](https://dragonflyagony.substack.com/p/after-psychedelics?selection=ccf8f9c7-5bca-4cc3-ac11-9f884aaa04f8)
 
-Jan 14
+Jan 14, 2025
 
 at
 
@@ -1126,8 +2210,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jan 1](https://substack.com/@stephenreid/note/c-83981756?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 1, 2025](https://substack.com/@stephenreid/note/c-83981756)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1177,8 +2262,9 @@ Projects:
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!2Yer!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ad57209-be5c-407b-abcc-1547f4e7bbcc_962x641.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1186,7 +2272,7 @@ In Correspondence #45
 
 ](https://stephenreid.substack.com/p/in-correspondence-45)
 
-Jan 1
+Jan 1, 2025
 
 at
 
@@ -1200,8 +2286,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Dec 7](https://substack.com/@stephenreid/note/c-80458180?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 7, 2024](https://substack.com/@stephenreid/note/c-80458180)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1309,9 +2396,11 @@ google.com
 
 The Dandelion Treasure Map - Google My Maps
 
- ![](https://substackcdn.com/image/fetch/$s_!WZrJ!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d54b4cb-1e2e-466d-b10c-a31e87a6d1a1_504x520.jpeg)](https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8)
+A carefully curated constellation of transformative spaces across the continents, the Dandelion Treasure Map reveals the hidden geography of human flourishing. From contemplative centers to experimental coliving spaces, cultural laboratories to regenerative farms, each location represents a unique e…
 
-Dec 7
+  ![](https://substackcdn.com/image/fetch/$s_!WZrJ!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d54b4cb-1e2e-466d-b10c-a31e87a6d1a1_504x520.jpeg)](https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8)
+
+Dec 7, 2024
 
 at
 
@@ -1325,8 +2414,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Dec 3](https://substack.com/@stephenreid/note/c-79841847?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Dec 3, 2024](https://substack.com/@stephenreid/note/c-79841847)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1334,8 +2424,9 @@ Just published my latest newsletter, featuring an invitation to Futurecraft at F
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!jxHg!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01f8d400-bda2-4122-b57e-726039c45cbc_1920x1076.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1343,7 +2434,7 @@ In Correspondence #44
 
 ](https://stephenreid.substack.com/p/in-correspondence-44)
 
-Dec 3
+Dec 3, 2024
 
 at
 
@@ -1357,8 +2448,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Nov 21](https://substack.com/@stephenreid/note/c-78248264?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Nov 21, 2024](https://substack.com/@stephenreid/note/c-78248264)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1370,7 +2462,7 @@ Meanwhile Bluesky and Farcaster APIs enable me to automate the publishing of lin
 
 [warpcast.com/stephenrei…](https://warpcast.com/stephenreid.eth)
 
-Nov 21
+Nov 21, 2024
 
 at
 
@@ -1384,8 +2476,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Nov 18](https://substack.com/@stephenreid/note/c-77713088?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Nov 18, 2024](https://substack.com/@stephenreid/note/c-77713088)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1409,8 +2502,9 @@ Featuring:
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!jxHg!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01f8d400-bda2-4122-b57e-726039c45cbc_1920x1076.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!ZKf-!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb1306-a81d-47f0-8bce-de581e4f2e29_108x108.png)
+ ![](https://substackcdn.com/image/fetch/$s_!ZKf-!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb1306-a81d-47f0-8bce-de581e4f2e29_108x108.png)
 
 [Futurecraft](https://futurecrafters.substack.com/)
 
@@ -1418,7 +2512,7 @@ Futurecraft at Feÿtopia
 
 ](https://futurecrafters.substack.com/p/futurecraft-at-feytopia)
 
-Nov 18
+Nov 18, 2024
 
 at
 
@@ -1432,27 +2526,21 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Oct 10](https://substack.com/@stephenreid/note/c-72079985?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Oct 10, 2024](https://substack.com/@stephenreid/note/c-72079985)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
 Thanks to those who donated in the OpenCivics Collaborative Research Round, I’m pleased to be able to open-source the notes from my recent Technological Metamodernism course.
 
-I would say this is most important and cutting-edge course I’ve taught, bringing together ideas from technology, philosophy, design, game theory, mythology, speculative fiction and consciousness studies at a moment when AI and other emerging technologies are radically reshaping society. A huge thanks to the guests Ellie Hain, 
-[Rufus Pollock](https://substack.com/profile/138683345-rufus-pollock)
-, 
-[Emil Ejner Friis](https://substack.com/profile/8128552-emil-ejner-friis)
-, 
-[Michael Garfield](https://substack.com/profile/1333768-michael-garfield)
- & 
-[Alexander Beiner](https://substack.com/profile/57772718-alexander-beiner)
-, the course participants, and everyone whose work featured, especially Hanzi Freinacht, The Consilience Project, Vitalik Buterin, Alnoor Ladha, Josh Schrei, Sophie Strand and Andrés Gómez Emilsson.
+I would say this is most important and cutting-edge course I’ve taught, bringing together ideas from technology, philosophy, design, game theory, mythology, speculative fiction and consciousness studies at a moment when AI and other emerging technologies are radically reshaping society. A huge thanks to the guests Ellie Hain, [Rufus Pollock](https://substack.com/profile/138683345-rufus-pollock), [Emil Ejner Friis](https://substack.com/profile/8128552-emil-ejner-friis), [Michael Garfield](https://substack.com/profile/1333768-michael-garfield) & [Alexander Beiner](https://substack.com/profile/57772718-alexander-beiner), the course participants, and everyone whose work featured, especially Hanzi Freinacht, The Consilience Project, Vitalik Buterin, Alnoor Ladha, Josh Schrei, Sophie Strand and Andrés Gómez Emilsson.
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!3Nbm!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1fb96c06-cbff-4080-844c-0eeb940bd8e2_1536x768.png)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1460,7 +2548,7 @@ Technological Metamodernism course notes
 
 ](https://stephenreid.substack.com/p/technological-metamodernism-course)
 
-Oct 10
+Oct 10, 2024
 
 at
 
@@ -1474,8 +2562,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Aug 19](https://substack.com/@stephenreid/note/c-65957997?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Aug 19, 2024](https://substack.com/@stephenreid/note/c-65957997)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1485,7 +2574,7 @@ Course runs 17th Sep – 8th Oct 2024: [futurecraft.life/techno…](https://futu
 
 https://open.spotify.com/embed/episode/5Rtjr3N95IjgqfSZ6aQKWz
 
-Aug 19
+Aug 19, 2024
 
 at
 
@@ -1499,8 +2588,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Aug 19](https://substack.com/@stephenreid/note/c-65950565?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Aug 19, 2024](https://substack.com/@stephenreid/note/c-65950565)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1514,8 +2604,9 @@ Thanks in anticipation 🙏
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!jVr0!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff63a7d10-f72a-4dfe-9f26-4499c5bede2c_1456x816.png)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1523,7 +2614,7 @@ QF match funding: please chip in!
 
 ](https://stephenreid.substack.com/p/qf-match-funding-please-chip-in)
 
-Aug 19
+Aug 19, 2024
 
 at
 
@@ -1537,8 +2628,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Aug 1](https://substack.com/@stephenreid/note/c-64007183?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Aug 1, 2024](https://substack.com/@stephenreid/note/c-64007183)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1546,8 +2638,9 @@ Just published my latest newsletter [stephenreid.substack.co…](https://stephen
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!m3iP!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc9c5528-2b80-4f40-899c-dc4cf579f406_1461x1104.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1555,7 +2648,7 @@ In Correspondence #41
 
 ](https://stephenreid.substack.com/p/in-correspondence-41)
 
-Aug 1
+Aug 1, 2024
 
 at
 
@@ -1569,18 +2662,13 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jul 12, 2024](https://substack.com/@stephenreid/note/c-61745574?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jul 12, 2024](https://substack.com/@stephenreid/note/c-61745574)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
-I'm running a new course on Technological Metamodernism with special guests 
-[Alexander Beiner](https://substack.com/profile/57772718-alexander-beiner)
-, 
-[Rufus Pollock](https://substack.com/profile/138683345-rufus-pollock)
-, 
-[Michael Garfield](https://substack.com/profile/1333768-michael-garfield)
-, Hanzi Freinacht (Emil Ejner Friis) & Ellie Hain, 17th Sep – 8th Oct 2024. Read more at
+I'm running a new course on Technological Metamodernism with special guests [Alexander Beiner](https://substack.com/profile/57772718-alexander-beiner), [Rufus Pollock](https://substack.com/profile/138683345-rufus-pollock), [Michael Garfield](https://substack.com/profile/1333768-michael-garfield), Hanzi Freinacht (Emil Ejner Friis) & Ellie Hain, 17th Sep – 8th Oct 2024. Read more at
 
 [
 
@@ -1588,7 +2676,7 @@ futurecraft.life
 
 Technological Metamodernism — Futurecraft
 
- ![](https://substackcdn.com/image/fetch/$s_!RryL!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9161183-5e56-4caf-a2e2-b1694c1b6f3f_1500x844.jpeg)](https://futurecraft.life/technological-metamodernism)
+  ![](https://substackcdn.com/image/fetch/$s_!RryL!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9161183-5e56-4caf-a2e2-b1694c1b6f3f_1500x844.jpeg)](https://futurecraft.life/technological-metamodernism)
 
 Jul 12, 2024
 
@@ -1604,8 +2692,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Mar 3, 2024](https://substack.com/@stephenreid/note/c-50850023?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Mar 3, 2024](https://substack.com/@stephenreid/note/c-50850023)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1613,8 +2702,9 @@ Just published my latest newsletter. Image from the highly recommended Scavenger
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!W0yZ!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F68368f3a-ae73-4e58-9a3f-25f533ff9c1d_1920x1080.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1636,8 +2726,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Feb 21, 2024](https://substack.com/@stephenreid/note/c-50058154?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Feb 21, 2024](https://substack.com/@stephenreid/note/c-50058154)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1649,7 +2740,7 @@ Substack now provides audience overlap stats. Turns out the readership of [steph
 
 [Jules Evans](https://substack.com/profile/103200198-jules-evans)
 
-[Peter Limberg](https://substack.com/profile/2267052-peter-limberg)
+[Peter Limberger](https://substack.com/profile/2267052-peter-limberger)
 
 [Daniel Pinchbeck](https://substack.com/profile/2728693-daniel-pinchbeck)
 
@@ -1661,15 +2752,11 @@ and
 
 [
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_288,h_288,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
-
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_568,h_297,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
-
-[stephenreid](https://stephenreid.substack.com/)
+stephenreid.substack.com
 
 Stephen Reid In Correspondence
 
-](https://stephenreid.substack.com/)
+  ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)](https://stephenreid.substack.com/)
 
 Feb 21, 2024
 
@@ -1685,8 +2772,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jan 2, 2024](https://substack.com/@stephenreid/note/c-46447881?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jan 2, 2024](https://substack.com/@stephenreid/note/c-46447881)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1694,8 +2782,9 @@ I just published my latest newsletter, featuring Introduction to AI, I Want A Be
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!x4b5!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00d7b71a-6860-40cc-8dc7-246fc3100d07_1574x1106.png)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1717,8 +2806,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Nov 21, 2023](https://substack.com/@stephenreid/note/c-44035923?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Nov 21, 2023](https://substack.com/@stephenreid/note/c-44035923)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1744,8 +2834,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Nov 21, 2023](https://substack.com/@stephenreid/note/c-44030929?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Nov 21, 2023](https://substack.com/@stephenreid/note/c-44030929)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1753,8 +2844,9 @@ I just published my latest newsletter, featuring the final room at the upcoming 
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!3ZBc!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcf6c2523-05c8-4889-9d35-95888f9fbe63_1920x1080.png)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1776,8 +2868,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Nov 3, 2023](https://substack.com/@stephenreid/note/c-42984422?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Nov 3, 2023](https://substack.com/@stephenreid/note/c-42984422)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1793,7 +2886,7 @@ docs.google.com
 
 Futurecraft reading/watching list
 
- ![](https://substackcdn.com/image/fetch/$s_!qsCD!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65ab1e91-736e-4bbb-8d38-c5c9d0ac3d6a_1200x630.png)](https://docs.google.com/document/d/1DND4gidDvHU0hNAwTs68BL4L5GSKpRVAuyap2YihjKo/edit)
+  ![](https://substackcdn.com/image/fetch/$s_!qsCD!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65ab1e91-736e-4bbb-8d38-c5c9d0ac3d6a_1200x630.png)](https://docs.google.com/document/d/1DND4gidDvHU0hNAwTs68BL4L5GSKpRVAuyap2YihjKo/edit)
 
 Nov 3, 2023
 
@@ -1809,8 +2902,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Oct 30, 2023](https://substack.com/@stephenreid/note/c-42749910?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Oct 30, 2023](https://substack.com/@stephenreid/note/c-42749910)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1846,7 +2940,7 @@ stephenreid.net
 
 Films · Stephen Reid
 
- ![](https://substackcdn.com/image/fetch/$s_!fBU-!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeefbf7b-729d-4fcb-a3f8-b115b0658848_1280x672.jpeg)](https://stephenreid.net/films)
+  ![](https://substackcdn.com/image/fetch/$s_!fBU-!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeefbf7b-729d-4fcb-a3f8-b115b0658848_1280x672.jpeg)](https://stephenreid.net/films)
 
 Oct 30, 2023
 
@@ -1862,8 +2956,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Oct 19, 2023](https://substack.com/@stephenreid/note/c-42116793?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Oct 19, 2023](https://substack.com/@stephenreid/note/c-42116793)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1871,8 +2966,9 @@ I just published my latest newsletter, featuring the Planet Local and Inner Deve
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!fcrf!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff32991a9-e7b0-4d42-abc0-343a5775eabf_900x706.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1894,8 +2990,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jul 5, 2023](https://substack.com/@stephenreid/note/c-18142667?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jul 5, 2023](https://substack.com/@stephenreid/note/c-18142667)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1906,6 +3003,10 @@ Anyone else here on Farcaster? I’m at
 warpcast.com
 
 Warpcast
+
+A decentralized social network
+
+ 
 
 ](https://warpcast.com/stephenreid)
 
@@ -1923,8 +3024,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Jun 16, 2023](https://substack.com/@stephenreid/note/c-17386252?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Jun 16, 2023](https://substack.com/@stephenreid/note/c-17386252)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1932,8 +3034,9 @@ I just published my latest newsletter:
 
 [
  ![](https://substackcdn.com/image/fetch/$s_!ec9L!,w_520,h_272,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9acfd9a5-c9bd-43eb-8b1a-64450ccd705f_720x479.jpeg)
+ 
 
- ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
+ ![](https://substackcdn.com/image/fetch/$s_!AcoB!,w_20,h_20,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com/)
 
@@ -1955,8 +3058,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[May 14, 2023](https://substack.com/@stephenreid/note/c-15999789?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[May 14, 2023](https://substack.com/@stephenreid/note/c-15999789)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -1982,8 +3086,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Apr 13, 2023](https://substack.com/@stephenreid/note/c-14651691?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Apr 13, 2023](https://substack.com/@stephenreid/note/c-14651691)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -2007,8 +3112,9 @@ at
 
 ](https://substack.com/@stephenreid?utm_source=substack-feed-item)
 
-[Stephen Reid](https://substack.com/@stephenreid?)
-[Apr 12, 2023](https://substack.com/@stephenreid/note/c-14528058?)
+[Stephen Reid](https://substack.com/@stephenreid) 
+
+[Apr 12, 2023](https://substack.com/@stephenreid/note/c-14528058)
 
 [Stephen Reid In Correspondence](https://stephenreid.substack.com)
 
@@ -2020,7 +3126,9 @@ stephenreid.net
 
 Stephen Reid
 
- ![](https://substackcdn.com/image/fetch/$s_!QrBy!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0205305b-8e39-4343-9266-fe767fd921b3_900x473.jpeg)](https://stephenreid.net/)
+Technologist, facilitator and coach
+
+  ![](https://substackcdn.com/image/fetch/$s_!QrBy!,w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0205305b-8e39-4343-9266-fe767fd921b3_900x473.jpeg)](https://stephenreid.net/)
 
 Apr 12, 2023
 
