@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '3.2.8'
+ruby '3.4.7'
 gem 'activesupport'
 gem 'irb'
 gem 'padrino'
 gem 'puma'
-gem 'rack', '~> 2.0'
+gem 'rack'
 gem 'rake'
 gem 'sass'
 gem 'sinatra'
@@ -21,6 +21,7 @@ gem 'erb_lint', require: false
 gem 'rubocop'
 
 # Basics
+gem 'csv'
 gem 'bcrypt'
 gem 'chroma'
 gem 'front_matter_parser'
@@ -29,6 +30,7 @@ gem 'rack-attack'
 gem 'redcarpet'
 gem 'reverse_markdown'
 gem 'rss'
+gem 'htmlbeautifier'
 
 # Data
 gem 'airrecord'
