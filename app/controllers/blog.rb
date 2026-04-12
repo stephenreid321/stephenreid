@@ -1,8 +1,4 @@
 StephenReid::App.controller do
-  get '/blog/unplugging-from-facebook' do
-    redirect '/blog/2020/07/09/unplugging-from-facebook.html'
-  end
-
   get '/blog/feed' do
     redirect '/blog/feed.xml'
   end
