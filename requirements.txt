@@ -1,7 +1,5 @@
-python-telegram-bot
 farcaster
 youtube_transcript_api
 pytubefix
-pydub
 fal_client
 atproto>=0.0.52
