@@ -66,32 +66,6 @@ module StephenReid
       erb :about
     end
 
-    post '/telegram_webhook' do
-      puts request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN']
-      halt unless request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] == ENV['TELEGRAM_BOT_SECRET_TOKEN']
-      puts json = JSON.parse(request.body.read)
-      halt 200 unless json.dig('message', 'chat', 'id') == ENV['TELEGRAM_BOT_CHAT_ID'].to_i
-      text = json['message']['text']
-      if text.split.last =~ %r{^https?://}
-        url = text.split.last
-        text = text.split[0..-2].join(' ')
-        iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
-        metadata = Post.extract_iframely_metadata(iframely)
-        Post.post_to_bluesky(
-          text,
-          url: url,
-          title: metadata[:title],
-          description: metadata[:description],
-          thumbnail: metadata[:thumbnail]
-        )
-        Post.post_to_x("#{text} #{url}".strip)
-      else
-        Post.post_to_bluesky(text)
-        Post.post_to_x(text)
-      end
-      200
-    end
-
     get '/sign_in/:code' do
       if params[:code].to_i == ENV['SIGN_IN_CODE']
         session[:account_id] = Account.find_by(admin: true)
@@ -113,49 +87,6 @@ module StephenReid
         @title = r.gsub('-', ' ').capitalize
         erb :"#{r.underscore}"
       end
-    end
-
-    {
-      '/z' => 'https://zoom.us/j/9082171779',
-      '/cal' => 'https://cal.com/stephenreid',
-      '/meet' => 'https://cal.com/stephenreid/meet',
-      '/ooo' => 'https://app.cal.com/settings/my-account/out-of-office',
-      '/15' => 'https://cal.com/stephenreid/15',
-      '/30' => 'https://cal.com/stephenreid/30',
-      '/60' => 'https://cal.com/stephenreid/60',
-      '/about' => '/',
-      '/link' => '/',
-      '/training' => '/about',
-      '/bio' => '/about',
-      '/darknet' => 'https://dark.fail/',
-      '/why-use-the-darknet' => 'https://dark.fail/',
-      '/books-videos' => '/knowledgegraph',
-      '/featured' => '/knowledgegraph',
-      '/recommended' => '/knowledgegraph',
-      '/maps' => '/life-as-practice',
-      '/life-as-practice' => 'https://lifeaspractice.com/',
-      '/technological-metamodernism' => 'https://stephenreid.substack.com/p/technological-metamodernism-course'
-    }.each do |k, v|
-      get k.to_s do
-        redirect v
-      end
-    end
-
-    get '/to/:slug' do
-      @product = Product.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
-      redirect @product['URL']
-    end
-
-    get '/p/:slug' do
-      @product = Product.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
-      @url = @product['URL']
-      erb :redirect
-    end
-
-    get '/r/:slug' do
-      @link = Link.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
-      @url = @link['URL']
-      erb :redirect
     end
 
     get '/coaching' do
@@ -212,6 +143,58 @@ module StephenReid
       redirect("https://www.goodreads.com/book/show/#{@book['Book Id']}") if @book['Summary'].blank?
       @title = @book['Title']
       erb :book
+    end
+
+    post '/telegram_webhook' do
+      puts request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN']
+      halt unless request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] == ENV['TELEGRAM_BOT_SECRET_TOKEN']
+      puts json = JSON.parse(request.body.read)
+      halt 200 unless json.dig('message', 'chat', 'id') == ENV['TELEGRAM_BOT_CHAT_ID'].to_i
+      text = json['message']['text']
+      if text.split.last =~ %r{^https?://}
+        url = text.split.last
+        text = text.split[0..-2].join(' ')
+        iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
+        metadata = Post.extract_iframely_metadata(iframely)
+        Post.post_to_bluesky(
+          text,
+          url: url,
+          title: metadata[:title],
+          description: metadata[:description],
+          thumbnail: metadata[:thumbnail]
+        )
+        Post.post_to_x("#{text} #{url}".strip)
+      else
+        Post.post_to_bluesky(text)
+        Post.post_to_x(text)
+      end
+      200
+    end
+
+    {
+      '/z' => 'https://zoom.us/j/9082171779',
+      '/cal' => 'https://cal.com/stephenreid',
+      '/meet' => 'https://cal.com/stephenreid/meet',
+      '/ooo' => 'https://app.cal.com/settings/my-account/out-of-office',
+      '/15' => 'https://cal.com/stephenreid/15',
+      '/30' => 'https://cal.com/stephenreid/30',
+      '/60' => 'https://cal.com/stephenreid/60',
+      '/about' => '/',
+      '/link' => '/',
+      '/training' => '/about',
+      '/bio' => '/about',
+      '/darknet' => 'https://dark.fail/',
+      '/why-use-the-darknet' => 'https://dark.fail/',
+      '/books-videos' => '/knowledgegraph',
+      '/featured' => '/knowledgegraph',
+      '/recommended' => '/knowledgegraph',
+      '/maps' => '/life-as-practice',
+      '/life-as-practice' => 'https://lifeaspractice.com/',
+      '/technological-metamodernism' => 'https://stephenreid.substack.com/p/technological-metamodernism-course'
+    }.each do |k, v|
+      get k.to_s do
+        redirect v
+      end
     end
   end
 end
