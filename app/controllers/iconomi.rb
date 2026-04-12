@@ -2,12 +2,12 @@ StephenReid::App.controller do
   get '/iconomi', cache: true do
     expires 6.hours.to_i
     @title = 'ICONOMI strategy evaluator'
-    erb :'crypto/iconomi'
+    erb :'iconomi/iconomi'
   end
 
   get '/metastrategy' do
     @title = 'Metastrategy'
-    erb :'crypto/metastrategy'
+    erb :'iconomi/metastrategy'
   end
 
   get '/metastrategy/verify' do
@@ -17,7 +17,7 @@ StephenReid::App.controller do
   end
 
   get '/metastrategy/table' do
-    partial :'crypto/metastrategy'
+    partial :'iconomi/metastrategy'
   end
 
   get '/metastrategy/rebalance' do
@@ -34,7 +34,7 @@ StephenReid::App.controller do
 
   get '/metastrategy/n' do
     sign_in_required!
-    partial :'crypto/n'
+    partial :'iconomi/n'
   end
 
   post '/metastrategy/n' do
@@ -45,7 +45,7 @@ StephenReid::App.controller do
 
   get '/assets/:id/multiplier' do
     asset = Asset.find(params[:id])
-    partial :'crypto/multiplier', locals: { asset: asset }
+    partial :'iconomi/multiplier', locals: { asset: asset }
   end
 
   post '/assets/:id/multiplier' do

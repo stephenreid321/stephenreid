@@ -109,10 +109,10 @@
 </table>
 <% if Padrino.env == :development || current_account %>
   <div data-pagelet-url="/metastrategy/table" class="mb-3">
-    <%= partial :'crypto/metastrategy' %>
+    <%= partial :'iconomi/metastrategy' %>
   </div>
 <% else %>
-  <%= cp :'crypto/metastrategy' %>
+  <%= cp :'iconomi/metastrategy' %>
 <% end %>
 <h2>How Metastrategy works</h2>
 <%= md :metastrategy %>
