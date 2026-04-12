@@ -1,6 +1,5 @@
 StephenReid::App.controller do
   before do
-    @hide_sponsors = true
     if params[:slug]
       @network = Network.find_by(slug: params[:slug]) || not_found
       @title = "#{@network.name}'s knowledgegraph"
