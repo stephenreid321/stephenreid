@@ -3,12 +3,6 @@ StephenReid::App.helpers do
     %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x.iso8601}</abbr>)
   end
 
-  def audio_prompt
-    p = ['You are [Stephen Reid](https://stephenreid.net). Here is information on Stephen:']
-    p += Prompt.markdown[0..1]
-    p
-  end
-
   def md(slug, render: true)
     begin
       text = File.read("#{Padrino.root}/app/markdown/#{slug}.md").force_encoding('utf-8')
