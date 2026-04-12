@@ -17,15 +17,6 @@ namespace :strategies do
   end
 end
 
-namespace :tweets do
-  task import: :environment do
-    Tweet.import if ENV['TWEETS_IMPORT']
-  end
-  task nitter: :environment do
-    Tweet.nitter if ENV['TWEETS_IMPORT']
-  end
-end
-
 namespace :verses do
   task update_owners: :environment do
     Verse.all.each(&:update_owner)
