@@ -200,6 +200,25 @@ module StephenReid
       erb :places
     end
 
+    get '/courses/:slug' do
+      expires 6.hours.to_i
+      @course = Course.all(filter: "{Slug} = '#{params[:slug]}'").first
+      erb :'courses/course', layout: false
+    end
+
+    get '/books' do
+      @title = 'Books'
+      erb :books
+    end
+
+    get '/books/:slug', cache: true do
+      expires 6.hours.to_i
+      @book = Book.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
+      redirect("https://www.goodreads.com/book/show/#{@book['Book Id']}") if @book['Summary'].blank?
+      @title = @book['Title']
+      erb :book
+    end
+
     ##############################
 
     get '/software/update' do

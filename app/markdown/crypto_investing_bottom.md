@@ -1,1 +1,0 @@
-If you do choose to invest, consider <a href="https://www.degiro.co.uk/knowledge/strategies/what-is-dollar-cost-averaging">dollar-cost averaging</a> (investing equal sums of money at regular intervals) rather than going all-in.
