@@ -2,6 +2,7 @@
 
 - **Note ID:** `c-242073761`
 - **Link:** https://substack.com/@stephenreid/note/c-242073761
+- **Likes:** 8
 
 
 
@@ -29,6 +30,7 @@ The most meaningful life available to a human being has never required 200,000 c
 
 - **Note ID:** `c-242066422`
 - **Link:** https://substack.com/@stephenreid/note/c-242066422
+- **Likes:** 2
 
 
 
@@ -46,6 +48,7 @@ The most meaningful life available to a human being has never required 200,000 c
 
 - **Note ID:** `c-241766953`
 - **Link:** https://substack.com/@stephenreid/note/c-241766953
+- **Likes:** 1
 
 > **From:** [Ontoshift](https://technologicalmetamodernism.substack.com/p/ontoshift)
 > The problem with the Western-individualist ontology embedded in capitalist modernity isn’t that it’s wrong exactly. It’s that it’s become utterly dominant–an invasive species that has colonized the mind. Healthy civilizations, like healthy ecosystems, rely on diversity. Any single ontology, however sophisticated, will be inadequate for navigating the full complexity of human existence.
@@ -62,6 +65,7 @@ The most meaningful life available to a human being has never required 200,000 c
 
 - **Note ID:** `c-241765882`
 - **Link:** https://substack.com/@stephenreid/note/c-241765882
+- **Likes:** 0
 
 > **From:** [Ontoshift](https://technologicalmetamodernism.substack.com/p/ontoshift)
 > The Ontoshift framework preserves what’s valuable in developmental thinking—recognition that ontologies can be learned, that some ontological capabilities are useful for certain challenges—while avoiding the worst pathologies of stage thinking. Different maps rather than a single ladder. That distinction matters.
@@ -78,6 +82,7 @@ The most meaningful life available to a human being has never required 200,000 c
 
 - **Note ID:** `c-241676459`
 - **Link:** https://substack.com/@stephenreid/note/c-241676459
+- **Likes:** 2
 
 Update: one month after this post, Cursor released Composer 2 (built on top of Kimi K2.5) which benches ~equal to Opus at 1/10th the price.
 
@@ -98,6 +103,7 @@ This has enabled me to switch from the $60 Cursor sub (often with a further $40-
 
 - **Note ID:** `c-241648107`
 - **Link:** https://substack.com/@stephenreid/note/c-241648107
+- **Likes:** 4
 
 Great new miniseries on oil from @Nate Hagens
 
@@ -113,6 +119,7 @@ Great new miniseries on oil from @Nate Hagens
 
 - **Note ID:** `c-241647884`
 - **Link:** https://substack.com/@stephenreid/note/c-241647884
+- **Likes:** 5
 
 @Bill Plotkin on Substack!
 
@@ -128,6 +135,7 @@ Great new miniseries on oil from @Nate Hagens
 
 - **Note ID:** `c-241111067`
 - **Link:** https://substack.com/@stephenreid/note/c-241111067
+- **Likes:** 2
 
 > **From:** [Cyborgs Will Kill the Corporation](https://www.octopusyarn.com/p/cyborgs-will-kill-the-corporation)
 > Whereas corporations organize humans around the skeleton of an org chart embedded in a legal structure, cyborgs consist of a human on the inside and an exoskeleton of AI agents outside. Agents do the gripping and lifting while the human provides direction, judgment, and taste.
@@ -144,6 +152,7 @@ Great new miniseries on oil from @Nate Hagens
 
 - **Note ID:** `c-241110744`
 - **Link:** https://substack.com/@stephenreid/note/c-241110744
+- **Likes:** 3
 
 > **From:** [Cyborgs Will Kill the Corporation](https://www.octopusyarn.com/p/cyborgs-will-kill-the-corporation)
 > Employees are starting to deploy their agents to do their jobs, wherever those jobs are machine-like enough for nobody to notice. For a while, we might see plenty of zombie firms where employees continue collecting paychecks while most of the work is done by a $200 Anthropic subscription.
@@ -160,6 +169,7 @@ Great new miniseries on oil from @Nate Hagens
 
 - **Note ID:** `c-240764148`
 - **Link:** https://substack.com/@stephenreid/note/c-240764148
+- **Likes:** 1
 
 
 
@@ -180,6 +190,7 @@ https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier?__readw
 
 - **Note ID:** `c-240317434`
 - **Link:** https://substack.com/@stephenreid/note/c-240317434
+- **Likes:** 2
 
 > **From:** [The two kinds of desire, and one of the most important things I know](https://sashachapin.substack.com/p/the-two-kinds-of-desire-and-one-of)
 > The most interesting finding in human psychology, ever, is that basically all of us are born with the wrong intuition about how to be happy. We think that doing enough tanha, enough grabbing, will please us. But actually, grabbing is the source of something like 90% of our unhappiness. It’s a basically dissociative reaction to reality which creates a sense of temporary dissatisfaction, like putting on tight shoes so that later your feet will feel good again. Skip it altogether, as much as possible, if you want to be at peace.
@@ -196,6 +207,7 @@ https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier?__readw
 
 - **Note ID:** `c-240316162`
 - **Link:** https://substack.com/@stephenreid/note/c-240316162
+- **Likes:** 1
 
 > **From:** [(free version) Metashamanics](https://laymanpascal.substack.com/p/free-version-metashamanics)
 > Nor is there any necessity to use the word shaman.  We are describing a socially and evolutionarily conserved range of human sensemaking.  If the word sounds too masculine, we could say witch.  If that sounds too magical, we could say gnostic intermediary.  If that still sounds too pagan or heretical, we could say natural priest or organic imam or embodied theologian.
@@ -212,6 +224,7 @@ https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier?__readw
 
 - **Note ID:** `c-240312146`
 - **Link:** https://substack.com/@stephenreid/note/c-240312146
+- **Likes:** 3
 
 From the comments:
 
@@ -233,6 +246,7 @@ https://kevinkelly.substack.com/p/six-selfish-reasons-to-have-kids?utm_source=po
 
 - **Note ID:** `c-240310679`
 - **Link:** https://substack.com/@stephenreid/note/c-240310679
+- **Likes:** 3
 
 connecting the evolutionary dots between life, computation, and symbiogenesis
 
@@ -248,6 +262,7 @@ connecting the evolutionary dots between life, computation, and symbiogenesis
 
 - **Note ID:** `c-240310281`
 - **Link:** https://substack.com/@stephenreid/note/c-240310281
+- **Likes:** 0
 
 > **From:** [You Are Not a Function](https://blog.cosmos-institute.org/p/you-are-not-a-function)
 > If the capacities required for non-servile life in an AI world were all formed in a pre-AI world, what happens when that formation stops? You can live on an inheritance for a while. You cannot educate a civilization on inherited judgment forever.
@@ -264,6 +279,7 @@ connecting the evolutionary dots between life, computation, and symbiogenesis
 
 - **Note ID:** `c-240309379`
 - **Link:** https://substack.com/@stephenreid/note/c-240309379
+- **Likes:** 7
 
 > **From:** [You're probably addicted to thinking ](https://deepfix.substack.com/p/youre-probably-addicted-to-thinking)
 > If you keep tracing addiction to its root, if you keep asking what engine is driving the meta-engine, you arrive somewhere far more fundamental than heroin or TikTok. You arrive at the addiction to thinking itself.
@@ -280,6 +296,7 @@ connecting the evolutionary dots between life, computation, and symbiogenesis
 
 - **Note ID:** `c-240308589`
 - **Link:** https://substack.com/@stephenreid/note/c-240308589
+- **Likes:** 3
 
 
 
@@ -300,6 +317,7 @@ https://arxiv.org/html/2603.20639v1
 
 - **Note ID:** `c-238979197`
 - **Link:** https://substack.com/@stephenreid/note/c-238979197
+- **Likes:** 55
 
 > **From:** [Intelligence, Agency, and the Human Will of AI](https://larrymuhlstein.substack.com/p/intelligence-agency-and-the-human)
 > The alignment problem isn’t that AI might develop goals that diverge from ours. It’s that AI faithfully inherits our goals, and our goals are already misaligned with our own wellbeing.
@@ -316,6 +334,7 @@ https://arxiv.org/html/2603.20639v1
 
 - **Note ID:** `c-238028160`
 - **Link:** https://substack.com/@stephenreid/note/c-238028160
+- **Likes:** 39
 
 the current vibecoding/agents craze has the same energy as the ‘20-’22 crypto/DAO hype wave
 
@@ -333,6 +352,7 @@ i have found one of the best antidotes is a serious meditation practice, or more
 
 - **Note ID:** `c-235411763`
 - **Link:** https://substack.com/@stephenreid/note/c-235411763
+- **Likes:** 10
 
 Just added this page to Dandelion…
 
@@ -385,6 +405,7 @@ https://dandelion.events/dandelion-vs-luma
 
 - **Note ID:** `c-235397885`
 - **Link:** https://substack.com/@stephenreid/note/c-235397885
+- **Likes:** 3
 
 Baby is almost one month old and I’m considering offering an online course for the first time since Sep 2024
 
@@ -445,6 +466,7 @@ Tools for the Regenerative Renaissance (Feb 2021) https://stephenreid.net/course
 - **Publication:** [Life Itself Research](https://lifeitselfresearch.substack.com)
 ![publication](https://substackcdn.com/image/fetch/$s_!lHlz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa451fbe5-0d7f-42ee-983a-3cbac2cac12b_500x500.png)
 - **Post:** [Stephen Reid on Technological Metamodernism](https://lifeitselfresearch.substack.com/p/stephen-reid-on-technological-metamodernism)
+- **Post likes:** 3
 - **Post subtitle:** Join us for the Life Itself Research Community Call#29. Stephen Reid shares his latest thinking on Technological Metamodernism
 - **Post description:** Join us for the Life Itself Research Community Call#29. Stephen Reid shares his latest thinking on Technological Metamodernism
 ![post cover](https://substack-video.s3.amazonaws.com/video_upload/post/190052404/992e77fa-28aa-4ae7-a007-3afd32d781d8/transcoded-1772882856.png)
@@ -459,6 +481,7 @@ Tools for the Regenerative Renaissance (Feb 2021) https://stephenreid.net/course
 
 - **Note ID:** `c-220522064`
 - **Link:** https://substack.com/@stephenreid/note/c-220522064
+- **Likes:** 3
 
 Following the UK Green Party’s stunning byelection win, I put together a friendly critique of the Greens’ technology policy: three strengths, three weaknesses, and three suggestions.
 
@@ -476,6 +499,7 @@ https://technologicalmetamodernism.substack.com/p/uk-green-party-tech-policy-met
 
 - **Note ID:** `c-219513234`
 - **Link:** https://substack.com/@stephenreid/note/c-219513234
+- **Likes:** 2
 
 Opus 4.5 is now 3 months old.
 
@@ -496,6 +520,7 @@ Given that we will likely have Opus 4.5-level open-source models in the next few
 
 - **Note ID:** `c-218616803`
 - **Link:** https://substack.com/@stephenreid/note/c-218616803
+- **Likes:** 3
 
 Latest chapter of Technological Metamodernism out now! https://technologicalmetamodernism.substack.com/p/ontoshift
 
@@ -511,6 +536,7 @@ Latest chapter of Technological Metamodernism out now! https://technologicalmeta
 
 - **Note ID:** `c-218083066`
 - **Link:** https://substack.com/@stephenreid/note/c-218083066
+- **Likes:** 8
 
 Two pieces that argue that AI's deepest challenges are spiritual and ethical rather than technical:
 
@@ -536,6 +562,7 @@ Both ultimately arrive at the same conclusion: AI alignment is a human alignment
 
 - **Note ID:** `c-216262775`
 - **Link:** https://substack.com/@stephenreid/note/c-216262775
+- **Likes:** 7
 
 just had an exchange which reminded me of this curious artifact…
 
@@ -623,6 +650,7 @@ from https://scarletimprint.com/publications/p/apocalyptic-witchcraft by Peter G
 
 - **Note ID:** `c-215218200`
 - **Link:** https://substack.com/@stephenreid/note/c-215218200
+- **Likes:** 28
 
 Three pieces that converge on the same core argument: AI is dissolving the systems we built our identities, careers, and institutions around — and forcing us to reckon with what remains.
 
@@ -652,6 +680,7 @@ All three also share a cautious optimism buried inside the alarm. Each suggests 
 
 - **Note ID:** `c-213533691`
 - **Link:** https://substack.com/@stephenreid/note/c-213533691
+- **Likes:** 9
 
 Cosmo-localism is the topic of the latest chapter of Technological Metamodernism, by @Hilma Church-Turing and me: https://technologicalmetamodernism.substack.com/p/cosmo-localism
 
@@ -669,6 +698,7 @@ With thanks for the years of work by @Michel Bauwens, amongst others!
 
 - **Note ID:** `c-213016971`
 - **Link:** https://substack.com/@stephenreid/note/c-213016971
+- **Likes:** 5
 
 New Features page for Dandelion ☺️ https://dandelion.events/features
 
@@ -684,6 +714,7 @@ New Features page for Dandelion ☺️ https://dandelion.events/features
 
 - **Note ID:** `c-210896119`
 - **Link:** https://substack.com/@stephenreid/note/c-210896119
+- **Likes:** 9
 
 slides from the presentation on Technological Metamodernism I just gave to @Life Itself
 
@@ -702,6 +733,7 @@ https://docs.google.com/presentation/d/1ckLaGdYerK60FhzZKhImVzjDitG-XBviHK9BcUyv
 
 - **Note ID:** `c-209026523`
 - **Link:** https://substack.com/@stephenreid/note/c-209026523
+- **Likes:** 3
 
 Brilliant piece!
 
@@ -728,6 +760,7 @@ https://www.jakemclain.com/writings/creative-machines.html
 
 - **Note ID:** `c-206465232`
 - **Link:** https://substack.com/@stephenreid/note/c-206465232
+- **Likes:** 1
 
 Just published my latest newsletter, including @Hilma Church-Turing, @Brendan McCord, @Alex Komoroske, @Erik Hoel and @Henrik Karlssonhttps://stephenreid.substack.com/p/in-correspondence-55
 
@@ -743,6 +776,7 @@ Just published my latest newsletter, including @Hilma Church-Turing, @Brendan Mc
 
 - **Note ID:** `c-205861431`
 - **Link:** https://substack.com/@stephenreid/note/c-205861431
+- **Likes:** 5
 
 my slides on Technological Metamodernism for the meetup tomorrow at Berghs in Stockholm: https://docs.google.com/presentation/d/1KJ1PGslbyKZpaU1-Wp_5P470JylGGbgQvcqCYgSzqIE/edit
 
@@ -759,6 +793,7 @@ my slides on Technological Metamodernism for the meetup tomorrow at Berghs in St
 
 - **Note ID:** `c-195221621`
 - **Link:** https://substack.com/@stephenreid/note/c-195221621
+- **Likes:** 7
 
 Plurality ⿻ (“technology for collaboration across social difference”) is the topic of the latest chapter of Technological Metamodernism by me and @Hilma Church-Turing
 
@@ -776,6 +811,7 @@ https://technologicalmetamodernism.substack.com/p/plurality
 
 - **Note ID:** `c-194353126`
 - **Link:** https://substack.com/@stephenreid/note/c-194353126
+- **Likes:** 7
 
 currently using...
 
@@ -799,6 +835,7 @@ looking forward to the day when i'm 100% open source
 
 - **Note ID:** `c-193112922`
 - **Link:** https://substack.com/@stephenreid/note/c-193112922
+- **Likes:** 4
 
 bringing up a baby seems to be a process of gaslighting them into believing there are in fact separable 'things'
 
@@ -810,6 +847,7 @@ bringing up a baby seems to be a process of gaslighting them into believing ther
 
 - **Note ID:** `c-192113461`
 - **Link:** https://substack.com/@stephenreid/note/c-192113461
+- **Likes:** 1
 
 created a way of plotting custom charts based on https://artificialanalysis.ai/ data: https://stephenreid.net/llms
 
@@ -825,6 +863,7 @@ created a way of plotting custom charts based on https://artificialanalysis.ai/ 
 
 - **Note ID:** `c-191240189`
 - **Link:** https://substack.com/@stephenreid/note/c-191240189
+- **Likes:** 3
 
 > **From:** [A World Unobserved](https://blog.cosmos-institute.org/p/a-world-unobserved)
 > The right to think for yourself, and the right to speak for yourself, can remain perfectly intact while the capacity to think for yourself—the capacity that makes these rights meaningful—quietly atrophies. The 20th century’s biggest threat to free speech was coercion. Today, it is comfort: frictionless belief acquisition that makes judgment optional.
@@ -841,6 +880,7 @@ created a way of plotting custom charts based on https://artificialanalysis.ai/ 
 
 - **Note ID:** `c-190500663`
 - **Link:** https://substack.com/@stephenreid/note/c-190500663
+- **Likes:** 12
 
 I’m hosting the first Technological Metamodernism meetup at the lovely Berghs School of Communication in Stockholm on Wed 14th Jan, 19:00-21:00, come along!
 
@@ -856,6 +896,7 @@ I’m hosting the first Technological Metamodernism meetup at the lovely Berghs 
 
 - **Note ID:** `c-189802392`
 - **Link:** https://substack.com/@stephenreid/note/c-189802392
+- **Likes:** 1
 
 https://cursor.com/2025
 
@@ -871,6 +912,7 @@ https://cursor.com/2025
 
 - **Note ID:** `c-186641879`
 - **Link:** https://substack.com/@stephenreid/note/c-186641879
+- **Likes:** 2
 
 @Hilma Church-Turing and I just published the latest chapter of Technological Metamodernism, on d/acc https://technologicalmetamodernism.substack.com/p/d-acc
 
@@ -886,6 +928,7 @@ https://cursor.com/2025
 
 - **Note ID:** `c-182945685`
 - **Link:** https://substack.com/@stephenreid/note/c-182945685
+- **Likes:** 8
 
 Listening to Audrey Tang give the lecture for the 2025 Right Livelihood Award at Stockholm University https://www.su.se/english/calendar/ai-democracy-and-plurality-in-a-time-of-polarisation-meet-the-2025-right-livelihood-laureate-1.862639
 
@@ -903,6 +946,7 @@ Listening to Audrey Tang give the lecture for the 2025 Right Livelihood Award at
 
 - **Note ID:** `c-182618325`
 - **Link:** https://substack.com/@stephenreid/note/c-182618325
+- **Likes:** 0
 
 I will be in London 14-17 Dec primarily to see my new baby niece ☺️ DM me if you want to connect whilst I'm there!
 
@@ -917,6 +961,7 @@ I will be in London 14-17 Dec primarily to see my new baby niece ☺️ DM me if
 - **Publication:** [Technological Metamodernism](https://technologicalmetamodernism.substack.com)
 ![publication](https://substackcdn.com/image/fetch/$s_!ilEc!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F88f420c8-7fd2-4ce0-b642-73ad4a56a479_500x500.png)
 - **Post:** [Proto-metamodern thinkers on technology](https://technologicalmetamodernism.substack.com/p/proto-metamodern-thinkers-on-technology)
+- **Post likes:** 16
 - **Post subtitle:** Chapter 5 of Technological Metamodernism
 - **Post description:** Chapter 5 of Technological Metamodernism
 ![post cover](https://substack-post-media.s3.amazonaws.com/public/images/823e9bdb-f429-4fcb-a6dd-3109393e46ab_1024x576.png)
@@ -931,6 +976,7 @@ I will be in London 14-17 Dec primarily to see my new baby niece ☺️ DM me if
 
 - **Note ID:** `c-177170070`
 - **Link:** https://substack.com/@stephenreid/note/c-177170070
+- **Likes:** 9
 
 @Hilma Church-Turing and I just published chapter 4 of Technological Metamodernism, 'What is Metamodernism?' https://technologicalmetamodernism.substack.com/p/what-is-metamodernism
 
@@ -946,6 +992,7 @@ I will be in London 14-17 Dec primarily to see my new baby niece ☺️ DM me if
 
 - **Note ID:** `c-170599242`
 - **Link:** https://substack.com/@stephenreid/note/c-170599242
+- **Likes:** 12
 
 It is a pleasure to return to Oxford (where I studied Physics as an undergraduate) for the first time in many years to give a talk to the Oxford Psychedelic Society based on @Jamie Wheal’s piece "Salt, Acid and Light: Why psychedelics change everything (and nothing)” https://jamiewheal.substack.com/p/salt-acid-and-light
 
@@ -961,6 +1008,7 @@ It is a pleasure to return to Oxford (where I studied Physics as an undergraduat
 
 - **Note ID:** `c-164261415`
 - **Link:** https://substack.com/@stephenreid/note/c-164261415
+- **Likes:** 3
 
 Latest chapter of Technological Metamodernism by @Hilma Church-Turing and me https://technologicalmetamodernism.substack.com/p/the-techno-optimists-the-longtermists
 
@@ -976,6 +1024,7 @@ Latest chapter of Technological Metamodernism by @Hilma Church-Turing and me htt
 
 - **Note ID:** `c-164153810`
 - **Link:** https://substack.com/@stephenreid/note/c-164153810
+- **Likes:** 28
 
 Zack Polanski, the new leader of the UK Green Party.
 
@@ -998,6 +1047,7 @@ https://x.com/TheGreenParty/status/1975259760967532606
 - **Publication:** [Dandelion](https://dandeliondotevents.substack.com)
 ![publication](https://substackcdn.com/image/fetch/$s_!4trq!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0e266a18-e498-4cc1-bfff-f3b62fdf8ec0_1200x1200.png)
 - **Post:** [The Bread Coop Solidarity Fund](https://dandeliondotevents.substack.com/p/the-bread-coop-solidarity-fund)
+- **Post likes:** 5
 - **Post subtitle:** Help fund Dandelion by foregoing the interest on your digital dollars
 - **Post description:** Help fund Dandelion by foregoing the interest on your digital dollars
 ![post cover](https://substack-post-media.s3.amazonaws.com/public/images/f80be24a-3985-4367-a7bd-9754427fca5f_946x447.png)
@@ -1012,6 +1062,7 @@ https://x.com/TheGreenParty/status/1975259760967532606
 
 - **Note ID:** `c-152263930`
 - **Link:** https://substack.com/@stephenreid/note/c-152263930
+- **Likes:** 0
 
 Emad’s https://www.thelasteconomy.com/ is actually pretty interesting. I will keep an eye on the associated https://ii.inc/
 
@@ -1030,6 +1081,7 @@ Emad’s https://www.thelasteconomy.com/ is actually pretty interesting. I will 
 
 - **Note ID:** `c-151286638`
 - **Link:** https://substack.com/@stephenreid/note/c-151286638
+- **Likes:** 2
 
 Top audience overlaps for my Substack https://stephenreid.substack.com/ are with @Alexander Beiner, @Jules Evans, @Charles Eisenstein, @Daniel Pinchbeck, @Peter Limberger and @Jamie Wheal
 
@@ -1045,6 +1097,7 @@ Top audience overlaps for my Substack https://stephenreid.substack.com/ are with
 
 - **Note ID:** `c-151248193`
 - **Link:** https://substack.com/@stephenreid/note/c-151248193
+- **Likes:** 2
 
 Just published my latest newsletter 📰
 
@@ -1076,6 +1129,7 @@ After nearly 4 years, Ethereum hit a new all-time high
 
 - **Note ID:** `c-143017094`
 - **Link:** https://substack.com/@stephenreid/note/c-143017094
+- **Likes:** 0
 
 Map of places I spent time at during my recent trip to Devon & London
 
@@ -1094,6 +1148,7 @@ https://www.google.com/maps/d/u/0/edit?mid=1f2j6D_xJqkSAfMXxV377XtCFplEnn2Y&ll=5
 
 - **Note ID:** `c-141991360`
 - **Link:** https://substack.com/@stephenreid/note/c-141991360
+- **Likes:** 0
 
 Notes on Network Nations for an event I’m hosting tomorrow https://docs.google.com/document/d/1HvvtL-pdtvtNbgIOuL78Ib6h_ReZMEak9a0pKkRRY-U/edit
 
@@ -1110,6 +1165,7 @@ Notes on Network Nations for an event I’m hosting tomorrow https://docs.google
 
 - **Note ID:** `c-139419995`
 - **Link:** https://substack.com/@stephenreid/note/c-139419995
+- **Likes:** 0
 
 My latest newsletter, with tips for the LLM connoisseur
 
@@ -1125,6 +1181,7 @@ My latest newsletter, with tips for the LLM connoisseur
 
 - **Note ID:** `c-137185162`
 - **Link:** https://substack.com/@stephenreid/note/c-137185162
+- **Likes:** 6
 
 Chapter 2, part 1 of Technological Metamodernism by @Hilma Church-Turing and me
 
@@ -1140,6 +1197,7 @@ Chapter 2, part 1 of Technological Metamodernism by @Hilma Church-Turing and me
 
 - **Note ID:** `c-133322931`
 - **Link:** https://substack.com/@stephenreid/note/c-133322931
+- **Likes:** 6
 
 Latest from me and @Hilma Church-Turing 
 
@@ -1155,6 +1213,7 @@ Latest from me and @Hilma Church-Turing
 
 - **Note ID:** `c-126332564`
 - **Link:** https://substack.com/@stephenreid/note/c-126332564
+- **Likes:** 0
 
 > **From:** [In Correspondence #49](https://stephenreid.substack.com/p/in-correspondence-49)
 > I’m preparing to move into Emerge Lakefront later today– if you’re curious about the place, you’re welcome to join the Virtual Open House at 5pm CET.
@@ -1171,6 +1230,7 @@ Just published my latest newsletter!
 
 - **Note ID:** `c-116466121`
 - **Link:** https://substack.com/@stephenreid/note/c-116466121
+- **Likes:** 3
 
 Just posted my latest newsletter ✨ https://stephenreid.substack.com/p/in-correspondence-48
 
@@ -1187,6 +1247,7 @@ Just posted my latest newsletter ✨ https://stephenreid.substack.com/p/in-corre
 
 - **Note ID:** `c-113571513`
 - **Link:** https://substack.com/@stephenreid/note/c-113571513
+- **Likes:** 6
 
 Thrilled to announce the Life as Practice Yearlong Group Mentorship, that I’m hosting alongside my partner Laura.
 
@@ -1206,6 +1267,7 @@ https://lifeaspractice.com/
 
 - **Note ID:** `c-111724864`
 - **Link:** https://substack.com/@stephenreid/note/c-111724864
+- **Likes:** 4
 
 For folks in the US–
 
@@ -1233,6 +1295,7 @@ https://www.sfwhgse.com/
 - **Publication:** [Letters from Lakefront](https://emergelakefront.substack.com)
 ![publication](https://substackcdn.com/image/fetch/$s_!civB!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff11fb775-b14d-49fe-82e4-385034d93c44_500x500.png)
 - **Post:** [Introducing The Emerge Lakefront Project](https://emergelakefront.substack.com/p/introducing-the-emerge-lakefront)
+- **Post likes:** 3
 - **Post subtitle:** A Changemaker residency for inner development and global impact.
 - **Post description:** A Changemaker residency for inner development and global impact.
 ![post cover](https://substack-video.s3.amazonaws.com/video_upload/post/161082740/d70e2306-4f00-4b30-aae9-a0ddf00156cf/transcoded-00083.png)
@@ -1247,6 +1310,7 @@ https://www.sfwhgse.com/
 
 - **Note ID:** `c-106355423`
 - **Link:** https://substack.com/@contraptions/note/c-106355423
+- **Likes:** 57
 
 Fussing with the word level of AI co-authored text feels a bit like pursuing photorealistic art after the invention of the camera. I mean, impressive that you can paint photorealistically, but I’d rather go look at impressionist, cubist art, or watch camera-based media like movies. If I want photorealism I’ll take or commission a photo.
 
@@ -1264,6 +1328,7 @@ The more I experiment the more addicted I get. I think 4o was the threshold for 
 
 - **Note ID:** `c-106173936`
 - **Link:** https://substack.com/@stephenreid/note/c-106173936
+- **Likes:** 6
 
 Presentation I just gave on the work of Rob Burbea at Elevate https://docs.google.com/document/d/1GkXUYqOCRRf1lNlpHQxsCS503RJUuxqyqNeA8SlSVo8/edit?usp=drivesdk
 
@@ -1280,6 +1345,7 @@ Presentation I just gave on the work of Rob Burbea at Elevate https://docs.googl
 
 - **Note ID:** `c-105883980`
 - **Link:** https://substack.com/@stephenreid/note/c-105883980
+- **Likes:** 4
 
 I just published my latest In Correspondence from the beautiful Ekskäret island where I’m attending my second Elevate co-created gathering.
 
@@ -1295,6 +1361,7 @@ I just published my latest In Correspondence from the beautiful Ekskäret island
 
 - **Note ID:** `c-104266908`
 - **Link:** https://substack.com/@stephenreid/note/c-104266908
+- **Likes:** 0
 
 Just finished the creepy and creative There Is No Antimemetics Division.
 
@@ -1317,6 +1384,7 @@ https://www.goodreads.com/book/show/54870256-there-is-no-antimemetics-division
 
 - **Note ID:** `c-104012266`
 - **Link:** https://substack.com/@stephenreid/note/c-104012266
+- **Likes:** 3
 
 The Soulful Baltic https://www.google.com/maps/d/u/0/edit?mid=16RplNufvIbSZVDrbFH1v0TI0u6j-Zqg&usp=sharing
 
@@ -1348,6 +1416,7 @@ Finnish is as different to Swedish and Latvian as they are to Japanese, Mandarin
 
 - **Note ID:** `c-103851019`
 - **Link:** https://substack.com/@stephenreid/note/c-103851019
+- **Likes:** 16
 
 Cosmopoesis, as articulated by Rob Burbea, refers to a way of perceiving and experiencing the world as sacred or divine—a creative opening of possibilities in how we see, sense, and experience the cosmos. It's a process where our perception opens up to see the world around us in a poetic, sacred, or enchanted way, while feeling oneself within such a cosmos. Burbea describes it as "opening up the possibilities of seeing, of sensing, of really inhabiting a different cosmos," allowing us to expand beyond conventional perception to recognize multiple dimensions or sacred qualities within our ordinary experience.
 
@@ -1395,6 +1464,7 @@ These examples illustrate how cosmopoesis emerges in various ways—often trigge
 
 - **Note ID:** `c-103845403`
 - **Link:** https://substack.com/@stephenreid/note/c-103845403
+- **Likes:** 29
 
 post-woke https://richdecibels.substack.com/p/towards-a-post-woke-synthesis• @Richard D. Bartlett
 
@@ -1416,6 +1486,7 @@ metamodern https://metamoderna.org/• @Emil Ejner Friis
 
 - **Note ID:** `c-100140308`
 - **Link:** https://substack.com/@stephenreid/note/c-100140308
+- **Likes:** 60
 
 I’ve been struck by the resonances between these three contemporary bodies of work on soul:
 
@@ -1615,6 +1686,7 @@ Together, they demonstrate the continued evolution of spiritual thought in the 2
 
 - **Note ID:** `c-100131820`
 - **Link:** https://substack.com/@stephenreid/note/c-100131820
+- **Likes:** 8
 
 Greetings from Oodi, Helsinki’s lovely central library. I’m in Finland for a 10-day Soulmaking retreat with Catherine McGee & Juha Penttilä (my second, after a similar retreat at Gaia House in Sep 2023) https://nirodha.fi/retreat-03-25/
 
@@ -1632,6 +1704,7 @@ Greetings from Oodi, Helsinki’s lovely central library. I’m in Finland for a
 
 - **Note ID:** `c-99998357`
 - **Link:** https://substack.com/@thealgorithmicbridge/note/c-99998357
+- **Likes:** 75
 
 AI slop is better at getting you an audience than being a master writer. This is absolutely fascinating. A sign of the times. Or a sign of humanity. The average person likes AI poetry more than human poetry by a lot. I bet soon it’ll be the same for prose. People also rationalize explanations why despite changing their minds once they’re told an AI wrote it. The study was published in Nature in November and was widely shared. Still fascinated by the results, still figuring out what to make of them.
 
@@ -1651,6 +1724,7 @@ AI slop is better at getting you an audience than being a master writer. This is
 
 - **Note ID:** `c-99200813`
 - **Link:** https://substack.com/@stephenreid/note/c-99200813
+- **Likes:** 10
 
 Dandelion (https://dandelion.events/) just crossed £4m in tickets sold via the platform 🎉
 
@@ -1667,6 +1741,7 @@ Dandelion (https://dandelion.events/) just crossed £4m in tickets sold via the 
 
 - **Note ID:** `c-99170451`
 - **Link:** https://substack.com/@stephenreid/note/c-99170451
+- **Likes:** 20
 
 Both @Jonathan Rowson’s essay and @Emil Ejner Friis’s note wrestle with the central tension facing metamodern communities: the gap between contemplative self-development and tangible socio-political action. Rowson frames the Emerge network as an "incipient field" that has found itself but now needs to mature beyond its "honeymoon period" to confront real-world power structures and generate collective impact. Similarly, Friis challenges the "liminal web" to evolve beyond what he characterizes as "bourgeois escapism" and private enlightenment pursuits toward genuine societal transformation. Both writers recognize the metamodern scene's unique capacity to perceive connections between disparate renewal efforts and to operate "between worlds," while also acknowledging that without institutional tenacity and political engagement, these communities risk becoming self-referential bubbles of "social reverie." The parallel questioning of whether these networks can transcend their comfortable theorizing to affect systemic change reveals a shared understanding that the field stands at a crucial inflection point where it must define its relationship to power and politics.
 
@@ -1682,6 +1757,7 @@ https://substack.com/@metamoderna/note/c-98929872
 
 - **Note ID:** `c-93020595`
 - **Link:** https://substack.com/@stephenreid/note/c-93020595
+- **Likes:** 16
 
 Imagine a world breathing with life, vibrant and resilient. Cities are not concrete jungles, but verdant ecosystems, interwoven with nature. Buildings rise like sculpted trees, their surfaces alive with vertical gardens and solar panels seamlessly integrated into their design. Food is grown locally, in rooftop farms and community plots, nourishing bodies with a richness and diversity long forgotten. Energy flows from renewable sources, decentralized and democratically controlled, empowering communities to be self-sufficient.
 
@@ -1726,6 +1802,7 @@ The Consilience Project’s Axiological Design
 
 - **Note ID:** `c-91213676`
 - **Link:** https://substack.com/@stephenreid/note/c-91213676
+- **Likes:** 1
 
 I just published my latest newsletter, featuring:
 
@@ -1759,6 +1836,7 @@ and much more…
 
 - **Note ID:** `c-90453168`
 - **Link:** https://substack.com/@stephenreid/note/c-90453168
+- **Likes:** 1
 
 A couple of spots have unexpectedly become available at Futurecraft at Feÿtopia from 17-23 Feb – join us?
 
@@ -1797,6 +1875,7 @@ https://dandelion.events/e/futurecraft-feytopia
 
 - **Note ID:** `c-88056078`
 - **Link:** https://substack.com/@stephenreid/note/c-88056078
+- **Likes:** 8
 
 Got tipped off that my Technological Metamodernism course notes are doing the rounds amongst the Russian-speaking community! “The best intellectual product that appeared last year in the field of technological sense-making is Stephen Reid’s four-week course ‘Technological Metamodernism’. A real underground post-cyberpunk.”
 
@@ -1870,6 +1949,7 @@ http://stephenreid.substack.com/p/technological-metamodernism-course
 
 - **Note ID:** `c-86736918`
 - **Link:** https://substack.com/@stephenreid/note/c-86736918
+- **Likes:** 1
 
 From x.com/_LouiePeters - if this is correct, things are going to get crazy, fast:
 
@@ -1907,6 +1987,7 @@ Separate to this feedback loop, we also have easy wins from scaling RL training 
 
 - **Note ID:** `c-86307329`
 - **Link:** https://substack.com/@stephenreid/note/c-86307329
+- **Likes:** 5
 
 > **From:** [Intelligence in the Age of Mechanical Reproduction](https://charleseisenstein.substack.com/p/intelligence-in-the-age-of-mechanical)
 > AI amplifies the intellectual capacities of its creator, the human collective. In fact, the “A” should probably stand for “amplified,” not “artificial.” AI certainly does amplify our intelligence, but it also amplifies our stupidity, our insanity, our disconnection, and the consequences of our errors. We must understand it in this way if we are to use it well.
@@ -1923,6 +2004,7 @@ cf.  Stan Grof’s idea of psychedelics as “nonspecific amplifiers”
 
 - **Note ID:** `c-86103767`
 - **Link:** https://substack.com/@stephenreid/note/c-86103767
+- **Likes:** 6
 
 > **From:** [After Psychedelics](https://dragonflyagony.substack.com/p/after-psychedelics)
 > So much of the clumsiness surrounding the integration of psychedelics into the American machine seems to fall back on this simple fact: We don’t understand mind. We haven’t sat long enough with the difficult questions of who and what we are to justify introducing these powerful, ancient technologies into our systems. This is not a call for moderation, and certainly not an effort to halt any progress that would counteract the obscene violence of prohibition. This is, simply, a cry for deeper contemplation of the ground in which we’re planting these seeds.
@@ -1939,6 +2021,7 @@ cf.  Stan Grof’s idea of psychedelics as “nonspecific amplifiers”
 
 - **Note ID:** `c-83981756`
 - **Link:** https://substack.com/@stephenreid/note/c-83981756
+- **Likes:** 0
 
 Just published my latest newsletter, including my plans for 2025:
 
@@ -1998,6 +2081,7 @@ https://open.substack.com/pub/stephenreid/p/in-correspondence-45
 
 - **Note ID:** `c-80458180`
 - **Link:** https://substack.com/@stephenreid/note/c-80458180
+- **Likes:** 0
 
 What other places/projects should be on this map, which I plan to add to https://dandelion.events?
 
@@ -2112,6 +2196,7 @@ https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8
 
 - **Note ID:** `c-79841847`
 - **Link:** https://substack.com/@stephenreid/note/c-79841847
+- **Likes:** 2
 
 Just published my latest newsletter, featuring an invitation to Futurecraft at Feÿtopia, the beautiful Ekskäret island in the Stockholm Archipelago, Tyson Yunkaporta’s Right Story, Wrong Story and much more…
 
@@ -2127,6 +2212,7 @@ Just published my latest newsletter, featuring an invitation to Futurecraft at F
 
 - **Note ID:** `c-78248264`
 - **Link:** https://substack.com/@stephenreid/note/c-78248264
+- **Likes:** 2
 
 I really like Substack apart from the fact there’s no API- wtfff?
 
@@ -2144,6 +2230,7 @@ https://warpcast.com/stephenreid.eth
 
 - **Note ID:** `c-77713088`
 - **Link:** https://substack.com/@stephenreid/note/c-77713088
+- **Likes:** 2
 
 Join me, Anna Ling, Laura Gottlieb and jae spencer keyse for the third Futurecraft Residency, this time taking place during Feÿtopia at the inspiring Château du Feÿ near Paris, France from 17th - 23rd February 2025.
 
@@ -2177,6 +2264,7 @@ https://futurecrafters.substack.com/p/futurecraft-at-feytopia
 
 - **Note ID:** `c-72079985`
 - **Link:** https://substack.com/@stephenreid/note/c-72079985
+- **Likes:** 5
 
 Thanks to those who donated in the OpenCivics Collaborative Research Round, I’m pleased to be able to open-source the notes from my recent Technological Metamodernism course.
 
@@ -2197,6 +2285,7 @@ I would say this is most important and cutting-edge course I’ve taught, bringi
 - **Publication:** [Stephen Reid](https://stephenreid.substack.com)
 ![publication](https://substackcdn.com/image/fetch/$s_!AcoB!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25b04901-8a82-47af-a4d7-f935403c5095_560x560.png)
 - **Post:** [In Correspondence #42](https://stephenreid.substack.com/p/in-correspondence-42)
+- **Post likes:** 4
 - **Post subtitle:** Swedish adventures, Superhappiness and a special offer
 - **Post description:** Swedish adventures, Superhappiness and a special offer
 ![post cover](https://substackcdn.com/image/fetch/$s_!SvbF!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7bed05d1-cb62-461a-833a-c90813ec0348_3000x1875.jpeg)
@@ -2211,6 +2300,7 @@ I would say this is most important and cutting-edge course I’ve taught, bringi
 
 - **Note ID:** `c-65957997`
 - **Link:** https://substack.com/@stephenreid/note/c-65957997
+- **Likes:** 1
 
 I spoke on the Buddhist Geeks podcast about Technological Metamodernism.
 
@@ -2231,6 +2321,7 @@ https://open.spotify.com/episode/5Rtjr3N95IjgqfSZ6aQKWz?si=b577697ca8b14ac5&nd=1
 
 - **Note ID:** `c-65950565`
 - **Link:** https://substack.com/@stephenreid/note/c-65950565
+- **Likes:** 1
 
 Two of my projects have been accepted into ‘Quadratic Funding’ match funding rounds. Quadratic Funding is a type of match funding where the number of donations can matter as much as the amount, such that a single £/$/€ can be matched with many multiples of the donated amount.
 
@@ -2252,6 +2343,7 @@ Thanks in anticipation 🙏
 
 - **Note ID:** `c-64007183`
 - **Link:** https://substack.com/@stephenreid/note/c-64007183
+- **Likes:** 1
 
 Just published my latest newsletter https://stephenreid.substack.com/p/in-correspondence-41 🏕️
 
@@ -2267,6 +2359,7 @@ Just published my latest newsletter https://stephenreid.substack.com/p/in-corres
 
 - **Note ID:** `c-61745574`
 - **Link:** https://substack.com/@stephenreid/note/c-61745574
+- **Likes:** 1
 
 I'm running a new course on Technological Metamodernism with special guests @Alexander Beiner, @Rufus Pollock, @Michael Garfield, Hanzi Freinacht (Emil Ejner Friis) & Ellie Hain, 17th Sep – 8th Oct 2024. Read more at https://futurecraft.life/technological-metamodernism 🔮
 
@@ -2283,6 +2376,7 @@ I'm running a new course on Technological Metamodernism with special guests @Ale
 
 - **Note ID:** `c-50850023`
 - **Link:** https://substack.com/@stephenreid/note/c-50850023
+- **Likes:** 3
 
 Just published my latest newsletter. Image from the highly recommended Scavengers Reign animated series
 
@@ -2298,6 +2392,7 @@ Just published my latest newsletter. Image from the highly recommended Scavenger
 
 - **Note ID:** `c-50058154`
 - **Link:** https://substack.com/@stephenreid/note/c-50058154
+- **Likes:** 6
 
 Substack now provides audience overlap stats. Turns out the readership of stephenreid.substack.com most overlaps with:
 
@@ -2329,6 +2424,7 @@ and
 
 - **Note ID:** `c-46447881`
 - **Link:** https://substack.com/@stephenreid/note/c-46447881
+- **Likes:** 1
 
 I just published my latest newsletter, featuring Introduction to AI, I Want A Better Catastrophe, Building Our Regenerative Future and much more.
 
@@ -2344,6 +2440,7 @@ I just published my latest newsletter, featuring Introduction to AI, I Want A Be
 
 - **Note ID:** `c-44035923`
 - **Link:** https://substack.com/@stephenreid/note/c-44035923
+- **Likes:** 2
 
 > **From:** [Salt, Acid and Light](https://jamiewheal.substack.com/p/salt-acid-and-light)
 > Welcome to the Brother-Sisterhood of the Screaming Abyss. There’s a good reason why most never peer over the Edge. Sometimes More isn’t always Better. It’s just More. A lot more.
@@ -2360,6 +2457,7 @@ I just published my latest newsletter, featuring Introduction to AI, I Want A Be
 
 - **Note ID:** `c-44030929`
 - **Link:** https://substack.com/@stephenreid/note/c-44030929
+- **Likes:** 0
 
 I just published my latest newsletter, featuring the final room at the upcoming Futurecraft Residency in Costa Rica, solarpunk fiction, the Introduction to AI course and much more
 
@@ -2375,6 +2473,7 @@ I just published my latest newsletter, featuring the final room at the upcoming 
 
 - **Note ID:** `c-42984422`
 - **Link:** https://substack.com/@stephenreid/note/c-42984422
+- **Likes:** 0
 
 If you appreciate this reading/watching list for the upcoming Futurecraft Residency at Brave Earth in Costa Rica, 12-19 Dec, then come along!
 
@@ -2395,6 +2494,7 @@ Event: https://docs.google.com/document/d/1DND4gidDvHU0hNAwTs68BL4L5GSKpRVAuyap2
 
 - **Note ID:** `c-42749910`
 - **Link:** https://substack.com/@stephenreid/note/c-42749910
+- **Likes:** 1
 
 New films page: https://stephenreid.net/films
 
@@ -2435,6 +2535,7 @@ and many more
 
 - **Note ID:** `c-42116793`
 - **Link:** https://substack.com/@stephenreid/note/c-42116793
+- **Likes:** 0
 
 I just published my latest newsletter, featuring the Planet Local and Inner Development Goals summits, the upcoming Futurecraft Residency in Costa Rica in Dec, the next Intro to AI course in Jan, a great intro to the metacrisis, and much more. Check it out at https://stephenreid.substack.com/p/in-correspondence-33
 
@@ -2450,6 +2551,7 @@ I just published my latest newsletter, featuring the Planet Local and Inner Deve
 
 - **Note ID:** `c-18142667`
 - **Link:** https://substack.com/@stephenreid/note/c-18142667
+- **Likes:** 1
 
 Anyone else here on Farcaster? I’m at https://warpcast.com/stephenreid
 
@@ -2465,6 +2567,7 @@ Anyone else here on Farcaster? I’m at https://warpcast.com/stephenreid
 
 - **Note ID:** `c-17386252`
 - **Link:** https://substack.com/@stephenreid/note/c-17386252
+- **Likes:** 0
 
 I just published my latest newsletter: https://stephenreid.substack.com/p/in-correspondence-30
 
@@ -2480,6 +2583,7 @@ I just published my latest newsletter: https://stephenreid.substack.com/p/in-cor
 
 - **Note ID:** `c-15999789`
 - **Link:** https://substack.com/@stephenreid/note/c-15999789
+- **Likes:** 0
 
 > **From:** [In Correspondence #29](https://stephenreid.substack.com/p/in-correspondence-29)
 > Dear friends, welcome to another edition of In Correspondence. I’m still buzzing from the Futurecraft Residency, which was even better than I hoped 💫
@@ -2496,6 +2600,7 @@ I just published my latest newsletter: https://stephenreid.substack.com/p/in-cor
 
 - **Note ID:** `c-14651691`
 - **Link:** https://substack.com/@stephenreid/note/c-14651691
+- **Likes:** 6
 
 This was one of Daniel Schmachtenberger’s best appearances in some time: https://www.youtube.com/watch?v=KCSsKV5F4xc
 
@@ -2514,6 +2619,7 @@ Our existing world system (Moloch) as a misaligned superintellgence
 
 - **Note ID:** `c-14528058`
 - **Link:** https://substack.com/@stephenreid/note/c-14528058
+- **Likes:** 9
 
 I've always liked Substack. I've left Facebook, never posted regularly on Twitter and as much as I like Farcaster it still feels very niche. So maybe this is a reasonable place for short thoughts…
 

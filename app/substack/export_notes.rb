@@ -358,6 +358,7 @@ def markdown_for_note(flat)
   lines = ["## #{heading}", '']
   lines << "- **Note ID:** `#{flat['entity_key']}`" if present?(flat['entity_key'])
   lines << "- **Link:** #{flat['primary_link']}" if present?(flat['primary_link'])
+  lines << "- **Likes:** #{flat['reaction_count']}" if present?(flat['reaction_count'])
 
   pub_name = flat['publication_name'].to_s
   pub_home = substack_homepage(subdomain: flat['publication_subdomain'].to_s, custom_domain: flat['publication_custom_domain'].to_s)
@@ -375,6 +376,7 @@ def markdown_for_note(flat)
   if present?(post_title)
     lines << (present?(post_url) ? "- **Post:** [#{post_title}](#{post_url})" : "- **Post:** #{post_title}")
   end
+  lines << "- **Post likes:** #{flat['post_reaction_count']}" if present?(post_title) && present?(flat['post_reaction_count'])
   lines << "- **Post subtitle:** #{flat['post_subtitle']}" if present?(flat['post_subtitle'])
   lines << "- **Post description:** #{flat['post_description']}" if present?(flat['post_description'])
   lines << "![post cover](#{flat['post_cover_image_url']})" if present?(flat['post_cover_image_url'])
