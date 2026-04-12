@@ -165,10 +165,6 @@ module StephenReid
       erb :coaching
     end
 
-    get '/lunarpunk-dreams' do
-      redirect '/blog/2022/09/30/beyond-privacy-the-seven-darknesses-of-lunarpunk.html'
-    end
-
     get '/prompt', provides: :txt do
       Prompt.markdown(
         book_summaries: params[:book_summaries],
@@ -218,8 +214,6 @@ module StephenReid
       erb :book
     end
 
-    ##############################
-
     get '/software/update' do
       Software.iframely
       redirect '/software?r=1'
@@ -228,10 +222,6 @@ module StephenReid
     get '/films/update' do
       Film.iframely
       redirect '/films?r=1'
-    end
-
-    get '/master-lover-course' do
-      send_file "#{Padrino.root}/app/markdown/master-lover-course.html"
     end
   end
 end
