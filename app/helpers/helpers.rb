@@ -68,13 +68,39 @@ StephenReid::App.helpers do
 
   def display_or_dash(value, format: nil, prefix: nil, suffix: nil, &block)
     if value
-      formatted = block ? yield(value) : (format ? sprintf(format, value) : value)
+      formatted = if block
+                    yield(value)
+                  else
+                    (format ? format(format, value) : value)
+                  end
       result = prefix.to_s + formatted.to_s
       result += %( <small class="text-muted">#{suffix}</small>) if suffix
       result
     else
       %(<span class="text-muted">—</span>)
     end
+  end
+
+  # Splits notes.md into chunks (delimiter must match export_notes.rb).
+  # Export order is newest-first, so the first chunks are the most recent notes.
+  def substack_notes_markdown(limit: nil)
+    substack_note_separator = '<!-- substack-note-separator -->'.freeze
+
+    path = "#{Padrino.root}/app/substack/notes.md"
+    full = File.read(path).force_encoding('utf-8')
+    n = limit.to_i
+    return full if n <= 0
+
+    full = full.gsub("\r\n", "\n").sub(/\A\uFEFF/, '')
+    escaped = Regexp.escape(substack_note_separator)
+    parts = full.split(/\n#{escaped}\n/)
+    parts = full.split("\n* * *\n") if parts.length == 1 && !full.include?(substack_note_separator)
+    parts = parts.map(&:strip).reject(&:empty?)
+    return full if parts.empty? || parts.length <= n
+
+    parts.first(n).join("\n#{substack_note_separator}\n")
+  rescue Errno::ENOENT
+    ''
   end
 
   def substack_posts(limit: nil)
