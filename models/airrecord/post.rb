@@ -52,7 +52,6 @@ class Post < Airrecord::Table
       end
 
       post.tagify
-      # post.cast
       post.bluesky
     end
   end
@@ -96,7 +95,6 @@ class Post < Airrecord::Table
         post.save
       end
       post.tagify
-      # post.cast
       post.bluesky
     end
   end
@@ -185,11 +183,6 @@ class Post < Airrecord::Table
     end
 
     self['Twitter text']
-  end
-
-  def cast
-    post = self
-    `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/cast.py #{Shellwords.escape(post['Title'])} #{Shellwords.escape(post['Link'])}`
   end
 
   def self.extract_iframely_metadata(iframely_json)

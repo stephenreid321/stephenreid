@@ -24,7 +24,6 @@ StephenReid::App.controller do
       @post.save
     end
     @post.tagify
-    # @post.cast
     @post.bluesky
     200
   end

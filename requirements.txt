@@ -1,4 +1,3 @@
-farcaster
 youtube_transcript_api
 pytubefix
 fal_client
