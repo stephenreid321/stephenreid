@@ -171,7 +171,6 @@ GEM
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (1.2.3)
       reline
-    front_matter_parser (1.0.1)
     gemini-ai (4.3.0)
       event_stream_parser (~> 1.0)
       faraday (~> 2.13, >= 2.13.2)
@@ -489,7 +488,6 @@ DEPENDENCIES
   dropbox_api
   erb_lint
   ferrum
-  front_matter_parser
   gemini-ai
   honeybadger
   htmlbeautifier

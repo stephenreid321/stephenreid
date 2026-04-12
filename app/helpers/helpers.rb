@@ -24,11 +24,6 @@ StephenReid::App.helpers do
     end
   end
 
-  def front_matter(slug)
-    text = File.read("#{Padrino.root}/app/markdown/#{slug}.md").force_encoding('utf-8')
-    FrontMatterParser::Parser.new(:md).call(text)
-  end
-
   def cp(slug, locals: {}, key: slug, expires: 1.hours.to_i)
     Padrino.env == :development ? partial(slug, locals: locals) : cache(key, expires: expires) { partial(slug, locals: locals) }
   end
