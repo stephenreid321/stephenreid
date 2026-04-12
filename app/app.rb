@@ -213,15 +213,5 @@ module StephenReid
       @title = @book['Title']
       erb :book
     end
-
-    get '/software/update' do
-      Software.iframely
-      redirect '/software?r=1'
-    end
-
-    get '/films/update' do
-      Film.iframely
-      redirect '/films?r=1'
-    end
   end
 end
