@@ -1,5 +1,5 @@
 module Prompt
-  def self.prompt(book_summaries: false)
+  def self.prompt(book_summaries: false, notes_limit: nil, posts_limit: nil)
     sections = [
       {
         title: 'Short bio in the third person',
@@ -27,23 +27,36 @@ module Prompt
       }
     ]
 
-    if book_summaries
-      sections << {
-        title: "Books I've read, with summaries",
-        books: Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| { title: b['Title'], author: b['Author'], date_read: b['Date Read'], summary: b['Summary'].blank? ? '(summary missing)' : b['Summary'].split("\n\n")[1..-1].join("\n\n") } }
-      }
-    else
-      sections << {
-        title: "Books I've read",
-        books: Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| { title: b['Title'], author: b['Author'], date_read: b['Date Read'] } }
-      }
-    end
+    sections << if book_summaries
+                  {
+                    title: "Books I've read, with summaries",
+                    books: Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| { title: b['Title'], author: b['Author'], date_read: b['Date Read'], summary: b['Summary'].blank? ? '(summary missing)' : b['Summary'].split("\n\n")[1..-1].join("\n\n") } }
+                  }
+                else
+                  {
+                    title: "Books I've read",
+                    books: Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| { title: b['Title'], author: b['Author'], date_read: b['Date Read'] } }
+                  }
+                end
+
+    sections << {
+      title: 'Substack notes',
+      content: substack_notes_markdown(limit: notes_limit)
+    }
+    sections << {
+      title: 'Substack posts',
+      content: substack_posts(limit: posts_limit)
+    }
 
     { document: { section: sections } }
   end
 
-  def self.markdown(book_summaries: false)
-    data = prompt(book_summaries: book_summaries)
+  def self.markdown(book_summaries: false, notes_limit: nil, posts_limit: nil)
+    data = prompt(
+      book_summaries: book_summaries,
+      notes_limit: notes_limit,
+      posts_limit: posts_limit
+    )
     sections = data[:document][:section]
 
     sections.map do |section|
@@ -54,24 +67,28 @@ module Prompt
       elsif section[:posts]
         result << section[:posts].map { |post| "[#{post[:title]}](#{post[:link]}), #{post[:date]}\n#{post[:body]}" }.join("\n\n")
       elsif section[:books]
-        if section[:title].include?('summaries')
-          result << section[:books].map { |b| "### #{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n\n#{b[:summary]}" }.join("\n\n")
-        else
-          result << section[:books].map { |b| "#{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n" }.join("\n")
-        end
+        result << if section[:title].include?('summaries')
+                    section[:books].map { |b| "### #{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n\n#{b[:summary]}" }.join("\n\n")
+                  else
+                    section[:books].map { |b| "#{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n" }.join("\n")
+                  end
       end
 
       result.join("\n\n")
     end
   end
 
-  def self.xml(book_summaries: false)
-    data = prompt(book_summaries: book_summaries)
+  def self.xml(book_summaries: false, notes_limit: nil, posts_limit: nil)
+    data = prompt(
+      book_summaries: book_summaries,
+      notes_limit: notes_limit,
+      posts_limit: posts_limit
+    )
     sections = data[:document][:section]
 
     sections.map do |section|
       section_hash = { title: section[:title] }
-      
+
       if section[:content]
         section_hash[:content] = section[:content]
       elsif section[:posts]
@@ -79,8 +96,62 @@ module Prompt
       elsif section[:books]
         section_hash[:book] = section[:books]
       end
-      
+
       section_hash.to_xml(root: 'section', skip_instruct: true)
     end
+  end
+
+  # Splits notes.md into chunks (delimiter must match export_notes.rb).
+  # Export order is newest-first, so the first chunks are the most recent notes.
+  def self.substack_notes_markdown(limit: nil)
+    substack_note_separator = '<!-- substack-note-separator -->'.freeze
+
+    path = "#{Padrino.root}/app/substack/notes.md"
+    full = File.read(path).force_encoding('utf-8')
+    n = limit.to_i
+    return full if n <= 0
+
+    full = full.gsub("\r\n", "\n").sub(/\A\uFEFF/, '')
+    escaped = Regexp.escape(substack_note_separator)
+    parts = full.split(/\n#{escaped}\n/)
+    parts = full.split("\n* * *\n") if parts.length == 1 && !full.include?(substack_note_separator)
+    parts = parts.map(&:strip).reject(&:empty?)
+    return full if parts.empty? || parts.length <= n
+
+    parts.first(n).join("\n#{substack_note_separator}\n")
+  rescue Errno::ENOENT
+    ''
+  end
+
+  def self.substack_posts(limit: nil)
+    posts = Dir["#{Padrino.root}/app/substack/posts/*.html"]
+            .sort_by { |file| file.split('/').last.split('.').first.to_i }
+    posts = posts.reverse
+
+    csv_posts = CSV.read("#{Padrino.root}/app/substack/posts.csv", headers: true)
+
+    posts = posts[0..(limit.to_i - 1)] if limit
+
+    posts.reverse.map do |file|
+      post_id = file.split('/').last.gsub('.html', '')
+      post = csv_posts.find { |row| row['post_id'] == post_id }
+
+      doc = Nokogiri::HTML(
+        "<h1>#{post['title']}, #{post['post_date']}</h1>
+            #{File.read(file).gsub(/<source.*?>/, '')}"
+      )
+      doc.search('div.image2-inset').each do |tag|
+        tag.replace(tag.children)
+      end
+      doc.search('picture').each do |tag|
+        tag.replace(tag.children)
+      end
+      doc.search('div.image-link-expand').remove
+      doc.search('img').each do |tag|
+        tag['src'] = tag['srcset'].split(' ')[-2] if tag['srcset']
+      end
+
+      ReverseMarkdown.convert(doc.to_html.gsub('<div></div>', ''))
+    end.join("\n")
   end
 end

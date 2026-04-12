@@ -170,17 +170,12 @@ module StephenReid
       redirect '/blog/2022/09/30/beyond-privacy-the-seven-darknesses-of-lunarpunk.html'
     end
 
-    get '/substack', provides: :txt do
-      substack_posts
-    end
-
     get '/prompt', provides: :txt do
-      [
-        Prompt.markdown(book_summaries: params[:book_summaries]).join("\n\n"),
-        '# Substack notes',
-        substack_notes_markdown(limit: params[:notes_limit]),
-        (substack_posts(limit: params[:limit]) unless params[:skip_substack_posts])
-      ].compact.join("\n\n")
+      Prompt.markdown(
+        book_summaries: params[:book_summaries],
+        notes_limit: params[:notes_limit],
+        posts_limit: params[:limit]
+      ).join("\n\n")
     end
 
     get '/places' do
