@@ -158,22 +158,31 @@ class SubstackPost
 
       path = "#{base_api}/posts/#{Rack::Utils.escape_path(s)}"
       last_detail = nil
+      last_error = nil
 
       max_attempts.times do |attempt|
         response = http.get(path)
-        return nil unless response.status.success?
+        unless response.status.success?
+          last_error = "HTTP #{response.status}"
+          sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
+          next
+        end
 
         detail = JSON.parse(response.body.to_s)
         last_detail = detail
         return detail if detail['body_html'].to_s.present?
 
+        last_error = 'body_html blank'
         sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
-      rescue JSON::ParserError
-        return nil
+      rescue JSON::ParserError => e
+        last_error = "JSON parse error: #{e.message}"
+        sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
       end
 
       if last_detail && last_detail['body_html'].to_s.blank?
         puts "⚠️  Substack post detail: body_html still blank after #{max_attempts} attempt(s) (slug=#{s})"
+      elsif last_error
+        puts "⚠️  Substack post detail: failed after #{max_attempts} attempt(s) (slug=#{s}, error=#{last_error})"
       end
 
       last_detail
