@@ -91,16 +91,19 @@ class SubstackNote
         'User-Agent' => USER_AGENT
       )
 
+      all_raw = []
       cursor = nil
       loop do
         data = fetch_notes_page(http: http, base_api: base_api, cursor: cursor)
-        (data['items'] || []).each do |raw|
-          import_note(flatten_raw_note(raw))
-          imported += 1
-        end
+        all_raw.concat(data['items'] || [])
 
         cursor = data['nextCursor']
         break if cursor.to_s.empty?
+      end
+
+      all_raw.reverse_each do |raw|
+        import_note(flatten_raw_note(raw))
+        imported += 1
       end
 
       puts "🗄️  API import: #{imported} SubstackNote(s)"
