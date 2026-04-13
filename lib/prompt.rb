@@ -102,20 +102,7 @@ module Prompt
   end
 
   def self.substack_notes_markdown(limit: nil)
-    substack_note_separator = SubstackNote::SUBSTACK_NOTE_SEPARATOR
-
-    full = SubstackNote.markdown_export.force_encoding('utf-8')
-    n = limit.to_i
-    return full if n <= 0
-
-    full = full.gsub("\r\n", "\n").sub(/\A\uFEFF/, '')
-    escaped = Regexp.escape(substack_note_separator)
-    parts = full.split(/\n#{escaped}\n/)
-    parts = full.split("\n* * *\n") if parts.length == 1 && !full.include?(substack_note_separator)
-    parts = parts.map(&:strip).reject(&:empty?)
-    return full if parts.empty? || parts.length <= n
-
-    parts.first(n).join("\n#{substack_note_separator}\n")
+    SubstackNote.markdown_export(notes_limit: limit).force_encoding('utf-8')
   end
 
   def self.substack_posts(limit: nil)

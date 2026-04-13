@@ -57,9 +57,6 @@ class SubstackNote
     fields
   end
 
-  # Machine delimiter between notes in exported markdown; must match splitting logic in Prompt.substack_notes_markdown
-  SUBSTACK_NOTE_SEPARATOR = '<!-- substack-note-separator -->'.freeze
-
   USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'
 
   # Each type maps to `render_<type>_attachment` below.
@@ -67,6 +64,10 @@ class SubstackNote
 
   def to_markdown_flat
     BASE_COLUMNS.to_h { |key| [key, public_send(key) || ''] }
+  end
+
+  def to_markdown
+    self.class.send(:markdown_for_note, to_markdown_flat)
   end
 
   class << self
@@ -107,10 +108,11 @@ class SubstackNote
       { api_sync: true, sync_created: sync_created }
     end
 
-    def markdown_export
-      desc(:published_at).each_with_object(+'') do |note, md|
-        md << markdown_for_note(note.to_markdown_flat)
-      end
+    def markdown_export(notes_limit: nil)
+      n = notes_limit.to_i
+      scope = desc(:published_at)
+      scope = scope.limit(n) if n.positive?
+      scope.map(&:to_markdown).join
     end
 
     def save_notes_md(path = Padrino.root('app', 'substack', 'notes.md'))
@@ -481,7 +483,6 @@ class SubstackNote
       lines << parent_thread_hint(flat)
       lines << ''
       lines << '* * *'
-      lines << SUBSTACK_NOTE_SEPARATOR
       lines << ''
       lines.join("\n")
     end

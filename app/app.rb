@@ -105,7 +105,7 @@ module StephenReid
     end
 
     get '/notes', provides: :txt do
-      SubstackNote.markdown_export
+      SubstackNote.markdown_export(notes_limit: params[:notes_limit])
     end
 
     get '/places' do
