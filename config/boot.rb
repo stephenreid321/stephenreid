@@ -29,10 +29,6 @@ module Airrecord
   end
 end
 
-Anthropic.configure do |config|
-  config.access_token = ENV['ANTHROPIC_API_KEY']
-end
-
 if ENV['GEMINI_API_KEY']
   GEMINI_PRO = Gemini.new(
     credentials: {

@@ -115,19 +115,6 @@ class Book < Airrecord::Table
     )
     content = response.dig('candidates', 0, 'content', 'parts', 0, 'text')
 
-    # client = Anthropic::Client.new
-    # response = client.messages(
-    #   parameters: {
-    #     # model: 'claude-3-haiku-20240307',
-    #     model: 'claude-3-opus-20240229',
-    #     messages: [
-    #       { role: 'user', content: prompt }
-    #     ],
-    #     max_tokens: 4096
-    #   }
-    # )
-    # content = response['content'].first['text']
-
     puts "#{content}\n\n"
     book['Summary'] = content
     book.save

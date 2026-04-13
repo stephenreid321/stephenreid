@@ -65,7 +65,6 @@ GEM
     bigdecimal (4.0.1)
     bson (5.2.0)
     builder (3.3.0)
-    chroma (0.2.0)
     concurrent-ruby (1.3.6)
     connection_pool (3.0.2)
     crass (1.0.6)
@@ -88,9 +87,6 @@ GEM
       dragonfly (~> 1.0)
       fog-aws
     drb (2.2.3)
-    dropbox_api (0.1.21)
-      faraday (< 3.0)
-      oauth2 (~> 1.1)
     dry-core (1.2.0)
       concurrent-ruby (~> 1.0)
       logger
@@ -191,7 +187,6 @@ GEM
     honeybadger (6.5.2)
       logger
       ostruct
-    htmlbeautifier (1.4.3)
     http-cookie (1.1.0)
       domain_name (~> 0.5)
     i18n (1.14.8)
@@ -254,8 +249,6 @@ GEM
       concurrent-ruby (>= 1.0.5, < 2.0)
       mongo (>= 2.18.0, < 3.0.0)
     multi_json (1.19.1)
-    multi_xml (0.8.1)
-      bigdecimal (>= 3.1, < 5)
     multipart-post (2.4.1)
     mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
@@ -287,12 +280,6 @@ GEM
       version_gem (~> 1.1, >= 1.1.9)
     oauth-tty (1.0.6)
       version_gem (~> 1.1, >= 1.1.9)
-    oauth2 (1.4.11)
-      faraday (>= 0.17.3, < 3.0)
-      jwt (>= 1.0, < 3.0)
-      multi_json (~> 1.3)
-      multi_xml (~> 0.5)
-      rack (>= 1.2, < 4)
     os (1.1.4)
     ostruct (0.6.3)
     padrino (0.16.0)
@@ -394,14 +381,6 @@ GEM
     rubocop-ast (1.49.1)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
-    ruby-anthropic (0.4.2)
-      event_stream_parser (>= 0.3.0, < 2.0.0)
-      faraday (>= 1)
-      faraday-multipart (>= 1)
-    ruby-openai (8.3.0)
-      event_stream_parser (>= 0.3.0, < 2.0.0)
-      faraday (>= 1)
-      faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyntlm (0.6.5)
@@ -429,7 +408,6 @@ GEM
       hashie (>= 0.1.0, < 6)
       version_gem (>= 1.1.8, < 3)
     stringio (3.2.0)
-    stripe (18.4.2)
     telegram-bot-ruby (2.5.0)
       dry-struct (~> 1.6)
       faraday (~> 2.0)
@@ -467,19 +445,16 @@ DEPENDENCIES
   airrecord
   bcrypt
   better_html
-  chroma
   concurrent-ruby
   csv
   delayed_job_mongoid
   dragonfly
   dragonfly-s3_data_store
-  dropbox_api
   erb_lint
   faraday
   ferrum
   gemini-ai
   honeybadger
-  htmlbeautifier
   irb
   mail
   mechanize
@@ -494,12 +469,8 @@ DEPENDENCIES
   reverse_markdown
   rss
   rubocop
-  ruby-anthropic
-  ruby-openai
-  ruby-progressbar
   sass
   sinatra
-  stripe
   telegram-bot-ruby
   will_paginate!
 
