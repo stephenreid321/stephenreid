@@ -2,9 +2,6 @@ class SubstackPost
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  # Keep in sync with SubstackNote::USER_AGENT.
-  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'
-
   field :post_id, type: Integer
   field :publication_id, type: Integer
   field :slug, type: String
@@ -79,28 +76,21 @@ class SubstackPost
   class << self
     # Publication /api/v1/archive → Mongo. Same env as SubstackNote: SUBSTACK_TOKEN, SUBSTACK_PUBLICATION_URL.
     def import
-      unless api_sync_enabled?
+      unless Substack.api_sync_enabled?
         puts 'ℹ️  Substack post import skipped: set SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL.'
         return { api_sync: false, sync_created: 0 }
       end
 
       imported = 0
 
-      token = ENV['SUBSTACK_TOKEN']
-      publication_url = ENV['SUBSTACK_PUBLICATION_URL']
-      base_api = "#{normalize_publication_url(publication_url).chomp('/')}/api/v1"
-      http = HTTP.headers(
-        'Cookie' => "substack.sid=#{token}",
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
-        'User-Agent' => USER_AGENT
-      )
+      conn = Substack.http_client
+      base_api = Substack.base_api_url
 
       all_raw = []
       offset = 0
       page_size = 50
       loop do
-        page = fetch_archive_page(http: http, base_api: base_api, offset: offset, limit: page_size)
+        page = Substack.fetch_archive_page(conn: conn, base_api: base_api, offset: offset, limit: page_size)
         break if page.empty?
 
         all_raw.concat(page)
@@ -115,7 +105,7 @@ class SubstackPost
         next if archive_row['id'].nil?
 
         seen_ids << archive_row['id']
-        import_post(http: http, base_api: base_api, archive_row: archive_row)
+        import_post(conn: conn, base_api: base_api, archive_row: archive_row)
         imported += 1
       end
 
@@ -135,74 +125,13 @@ class SubstackPost
 
     private
 
-    def api_sync_enabled?
-      ENV['SUBSTACK_TOKEN'].present? && ENV['SUBSTACK_PUBLICATION_URL'].present?
-    end
-
-    def normalize_publication_url(url)
-      u = url.to_s.strip
-      u.start_with?('http://', 'https://') ? u : "https://#{u}"
-    end
-
-    def fetch_archive_page(http:, base_api:, offset:, limit:)
-      response = http.get("#{base_api}/archive?limit=#{limit}&offset=#{offset}")
-      raise "HTTP #{response.status}: #{response.body.to_s[0, 200]}" unless response.status.success?
-
-      arr = JSON.parse(response.body.to_s)
-      arr.is_a?(Array) ? arr : []
-    end
-
-    def fetch_post_detail(http:, base_api:, slug:, max_attempts: 3)
-      s = slug.to_s.strip
-      return nil if s.empty?
-
-      path = "#{base_api}/posts/#{Rack::Utils.escape_path(s)}"
-      last_detail = nil
-      last_error = nil
-
-      max_attempts.times do |attempt|
-        response = http.get(path)
-        unless response.status.success?
-          last_error = "HTTP #{response.status}"
-          sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
-          next
-        end
-
-        detail = JSON.parse(response.body.to_s)
-        last_detail = detail
-        return detail if detail['body_html'].to_s.present?
-
-        last_error = 'body_html blank'
-        sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
-      rescue JSON::ParserError => e
-        last_error = "JSON parse error: #{e.message}"
-        sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
-      end
-
-      if last_detail && last_detail['body_html'].to_s.blank?
-        puts "⚠️  Substack post detail: body_html still blank after #{max_attempts} attempt(s) (slug=#{s})"
-      elsif last_error
-        puts "⚠️  Substack post detail: failed after #{max_attempts} attempt(s) (slug=#{s}, error=#{last_error})"
-      end
-
-      last_detail
-    end
-
-    def safe_json(obj)
-      return '' if obj.nil?
-
-      JSON.generate(obj)
-    rescue JSON::GeneratorError
-      ''
-    end
-
-    def import_post(http:, base_api:, archive_row:)
+    def import_post(conn:, base_api:, archive_row:)
       pid = archive_row['id']
       return if pid.nil?
 
       record = find_or_initialize_by(post_id: pid)
       detail =
-        (fetch_post_detail(http: http, base_api: base_api, slug: archive_row['slug']) if record.new_record? || record.body_html.blank?)
+        (Substack.fetch_post_detail(conn: conn, base_api: base_api, slug: archive_row['slug']) if record.new_record? || record.body_html.blank?)
 
       raw = archive_row.merge(detail || {})
       raw['body_html'] = record.body_html if record.persisted? && record.body_html.present?
@@ -225,8 +154,8 @@ class SubstackPost
         wordcount: raw['wordcount'],
         truncated_body_text: raw['truncated_body_text'].to_s,
         body_html: raw['body_html'].to_s,
-        reactions_json: safe_json(raw['reactions']),
-        raw_json: safe_json(raw)
+        reactions_json: Substack.safe_json(raw['reactions']),
+        raw_json: Substack.safe_json(raw)
       )
       record.save!
     end

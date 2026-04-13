@@ -487,6 +487,7 @@ DEPENDENCIES
   dragonfly-s3_data_store
   dropbox_api
   erb_lint
+  faraday
   ferrum
   gemini-ai
   honeybadger

@@ -57,8 +57,6 @@ class SubstackNote
     fields
   end
 
-  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'
-
   # Each type maps to `render_<type>_attachment` below.
   ATTACHMENT_TYPES = %w[image video link publication comment post].freeze
 
@@ -69,7 +67,7 @@ class SubstackNote
   class << self
     # Substack API → Mongo. Env: SUBSTACK_TOKEN, SUBSTACK_PUBLICATION_URL.
     def import
-      unless api_sync_enabled?
+      unless Substack.api_sync_enabled?
         puts 'ℹ️  API import skipped: set SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL.'
         return { api_sync: false, sync_created: 0 }
       end
@@ -77,20 +75,13 @@ class SubstackNote
       delete_all
       imported = 0
 
-      token = ENV['SUBSTACK_TOKEN']
-      publication_url = ENV['SUBSTACK_PUBLICATION_URL']
-      base_api = "#{normalize_publication_url(publication_url).chomp('/')}/api/v1"
-      http = HTTP.headers(
-        'Cookie' => "substack.sid=#{token}",
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
-        'User-Agent' => USER_AGENT
-      )
+      conn = Substack.http_client
+      base_api = Substack.base_api_url
 
       all_raw = []
       cursor = nil
       loop do
-        data = fetch_notes_page(http: http, base_api: base_api, cursor: cursor)
+        data = Substack.fetch_notes_page(conn: conn, base_api: base_api, cursor: cursor)
         all_raw.concat(data['items'] || [])
 
         cursor = data['nextCursor']
@@ -142,33 +133,9 @@ class SubstackNote
       nil
     end
 
-    def api_sync_enabled?
-      ENV['SUBSTACK_TOKEN'].present? && ENV['SUBSTACK_PUBLICATION_URL'].present?
-    end
-
-    def safe_json(obj)
-      return '' if obj.nil?
-
-      JSON.generate(obj)
-    rescue JSON::GeneratorError, Encoding::UndefinedConversionError
-      ''
-    end
-
     def truncated_json(obj, max = 500)
-      s = safe_json(obj)
+      s = Substack.safe_json(obj)
       s.length > max ? "#{s[0, max]}…" : s
-    end
-
-    def normalize_publication_url(url)
-      u = url.to_s.strip
-      u.start_with?('http://', 'https://') ? u : "https://#{u}"
-    end
-
-    def substack_homepage(subdomain:, custom_domain:)
-      return "https://#{custom_domain}" if custom_domain.present?
-      return "https://#{subdomain}.substack.com" if subdomain.present?
-
-      ''
     end
 
     def primary_link(raw)
@@ -264,14 +231,14 @@ class SubstackNote
         'parent_comment_id' => (comment['parent_comment_id'] || comment['parent_id'] || comment.dig('parent_comment', 'id')).to_s,
         'body' => comment['body'].to_s,
         'reaction_count' => comment.fetch('reaction_count', ''),
-        'reactions_json' => safe_json(comment['reactions']),
+        'reactions_json' => Substack.safe_json(comment['reactions']),
         'restacks' => comment.fetch('restacks', ''),
         'restacked' => comment.key?('restacked') ? comment['restacked'].to_s : '',
         'children_count' => comment.fetch('children_count', ''),
         'edited_at' => comment['edited_at'].to_s,
         'media_clip_id' => comment.fetch('media_clip_id', ''),
-        'attachments_json' => safe_json(comment['attachments']),
-        'body_json' => safe_json(comment['body_json'])
+        'attachments_json' => Substack.safe_json(comment['attachments']),
+        'body_json' => Substack.safe_json(comment['body_json'])
       }
     end
 
@@ -288,18 +255,18 @@ class SubstackNote
         'entity_key' => raw['entity_key'].to_s,
         'feed_item_type' => raw['type'].to_s,
         'context_type' => ctx&.dig('type').to_s,
-        'context_json' => ctx ? safe_json(ctx) : '',
+        'context_json' => ctx ? Substack.safe_json(ctx) : '',
         'published_at' => published_at.to_s,
         'primary_link' => primary_link(raw),
         'post_id' => post ? post['id'] : comment&.dig('post_id'),
-        'quote_selections_json' => quote_selections.empty? ? '' : safe_json(quote_selections),
-        'parent_comments_json' => raw['parentComments'] ? safe_json(raw['parentComments']) : ''
+        'quote_selections_json' => quote_selections.empty? ? '' : Substack.safe_json(quote_selections),
+        'parent_comments_json' => raw['parentComments'] ? Substack.safe_json(raw['parentComments']) : ''
       }
 
       row.merge!(post_fields(post))
       row.merge!(publication_fields(pub))
       row.merge!(comment_fields(comment))
-      row['raw_json'] = safe_json(raw)
+      row['raw_json'] = Substack.safe_json(raw)
       row
     end
 
@@ -372,7 +339,7 @@ class SubstackNote
     def render_publication_attachment(att)
       pub = att['publication'] || {}
       name = pub['name'].to_s
-      url = substack_homepage(subdomain: pub['subdomain'].to_s, custom_domain: pub['custom_domain'].to_s)
+      url = Substack.substack_homepage(subdomain: pub['subdomain'].to_s, custom_domain: pub['custom_domain'].to_s)
       img = (pub['logo_url'] || pub['logo_url_wide'] || pub['cover_photo_url']).to_s
 
       lines = []
@@ -483,7 +450,7 @@ class SubstackNote
 
     def markdown_publication_lines(flat)
       pub_name = flat['publication_name'].to_s
-      pub_home = substack_homepage(subdomain: flat['publication_subdomain'].to_s, custom_domain: flat['publication_custom_domain'].to_s)
+      pub_home = Substack.substack_homepage(subdomain: flat['publication_subdomain'].to_s, custom_domain: flat['publication_custom_domain'].to_s)
       lines = []
 
       if pub_name.present? && pub_home.present?
@@ -512,12 +479,5 @@ class SubstackNote
       lines
     end
 
-    def fetch_notes_page(http:, base_api:, cursor:)
-      path = cursor ? "/notes?cursor=#{URI.encode_www_form_component(cursor)}" : '/notes'
-      response = http.get("#{base_api}#{path}")
-      raise "HTTP #{response.status}: #{response.body.to_s[0, 200]}" unless response.status.success?
-
-      JSON.parse(response.body.to_s)
-    end
   end
 end
