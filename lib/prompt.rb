@@ -101,13 +101,10 @@ module Prompt
     end
   end
 
-  # Splits notes.md into chunks (delimiter must match export_notes.rb).
-  # Export order is newest-first, so the first chunks are the most recent notes.
   def self.substack_notes_markdown(limit: nil)
-    substack_note_separator = '<!-- substack-note-separator -->'.freeze
+    substack_note_separator = SubstackNote::SUBSTACK_NOTE_SEPARATOR
 
-    path = "#{Padrino.root}/app/substack/notes.md"
-    full = File.read(path).force_encoding('utf-8')
+    full = SubstackNote.markdown_export.force_encoding('utf-8')
     n = limit.to_i
     return full if n <= 0
 
@@ -119,8 +116,6 @@ module Prompt
     return full if parts.empty? || parts.length <= n
 
     parts.first(n).join("\n#{substack_note_separator}\n")
-  rescue Errno::ENOENT
-    ''
   end
 
   def self.substack_posts(limit: nil)

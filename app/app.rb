@@ -104,6 +104,10 @@ module StephenReid
       ).join("\n\n")
     end
 
+    get '/notes', provides: :txt do
+      SubstackNote.markdown_export
+    end
+
     get '/places' do
       KML_NS = { 'kml' => 'http://www.opengis.net/kml/2.2' }
       kml = Faraday.get('https://www.google.com/maps/d/kml?forcekml=1&mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8').body
