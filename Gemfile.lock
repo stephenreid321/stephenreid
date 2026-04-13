@@ -150,9 +150,6 @@ GEM
       websocket-driver (~> 0.7)
     ffi (1.17.3)
     ffi (1.17.3-arm64-darwin)
-    ffi-compiler (1.3.2)
-      ffi (>= 1.15.5)
-      rake
     fog-aws (3.33.1)
       base64 (>= 0.2, < 0.4)
       fog-core (~> 2.6)
@@ -195,14 +192,8 @@ GEM
       logger
       ostruct
     htmlbeautifier (1.4.3)
-    http (5.3.1)
-      addressable (~> 2.8)
-      http-cookie (~> 1.0)
-      http-form_data (~> 2.2)
-      llhttp-ffi (~> 0.5.0)
     http-cookie (1.1.0)
       domain_name (~> 0.5)
-    http-form_data (2.3.0)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -220,9 +211,6 @@ GEM
       base64
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
-    llhttp-ffi (0.5.1)
-      ffi-compiler (~> 1.0)
-      rake (~> 13.0)
     logger (1.7.0)
     loofah (2.25.0)
       crass (~> 1.0.2)
@@ -492,7 +480,6 @@ DEPENDENCIES
   gemini-ai
   honeybadger
   htmlbeautifier
-  http
   irb
   mail
   mechanize

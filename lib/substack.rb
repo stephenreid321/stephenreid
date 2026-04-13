@@ -1,9 +1,3 @@
-require 'faraday'
-require 'json'
-require 'uri'
-require 'rack/utils'
-
-# Shared Substack publication API helpers (cookie auth: SUBSTACK_TOKEN + SUBSTACK_PUBLICATION_URL).
 module Substack
   USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'
 
@@ -38,7 +32,7 @@ module Substack
       ''
     end
 
-    def substack_homepage(subdomain:, custom_domain:)
+    def homepage(subdomain:, custom_domain:)
       return "https://#{custom_domain}" if custom_domain.present?
       return "https://#{subdomain}.substack.com" if subdomain.present?
 
@@ -58,7 +52,7 @@ module Substack
       arr.is_a?(Array) ? arr : []
     end
 
-    def fetch_post_detail(conn:, base_api:, slug:, max_attempts: 3)
+    def fetch_post_detail(conn:, base_api:, slug:, max_attempts: 5)
       s = slug.to_s.strip
       return nil if s.empty?
 

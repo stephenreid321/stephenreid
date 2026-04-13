@@ -339,7 +339,7 @@ class SubstackNote
     def render_publication_attachment(att)
       pub = att['publication'] || {}
       name = pub['name'].to_s
-      url = Substack.substack_homepage(subdomain: pub['subdomain'].to_s, custom_domain: pub['custom_domain'].to_s)
+      url = Substack.homepage(subdomain: pub['subdomain'].to_s, custom_domain: pub['custom_domain'].to_s)
       img = (pub['logo_url'] || pub['logo_url_wide'] || pub['cover_photo_url']).to_s
 
       lines = []
@@ -450,7 +450,7 @@ class SubstackNote
 
     def markdown_publication_lines(flat)
       pub_name = flat['publication_name'].to_s
-      pub_home = Substack.substack_homepage(subdomain: flat['publication_subdomain'].to_s, custom_domain: flat['publication_custom_domain'].to_s)
+      pub_home = Substack.homepage(subdomain: flat['publication_subdomain'].to_s, custom_domain: flat['publication_custom_domain'].to_s)
       lines = []
 
       if pub_name.present? && pub_home.present?
@@ -478,6 +478,5 @@ class SubstackNote
       lines << "![post cover](#{flat['post_cover_image_url']})" if flat['post_cover_image_url'].present?
       lines
     end
-
   end
 end
