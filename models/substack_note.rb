@@ -62,12 +62,8 @@ class SubstackNote
   # Each type maps to `render_<type>_attachment` below.
   ATTACHMENT_TYPES = %w[image video link publication comment post].freeze
 
-  def to_markdown_flat
-    BASE_COLUMNS.to_h { |key| [key, public_send(key) || ''] }
-  end
-
   def to_markdown
-    self.class.send(:markdown_for_note, to_markdown_flat)
+    self.class.send(:markdown_for_note, self)
   end
 
   class << self
@@ -118,6 +114,8 @@ class SubstackNote
       scope.map(&:to_markdown).join
     end
 
+    private
+
     def import_note(flat)
       key = flat['entity_key'].to_s.strip
       return if key.empty?
@@ -130,8 +128,6 @@ class SubstackNote
 
       create!(attrs)
     end
-
-    private
 
     def coerce_integer(value)
       return nil if value.nil?
@@ -461,7 +457,8 @@ class SubstackNote
       ''
     end
 
-    def markdown_for_note(flat)
+    def markdown_for_note(note)
+      flat = BASE_COLUMNS.to_h { |key| [key, note.public_send(key) || ''] }
       heading = [flat['published_at'], flat['entity_key'], 'Note'].map(&:to_s).find(&:present?)
 
       lines = ["## #{heading}", '']
