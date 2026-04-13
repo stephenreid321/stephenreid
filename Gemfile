@@ -21,8 +21,8 @@ gem 'erb_lint', require: false
 gem 'rubocop'
 
 # Basics
-gem 'csv'
 gem 'bcrypt'
+gem 'csv'
 gem 'mail'
 gem 'rack-attack'
 gem 'redcarpet'
