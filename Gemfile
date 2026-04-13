@@ -22,6 +22,7 @@ gem 'rubocop'
 
 # Basics
 gem 'bcrypt'
+gem 'chroma'
 gem 'csv'
 gem 'mail'
 gem 'rack-attack'
