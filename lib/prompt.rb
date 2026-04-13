@@ -41,11 +41,11 @@ module Prompt
 
     sections << {
       title: 'Substack notes',
-      content: substack_notes_markdown(limit: notes_limit)
+      content: SubstackNote.markdown_export(limit: notes_limit).force_encoding('utf-8')
     }
     sections << {
       title: 'Substack posts',
-      content: substack_posts(limit: posts_limit)
+      content: SubstackPost.markdown_export(limit: posts_limit).force_encoding('utf-8')
     }
 
     { document: { section: sections } }
@@ -99,41 +99,5 @@ module Prompt
 
       section_hash.to_xml(root: 'section', skip_instruct: true)
     end
-  end
-
-  def self.substack_notes_markdown(limit: nil)
-    SubstackNote.markdown_export(notes_limit: limit).force_encoding('utf-8')
-  end
-
-  def self.substack_posts(limit: nil)
-    posts = Dir["#{Padrino.root}/app/substack/posts/*.html"]
-            .sort_by { |file| file.split('/').last.split('.').first.to_i }
-    posts = posts.reverse
-
-    csv_posts = CSV.read("#{Padrino.root}/app/substack/posts.csv", headers: true)
-
-    posts = posts[0..(limit.to_i - 1)] if limit
-
-    posts.reverse.map do |file|
-      post_id = file.split('/').last.gsub('.html', '')
-      post = csv_posts.find { |row| row['post_id'] == post_id }
-
-      doc = Nokogiri::HTML(
-        "<h1>#{post['title']}, #{post['post_date']}</h1>
-            #{File.read(file).gsub(/<source.*?>/, '')}"
-      )
-      doc.search('div.image2-inset').each do |tag|
-        tag.replace(tag.children)
-      end
-      doc.search('picture').each do |tag|
-        tag.replace(tag.children)
-      end
-      doc.search('div.image-link-expand').remove
-      doc.search('img').each do |tag|
-        tag['src'] = tag['srcset'].split(' ')[-2] if tag['srcset']
-      end
-
-      ReverseMarkdown.convert(doc.to_html.gsub('<div></div>', ''))
-    end.join("\n")
   end
 end

@@ -111,17 +111,11 @@ class SubstackNote
       { api_sync: true, sync_created: imported }
     end
 
-    def markdown_export(notes_limit: nil)
-      n = notes_limit.to_i
+    def markdown_export(limit: nil)
+      n = limit.to_i
       scope = desc(:published_at)
       scope = scope.limit(n) if n.positive?
       scope.map(&:to_markdown).join
-    end
-
-    def save_notes_md(path = Padrino.root('app', 'substack', 'notes.md'))
-      result = import
-      File.write(path, markdown_export.force_encoding('utf-8'))
-      result
     end
 
     def import_note(flat)

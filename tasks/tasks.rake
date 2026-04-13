@@ -114,3 +114,16 @@ namespace :substack_notes do
     SubstackNote.import
   end
 end
+
+namespace :substack_posts do
+  task import: :environment do
+    SubstackPost.import
+  end
+end
+
+namespace :substack do
+  task import: :environment do
+    SubstackNote.import
+    SubstackPost.import
+  end
+end
