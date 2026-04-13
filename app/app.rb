@@ -113,16 +113,16 @@ module StephenReid
     end
 
     get '/places' do
-      KML_NS = { 'kml' => 'http://www.opengis.net/kml/2.2' }
+      kml_ns = { 'kml' => 'http://www.opengis.net/kml/2.2' }
       kml = Faraday.get('https://www.google.com/maps/d/kml?forcekml=1&mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8').body
       doc = Nokogiri::XML(kml)
 
-      @places = doc.xpath('//kml:Folder', KML_NS).map do |folder|
+      @places = doc.xpath('//kml:Folder', kml_ns).map do |folder|
         {
-          name: folder.at_xpath('./kml:name', KML_NS).text,
-          places: folder.xpath('.//kml:Placemark', KML_NS).map do |place|
-            name = place.at_xpath('./kml:name', KML_NS).text
-            coords = place.at_xpath('.//kml:coordinates', KML_NS).text.strip.split(',')
+          name: folder.at_xpath('./kml:name', kml_ns).text,
+          places: folder.xpath('.//kml:Placemark', kml_ns).map do |place|
+            name = place.at_xpath('./kml:name', kml_ns).text
+            coords = place.at_xpath('.//kml:coordinates', kml_ns).text.strip.split(',')
             {
               name: name,
               lat: coords[1],
