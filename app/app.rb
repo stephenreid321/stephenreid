@@ -105,11 +105,11 @@ module StephenReid
     end
 
     get '/substack/notes', provides: :txt do
-      SubstackNote.markdown_export(limit: params[:notes_limit])
+      SubstackNote.markdown_export(limit: params[:limit])
     end
 
     get '/substack/posts', provides: :txt do
-      SubstackPost.markdown_export(limit: params[:posts_limit])
+      SubstackPost.markdown_export(limit: params[:limit])
     end
 
     get '/places' do
