@@ -152,17 +152,31 @@ class SubstackPost
       arr.is_a?(Array) ? arr : []
     end
 
-    def fetch_post_detail(http:, base_api:, slug:)
+    def fetch_post_detail(http:, base_api:, slug:, max_attempts: 3)
       s = slug.to_s.strip
       return nil if s.empty?
 
       path = "#{base_api}/posts/#{Rack::Utils.escape_path(s)}"
-      response = http.get(path)
-      return nil unless response.status.success?
+      last_detail = nil
 
-      JSON.parse(response.body.to_s)
-    rescue JSON::ParserError
-      nil
+      max_attempts.times do |attempt|
+        response = http.get(path)
+        return nil unless response.status.success?
+
+        detail = JSON.parse(response.body.to_s)
+        last_detail = detail
+        return detail if detail['body_html'].to_s.present?
+
+        sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
+      rescue JSON::ParserError
+        return nil
+      end
+
+      if last_detail && last_detail['body_html'].to_s.blank?
+        puts "⚠️  Substack post detail: body_html still blank after #{max_attempts} attempt(s) (slug=#{s})"
+      end
+
+      last_detail
     end
 
     def safe_json(obj)
