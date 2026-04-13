@@ -108,3 +108,9 @@ namespace :tags do
     Tag.update_holdings
   end
 end
+
+namespace :substack_notes do
+  task import: :environment do
+    SubstackNote.import
+  end
+end

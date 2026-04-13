@@ -72,14 +72,14 @@ class SubstackNote
 
   class << self
     # Substack API → Mongo. Env: SUBSTACK_TOKEN, SUBSTACK_PUBLICATION_URL.
-    def sync
+    def import
       unless api_sync_enabled?
-        puts 'ℹ️  API sync skipped: set SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL.'
+        puts 'ℹ️  API import skipped: set SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL.'
         return { api_sync: false, sync_created: 0 }
       end
 
       delete_all
-      sync_created = 0
+      imported = 0
 
       token = ENV['SUBSTACK_TOKEN']
       publication_url = ENV['SUBSTACK_PUBLICATION_URL']
@@ -96,16 +96,16 @@ class SubstackNote
         data = fetch_notes_page(http: http, base_api: base_api, cursor: cursor)
         (data['items'] || []).each do |raw|
           import_note(flatten_raw_note(raw))
-          sync_created += 1
+          imported += 1
         end
 
         cursor = data['nextCursor']
         break if cursor.to_s.empty?
       end
 
-      puts "🗄️  API sync: #{sync_created} SubstackNote(s) imported"
+      puts "🗄️  API import: #{imported} SubstackNote(s)"
 
-      { api_sync: true, sync_created: sync_created }
+      { api_sync: true, sync_created: imported }
     end
 
     def markdown_export(notes_limit: nil)
@@ -116,7 +116,7 @@ class SubstackNote
     end
 
     def save_notes_md(path = Padrino.root('app', 'substack', 'notes.md'))
-      result = sync
+      result = import
       File.write(path, markdown_export.force_encoding('utf-8'))
       result
     end
