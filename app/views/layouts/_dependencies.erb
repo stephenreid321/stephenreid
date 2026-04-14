@@ -33,6 +33,7 @@
        '//rawcdn.githack.com/tgdwyer/WebCola/aab7e61cd9580c4c89180cc0a30594e12743a242/WebCola/cola.min.js',
        '//rawcdn.githack.com/cytoscape/cytoscape.js-cola/8c78f9d5c11ff6162b7d902f0639e1f787277b9f/cytoscape-cola.js',
        '//rawcdn.githack.com/kudago/oembed-all/ef03c7332cd2538a093ed756846e86319155553a/oembed.js',
+       '//rawcdn.githack.com/symbiota-coop/dandelion/b2ac10e0761e8d8a2942750f80261a99233d6118/app/assets/javascripts/pagelets.js',       
        '//cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js',
        '//cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0',
        '//cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js',
@@ -40,7 +41,6 @@
        '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
        '//platform.twitter.com/widgets.js',
        '/javascripts/toc.js',
-       "/javascripts/pagelets.js?#{@cachebuster}",
        "/javascripts/app.js?#{@cachebuster}"
      ].each { |f| %>
 <script src="<%= f %>"></script>

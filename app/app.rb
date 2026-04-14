@@ -137,7 +137,7 @@ module StephenReid
     get '/courses/:slug' do
       expires 6.hours.to_i
       @course = Course.all(filter: "{Slug} = '#{params[:slug]}'").first
-      erb :'courses/course', layout: false
+      erb :course, layout: false
     end
 
     get '/books' do
