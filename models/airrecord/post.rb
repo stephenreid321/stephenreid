@@ -53,49 +53,6 @@ class Post < Airrecord::Table
     end
   end
 
-  def self.sync_with_pocket
-    conn = Faraday.new(url: 'https://getpocket.com/v3/get') do |faraday|
-      faraday.request :url_encoded
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.post do |req|
-      req.headers['Content-Type'] = 'application/json; charset=UTF8'
-      req.headers['X-Accept'] = 'application/json'
-      req.body = {
-        consumer_key: ENV['POCKET_CONSUMER_KEY'],
-        access_token: ENV['POCKET_ACCESS_TOKEN'],
-        detailType: :complete,
-        state: :archive,
-        count: 50
-      }.to_json
-    end
-
-    data = JSON.parse(response.body)
-    data['list'].sort_by { |_, p| -p['time_updated'].to_i }.each do |_, p|
-      url = p['resolved_url']
-      url = url.gsub('youtu.be/', 'youtube.com/watch?v=')
-      puts url
-      break if Post.all(filter: "{Link} = '#{url}'").first
-
-      post = Post.create(
-        'Title' => p['resolved_title'],
-        'Link' => url,
-        'Body' => p['excerpt'],
-        'Iframely' => Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body,
-        'Created at' => Time.now
-      )
-      unless post['Title']
-        json = JSON.parse(post['Iframely'])
-        post['Title'] = json['meta']['title']
-        post['Body'] = json['meta']['description']
-        post.save
-      end
-      post.tagify
-      post.bluesky
-    end
-  end
-
   def tagify(skip_linking: false)
     post = self
     json = JSON.parse(post['Iframely'])

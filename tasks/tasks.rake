@@ -39,7 +39,6 @@ end
 
 namespace :posts do
   task sync: :environment do
-    # Post.sync_with_pocket
     Post.sync_with_readwise
   end
 
