@@ -28,15 +28,6 @@ StephenReid::App.controller do
     200
   end
 
-  post '/posts/:id/essay' do
-    @post = begin; Post.find(params[:id]); rescue StandardError; not_found; end
-    @post['Prompt'] = params[:prompt]
-    @post['Generating essay'] = true
-    @post.save
-    Padrino.env == :development ? @post.generate_essay_without_delay : @post.generate_essay
-    redirect "/posts/#{@post.id}"
-  end
-
   get '/terms/tagify' do
     post_ids = []
     Term.all.each do |term|
