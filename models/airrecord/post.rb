@@ -111,7 +111,7 @@ class Post < Airrecord::Table
     args << Shellwords.escape(title) if title
     args << Shellwords.escape(description) if description
     args << Shellwords.escape(thumbnail) if thumbnail
-    `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{args.join(' ')}`
+    `python #{Shellwords.escape(Padrino.root.to_s)}/scripts/bluesky.py #{args.join(' ')}`
   end
 
   def bluesky
