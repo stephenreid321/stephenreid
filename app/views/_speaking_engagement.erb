@@ -3,15 +3,15 @@
 <dd class="col-lg-8">
   <a href="<%= speaking_engagement['URL'] %>">
     <% if speaking_engagement['URL'] =~ /youtu/ %>
-      <i class="fab fa-youtube"></i>
+      <i class="bi bi-youtube"></i>
     <% elsif speaking_engagement['URL'] =~ /spotify/ %>
-      <i class="fab fa-spotify"></i>
+      <i class="bi bi-spotify"></i>
     <% elsif speaking_engagement['URL'] =~ /substack/ %>
-      <i class="far fa-bookmark"></i>
+      <i class="bi bi-bookmark"></i>
     <% elsif speaking_engagement['URL'] =~ /google/ %>
-      <i class="fab fa-google-drive"></i>
+      <i class="bi bi-google"></i>
     <% elsif speaking_engagement['URL'] =~ /facebook\.com\/events\// %>
-      <i class="fab fa-facebook"></i>
+      <i class="bi bi-facebook"></i>
     <% end %>
     <%= speaking_engagement['Name'] %>
   </a>

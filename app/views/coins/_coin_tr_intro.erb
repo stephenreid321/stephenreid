@@ -9,15 +9,15 @@
 <td>
   <% if current_account && current_account.id == @account.id %>
     <% if !coinship || !coinship.starred %>
-      <a class="pagelet-trigger" href="/coins/<%=coin.id%>/star"><i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i></a>
+      <a class="pagelet-trigger" href="/coins/<%=coin.id%>/star"><i class="bi bi-star" style="color: #FAC84F; opacity: 0.3"></i></a>
     <% else %>
-      <a class="pagelet-trigger" href="/coins/<%=coin.id%>/unstar"><i class="fas fa-star" style="color: #FAC84F"></i></a>
+      <a class="pagelet-trigger" href="/coins/<%=coin.id%>/unstar"><i class="bi bi-star-fill" style="color: #FAC84F"></i></a>
     <% end %>
   <% else %>
     <% if !coinship || !coinship.starred %>
-      <i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i>
+      <i class="bi bi-star" style="color: #FAC84F; opacity: 0.3"></i>
     <% else %>
-      <i class="fas fa-star" style="color: #FAC84F"></i>
+      <i class="bi bi-star-fill" style="color: #FAC84F"></i>
     <% end %>
   <% end %>
 </td>
