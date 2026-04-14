@@ -60,7 +60,7 @@
 <script>
   $("#nav a[href^=http]").attr('target', '_blank')
   $("#nav a[href^='/courses']").attr('target', '_blank')
-  $.map(['blog', 'coins'], function(x,i) {
+  $.map(['coins'], function(x,i) {
     if (window.location.href.includes('/'+x))
       $("#nav a[href='/"+x+"']").addClass('active')
   })
