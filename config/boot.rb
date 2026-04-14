@@ -20,10 +20,3 @@ Padrino.load!
 Delayed::Worker.max_attempts = 1
 
 Airrecord.api_key = ENV['AIRTABLE_API_KEY']
-module Airrecord
-  class Table
-    def self.since(time)
-      all(filter: "{Created at} >= '#{time.to_s(:db)}'")
-    end
-  end
-end
