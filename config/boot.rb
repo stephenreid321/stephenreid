@@ -7,7 +7,6 @@ require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 require 'open-uri'
 require 'active_support/all'
-require 'telegram/bot'
 require 'shellwords'
 Bundler.require(:default, RACK_ENV)
 
@@ -27,21 +26,4 @@ module Airrecord
       all(filter: "{Created at} >= '#{time.to_s(:db)}'")
     end
   end
-end
-
-if ENV['GEMINI_API_KEY']
-  GEMINI_PRO = Gemini.new(
-    credentials: {
-      service: 'generative-language-api',
-      api_key: ENV['GEMINI_API_KEY']
-    },
-    options: { model: 'gemini-1.5-pro', server_sent_events: true }
-  )
-  GEMINI_FLASH = Gemini.new(
-    credentials: {
-      service: 'generative-language-api',
-      api_key: ENV['GEMINI_API_KEY']
-    },
-    options: { model: 'gemini-1.5-flash', server_sent_events: true }
-  )
 end

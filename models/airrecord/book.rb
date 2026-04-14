@@ -50,20 +50,6 @@ class Book < Airrecord::Table
     end
   end
 
-  # https://www.goodreads.com/review/import
-  def self.summarise!
-    books = Book.all(filter: "AND({Summary} = '', {Dandelion} != '')")
-    count = books.length
-    books.each_with_index do |book, i|
-      puts "#{book['Title']} (#{i + 1}/#{count})"
-      begin
-        book.summarise!
-      rescue StandardError => e
-        puts e
-      end
-    end
-  end
-
   def self.set_additional_info!
     # Create a thread pool with a fixed number of threads (e.g., 5)
     pool = Concurrent::FixedThreadPool.new(100)
@@ -94,29 +80,6 @@ class Book < Airrecord::Table
     if img = page.at_css('.BookCover__image img')
       book['Cover image'] = [{ url: img['src'] }]
     end
-    book.save
-  end
-
-  def summarise!
-    book = self
-    if book['Full text']
-      prompt = "Please summarise this book:\n\n#{book['Title']} by #{book['Author']}\n\n#{URI.open(book['Full text'][0]['url']).read}"
-      gemini = GEMINI_FLASH
-    else
-      prompt = "Please provide a comprehensive summary of the book #{book['Title']} by #{book['Author']}"
-      gemini = GEMINI_PRO
-    end
-
-    response = gemini.generate_content(
-      {
-        contents: { role: 'user', parts: { text: prompt } },
-        generationConfig: { maxOutputTokens: 8192 }
-      }
-    )
-    content = response.dig('candidates', 0, 'content', 'parts', 0, 'text')
-
-    puts "#{content}\n\n"
-    book['Summary'] = content
     book.save
   end
 end

@@ -40,7 +40,5 @@ gem 'mongoid'
 # Interacting with other websites
 gem 'concurrent-ruby'
 gem 'faraday'
-gem 'gemini-ai'
 gem 'honeybadger'
 gem 'mechanize'
-gem 'telegram-bot-ruby'
