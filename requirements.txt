@@ -1,4 +1,3 @@
-youtube_transcript_api
 pytubefix
 fal_client
 atproto>=0.0.52
