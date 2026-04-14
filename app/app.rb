@@ -171,10 +171,8 @@ module StephenReid
           description: metadata[:description],
           thumbnail: metadata[:thumbnail]
         )
-        Post.post_to_x("#{text} #{url}".strip)
       else
         Post.post_to_bluesky(text)
-        Post.post_to_x(text)
       end
       200
     end

@@ -1,5 +1,4 @@
 require 'shellwords'
-require 'oauth'
 
 class Post < Airrecord::Table
   self.base_key = ENV['AIRTABLE_BASE_KEY']
@@ -203,21 +202,6 @@ class Post < Airrecord::Table
     `python #{Shellwords.escape(Padrino.root.to_s)}/tasks/bluesky.py #{args.join(' ')}`
   end
 
-  def self.post_to_x(text)
-    consumer = OAuth::Consumer.new(
-      ENV['TWITTER_KEY'],
-      ENV['TWITTER_SECRET'],
-      site: 'https://api.twitter.com'
-    )
-    access_token = OAuth::AccessToken.new(
-      consumer,
-      ENV['TWITTER_ACCESS_TOKEN'],
-      ENV['TWITTER_ACCESS_TOKEN_SECRET']
-    )
-    response = access_token.post('/2/tweets', { text: text }.to_json, 'Content-Type' => 'application/json')
-    JSON.parse(response.body)
-  end
-
   def bluesky
     metadata = Post.extract_iframely_metadata(self['Iframely'])
     Post.post_to_bluesky(
@@ -235,30 +219,5 @@ class Post < Airrecord::Table
     result = agent.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}")
     post['Iframely'] = result.body.force_encoding('UTF-8')
     post.save
-  end
-
-  def countdown(n)
-    n.downto(1) do |i|
-      puts i
-      sleep 1
-    end
-  end
-
-  def note
-    post = self
-    browser = Ferrum::Browser.new
-    browser.go_to('https://substack.com/sign-in')
-    browser.at_css('a.login-option').click
-    browser.at_css("input[name='email']").focus.type(ENV['SUBSTACK_EMAIL'])
-    browser.at_css("input[name='password']").focus.type(ENV['SUBSTACK_PASSWORD'])
-    browser.at_css('button[type="submit"]').click
-    countdown 5
-    browser.screenshot(path: '1.png')
-    browser.at_css('div[class*=sideNav] button.pencraft').click
-    browser.at_css('div.tiptap').focus.type(post['Title'], :Enter, :Enter, post['Link'], :Enter)
-    countdown 5
-    browser.at_css('div[class*=composerModal] button[class*=priority_primary]').click
-    countdown 5
-    browser.screenshot(path: '2.png')
   end
 end
