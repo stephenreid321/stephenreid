@@ -3,6 +3,11 @@ StephenReid::App.controller do
     sign_in_required!
   end
 
+  get '/knowledgegraph/r' do
+    Post.delay.sync_with_readwise
+    redirect '/knowledgegraph?r=1'
+  end
+
   get '/organisations/:id/tagify' do
     @organisation = begin; Organisation.find(params[:id]); rescue StandardError; not_found; end
     @organisation.tagify
@@ -79,7 +84,7 @@ StephenReid::App.controller do
       post_text = []
       json = JSON.parse(post['Iframely'])
       post_text << post['Title']
-      if (b = post['Body']) && (!b.include?('use cookies') && !b.include?('use of cookies'))
+      if (b = post['Body']) && !b.include?('use cookies') && !b.include?('use of cookies')
         b = b.gsub(/Read [\d,]+ reviews from the world's largest community for readers. /, '')
         post_text << b
       end
