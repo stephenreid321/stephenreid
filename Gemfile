@@ -18,13 +18,13 @@ gem 'will_paginate', github: 'mislav/will_paginate'
 # Linting
 gem 'better_html'
 gem 'erb_lint', require: false
+gem 'htmlbeautifier'
 gem 'rubocop'
 
 # Basics
 gem 'bcrypt'
 gem 'chroma'
 gem 'csv'
-gem 'htmlbeautifier'
 gem 'rack-attack'
 gem 'redcarpet'
 gem 'reverse_markdown'
