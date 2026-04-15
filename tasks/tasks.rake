@@ -56,11 +56,8 @@ namespace :posts do
 
   task tag_new: :environment do
     term_ids = []
-    agent = Mechanize.new
     Post.all(filter: "{Title} = ''").each do |post|
-      result = agent.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-
-      post['Iframely'] = result.body.force_encoding('UTF-8')
+      post['Iframely'] = Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body.force_encoding('UTF-8')
 
       json = JSON.parse(post['Iframely'])
 

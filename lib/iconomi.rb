@@ -13,13 +13,13 @@ class Iconomi
       )
     ).split.join #  to remove newlines introduced by base64 encoding
 
-    agent = Mechanize.new
-    agent.request_headers = {
-      'ICN-API-KEY' => ENV['ICN_API_KEY'],
-      'ICN-SIGN' => signature,
-      'ICN-TIMESTAMP' => t
-    }
-    agent.get("https://api.iconomi.com#{path}#{parameters ? "?#{parameters}" : ''}").body
+    Faraday.new(
+      headers: {
+        'ICN-API-KEY' => ENV['ICN_API_KEY'],
+        'ICN-SIGN' => signature,
+        'ICN-TIMESTAMP' => t
+      }
+    ).get("https://api.iconomi.com#{path}#{parameters ? "?#{parameters}" : ''}").body
   end
 
   def self.post(path, request_body)
@@ -36,12 +36,13 @@ class Iconomi
       )
     ).split.join #  to remove newlines introduced by base64 encoding
 
-    agent = Mechanize.new
-    agent.request_headers = {
-      'ICN-API-KEY' => ENV['ICN_API_KEY'],
-      'ICN-SIGN' => signature,
-      'ICN-TIMESTAMP' => t
-    }
-    agent.post("https://api.iconomi.com#{path}", request_body, { 'Content-Type' => 'application/json' }).body
+    Faraday.new(
+      headers: {
+        'ICN-API-KEY' => ENV['ICN_API_KEY'],
+        'ICN-SIGN' => signature,
+        'ICN-TIMESTAMP' => t,
+        'Content-Type' => 'application/json'
+      }
+    ).post("https://api.iconomi.com#{path}", request_body).body
   end
 end

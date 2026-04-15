@@ -127,9 +127,7 @@ class Post < Airrecord::Table
 
   def refresh_iframely
     post = self
-    agent = Mechanize.new
-    result = agent.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}")
-    post['Iframely'] = result.body.force_encoding('UTF-8')
+    post['Iframely'] = Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body.force_encoding('UTF-8')
     post.save
   end
 end

@@ -73,8 +73,7 @@ class Book < Airrecord::Table
 
   def set_additional_info!
     book = self
-    a = Mechanize.new
-    page = a.get("https://www.goodreads.com/book/show/#{book['Book Id']}")
+    page = Nokogiri::HTML(Faraday.get("https://www.goodreads.com/book/show/#{book['Book Id']}").body)
     book['Genres'] = page.search('[data-testid=genresList] .Button__labelItem').map { |el| el.text }.reject { |g| g.starts_with?('...') }.join(', ')
     book['Number of Ratings'] = page.search('[data-testid=ratingsCount]').text.gsub(',', '').to_i
     if img = page.at_css('.BookCover__image img')

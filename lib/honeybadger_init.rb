@@ -27,9 +27,6 @@ IGNORED_ERRORS = {
   ],
   'Errno::ECONNRESET' => [
     'Connection reset by peer'
-  ],
-  'Mechanize::ResponseCodeError' => [
-    '429 => Net::HTTPTooManyRequests'
   ]
 }.freeze
 
