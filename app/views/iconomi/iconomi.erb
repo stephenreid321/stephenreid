@@ -33,16 +33,6 @@ count = strategies.count
       <div class="card-body text-center">
         <h5 class="card-title">
           <mark>
-            Not yet an ICONOMI member?
-          </mark>
-        </h5>
-        <p class>
-          Do me a favour by signing up <a href="https://www.iconomi.com/register?ref=YGnZy">via this referral link</a>
-          or use the referral code YGnZy
-        </p>
-
-        <h5 class="card-title">
-          <mark>
             Don't want to have to keep checking this page?
           </mark>
         </h5>
@@ -123,7 +113,7 @@ count = strategies.count
     <td style="opacity: 0.5">
     </td>
     <td class="block">
-      <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>?ref=YGnZy"><%= strategy.name %></a>
+      <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>"><%= strategy.name %></a>
       <a style="display: none" target="_blank" class="block-edit" href="/admin/edit/Strategy/<%=strategy.id%>"><i class="text-white bi bi-pencil"></i></a>
       <br />
       <% if current_account %>

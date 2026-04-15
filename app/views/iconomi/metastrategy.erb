@@ -3,13 +3,13 @@
 <% strategies = Strategy.and(:status => 'verified') %>
 <div class="row justify-content-center text-center">
   <div class="col-6 col-lg-2 mb-4">
-    <a href="https://iconomi.com/asset/DECENTCOOP?ref=YGnZy"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,1)" src="/images/meta-sq.jpg"></a>
+    <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,1)" src="/images/meta-sq.jpg"></a>
   </div>
 </div>
 <div class="row justify-content-center">
   <div class="col-lg-9">
     <p class="lead">
-      <a href="https://www.iconomi.com/asset/DECENTCOOP?ref=YGnZy">Metastrategy</a> is my strategy on ICONOMI.
+      <a href="https://www.iconomi.com/asset/DECENTCOOP">Metastrategy</a> is my strategy on ICONOMI.
       It's an automated strategy with weekly rebalancing that is always an intelligent mix of the current top performing strategies.
       It's a great 'set-and-forget' option and is my top recommendation for those new to crypto investing.
     </p>
@@ -17,7 +17,7 @@
       Metastrategy is currently the #<%=acs_index = strategy.nscore_index('aum', strategies: strategies)[1]%> most copied strategy on ICONOMI (by value).
     </p>
     <p class="lead d-none">
-      Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?ref=YGnZy&sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
+      Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
       Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| (other_strategy.ryear || 0) < strategy.ryear }).count%> of them over the 1-year timeframe:
       <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
       If you're already copying these strategies, you're probably better off switching to Metastrategy.
@@ -26,15 +26,13 @@
     <h2>Step-by-step guide to investing in Metastrategy</h2>
     <ol class="mt-1">
       <li>
-        <a href="https://www.iconomi.com/register?ref=YGnZy">Sign up to ICONOMI via this referral link</a>
-        or use the referral code 
-        <span style="border-bottom: 1px dotted">YGnZy</span>
+        <a href="https://www.iconomi.com/register">Sign up to ICONOMI</a>
       </li>
       <li>
         Click Deposit and load your ICONOMI account.
       </li>
       <li>
-        <a href="https://iconomi.com/asset/DECENTCOOP?ref=YGnZy">Go to the Metastrategy page</a> and click Copy Strategy.
+        <a href="https://iconomi.com/asset/DECENTCOOP">Go to the Metastrategy page</a> and click Copy Strategy.
       </li>
     </ol>
     <p>
@@ -63,14 +61,14 @@
       <% if Asset.and(:status.ne => 'verified').count > 0 %>
         Currently excluded coins:
         <%= Asset.and(:status.ne => 'verified').map do |asset|
-            %{<a class="badge #{asset.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}?ref=YGnZy">#{asset.name} (#{asset.ticker})</a>}
+            %{<a class="badge #{asset.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}">#{asset.name} (#{asset.ticker})</a>}
           end.join(' ') %>
         <br>
       <% end %>
       <% if Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').count > 0 %>
         Currently excluded strategies:
         <%= Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').map do |strategy|
-            %(<a class="badge #{strategy.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}?ref=YGnZy">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
+            %(<a class="badge #{strategy.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
           end.join(' ') %>
       <% end %>
     </p>
