@@ -33,8 +33,6 @@ gem 'rss'
 # Data
 gem 'airrecord'
 gem 'delayed_job_mongoid'
-gem 'dragonfly'
-gem 'dragonfly-s3_data_store'
 gem 'mongoid'
 
 # Interacting with other websites
