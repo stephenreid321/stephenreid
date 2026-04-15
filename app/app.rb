@@ -63,21 +63,14 @@ module StephenReid
         FIND('\"url\": ', {Iframely}) > 0,
         {Hide from homepage} != 1
       )", sort: { 'Created at' => 'desc' })
-      erb :about
+      erb :home
     end
 
-    get '/events', cache: true do
-      expires 6.hours.to_i
-      @title = 'Events'
-      @container_class = 'container-fluid'
-      erb :events
-    end
-
-    %w[films podcasts events speaking-engagements background].each do |r|
+    %w[events films podcasts speaking-engagements background].each do |r|
       get "/#{r}", cache: true do
         expires 6.hours.to_i
         @title = r.gsub('-', ' ').capitalize
-        erb :"#{r.underscore}"
+        erb :"pages/#{r.underscore}"
       end
     end
 
@@ -85,7 +78,7 @@ module StephenReid
       @title = 'Coaching'
       @og_desc = 'What do you really want, and how can you move towards it?'
       @hide_subscribe = true
-      erb :coaching
+      erb :'pages/coaching'
     end
 
     get '/prompt', provides: :txt do
