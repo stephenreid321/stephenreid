@@ -25,15 +25,6 @@ module StephenReid
     set :public_folder, Padrino.root('app', 'assets')
     set :default_builder, 'ActivateFormBuilder'
 
-    Mail.defaults do
-      delivery_method :smtp, {
-        user_name: ENV['SMTP_USERNAME'],
-        password: ENV['SMTP_PASSWORD'],
-        address: ENV['SMTP_ADDRESS'],
-        port: 587
-      }
-    end
-
     before do
       @stylesheet = params[:stylesheet] || 'dark'
       @cachebuster = Padrino.env == :development ? SecureRandom.uuid : ENV['HEROKU_SLUG_COMMIT']
@@ -66,19 +57,30 @@ module StephenReid
       erb :home
     end
 
-    %w[events films podcasts speaking-engagements background].each do |r|
+    %w[background books coaching events films podcasts speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 6.hours.to_i
         @title = r.gsub('-', ' ').capitalize
+        if r == 'coaching'
+          @og_desc = 'What do you really want, and how can you move towards it?'
+          @hide_subscribe = true
+        end
         erb :"pages/#{r.underscore}"
       end
     end
 
-    get '/coaching' do
-      @title = 'Coaching'
-      @og_desc = 'What do you really want, and how can you move towards it?'
-      @hide_subscribe = true
-      erb :'pages/coaching'
+    get '/courses/:slug' do
+      expires 6.hours.to_i
+      @course = Course.all(filter: "{Slug} = '#{params[:slug]}'").first
+      erb :course, layout: false
+    end
+
+    get '/books/:slug', cache: true do
+      expires 6.hours.to_i
+      @book = Book.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
+      redirect("https://www.goodreads.com/book/show/#{@book['Book Id']}") if @book['Summary'].blank?
+      @title = @book['Title']
+      erb :book
     end
 
     get '/prompt', provides: :txt do
@@ -117,25 +119,6 @@ module StephenReid
         }
       end
       erb :places
-    end
-
-    get '/courses/:slug' do
-      expires 6.hours.to_i
-      @course = Course.all(filter: "{Slug} = '#{params[:slug]}'").first
-      erb :course, layout: false
-    end
-
-    get '/books' do
-      @title = 'Books'
-      erb :books
-    end
-
-    get '/books/:slug', cache: true do
-      expires 6.hours.to_i
-      @book = Book.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
-      redirect("https://www.goodreads.com/book/show/#{@book['Book Id']}") if @book['Summary'].blank?
-      @title = @book['Title']
-      erb :book
     end
 
     post '/telegram_webhook' do

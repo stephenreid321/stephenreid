@@ -366,7 +366,6 @@ DEPENDENCIES
   faraday
   honeybadger
   irb
-  mail
   mechanize
   mongoid
   padrino
