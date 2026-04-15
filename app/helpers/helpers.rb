@@ -30,23 +30,6 @@ StephenReid::App.helpers do
     halt(403) unless current_account
   end
 
-  def tag_badge(tag, account: tag.try(:account), html_tag: 'a')
-    return unless tag
-
-    if tag.is_a?(Tag)
-      name = tag.name
-      bg = "background-color: #{tag.background_color}"
-      c = ''
-      s = ''
-    else
-      name = tag
-      bg = 'background: none'
-      c = 'text-contrast'
-      s = 'font-weight: 500'
-    end
-    %(<#{html_tag} href="/u/#{account.username}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; #{s}">#{name}</#{html_tag}>)
-  end
-
   def bool_badge(value, yes_text: 'Yes', no_text: 'No')
     if value
       %(<span class="badge badge-success">#{yes_text}</span>)

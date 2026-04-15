@@ -57,7 +57,7 @@
         <td class="assetName" style="white-space: nowrap;">
           <a
       data-toggle="tooltip"
-      target="_blank" href="https://coingecko.com/en/coins/<%=Coin.find_by(symbol: asset.ticker).try(:slug)%>">
+      target="_blank" href="https://www.coingecko.com/en/search?query=<%= ERB::Util.url_encode(asset.ticker) %>">
             <%= asset.name %> (<%= k %>)
           </a>
           <% if current_account %>

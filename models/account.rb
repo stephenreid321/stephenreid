@@ -10,9 +10,6 @@ class Account
   field :crypted_password, type: String
   field :eth_address_hashes, type: Array
 
-  has_many :coinships, dependent: :destroy
-  has_many :tags, dependent: :destroy
-
   def self.protected_attributes
     %w[admin]
   end
