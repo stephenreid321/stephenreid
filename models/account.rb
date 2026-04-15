@@ -8,7 +8,6 @@ class Account
   field :admin, type: Boolean
   field :time_zone, type: String
   field :crypted_password, type: String
-  field :eth_address_hashes, type: Array
 
   def self.protected_attributes
     %w[admin]

@@ -17,12 +17,6 @@ namespace :strategies do
   end
 end
 
-namespace :verses do
-  task update_owners: :environment do
-    Verse.all.each(&:update_owner)
-  end
-end
-
 namespace :terms do
   task create_edges: :environment do
     term_ids = []
@@ -78,18 +72,6 @@ namespace :posts do
       puts term['Name']
       term.create_edges
     end
-  end
-end
-
-namespace :substack_notes do
-  task import: :environment do
-    SubstackNote.import
-  end
-end
-
-namespace :substack_posts do
-  task import: :environment do
-    SubstackPost.import
   end
 end
 
