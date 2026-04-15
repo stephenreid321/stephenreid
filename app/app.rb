@@ -57,7 +57,7 @@ module StephenReid
       erb :home
     end
 
-    %w[background books coaching events films podcasts speaking-engagements].each do |r|
+    %w[background books coaching events films speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 6.hours.to_i
         @title = r.gsub('-', ' ').capitalize
