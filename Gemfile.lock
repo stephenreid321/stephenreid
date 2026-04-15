@@ -131,6 +131,7 @@ GEM
     honeybadger (6.5.2)
       logger
       ostruct
+    htmlbeautifier (1.4.3)
     http-cookie (1.1.0)
       domain_name (~> 0.5)
     i18n (1.14.8)
@@ -365,6 +366,7 @@ DEPENDENCIES
   erb_lint
   faraday
   honeybadger
+  htmlbeautifier
   irb
   mechanize
   mongoid
