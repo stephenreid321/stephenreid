@@ -1,5 +1,5 @@
 <% 
-base_uri = "https://stephenreid.ams3.cdn.digitaloceanspaces.com/courses/#{@course['Name'].gsub(' ', '%20')}"
+base_uri = "https://raw.githubusercontent.com/stephenreid321/courses/main/#{Rack::Utils.escape_path(@course['Name'])}"
 doc = Nokogiri::HTML(URI.open("#{base_uri}/course.html"))
 head = doc.search('head')
 body = doc.search('body')
