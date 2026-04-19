@@ -53,6 +53,7 @@ module StephenReid
         FIND('\"url\": ', {Iframely}) > 0,
         {Hide from homepage} != 1
       )", sort: { 'Created at' => 'desc' })
+      @substack_gallery = SubstackNote.recent_gallery_items(limit: 20)
       erb :home
     end
 

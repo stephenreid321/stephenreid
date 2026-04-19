@@ -64,6 +64,32 @@ class SubstackNote
     self.class.send(:markdown_for_note, self)
   end
 
+  # Public note URL on Substack (homepage gallery links).
+  def gallery_note_url
+    u = primary_link.to_s.strip
+    return u if u.present?
+
+    h = comment_author_handle.to_s.strip
+    k = entity_key.to_s.strip
+    h.present? && k.present? ? "https://substack.com/@#{h}/note/#{k}" : ''
+  end
+
+  # Image attachment URLs plus post cover when present, in feed order (deduped).
+  def image_urls_for_gallery
+    parsed = JSON.parse(attachments_json.to_s.presence || '[]')
+    urls = (parsed.is_a?(Array) ? parsed : []).filter_map do |att|
+      next unless att.is_a?(Hash) && att['type'] == 'image'
+
+      (att['imageUrl'] || att['url']).to_s.strip.presence
+    end
+    urls.uniq!
+    pc = post_cover_image_url.to_s.strip
+    urls << pc if pc.present? && !urls.include?(pc)
+    urls
+  rescue JSON::ParserError
+    []
+  end
+
   class << self
     # Substack API → Mongo. Env: SUBSTACK_TOKEN, SUBSTACK_PUBLICATION_URL.
     def import
@@ -103,6 +129,22 @@ class SubstackNote
       scope = desc(:published_at)
       scope = scope.limit(n) if n.positive?
       scope.map(&:to_markdown).join
+    end
+
+    # Newest notes first; flattens images (+ post covers) into up to +limit+ cells.
+    def recent_gallery_items(limit: 20)
+      max_items = (n = limit.to_i).positive? ? n : 20
+      items = []
+      desc(:published_at).each do |note|
+        url = note.gallery_note_url
+        next if url.blank?
+
+        note.image_urls_for_gallery.each do |img|
+          items << { image_url: img, note_url: url, published_at: note.published_at.to_s }
+          return items if items.size >= max_items
+        end
+      end
+      items
     end
 
     private
