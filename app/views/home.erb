@@ -46,7 +46,7 @@
     json = JSON.parse(post['Iframely'])
     next unless json['links']
     next unless json['links']['thumbnail']
-    next unless json['meta']['description'] && json['meta']['description'].length > 20
+    next unless json['meta']['description'] && json['meta']['description'].length > 10
     %>
       <%= partial :recent_post, locals: {post: post, json: json, p: p} %>
       <% p += 1; break if p == 3 } %>
