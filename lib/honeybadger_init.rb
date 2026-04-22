@@ -6,7 +6,7 @@ IGNORED_ERRORS = {
   # Error types with specific message patterns
   'Sinatra::BadRequest' => [
     'invalid %-encoding',
-    'Invalid multipart/form-data: EOFError',
+    'Invalid multipart/form-data',
     'invalid byte sequence in UTF-8'
   ],
   'ThreadError' => [
