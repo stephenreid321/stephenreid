@@ -70,7 +70,7 @@ module StephenReid
     end
 
     get '/courses/:slug' do
-      @course = Course.all(filter: "{Slug} = '#{params[:slug]}'").first
+      @course = Course.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
       erb :course, layout: false
     end
 
