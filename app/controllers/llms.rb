@@ -2,7 +2,7 @@ StephenReid::App.controller do
   get '/llms', cache: true do
     @container_class = 'container-fluid'
     @stylesheet = 'light'
-    @index_attributes = %w[intelligence agentic coding terminal_bench_hard math omniscience openness]
+    @index_attributes = %w[intelligence agentic coding terminal_bench_hard omniscience openness]
     @title = 'LLMs'
 
     response = Faraday.get('https://artificialanalysis.ai/models') do |req|

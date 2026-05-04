@@ -1,12 +1,3 @@
-<%
-  min_model = @models.find { |m| m['slug'] == 'claude-4-5-sonnet' }
-  default_min_score_values = @index_attributes.each_with_object({}) do |attr, defaults|
-    score = min_model && min_model["#{attr}_index"]
-    defaults[attr] = score ? score.to_f.floor.to_s : nil
-  end
-  %w[math omniscience openness].each { |a| default_min_score_values[a] = nil }
-%>
-
 <div class="mb-3">
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
@@ -37,10 +28,18 @@
       <label for="release-filter">Released in last</label>
       <%= select_tag :release, options: [['All time', '']] + [1, 3, 6, 12, 24].map { |m| ["#{pluralize(m, 'month')}", m.to_s] }, selected: (params[:release] || '3'), id: 'release-filter', class: 'form-control' %>
     </div>
+    <div class="form-group col-md-2 mb-2">
+      <label for="max-cost-filter">Cost &lt; ($)</label>
+      <%= number_field_tag :max_cost, value: params[:max_cost], id: 'max-cost-filter', class: 'form-control', step: 'any', min: 0, placeholder: 'No limit' %>
+    </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-12 mb-2">
-      <div class="d-flex flex-wrap gap-3">
+      <div class="d-flex flex-wrap align-items-end gap-3">
+        <div class="form-group mb-1 mr-2">
+          <label for="min-model-selector">At least as good as</label>
+          <select name="min_model_slug" id="min-model-selector" class="form-control form-control-sm" style="width: 11rem; max-width: 100%"></select>
+        </div>
         <% @index_attributes.each do |attr| %>
           <div class="form-group mb-1 mr-1">
             <button type="button" class="btn btn-sm btn-outline-secondary toggle-score-field" data-attr="<%= attr %>">
@@ -53,13 +52,12 @@
                     <%= attr.titleize %> &gt;=
                   </span>
                 </div>
-                <%= number_field_tag "min_score_#{attr}".to_sym, value: (params["min_score_#{attr}".to_sym].presence || default_min_score_values[attr]), id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, style: 'max-width: 4rem' %>
+                <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, style: 'max-width: 4rem' %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
-      <small id="min-level-note" class="text-muted"><%= min_model['name'] %> level</small>
     </div>
   </div>
 </div>
@@ -165,36 +163,28 @@
     @index_attributes.map { |attr| [attr, attr.titleize] }.to_h.to_json
   %>;
 
+  var DEFAULT_MIN_MODEL_SLUG = 'claude-4-5-sonnet';
+  var initialMinModelSlug = <%== params[:min_model_slug].to_json %>;
+  var MIN_MODEL_SELECTOR_INTELLIGENCE_TOP_N = 100;
+
+  /** Index attrs that do not get floors from the baseline model */
+  var MIN_SCORE_REFERENCE_EXEMPT = ['omniscience', 'openness'];
+
   // Clean model names for display (remove reasoning/non-reasoning suffixes)
   function cleanModelName(name) {
     return name.replace(/\s*\(Reasoning\)\s*/gi, '').replace(/\s*\(Non-reasoning\)\s*/gi, '').trim();
   }
 
   $(function() {
-    function hideMinLevelNote() { $('#min-level-note').hide(); }
-
     var table = $('#models-table').DataTable({
       paging: false,
       searching: true,
       info: false,
       order: [[2, 'desc']], // Sort by Release date descending
       columnDefs: [
-        { type: 'num', targets: [5, 6, 7, 8, 9, 10, 11, 12, 13] } // Numeric columns (index attributes + speed + cost)
+        { type: 'num', targets: [5, 6, 7, 8, 9, 10, 11, 12] } // Numeric columns (index attributes + speed + cost)
       ]
     });
-
-    // Show fields that already have values on page load
-    <% @index_attributes.each do |attr| %>
-      <% if params["min_score_#{attr}".to_sym].present? || default_min_score_values[attr].present? %>
-        $('#score-field-<%= attr %>').show();
-        $('button[data-attr="<%= attr %>"]').hide();
-      <% end %>
-    <% end %>
-
-    // Hide min-level note when any filter is interacted with
-    $('#index-selector, #x-axis-selector, #reasoning-filter, #open-source-filter, #release-filter').on('change', hideMinLevelNote);
-    $('[id^="min-score-"]').on('input change', hideMinLevelNote);
-    $('.toggle-score-field, [id^="label-"]').on('click', hideMinLevelNote);
 
     // Toggle score field visibility on button click
     $('.toggle-score-field').on('click', function() {
@@ -240,13 +230,6 @@
       var attr = $(this).attr('id').replace('min-score-', '');
       updateLabelStyle(attr);
     });
-
-    // Update label styles for fields with initial values on page load
-    <% @index_attributes.each do |attr| %>
-      <% if params["min_score_#{attr}".to_sym].present? || default_min_score_values[attr].present? %>
-        updateLabelStyle('<%= attr %>');
-      <% end %>
-    <% end %>
 
     // Handle label click to reset field to blank and hide
     $('[id^="label-"]').on('click', function() {
@@ -645,6 +628,147 @@
       return scores;
     }
 
+    function getMaxCostLimit() {
+      var raw = $('#max-cost-filter').val();
+      if (raw === '' || raw === null) return null;
+      var n = parseFloat(raw);
+      if (isNaN(n) || n <= 0) return null;
+      return n;
+    }
+
+    function resolveBaselineSlug() {
+      if (initialMinModelSlug === '') return '';
+      if (initialMinModelSlug && modelsData.some(function(m) { return m.slug === initialMinModelSlug; }))
+        return initialMinModelSlug;
+      var d = modelsData.find(function(m) { return m.slug === DEFAULT_MIN_MODEL_SLUG; });
+      if (d) return d.slug;
+      return modelsData.length ? modelsData[0].slug : '';
+    }
+
+    function populateMinModelSelector() {
+      var $sel = $('#min-model-selector');
+      $sel.empty();
+      $sel.append($('<option></option>').attr('value', '').text(''));
+
+      var ranked = modelsData.slice().sort(function(a, b) {
+        return (b.intelligenceIndex || 0) - (a.intelligenceIndex || 0);
+      });
+      var intelligenceFirstSlug = ranked.length ? ranked[0].slug : '';
+      var optionsList = ranked.slice(0, MIN_MODEL_SELECTOR_INTELLIGENCE_TOP_N);
+      var inSelect = {};
+      optionsList.forEach(function(m) { inSelect[m.slug] = true; });
+
+      var desired = resolveBaselineSlug();
+      if (desired && !inSelect[desired]) {
+        var extra = modelsData.find(function(m) { return m.slug === desired; });
+        if (extra) optionsList.push(extra);
+      }
+
+      optionsList.sort(function(a, b) {
+        return cleanModelName(a.name).localeCompare(cleanModelName(b.name), undefined, { sensitivity: 'base' });
+      });
+
+      optionsList.forEach(function(m) {
+        var label = cleanModelName(m.name) + (m.reasoningModel ? ' ▲' : '');
+        $sel.append($('<option></option>').attr('value', m.slug).text(label));
+      });
+
+      $sel.val(desired);
+      if (desired && $sel.val() !== desired) {
+        $sel.val(intelligenceFirstSlug);
+      }
+    }
+
+    function clearMinScoreFieldsFromBaseline() {
+      INDEX_ATTRIBUTES.forEach(function(attr) {
+        var $field = $('#score-field-' + attr);
+        var $button = $('.toggle-score-field[data-attr="' + attr + '"]');
+        var $input = $('#min-score-' + attr);
+        $input.val('');
+        $field.hide();
+        $button.show();
+        updateLabelStyle(attr);
+      });
+    }
+
+    function applyBaselineFromModelToField(attr, model) {
+      var $field = $('#score-field-' + attr);
+      var $button = $('.toggle-score-field[data-attr="' + attr + '"]');
+      var $input = $('#min-score-' + attr);
+
+      if (MIN_SCORE_REFERENCE_EXEMPT.indexOf(attr) !== -1) {
+        $input.val('');
+        $field.hide();
+        $button.show();
+        updateLabelStyle(attr);
+        return;
+      }
+
+      var v = model[snakeToCamel(attr) + 'Index'];
+      if (v == null || isNaN(v)) {
+        $input.val('');
+        $field.hide();
+        $button.show();
+      } else {
+        $input.val(Math.floor(parseFloat(v)).toString());
+        $field.show();
+        $button.hide();
+      }
+      updateLabelStyle(attr);
+    }
+
+    function setMinScoreFieldsFromBaseline(slug, onlyIfEmpty) {
+      if (!slug) {
+        if (onlyIfEmpty) {
+          INDEX_ATTRIBUTES.forEach(function(attr) {
+            var $input = $('#min-score-' + attr);
+            if ($input.val() != null && String($input.val()).trim() !== '') {
+              $('#score-field-' + attr).show();
+              $('.toggle-score-field[data-attr="' + attr + '"]').hide();
+              updateLabelStyle(attr);
+            }
+          });
+        } else {
+          clearMinScoreFieldsFromBaseline();
+        }
+        return;
+      }
+
+      var model = modelsData.find(function(m) { return m.slug === slug; });
+      if (!model) return;
+
+      INDEX_ATTRIBUTES.forEach(function(attr) {
+        if (onlyIfEmpty) {
+          var $input = $('#min-score-' + attr);
+          if ($input.val() != null && String($input.val()).trim() !== '') {
+            $('#score-field-' + attr).show();
+            $('.toggle-score-field[data-attr="' + attr + '"]').hide();
+            updateLabelStyle(attr);
+            return;
+          }
+        }
+        applyBaselineFromModelToField(attr, model);
+      });
+    }
+
+    function applyMinModelBaseline(slug) {
+      if (!slug) {
+        clearMinScoreFieldsFromBaseline();
+        table.draw();
+        updateRanks();
+        updateChart();
+        return;
+      }
+      setMinScoreFieldsFromBaseline(slug, false);
+      table.draw();
+      updateRanks();
+      updateChart();
+    }
+
+    $('#min-model-selector').on('change', function() {
+      applyMinModelBaseline($(this).val());
+    });
+
     function updateChart() {
       var selectedIndex = $('#index-selector').val();
       var xAxisType = $('#x-axis-selector').val();
@@ -652,6 +776,7 @@
       var openSourceFilter = $('#open-source-filter').val();
       var releaseFilter = $('#release-filter').val();
       var minScores = getMinScores();
+      var maxCostLimit = getMaxCostLimit();
 
       // Update title and axis labels
       var indexLabel = indexLabels[selectedIndex];
@@ -716,7 +841,12 @@
           ? (indexValue != null && !isNaN(indexValue))
           : (indexValue > 0);
 
-        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && indexValueValid && xAxisValue > 0;
+        var costCapMatch = true;
+        if (maxCostLimit != null) {
+          costCapMatch = model.costToRun < maxCostLimit;
+        }
+
+        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && indexValueValid && xAxisValue > 0 && costCapMatch;
       });
 
       // Group by reasoning and open source
@@ -855,6 +985,7 @@
         var releaseFilter = $('#release-filter').val();
         var selectedIndex = $('#index-selector').val();
         var minScores = getMinScores();
+        var maxCostLimit = getMaxCostLimit();
 
         if (settings.nTable.id !== 'models-table') return true;
 
@@ -911,16 +1042,25 @@
           }
         });
 
-        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch;
+        var costCapMatch = true;
+        if (maxCostLimit != null) {
+          var costVal = parseFloat($(row).find('td:last').data('order'));
+          if (isNaN(costVal)) costVal = 0;
+          costCapMatch = costVal < maxCostLimit;
+        }
+
+        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && costCapMatch;
       }
     );
 
-    // Redraw table to apply custom filter (including default min_score on initial load)
+    // Populate baseline control, fill empty min-score fields from that model, then apply custom filter
+    populateMinModelSelector();
+    setMinScoreFieldsFromBaseline($('#min-model-selector').val(), true);
     table.draw();
 
     // Apply filters when dropdowns change
     var minScoreSelectors = INDEX_ATTRIBUTES.map(function(attr) { return '#min-score-' + attr; }).join(', ');
-    $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #x-axis-selector, ' + minScoreSelectors).on('change input', function() {
+    $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #max-cost-filter, #x-axis-selector, ' + minScoreSelectors).on('change input', function() {
       table.draw();
       updateRanks();
       updateChart();
