@@ -1,7 +1,5 @@
 import sys
 import os
-from dotenv import load_dotenv
-load_dotenv()
 
 from atproto import Client
 from atproto import models
