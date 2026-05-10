@@ -1,1 +1,2 @@
 atproto>=0.0.52
+requests>=2.28.0
