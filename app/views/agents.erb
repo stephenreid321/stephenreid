@@ -1,0 +1,293 @@
+<% if @agent_rows.empty? %>
+  <div class="alert alert-warning">
+    Could not load coding-agent results from Artificial Analysis. Try again later or visit
+    <a href="https://artificialanalysis.ai/agents/coding-agents" class="alert-link" target="_blank" rel="noopener">their benchmarks page</a> directly.
+  </div>
+<% else %>
+  <% chart_keys = %w[swe-atlas-qna swe-bench-pro-hard terminal-bench-v2] %>
+  <% agents_score_column_classes = [{ cell_class: 'agents-index-cell' }] + chart_keys.map { |k| { cell_class: "agents-bench-#{k}" } } %>
+  <div class="mb-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+        <h5 class="mb-0">Tasks per dollar v wall time</h5>
+        <div class="form-inline mt-2 mt-md-0 align-items-end">
+          <div class="form-group mb-0">
+            <label for="agents-baseline-select" class="mb-1 mr-1 d-block small text-muted">At least as smart as</label>
+            <select id="agents-baseline-select" class="form-control form-control-sm" style="min-width: 14rem; max-width: 26rem;"></select>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="position: relative; height: 420px;">
+          <canvas id="agents-scatter-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table id="agents-table" class="table table-sm">
+      <thead>
+        <tr>
+          <th>Configuration</th>
+          <th>Release</th>
+          <th>Agent</th>
+          <th>Model</th>
+          <th class="text-right">Index</th>
+          <% chart_keys.each do |key| %>
+            <% sample = @agent_rows.find { |r| r.dig('components_by_dataset', key) } %>
+            <% label = sample&.dig('components_by_dataset', key, 'evaluationDatasetSlug') || key.titleize %>
+            <th class="text-right"><%= label %></th>
+          <% end %>
+          <th class="text-right">Tasks per $</th>
+          <th class="text-right">Time per task (s)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @agent_rows.each do |row| %>
+          <% mean = row['mean'] || {} %>
+          <tr>
+            <td>
+              <strong><%= row['displayLabel'] %></strong>
+            </td>
+            <td data-order="<%= row['releaseDate'] || '0000-00-00' %>">
+              <% if row['releaseDate'] %>
+                <%= display_or_dash(row['releaseDate']) { |d| Date.parse(d).strftime('%b %Y') rescue d } %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td><%= row.dig('display', 'agent') || row['agentName'] %></td>
+            <td><%= row.dig('display', 'model') || row['modelName'] %></td>
+            <td class="text-right agents-index-cell" data-order="<%= row['indexScore'] ? (row['indexScore'].to_f * 100).round : -1 %>">
+              <% if row['indexScore'] %>
+                <%= (row['indexScore'].to_f * 100).round %>
+                <small class="text-muted rank-display"></small>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <% chart_keys.each do |key| %>
+              <% comp = row.dig('components_by_dataset', key) %>
+              <% reward = comp&.dig('mean', 'reward') %>
+              <td class="text-right agents-bench-<%= key %>" data-order="<%= reward ? (reward.to_f * 100).round : -1 %>">
+                <% if reward %>
+                  <%= (reward.to_f * 100).round %>
+                  <small class="text-muted rank-display"></small>
+                <% else %>
+                  <span class="text-muted">—</span>
+                <% end %>
+              </td>
+            <% end %>
+            <td class="text-right" data-order="<%= mean['costUsd'].to_f.positive? ? (1.0 / mean['costUsd'].to_f) : -1 %>">
+              <% if mean['costUsd'].to_f.positive? %>
+                <%= sprintf('%.2f', 1.0 / mean['costUsd'].to_f) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td class="text-right" data-order="<%= mean['agentWallTimeSec'] || -1 %>">
+              <% if mean['agentWallTimeSec'] %>
+                <% sec = mean['agentWallTimeSec'].to_f %>
+                <%= sprintf('%.0f s', sec) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    var agentsChartData = <%== @agent_rows.map.with_index { |r, i|
+      mean = r['mean'] || {}
+      wall = mean['agentWallTimeSec']&.to_f
+      {
+        id: r['id'].presence || "agent-row-#{i}",
+        label: r['displayLabel'],
+        agentFamily: r['agentName'],
+        indexScore: r['indexScore']&.to_f,
+        cost: mean['costUsd']&.to_f,
+        wallSec: wall
+      }
+    }.to_json %>;
+
+    var AGENTS_SCORE_COLUMNS = <%== agents_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
+
+    var familyColors = {
+      'Claude Code': 'rgba(217, 119, 6, 0.85)',
+      'Cursor CLI': 'rgba(99, 102, 241, 0.85)',
+      'Codex': 'rgba(16, 185, 129, 0.85)',
+      'Gemini CLI': 'rgba(66, 133, 244, 0.85)'
+    };
+
+    $(function() {
+      var agentsTable = $('#agents-table').DataTable({
+        paging: false,
+        searching: true,
+        info: true,
+        order: [[4, 'desc']],
+        columnDefs: [
+          { className: 'text-right', targets: [4, 5, 6, 7, 8, 9] },
+          { type: 'num', targets: [4, 5, 6, 7, 8, 9] }
+        ]
+      });
+
+      function updateAgentScoreRanks() {
+        var visibleRows = agentsTable.rows({ search: 'applied' }).nodes();
+        AGENTS_SCORE_COLUMNS.forEach(function(col) {
+          $('td.' + col.cellClass + ' .rank-display').text('');
+          var scores = [];
+          $(visibleRows).each(function() {
+            var row = $(this);
+            var cell = row.find('td.' + col.cellClass);
+            if (!cell.length) return;
+            var score = parseFloat(cell.data('order'));
+            if (isNaN(score)) score = -1;
+            if (score >= 0) {
+              scores.push({ score: score, cell: cell });
+            }
+          });
+          scores.sort(function(a, b) { return b.score - a.score; });
+          var currentRank = 1;
+          scores.forEach(function(item, idx) {
+            if (idx > 0 && scores[idx - 1].score !== item.score) {
+              currentRank = idx + 1;
+            }
+            item.cell.find('.rank-display').text('(' + currentRank + '/' + scores.length + ')');
+          });
+        });
+      }
+
+      agentsTable.on('draw', function() {
+        updateAgentScoreRanks();
+      });
+      updateAgentScoreRanks();
+
+      function indexDisplay(row) {
+        if (row.indexScore == null || isNaN(row.indexScore)) return null;
+        return Math.round(row.indexScore * 100);
+      }
+
+      function populateAgentsBaselineSelect() {
+        var $sel = $('#agents-baseline-select');
+        $sel.empty();
+        $sel.append($('<option></option>').attr('value', '').text(''));
+        agentsChartData.slice().filter(function(r) {
+          return indexDisplay(r) != null;
+        }).sort(function(a, b) {
+          var da = indexDisplay(a);
+          var db = indexDisplay(b);
+          if (db !== da) return da - db;
+          return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
+        }).forEach(function(r) {
+          $sel.append(
+            $('<option></option>')
+              .attr('value', r.id)
+              .text(r.label + ' (' + indexDisplay(r) + ')')
+          );
+        });
+      }
+
+      function baselineMinIndex() {
+        var id = $('#agents-baseline-select').val();
+        if (!id) return null;
+        var base = agentsChartData.find(function(r) { return String(r.id) === String(id); });
+        if (!base) return null;
+        return indexDisplay(base);
+      }
+
+      populateAgentsBaselineSelect();
+
+      var ctx = document.getElementById('agents-scatter-chart');
+      if (!ctx || !agentsChartData.length) return;
+
+      var scatterChart = new Chart(ctx.getContext('2d'), {
+        type: 'scatter',
+        data: { datasets: [] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  var p = ctx.raw;
+                  return p.tooltip;
+                }
+              }
+            },
+            legend: {
+              display: true,
+              position: 'bottom'
+            }
+          },
+          scales: {
+            x: {
+              title: { display: true, text: 'Time per task (seconds)' },
+              ticks: {
+                callback: function(v) {
+                  return Math.round(v) + ' s';
+                }
+              }
+            },
+            y: {
+              title: { display: true, text: 'Tasks per dollar' },
+              ticks: {
+                callback: function(v) {
+                  if (v >= 10) return v.toFixed(1);
+                  if (v >= 1) return v.toFixed(2);
+                  return v.toFixed(2);
+                }
+              }
+            }
+          }
+        }
+      });
+
+      function rebuildChart() {
+        var floor = baselineMinIndex();
+        var byFamily = {};
+        agentsChartData.forEach(function(row) {
+          var idxDisp = indexDisplay(row);
+          if (idxDisp == null) return;
+          if (floor != null && idxDisp < floor) return;
+          var wall = row.wallSec;
+          var cost = row.cost;
+          if (cost == null || wall == null || cost <= 0 || wall <= 0) return;
+          var tpd = 1 / cost;
+          var fam = row.agentFamily || 'Other';
+          if (!byFamily[fam]) byFamily[fam] = [];
+          var wallSecsLabel = Math.round(wall) + 's';
+          var tpdLabel = tpd.toFixed(2);
+          byFamily[fam].push({
+            x: wall,
+            y: tpd,
+            tooltip: row.label +
+              ': index ' + idxDisp +
+              ', ' + tpdLabel + ' tasks/$' +
+              ', ' + wallSecsLabel
+          });
+        });
+
+        scatterChart.data.datasets = Object.keys(byFamily).sort().map(function(fam) {
+          return {
+            label: fam,
+            data: byFamily[fam],
+            backgroundColor: familyColors[fam] || 'rgba(100, 100, 100, 0.7)',
+            pointRadius: 7,
+            pointHoverRadius: 9
+          };
+        });
+        scatterChart.update();
+      }
+
+      $('#agents-baseline-select').on('change', function() {
+        rebuildChart();
+      });
+      rebuildChart();
+    });
+  </script>
+<% end %>
