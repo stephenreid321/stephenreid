@@ -47,7 +47,6 @@ StephenReid::App.controller do
     @container_class = 'container-fluid'
     @stylesheet = 'light'
     @title = 'Coding agents'
-    @og_desc = 'Coding agent benchmarks from Artificial Analysis: composite index, per-benchmark scores, cost and runtime.'
 
     response = Faraday.get('https://artificialanalysis.ai/agents/coding-agents') do |req|
       req.headers['RSC'] = '1'
