@@ -22,12 +22,12 @@
       <p class="text-contrast text-center">
         Recent images from Substack Notes
       </p>
-      <div id="substack-notes-gallery" class="substack-notes-gallery grid" style="opacity: 0">
+      <div id="substack-notes-gallery" class="substack-notes-gallery grid">
         <div class="grid-sizer"></div>
         <% substack_gallery.each do |cell| %>
           <div class="grid-item">
             <a href="<%=h cell[:note_url] %>" target="_blank" rel="noopener" class="d-block bg-dark">
-              <img src="<%=h cell[:image_url] %>" alt="" onerror="this.closest('.grid-item').style.display='none'">
+              <img src="<%=h cell[:image_url] %>" alt="" loading="lazy" decoding="async" onerror="this.closest('.grid-item').style.display='none'">
             </a>
           </div>
         <% end %>

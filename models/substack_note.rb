@@ -140,7 +140,11 @@ class SubstackNote
         next if url.blank?
 
         note.image_urls_for_gallery.each do |img|
-          items << { image_url: img, note_url: url, published_at: note.published_at.to_s }
+          items << {
+            image_url: Substack.gallery_image_url(img),
+            note_url: url,
+            published_at: note.published_at.to_s
+          }
           return items if items.size >= max_items
         end
       end

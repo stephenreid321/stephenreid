@@ -1,7 +1,29 @@
 module Substack
   USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'
+  CDN_IMAGE_HOST = 'substackcdn.com'
+  GALLERY_IMAGE_WIDTH = 480
 
   class << self
+    # Resize via Substack CDN (WebP, width-limited). Unwraps existing CDN URLs first.
+    def gallery_image_url(url, width: GALLERY_IMAGE_WIDTH)
+      source = unwrap_cdn_image_url(url.to_s.strip)
+      return source if source.blank?
+      return source unless source.start_with?('http://', 'https://')
+
+      encoded = URI.encode_www_form_component(source)
+      "https://#{CDN_IMAGE_HOST}/image/fetch/w_#{width.to_i},c_limit,f_webp,q_auto:good/#{encoded}"
+    end
+
+    def unwrap_cdn_image_url(url)
+      return url unless url.include?("#{CDN_IMAGE_HOST}/image/fetch")
+
+      if url =~ /(https%3A%2F%2F.+)\z/
+        URI.decode_www_form_component(Regexp.last_match(1))
+      else
+        url
+      end
+    end
+
     def api_sync_enabled?
       ENV['SUBSTACK_TOKEN'].present? && ENV['SUBSTACK_PUBLICATION_URL'].present?
     end

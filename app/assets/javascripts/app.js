@@ -76,9 +76,7 @@ $(function () {
 
   var $sg = $('#substack-notes-gallery')
   if ($sg.length) {
-    $(window).on('load', function () {
-      $sg.masonry({ itemSelector: '.grid-item', columnWidth: '.grid-sizer', percentPosition: true })
-      $sg.animate({ opacity: 1 })
-    })
+    $sg.masonry({ itemSelector: '.grid-item', columnWidth: '.grid-sizer', percentPosition: true })
+    $sg.find('img').on('load', function () { $sg.masonry('layout') })
   }
 })

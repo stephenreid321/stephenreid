@@ -57,6 +57,13 @@ module StephenReid
       erb :home
     end
 
+    get '/notes', cache: true do
+      expires 1.hour.to_i
+      @title = 'Notes'
+      @substack_gallery = SubstackNote.recent_gallery_items(limit: 20)
+      erb :notes
+    end
+
     %w[background books coaching events films speaking-engagements].each do |r|
       get "/#{r}", cache: true do
         expires 6.hours.to_i
