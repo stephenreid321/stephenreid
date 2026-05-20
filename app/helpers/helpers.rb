@@ -52,4 +52,44 @@ StephenReid::App.helpers do
       %(<span class="text-muted">—</span>)
     end
   end
+
+  # Extract a JSON array value that follows `key` in an RSC payload, skipping
+  # bracket characters that appear inside strings.
+  def extract_json_array(body, key)
+    bytes = body.b
+    i = bytes.index(key.b)
+    return nil unless i
+
+    start = i + key.bytesize
+    start += 1 while start < bytes.bytesize && bytes.byteslice(start, 1) =~ /\s/
+    return nil unless bytes.byteslice(start, 1) == '['
+
+    depth = 0
+    in_string = false
+    escape = false
+    bytes.byteslice(start..).each_byte.with_index do |c, idx|
+      if escape
+        escape = false
+        next
+      end
+      if in_string
+        if c == 92 # backslash
+          escape = true
+        elsif c == 34 # double quote
+          in_string = false
+        end
+        next
+      end
+      case c
+      when 34 # double quote
+        in_string = true
+      when 91 # [
+        depth += 1
+      when 93 # ]
+        depth -= 1
+        return bytes.byteslice(start, idx + 1).force_encoding('UTF-8') if depth.zero?
+      end
+    end
+    nil
+  end
 end

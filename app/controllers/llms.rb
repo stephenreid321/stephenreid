@@ -10,30 +10,14 @@ StephenReid::App.controller do
     end
     body = response.body.force_encoding('UTF-8').scrub
 
-    # Extract the models array from the RSC response
-    # The models are embedded in the React Server Components payload
-    # There are two "models":[ arrays - the second one contains omniscience data
-    first_models_idx = body.index('"models":[')
-    models_match = first_models_idx && body.index('"models":[', first_models_idx + 1)
-    if models_match
-      # Find the full models array by locating its boundaries (use second occurrence)
-      start_idx = body.index('"models":[', first_models_idx + 1) + 9
-      # Count brackets to find the end of the array
-      bracket_count = 0
-      end_idx = start_idx
-      body[start_idx..].each_char.with_index do |char, idx|
-        bracket_count += 1 if char == '['
-        bracket_count -= 1 if char == ']'
-        if bracket_count.zero?
-          end_idx = start_idx + idx
-          break
-        end
+    # Artificial Analysis currently exposes the model rows in `defaultData`.
+    models_json = extract_json_array(body, '"defaultData":')
+    @models =
+      begin
+        models_json ? JSON.parse(models_json) : []
+      rescue JSON::ParserError
+        []
       end
-      models_json = body[start_idx..end_idx]
-      @models = JSON.parse(models_json)
-    else
-      @models = []
-    end
 
     # Extract data from body and build lookup by model ID
     extract_model_data = lambda do |json_key, model_id_key, value_key|
