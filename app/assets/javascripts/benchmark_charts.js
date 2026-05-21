@@ -1,20 +1,20 @@
 // Shared Chart.js and DataTable utilities for benchmark scatter charts.
 
-function cleanModelName(name) {
+function cleanModelName (name) {
   return name.replace(/\s*\(Reasoning\)\s*/gi, '').replace(/\s*\(Non-reasoning\)\s*/gi, '').trim();
 }
 
-function registerScatterChartPlugins() {
+function registerScatterChartPlugins () {
   if (typeof ChartDataLabels !== 'undefined') {
     Chart.register(ChartDataLabels);
   }
 }
 
-function scatterChartLayoutPadding() {
+function scatterChartLayoutPadding () {
   return { left: 20, right: 20, top: 10, bottom: 10 };
 }
 
-function canvasEventCoords(canvas, evt) {
+function canvasEventCoords (canvas, evt) {
   var rect = canvas.getBoundingClientRect();
   var scaleX = canvas.width / rect.width;
   var scaleY = canvas.height / rect.height;
@@ -24,21 +24,21 @@ function canvasEventCoords(canvas, evt) {
   };
 }
 
-function labelHitTest(labelPositions, x, y) {
+function labelHitTest (labelPositions, x, y) {
   for (var i = 0; i < labelPositions.length; i++) {
     var label = labelPositions[i];
     if (x >= label.x && x <= label.x + label.width &&
-        y >= label.y && y <= label.y + label.height) {
+      y >= label.y && y <= label.y + label.height) {
       return label;
     }
   }
   return null;
 }
 
-function bindChartLabelInteractions(canvasEl, chart, labelPositions, onLabelClick) {
+function bindChartLabelInteractions (canvasEl, chart, labelPositions, onLabelClick) {
   var $canvas = $(canvasEl);
 
-  $canvas.on('mousemove', function(evt) {
+  $canvas.on('mousemove', function (evt) {
     var coords = canvasEventCoords(canvasEl, evt);
     var overLabel = labelHitTest(labelPositions, coords.x, coords.y);
     var overDataPoint = chart._hoveringDataPoint || false;
@@ -46,7 +46,7 @@ function bindChartLabelInteractions(canvasEl, chart, labelPositions, onLabelClic
   });
 
   if (onLabelClick) {
-    $canvas.on('click', function(evt) {
+    $canvas.on('click', function (evt) {
       var coords = canvasEventCoords(canvasEl, evt);
       var label = labelHitTest(labelPositions, coords.x, coords.y);
       if (label) onLabelClick(label);
@@ -54,17 +54,17 @@ function bindChartLabelInteractions(canvasEl, chart, labelPositions, onLabelClic
   }
 }
 
-function updateTableScoreRanks(table, columns) {
+function updateTableScoreRanks (table, columns) {
   var visibleRows = table.rows({ search: 'applied' }).nodes();
 
-  columns.forEach(function(col) {
-    var includeScore = col.includeScore || function(score) { return score >= 0; };
+  columns.forEach(function (col) {
+    var includeScore = col.includeScore || function (score) { return score >= 0; };
     var nanScore = col.nanScore != null ? col.nanScore : -1;
 
     $('td.' + col.cellClass + ' .rank-display').text('');
     var scores = [];
 
-    $(visibleRows).each(function() {
+    $(visibleRows).each(function () {
       var cell = $(this).find('td.' + col.cellClass);
       if (!cell.length) return;
 
@@ -75,10 +75,10 @@ function updateTableScoreRanks(table, columns) {
       }
     });
 
-    scores.sort(function(a, b) { return b.score - a.score; });
+    scores.sort(function (a, b) { return b.score - a.score; });
 
     var currentRank = 1;
-    scores.forEach(function(item, idx) {
+    scores.forEach(function (item, idx) {
       if (idx > 0 && scores[idx - 1].score !== item.score) {
         currentRank = idx + 1;
       }
@@ -88,7 +88,7 @@ function updateTableScoreRanks(table, columns) {
 }
 
 // Chart.js plugin: leader lines from scatter points to labels with collision avoidance.
-function createLeaderLinePlugin(options) {
+function createLeaderLinePlugin (options) {
   options = options || {};
   var labelHeight = options.labelHeight || 12;
   var labelPadding = options.labelPadding || 4;
@@ -96,14 +96,14 @@ function createLeaderLinePlugin(options) {
   var maxLineLength = options.maxLineLength || 200;
   var lineLengthStep = options.lineLengthStep || 10;
   var pointRadius = options.pointRadius || 12;
-  var shouldLabel = options.shouldLabel || function(dataPoint) { return !!dataPoint.label; };
-  var formatLabel = options.formatLabel || function(dataPoint) { return dataPoint.label; };
+  var shouldLabel = options.shouldLabel || function (dataPoint) { return !!dataPoint.label; };
+  var formatLabel = options.formatLabel || function (dataPoint) { return dataPoint.label; };
   var labelPositions = options.labelPositions || null;
-  var getLabelMeta = options.getLabelMeta || function() { return {}; };
+  var getLabelMeta = options.getLabelMeta || function () { return {}; };
 
   return {
     id: 'leaderLines',
-    afterDatasetsDraw: function(chart) {
+    afterDatasetsDraw: function (chart) {
       var ctx = chart.ctx;
       var labels = [];
       var allPoints = [];
@@ -112,15 +112,15 @@ function createLeaderLinePlugin(options) {
 
       var chartArea = chart.chartArea;
 
-      function pointInChartArea(x, y) {
+      function pointInChartArea (x, y) {
         return x >= chartArea.left && x <= chartArea.right &&
-               y >= chartArea.top && y <= chartArea.bottom;
+          y >= chartArea.top && y <= chartArea.bottom;
       }
 
-      chart.data.datasets.forEach(function(dataset, datasetIndex) {
+      chart.data.datasets.forEach(function (dataset, datasetIndex) {
         if (dataset.type === 'line') return;
         var meta = chart.getDatasetMeta(datasetIndex);
-        meta.data.forEach(function(element, index) {
+        meta.data.forEach(function (element, index) {
           var dataPoint = dataset.data[index];
           if (!shouldLabel(dataPoint)) return;
           if (element.skip || element.hidden) return;
@@ -143,11 +143,11 @@ function createLeaderLinePlugin(options) {
         });
       });
 
-      labels.sort(function(a, b) { return b.pointX - a.pointX; });
+      labels.sort(function (a, b) { return b.pointX - a.pointX; });
 
       var axisBottom = chartArea.bottom;
 
-      function calcLabelBox(lbl) {
+      function calcLabelBox (lbl) {
         var endX = lbl.pointX + Math.cos(lbl.angle) * lbl.lineLength;
         var endY = lbl.pointY + Math.sin(lbl.angle) * lbl.lineLength;
         return {
@@ -160,16 +160,16 @@ function createLeaderLinePlugin(options) {
         };
       }
 
-      function boxBelowAxis(box) {
+      function boxBelowAxis (box) {
         return box.endY > axisBottom || (box.y + box.height) > axisBottom;
       }
 
-      function boxesOverlap(a, b) {
+      function boxesOverlap (a, b) {
         return !(a.x + a.width < b.x || b.x + b.width < a.x ||
-                 a.y + a.height < b.y || b.y + b.height < a.y);
+          a.y + a.height < b.y || b.y + b.height < a.y);
       }
 
-      function boxOverlapsPoint(box, point) {
+      function boxOverlapsPoint (box, point) {
         var closestX = Math.max(box.x, Math.min(point.x, box.x + box.width));
         var closestY = Math.max(box.y, Math.min(point.y, box.y + box.height));
         var dx = point.x - closestX;
@@ -177,13 +177,13 @@ function createLeaderLinePlugin(options) {
         return (dx * dx + dy * dy) < (pointRadius * pointRadius);
       }
 
-      var angles = [-Math.PI/8, Math.PI/8, -Math.PI/6, Math.PI/6, -Math.PI/4, Math.PI/4, -Math.PI/3, Math.PI/3, -Math.PI/2.5, Math.PI/2.5, -Math.PI/2, 0];
+      var angles = [-Math.PI / 8, Math.PI / 8, -Math.PI / 6, Math.PI / 6, -Math.PI / 4, Math.PI / 4, -Math.PI / 3, Math.PI / 3, -Math.PI / 2.5, Math.PI / 2.5, -Math.PI / 2, 0];
       var lengths = [];
       for (var len = baseLineLength; len <= maxLineLength; len += lineLengthStep) {
         lengths.push(len);
       }
 
-      function lineAngleScore(angle) {
+      function lineAngleScore (angle) {
         if (Math.abs(angle) < 0.01) return 100;
         var abs = Math.abs(angle);
         if (abs >= Math.PI / 12 && abs <= Math.PI / 4) {
@@ -232,7 +232,7 @@ function createLeaderLinePlugin(options) {
         currentLabel.lineLength = bestConfig.lineLength;
       }
 
-      labels.forEach(function(lbl) {
+      labels.forEach(function (lbl) {
         if (!pointInChartArea(lbl.pointX, lbl.pointY)) return;
 
         var box = calcLabelBox(lbl);
