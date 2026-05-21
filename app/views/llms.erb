@@ -2,7 +2,7 @@
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
       <label for="index-selector">Y-axis</label>
-      <%= select_tag :index, options: @index_attributes.map { |i| [i.titleize, i] }, selected: (params[:index] || 'agentic'), id: 'index-selector', class: 'form-control' %>
+      <%= select_tag :index, options: @index_attributes.map { |i| [i.titleize, i] }, selected: (params[:index] || 'intelligence'), id: 'index-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
@@ -170,11 +170,6 @@
   /** Index attrs that do not get floors from the baseline model */
   var MIN_SCORE_REFERENCE_EXEMPT = ['omniscience', 'openness'];
 
-  // Clean model names for display (remove reasoning/non-reasoning suffixes)
-  function cleanModelName(name) {
-    return name.replace(/\s*\(Reasoning\)\s*/gi, '').replace(/\s*\(Non-reasoning\)\s*/gi, '').trim();
-  }
-
   $(function() {
     var table = $('#models-table').DataTable({
       paging: false,
@@ -254,215 +249,32 @@
       $input.trigger('change');
     });
 
-    // Calculate and update ranks based on visible (filtered) rows
     function updateRanks() {
-      var visibleRows = table.rows({ search: 'applied' }).nodes();
-      var indexColumns = INDEX_ATTRIBUTES.map(function(attr, idx) {
+      updateTableScoreRanks(table, INDEX_ATTRIBUTES.map(function(attr) {
         return {
-          name: attr + '_index',
           cellClass: attr + '-index-cell',
-          colIndex: idx + 5
+          nanScore: attr === 'omniscience' ? -999 : 0,
+          includeScore: function(score) {
+            return attr === 'omniscience' ? score !== -999 : score > 0;
+          }
         };
-      });
-
-      indexColumns.forEach(function(indexCol) {
-        // First, clear all rank displays for this column
-        $('td.' + indexCol.cellClass + ' .rank-display').text('');
-
-        // Collect scores from visible rows
-        var scores = [];
-        var isOmniscience = indexCol.name === 'omniscience_index';
-        var nullSentinel = -999;
-        $(visibleRows).each(function() {
-          var row = $(this);
-          var cell = row.find('td.' + indexCol.cellClass);
-          var score = parseFloat(cell.data('order'));
-          if (isNaN(score)) score = isOmniscience ? nullSentinel : 0;
-
-          // For omniscience: include any value except null sentinel; for others: only > 0
-          if (isOmniscience ? (score !== nullSentinel) : (score > 0)) {
-            scores.push({ score: score, cell: cell });
-          }
-        });
-
-        // Sort by score descending
-        scores.sort(function(a, b) { return b.score - a.score; });
-
-        // Calculate ranks (handle ties)
-        var currentRank = 1;
-        scores.forEach(function(item, idx) {
-          if (idx > 0 && scores[idx - 1].score !== item.score) {
-            currentRank = idx + 1;
-          }
-
-          var rankDisplay = item.cell.find('.rank-display');
-          rankDisplay.text('(' + currentRank + '/' + scores.length + ')');
-        });
-      });
+      }));
     }
 
-    // Store label positions for click detection
     var labelPositions = [];
-
-    // Custom plugin for leader lines with collision avoidance
-    var leaderLinePlugin = {
-      id: 'leaderLines',
-      afterDatasetsDraw: function(chart) {
-        var ctx = chart.ctx;
-        var labels = [];
-        var allPoints = []; // All Pareto point positions
-        var labelHeight = 12;
-        var labelPadding = 4;
-        var baseLineLength = 25;
-        var pointRadius = 12; // Approximate point radius for collision
-
-        // Clear previous label positions
-        labelPositions = [];
-
-        // First pass: collect all Pareto points
-        chart.data.datasets.forEach(function(dataset, datasetIndex) {
-          if (dataset.type === 'line') return;
-          var meta = chart.getDatasetMeta(datasetIndex);
-          meta.data.forEach(function(element, index) {
-            var dataPoint = dataset.data[index];
-            if (!dataPoint.isPareto) return;
-
-            ctx.font = '10px sans-serif';
-            var displayLabel = cleanModelName(dataPoint.label);
-            var lightbulbSymbol = dataPoint.reasoningModel ? ' ▲' : '';
-            var labelWithIcon = displayLabel + lightbulbSymbol;
-            var textWidth = ctx.measureText(labelWithIcon).width;
-
-            var pointInfo = {
-              label: labelWithIcon,
-              pointX: element.x,
-              pointY: element.y,
-              textWidth: textWidth,
-              angle: 0,
-              lineLength: baseLineLength,
-              slug: dataPoint.slug
-            };
-            labels.push(pointInfo);
-            allPoints.push({ x: element.x, y: element.y });
-          });
-        });
-
-        // Sort by x position (right to left, highest cost first)
-        labels.sort(function(a, b) { return b.pointX - a.pointX; });
-
-        // Calculate label end positions
-        function calcLabelBox(lbl) {
-          var endX = lbl.pointX + Math.cos(lbl.angle) * lbl.lineLength;
-          var endY = lbl.pointY + Math.sin(lbl.angle) * lbl.lineLength;
-          return {
-            x: endX + labelPadding,
-            y: endY - labelHeight / 2,
-            width: lbl.textWidth,
-            height: labelHeight,
-            endX: endX,
-            endY: endY
-          };
-        }
-
-        // Check if two boxes overlap
-        function boxesOverlap(a, b) {
-          return !(a.x + a.width < b.x || b.x + b.width < a.x ||
-                   a.y + a.height < b.y || b.y + b.height < a.y);
-        }
-
-        // Check if a box overlaps with a circle (point)
-        function boxOverlapsPoint(box, point) {
-          // Find closest point on box to circle center
-          var closestX = Math.max(box.x, Math.min(point.x, box.x + box.width));
-          var closestY = Math.max(box.y, Math.min(point.y, box.y + box.height));
-          var dx = point.x - closestX;
-          var dy = point.y - closestY;
-          return (dx * dx + dy * dy) < (pointRadius * pointRadius);
-        }
-
-        // Try to resolve collisions iteratively
-        var angles = [0, Math.PI/6, Math.PI/4, Math.PI/3, Math.PI/2.5, -Math.PI/8, -Math.PI/6];
-        var lengths = [25, 35, 45, 55, 65, 75];
-
-        for (var i = 0; i < labels.length; i++) {
-          var currentLabel = labels[i];
-          var bestConfig = { angle: 0, lineLength: baseLineLength, collisions: Infinity };
-
-          // Try different angle/length combinations
-          for (var ai = 0; ai < angles.length; ai++) {
-            for (var li = 0; li < lengths.length; li++) {
-              currentLabel.angle = angles[ai];
-              currentLabel.lineLength = lengths[li];
-              var currentBox = calcLabelBox(currentLabel);
-
-              var collisionCount = 0;
-
-              // Check against all previous labels
-              for (var j = 0; j < i; j++) {
-                var otherBox = calcLabelBox(labels[j]);
-                if (boxesOverlap(currentBox, otherBox)) {
-                  collisionCount++;
-                }
-              }
-
-              // Check against all Pareto points
-              for (var p = 0; p < allPoints.length; p++) {
-                if (boxOverlapsPoint(currentBox, allPoints[p])) {
-                  collisionCount++;
-                }
-              }
-
-              // Prefer shorter lines and smaller angles when no collisions
-              var score = collisionCount * 1000 + lengths[li] + Math.abs(angles[ai]) * 10;
-              if (score < bestConfig.collisions * 1000 + bestConfig.lineLength + Math.abs(bestConfig.angle) * 10) {
-                bestConfig = { angle: angles[ai], lineLength: lengths[li], collisions: collisionCount };
-              }
-
-              if (collisionCount === 0) break; // Found good config, stop searching lengths
-            }
-            if (bestConfig.collisions === 0) break; // Found good config, stop searching angles
-          }
-
-          currentLabel.angle = bestConfig.angle;
-          currentLabel.lineLength = bestConfig.lineLength;
-        }
-
-        // Draw all labels with resolved positions
-        labels.forEach(function(lbl) {
-          var box = calcLabelBox(lbl);
-
-          ctx.save();
-          // Draw leader line
-          ctx.beginPath();
-          ctx.moveTo(lbl.pointX, lbl.pointY);
-          ctx.lineTo(box.endX, box.endY);
-          ctx.strokeStyle = '#999';
-          ctx.lineWidth = 1;
-          ctx.stroke();
-
-          // Draw label
-          ctx.font = '10px sans-serif';
-          ctx.fillStyle = '#666';
-          ctx.textBaseline = 'middle';
-          ctx.textAlign = 'left';
-          ctx.fillText(lbl.label, box.endX + labelPadding, box.endY);
-          ctx.restore();
-
-          // Store label position for click detection
-          labelPositions.push({
-            x: box.x,
-            y: box.y,
-            width: box.width,
-            height: box.height,
-            slug: lbl.slug
-          });
-        });
-      }
-    };
+    var leaderLinePlugin = createLeaderLinePlugin({
+      pointRadius: 12,
+      shouldLabel: function(dataPoint) { return dataPoint.isPareto; },
+      formatLabel: function(dataPoint) {
+        return cleanModelName(dataPoint.label) + (dataPoint.reasoningModel ? ' ▲' : '');
+      },
+      labelPositions: labelPositions,
+      getLabelMeta: function(dataPoint) { return { slug: dataPoint.slug }; }
+    });
 
     // Initialize scatter chart
     var ctx = document.getElementById('cost-intelligence-chart').getContext('2d');
-    Chart.register(ChartDataLabels);
+    registerScatterChartPlugins();
     var chart = new Chart(ctx, {
       type: 'scatter',
       data: { datasets: [] },
@@ -471,7 +283,7 @@
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-          padding: { left: 20, right: 20, top: 10, bottom: 10 }
+          padding: scatterChartLayoutPadding()
         },
         plugins: {
           datalabels: {
@@ -549,58 +361,19 @@
       }
     });
 
-    // Initialize hover state
     chart._hoveringDataPoint = false;
 
-    // Change cursor to pointer when hovering over labels or data points
-    $('#cost-intelligence-chart').on('mousemove', function(evt) {
-      var canvas = this;
-      var rect = canvas.getBoundingClientRect();
-      var scaleX = canvas.width / rect.width;
-      var scaleY = canvas.height / rect.height;
-      var x = (evt.clientX - rect.left) * scaleX;
-      var y = (evt.clientY - rect.top) * scaleY;
-
-      // Check if hovering over a label
-      var overLabel = false;
-      for (var i = 0; i < labelPositions.length; i++) {
-        var label = labelPositions[i];
-        if (x >= label.x && x <= label.x + label.width &&
-            y >= label.y && y <= label.y + label.height) {
-          overLabel = true;
-          break;
-        }
+    bindChartLabelInteractions(
+      document.getElementById('cost-intelligence-chart'),
+      chart,
+      labelPositions,
+      function(label) {
+        window.open('https://artificialanalysis.ai/models/' + label.slug, '_blank');
       }
+    );
 
-      // Check if hovering over a data point (set by onHover callback)
-      var overDataPoint = chart._hoveringDataPoint || false;
-
-      canvas.style.cursor = (overLabel || overDataPoint) ? 'pointer' : 'default';
-    });
-
-    // Reset zoom button
     $('#reset-zoom').on('click', function() {
       chart.resetZoom();
-    });
-
-    // Make chart labels clickable
-    $('#cost-intelligence-chart').on('click', function(evt) {
-      var canvas = this;
-      var rect = canvas.getBoundingClientRect();
-      var scaleX = canvas.width / rect.width;
-      var scaleY = canvas.height / rect.height;
-      var x = (evt.clientX - rect.left) * scaleX;
-      var y = (evt.clientY - rect.top) * scaleY;
-
-      // Check if click is within any label bounds
-      for (var i = 0; i < labelPositions.length; i++) {
-        var label = labelPositions[i];
-        if (x >= label.x && x <= label.x + label.width &&
-            y >= label.y && y <= label.y + label.height) {
-          window.open('https://artificialanalysis.ai/models/' + label.slug, '_blank');
-          return;
-        }
-      }
     });
 
 

@@ -11,10 +11,11 @@
       <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
         <h5 class="mb-0">Tasks per dollar v time per task</h5>
         <div class="form-inline mt-2 mt-md-0 align-items-end">
-          <div class="form-group mb-0">
+          <div class="form-group mb-0 mr-2">
             <label for="agents-baseline-select" class="mb-1 mr-1 d-block small text-muted">At least as smart as</label>
             <select id="agents-baseline-select" class="form-control form-control-sm" style="min-width: 14rem; max-width: 26rem;"></select>
           </div>
+          <button id="agents-reset-zoom" class="btn btn-sm btn-outline-secondary mb-0">Reset zoom</button>
         </div>
       </div>
       <div class="card-body">
@@ -116,6 +117,8 @@
 
     var AGENTS_SCORE_COLUMNS = <%== agents_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
 
+    var DEFAULT_AGENT_BASELINE_LABEL = 'Cursor CLI - Composer 2';
+
     var familyColors = {
       'Claude Code': 'rgba(217, 119, 6, 0.85)',
       'Cursor CLI': 'rgba(99, 102, 241, 0.85)',
@@ -136,29 +139,7 @@
       });
 
       function updateAgentScoreRanks() {
-        var visibleRows = agentsTable.rows({ search: 'applied' }).nodes();
-        AGENTS_SCORE_COLUMNS.forEach(function(col) {
-          $('td.' + col.cellClass + ' .rank-display').text('');
-          var scores = [];
-          $(visibleRows).each(function() {
-            var row = $(this);
-            var cell = row.find('td.' + col.cellClass);
-            if (!cell.length) return;
-            var score = parseFloat(cell.data('order'));
-            if (isNaN(score)) score = -1;
-            if (score >= 0) {
-              scores.push({ score: score, cell: cell });
-            }
-          });
-          scores.sort(function(a, b) { return b.score - a.score; });
-          var currentRank = 1;
-          scores.forEach(function(item, idx) {
-            if (idx > 0 && scores[idx - 1].score !== item.score) {
-              currentRank = idx + 1;
-            }
-            item.cell.find('.rank-display').text('(' + currentRank + '/' + scores.length + ')');
-          });
-        });
+        updateTableScoreRanks(agentsTable, AGENTS_SCORE_COLUMNS);
       }
 
       agentsTable.on('draw', function() {
@@ -169,6 +150,13 @@
       function indexDisplay(row) {
         if (row.indexScore == null || isNaN(row.indexScore)) return null;
         return Math.round(row.indexScore * 100);
+      }
+
+      function resolveAgentsBaselineId() {
+        var match = agentsChartData.find(function(r) {
+          return r.label === DEFAULT_AGENT_BASELINE_LABEL;
+        });
+        return match ? match.id : '';
       }
 
       function populateAgentsBaselineSelect() {
@@ -189,6 +177,7 @@
               .text(r.label + ' (' + indexDisplay(r) + ')')
           );
         });
+        $sel.val(resolveAgentsBaselineId());
       }
 
       function baselineMinIndex() {
@@ -199,55 +188,30 @@
         return indexDisplay(base);
       }
 
-      populateAgentsBaselineSelect();
+      $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        if (settings.nTable.id !== 'agents-table') return true;
 
-      var ctx = document.getElementById('agents-scatter-chart');
-      if (!ctx || !agentsChartData.length) return;
+        var floor = baselineMinIndex();
+        if (floor == null) return true;
 
-      var scatterChart = new Chart(ctx.getContext('2d'), {
-        type: 'scatter',
-        data: { datasets: [] },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label: function(ctx) {
-                  var p = ctx.raw;
-                  return p.tooltip;
-                }
-              }
-            },
-            legend: {
-              display: true,
-              position: 'bottom'
-            }
-          },
-          scales: {
-            x: {
-              title: { display: true, text: 'Time per task (seconds)' },
-              ticks: {
-                callback: function(v) {
-                  return Math.round(v) + ' s';
-                }
-              }
-            },
-            y: {
-              title: { display: true, text: 'Tasks per dollar' },
-              ticks: {
-                callback: function(v) {
-                  if (v >= 10) return v.toFixed(1);
-                  if (v >= 1) return v.toFixed(2);
-                  return v.toFixed(2);
-                }
-              }
-            }
-          }
-        }
+        var row = agentsTable.row(dataIndex).node();
+        var index = parseFloat($(row).find('td.agents-index-cell').data('order'));
+        if (isNaN(index) || index < 0) return false;
+        return index >= floor;
       });
 
+      function applyAgentsBaselineFilter() {
+        agentsTable.draw();
+        rebuildChart();
+      }
+
+      populateAgentsBaselineSelect();
+      agentsTable.draw();
+
+      var scatterChart = null;
+
       function rebuildChart() {
+        if (!scatterChart) return;
         var floor = baselineMinIndex();
         var byFamily = {};
         agentsChartData.forEach(function(row) {
@@ -265,6 +229,7 @@
           byFamily[fam].push({
             x: wall,
             y: tpd,
+            label: row.label,
             tooltip: row.label +
               ': index ' + idxDisp +
               ', ' + tpdLabel + ' tasks/$' +
@@ -278,15 +243,93 @@
             data: byFamily[fam],
             backgroundColor: familyColors[fam] || 'rgba(100, 100, 100, 0.7)',
             pointRadius: 7,
-            pointHoverRadius: 9
+            pointHoverRadius: 9,
+            datalabels: { display: false }
           };
         });
         scatterChart.update();
       }
 
-      $('#agents-baseline-select').on('change', function() {
-        rebuildChart();
+      var ctx = document.getElementById('agents-scatter-chart');
+      if (ctx && agentsChartData.length) {
+        var leaderLinePlugin = createLeaderLinePlugin({ pointRadius: 10 });
+
+        registerScatterChartPlugins();
+        scatterChart = new Chart(ctx.getContext('2d'), {
+          type: 'scatter',
+          data: { datasets: [] },
+          plugins: [leaderLinePlugin],
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: scatterChartLayoutPadding()
+            },
+            plugins: {
+              datalabels: {
+                display: false
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    var p = ctx.raw;
+                    return p.tooltip;
+                  }
+                }
+              },
+              legend: {
+                display: true,
+                position: 'bottom'
+              },
+              zoom: {
+                limits: {
+                  x: { min: 0 },
+                  y: { min: 0 }
+                },
+                pan: {
+                  enabled: true,
+                  mode: 'xy'
+                },
+                zoom: {
+                  wheel: { enabled: true },
+                  pinch: { enabled: true },
+                  mode: 'xy'
+                }
+              }
+            },
+            scales: {
+              x: {
+                reverse: true,
+                min: 0,
+                title: { display: true, text: 'Time per task (seconds)' },
+                ticks: {
+                  callback: function(v) {
+                    return Math.round(v) + ' s';
+                  }
+                }
+              },
+              y: {
+                min: 0,
+                title: { display: true, text: 'Tasks per dollar' },
+                ticks: {
+                  callback: function(v) {
+                    if (v >= 10) return v.toFixed(1);
+                    if (v >= 1) return v.toFixed(2);
+                    return v.toFixed(2);
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      $('#agents-baseline-select').on('change', applyAgentsBaselineFilter);
+
+      $('#agents-reset-zoom').on('click', function() {
+        if (scatterChart) scatterChart.resetZoom();
       });
+
       rebuildChart();
     });
   </script>
