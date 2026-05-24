@@ -127,30 +127,6 @@ module StephenReid
       erb :places
     end
 
-    post '/telegram_webhook' do
-      puts request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN']
-      halt unless request.env['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] == ENV['TELEGRAM_BOT_SECRET_TOKEN']
-      puts json = JSON.parse(request.body.read)
-      halt 200 unless json.dig('message', 'chat', 'id') == ENV['TELEGRAM_BOT_CHAT_ID'].to_i
-      text = json['message']['text']
-      if text.split.last =~ %r{^https?://}
-        url = text.split.last
-        text = text.split[0..-2].join(' ')
-        iframely = JSON.parse(Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body)
-        metadata = Post.extract_iframely_metadata(iframely)
-        Post.post_to_bluesky(
-          text,
-          url: url,
-          title: metadata[:title],
-          description: metadata[:description],
-          thumbnail: metadata[:thumbnail]
-        )
-      else
-        Post.post_to_bluesky(text)
-      end
-      200
-    end
-
     {
       '/z' => 'https://zoom.us/j/9082171779',
       '/cal' => 'https://cal.com/stephenreid',
