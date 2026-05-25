@@ -11,15 +11,10 @@ module Prompt
       },
       {
         title: 'Speaking engagements',
-        content: SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map { |speaking_engagement| "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{speaking_engagement['Name']}" }.join("\n\n")
-      },
-      {
-        title: 'Life as Practice',
-        content: File.read("#{Padrino.root}/app/markdown/life_as_practice.md").force_encoding('utf-8')
-      },
-      {
-        title: 'Coaching',
-        content: File.read("#{Padrino.root}/app/markdown/coaching.md").force_encoding('utf-8')
+        content: SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map do |speaking_engagement|
+          name = speaking_engagement['URL'].present? ? "[#{speaking_engagement['Name']}](#{speaking_engagement['URL']})" : speaking_engagement['Name']
+          "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{name}"
+        end.join("\n\n")
       },
       {
         title: "Content I've shared recently",
