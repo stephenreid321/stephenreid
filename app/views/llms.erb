@@ -163,7 +163,7 @@
     @index_attributes.map { |attr| [attr, attr.titleize] }.to_h.to_json
   %>;
 
-  var DEFAULT_MIN_MODEL_SLUG = 'claude-4-5-sonnet';
+  var DEFAULT_MIN_MODEL_SLUG = 'deepseek-v4-flash';
   var initialMinModelSlug = <%== params[:min_model_slug].to_json %>;
   var MIN_MODEL_SELECTOR_INTELLIGENCE_TOP_N = 100;
 
