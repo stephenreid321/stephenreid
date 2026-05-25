@@ -66,8 +66,8 @@ module Substack
       request_json(conn, "#{base_api}#{path}")
     end
 
-    def fetch_archive_page(conn:, base_api:, offset:, limit:)
-      response = conn.get("#{base_api}/archive?limit=#{limit}&offset=#{offset}")
+    def fetch_archive_page(conn:, base_api:, offset:, limit:, sort: 'new')
+      response = conn.get("#{base_api}/archive?sort=#{sort}&limit=#{limit}&offset=#{offset}")
       raise "HTTP #{response.status}: #{response.body.to_s.byteslice(0, 200)}" unless response.success?
 
       arr = JSON.parse(response.body.to_s)

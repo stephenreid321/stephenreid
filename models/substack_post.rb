@@ -88,15 +88,13 @@ class SubstackPost
 
       all_raw = []
       offset = 0
-      page_size = 50
+      page_size = 12
       loop do
         page = Substack.fetch_archive_page(conn: conn, base_api: base_api, offset: offset, limit: page_size)
         break if page.empty?
 
         all_raw.concat(page)
-        break if page.size < page_size
-
-        offset += page_size
+        offset += page.size
       end
 
       seen_ids = []
