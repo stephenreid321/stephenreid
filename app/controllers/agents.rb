@@ -28,6 +28,12 @@ StephenReid::App.controller do
           label.end_with?(' Fast') ? label.delete_suffix(' Fast') : nil
         end
         rows.select! { |row| !fast_bases.include?(row['displayLabel']) }
+        times = rows.filter_map { |row| row.dig('mean', 'agentWallTimeSec')&.to_f }.select(&:positive?).sort
+        if times.any?
+          median_time = times.length.odd? ? times[times.length / 2] : (times[times.length / 2 - 1] + times[times.length / 2]) / 2.0
+          max_time = 2 * median_time
+          rows.select! { |row| row.dig('mean', 'agentWallTimeSec').to_f <= max_time }
+        end
         rows.sort_by { |r| -(r['indexScore'] || 0).to_f }
       rescue JSON::ParserError
         []
