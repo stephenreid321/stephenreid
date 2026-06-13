@@ -151,3 +151,17 @@ blockquote {
 .badge {
   font-weight: normal
 }
+
+#footer {
+  background-color: $bg-dark;
+  border-top: 1px solid $border-dark;
+
+  a:not(.btn) {
+    color: $body-color;
+  }
+
+  a:not(.btn):hover,
+  a:not(.btn):focus {
+    color: $contrast-color;
+  }
+}

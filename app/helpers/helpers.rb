@@ -92,4 +92,26 @@ StephenReid::App.helpers do
     end
     nil
   end
+
+  # AA embeds the full agent list in `benchmarkRows`, with React Flight refs into
+  # the smaller default `rows` array for the initially selected configurations.
+  def extract_agent_benchmark_rows(body)
+    rows_json = extract_json_array(body, '"rows":')
+    benchmark_rows_json = extract_json_array(body, '"benchmarkRows":')
+    return [] unless benchmark_rows_json
+
+    rows = rows_json ? JSON.parse(rows_json) : []
+    benchmark_rows = JSON.parse(benchmark_rows_json)
+    resolved = benchmark_rows.map do |item|
+      if item.is_a?(Hash)
+        item
+      elsif item.is_a?(String) && item.include?(':rows:')
+        rows[item.split(':').last.to_i]
+      end
+    end.compact
+
+    resolved.uniq { |row| row['id'] }
+  rescue JSON::ParserError
+    []
+  end
 end

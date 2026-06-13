@@ -9,15 +9,25 @@ StephenReid::App.controller do
     end
     body = response.body.force_encoding('UTF-8').scrub
 
-    rows_json = extract_json_array(body, '"rows":')
+    @chart_keys = %w[deep-swe terminal-bench-v2 swe-atlas-qna]
+
     @agent_rows =
       begin
-        rows = rows_json ? JSON.parse(rows_json) : []
+        rows = extract_agent_benchmark_rows(body)
         rows.each do |row|
-          row['components_by_dataset'] = (row['componentScores'] || []).each_with_object({}) do |c, h|
+          components = row['evals'] || row['componentScores'] || []
+          row['components_by_dataset'] = components.each_with_object({}) do |c, h|
             h[c['datasetIndexName']] = c
           end
         end
+        rows.select! do |row|
+          @chart_keys.all? { |key| row.dig('components_by_dataset', key, 'mean', 'reward') }
+        end
+        fast_bases = rows.filter_map do |row|
+          label = row['displayLabel']
+          label.end_with?(' Fast') ? label.delete_suffix(' Fast') : nil
+        end
+        rows.select! { |row| !fast_bases.include?(row['displayLabel']) }
         rows.sort_by { |r| -(r['indexScore'] || 0).to_f }
       rescue JSON::ParserError
         []

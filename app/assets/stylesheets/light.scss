@@ -49,3 +49,17 @@ blockquote {
 .navbar-light .navbar-nav .nav-link:focus {
   color: $contrast-color;
 }
+
+#footer {
+  background-color: $gray-100;
+  border-top: 1px solid $gray-200;
+
+  a:not(.btn) {
+    color: $contrast-color;
+  }
+
+  a:not(.btn):hover,
+  a:not(.btn):focus {
+    color: darken($contrast-color, 10%);
+  }
+}

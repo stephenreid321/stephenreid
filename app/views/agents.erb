@@ -4,7 +4,7 @@
     <a href="https://artificialanalysis.ai/agents/coding-agents" class="alert-link" target="_blank" rel="noopener">their benchmarks page</a> directly.
   </div>
 <% else %>
-  <% chart_keys = %w[swe-atlas-qna swe-bench-pro-hard terminal-bench-v2] %>
+  <% chart_keys = @chart_keys %>
   <% agents_score_column_classes = [{ cell_class: 'agents-index-cell' }] + chart_keys.map { |k| { cell_class: "agents-bench-#{k}" } } %>
   <div class="mb-4">
     <div class="card">
@@ -31,7 +31,6 @@
       <thead>
         <tr>
           <th>Configuration</th>
-          <th>Release</th>
           <th>Agent</th>
           <th>Model</th>
           <th class="text-right">Index</th>
@@ -50,13 +49,6 @@
           <tr>
             <td>
               <strong><%= row['displayLabel'] %></strong>
-            </td>
-            <td data-order="<%= row['releaseDate'] || '0000-00-00' %>">
-              <% if row['releaseDate'] %>
-                <%= display_or_dash(row['releaseDate']) { |d| Date.parse(d).strftime('%b %Y') rescue d } %>
-              <% else %>
-                <span class="text-muted">—</span>
-              <% end %>
             </td>
             <td><%= row.dig('display', 'agent') || row['agentName'] %></td>
             <td><%= row.dig('display', 'model') || row['modelName'] %></td>
@@ -117,8 +109,6 @@
 
     var AGENTS_SCORE_COLUMNS = <%== agents_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
 
-    var DEFAULT_AGENT_BASELINE_LABEL = 'Cursor CLI - Composer 2';
-
     var familyColors = {
       'Claude Code': 'rgba(217, 119, 6, 0.85)',
       'Cursor CLI': 'rgba(99, 102, 241, 0.85)',
@@ -131,10 +121,10 @@
         paging: false,
         searching: true,
         info: true,
-        order: [[4, 'desc']],
+        order: [[3, 'desc']],
         columnDefs: [
-          { className: 'text-right', targets: [4, 5, 6, 7, 8, 9] },
-          { type: 'num', targets: [4, 5, 6, 7, 8, 9] }
+          { className: 'text-right', targets: [3, 4, 5, 6, 7, 8] },
+          { type: 'num', targets: [3, 4, 5, 6, 7, 8] }
         ]
       });
 
@@ -150,13 +140,6 @@
       function indexDisplay(row) {
         if (row.indexScore == null || isNaN(row.indexScore)) return null;
         return Math.round(row.indexScore * 100);
-      }
-
-      function resolveAgentsBaselineId() {
-        var match = agentsChartData.find(function(r) {
-          return r.label === DEFAULT_AGENT_BASELINE_LABEL;
-        });
-        return match ? match.id : '';
       }
 
       function populateAgentsBaselineSelect() {
@@ -177,7 +160,7 @@
               .text(r.label + ' (' + indexDisplay(r) + ')')
           );
         });
-        $sel.val(resolveAgentsBaselineId());
+        $sel.val('');
       }
 
       function baselineMinIndex() {
