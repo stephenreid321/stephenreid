@@ -335,7 +335,7 @@
         },
         scales: {
           x: {
-            type: 'linear',
+            type: 'logarithmic',
             title: { display: true, text: 'Cost to Run ($)', font: { weight: 'bold' } },
             grid: { color: 'rgba(0,0,0,0.05)' }
           },
@@ -558,7 +558,7 @@
       $('#chart-title').text(indexLabel + ' vs ' + xAxisLabel);
       chart.options.scales.y.title.text = indexLabel;
       chart.options.scales.x.title.text = xAxisLabel + xAxisUnit;
-      chart.options.scales.x.type = 'linear';
+      chart.options.scales.x.type = 'logarithmic';
 
       // Calculate cutoff date for release filter
       var cutoffDate = null;
