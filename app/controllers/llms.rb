@@ -2,7 +2,7 @@ StephenReid::App.controller do
   get '/llms', cache: true do
     @container_class = 'container-fluid'
     @stylesheet = 'light'
-    @index_attributes = %w[intelligence agentic coding terminal_bench_hard omniscience openness]
+    @index_attributes = %w[intelligence agentic coding omniscience openness]
     @title = 'LLMs'
 
     response = Faraday.get('https://artificialanalysis.ai/models') do |req|
@@ -36,8 +36,6 @@ StephenReid::App.controller do
     @models.each do |model|
       model['openness_index'] = openness_by_model_id[model['id']]
       model['speed'] = speed_by_model_id[model['id']]
-      # terminalbench_hard is directly on the model object (scale 0-1, multiply by 100 to match other indices)
-      model['terminal_bench_hard_index'] = model['terminalbench_hard'] ? model['terminalbench_hard'] * 100 : nil
       # Normalize omniscience to follow the same pattern as other indices
       model['omniscience_index'] = model['omniscience'] if model['omniscience']
 
