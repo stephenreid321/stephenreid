@@ -39,26 +39,8 @@ StephenReid::App.controller do
       # Normalize omniscience to follow the same pattern as other indices
       model['omniscience_index'] = model['omniscience'] if model['omniscience']
 
-      token_counts = model['intelligence_index_token_counts']
-      host_models = model['host_models']
-      primary_host_id = model['computed_performance_host_model_id']
-      next unless token_counts && host_models&.any?
-
-      input_tokens = token_counts['input_tokens'] || 0
-      output_tokens = token_counts['output_tokens'] || 0
-
-      # Use primary host model (same as AA site uses for their calculations)
-      # Fallback: use most common price tier when no primary is set
-      host = host_models.find { |hm| hm['id'] == primary_host_id }
-      unless host
-        non_free = host_models.select { |hm| (hm['price_1m_blended_3_to_1'] || 0) > 0 }
-        host = non_free.min_by { |hm| hm['price_1m_blended_3_to_1'] }
-      end
-      next unless host && host['price_1m_input_tokens'] && host['price_1m_output_tokens']
-
-      input_cost = input_tokens / 1_000_000.0 * host['price_1m_input_tokens']
-      output_cost = output_tokens / 1_000_000.0 * host['price_1m_output_tokens']
-      model['cost_to_run'] = input_cost + output_cost
+      cost_per_task = model['intelligenceIndexCostPerTask']
+      model['cost_per_task'] = cost_per_task.dig('cost', 'total') if cost_per_task.is_a?(Hash)
     end
 
     erb :llms

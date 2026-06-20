@@ -6,7 +6,7 @@
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
-      <%= select_tag :x_axis, options: [['Cost', 'cost'], ['Speed', 'speed']], selected: (params[:x_axis] || 'cost'), id: 'x-axis-selector', class: 'form-control' %>
+      <%= select_tag :x_axis, options: [['Cost per Task', 'cost'], ['Speed', 'speed']], selected: (params[:x_axis] || 'cost'), id: 'x-axis-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="reasoning-filter">Reasoning</label>
@@ -29,7 +29,7 @@
       <%= select_tag :release, options: [['All time', '']] + [1, 3, 6, 12, 24].map { |m| ["#{pluralize(m, 'month')}", m.to_s] }, selected: (params[:release] || '3'), id: 'release-filter', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
-      <label for="max-cost-filter">Cost &lt; ($)</label>
+      <label for="max-cost-filter">Cost/task &lt; ($)</label>
       <%= number_field_tag :max_cost, value: params[:max_cost], id: 'max-cost-filter', class: 'form-control', step: 'any', min: 0, placeholder: 'No limit' %>
     </div>
   </div>
@@ -96,7 +96,7 @@
           <th><%= attr.titleize %></th>
         <% end %>
         <th>Speed</th>
-        <th>Cost to Run</th>
+        <th>Cost per Task</th>
       </tr>
     </thead>
     <tbody>
@@ -130,7 +130,7 @@
             </td>
           <% end %>
           <td data-order="<%= model['speed'] || 0 %>"><%= display_or_dash(model['speed'], format: '%.0f', suffix: 'tok/s') %></td>
-          <td data-order="<%= model['cost_to_run'] || 0 %>"><%= display_or_dash(model['cost_to_run'], format: '%.0f', prefix: '$') %></td>
+          <td data-order="<%= model['cost_per_task'] || 0 %>"><%= display_or_dash(model['cost_per_task'], format: '%.3f', prefix: '$') %></td>
         </tr>
       <% end %>
     </tbody>
@@ -145,7 +145,7 @@
       slug: m['slug'],
       name: m['name'],
       speed: (m['speed'] || 0).to_f,
-      costToRun: (m['cost_to_run'] || 0).to_f,
+      costPerTask: (m['cost_per_task'] || 0).to_f,
       reasoningModel: !!m['reasoning_model'],
       isOpenWeights: !!m['is_open_weights'],
       releaseDate: m['release_date']
@@ -166,9 +166,7 @@
   var DEFAULT_MIN_MODEL_SLUG = 'deepseek-v4-flash';
   var initialMinModelSlug = <%== params[:min_model_slug].to_json %>;
   var MIN_MODEL_SELECTOR_INTELLIGENCE_TOP_N = 100;
-
-  /** Index attrs that do not get floors from the baseline model */
-  var MIN_SCORE_REFERENCE_EXEMPT = ['omniscience', 'openness'];
+  var BASELINE_SCORE_ATTRIBUTES = ['intelligence'];
 
   $(function() {
     var table = $('#models-table').DataTable({
@@ -294,7 +292,7 @@
               label: function(context) {
                 var point = context.raw;
                 var xAxisType = $('#x-axis-selector').val();
-                var xLabel = xAxisType === 'speed' ? 'Speed ' + point.x.toFixed(0) + ' tok/s' : 'Cost $' + point.x.toFixed(0);
+                var xLabel = xAxisType === 'speed' ? 'Speed ' + point.x.toFixed(0) + ' tok/s' : 'Cost/task ' + formatCost(point.x);
                 return cleanModelName(point.label) + ': Score ' + point.y.toFixed(1) + ', ' + xLabel;
               }
             }
@@ -336,7 +334,7 @@
         scales: {
           x: {
             type: 'logarithmic',
-            title: { display: true, text: 'Cost to Run ($)', font: { weight: 'bold' } },
+            title: { display: true, text: 'Cost per Task ($)', font: { weight: 'bold' } },
             grid: { color: 'rgba(0,0,0,0.05)' }
           },
           y: {
@@ -377,11 +375,17 @@
     });
 
 
-    // Convert snake_case to camelCase (e.g., cost_to_run -> costToRun)
+    // Convert snake_case to camelCase (e.g., cost_per_task -> costPerTask)
     function snakeToCamel(str) {
       return str.replace(/_([a-z])/g, function(match, letter) {
         return letter.toUpperCase();
       });
+    }
+
+    function formatCost(value) {
+      if (value >= 1) return '$' + value.toFixed(2);
+      if (value >= 0.01) return '$' + value.toFixed(3);
+      return '$' + value.toPrecision(2);
     }
 
     function getIndexValue(model, indexType) {
@@ -453,7 +457,7 @@
     }
 
     function clearMinScoreFieldsFromBaseline() {
-      INDEX_ATTRIBUTES.forEach(function(attr) {
+      BASELINE_SCORE_ATTRIBUTES.forEach(function(attr) {
         var $field = $('#score-field-' + attr);
         var $button = $('.toggle-score-field[data-attr="' + attr + '"]');
         var $input = $('#min-score-' + attr);
@@ -469,14 +473,6 @@
       var $button = $('.toggle-score-field[data-attr="' + attr + '"]');
       var $input = $('#min-score-' + attr);
 
-      if (MIN_SCORE_REFERENCE_EXEMPT.indexOf(attr) !== -1) {
-        $input.val('');
-        $field.hide();
-        $button.show();
-        updateLabelStyle(attr);
-        return;
-      }
-
       var v = model[snakeToCamel(attr) + 'Index'];
       if (v == null || isNaN(v)) {
         $input.val('');
@@ -490,17 +486,21 @@
       updateLabelStyle(attr);
     }
 
+    function showPrefilledMinScoreFields() {
+      INDEX_ATTRIBUTES.forEach(function(attr) {
+        var $input = $('#min-score-' + attr);
+        if ($input.val() != null && String($input.val()).trim() !== '') {
+          $('#score-field-' + attr).show();
+          $('.toggle-score-field[data-attr="' + attr + '"]').hide();
+          updateLabelStyle(attr);
+        }
+      });
+    }
+
     function setMinScoreFieldsFromBaseline(slug, onlyIfEmpty) {
       if (!slug) {
         if (onlyIfEmpty) {
-          INDEX_ATTRIBUTES.forEach(function(attr) {
-            var $input = $('#min-score-' + attr);
-            if ($input.val() != null && String($input.val()).trim() !== '') {
-              $('#score-field-' + attr).show();
-              $('.toggle-score-field[data-attr="' + attr + '"]').hide();
-              updateLabelStyle(attr);
-            }
-          });
+          showPrefilledMinScoreFields();
         } else {
           clearMinScoreFieldsFromBaseline();
         }
@@ -510,7 +510,9 @@
       var model = modelsData.find(function(m) { return m.slug === slug; });
       if (!model) return;
 
-      INDEX_ATTRIBUTES.forEach(function(attr) {
+      if (onlyIfEmpty) showPrefilledMinScoreFields();
+
+      BASELINE_SCORE_ATTRIBUTES.forEach(function(attr) {
         if (onlyIfEmpty) {
           var $input = $('#min-score-' + attr);
           if ($input.val() != null && String($input.val()).trim() !== '') {
@@ -553,7 +555,7 @@
 
       // Update title and axis labels
       var indexLabel = indexLabels[selectedIndex];
-      var xAxisLabel = xAxisType === 'speed' ? 'Speed' : 'Cost to Run';
+      var xAxisLabel = xAxisType === 'speed' ? 'Speed' : 'Cost per Task';
       var xAxisUnit = xAxisType === 'speed' ? ' (tok/s)' : ' ($)';
       $('#chart-title').text(indexLabel + ' vs ' + xAxisLabel);
       chart.options.scales.y.title.text = indexLabel;
@@ -587,7 +589,7 @@
         }
 
         var indexValue = getIndexValue(model, selectedIndex);
-        var xAxisValue = xAxisType === 'speed' ? model.speed : model.costToRun;
+        var xAxisValue = xAxisType === 'speed' ? model.speed : model.costPerTask;
 
         // Check all min score filters
         var scoreMatch = true;
@@ -615,7 +617,7 @@
 
         var costCapMatch = true;
         if (maxCostLimit != null) {
-          costCapMatch = model.costToRun < maxCostLimit;
+          costCapMatch = model.costPerTask < maxCostLimit;
         }
 
         return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && indexValueValid && xAxisValue > 0 && costCapMatch;
@@ -652,7 +654,7 @@
 
       // Calculate Pareto frontier FIRST so we can label only those points
       var allPoints = filteredModels.map(function(m) {
-        var xValue = xAxisType === 'speed' ? m.speed : m.costToRun;
+        var xValue = xAxisType === 'speed' ? m.speed : m.costPerTask;
         return { x: xValue, y: getIndexValue(m, selectedIndex), label: m.name, reasoningModel: m.reasoningModel, slug: m.slug };
       });
 
@@ -689,7 +691,7 @@
         if (models.length > 0) {
           var dataPoints = models.map(function(m) {
             var pIdx = paretoInfo[m.name];
-            var xValue = xAxisType === 'speed' ? m.speed : m.costToRun;
+            var xValue = xAxisType === 'speed' ? m.speed : m.costPerTask;
             return {
               x: xValue,
               y: getIndexValue(m, selectedIndex),
@@ -738,7 +740,7 @@
         var sortedPareto = paretoPoints.slice().sort(function(a, b) { return b.x - a.x; });
         var paretoHtml = '<ul class="list-unstyled mb-0">' + sortedPareto.map(function(p) {
           var lightbulbIcon = p.reasoningModel ? ' ▲' : '';
-          var xDisplay = xAxisType === 'speed' ? p.x.toFixed(0) + ' tok/s' : '$' + p.x.toFixed(0);
+          var xDisplay = xAxisType === 'speed' ? p.x.toFixed(0) + ' tok/s' : formatCost(p.x);
           return '<li><strong><a href="https://artificialanalysis.ai/models/' + p.slug + '" target="_blank" class="text-dark">' + cleanModelName(p.label) + '</a>' + lightbulbIcon + '</strong> <span class="text-muted">(' + xDisplay + ' @ ' + p.y.toFixed(1) + ')</span></li>';
         }).join('') + '</ul>';
         $('#pareto-list').html(paretoHtml);
@@ -825,7 +827,7 @@
       }
     );
 
-    // Populate baseline control, fill empty min-score fields from that model, then apply custom filter
+    // Populate baseline control, fill the intelligence floor from that model, then apply custom filter
     populateMinModelSelector();
     setMinScoreFieldsFromBaseline($('#min-model-selector').val(), true);
     table.draw();
