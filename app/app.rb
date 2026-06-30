@@ -89,8 +89,8 @@ module StephenReid
       erb :book
     end
 
-    get '/prompt', provides: :txt do
-      Prompt.markdown(
+    get '/context', provides: :txt do
+      Context.markdown(
         book_summaries: params[:book_summaries],
         notes_limit: params[:notes_limit],
         posts_limit: params[:posts_limit]

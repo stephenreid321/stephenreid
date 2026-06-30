@@ -1,5 +1,5 @@
-module Prompt
-  def self.prompt(book_summaries: false, notes_limit: nil, posts_limit: nil)
+module Context
+  def self.context(book_summaries: false, notes_limit: nil, posts_limit: nil)
     sections = [
       {
         title: 'Short bio in the third person',
@@ -47,7 +47,7 @@ module Prompt
   end
 
   def self.markdown(book_summaries: false, notes_limit: nil, posts_limit: nil)
-    data = prompt(
+    data = context(
       book_summaries: book_summaries,
       notes_limit: notes_limit,
       posts_limit: posts_limit
@@ -74,7 +74,7 @@ module Prompt
   end
 
   def self.xml(book_summaries: false, notes_limit: nil, posts_limit: nil)
-    data = prompt(
+    data = context(
       book_summaries: book_summaries,
       notes_limit: notes_limit,
       posts_limit: posts_limit
