@@ -29,5 +29,3 @@ end
 Padrino.load!
 
 Delayed::Worker.max_attempts = 1
-
-Airrecord.api_key = ENV['AIRTABLE_API_KEY']

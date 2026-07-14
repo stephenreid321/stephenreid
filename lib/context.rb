@@ -15,10 +15,6 @@ module Context
           name = speaking_engagement[:url].present? ? "[#{speaking_engagement[:name]}](#{speaking_engagement[:url]})" : speaking_engagement[:name]
           "#{[speaking_engagement[:date], speaking_engagement[:location], speaking_engagement[:organisation_name]].compact.join(', ')}: #{name}"
         end.join("\n\n")
-      },
-      {
-        title: "Content I've shared recently",
-        posts: Post.all(filter: "IS_AFTER({Created at}, '#{3.months.ago.to_s(:db)}')", sort: { 'Created at' => 'desc' }).map { |post| { title: post['Title'], link: post['Link'], date: post['Created at'], body: post['Body'] } }
       }
     ]
 
@@ -59,8 +55,6 @@ module Context
 
       if section[:content]
         result << section[:content]
-      elsif section[:posts]
-        result << section[:posts].map { |post| "[#{post[:title]}](#{post[:link]}), #{post[:date]}\n#{post[:body]}" }.join("\n\n")
       elsif section[:books]
         result << if section[:title].include?('summaries')
                     section[:books].map { |b| "### #{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n\n#{b[:summary]}" }.join("\n\n")
@@ -86,8 +80,6 @@ module Context
 
       if section[:content]
         section_hash[:content] = section[:content]
-      elsif section[:posts]
-        section_hash[:post] = section[:posts]
       elsif section[:books]
         section_hash[:book] = section[:books]
       end

@@ -17,60 +17,46 @@ namespace :strategies do
   end
 end
 
-namespace :terms do
-  task create_edges: :environment do
-    term_ids = []
-    Post.all(filter: "IS_AFTER({Created at}, '#{1.day.ago.to_s(:db)}')").each do |post|
-      term_ids += post['Terms'] if post['Terms']
-    end
-    term_ids.uniq.each do |term_id|
-      term = Term.find(term_id)
-      puts term['Name']
-      term.create_edges
-    end
-  end
-end
-
 namespace :posts do
   task sync: :environment do
-    Post.sync_with_readwise
-  end
-
-  task delete_duplicates: :environment do
-    links = Post.all.map { |post| post['Link'] }
-    dupes = links.select { |link| links.count(link) > 1 }
-    dupes.uniq.each do |link|
-      posts = Post.all(filter: "{Link} = '#{link}'", sort: { 'Created at' => 'desc' })
-      posts[1..].each do |post|
-        puts "destroying #{post['Link']} created #{post['Created at']}"
-        post.destroy
-      end
-    end
-  end
-
-  task tag_new: :environment do
-    term_ids = []
-    Post.all(filter: "{Title} = ''").each do |post|
-      post['Iframely'] = Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(post['Link'].split('#').first)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body.force_encoding('UTF-8')
-
-      json = JSON.parse(post['Iframely'])
-
-      puts(post['Title'] = json['meta']['title'])
-      post['Body'] = json['meta']['description']
-
-      post.save
-
-      if post['Title']
-        post.tagify(skip_linking: true)
-        term_ids += post['Terms'] if post['Terms']
-      end
+    conn = Faraday.new(url: 'https://readwise.io/api/v3') do |faraday|
+      faraday.request :url_encoded
+      faraday.adapter Faraday.default_adapter
     end
 
-    puts term_ids.count
-    term_ids.uniq.each do |term_id|
-      term = Term.find(term_id)
-      puts term['Name']
-      term.create_edges
+    response = conn.get('list', {
+                          location: 'archive',
+                          updatedAfter: 7.days.ago.iso8601
+                        }) do |req|
+      req.headers['Authorization'] = "Token #{ENV['READWISE_ACCESS_TOKEN']}"
+      req.headers['Content-Type'] = 'application/json'
+    end
+
+    posted_urls = `python #{Shellwords.escape(Padrino.root.to_s)}/scripts/bluesky.py --recent-urls`
+                    .lines.map(&:strip).reject(&:empty?)
+
+    data = JSON.parse(response.body)
+    data['results'].first(50).sort_by { |r| -Time.parse(r['last_moved_at']).to_i }.each do |r|
+      url = r['source_url'].gsub('youtu.be/', 'youtube.com/watch?v=')
+      next if Time.parse(r['last_moved_at']) < 7.days.ago
+      next if posted_urls.include?(url)
+
+      puts url
+
+      iframely = Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body
+      json = JSON.parse(iframely)
+      metadata = {
+        title: json.dig('meta', 'title').to_s,
+        description: json.dig('meta', 'description').to_s.truncate(150),
+        thumbnail: json.dig('links', 'thumbnail', 0, 'href').to_s
+      }
+      title = r['title'].presence || metadata[:title]
+      description = (r['summary'].presence || metadata[:description]).to_s.truncate(150)
+
+      args = [Shellwords.escape(title), Shellwords.escape(url), Shellwords.escape(title), Shellwords.escape(description)]
+      args << Shellwords.escape(metadata[:thumbnail]) if metadata[:thumbnail].present?
+      `python #{Shellwords.escape(Padrino.root.to_s)}/scripts/bluesky.py #{args.join(' ')}`
+      posted_urls << url
     end
   end
 end

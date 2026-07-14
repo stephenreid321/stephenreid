@@ -47,10 +47,6 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.9)
       public_suffix (>= 2.0.2, < 8.0)
-    airrecord (1.0.12)
-      faraday (>= 1.0, < 3.0)
-      faraday-net_http_persistent
-      net-http-persistent
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.21)
@@ -88,15 +84,12 @@ GEM
       rubocop (>= 1)
       smart_properties
     erubi (1.13.1)
-    faraday (2.14.1)
+    faraday (2.14.3)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.4.2)
+    faraday-net_http (3.4.4)
       net-http (~> 0.5)
-    faraday-net_http_persistent (2.3.1)
-      faraday (~> 2.5)
-      net-http-persistent (>= 4.0.4, < 5)
     ffi (1.17.3)
     ffi (1.17.3-arm64-darwin)
     honeybadger (6.5.2)
@@ -111,7 +104,7 @@ GEM
       prism (>= 1.3.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.19.1)
+    json (2.21.1)
     json-schema (6.2.0)
       addressable (~> 2.8)
       bigdecimal (>= 3.1, < 5)
@@ -150,8 +143,6 @@ GEM
       ruby2_keywords (~> 0.0.1)
     net-http (0.9.1)
       uri (>= 0.11.1)
-    net-http-persistent (4.0.8)
-      connection_pool (>= 2.2.4, < 4)
     net-imap (0.6.3)
       date
       net-protocol
@@ -216,8 +207,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.5)
-    rack-attack (6.8.0)
-      rack (>= 1.0, < 4)
     rack-protection (4.2.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
@@ -303,7 +292,6 @@ DEPENDENCIES
   activate-admin!
   activate-tools!
   activesupport
-  airrecord
   bcrypt
   better_html
   chroma
@@ -320,7 +308,6 @@ DEPENDENCIES
   padrino
   puma
   rack
-  rack-attack
   rake
   redcarpet
   reverse_markdown

@@ -25,13 +25,11 @@ gem 'rubocop'
 gem 'bcrypt'
 gem 'chroma'
 gem 'csv'
-gem 'rack-attack'
 gem 'redcarpet'
 gem 'reverse_markdown'
 gem 'rss'
 
 # Data
-gem 'airrecord'
 gem 'delayed_job_mongoid'
 gem 'mongoid'
 

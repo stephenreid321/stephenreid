@@ -21,10 +21,6 @@ IGNORED_ERRORS = {
   'ArgumentError' => [
     'invalid byte sequence in UTF-8'
   ],
-  'Airrecord::Error' => [
-    'HTTP 503: Communication error',
-    'HTTP 422: INVALID_FILTER_BY_FORMULA'
-  ],
   'Errno::ECONNRESET' => [
     'Connection reset by peer'
   ]

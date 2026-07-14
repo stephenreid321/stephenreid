@@ -10,8 +10,6 @@ module StephenReid
     use Honeybadger::Rack::UserInformer
     use Honeybadger::Rack::ErrorNotifier
 
-    use Rack::Attack
-
     register Padrino::Cache
     enable :caching unless Padrino.env == :development
 
@@ -49,10 +47,6 @@ module StephenReid
       expires 1.hour.to_i
       @og_image = "#{ENV['BASE_URI']}/images/link.jpg"
       @og_desc = 'Technologist, facilitator and coach'
-      @posts = Post.all(filter: "AND(
-        FIND('\"url\": ', {Iframely}) > 0,
-        {Hide from homepage} != 1
-      )", sort: { 'Created at' => 'desc' })
       @substack_gallery = SubstackNote.recent_gallery_items(limit: 20)
       erb :home
     end
@@ -141,9 +135,10 @@ module StephenReid
       '/bio' => '/about',
       '/darknet' => 'https://dark.fail/',
       '/why-use-the-darknet' => 'https://dark.fail/',
-      '/books-videos' => '/knowledgegraph',
-      '/featured' => '/knowledgegraph',
-      '/recommended' => '/knowledgegraph',
+      '/books-videos' => '/',
+      '/featured' => '/',
+      '/recommended' => '/',
+      '/knowledgegraph' => '/',
       '/maps' => '/life-as-practice',
       '/life-as-practice' => 'https://lifeaspractice.com/',
       '/technological-metamodernism' => 'https://stephenreid.substack.com/p/technological-metamodernism-course'
