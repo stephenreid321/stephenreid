@@ -5,7 +5,9 @@ require 'csv'
   Object.const_set(
     name.upcase,
     CSV.read(path, headers: true).map do |row|
-      row.to_h.transform_keys(&:to_sym).transform_values { |v| v.nil? || v.empty? ? nil : v }
+      record = row.to_h.transform_keys(&:to_sym).transform_values { |v| v.nil? || v.empty? ? nil : v }
+      record[:slug] = record[:name].to_s.parameterize if record[:name]
+      record
     end.freeze
   )
 end
