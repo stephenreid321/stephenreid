@@ -1,7 +1,3 @@
-<p class="lead">
-  Last updated <%= time_ago_in_words Time.parse(SPEAKING_ENGAGEMENTS.map { |s| s[:updated_at] }.compact.max) %> ago
-</p>
-
 <dl class="row">
   <% SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.each { |speaking_engagement| %>
   <%= partial :speaking_engagement, object: speaking_engagement %>
