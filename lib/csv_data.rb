@@ -22,11 +22,10 @@ BOOKS = CSV.read("#{PADRINO_ROOT}/data/goodreads_library_export.csv", headers: t
     book[key] = book[key].tr('/', '-') if book[key]
   end
 
-  book[:slug] = book[:title].to_s.downcase.gsub(/[^a-z0-9]+/, '-').gsub(/\A-|-\z/, '')
+  book[:slug] = book[:title].to_s.parameterize
 
   book_id = book[:book_id].to_s
-  ext = %w[jpg jpeg png gif webp].find { |e| File.exist?("#{cover_dir}/#{book_id}.#{e}") }
-  book[:cover_image] = "/images/books/#{book_id}.#{ext}" if ext
+  book[:cover_image] = "/images/books/#{book_id}.jpg" if File.exist?("#{cover_dir}/#{book_id}.jpg")
 
   book
 end.freeze
