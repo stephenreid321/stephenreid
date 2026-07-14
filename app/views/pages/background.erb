@@ -5,12 +5,12 @@
 
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 <ul>
-  <% Affiliation.all(filter: "AND({Current} = '', {Hidden} = '')", sort: { 'Order' => 'asc' }).each { |affiliation| %>
+  <% AFFILIATIONS.select { |a| a[:current].nil? && a[:hidden].nil? }.sort_by { |a| a[:order].to_i }.each { |affiliation| %>
   <li>
-    <% if affiliation.fields['Organisation'] %>
-      <a href="<%= affiliation.organisation['URL'] %>"><%= affiliation.organisation['Name'] %></a>,
+    <% if affiliation[:organisation_name] %>
+      <a href="<%= affiliation[:organisation_url] %>"><%= affiliation[:organisation_name] %></a>,
     <% end %>
-    <%= affiliation['Position'] %>
+    <%= affiliation[:position] %>
   </li>
   <% } %>
   <li>
@@ -23,11 +23,11 @@
 
 <h2 class="mt-5" id="research">Peer-reviewed research</h2>
 <dl class="row">
-  <% Paper.all.shuffle.each { |paper| %>
-  <dt class="col-lg-3"><%= date = Date.parse(paper['Date']); date.strftime('%b %Y') %>,
-    <%= paper['Journal'] %></dt>
+  <% PAPERS.each { |paper| %>
+  <dt class="col-lg-3"><%= date = Date.parse(paper[:date]); date.strftime('%b %Y') %>,
+    <%= paper[:journal] %></dt>
   <dd class="col-lg-9">
-    <a href="<%= paper['URL'] %>"><%= paper['Name'] %></a>
+    <a href="<%= paper[:url] %>"><%= paper[:name] %></a>
   </dd>
   <% } %>
 </dl>

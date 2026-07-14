@@ -1,5 +1,5 @@
 <% 
-base_uri = "https://raw.githubusercontent.com/stephenreid321/courses/main/#{Rack::Utils.escape_path(@course['Name'])}"
+base_uri = "https://raw.githubusercontent.com/stephenreid321/courses/main/#{Rack::Utils.escape_path(@course[:name])}"
 doc = Nokogiri::HTML(URI.open("#{base_uri}/course.html"))
 head = doc.search('head')
 body = doc.search('body')
@@ -89,7 +89,7 @@ end
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= head.inner_html.to_s.gsub('"Overpass"', 'sans-serif') %>
-    <title><%= @course['Name'] %></title>
+    <title><%= @course[:name] %></title>
     <style>
       body { margin: 0 !important; font-family: sans-serif;  }
       .container { padding: 20px !important; max-width: 800px; margin: 0 auto;}
@@ -147,19 +147,19 @@ end
     </style>
   </head>
   <body>
-    <% if @course['URL'] %>
+    <% if @course[:url] %>
       <div class="source-banner">
         A course by <a href="https://stephenreid.net" target="_blank">Stephen Reid</a>
         &middot;
         <span class="mobile-visible">
-          <a href="<%= @course['URL'] %>" target="_blank">Original notes</a>
+          <a href="<%= @course[:url] %>" target="_blank">Original notes</a>
         </span>
         <span class="mobile-hidden">
           Original notes available on
-          <a href="<%= @course['URL'] %>" target="_blank">Google Docs</a>
+          <a href="<%= @course[:url] %>" target="_blank">Google Docs</a>
         </span>
         &middot;
-        <a href="<%= @course['Dandelion URL'] %>" target="_blank">Event page</a>
+        <a href="<%= @course[:dandelion_url] %>" target="_blank">Event page</a>
       </div>
     <% end %>
     <div class="container">

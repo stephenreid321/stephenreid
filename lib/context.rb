@@ -11,9 +11,9 @@ module Context
       },
       {
         title: 'Speaking engagements',
-        content: SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).map do |speaking_engagement|
-          name = speaking_engagement['URL'].present? ? "[#{speaking_engagement['Name']}](#{speaking_engagement['URL']})" : speaking_engagement['Name']
-          "#{[speaking_engagement['Date'], speaking_engagement['Location'], speaking_engagement['Organisation Name']].compact.join(', ')}: #{name}"
+        content: SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.map do |speaking_engagement|
+          name = speaking_engagement[:url].present? ? "[#{speaking_engagement[:name]}](#{speaking_engagement[:url]})" : speaking_engagement[:name]
+          "#{[speaking_engagement[:date], speaking_engagement[:location], speaking_engagement[:organisation_name]].compact.join(', ')}: #{name}"
         end.join("\n\n")
       },
       {
@@ -25,12 +25,12 @@ module Context
     sections << if book_summaries
                   {
                     title: "Books I've read, with summaries",
-                    books: Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| { title: b['Title'], author: b['Author'], date_read: b['Date Read'], summary: b['Summary'].blank? ? '(summary missing)' : b['Summary'].split("\n\n")[1..-1].join("\n\n") } }
+                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read], summary: b[:summary].blank? ? '(summary missing)' : b[:summary].split("\n\n")[1..-1].join("\n\n") } }
                   }
                 else
                   {
                     title: "Books I've read",
-                    books: Book.all(sort: { 'Date Read' => 'desc' }, filter: "{Date Read} >= '2018-01-01'").map { |b| { title: b['Title'], author: b['Author'], date_read: b['Date Read'] } }
+                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read] } }
                   }
                 end
 

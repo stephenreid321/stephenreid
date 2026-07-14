@@ -77,15 +77,15 @@ module StephenReid
     end
 
     get '/courses/:slug' do
-      @course = Course.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
+      @course = COURSES.find { |c| c[:slug] == params[:slug] } || not_found
       erb :course, layout: false
     end
 
     get '/books/:slug', cache: true do
       expires 6.hours.to_i
-      @book = Book.all(filter: "{Slug} = '#{params[:slug]}'").first || not_found
-      redirect("https://www.goodreads.com/book/show/#{@book['Book Id']}") if @book['Summary'].blank?
-      @title = @book['Title']
+      @book = BOOKS.find { |b| b[:slug] == params[:slug] } || not_found
+      redirect("https://www.goodreads.com/book/show/#{@book[:book_id]}") if @book[:summary].blank?
+      @title = @book[:title]
       erb :book
     end
 

@@ -2,8 +2,6 @@ class Organisation < Airrecord::Table
   self.base_key = ENV['AIRTABLE_BASE_KEY']
   self.table_name = 'Organisations'
 
-  has_many :affiliations, class: 'Affiliation', column: 'Affiliations'
-  has_many :speaking_engagements, class: 'SpeakingEngagement', column: 'Speaking engagements'
   has_many :terms, class: 'Term', column: 'Terms'
   has_many :posts, class: 'Post', column: 'Posts'
 

@@ -1,9 +1,9 @@
 <p class="lead">
-  Last updated <%= time_ago_in_words Time.parse(SpeakingEngagement.all(sort: { 'Updated at' => 'desc'}).first['Updated at']) %> ago
+  Last updated <%= time_ago_in_words Time.parse(SPEAKING_ENGAGEMENTS.map { |s| s[:updated_at] }.compact.max) %> ago
 </p>
 
 <dl class="row">
-  <% SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).each { |speaking_engagement| %>
+  <% SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.each { |speaking_engagement| %>
   <%= partial :speaking_engagement, object: speaking_engagement %>
   <% } %>
 </dl>

@@ -1,7 +1,7 @@
-<% Software.all(sort: { "Order" => "asc" }).each { |platform| if (profile_url = platform['Profile URL']) %>
+<% SOFTWARES.select { |p| p[:profile_url] }.sort_by { |p| p[:order].to_i }.each { |platform| %>
 <div class="col-auto">
-  <a style="text-decoration:none" data-toggle="tooltip" title="<%= profile_url.starts_with?('http') ? profile_url.split('/').last : profile_url %>" target="_blank" href="<%= profile_url %>">
-    <%= platform['Name'] %>
+  <a style="text-decoration:none" data-toggle="tooltip" title="<%= platform[:profile_url].starts_with?('http') ? platform[:profile_url].split('/').last : platform[:profile_url] %>" target="_blank" href="<%= platform[:profile_url] %>">
+    <%= platform[:name] %>
   </a>
 </div>
-<% end } %>
+<% } %>

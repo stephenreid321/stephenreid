@@ -1,18 +1,18 @@
-<dt class="col-lg-4"><%= date = Date.parse(speaking_engagement['Date']); date.strftime('%b %Y') %><% if speaking_engagement['Location'] %>, <%= speaking_engagement['Location'] %><% elsif speaking_engagement['Organisation'] %>, <%= speaking_engagement['Organisation name'] %><% end %>
+<dt class="col-lg-4"><%= date = Date.parse(speaking_engagement[:date]); date.strftime('%b %Y') %><% if speaking_engagement[:location] %>, <%= speaking_engagement[:location] %><% elsif speaking_engagement[:organisation_name] %>, <%= speaking_engagement[:organisation_name] %><% end %>
 </dt>
 <dd class="col-lg-8">
-  <a href="<%= speaking_engagement['URL'] %>">
-    <% if speaking_engagement['URL'] =~ /youtu/ %>
+  <a href="<%= speaking_engagement[:url] %>">
+    <% if speaking_engagement[:url] =~ /youtu/ %>
       <i class="bi bi-youtube"></i>
-    <% elsif speaking_engagement['URL'] =~ /spotify/ %>
+    <% elsif speaking_engagement[:url] =~ /spotify/ %>
       <i class="bi bi-spotify"></i>
-    <% elsif speaking_engagement['URL'] =~ /substack/ %>
+    <% elsif speaking_engagement[:url] =~ /substack/ %>
       <i class="bi bi-bookmark"></i>
-    <% elsif speaking_engagement['URL'] =~ /google/ %>
+    <% elsif speaking_engagement[:url] =~ /google/ %>
       <i class="bi bi-google"></i>
-    <% elsif speaking_engagement['URL'] =~ /facebook\.com\/events\// %>
+    <% elsif speaking_engagement[:url] =~ /facebook\.com\/events\// %>
       <i class="bi bi-facebook"></i>
     <% end %>
-    <%= speaking_engagement['Name'] %>
+    <%= speaking_engagement[:name] %>
   </a>
 </dd>

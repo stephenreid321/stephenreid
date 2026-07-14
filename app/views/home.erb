@@ -63,7 +63,7 @@
   Recent speaking engagements
 </p>
 <dl class="row">
-  <% SpeakingEngagement.all(filter: '{Hidden} = 0', sort: { 'Date' => 'desc' }).first(5).each { |speaking_engagement| %>
+  <% SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.first(5).each { |speaking_engagement| %>
   <%= partial :speaking_engagement, object: speaking_engagement %>
   <% } %>
 </dl>
