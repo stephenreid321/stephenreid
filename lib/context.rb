@@ -21,12 +21,12 @@ module Context
     sections << if book_summaries
                   {
                     title: "Books I've read, with summaries",
-                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read], summary: b[:summary].blank? ? '(summary missing)' : b[:summary].split("\n\n")[1..-1].join("\n\n") } }
+                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.sort_by { |b| b[:date_read] }.reverse.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read], summary: '(summary missing)' } }
                   }
                 else
                   {
                     title: "Books I've read",
-                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read] } }
+                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.sort_by { |b| b[:date_read] }.reverse.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read] } }
                   }
                 end
 

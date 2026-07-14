@@ -1,3 +1,3 @@
-<a href="<%= book[:summary].blank? ? "https://www.goodreads.com/book/show/#{book[:book_id]}" : "/books/#{book[:slug]}" %>">
+<a href="https://www.goodreads.com/book/show/<%= book[:book_id] %>">
   <img <% if Date.parse(book[:date_read]) > Date.parse('2020-01-01') %> data-toggle="tooltip" title="Read <%=Date.parse(book[:date_read]).strftime('%b %Y')%>" <% end %> class="w-100" src="<%= book[:cover_image] %>">
 </a>

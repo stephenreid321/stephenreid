@@ -74,9 +74,7 @@ module StephenReid
 
     get '/books/:slug' do
       @book = BOOKS.find { |b| b[:slug] == params[:slug] } || not_found
-      redirect("https://www.goodreads.com/book/show/#{@book[:book_id]}") if @book[:summary].blank?
-      @title = @book[:title]
-      erb :book
+      redirect("https://www.goodreads.com/book/show/#{@book[:book_id]}")
     end
 
     get '/context', provides: :txt do

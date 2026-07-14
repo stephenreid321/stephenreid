@@ -1,10 +1,10 @@
 <p class="lead">
   Books I've read,
-  last updated <%= time_ago_in_words Time.parse(BOOKS.map { |b| b[:created] }.compact.max) %> ago
+  last updated <%= time_ago_in_words File.mtime(Padrino.root('data', 'goodreads_library_export.csv')) %> ago
 </p>
 
 <div class="row">
-  <% BOOKS.select { |b| b[:date_read] }.each { |book| %>
+  <% BOOKS.select { |b| b[:date_read] }.sort_by { |b| b[:date_read] }.reverse.each { |book| %>
   <div class="col-6 col-lg-2 mb-3">
     <%= partial :book, locals: { book: book } %>
   </div>
