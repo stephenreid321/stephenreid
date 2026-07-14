@@ -33,7 +33,7 @@ namespace :posts do
     end
 
     posted_urls = `python #{Shellwords.escape(Padrino.root.to_s)}/scripts/bluesky.py --recent-urls`
-                    .lines.map(&:strip).reject(&:empty?)
+                  .lines.map(&:strip).reject(&:empty?)
 
     data = JSON.parse(response.body)
     data['results'].first(50).sort_by { |r| -Time.parse(r['last_moved_at']).to_i }.each do |r|
@@ -43,18 +43,12 @@ namespace :posts do
 
       puts url
 
-      iframely = Faraday.get("https://iframe.ly/api/iframely?url=#{URI.encode_www_form_component(url)}&api_key=#{ENV['IFRAMELY_API_KEY']}").body
-      json = JSON.parse(iframely)
-      metadata = {
-        title: json.dig('meta', 'title').to_s,
-        description: json.dig('meta', 'description').to_s.truncate(150),
-        thumbnail: json.dig('links', 'thumbnail', 0, 'href').to_s
-      }
-      title = r['title'].presence || metadata[:title]
-      description = (r['summary'].presence || metadata[:description]).to_s.truncate(150)
+      title = r['title'].to_s
+      description = r['summary'].to_s.truncate(150)
+      thumbnail = r['image_url'].to_s
 
       args = [Shellwords.escape(title), Shellwords.escape(url), Shellwords.escape(title), Shellwords.escape(description)]
-      args << Shellwords.escape(metadata[:thumbnail]) if metadata[:thumbnail].present?
+      args << Shellwords.escape(thumbnail) if thumbnail.present?
       `python #{Shellwords.escape(Padrino.root.to_s)}/scripts/bluesky.py #{args.join(' ')}`
       posted_urls << url
     end
