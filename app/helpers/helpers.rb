@@ -18,10 +18,6 @@ StephenReid::App.helpers do
     end
   end
 
-  def cp(slug, locals: {}, key: slug, expires: 1.hours.to_i)
-    Padrino.env == :development ? partial(slug, locals: locals) : cache(key, expires: expires) { partial(slug, locals: locals) }
-  end
-
   def current_account
     @current_account ||= Account.find(session[:account_id]) if session[:account_id]
   end

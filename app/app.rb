@@ -43,24 +43,21 @@ module StephenReid
       erb :not_found, layout: :application
     end
 
-    get '/', cache: true do
-      expires 1.hour.to_i
+    get '/' do
       @og_image = "#{ENV['BASE_URI']}/images/link.jpg"
       @og_desc = 'Technologist, facilitator and coach'
       @substack_gallery = SubstackNote.recent_gallery_items(limit: 20)
       erb :home
     end
 
-    get '/notes', cache: true do
-      expires 1.hour.to_i
+    get '/notes' do
       @title = 'Notes'
       @substack_gallery = SubstackNote.recent_gallery_items(limit: 20)
       erb :notes
     end
 
     %w[background books coaching events films speaking-engagements].each do |r|
-      get "/#{r}", cache: true do
-        expires 6.hours.to_i
+      get "/#{r}" do
         @title = r.gsub('-', ' ').capitalize
         if r == 'coaching'
           @og_desc = 'What do you really want, and how can you move towards it?'
@@ -75,8 +72,7 @@ module StephenReid
       erb :course, layout: false
     end
 
-    get '/books/:slug', cache: true do
-      expires 6.hours.to_i
+    get '/books/:slug' do
       @book = BOOKS.find { |b| b[:slug] == params[:slug] } || not_found
       redirect("https://www.goodreads.com/book/show/#{@book[:book_id]}") if @book[:summary].blank?
       @title = @book[:title]
