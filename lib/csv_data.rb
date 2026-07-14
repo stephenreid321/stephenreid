@@ -1,6 +1,6 @@
 require 'csv'
 
-%w[affiliations papers softwares speaking_engagements courses films].each do |name|
+%w[speaking_engagements courses films].each do |name|
   path = "#{PADRINO_ROOT}/data/#{name}.csv"
   Object.const_set(
     name.upcase,

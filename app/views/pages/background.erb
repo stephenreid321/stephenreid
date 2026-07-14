@@ -5,14 +5,11 @@
 
 <h2 class="mt-5" id="previous-affiliations">Previous affiliations</h2>
 <ul>
-  <% AFFILIATIONS.select { |a| a[:current].nil? && a[:hidden].nil? }.sort_by { |a| a[:order].to_i }.each { |affiliation| %>
-  <li>
-    <% if affiliation[:organisation_name] %>
-      <a href="<%= affiliation[:organisation_url] %>"><%= affiliation[:organisation_name] %></a>,
-    <% end %>
-    <%= affiliation[:position] %>
-  </li>
-  <% } %>
+  <li><a href="http://psychedelicsociety.org.uk/">The Psychedelic Society</a>, Founder</li>
+  <li><a href="http://breakingconvention.co.uk/">Breaking Convention Conference on Psychedelic Consciousness</a>, Press officer</li>
+  <li><a href="https://www.greenpeace.org.uk/">Greenpeace UK</a>, Board member</li>
+  <li><a href="http://www.neweconomyorganisers.org/">New Economy Organisers Network</a>, Network organiser</li>
+  <li><a href="http://enspiral.com">Enspiral</a>, Contributor</li>
   <li>
     Digital consultancy work for organisations including Supermodular, the New Economics Foundation, 38 Degrees, the Labour Party, the Green Party, 350.org, the Living Wage Foundation, Positive Money, SumOfUs, 10:10 and Brandalism
   </li>
@@ -23,13 +20,14 @@
 
 <h2 class="mt-5" id="research">Peer-reviewed research</h2>
 <dl class="row">
-  <% PAPERS.each { |paper| %>
-  <dt class="col-lg-3"><%= date = Date.parse(paper[:date]); date.strftime('%b %Y') %>,
-    <%= paper[:journal] %></dt>
+  <dt class="col-lg-3">Sep 2012, PLOS One</dt>
   <dd class="col-lg-9">
-    <a href="<%= paper[:url] %>"><%= paper[:name] %></a>
+    <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0042790">BSim: An Agent-Based Tool for Modeling Bacterial Populations in Systems and Synthetic Biology</a>
   </dd>
-  <% } %>
+  <dt class="col-lg-3">Aug 2012, APS Physical Review E</dt>
+  <dd class="col-lg-9">
+    <a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.86.036104">Taxonomies of networks from community structure</a>
+  </dd>
 </dl>
 
 <h2 class="mt-5" id="feedback">Feedback on my courses and events</h2>

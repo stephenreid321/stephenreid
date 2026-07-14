@@ -1,7 +1,14 @@
-<% SOFTWARES.select { |p| p[:profile_url] }.sort_by { |p| p[:order].to_i }.each { |platform| %>
+<% [
+  ['Substack', 'https://substack.com/@stephenreid', 'stephenreid'],
+  ['ATProto/Bluesky', 'https://bsky.app/profile/stephenreid.net', 'stephenreid.net'],
+  ['Telegram', 'https://t.me/stephenreid321', 'stephenreid321'],
+  ['Dandelion', 'https://dandelion.events/u/stephenreid', 'stephenreid'],
+  ['Github', 'http://github.com/stephenreid321', 'stephenreid321'],
+  ['Goodreads', 'http://goodreads.com/stephenreid321', 'stephenreid321'],
+].each do |name, profile_url, tooltip| %>
 <div class="col-auto">
-  <a style="text-decoration:none" data-toggle="tooltip" title="<%= platform[:profile_url].starts_with?('http') ? platform[:profile_url].split('/').last : platform[:profile_url] %>" target="_blank" href="<%= platform[:profile_url] %>">
-    <%= platform[:name] %>
+  <a style="text-decoration:none" data-toggle="tooltip" title="<%= tooltip %>" target="_blank" href="<%= profile_url %>">
+    <%= name %>
   </a>
 </div>
-<% } %>
+<% end %>
