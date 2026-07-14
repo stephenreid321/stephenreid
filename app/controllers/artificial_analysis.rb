@@ -9,7 +9,7 @@ StephenReid::App.controller do
     @title = 'LLMs'
     @models = ArtificialAnalysis.llm_models
 
-    erb :llms
+    erb :'artificial_analysis/llms'
   end
 
   get '/agents', cache: true do
@@ -17,6 +17,6 @@ StephenReid::App.controller do
     @chart_keys = ArtificialAnalysis::DEFAULT_AGENT_CHART_KEYS
     @agent_rows = ArtificialAnalysis.coding_agents(chart_keys: @chart_keys)
 
-    erb :agents
+    erb :'artificial_analysis/agents'
   end
 end
