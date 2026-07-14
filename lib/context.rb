@@ -13,7 +13,7 @@ module Context
         title: 'Speaking engagements',
         content: SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.map do |speaking_engagement|
           name = speaking_engagement[:url].present? ? "[#{speaking_engagement[:name]}](#{speaking_engagement[:url]})" : speaking_engagement[:name]
-          "#{[speaking_engagement[:date], speaking_engagement[:location], speaking_engagement[:organisation_name]].compact.join(', ')}: #{name}"
+          "#{[speaking_engagement[:date], speaking_engagement[:location]].compact.join(', ')}: #{name}"
         end.join("\n\n")
       }
     ]
