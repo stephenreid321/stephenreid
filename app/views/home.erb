@@ -38,18 +38,4 @@
 
 <%= partial :substack_gallery, locals: { substack_gallery: @substack_gallery } %>
 
-<p class="mt-5 text-contrast text-center">
-  Recent speaking engagements
-</p>
-<dl class="row">
-  <% SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.first(5).each { |speaking_engagement| %>
-  <%= partial :speaking_engagement, object: speaking_engagement %>
-  <% } %>
-</dl>
-
-<p class="text-center">
-  <a href="/speaking-engagements">View all speaking engagements &rarr;</a>
-</p>
-
-
 <iframe class="mt-5" src="https://www.google.com/maps/d/u/0/embed?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8&ehbc=2E312F" style="height: 400px; width: 100%; border: 0;"></iframe>
