@@ -61,7 +61,7 @@
                     <br><small class="text-muted"><%= truncate(project[:logline], length: 90) %></small>
                   <% end %>
                 </td>
-                <td><%= project[:creator] || %(<span class="text-muted">—</span>) %></td>
+                <td><%= project[:creator] %></td>
                 <td class="text-right" data-order="<%= project[:sales] %>"><%= usd(project[:sales]) %></td>
                 <td class="text-right" data-order="<%= project[:match] %>"><%= usd(project[:match]) %></td>
                 <td class="text-right" data-order="<%= project[:prize] %>"><%= usd(project[:prize]) %></td>
@@ -168,8 +168,6 @@
                 <td data-order="<%= fund[:last_contribution] || '' %>">
                   <% if fund[:last_contribution] %>
                     <%= timeago(Time.zone.parse(fund[:last_contribution])) %>
-                  <% else %>
-                    <span class="text-muted">—</span>
                   <% end %>
                 </td>
               </tr>

@@ -83,7 +83,7 @@
                 <td class="text-right"><%= usd(drive[:sales]) %></td>
                 <td class="text-right"><%= usd(drive[:match]) %></td>
                 <td class="text-right"><%= "#{format('%.1f', drive[:match] / drive[:sales])}x" if drive[:sales].to_f.positive? %></td>
-                <td class="text-right"><%= usd(drive[:active] ? drive[:available] : nil) %></td>
+                <td class="text-right"><%= usd(drive[:available]) if drive[:active] %></td>
                 <td class="text-right"><%= usd(drive[:prize]) %></td>
                 <td class="text-right"><%= usd(drive[:sales].to_f + drive[:match].to_f + drive[:prize].to_f) %></td>
               </tr>
@@ -96,7 +96,7 @@
                   <td class="text-right"></td>
                   <td class="text-right"><%= usd(fund[:unlocked]) %></td>
                   <td class="text-right"></td>
-                  <td class="text-right"><%= usd(drive[:active] ? fund[:available] : nil) %></td>
+                  <td class="text-right"><%= usd(fund[:available]) if drive[:active] %></td>
                   <td class="text-right"></td>
                   <td class="text-right"></td>
                 </tr>
