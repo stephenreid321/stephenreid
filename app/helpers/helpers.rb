@@ -50,7 +50,7 @@ StephenReid::App.helpers do
   end
 
   def usd(value)
-    return %(<span class="text-muted">—</span>) if value.nil?
+    return if value.nil?
 
     n = value.to_f
     precision = n.abs >= 100 ? 0 : 2

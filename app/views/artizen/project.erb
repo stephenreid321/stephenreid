@@ -62,7 +62,7 @@
               <td class="text-right"><%= usd(season[:sales]) %></td>
               <td class="text-right"><%= usd(season[:match]) %></td>
               <td class="text-right"><%= "#{format('%.1f', season[:match] / season[:sales])}x" if season[:sales].to_f.positive? %></td>
-              <td class="text-right"><%= usd(season[:available]) %></td>
+              <td class="text-right"><%= usd(season[:available]) if season[:available].to_f.positive? %></td>
               <td class="text-right"><%= usd(season[:prize]) %></td>
               <td class="text-right"><%= usd(season[:raised]) %></td>
             </tr>

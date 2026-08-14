@@ -62,7 +62,7 @@
             </td>
             <td class="text-right"><%= usd(season[:total]) %></td>
             <td class="text-right"><%= usd(season[:unlocked]) %></td>
-            <td class="text-right"><%= usd(season[:available]) %></td>
+            <td class="text-right"><%= usd(season[:available]) if season[:available].to_f.positive? %></td>
             <td class="text-right"><%= usd(season[:unlocked].to_f + season[:available].to_f) %></td>
             <td class="text-right"></td>
           </tr>
