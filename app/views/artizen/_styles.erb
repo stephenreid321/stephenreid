@@ -79,36 +79,35 @@
 </style>
 <script>
   $(function() {
+    function setKids($table, id, show) {
+      var $kids = $table.find('tr[data-parent="' + id + '"]');
+      if (show) {
+        $kids.removeClass('artizen-tree-hidden');
+        $kids.each(function() {
+          var childId = $(this).attr('data-id');
+          if (!childId) return;
+          var childOpen = $(this).find('a.artizen-tree-toggle[aria-expanded="true"]').length > 0;
+          setKids($table, childId, childOpen);
+        });
+      } else {
+        $kids.addClass('artizen-tree-hidden');
+        $kids.each(function() {
+          var childId = $(this).attr('data-id');
+          if (childId) setKids($table, childId, false);
+        });
+      }
+    }
+
     $('.artizen-funding-tree').on('click', '.artizen-tree-toggle', function(e) {
       e.preventDefault();
       var $btn = $(this);
       if (!$btn.is('a')) return;
       var $table = $btn.closest('.artizen-funding-tree');
-      var $row = $btn.closest('tr');
-      var id = $row.data('id');
+      var id = $btn.closest('tr').attr('data-id');
       var expanding = $btn.attr('aria-expanded') !== 'true';
       $btn.attr('aria-expanded', expanding);
       $btn.find('i').toggleClass('bi-chevron-down', expanding).toggleClass('bi-chevron-right', !expanding);
-      var $kids = $table.find('tr[data-parent="' + id + '"]');
-      if (expanding) {
-        $kids.removeClass('artizen-tree-hidden');
-        $kids.each(function() {
-          var $child = $(this);
-          var childId = $child.data('id');
-          var childOpen = $child.find('.artizen-tree-toggle[aria-expanded="true"]').length;
-          if (childId && !childOpen) {
-            $table.find('tr[data-parent="' + childId + '"]').addClass('artizen-tree-hidden');
-          }
-        });
-      } else {
-        $kids.addClass('artizen-tree-hidden');
-        $kids.each(function() {
-          var childId = $(this).data('id');
-          if (childId) {
-            $table.find('tr[data-parent="' + childId + '"]').addClass('artizen-tree-hidden');
-          }
-        });
-      }
+      setKids($table, id, expanding);
     });
   });
 </script>
