@@ -47,7 +47,10 @@ module Artizen
         cache_write("#{LEADERBOARD_CACHE}/current", data) if season[:current]
       end
 
-      puts "[Artizen] refreshed #{seasons.size} seasons in #{(Time.now - started).round}s"
+      dropped = Stash.where(key: /\A#{Regexp.escape(PROJECT_CACHE)}\//).delete_all
+      dropped += Stash.where(key: /\A#{Regexp.escape(FUND_CACHE)}\//).delete_all
+
+      puts "[Artizen] refreshed #{seasons.size} seasons, dropped #{dropped} project/fund stashes in #{(Time.now - started).round}s"
     end
 
     def rich_text(text)
