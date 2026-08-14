@@ -1,6 +1,7 @@
 StephenReid::App.controller do
   before %r{\A/artizen} do
     @stylesheet = 'light'
+    halt 403, { 'Content-Type' => 'text/plain', 'Cache-Control' => 'public, max-age=86400' }, "Forbidden\n" if CrawlerDetect.is_crawler?(request.user_agent)
   end
 
   get '/artizen' do

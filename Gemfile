@@ -35,6 +35,7 @@ gem 'mongoid'
 
 # Interacting with other websites
 gem 'concurrent-ruby'
+gem 'crawler_detect'
 gem 'faraday'
 gem 'honeybadger'
 gem 'nokogiri'
