@@ -5,7 +5,7 @@ StephenReid::App.controller do
   end
 
   get '/llms', cache: true do
-    @index_attributes = %w[intelligence agentic coding omniscience openness]
+    @index_attributes = %w[intelligence]
     @title = 'LLMs'
     @models = ArtificialAnalysis.llm_models
 

@@ -1,12 +1,8 @@
 <div class="mb-3">
   <div class="form-row">
     <div class="form-group col-md-2 mb-2">
-      <label for="index-selector">Y-axis</label>
-      <%= select_tag :index, options: @index_attributes.map { |i| [i.titleize, i] }, selected: (params[:index] || 'intelligence'), id: 'index-selector', class: 'form-control' %>
-    </div>
-    <div class="form-group col-md-2 mb-2">
       <label for="x-axis-selector">X-axis</label>
-      <%= select_tag :x_axis, options: [['Cost per Task', 'cost'], ['Speed', 'speed']], selected: (params[:x_axis] || 'cost'), id: 'x-axis-selector', class: 'form-control' %>
+      <%= select_tag :x_axis, options: [['Cost per task', 'cost'], ['Time per task', 'time'], ['Cost × time', 'cost_time']], selected: (params[:x_axis] || 'cost'), id: 'x-axis-selector', class: 'form-control' %>
     </div>
     <div class="form-group col-md-2 mb-2">
       <label for="reasoning-filter">Reasoning</label>
@@ -28,35 +24,67 @@
       <label for="release-filter">Released in last</label>
       <%= select_tag :release, options: [['All time', '']] + [1, 3, 6, 12, 24].map { |m| ["#{pluralize(m, 'month')}", m.to_s] }, selected: (params[:release] || '3'), id: 'release-filter', class: 'form-control' %>
     </div>
-    <div class="form-group col-md-2 mb-2">
-      <label for="max-cost-filter">Cost/task &lt; ($)</label>
-      <%= number_field_tag :max_cost, value: params[:max_cost], id: 'max-cost-filter', class: 'form-control', step: 'any', min: 0, placeholder: 'No limit' %>
-    </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-12 mb-2">
       <div class="d-flex flex-wrap align-items-end gap-3">
         <div class="form-group mb-1 mr-2">
-          <label for="min-model-selector">At least as good as</label>
+          <label for="min-model-selector">At least as intelligent as</label>
           <select name="min_model_slug" id="min-model-selector" class="form-control form-control-sm" style="width: 11rem; max-width: 100%"></select>
         </div>
-        <% @index_attributes.each do |attr| %>
-          <div class="form-group mb-1 mr-1">
-            <button type="button" class="btn btn-sm btn-outline-secondary toggle-score-field" data-attr="<%= attr %>">
-              <%= attr.titleize %> &gt;=
-            </button>
-            <div id="score-field-<%= attr %>" style="display: none;">
-              <div class="input-group input-group-sm">
-                <div class="input-group-prepend">
-                  <span class="btn btn-sm btn-outline-secondary" id="label-<%= attr %>" style="cursor: pointer;">
-                    <%= attr.titleize %> &gt;=
-                  </span>
-                </div>
-                <%= number_field_tag "min_score_#{attr}".to_sym, value: params["min_score_#{attr}".to_sym], id: "min-score-#{attr}", class: 'form-control form-control-sm', step: 0.1, style: 'max-width: 4rem' %>
+        <div class="form-group mb-1 mr-1">
+          <button type="button" class="btn btn-sm btn-outline-secondary toggle-score-field" data-attr="intelligence">
+            Intelligence &gt;=
+          </button>
+          <div id="score-field-intelligence" style="display: none;">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="btn btn-sm btn-outline-secondary" id="label-intelligence" style="cursor: pointer;">
+                  Intelligence &gt;=
+                </span>
               </div>
+              <%= number_field_tag :min_score_intelligence, value: params[:min_score_intelligence], id: 'min-score-intelligence', class: 'form-control form-control-sm', step: 0.1, style: 'max-width: 4rem' %>
             </div>
           </div>
-        <% end %>
+        </div>
+        <div class="form-group mb-1 mr-2">
+          <label for="max-model-selector">At least as cheap as</label>
+          <select name="max_model_slug" id="max-model-selector" class="form-control form-control-sm" style="width: 11rem; max-width: 100%"></select>
+        </div>
+        <div class="form-group mb-1 mr-1">
+          <button type="button" class="btn btn-sm btn-outline-secondary toggle-cap-field" data-cap="cost">
+            Cost &le;
+          </button>
+          <div id="cap-field-cost" style="display: none;">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="btn btn-sm btn-outline-secondary" id="cap-label-cost" style="cursor: pointer;">
+                  Cost &le;
+                </span>
+              </div>
+              <%= number_field_tag :max_cost, value: params[:max_cost], id: 'max-cost-filter', class: 'form-control form-control-sm', step: 'any', min: 0, style: 'max-width: 5rem' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-1 mr-2">
+          <label for="fast-model-selector">At least as fast as</label>
+          <select name="fast_model_slug" id="fast-model-selector" class="form-control form-control-sm" style="width: 11rem; max-width: 100%"></select>
+        </div>
+        <div class="form-group mb-1 mr-1">
+          <button type="button" class="btn btn-sm btn-outline-secondary toggle-cap-field" data-cap="time">
+            Time &le;
+          </button>
+          <div id="cap-field-time" style="display: none;">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="btn btn-sm btn-outline-secondary" id="cap-label-time" style="cursor: pointer;">
+                  Time &le;
+                </span>
+              </div>
+              <%= number_field_tag :max_time, value: params[:max_time], id: 'max-time-filter', class: 'form-control form-control-sm', step: 'any', min: 0, style: 'max-width: 4.5rem' %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -95,8 +123,9 @@
         <% @index_attributes.each do |attr| %>
           <th><%= attr.titleize %></th>
         <% end %>
-        <th>Speed</th>
-        <th>Cost per Task</th>
+        <th>Time per task</th>
+        <th>Cost per task</th>
+        <th>Cost × time</th>
       </tr>
     </thead>
     <tbody>
@@ -129,8 +158,12 @@
               <% end %>
             </td>
           <% end %>
-          <td data-order="<%= model['speed'] || 0 %>"><%= display_or_dash(model['speed'], format: '%.0f', suffix: 'tok/s') %></td>
-          <td data-order="<%= model['cost_per_task'] || 0 %>"><%= display_or_dash(model['cost_per_task'], format: '%.3f', prefix: '$') %></td>
+          <td class="time-per-task-cell" data-order="<%= model['time_per_task'] || 0 %>"><%= display_or_dash(model['time_per_task']) { |t| t >= 3600 ? sprintf('%.1f h', t / 3600.0) : t >= 60 ? sprintf('%.1f min', t / 60.0) : sprintf('%.0f s', t) } %></td>
+          <td class="cost-per-task-cell" data-order="<%= model['cost_per_task'] || 0 %>"><%= display_or_dash(model['cost_per_task'], format: '%.3f', prefix: '$') %></td>
+          <%
+            cost_time = model['cost_per_task'].to_f > 0 && model['time_per_task'].to_f > 0 ? model['cost_per_task'].to_f * model['time_per_task'].to_f : nil
+          %>
+          <td data-order="<%= cost_time || 0 %>"><%= display_or_dash(cost_time) { |v| (v >= 1 ? sprintf('$%.2f', v) : v >= 0.01 ? sprintf('$%.3f', v) : '$' + sprintf('%.2g', v)) + '·s' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -144,8 +177,8 @@
     result = {
       slug: m['slug'],
       name: m['name'],
-      speed: (m['speed'] || 0).to_f,
       costPerTask: (m['cost_per_task'] || 0).to_f,
+      timePerTask: (m['time_per_task'] || 0).to_f,
       reasoningModel: !!m['reasoning_model'],
       isOpenWeights: !!m['is_open_weights'],
       releaseDate: m['release_date']
@@ -165,6 +198,8 @@
 
   var DEFAULT_MIN_MODEL_SLUG = 'gemini-3-7-flash-low';
   var initialMinModelSlug = <%== params[:min_model_slug].to_json %>;
+  var initialMaxModelSlug = <%== params[:max_model_slug].to_json %>;
+  var initialFastModelSlug = <%== params[:fast_model_slug].to_json %>;
   var MIN_MODEL_SELECTOR_INTELLIGENCE_TOP_N = 200;
   var BASELINE_SCORE_ATTRIBUTES = ['intelligence'];
 
@@ -175,7 +210,7 @@
       info: false,
       order: [[2, 'desc']], // Sort by Release date descending
       columnDefs: [
-        { type: 'num', targets: [5, 6, 7, 8, 9, 10, 11] } // Numeric columns (index attributes + speed + cost)
+        { type: 'num', targets: [5, 6, 7, 8] } // Numeric columns (intelligence + time + cost + cost×time)
       ]
     });
 
@@ -184,6 +219,7 @@
       var attr = $(this).data('attr');
       var $button = $(this);
       var $field = $('#score-field-' + attr);
+      var $input = $('#min-score-' + attr);
 
       // Hide any other empty fields first
       $('[id^="score-field-"]').each(function() {
@@ -199,10 +235,17 @@
         }
       });
 
-      $button.hide();
-      $field.show();
-      $('#min-score-' + attr).focus();
+      var slug = $('#min-model-selector').val();
+      if (slug && (!$input.val() || String($input.val()).trim() === '')) {
+        var model = modelsData.find(function(m) { return m.slug === slug; });
+        if (model) applyBaselineFromModelToField(attr, model);
+      } else {
+        $button.hide();
+        $field.show();
+      }
+      $input.focus();
       updateLabelStyle(attr);
+      $input.trigger('change');
     });
 
     // Function to update label styling based on input value
@@ -219,9 +262,10 @@
     }
 
     // Update label styles on input change
-    $('[id^="min-score-"]').on('input change', function() {
+    $('[id^="min-score-"]').on('input change', function(e) {
       var attr = $(this).attr('id').replace('min-score-', '');
       updateLabelStyle(attr);
+      if (e.type === 'input') $('#min-model-selector').val('');
     });
 
     // Handle label click to reset field to blank and hide
@@ -244,6 +288,65 @@
       updateLabelStyle(attr);
 
       // Trigger change event to update filters
+      $input.trigger('change');
+    });
+
+    function capInput(cap) {
+      return cap === 'cost' ? $('#max-cost-filter') : $('#max-time-filter');
+    }
+
+    function updateCapLabelStyle(cap) {
+      var $input = capInput(cap);
+      var $label = $('#cap-label-' + cap);
+      var value = $input.val();
+      if (value && String(value).trim() !== '') {
+        $label.removeClass('btn-outline-secondary').addClass('btn-primary');
+      } else {
+        $label.removeClass('btn-primary').addClass('btn-outline-secondary');
+      }
+    }
+
+    function setCapFieldVisibility(cap, hasValue) {
+      var $field = $('#cap-field-' + cap);
+      var $button = $('.toggle-cap-field[data-cap="' + cap + '"]');
+      if (hasValue) {
+        $field.show();
+        $button.hide();
+      } else {
+        $field.hide();
+        $button.show();
+      }
+      updateCapLabelStyle(cap);
+    }
+
+    $('.toggle-cap-field').on('click', function() {
+      var cap = $(this).data('cap');
+      var $input = capInput(cap);
+      var slug = cap === 'cost' ? $('#max-model-selector').val() : $('#fast-model-selector').val();
+      if (slug && (!$input.val() || String($input.val()).trim() === '')) {
+        var model = modelsData.find(function(m) { return m.slug === slug; });
+        $input.val(cap === 'cost' ? costCapFromModel(model) : timeCapFromModel(model));
+      }
+      $(this).hide();
+      $('#cap-field-' + cap).show();
+      $input.focus();
+      updateCapLabelStyle(cap);
+      $input.trigger('change');
+    });
+
+    $('#max-cost-filter, #max-time-filter').on('input change', function(e) {
+      var cap = this.id === 'max-cost-filter' ? 'cost' : 'time';
+      updateCapLabelStyle(cap);
+      if (e.type === 'input') {
+        $(cap === 'cost' ? '#max-model-selector' : '#fast-model-selector').val('');
+      }
+    });
+
+    $('[id^="cap-label-"]').on('click', function() {
+      var cap = $(this).attr('id').replace('cap-label-', '');
+      var $input = capInput(cap);
+      $input.val('');
+      setCapFieldVisibility(cap, false);
       $input.trigger('change');
     });
 
@@ -292,8 +395,7 @@
               label: function(context) {
                 var point = context.raw;
                 var xAxisType = $('#x-axis-selector').val();
-                var xLabel = xAxisType === 'speed' ? 'Speed ' + point.x.toFixed(0) + ' tok/s' : 'Cost/task ' + formatCost(point.x);
-                return cleanModelName(point.label) + ': Score ' + point.y.toFixed(1) + ', ' + xLabel;
+                return cleanModelName(point.label) + ': Score ' + point.y.toFixed(1) + ', ' + formatXAxisTooltip(point.x, xAxisType);
               }
             }
           },
@@ -334,11 +436,11 @@
         scales: {
           x: {
             type: 'logarithmic',
-            title: { display: true, text: 'Cost per Task ($)', font: { weight: 'bold' } },
+            title: { display: true, text: 'Cost per task ($)', font: { weight: 'bold' } },
             grid: { color: 'rgba(0,0,0,0.05)' }
           },
           y: {
-            title: { display: true, text: 'Agentic', font: { weight: 'bold' } },
+            title: { display: true, text: 'Intelligence', font: { weight: 'bold' } },
             grid: { color: 'rgba(0,0,0,0.05)' }
           }
         },
@@ -388,6 +490,41 @@
       return '$' + value.toPrecision(2);
     }
 
+    function costTimeValue(model) {
+      if (!model.costPerTask || !model.timePerTask || model.timePerTask <= 0) return 0;
+      return model.costPerTask * model.timePerTask;
+    }
+
+    function formatDuration(seconds) {
+      if (seconds >= 3600) return (seconds / 3600).toFixed(1) + ' h';
+      if (seconds >= 60) return (seconds / 60).toFixed(1) + ' min';
+      return seconds.toFixed(0) + ' s';
+    }
+
+    function getXAxisValue(model, xAxisType) {
+      if (xAxisType === 'cost_time') return costTimeValue(model);
+      if (xAxisType === 'time') return model.timePerTask;
+      return model.costPerTask;
+    }
+
+    function xAxisMeta(xAxisType) {
+      if (xAxisType === 'cost_time') return { label: 'Cost × time', unit: ' ($·s/task)' };
+      if (xAxisType === 'time') return { label: 'Time per task', unit: '' };
+      return { label: 'Cost per task', unit: ' ($)' };
+    }
+
+    function formatXAxisValue(value, xAxisType) {
+      if (xAxisType === 'cost_time') return formatCost(value) + '·s';
+      if (xAxisType === 'time') return formatDuration(value);
+      return formatCost(value);
+    }
+
+    function formatXAxisTooltip(value, xAxisType) {
+      if (xAxisType === 'cost_time') return 'Cost×time ' + formatXAxisValue(value, xAxisType);
+      if (xAxisType === 'time') return 'Time per task ' + formatXAxisValue(value, xAxisType);
+      return 'Cost/task ' + formatXAxisValue(value, xAxisType);
+    }
+
     function getIndexValue(model, indexType) {
       return model[snakeToCamel(indexType) + 'Index'];
     }
@@ -413,31 +550,66 @@
       return n;
     }
 
-    function resolveBaselineSlug() {
-      if (initialMinModelSlug === '') return '';
-      if (initialMinModelSlug && modelsData.some(function(m) { return m.slug === initialMinModelSlug; }))
-        return initialMinModelSlug;
-      var d = modelsData.find(function(m) { return m.slug === DEFAULT_MIN_MODEL_SLUG; });
+    function getMaxTimeLimit() {
+      var raw = $('#max-time-filter').val();
+      if (raw === '' || raw === null) return null;
+      var n = parseFloat(raw);
+      if (isNaN(n) || n <= 0) return null;
+      return n;
+    }
+
+    function resolveSlug(initialSlug, defaultSlug) {
+      if (initialSlug === '') return '';
+      if (initialSlug && modelsData.some(function(m) { return m.slug === initialSlug; }))
+        return initialSlug;
+      var d = modelsData.find(function(m) { return m.slug === defaultSlug; });
       if (d) return d.slug;
       return modelsData.length ? modelsData[0].slug : '';
     }
 
-    function populateMinModelSelector() {
-      var $sel = $('#min-model-selector');
+    function resolveBaselineSlug() {
+      return resolveSlug(initialMinModelSlug, DEFAULT_MIN_MODEL_SLUG);
+    }
+
+    function resolveOptionalSlug(initialSlug) {
+      if (!initialSlug) return '';
+      if (modelsData.some(function(m) { return m.slug === initialSlug; })) return initialSlug;
+      return '';
+    }
+
+    function resolveMaxBaselineSlug() {
+      return resolveOptionalSlug(initialMaxModelSlug);
+    }
+
+    function resolveFastBaselineSlug() {
+      return resolveOptionalSlug(initialFastModelSlug);
+    }
+
+    function modelsMatchingReleaseFilter() {
+      var releaseFilter = $('#release-filter').val();
+      if (!releaseFilter) return modelsData.slice();
+      var cutoffDate = new Date();
+      cutoffDate.setMonth(cutoffDate.getMonth() - parseInt(releaseFilter));
+      return modelsData.filter(function(model) {
+        if (!model.releaseDate) return false;
+        return new Date(model.releaseDate) >= cutoffDate;
+      });
+    }
+
+    function populateModelSelector($sel, desired, useFallback) {
       $sel.empty();
       $sel.append($('<option></option>').attr('value', '').text(''));
 
-      var ranked = modelsData.slice().sort(function(a, b) {
+      var ranked = modelsMatchingReleaseFilter().sort(function(a, b) {
         return (b.intelligenceIndex || 0) - (a.intelligenceIndex || 0);
       });
-      var intelligenceFirstSlug = ranked.length ? ranked[0].slug : '';
+      var fallbackSlug = ranked.length ? ranked[0].slug : '';
       var optionsList = ranked.slice(0, MIN_MODEL_SELECTOR_INTELLIGENCE_TOP_N);
       var inSelect = {};
       optionsList.forEach(function(m) { inSelect[m.slug] = true; });
 
-      var desired = resolveBaselineSlug();
       if (desired && !inSelect[desired]) {
-        var extra = modelsData.find(function(m) { return m.slug === desired; });
+        var extra = ranked.find(function(m) { return m.slug === desired; });
         if (extra) optionsList.push(extra);
       }
 
@@ -452,8 +624,89 @@
 
       $sel.val(desired);
       if (desired && $sel.val() !== desired) {
-        $sel.val(intelligenceFirstSlug);
+        $sel.val(useFallback && fallbackSlug ? fallbackSlug : '');
       }
+    }
+
+    function populateMinModelSelector() {
+      var current = $('#min-model-selector').val();
+      populateModelSelector($('#min-model-selector'), current || resolveBaselineSlug(), !current);
+    }
+
+    function populateMaxModelSelector() {
+      populateModelSelector($('#max-model-selector'), $('#max-model-selector').val() || resolveMaxBaselineSlug(), false);
+    }
+
+    function populateFastModelSelector() {
+      populateModelSelector($('#fast-model-selector'), $('#fast-model-selector').val() || resolveFastBaselineSlug(), false);
+    }
+
+    function costCapFromModel(model) {
+      var c = model && model.costPerTask;
+      if (!c || c <= 0 || isNaN(c)) return '';
+      return (Math.ceil(c * 10000) / 10000).toString();
+    }
+
+    function setMaxCostFromBaseline(slug, onlyIfEmpty) {
+      var $input = $('#max-cost-filter');
+      if (!slug) {
+        if (!onlyIfEmpty) {
+          $input.val('');
+          setCapFieldVisibility('cost', false);
+        }
+        return;
+      }
+      if (onlyIfEmpty) {
+        var existing = $input.val();
+        if (existing != null && String(existing).trim() !== '') {
+          setCapFieldVisibility('cost', true);
+          return;
+        }
+      }
+      var model = modelsData.find(function(m) { return m.slug === slug; });
+      $input.val(costCapFromModel(model));
+      setCapFieldVisibility('cost', !!$input.val());
+    }
+
+    function applyMaxModelBaseline(slug) {
+      setMaxCostFromBaseline(slug, false);
+      table.draw();
+      updateRanks();
+      updateChart();
+    }
+
+    function timeCapFromModel(model) {
+      var t = model && model.timePerTask;
+      if (!t || t <= 0 || isNaN(t)) return '';
+      return (Math.ceil(t * 10) / 10).toString();
+    }
+
+    function setMaxTimeFromBaseline(slug, onlyIfEmpty) {
+      var $input = $('#max-time-filter');
+      if (!slug) {
+        if (!onlyIfEmpty) {
+          $input.val('');
+          setCapFieldVisibility('time', false);
+        }
+        return;
+      }
+      if (onlyIfEmpty) {
+        var existing = $input.val();
+        if (existing != null && String(existing).trim() !== '') {
+          setCapFieldVisibility('time', true);
+          return;
+        }
+      }
+      var model = modelsData.find(function(m) { return m.slug === slug; });
+      $input.val(timeCapFromModel(model));
+      setCapFieldVisibility('time', !!$input.val());
+    }
+
+    function applyFastModelBaseline(slug) {
+      setMaxTimeFromBaseline(slug, false);
+      table.draw();
+      updateRanks();
+      updateChart();
     }
 
     function clearMinScoreFieldsFromBaseline() {
@@ -544,22 +797,30 @@
       applyMinModelBaseline($(this).val());
     });
 
+    $('#max-model-selector').on('change', function() {
+      applyMaxModelBaseline($(this).val());
+    });
+
+    $('#fast-model-selector').on('change', function() {
+      applyFastModelBaseline($(this).val());
+    });
+
     function updateChart() {
-      var selectedIndex = $('#index-selector').val();
+      var selectedIndex = INDEX_ATTRIBUTES[0];
       var xAxisType = $('#x-axis-selector').val();
       var reasoningFilter = $('#reasoning-filter').val();
       var openSourceFilter = $('#open-source-filter').val();
       var releaseFilter = $('#release-filter').val();
       var minScores = getMinScores();
       var maxCostLimit = getMaxCostLimit();
+      var maxTimeLimit = getMaxTimeLimit();
 
       // Update title and axis labels
       var indexLabel = indexLabels[selectedIndex];
-      var xAxisLabel = xAxisType === 'speed' ? 'Speed' : 'Cost per Task';
-      var xAxisUnit = xAxisType === 'speed' ? ' (tok/s)' : ' ($)';
-      $('#chart-title').text(indexLabel + ' vs ' + xAxisLabel);
+      var xMeta = xAxisMeta(xAxisType);
+      $('#chart-title').text(indexLabel + ' vs ' + xMeta.label);
       chart.options.scales.y.title.text = indexLabel;
-      chart.options.scales.x.title.text = xAxisLabel + xAxisUnit;
+      chart.options.scales.x.title.text = xMeta.label + xMeta.unit;
       chart.options.scales.x.type = 'logarithmic';
 
       // Calculate cutoff date for release filter
@@ -589,7 +850,7 @@
         }
 
         var indexValue = getIndexValue(model, selectedIndex);
-        var xAxisValue = xAxisType === 'speed' ? model.speed : model.costPerTask;
+        var xAxisValue = getXAxisValue(model, xAxisType);
 
         // Check all min score filters
         var scoreMatch = true;
@@ -617,10 +878,15 @@
 
         var costCapMatch = true;
         if (maxCostLimit != null) {
-          costCapMatch = model.costPerTask < maxCostLimit;
+          costCapMatch = model.costPerTask <= maxCostLimit;
         }
 
-        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && indexValueValid && xAxisValue > 0 && costCapMatch;
+        var timeCapMatch = true;
+        if (maxTimeLimit != null) {
+          timeCapMatch = model.timePerTask <= maxTimeLimit;
+        }
+
+        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && indexValueValid && xAxisValue > 0 && costCapMatch && timeCapMatch;
       });
 
       // Group by reasoning and open source
@@ -654,16 +920,11 @@
 
       // Calculate Pareto frontier FIRST so we can label only those points
       var allPoints = filteredModels.map(function(m) {
-        var xValue = xAxisType === 'speed' ? m.speed : m.costPerTask;
-        return { x: xValue, y: getIndexValue(m, selectedIndex), label: m.name, reasoningModel: m.reasoningModel, slug: m.slug };
+        return { x: getXAxisValue(m, xAxisType), y: getIndexValue(m, selectedIndex), label: m.name, reasoningModel: m.reasoningModel, slug: m.slug };
       });
 
-      // Sort by x-axis value (ascending for cost, descending for speed)
-      if (xAxisType === 'speed') {
-        allPoints.sort(function(a, b) { return b.x - a.x; }); // Higher speed first
-      } else {
-        allPoints.sort(function(a, b) { return a.x - b.x; }); // Lower cost first
-      }
+      // Sort by x-axis value (lower is better)
+      allPoints.sort(function(a, b) { return a.x - b.x; });
 
       // Find Pareto-optimal points (with epsilon for near-ties)
       var paretoPoints = [];
@@ -691,7 +952,7 @@
         if (models.length > 0) {
           var dataPoints = models.map(function(m) {
             var pIdx = paretoInfo[m.name];
-            var xValue = xAxisType === 'speed' ? m.speed : m.costPerTask;
+            var xValue = getXAxisValue(m, xAxisType);
             return {
               x: xValue,
               y: getIndexValue(m, selectedIndex),
@@ -740,7 +1001,7 @@
         var sortedPareto = paretoPoints.slice().sort(function(a, b) { return b.x - a.x; });
         var paretoHtml = '<ul class="list-unstyled mb-0">' + sortedPareto.map(function(p) {
           var lightbulbIcon = p.reasoningModel ? ' ▲' : '';
-          var xDisplay = xAxisType === 'speed' ? p.x.toFixed(0) + ' tok/s' : formatCost(p.x);
+          var xDisplay = formatXAxisValue(p.x, xAxisType);
           return '<li><strong><a href="https://artificialanalysis.ai/models/' + p.slug + '" target="_blank" class="text-dark">' + cleanModelName(p.label) + '</a>' + lightbulbIcon + '</strong> <span class="text-muted">(' + xDisplay + ' @ ' + p.y.toFixed(1) + ')</span></li>';
         }).join('') + '</ul>';
         $('#pareto-list').html(paretoHtml);
@@ -757,9 +1018,9 @@
         var reasoningFilter = $('#reasoning-filter').val();
         var openSourceFilter = $('#open-source-filter').val();
         var releaseFilter = $('#release-filter').val();
-        var selectedIndex = $('#index-selector').val();
         var minScores = getMinScores();
         var maxCostLimit = getMaxCostLimit();
+        var maxTimeLimit = getMaxTimeLimit();
 
         if (settings.nTable.id !== 'models-table') return true;
 
@@ -818,23 +1079,39 @@
 
         var costCapMatch = true;
         if (maxCostLimit != null) {
-          var costVal = parseFloat($(row).find('td:last').data('order'));
+          var costVal = parseFloat($(row).find('td.cost-per-task-cell').data('order'));
           if (isNaN(costVal)) costVal = 0;
-          costCapMatch = costVal < maxCostLimit;
+          costCapMatch = costVal <= maxCostLimit;
         }
 
-        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && costCapMatch;
+        var timeCapMatch = true;
+        if (maxTimeLimit != null) {
+          var timeVal = parseFloat($(row).find('td.time-per-task-cell').data('order'));
+          if (isNaN(timeVal)) timeVal = 0;
+          timeCapMatch = timeVal <= maxTimeLimit;
+        }
+
+        return reasoningMatch && openSourceMatch && releaseMatch && scoreMatch && costCapMatch && timeCapMatch;
       }
     );
 
     // Populate baseline control, fill the intelligence floor from that model, then apply custom filter
     populateMinModelSelector();
+    populateMaxModelSelector();
+    populateFastModelSelector();
     setMinScoreFieldsFromBaseline($('#min-model-selector').val(), true);
+    setMaxCostFromBaseline($('#max-model-selector').val(), true);
+    setMaxTimeFromBaseline($('#fast-model-selector').val(), true);
     table.draw();
 
     // Apply filters when dropdowns change
     var minScoreSelectors = INDEX_ATTRIBUTES.map(function(attr) { return '#min-score-' + attr; }).join(', ');
-    $('#index-selector, #reasoning-filter, #open-source-filter, #release-filter, #max-cost-filter, #x-axis-selector, ' + minScoreSelectors).on('change input', function() {
+    $('#reasoning-filter, #open-source-filter, #release-filter, #max-cost-filter, #max-time-filter, #x-axis-selector, ' + minScoreSelectors).on('change input', function() {
+      if (this.id === 'release-filter') {
+        populateMinModelSelector();
+        populateMaxModelSelector();
+        populateFastModelSelector();
+      }
       table.draw();
       updateRanks();
       updateChart();

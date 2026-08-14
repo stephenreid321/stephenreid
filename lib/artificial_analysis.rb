@@ -91,8 +91,8 @@ module ArtificialAnalysis
         'coding_index' => model['codingIndex'],
         'omniscience_index' => model['omniscience'],
         'openness_index' => model.dig('openness', 'opennessIndex'),
-        'speed' => model.dig('timescaleData', 'medianOutputSpeed'),
-        'cost_per_task' => cost_per_task.is_a?(Hash) ? cost_per_task.dig('cost', 'total') : nil
+        'cost_per_task' => cost_per_task.is_a?(Hash) ? cost_per_task.dig('cost', 'total') : nil,
+        'time_per_task' => model['intelligenceIndexTimePerTask']
       }
     end
 
