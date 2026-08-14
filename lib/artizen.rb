@@ -10,7 +10,7 @@ module Artizen
 
   class << self
     def leaderboard(season_number: nil)
-      cache_fetch("artizen/leaderboard/v10/#{season_number || 'current'}") { build(season_number) }
+      cache_fetch("artizen/leaderboard/v11/#{season_number || 'current'}") { build(season_number) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -26,7 +26,7 @@ module Artizen
     end
 
     def fund(slug)
-      cache_fetch("artizen/fund/v5/#{slug}") { build_fund(slug) }
+      cache_fetch("artizen/fund/v6/#{slug}") { build_fund(slug) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -75,7 +75,7 @@ module Artizen
         season: season,
         drives: fetch_drives(season[:id]),
         projects: project_rows(season[:id]),
-        funds: fund_rows(season[:id]),
+        funds: fund_rows(season[:id], current: season[:current]),
         error: false
       }
     end
@@ -266,7 +266,7 @@ module Artizen
       end
     end
 
-    def nest_fund_funding(contrib_seasons, matched_projects)
+    def nest_fund_funding(contrib_seasons, matched_projects, unallocated: 0)
       seasons = contrib_seasons.map(&:dup)
       known = seasons.map { |season| season[:number] }
       matched_projects.each do |project|
@@ -282,7 +282,7 @@ module Artizen
       end
       seasons.sort_by! { |season| -(season[:number] || 0) }
 
-      seasons.map do |season|
+      nested = seasons.map do |season|
         season_projects = matched_projects.select { |project| project[:season_number] == season[:number] }
         drives = season_projects.group_by { |project| project[:drive] || 'Drive' }.map do |name, projects|
           sample = projects.first
@@ -303,6 +303,23 @@ module Artizen
           drives: drives
         )
       end
+
+      if unallocated.to_f >= 0.5 && nested.any?
+        latest = nested.first
+        latest[:drives] << {
+          name: 'Unallocated',
+          url: nil,
+          active: false,
+          number: nil,
+          multiple: nil,
+          unlocked: 0.0,
+          available: unallocated.to_f,
+          projects: []
+        }
+        latest[:available] = latest[:available].to_f + unallocated.to_f
+      end
+
+      nested
     end
 
     def build_project(slug)
@@ -472,6 +489,11 @@ module Artizen
         }
       end
 
+      contrib_total = contribs.sum { |c| c['amount $USD'].to_f }
+      sliced_available = matched_projects.sum { |project| project[:available].to_f }
+      unallocated = row['Funding - current'].to_f - sliced_available
+      seasons = nest_fund_funding(contrib_seasons, matched_projects, unallocated: unallocated)
+
       {
         name: (ext && ext['full title'].presence) || row['name'].to_s.strip,
         artizen_url: fund_url(slug_value),
@@ -482,13 +504,13 @@ module Artizen
         eligibility: ext && ext['eligibility'].presence,
         sponsor: ext && ext['lead sponsor (text)'].presence,
         video: ext && ext['welcome video'].presence,
-        available: row['Funding - current']&.to_f,
-        season_total: row['Funding $ - total season']&.to_f,
+        available: seasons.sum { |season| season[:available].to_f },
+        unlocked: seasons.sum { |season| season[:unlocked].to_f },
         prize_art: row['Prize ART']&.to_f,
         prize_usd: row['Prize USD']&.to_f,
         active: row['active'],
-        contrib_total: contribs.sum { |c| c['amount $USD'].to_f },
-        seasons: nest_fund_funding(contrib_seasons, matched_projects)
+        contrib_total: contrib_total,
+        seasons: seasons
       }
     end
 
@@ -500,7 +522,7 @@ module Artizen
       (get(type, limit: 1, constraints: [{ key: '_id', constraint_type: 'equals', value: slug }].to_json)['results'] || []).first
     end
 
-    def fund_rows(season_id)
+    def fund_rows(season_id, current: false)
       contribs = list(
         'fundcontribution',
         constraints: [
@@ -527,17 +549,23 @@ module Artizen
         next unless season_total.positive?
 
         slug = fund['Slug'].presence || id
-        {
+        row = {
           name: fund['name'].to_s.strip,
           url: local_fund_path(slug),
           season_total: season_total,
-          available: fund['Funding - current']&.to_f,
-          prize_art: fund['Prize ART']&.to_f,
-          prize_usd: fund['Prize USD']&.to_f,
           last_contribution: last_at[id],
           active: fund['active']
         }
-      end.sort_by { |row| [-row[:available].to_f, -row[:season_total]] }
+        if current
+          row[:available] = fund['Funding - current']&.to_f
+          row[:prize_art] = fund['Prize ART']&.to_f
+          row[:prize_usd] = fund['Prize USD']&.to_f
+        end
+        row
+      end
+      ranked.sort_by! do |row|
+        current ? [-row[:available].to_f, -row[:season_total]] : [-row[:season_total]]
+      end
 
       ranked.each_with_index.map { |row, i| row.merge(rank: i + 1) }
     end

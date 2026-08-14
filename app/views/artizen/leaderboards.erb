@@ -85,9 +85,7 @@
                 <% end %>
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-start mb-1">
-                    <h5 class="mb-0">
-                      <a href="<%= drive[:url] %>" target="_blank" rel="noopener" class="text-dark"><%= drive[:name] %></a>
-                    </h5>
+                    <h5 class="mb-0"><%= drive[:name] %></h5>
                     <% if drive[:active] %>
                       <span class="badge badge-success">Active</span>
                     <% else %>
@@ -136,8 +134,10 @@
               <th class="text-right">#</th>
               <th>Fund</th>
               <th class="text-right">Season total</th>
-              <th class="text-right">Available</th>
-              <th class="text-right">Prize</th>
+              <% if @season && @season[:current] %>
+                <th class="text-right">Available</th>
+                <th class="text-right">Prize</th>
+              <% end %>
               <th>Last contribution</th>
             </tr>
           </thead>
@@ -152,17 +152,17 @@
                   <% end %>
                 </td>
                 <td class="text-right" data-order="<%= fund[:season_total] %>"><%= usd(fund[:season_total]) %></td>
-                <td class="text-right" data-order="<%= fund[:available] || -1 %>"><%= usd(fund[:available]) %></td>
-                <td class="text-right" data-order="<%= fund[:prize_usd] || -1 %>">
-                  <% if fund[:prize_usd] %>
-                    <%= usd(fund[:prize_usd]) %>
-                  <% elsif fund[:prize_art] %>
-                    <%= ActiveSupport::NumberHelper.number_to_delimited(fund[:prize_art].round) %>
-                    <small class="text-muted">ART</small>
-                  <% else %>
-                    <span class="text-muted">—</span>
-                  <% end %>
-                </td>
+                <% if @season && @season[:current] %>
+                  <td class="text-right" data-order="<%= fund[:available] || -1 %>"><%= usd(fund[:available]) %></td>
+                  <td class="text-right" data-order="<%= fund[:prize_usd] || -1 %>">
+                    <% if fund[:prize_usd] %>
+                      <%= usd(fund[:prize_usd]) %>
+                    <% elsif fund[:prize_art] %>
+                      <%= ActiveSupport::NumberHelper.number_to_delimited(fund[:prize_art].round) %>
+                      <small class="text-muted">ART</small>
+                    <% end %>
+                  </td>
+                <% end %>
                 <td data-order="<%= fund[:last_contribution] || '' %>">
                   <% if fund[:last_contribution] %>
                     <%= timeago(Time.zone.parse(fund[:last_contribution])) %>
@@ -196,10 +196,17 @@
         ]
       }, tableOpts));
       $('#artizen-funds-table').DataTable($.extend({}, tableOpts, {
-        order: [[3, 'desc']],
-        columnDefs: [
-          { type: 'num', targets: [0, 2, 3, 4] }
-        ]
+        <% if @season && @season[:current] %>
+          order: [[3, 'desc']],
+          columnDefs: [
+            { type: 'num', targets: [0, 2, 3, 4] }
+          ]
+        <% else %>
+          order: [[2, 'desc']],
+          columnDefs: [
+            { type: 'num', targets: [0, 2] }
+          ]
+        <% end %>
       }));
 
       $('a[data-toggle="tab"]').on('shown.bs.tab', function() {
