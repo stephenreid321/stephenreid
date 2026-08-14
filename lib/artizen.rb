@@ -10,7 +10,7 @@ module Artizen
 
   class << self
     def leaderboard(season_number: nil)
-      cache_fetch("artizen/leaderboard/v11/#{season_number || 'current'}") { build(season_number) }
+      cache_fetch("artizen/leaderboard/v12/#{season_number || 'current'}") { build(season_number) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -18,7 +18,7 @@ module Artizen
     end
 
     def project(slug)
-      cache_fetch("artizen/project/v12/#{slug}") { build_project(slug) }
+      cache_fetch("artizen/project/v13/#{slug}") { build_project(slug) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -26,7 +26,7 @@ module Artizen
     end
 
     def fund(slug)
-      cache_fetch("artizen/fund/v6/#{slug}") { build_fund(slug) }
+      cache_fetch("artizen/fund/v8/#{slug}") { build_fund(slug) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -286,14 +286,16 @@ module Artizen
         season_projects = matched_projects.select { |project| project[:season_number] == season[:number] }
         drives = season_projects.group_by { |project| project[:drive] || 'Drive' }.map do |name, projects|
           sample = projects.first
+          active = sample && sample[:drive_active]
+          leftover = projects.sum { |project| project[:available].to_f }
           {
             name: name,
             url: sample && sample[:drive_url],
-            active: sample && sample[:drive_active],
+            active: active,
             number: sample && sample[:drive_number],
             multiple: sample && sample[:drive_multiple],
             unlocked: projects.sum { |project| project[:unlocked].to_f },
-            available: projects.sum { |project| project[:available].to_f },
+            available: active ? leftover : 0.0,
             projects: projects.sort_by { |project| [-project[:available].to_f, -project[:unlocked].to_f] }
           }
         end.sort_by { |drive| -(drive[:number] || 0) }
@@ -306,16 +308,23 @@ module Artizen
 
       if unallocated.to_f >= 0.5 && nested.any?
         latest = nested.first
-        latest[:drives] << {
+        row = {
           name: 'Unallocated',
           url: nil,
           active: false,
+          adjustment: true,
           number: nil,
           multiple: nil,
           unlocked: 0.0,
           available: unallocated.to_f,
           projects: []
         }
+        active_idx = latest[:drives].index { |drive| drive[:active] }
+        if active_idx
+          latest[:drives].insert(active_idx + 1, row)
+        else
+          latest[:drives] << row
+        end
         latest[:available] = latest[:available].to_f + unallocated.to_f
       end
 
@@ -356,11 +365,12 @@ module Artizen
       slices.group_by { |s| s['boost'] }.each do |boost_id, rows|
         next if boost_id.blank?
 
-        available = rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f }
-        next unless available.positive?
+        leftover = rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f }
+        next unless leftover.positive?
 
+        drive = drives.find { |d| d[:id] == boost_id }
         stats[id][boost_id] ||= { sales: 0.0, match: 0.0, raised: 0.0 }
-        stats[id][boost_id][:available] = available
+        stats[id][boost_id][:available] = drive && drive[:active] ? leftover : 0.0
       end
 
       fund_ids = slices.map { |s| s['fund'] }.compact.uniq
@@ -380,7 +390,7 @@ module Artizen
           drive_multiple: drive && drive[:multiple],
           season: drive && drive[:season],
           season_number: drive && drive[:season_number],
-          available: rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f },
+          available: drive && drive[:active] ? rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f } : 0.0,
           unlocked: rows.sum { |r| r['match unlocked'].to_f },
           cap: rows.sum { |r| r['match cap $'].to_f }
         }
@@ -490,7 +500,7 @@ module Artizen
       end
 
       contrib_total = contribs.sum { |c| c['amount $USD'].to_f }
-      sliced_available = matched_projects.sum { |project| project[:available].to_f }
+      sliced_available = matched_projects.select { |project| project[:drive_active] }.sum { |project| project[:available].to_f }
       unallocated = row['Funding - current'].to_f - sliced_available
       seasons = nest_fund_funding(contrib_seasons, matched_projects, unallocated: unallocated)
 
@@ -558,6 +568,7 @@ module Artizen
         }
         if current
           row[:available] = fund['Funding - current']&.to_f
+          row[:raised] = fund['Funding $ - total minus owner']&.to_f
           row[:prize_art] = fund['Prize ART']&.to_f
           row[:prize_usd] = fund['Prize USD']&.to_f
         end

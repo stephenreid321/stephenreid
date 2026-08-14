@@ -64,7 +64,7 @@
               <td class="text-right"><%= "#{format('%.1f', season[:match] / season[:sales])}x" if season[:sales].to_f.positive? %></td>
               <td class="text-right"><%= usd(season[:available]) %></td>
               <td class="text-right"><%= usd(season[:prize]) %></td>
-              <td class="text-right"><strong><%= usd(season[:raised]) %></strong></td>
+              <td class="text-right"><%= usd(season[:raised]) %></td>
             </tr>
             <% season[:drives].each_with_index do |drive, di| %>
               <% drive_id = "#{season_id}d#{di}" %>
@@ -83,7 +83,7 @@
                 <td class="text-right"><%= usd(drive[:sales]) %></td>
                 <td class="text-right"><%= usd(drive[:match]) %></td>
                 <td class="text-right"><%= "#{format('%.1f', drive[:match] / drive[:sales])}x" if drive[:sales].to_f.positive? %></td>
-                <td class="text-right"><%= usd(drive[:available]) %></td>
+                <td class="text-right"><%= drive[:active] ? usd(drive[:available]) : %(<span class="text-muted">—</span>) %></td>
                 <td class="text-right"><%= usd(drive[:prize]) %></td>
                 <td class="text-right"><%= usd(drive[:sales].to_f + drive[:match].to_f + drive[:prize].to_f) %></td>
               </tr>
@@ -96,7 +96,7 @@
                   <td class="text-right"></td>
                   <td class="text-right"><%= usd(fund[:unlocked]) %></td>
                   <td class="text-right"></td>
-                  <td class="text-right"><%= usd(fund[:available]) %></td>
+                  <td class="text-right"><%= drive[:active] ? usd(fund[:available]) : %(<span class="text-muted">—</span>) %></td>
                   <td class="text-right"></td>
                   <td class="text-right"></td>
                 </tr>

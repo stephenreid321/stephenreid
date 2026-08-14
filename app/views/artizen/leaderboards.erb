@@ -3,7 +3,7 @@
 <div class="mb-3">
   <h2 class="regular mb-1">Artizen leaderboards</h2>
   <p class="text-muted mb-2">
-    Project raised = sales + match + prize. Fund totals are confirmed contributions.
+    Project raised = sales + match + prize. Fund raised = unlocked + available. Season total is confirmed contributions.
     Data from <a href="https://artizen.fund/" target="_blank" rel="noopener">artizen.fund</a><% if @season && @season[:total_raised] %>
     · <%= usd(@season[:total_raised]) %> raised this season<% end %>
   </p>
@@ -65,7 +65,7 @@
                 <td class="text-right" data-order="<%= project[:sales] %>"><%= usd(project[:sales]) %></td>
                 <td class="text-right" data-order="<%= project[:match] %>"><%= usd(project[:match]) %></td>
                 <td class="text-right" data-order="<%= project[:prize] %>"><%= usd(project[:prize]) %></td>
-                <td class="text-right" data-order="<%= project[:raised] %>"><strong><%= usd(project[:raised]) %></strong></td>
+                <td class="text-right" data-order="<%= project[:raised] %>"><%= usd(project[:raised]) %></td>
               </tr>
             <% end %>
           </tbody>
@@ -136,6 +136,7 @@
               <th class="text-right">Season total</th>
               <% if @season && @season[:current] %>
                 <th class="text-right">Available</th>
+                <th class="text-right">Raised</th>
                 <th class="text-right">Prize</th>
               <% end %>
               <th>Last contribution</th>
@@ -154,6 +155,7 @@
                 <td class="text-right" data-order="<%= fund[:season_total] %>"><%= usd(fund[:season_total]) %></td>
                 <% if @season && @season[:current] %>
                   <td class="text-right" data-order="<%= fund[:available] || -1 %>"><%= usd(fund[:available]) %></td>
+                  <td class="text-right" data-order="<%= fund[:raised] || -1 %>"><%= usd(fund[:raised]) %></td>
                   <td class="text-right" data-order="<%= fund[:prize_usd] || -1 %>">
                     <% if fund[:prize_usd] %>
                       <%= usd(fund[:prize_usd]) %>
@@ -199,7 +201,7 @@
         <% if @season && @season[:current] %>
           order: [[3, 'desc']],
           columnDefs: [
-            { type: 'num', targets: [0, 2, 3, 4] }
+            { type: 'num', targets: [0, 2, 3, 4, 5] }
           ]
         <% else %>
           order: [[2, 'desc']],

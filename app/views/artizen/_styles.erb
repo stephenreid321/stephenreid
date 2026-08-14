@@ -36,13 +36,17 @@
   .artizen-tree-hidden {
     display: none !important;
   }
+  .artizen-funding-tree td,
+  .artizen-funding-tree th {
+    vertical-align: top;
+  }
   .artizen-tree-toggle {
     color: inherit;
     width: 1.15rem;
     display: inline-block;
     text-align: center;
     line-height: 1;
-    vertical-align: middle;
+    vertical-align: top;
   }
   .artizen-tree-toggle:hover,
   .artizen-tree-toggle:focus {
@@ -51,7 +55,8 @@
   }
   .artizen-tree-label {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
+    max-width: calc(100% - 1.4rem);
   }
   .artizen-tree-drive td:first-child {
     padding-left: 1.5rem;
@@ -59,6 +64,10 @@
   .artizen-tree-fund td:first-child,
   .artizen-tree-project td:first-child {
     padding-left: 2.75rem;
+  }
+  .artizen-tree-adjust td {
+    font-style: italic;
+    color: #888;
   }
 </style>
 <script>

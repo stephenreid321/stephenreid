@@ -40,6 +40,7 @@
           <th class="text-right">Contributions</th>
           <th class="text-right">Unlocked</th>
           <th class="text-right">Available</th>
+          <th class="text-right">Raised</th>
           <th class="text-right">Prize</th>
         </tr>
       </thead>
@@ -59,15 +60,17 @@
                 <small class="text-muted"><%= season[:count] %> <%= season[:count] == 1 ? 'contribution' : 'contributions' %></small>
               <% end %>
             </td>
-            <td class="text-right"><strong><%= usd(season[:total]) %></strong></td>
+            <td class="text-right"><%= usd(season[:total]) %></td>
             <td class="text-right"><%= usd(season[:unlocked]) %></td>
             <td class="text-right"><%= usd(season[:available]) %></td>
+            <td class="text-right"><%= usd(season[:unlocked].to_f + season[:available].to_f) %></td>
             <td class="text-right"></td>
           </tr>
           <% season[:drives].each_with_index do |drive, di| %>
             <% drive_id = "#{season_id}d#{di}" %>
             <% drive_open = season_open && di.zero? %>
-            <tr class="artizen-tree-drive<%= ' artizen-tree-hidden' unless season_open %>" data-id="<%= drive_id %>" data-parent="<%= season_id %>">
+            <% live = drive[:active] || drive[:adjustment] %>
+            <tr class="artizen-tree-drive<%= ' artizen-tree-adjust' if drive[:adjustment] %><%= ' artizen-tree-hidden' unless season_open %>" data-id="<%= drive_id %>" data-parent="<%= season_id %>">
               <td>
                 <% if drive[:projects].any? %>
                   <a href="#" class="artizen-tree-toggle" aria-expanded="<%= drive_open %>"><i class="bi <%= drive_open ? 'bi-chevron-down' : 'bi-chevron-right' %>"></i></a>
@@ -79,8 +82,9 @@
                 <% if drive[:active] %> <span class="badge badge-success">current</span><% end %>
               </td>
               <td class="text-right"></td>
-              <td class="text-right"><%= usd(drive[:unlocked]) %></td>
-              <td class="text-right"><%= usd(drive[:available]) %></td>
+              <td class="text-right"><%= usd(drive[:unlocked]) unless drive[:adjustment] %></td>
+              <td class="text-right"><%= live ? usd(drive[:available]) : %(<span class="text-muted">—</span>) %></td>
+              <td class="text-right"><%= live || drive[:unlocked].to_f.positive? ? usd(drive[:unlocked].to_f + (live ? drive[:available].to_f : 0)) : %(<span class="text-muted">—</span>) %></td>
               <td class="text-right"></td>
             </tr>
             <% drive[:projects].each do |project| %>
@@ -95,7 +99,8 @@
                 </td>
                 <td class="text-right"></td>
                 <td class="text-right"><%= usd(project[:unlocked]) %></td>
-                <td class="text-right"><%= usd(project[:available]) %></td>
+                <td class="text-right"><%= live ? usd(project[:available]) : %(<span class="text-muted">—</span>) %></td>
+                <td class="text-right"><%= live || project[:unlocked].to_f.positive? ? usd(project[:unlocked].to_f + (live ? project[:available].to_f : 0)) : %(<span class="text-muted">—</span>) %></td>
                 <td class="text-right"></td>
               </tr>
             <% end %>
@@ -108,6 +113,7 @@
           <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:total].to_f }) %></th>
           <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:unlocked].to_f }) %></th>
           <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:available].to_f }) %></th>
+          <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:unlocked].to_f + s[:available].to_f }) %></th>
           <th class="text-right">
             <% if @fund[:prize_usd] %>
               <%= usd(@fund[:prize_usd]) %>
