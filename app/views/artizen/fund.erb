@@ -1,0 +1,164 @@
+<%= partial :'artizen/styles' %>
+
+<p class="mb-3">
+  <a href="/artizen">&larr; Artizen leaderboards</a>
+</p>
+
+<div class="row mb-4">
+  <div class="col-lg-4 mb-3">
+    <% if @fund[:image] %>
+      <img class="artizen-hero" src="<%= @fund[:image] %>" alt="<%= @fund[:name] %>">
+    <% end %>
+  </div>
+  <div class="col-lg-8">
+    <h1 class="mb-2"><%= @fund[:name] %></h1>
+    <% if @fund[:subtitle] %>
+      <p class="lead"><%= @fund[:subtitle] %></p>
+    <% end %>
+    <% if @fund[:for_title] %>
+      <p class="text-muted">For <%= @fund[:for_title] %></p>
+    <% end %>
+    <% if @fund[:sponsor] %>
+      <p>Lead sponsor: <%= @fund[:sponsor] %></p>
+    <% end %>
+    <% if @fund[:active] == false %>
+      <span class="badge badge-secondary">Inactive</span>
+    <% end %>
+    <p class="mt-2 mb-0">
+      <a href="<%= @fund[:artizen_url] %>" target="_blank" rel="noopener">View on Artizen</a>
+    </p>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-6 col-md-3">
+    <div class="artizen-stat">
+      <div class="label">Season total</div>
+      <div class="value"><%= usd(@fund[:season_total]) %></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="artizen-stat">
+      <div class="label">Available</div>
+      <div class="value"><%= usd(@fund[:available]) %></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="artizen-stat">
+      <div class="label">Contributed</div>
+      <div class="value"><%= usd(@fund[:contrib_total]) %></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="artizen-stat">
+      <div class="label">Prize</div>
+      <div class="value">
+        <% if @fund[:prize_usd] %>
+          <%= usd(@fund[:prize_usd]) %>
+        <% elsif @fund[:prize_art] %>
+          <%= ActiveSupport::NumberHelper.number_to_delimited(@fund[:prize_art].round) %> <small class="text-muted">ART</small>
+        <% else %>
+          —
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @fund[:seasons].any? %>
+  <h2 class="regular mt-4">Funding</h2>
+  <div class="table-responsive mb-4">
+    <table class="table table-sm artizen-funding-tree">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="text-right">Contributions</th>
+          <th class="text-right">Unlocked</th>
+          <th class="text-right">Available</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fund[:seasons].each_with_index do |season, si| %>
+          <% season_id = "s#{si}" %>
+          <% season_open = si.zero? %>
+          <tr class="artizen-tree-season" data-id="<%= season_id %>">
+            <td>
+              <% if season[:drives].any? %>
+                <a href="#" class="artizen-tree-toggle" aria-expanded="<%= season_open %>"><i class="bi <%= season_open ? 'bi-chevron-down' : 'bi-chevron-right' %>"></i></a>
+              <% else %>
+                <span class="artizen-tree-toggle"></span>
+              <% end %>
+              <%= season[:title] %>
+              <% if season[:count].to_i.positive? %>
+                <small class="text-muted"><%= season[:count] %> <%= season[:count] == 1 ? 'contribution' : 'contributions' %></small>
+              <% end %>
+            </td>
+            <td class="text-right"><strong><%= usd(season[:total]) %></strong></td>
+            <td class="text-right"><%= usd(season[:unlocked]) %></td>
+            <td class="text-right"><%= usd(season[:available]) %></td>
+          </tr>
+          <% season[:drives].each_with_index do |drive, di| %>
+            <% drive_id = "#{season_id}d#{di}" %>
+            <% drive_open = season_open && di.zero? %>
+            <tr class="artizen-tree-drive<%= ' artizen-tree-hidden' unless season_open %>" data-id="<%= drive_id %>" data-parent="<%= season_id %>">
+              <td>
+                <% if drive[:projects].any? %>
+                  <a href="#" class="artizen-tree-toggle" aria-expanded="<%= drive_open %>"><i class="bi <%= drive_open ? 'bi-chevron-down' : 'bi-chevron-right' %>"></i></a>
+                <% else %>
+                  <span class="artizen-tree-toggle"></span>
+                <% end %>
+                <% if drive[:url] %>
+                  <a href="<%= drive[:url] %>" target="_blank" rel="noopener"><%= drive[:name] %></a>
+                <% else %>
+                  <%= drive[:name] %>
+                <% end %>
+                <% if drive[:multiple] %> <span class="badge badge-secondary"><%= drive[:multiple].to_i %>x</span><% end %>
+                <% if drive[:active] %> <span class="badge badge-success">current</span><% end %>
+              </td>
+              <td class="text-right"></td>
+              <td class="text-right"><%= usd(drive[:unlocked]) %></td>
+              <td class="text-right"><%= usd(drive[:available]) %></td>
+            </tr>
+            <% drive[:projects].each do |project| %>
+              <tr class="artizen-tree-project<%= ' artizen-tree-hidden' unless drive_open %>" data-parent="<%= drive_id %>">
+                <td>
+                  <span class="artizen-tree-toggle"></span>
+                  <span class="artizen-tree-label">
+                    <a href="<%= project[:url] %>" class="text-dark"><%= project[:name] %></a>
+                    <% if project[:creator] %><br>
+                      <small class="text-muted"><%= project[:creator] %></small><% end %>
+                  </span>
+                </td>
+                <td class="text-right"></td>
+                <td class="text-right"><%= usd(project[:unlocked]) %></td>
+                <td class="text-right"><%= usd(project[:available]) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:total].to_f }) %></th>
+          <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:unlocked].to_f }) %></th>
+          <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:available].to_f }) %></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+<% end %>
+
+<% if @fund[:video] %>
+  <%= Artizen.video_iframe(@fund[:video]) %>
+<% end %>
+
+<% if @fund[:description] %>
+  <h2 class="regular mt-4">About</h2>
+  <%= Artizen.rich_text(@fund[:description]) %>
+<% end %>
+
+<% if @fund[:eligibility] %>
+  <h2 class="regular mt-4">Eligibility</h2>
+  <%= Artizen.rich_text(@fund[:eligibility]) %>
+<% end %>

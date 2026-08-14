@@ -48,4 +48,12 @@ StephenReid::App.helpers do
       %(<span class="text-muted">—</span>)
     end
   end
+
+  def usd(value)
+    return %(<span class="text-muted">—</span>) if value.nil?
+
+    n = value.to_f
+    precision = n.abs >= 100 ? 0 : 2
+    ActiveSupport::NumberHelper.number_to_currency(n, unit: '$', precision: precision)
+  end
 end
