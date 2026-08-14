@@ -56,4 +56,17 @@ StephenReid::App.helpers do
     precision = n.abs >= 100 ? 0 : 2
     ActiveSupport::NumberHelper.number_to_currency(n, unit: '$', precision: precision)
   end
+
+  def load_artizen_board
+    @container_class = 'container-fluid'
+    @og_desc = 'Fund and project leaderboards from Artizen'
+    @data = Artizen.leaderboard(season_number: params[:season])
+    @seasons = @data[:seasons]
+    @season = @data[:season]
+    @drives = @data[:drives] || []
+    @projects = @data[:projects]
+    @funds = @data[:funds]
+    @artizen_error = @data[:error]
+    @title = @season ? "Artizen · #{@season[:title]}" : 'Artizen'
+  end
 end

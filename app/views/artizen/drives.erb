@@ -1,0 +1,56 @@
+<%= partial :'artizen/board' %>
+
+<% unless @artizen_error && @projects.blank? && @funds.blank? %>
+  <% if @drives.empty? %>
+    <p class="text-muted">No fund drives in this season.</p>
+  <% else %>
+    <div class="row">
+      <% @drives.each do |drive| %>
+        <div class="col-md-6 col-xl-4 mb-3">
+          <div class="card h-100">
+            <% if drive[:image] %>
+              <img class="artizen-drive-thumb card-img-top" src="<%= drive[:image] %>" alt="" loading="lazy">
+            <% end %>
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <h5 class="mb-0"><%= drive[:name] %></h5>
+                <% if drive[:active] %>
+                  <span class="badge badge-success">Active</span>
+                <% else %>
+                  <span class="badge badge-secondary"><%= drive[:status] %></span>
+                <% end %>
+              </div>
+              <% if drive[:multiple] %>
+                <span class="badge badge-success mb-2"><%= drive[:multiple].to_i %>x match</span>
+              <% end %>
+              <% if drive[:description] %>
+                <p class="small text-muted mb-2"><%= truncate(drive[:description], length: 140) %></p>
+              <% end %>
+              <p class="small mb-2">
+                <% if drive[:start] %><%= Time.zone.parse(drive[:start]).strftime('%d %b') %><% end %>
+                –
+                <% if drive[:end] %><%= Time.zone.parse(drive[:end]).strftime('%d %b %Y') %><% end %>
+              </p>
+              <dl class="row small mb-0">
+                <dt class="col-6">Match pot</dt>
+                <dd class="col-6 text-right"><%= usd(drive[:match_pot]) %></dd>
+                <dt class="col-6">Project prizes</dt>
+                <dd class="col-6 text-right"><%= usd(drive[:prize_projects]) %></dd>
+                <dt class="col-6">Fund prizes</dt>
+                <dd class="col-6 text-right"><%= usd(drive[:prize_funds]) %></dd>
+                <% if drive[:match_per_project] %>
+                  <dt class="col-6">Match / project</dt>
+                  <dd class="col-6 text-right"><%= usd(drive[:match_per_project]) %></dd>
+                <% end %>
+                <% if drive[:project_first] %>
+                  <dt class="col-6">1st / 2nd / 3rd</dt>
+                  <dd class="col-6 text-right"><%= usd(drive[:project_first]) %> / <%= usd(drive[:project_second]) %> / <%= usd(drive[:project_third]) %></dd>
+                <% end %>
+              </dl>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

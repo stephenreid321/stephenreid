@@ -4,19 +4,26 @@ StephenReid::App.controller do
   end
 
   get '/artizen' do
-    @container_class = 'container-fluid'
-    @title = 'Artizen'
-    @og_desc = 'Fund and project leaderboards from Artizen'
-    @data = Artizen.leaderboard(season_number: params[:season])
-    @seasons = @data[:seasons]
-    @season = @data[:season]
-    @drives = @data[:drives] || []
-    @projects = @data[:projects]
-    @funds = @data[:funds]
-    @artizen_error = @data[:error]
-    @title = @season ? "Artizen · #{@season[:title]}" : 'Artizen'
+    qs = params[:season].present? ? "?season=#{params[:season]}" : ''
+    redirect "/artizen/projects#{qs}"
+  end
 
-    erb :'artizen/leaderboards'
+  get '/artizen/projects' do
+    load_artizen_board
+    @tab = :projects
+    erb :'artizen/projects'
+  end
+
+  get '/artizen/drives' do
+    load_artizen_board
+    @tab = :drives
+    erb :'artizen/drives'
+  end
+
+  get '/artizen/funds' do
+    load_artizen_board
+    @tab = :funds
+    erb :'artizen/funds'
   end
 
   get '/artizen/projects/:slug' do

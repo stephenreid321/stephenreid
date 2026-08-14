@@ -10,7 +10,7 @@ module Artizen
 
   class << self
     def leaderboard(season_number: nil)
-      cache_fetch("artizen/leaderboard/v13/#{season_number || 'current'}") { build(season_number) }
+      cache_fetch("artizen/leaderboard/v14/#{season_number || 'current'}") { build(season_number) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -568,8 +568,9 @@ module Artizen
           active: fund['active']
         }
         if current
+          row[:unlocked] = unlocked[id].to_f
           row[:available] = fund['Funding - current']&.to_f
-          row[:raised] = row[:available].to_f + unlocked[id].to_f
+          row[:raised] = row[:available].to_f + row[:unlocked]
           row[:prize_art] = fund['Prize ART']&.to_f
           row[:prize_usd] = fund['Prize USD']&.to_f
         end
