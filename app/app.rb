@@ -28,6 +28,7 @@ module StephenReid
       redirect "#{ENV['BASE_URI']}#{request.path}" if ENV['BASE_URI'] && (ENV['BASE_URI'] != "#{request.scheme}://#{request.env['HTTP_HOST']}")
       if params[:r]
         StephenReid::App.cache.clear
+        Stash.where(key: /\Aartizen\//).delete_all
         redirect request.path
       end
       fix_params!

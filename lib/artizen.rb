@@ -6,11 +6,13 @@ module Artizen
   PAGE_SIZE = 100
   IN_BATCH = 50
   PARALLEL_THREADS = 8
-  CACHE_TTL = 15.minutes.to_i
+  LEADERBOARD_CACHE = 'artizen/leaderboard/v15'.freeze
+  PROJECT_CACHE = 'artizen/project/v13'.freeze
+  FUND_CACHE = 'artizen/fund/v8'.freeze
 
   class << self
     def leaderboard(season_number: nil)
-      cache_fetch("artizen/leaderboard/v15/#{season_number || 'current'}") { build(season_number) }
+      cache_fetch("#{LEADERBOARD_CACHE}/#{season_number || 'current'}") { build(season_number) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -18,7 +20,7 @@ module Artizen
     end
 
     def project(slug)
-      cache_fetch("artizen/project/v13/#{slug}") { build_project(slug) }
+      cache_fetch("#{PROJECT_CACHE}/#{slug}") { build_project(slug) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -26,11 +28,39 @@ module Artizen
     end
 
     def fund(slug)
-      cache_fetch("artizen/fund/v8/#{slug}") { build_fund(slug) }
+      cache_fetch("#{FUND_CACHE}/#{slug}") { build_fund(slug) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
       nil
+    end
+
+    def refresh_cache
+      started = Time.now
+      seasons = fetch_seasons
+      project_slugs = []
+      fund_slugs = []
+
+      seasons.each do |season|
+        puts "[Artizen] leaderboard season #{season[:number]}"
+        data = rebuild("#{LEADERBOARD_CACHE}/#{season[:number]}") { build(season[:number]) }
+        next if data.nil? || data[:error]
+
+        cache_write("#{LEADERBOARD_CACHE}/current", data) if season[:current]
+        project_slugs.concat(data[:projects].filter_map { |row| row[:url].to_s.split('/').last.presence })
+        fund_slugs.concat(data[:funds].filter_map { |row| row[:url].to_s.split('/').last.presence })
+      end
+
+      project_slugs.uniq.each do |slug|
+        puts "[Artizen] project #{slug}"
+        rebuild("#{PROJECT_CACHE}/#{slug}") { build_project(slug) }
+      end
+      fund_slugs.uniq.each do |slug|
+        puts "[Artizen] fund #{slug}"
+        rebuild("#{FUND_CACHE}/#{slug}") { build_fund(slug) }
+      end
+
+      puts "[Artizen] refreshed #{seasons.size} seasons, #{project_slugs.uniq.size} projects, #{fund_slugs.uniq.size} funds in #{(Time.now - started).round}s"
     end
 
     def rich_text(text)
@@ -660,21 +690,30 @@ module Artizen
       results
     end
 
-    def cache_fetch(key)
-      cache = StephenReid::App.cache
-      begin
-        return cache[key] if cache.key?(key)
-      rescue StandardError
-        nil
+    def cache_fetch(key, &block)
+      if (stash = Stash.find_by(key: key))
+        return JSON.parse(stash.value, symbolize_names: true)
       end
 
-      value = yield
-      begin
-        cache.store(key, value, expires: CACHE_TTL) if value && !value[:error]
-      rescue StandardError
-        nil
+      cache_write(key, &block)
+    end
+
+    def cache_write(key, value = nil)
+      value = yield if block_given?
+      if value && !(value.is_a?(Hash) && value[:error])
+        stash = Stash.find_or_initialize_by(key: key)
+        stash.value = value.to_json
+        stash.save!
       end
       value
+    end
+
+    def rebuild(key)
+      cache_write(key) { yield }
+    rescue StandardError => e
+      Honeybadger.notify(e) if defined?(Honeybadger)
+      warn "[Artizen] #{key} failed: #{e.class}: #{e.message}"
+      nil
     end
 
     def project_url(slug_or_id)
