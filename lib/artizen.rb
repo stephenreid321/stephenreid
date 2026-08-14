@@ -10,7 +10,7 @@ module Artizen
 
   class << self
     def leaderboard(season_number: nil)
-      cache_fetch("artizen/leaderboard/v12/#{season_number || 'current'}") { build(season_number) }
+      cache_fetch("artizen/leaderboard/v13/#{season_number || 'current'}") { build(season_number) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -553,6 +553,7 @@ module Artizen
       end
 
       funds = fetch_by_ids('fund', totals.keys)
+      unlocked = current ? fund_unlocked(totals.keys) : {}
       ranked = funds.filter_map do |fund|
         id = fund['_id']
         season_total = totals[id].to_f
@@ -568,7 +569,7 @@ module Artizen
         }
         if current
           row[:available] = fund['Funding - current']&.to_f
-          row[:raised] = fund['Funding $ - total minus owner']&.to_f
+          row[:raised] = row[:available].to_f + unlocked[id].to_f
           row[:prize_art] = fund['Prize ART']&.to_f
           row[:prize_usd] = fund['Prize USD']&.to_f
         end
@@ -579,6 +580,22 @@ module Artizen
       end
 
       ranked.each_with_index.map { |row, i| row.merge(rank: i + 1) }
+    end
+
+    def fund_unlocked(fund_ids)
+      unlocked = Hash.new(0.0)
+      fund_ids.compact.uniq.each_slice(IN_BATCH) do |batch|
+        list(
+          'projectfundboostslice',
+          constraints: [
+            { key: 'fund', constraint_type: 'in', value: batch },
+            { key: 'match unlocked', constraint_type: 'greater than', value: 0 }
+          ]
+        ).each do |slice|
+          unlocked[slice['fund']] += slice['match unlocked'].to_f
+        end
+      end
+      unlocked
     end
 
     def list(type, constraints: nil, sort_field: nil, descending: nil)
