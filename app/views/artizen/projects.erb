@@ -4,9 +4,7 @@
   <table id="artizen-projects-table" class="table table-sm">
     <thead>
       <tr>
-        <th class="text-right">#</th>
         <th>Project</th>
-        <th>Creator</th>
         <th class="text-right">Sales</th>
         <th class="text-right">Match</th>
         <th class="text-right">Prize</th>
@@ -16,14 +14,12 @@
     <tbody>
       <% @projects.each do |project| %>
         <tr>
-          <td class="text-right text-muted" data-order="<%= project[:rank] %>"><%= project[:rank] %></td>
           <td>
             <strong><a href="<%= project[:url] %>" class="text-dark"><%= project[:name] %></a></strong>
             <% if project[:logline] %>
               <br><small class="text-muted"><%= truncate(project[:logline], length: 90) %></small>
             <% end %>
           </td>
-          <td><%= project[:creator] %></td>
           <td class="text-right" data-order="<%= project[:sales] %>"><%= usd(project[:sales]) %></td>
           <td class="text-right" data-order="<%= project[:match] %>"><%= usd(project[:match]) %></td>
           <td class="text-right" data-order="<%= project[:prize] %>"><%= usd(project[:prize]) %></td>
@@ -43,10 +39,10 @@
         lengthMenu: [10, 25, 50, 100],
         searching: true,
         info: true,
-        order: [[0, 'asc']],
+        order: [[4, 'desc']],
         fixedHeader: true,
         columnDefs: [
-          { type: 'num', targets: [0, 3, 4, 5, 6] }
+          { type: 'num', targets: [1, 2, 3, 4] }
         ]
       });
     });

@@ -13,24 +13,26 @@
             <% end %>
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-start mb-1">
-                <h5 class="mb-0"><%= drive[:name] %></h5>
+                <h5 class="mb-0">
+                  <%= drive[:name] %>
+                  <% if drive[:multiple] %>
+                    <span class="badge badge-success artizen-badge-sm"><%= drive[:multiple].to_i %>x</span>
+                  <% end %>
+                </h5>
                 <% if drive[:active] %>
                   <span class="badge badge-success">Active</span>
                 <% else %>
                   <span class="badge badge-secondary"><%= drive[:status] %></span>
                 <% end %>
               </div>
-              <% if drive[:multiple] %>
-                <span class="badge badge-success mb-2"><%= drive[:multiple].to_i %>x match</span>
-              <% end %>
-              <% if drive[:description] %>
-                <p class="small text-muted mb-2"><%= truncate(drive[:description], length: 140) %></p>
-              <% end %>
               <p class="small mb-2">
                 <% if drive[:start] %><%= Time.zone.parse(drive[:start]).strftime('%d %b') %><% end %>
                 –
                 <% if drive[:end] %><%= Time.zone.parse(drive[:end]).strftime('%d %b %Y') %><% end %>
               </p>
+              <% if drive[:description] %>
+                <p class="small text-muted mb-2"><%= truncate(drive[:description], length: 140) %></p>
+              <% end %>
               <dl class="row small mb-0">
                 <dt class="col-6">Match pot</dt>
                 <dd class="col-6 text-right"><%= usd(drive[:match_pot]) %></dd>

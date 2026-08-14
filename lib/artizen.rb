@@ -10,7 +10,7 @@ module Artizen
 
   class << self
     def leaderboard(season_number: nil)
-      cache_fetch("artizen/leaderboard/v14/#{season_number || 'current'}") { build(season_number) }
+      cache_fetch("artizen/leaderboard/v15/#{season_number || 'current'}") { build(season_number) }
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{e.class}: #{e.message}"
@@ -554,14 +554,17 @@ module Artizen
 
       funds = fetch_by_ids('fund', totals.keys)
       unlocked = current ? fund_unlocked(totals.keys) : {}
+      exts = fetch_by_ids('fundextendedinfo', funds.map { |fund| fund['Extended info'] }).index_by { |row| row['_id'] }
       ranked = funds.filter_map do |fund|
         id = fund['_id']
         season_total = totals[id].to_f
         next unless season_total.positive?
 
         slug = fund['Slug'].presence || id
+        ext = exts[fund['Extended info']]
         row = {
           name: fund['name'].to_s.strip,
+          subtitle: ext && ext['subtitle'].presence,
           url: local_fund_path(slug),
           season_total: season_total,
           last_contribution: last_at[id],

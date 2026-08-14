@@ -58,7 +58,6 @@ StephenReid::App.helpers do
   end
 
   def load_artizen_board
-    @container_class = 'container-fluid'
     @og_desc = 'Fund and project leaderboards from Artizen'
     @data = Artizen.leaderboard(season_number: params[:season])
     @seasons = @data[:seasons]

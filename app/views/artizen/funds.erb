@@ -4,7 +4,6 @@
   <table id="artizen-funds-table" class="table table-sm">
     <thead>
       <tr>
-        <th class="text-right">#</th>
         <th>Fund</th>
         <th class="text-right">Contributions</th>
         <% if @season && @season[:current] %>
@@ -13,15 +12,16 @@
           <th class="text-right">Raised</th>
           <th class="text-right">Prize</th>
         <% end %>
-        <th>Last contribution</th>
       </tr>
     </thead>
     <tbody>
       <% @funds.each do |fund| %>
         <tr>
-          <td class="text-right text-muted" data-order="<%= fund[:rank] %>"><%= fund[:rank] %></td>
           <td>
             <strong><a href="<%= fund[:url] %>" class="text-dark"><%= fund[:name] %></a></strong>
+            <% if fund[:subtitle] %>
+              <br><small class="text-muted"><%= truncate(fund[:subtitle], length: 90) %></small>
+            <% end %>
             <% if fund[:active] == false %>
               <br><span class="badge badge-secondary">Inactive</span>
             <% end %>
@@ -40,11 +40,6 @@
               <% end %>
             </td>
           <% end %>
-          <td data-order="<%= fund[:last_contribution] || '' %>">
-            <% if fund[:last_contribution] %>
-              <%= timeago(Time.zone.parse(fund[:last_contribution])) %>
-            <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>
@@ -62,14 +57,14 @@
         info: true,
         fixedHeader: true,
         <% if @season && @season[:current] %>
-          order: [[4, 'desc']],
+          order: [[3, 'desc']],
           columnDefs: [
-            { type: 'num', targets: [0, 2, 3, 4, 5, 6] }
+            { type: 'num', targets: [1, 2, 3, 4, 5] }
           ]
         <% else %>
-          order: [[2, 'desc']],
+          order: [[1, 'desc']],
           columnDefs: [
-            { type: 'num', targets: [0, 2] }
+            { type: 'num', targets: [1] }
           ]
         <% end %>
       });
