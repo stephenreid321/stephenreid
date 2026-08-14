@@ -16,11 +16,11 @@
                 <h5 class="mb-0">
                   <%= drive[:name] %>
                   <% if drive[:multiple] %>
-                    <span class="badge badge-success artizen-badge-sm"><%= drive[:multiple].to_i %>x</span>
+                    <span class="badge badge-primary artizen-badge-sm"><%= drive[:multiple].to_i %>x</span>
                   <% end %>
                 </h5>
                 <% if drive[:active] %>
-                  <span class="badge badge-success">Active</span>
+                  <span class="badge badge-primary">Active</span>
                 <% else %>
                   <span class="badge badge-secondary"><%= drive[:status] %></span>
                 <% end %>

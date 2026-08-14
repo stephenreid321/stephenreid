@@ -77,8 +77,8 @@
                     <span class="artizen-tree-toggle"></span>
                   <% end %>
                 <%= drive[:name] %>
-                  <% if drive[:multiple] %> <span class="badge badge-secondary"><%= drive[:multiple].to_i %>x</span><% end %>
-                  <% if drive[:active] %> <span class="badge badge-success">current</span><% end %>
+                  <% if drive[:multiple] %> <span class="badge badge-primary"><%= drive[:multiple].to_i %>x</span><% end %>
+                  <% if drive[:active] %> <span class="badge badge-primary">current</span><% end %>
                 </td>
                 <td class="text-right"><%= usd(drive[:sales]) %></td>
                 <td class="text-right"><%= usd(drive[:match]) %></td>
