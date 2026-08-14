@@ -38,8 +38,6 @@ module Artizen
     def refresh_cache
       started = Time.now
       seasons = fetch_seasons
-      project_slugs = []
-      fund_slugs = []
 
       seasons.each do |season|
         puts "[Artizen] leaderboard season #{season[:number]}"
@@ -47,20 +45,9 @@ module Artizen
         next if data.nil? || data[:error]
 
         cache_write("#{LEADERBOARD_CACHE}/current", data) if season[:current]
-        project_slugs.concat(data[:projects].filter_map { |row| row[:url].to_s.split('/').last.presence })
-        fund_slugs.concat(data[:funds].filter_map { |row| row[:url].to_s.split('/').last.presence })
       end
 
-      project_slugs.uniq.each do |slug|
-        puts "[Artizen] project #{slug}"
-        rebuild("#{PROJECT_CACHE}/#{slug}") { build_project(slug) }
-      end
-      fund_slugs.uniq.each do |slug|
-        puts "[Artizen] fund #{slug}"
-        rebuild("#{FUND_CACHE}/#{slug}") { build_fund(slug) }
-      end
-
-      puts "[Artizen] refreshed #{seasons.size} seasons, #{project_slugs.uniq.size} projects, #{fund_slugs.uniq.size} funds in #{(Time.now - started).round}s"
+      puts "[Artizen] refreshed #{seasons.size} seasons in #{(Time.now - started).round}s"
     end
 
     def rich_text(text)
