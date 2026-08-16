@@ -7,8 +7,9 @@
     [:match, 'Match', :usd],
     [:prize, 'Prize', :usd],
     [:vmp, 'V+M+P', :usd],
-    [:multiple, '(V+M+P)/S', :x],
+    [:multiple_v, 'V/S', :x],
     [:multiple_ex, '(V+M)/S', :x],
+    [:multiple, '(V+M+P)/S', :x],
     [:raised, 'Raised', :usd]
   ] %>
   <% rows = @projects.map { |project| artizen_funding(project) } %>
@@ -44,5 +45,5 @@
     </tbody>
   </table>
 
-  <%= partial :'artizen/datatable', locals: { table_id: 'artizen-projects-table', order: [[8, 'desc']], numeric: (1..8).to_a } %>
+  <%= partial :'artizen/datatable', locals: { table_id: 'artizen-projects-table', order: [[9, 'desc']], numeric: (1..9).to_a } %>
 <% end %>

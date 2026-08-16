@@ -69,21 +69,23 @@ StephenReid::App.helpers do
       match: match,
       prize: prize,
       vmp: vmp,
-      multiple: (vmp / sales if sales.positive?),
+      multiple_v: (venus / sales if sales.positive?),
       multiple_ex: ((venus + match) / sales if sales.positive?),
+      multiple: (vmp / sales if sales.positive?),
       raised: row[:raised].nil? ? sales + vmp : row[:raised].to_f
     )
   end
 
   def artizen_multiple_label(multiple)
-    "#{format('%.1f', multiple)}x" if multiple
+    "#{format('%.1f', multiple)}x" unless multiple.nil?
   end
 
   def artizen_money_cells(row, tag: 'td')
     f = artizen_funding(row)
     [
       usd(f[:sales]), usd(f[:venus]), usd(f[:match]), usd(f[:prize]),
-      usd(f[:vmp]), artizen_multiple_label(f[:multiple]), artizen_multiple_label(f[:multiple_ex]),
+      usd(f[:vmp]),
+      artizen_multiple_label(f[:multiple_v]), artizen_multiple_label(f[:multiple_ex]), artizen_multiple_label(f[:multiple]),
       usd(f[:raised])
     ].map { |content| %(<#{tag} class="text-right">#{content}</#{tag}>) }.join.html_safe
   end
