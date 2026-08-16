@@ -6,9 +6,10 @@ module Artizen
   PAGE_SIZE = 100
   IN_BATCH = 50
   PARALLEL_THREADS = 8
-  LEADERBOARD_CACHE = 'artizen/leaderboard/v15'.freeze
-  PROJECT_CACHE = 'artizen/project/v13'.freeze
+  LEADERBOARD_CACHE = 'artizen/leaderboard/v16'.freeze
+  PROJECT_CACHE = 'artizen/project/v15'.freeze
   FUND_CACHE = 'artizen/fund/v8'.freeze
+  VENUS_ACCOUNT_ID = '1774215063859x668765896046542800'.freeze
 
   class << self
     def leaderboard(season_number: nil)
@@ -47,8 +48,8 @@ module Artizen
         cache_write("#{LEADERBOARD_CACHE}/current", data) if season[:current]
       end
 
-      dropped = Stash.where(key: /\A#{Regexp.escape(PROJECT_CACHE)}\//).delete_all
-      dropped += Stash.where(key: /\A#{Regexp.escape(FUND_CACHE)}\//).delete_all
+      dropped = Stash.where(key: %r{\A#{Regexp.escape(PROJECT_CACHE)}/}).delete_all
+      dropped += Stash.where(key: %r{\A#{Regexp.escape(FUND_CACHE)}/}).delete_all
 
       puts "[Artizen] refreshed #{seasons.size} seasons, dropped #{dropped} project/fund stashes in #{(Time.now - started).round}s"
     end
@@ -139,8 +140,9 @@ module Artizen
       ).reject { |row| row['hide from competition'] }
 
       projects = fetch_by_ids('project', rows.map { |r| r['project'] }.compact.uniq).index_by { |p| p['_id'] }
+      venus_by_project = venus_buys_by_project(season_id)
 
-      ranked = rows.filter_map do |row|
+      rows.filter_map do |row|
         project = projects[row['project']] || {}
         next if project['Hide'] || project['unPublished']
 
@@ -148,19 +150,19 @@ module Artizen
         next if name.blank?
 
         slug = project['Slug'].presence || row['project']
+        venus = venus_by_project[row['project']].to_f
         {
           name: name,
           url: local_project_path(slug),
           creator: (project["Lead Creator\t(text)"] || row['lead creator']).to_s.strip.presence,
           logline: project['Logline'].presence,
-          sales: row['funding total sales'].to_f,
+          sales: community_sales(row['funding total sales'], venus),
+          venus: venus,
           match: row['funding match'].to_f + row['funding boost '].to_f,
           prize: row['funding prize funds usd'].to_f,
           raised: row['funding total'].to_f
         }
       end
-
-      ranked.each_with_index.map { |row, i| row.merge(rank: i + 1) }
     end
 
     def fetch_drives(season_id)
@@ -208,7 +210,7 @@ module Artizen
       drives.filter_map do |drive|
         stat = stats_by_drive[drive[:id]]
         next unless stat
-        next unless stat[:available].to_f.positive? || stat[:raised].to_f.positive? || stat[:sales].to_f.positive?
+        next unless stat[:available].to_f.positive? || stat[:raised].to_f.positive? || stat[:sales].to_f.positive? || stat[:venus].to_f.positive?
 
         stat.merge(
           name: drive[:name],
@@ -226,31 +228,19 @@ module Artizen
 
     def nest_project_funding(seasons, drives, matching_funds)
       known = seasons.map { |season| season[:number] }
-      drives.each do |drive|
-        next if known.include?(drive[:season_number])
+      (drives + matching_funds).each do |row|
+        next if known.include?(row[:season_number])
 
         seasons << {
-          number: drive[:season_number],
-          title: drive[:season] || "Season #{drive[:season_number]}",
+          number: row[:season_number],
+          title: row[:season] || "Season #{row[:season_number]}",
           sales: 0.0,
+          venus: 0.0,
           match: 0.0,
           prize: 0.0,
           raised: 0.0
         }
-        known << drive[:season_number]
-      end
-      matching_funds.each do |fund|
-        next if known.include?(fund[:season_number])
-
-        seasons << {
-          number: fund[:season_number],
-          title: fund[:season] || "Season #{fund[:season_number]}",
-          sales: 0.0,
-          match: 0.0,
-          prize: 0.0,
-          raised: 0.0
-        }
-        known << fund[:season_number]
+        known << row[:season_number]
       end
       seasons.sort_by! { |season| -(season[:number] || 0) }
 
@@ -267,6 +257,7 @@ module Artizen
             active: sample && sample[:drive_active],
             number: sample && sample[:drive_number],
             sales: 0.0,
+            venus: 0.0,
             match: 0.0,
             prize: 0.0,
             available: season_funds.select { |fund| fund[:drive] == name }.sum { |fund| fund[:available].to_f },
@@ -364,19 +355,26 @@ module Artizen
 
       boost_ids = (slices + participants).map { |r| r['boost'] }.compact.uniq
       drives = fetch_by_ids('boost', boost_ids).map { |r| normalize_drive(r) }
-      drives.each do |drive|
-        meta = seasons_meta[drive[:season_id]]
-        drive[:season_number] ||= meta&.dig(:number)
-        drive[:season] = meta&.dig(:title) || (drive[:season_number] && "Season #{drive[:season_number]}")
-      end
+      apply_season_names(drives, seasons_meta)
       drives.sort_by! { |d| [-(d[:season_number] || 0), -(d[:number] || 0)] }
+
+      venus_txs = venus_transactions(project_id: id)
+      venus_by_season = Hash.new(0.0)
+      venus_by_boost = Hash.new(0.0)
+      venus_txs.each do |tx|
+        venus_by_season[tx['Season']] += tx['amount spent $USD'].to_f
+        drive = assign_venus_drive(tx, drives)
+        venus_by_boost[drive[:id]] += tx['amount spent $USD'].to_f if drive
+      end
 
       stats = Hash.new { |h, k| h[k] = {} }
       participants.each do |part|
         next if part['boost'].blank?
 
+        venus = venus_by_boost[part['boost']].to_f
         stats[id][part['boost']] = {
-          sales: part['fund drive sales (both)'].to_f,
+          sales: community_sales(part['fund drive sales (both)'], venus),
+          venus: venus,
           match: part['match boost unlocked (both)'].to_f,
           raised: part['sales + match (both)'].to_f,
           prize: part['prize earned usd']&.to_f
@@ -389,7 +387,7 @@ module Artizen
         next unless leftover.positive?
 
         drive = drives.find { |d| d[:id] == boost_id }
-        stats[id][boost_id] ||= { sales: 0.0, match: 0.0, raised: 0.0 }
+        stats[id][boost_id] ||= { sales: 0.0, venus: 0.0, match: 0.0, raised: 0.0 }
         stats[id][boost_id][:available] = drive && drive[:active] ? leftover : 0.0
       end
 
@@ -423,16 +421,18 @@ module Artizen
       season_image = season_rows.sort_by { |srow| -(srow['season number'] || 0) }.map { |srow| srow['image crop'] }.find(&:present?)
       seasons = season_rows.filter_map do |srow|
         meta = seasons_meta[srow['season ']]
-        s_sales = srow['funding total sales'].to_f
+        s_venus = venus_by_season[srow['season ']].to_f
+        s_sales = community_sales(srow['funding total sales'], s_venus)
         s_match = srow['funding match'].to_f + srow['funding boost '].to_f
         s_prize = srow['funding prize funds usd'].to_f
-        s_raised = s_sales + s_match + s_prize
+        s_raised = s_sales + s_venus + s_match + s_prize
         next unless s_raised.positive?
 
         {
           number: srow['season number'] || meta&.dig(:number),
           title: meta&.dig(:title) || "Season #{srow['season number']}",
           sales: s_sales,
+          venus: s_venus,
           match: s_match,
           prize: s_prize,
           raised: s_raised
@@ -450,8 +450,46 @@ module Artizen
         image: media_url(row['(old) Artifact Image -crop'] || season_image || row['Profile image lead creator']),
         video: row['video presentation'].presence,
         tags: tags,
-        seasons: nest_project_funding(seasons, drive_details, matching_funds)
+        seasons: nest_project_funding(seasons, drive_details, matching_funds),
+        submissions: project_submissions(id, seasons_meta)
       }
+    end
+
+    def project_submissions(project_id, seasons_meta)
+      rows = list('projectsubmission', constraints: [{ key: 'Project', constraint_type: 'equals', value: project_id }])
+      rows.reject! { |row| row['Submitted'] == false }
+      fund_ids = rows.map { |row| row['Fund'] }.compact.uniq
+      funds_by_id = fetch_by_ids('fund', fund_ids).index_by { |fund| fund['_id'] }
+      rows.filter_map do |row|
+        fund = funds_by_id[row['Fund']]
+        next unless fund
+
+        slug = fund['Slug'].presence || row['Fund']
+        meta = seasons_meta[row['season']]
+        number = row['season number'] || meta&.dig(:number)
+        {
+          name: fund['name'].to_s.strip,
+          url: local_fund_path(slug),
+          status: row['Status'].to_s.presence,
+          season: meta&.dig(:title) || (number && "Season #{number}"),
+          season_number: number,
+          created_at: row['Created Date']
+        }
+      end.sort do |a, b|
+        cmp = (b[:season_number] || 0) <=> (a[:season_number] || 0)
+        next cmp unless cmp.zero?
+
+        cmp = submission_status_rank(a[:status]) <=> submission_status_rank(b[:status])
+        cmp.zero? ? b[:created_at].to_s <=> a[:created_at].to_s : cmp
+      end
+    end
+
+    def submission_status_rank(status)
+      case status
+      when 'Curated', 'Approved' then 0
+      when 'Submitted' then 1
+      else 2
+      end
     end
 
     def build_fund(slug)
@@ -474,11 +512,7 @@ module Artizen
       boost_ids = slices.map { |s| s['boost'] }.compact.uniq
       seasons_meta = fetch_seasons.index_by { |s| s[:id] }
       drives = fetch_by_ids('boost', boost_ids).map { |r| normalize_drive(r) }.index_by { |d| d[:id] }
-      drives.each_value do |drive|
-        meta = seasons_meta[drive[:season_id]]
-        drive[:season_number] ||= meta&.dig(:number)
-        drive[:season] = meta&.dig(:title) || (drive[:season_number] && "Season #{drive[:season_number]}")
-      end
+      apply_season_names(drives.values, seasons_meta)
 
       matched_projects = slices.group_by { |s| [s['project'], s['boost']] }.filter_map do |(project_id, boost_id), rows|
         project = projects[project_id]
@@ -602,8 +636,6 @@ module Artizen
       ranked.sort_by! do |row|
         current ? [-row[:available].to_f, -row[:season_total]] : [-row[:season_total]]
       end
-
-      ranked.each_with_index.map { |row, i| row.merge(rank: i + 1) }
     end
 
     def fund_unlocked(fund_ids)
@@ -680,12 +712,14 @@ module Artizen
       results
     end
 
-    def cache_fetch(key, &block)
+    def cache_fetch(key, &)
+      return yield if Padrino.env == :development
+
       if (stash = Stash.find_by(key: key))
         return JSON.parse(stash.value, symbolize_names: true)
       end
 
-      cache_write(key, &block)
+      cache_write(key, &)
     end
 
     def cache_write(key, value = nil)
@@ -698,12 +732,82 @@ module Artizen
       value
     end
 
-    def rebuild(key)
-      cache_write(key) { yield }
+    def rebuild(key, &)
+      cache_write(key, &)
     rescue StandardError => e
       Honeybadger.notify(e) if defined?(Honeybadger)
       warn "[Artizen] #{key} failed: #{e.class}: #{e.message}"
       nil
+    end
+
+    def venus_account_id
+      return @venus_account_id if defined?(@venus_account_id)
+
+      rows = get('useraccount', limit: 1, constraints: [{ key: 'name', constraint_type: 'equals', value: 'Venus' }].to_json)['results'] || []
+      @venus_account_id = rows.dig(0, '_id') || VENUS_ACCOUNT_ID
+    end
+
+    def venus_transactions(season_id: nil, project_id: nil)
+      id = venus_account_id
+      return [] if id.blank?
+
+      constraints = [
+        { key: 'Buyer (User account)', constraint_type: 'equals', value: id },
+        { key: 'confirmed', constraint_type: 'equals', value: true }
+      ]
+      constraints << { key: 'Season', constraint_type: 'equals', value: season_id } if season_id
+      constraints << { key: 'project', constraint_type: 'equals', value: project_id } if project_id
+      list('transaction', constraints: constraints)
+    end
+
+    def venus_buys_by_project(season_id)
+      venus_transactions(season_id: season_id).each_with_object(Hash.new(0.0)) do |tx, sums|
+        pid = tx['project']
+        next if pid.blank?
+
+        sums[pid] += tx['amount spent $USD'].to_f
+      end
+    end
+
+    def assign_venus_drive(tx, drives)
+      created = parse_time(tx['Created Date'])
+      return unless created
+
+      candidates = drives.select { |drive| drive[:season_id] == tx['Season'] }
+      candidates = drives if candidates.empty?
+
+      in_window = candidates.select do |drive|
+        start = parse_time(drive[:start])
+        finish = parse_time(drive[:end])
+        next false unless start
+
+        created >= start && (finish.nil? || created <= finish)
+      end
+      return in_window.max_by { |drive| parse_time(drive[:start]) } if in_window.any?
+
+      started = candidates.select { |drive| (start = parse_time(drive[:start])) && start <= created }
+      started.max_by { |drive| parse_time(drive[:start]) }
+    end
+
+    def parse_time(value)
+      return if value.blank?
+
+      Time.parse(value.to_s)
+    rescue ArgumentError
+      nil
+    end
+
+    def community_sales(gross, venus)
+      sales = gross.to_f - venus.to_f
+      sales.positive? ? sales : 0.0
+    end
+
+    def apply_season_names(drives, seasons_meta)
+      drives.each do |drive|
+        meta = seasons_meta[drive[:season_id]]
+        drive[:season_number] ||= meta&.dig(:number)
+        drive[:season] = meta&.dig(:title) || (drive[:season_number] && "Season #{drive[:season_number]}")
+      end
     end
 
     def project_url(slug_or_id)

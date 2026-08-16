@@ -39,11 +39,14 @@
           <tr>
             <th></th>
             <th class="text-right">Sales</th>
+            <th class="text-right">Venus</th>
             <th class="text-right">Match</th>
-            <th class="text-right">Match multiple</th>
-            <th class="text-right">Available</th>
             <th class="text-right">Prize</th>
+            <th class="text-right">V+M+P</th>
+            <th class="text-right">(V+M+P)/S</th>
+            <th class="text-right">(V+M)/S</th>
             <th class="text-right">Raised</th>
+            <th class="text-right">Available</th>
           </tr>
         </thead>
         <tbody>
@@ -59,12 +62,8 @@
                 <% end %>
                 <%= season[:title] %>
               </td>
-              <td class="text-right"><%= usd(season[:sales]) %></td>
-              <td class="text-right"><%= usd(season[:match]) %></td>
-              <td class="text-right"><%= "#{format('%.1f', season[:match] / season[:sales])}x" if season[:sales].to_f.positive? %></td>
+              <%= artizen_money_cells(season) %>
               <td class="text-right"><%= usd(season[:available]) if season[:available].to_f.positive? %></td>
-              <td class="text-right"><%= usd(season[:prize]) %></td>
-              <td class="text-right"><%= usd(season[:raised]) %></td>
             </tr>
             <% season[:drives].each_with_index do |drive, di| %>
               <% drive_id = "#{season_id}d#{di}" %>
@@ -80,12 +79,8 @@
                   <% if drive[:multiple] %> <span class="badge badge-primary"><%= drive[:multiple].to_i %>x</span><% end %>
                   <% if drive[:active] %> <span class="badge badge-primary">current</span><% end %>
                 </td>
-                <td class="text-right"><%= usd(drive[:sales]) %></td>
-                <td class="text-right"><%= usd(drive[:match]) %></td>
-                <td class="text-right"><%= "#{format('%.1f', drive[:match] / drive[:sales])}x" if drive[:sales].to_f.positive? %></td>
+                <%= artizen_money_cells(drive) %>
                 <td class="text-right"><%= usd(drive[:available]) if drive[:active] %></td>
-                <td class="text-right"><%= usd(drive[:prize]) %></td>
-                <td class="text-right"><%= usd(drive[:sales].to_f + drive[:match].to_f + drive[:prize].to_f) %></td>
               </tr>
               <% drive[:funds].each do |fund| %>
                 <tr class="artizen-tree-fund<%= ' artizen-tree-hidden' unless drive_open %>" data-parent="<%= drive_id %>">
@@ -94,29 +89,71 @@
                     <a href="<%= fund[:url] %>" class="text-dark"><%= fund[:name] %></a>
                   </td>
                   <td class="text-right"></td>
+                  <td class="text-right"></td>
                   <td class="text-right"><%= usd(fund[:unlocked]) %></td>
                   <td class="text-right"></td>
+                  <td class="text-right"></td>
+                  <td class="text-right"></td>
+                  <td class="text-right"></td>
+                  <td class="text-right"></td>
                   <td class="text-right"><%= usd(fund[:available]) if drive[:active] %></td>
-                  <td class="text-right"></td>
-                  <td class="text-right"></td>
                 </tr>
               <% end %>
             <% end %>
           <% end %>
         </tbody>
         <tfoot>
-          <% season_sales = @project[:seasons].sum { |s| s[:sales] } %>
-          <% season_match = @project[:seasons].sum { |s| s[:match] } %>
           <tr>
             <th>Total</th>
-            <th class="text-right"><%= usd(season_sales) %></th>
-            <th class="text-right"><%= usd(season_match) %></th>
-            <th class="text-right"><%= "#{format('%.1f', season_match / season_sales)}x" if season_sales.positive? %></th>
+            <%= artizen_money_cells({
+              sales: @project[:seasons].sum { |s| s[:sales].to_f },
+              venus: @project[:seasons].sum { |s| s[:venus].to_f },
+              match: @project[:seasons].sum { |s| s[:match].to_f },
+              prize: @project[:seasons].sum { |s| s[:prize].to_f },
+              raised: @project[:seasons].sum { |s| s[:raised].to_f }
+            }, tag: 'th') %>
             <th class="text-right"><%= usd(@project[:seasons].sum { |s| s[:available].to_f }) %></th>
-            <th class="text-right"><%= usd(@project[:seasons].sum { |s| s[:prize] }) %></th>
-            <th class="text-right"><%= usd(@project[:seasons].sum { |s| s[:raised] }) %></th>
           </tr>
         </tfoot>
+      </table>
+    </div>
+  <% end %>
+
+  <% if @project[:submissions].to_a.any? %>
+    <h2 class="regular mt-4">Submissions</h2>
+    <div class="table-responsive mb-4">
+      <table class="table table-sm artizen-funding-tree">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="text-right">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project[:submissions].group_by { |s| [s[:season_number], s[:season]] }.each_with_index do |((_, season_title), submissions), si| %>
+            <% season_id = "sub#{si}" %>
+            <% season_open = si.zero? %>
+            <tr class="artizen-tree-season" data-id="<%= season_id %>">
+              <td>
+                <a href="#" class="artizen-tree-toggle" aria-expanded="<%= season_open %>"><i class="bi <%= season_open ? 'bi-chevron-down' : 'bi-chevron-right' %>"></i></a>
+                <%= season_title %>
+              </td>
+              <td></td>
+            </tr>
+            <% submissions.each do |submission| %>
+              <tr class="artizen-tree-submission<%= ' artizen-tree-hidden' unless season_open %>" data-parent="<%= season_id %>">
+                <td>
+                  <span class="artizen-tree-toggle"></span>
+                  <a href="<%= submission[:url] %>" class="text-dark"><%= submission[:name] %></a>
+                </td>
+                <td class="text-right">
+                  <% accepted = %w[Curated Approved].include?(submission[:status]) %>
+                  <span class="badge <%= accepted ? 'badge-primary' : 'badge-secondary' %>"><%= submission[:status] %></span>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
       </table>
     </div>
   <% end %>

@@ -8,8 +8,8 @@
         <th class="text-right">Contributions</th>
         <% if @season && @season[:current] %>
           <th class="text-right">Unlocked</th>
-          <th class="text-right">Available</th>
           <th class="text-right">Raised</th>
+          <th class="text-right">Available</th>
           <th class="text-right">Prize</th>
         <% end %>
       </tr>
@@ -29,8 +29,8 @@
           <td class="text-right" data-order="<%= fund[:season_total] %>"><%= usd(fund[:season_total]) %></td>
           <% if @season && @season[:current] %>
             <td class="text-right" data-order="<%= fund[:unlocked] || -1 %>"><%= usd(fund[:unlocked]) %></td>
-            <td class="text-right" data-order="<%= fund[:available] || -1 %>"><%= usd(fund[:available]) %></td>
             <td class="text-right" data-order="<%= fund[:raised] || -1 %>"><%= usd(fund[:raised]) %></td>
+            <td class="text-right" data-order="<%= fund[:available] || -1 %>"><%= usd(fund[:available]) %></td>
             <td class="text-right" data-order="<%= fund[:prize_usd] || -1 %>">
               <% if fund[:prize_usd] %>
                 <%= usd(fund[:prize_usd]) %>
@@ -45,29 +45,9 @@
     </tbody>
   </table>
 
-  <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.bootstrap4.min.css">
-  <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
-  <script>
-    $(function() {
-      $('#artizen-funds-table').DataTable({
-        paging: true,
-        pageLength: 25,
-        lengthMenu: [10, 25, 50, 100],
-        searching: true,
-        info: true,
-        fixedHeader: true,
-        <% if @season && @season[:current] %>
-          order: [[3, 'desc']],
-          columnDefs: [
-            { type: 'num', targets: [1, 2, 3, 4, 5] }
-          ]
-        <% else %>
-          order: [[1, 'desc']],
-          columnDefs: [
-            { type: 'num', targets: [1] }
-          ]
-        <% end %>
-      });
-    });
-  </script>
+  <% if @season && @season[:current] %>
+    <%= partial :'artizen/datatable', locals: { table_id: 'artizen-funds-table', order: [[4, 'desc']], numeric: (1..5).to_a } %>
+  <% else %>
+    <%= partial :'artizen/datatable', locals: { table_id: 'artizen-funds-table', order: [[1, 'desc']], numeric: [1] } %>
+  <% end %>
 <% end %>

@@ -6,6 +6,12 @@
     position: relative;
     top: -0.12em;
   }
+  .artizen-rank {
+    font-size: 0.7rem;
+    font-weight: 400;
+    white-space: nowrap;
+    color: #000;
+  }
   .artizen-drive-thumb {
     width: 100%;
     height: 120px;
@@ -36,6 +42,14 @@
     font-size: 1.25rem;
     font-weight: 600;
   }
+  #artizen-projects-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  #artizen-projects-table td,
+  #artizen-projects-table th {
+    border: none !important;
+  }
   #artizen-projects-table td, #artizen-funds-table td,
   #artizen-projects-table th, #artizen-funds-table th {
     vertical-align: middle;
@@ -65,7 +79,8 @@
     vertical-align: top;
     max-width: calc(100% - 1.4rem);
   }
-  .artizen-tree-drive td:first-child {
+  .artizen-tree-drive td:first-child,
+  .artizen-tree-submission td:first-child {
     padding-left: 1.5rem;
   }
   .artizen-tree-fund td:first-child,

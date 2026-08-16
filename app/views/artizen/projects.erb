@@ -1,50 +1,48 @@
 <%= partial :'artizen/board' %>
 
 <% unless @artizen_error && @projects.blank? && @funds.blank? %>
+  <% cols = [
+    [:sales, 'Sales', :usd],
+    [:venus, 'Venus', :usd],
+    [:match, 'Match', :usd],
+    [:prize, 'Prize', :usd],
+    [:vmp, 'V+M+P', :usd],
+    [:multiple, '(V+M+P)/S', :x],
+    [:multiple_ex, '(V+M)/S', :x],
+    [:raised, 'Raised', :usd]
+  ] %>
+  <% rows = @projects.map { |project| artizen_funding(project) } %>
+  <% heat = artizen_heat(rows, cols.map(&:first)) %>
+  <p class="text-muted mb-2">
+    The % under each figure is that project's rank in the column — 1% is the top 1%.
+    Color follows that percentile on a log scale: full green at 1%, fading to white at 100%.
+  </p>
   <table id="artizen-projects-table" class="table table-sm">
     <thead>
       <tr>
         <th>Project</th>
-        <th class="text-right">Sales</th>
-        <th class="text-right">Match</th>
-        <th class="text-right">Prize</th>
-        <th class="text-right">Raised</th>
+        <% cols.each do |_, label, _| %>
+          <th class="text-right"><%= label %></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
-      <% @projects.each do |project| %>
+      <% rows.each do |project| %>
         <tr>
           <td>
             <strong><a href="<%= project[:url] %>" class="text-dark"><%= project[:name] %></a></strong>
             <% if project[:logline] %>
-              <br><small class="text-muted"><%= truncate(project[:logline], length: 90) %></small>
+              <br>
+              <small class="text-muted"><%= truncate(project[:logline], length: 90) %></small>
             <% end %>
           </td>
-          <td class="text-right" data-order="<%= project[:sales] %>"><%= usd(project[:sales]) %></td>
-          <td class="text-right" data-order="<%= project[:match] %>"><%= usd(project[:match]) %></td>
-          <td class="text-right" data-order="<%= project[:prize] %>"><%= usd(project[:prize]) %></td>
-          <td class="text-right" data-order="<%= project[:raised] %>"><%= usd(project[:raised]) %></td>
+          <% cols.each do |field, _, as| %>
+            <%= artizen_heat_td(project, field, heat, rows.size, as: as) %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.bootstrap4.min.css">
-  <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
-  <script>
-    $(function() {
-      $('#artizen-projects-table').DataTable({
-        paging: true,
-        pageLength: 25,
-        lengthMenu: [10, 25, 50, 100],
-        searching: true,
-        info: true,
-        order: [[4, 'desc']],
-        fixedHeader: true,
-        columnDefs: [
-          { type: 'num', targets: [1, 2, 3, 4] }
-        ]
-      });
-    });
-  </script>
+  <%= partial :'artizen/datatable', locals: { table_id: 'artizen-projects-table', order: [[8, 'desc']], numeric: (1..8).to_a } %>
 <% end %>

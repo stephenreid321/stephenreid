@@ -57,6 +57,80 @@ StephenReid::App.helpers do
     ActiveSupport::NumberHelper.number_to_currency(n, unit: '$', precision: precision)
   end
 
+  def artizen_funding(row)
+    sales = row[:sales].to_f
+    venus = row[:venus].to_f
+    match = row[:match].to_f
+    prize = row[:prize].to_f
+    vmp = venus + match + prize
+    row.merge(
+      sales: sales,
+      venus: venus,
+      match: match,
+      prize: prize,
+      vmp: vmp,
+      multiple: (vmp / sales if sales.positive?),
+      multiple_ex: ((venus + match) / sales if sales.positive?),
+      raised: row[:raised].nil? ? sales + vmp : row[:raised].to_f
+    )
+  end
+
+  def artizen_multiple_label(multiple)
+    "#{format('%.1f', multiple)}x" if multiple
+  end
+
+  def artizen_money_cells(row, tag: 'td')
+    f = artizen_funding(row)
+    [
+      usd(f[:sales]), usd(f[:venus]), usd(f[:match]), usd(f[:prize]),
+      usd(f[:vmp]), artizen_multiple_label(f[:multiple]), artizen_multiple_label(f[:multiple_ex]),
+      usd(f[:raised])
+    ].map { |content| %(<#{tag} class="text-right">#{content}</#{tag}>) }.join.html_safe
+  end
+
+  def artizen_heat(rows, fields)
+    fields.each_with_object({}) do |field, heat|
+      pairs = rows.map { |row| [row.object_id, row[field].to_f] }
+      ordered = pairs.sort_by { |_, value| -value }
+      ranks = {}
+      last_val = nil
+      last_rank = 0
+      ordered.each_with_index do |(id, val), i|
+        if val != last_val
+          last_rank = i + 1
+          last_val = val
+        end
+        ranks[id] = last_rank
+      end
+      heat[field] = ranks
+    end
+  end
+
+  def artizen_heat_td(row, field, heat, total, as: :usd)
+    value = row[field].to_f
+    rank = heat[field][row.object_id]
+    pct = artizen_rank_pct(rank, total)
+    label = as == :x ? artizen_multiple_label(row[field]) : usd(value)
+    note = %(<br><small class="artizen-rank">#{pct}%</small>) if pct
+    %(<td class="text-right" data-order="#{value}" style="#{artizen_rank_style(pct)}">#{label}#{note}</td>).html_safe
+  end
+
+  def artizen_rank_pct(rank, total)
+    return unless rank && total.to_i.positive?
+
+    [(rank.to_f / total * 100).ceil, 1].max
+  end
+
+  def artizen_rank_style(pct)
+    return 'background-color: #2DB963' if pct.nil? || pct <= 1
+
+    t = Math.log(pct) / Math.log(100)
+    r = (45 + (255 - 45) * t).round
+    g = (185 + (255 - 185) * t).round
+    b = (99 + (255 - 99) * t).round
+    "background-color: rgb(#{r},#{g},#{b})"
+  end
+
   def load_artizen_board
     @og_desc = 'Fund and project leaderboards from Artizen'
     @data = Artizen.leaderboard(season_number: params[:season])
