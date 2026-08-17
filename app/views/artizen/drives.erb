@@ -48,33 +48,38 @@
                   <dd class="col-6 text-right"><%= usd(drive[:match_per_project]) %></dd>
                 <% end %>
               </dl>
-              <% if drive[:podium].present? %>
-                <% prizes = [drive[:project_first], drive[:project_second], drive[:project_third]] %>
-                <table class="table table-sm mb-0 mt-3 artizen-podium">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th class="text-right">Prize</th>
-                      <th class="text-right">Sales+match</th>
-                      <th class="text-right">Points</th>
-                      <th class="text-right">Score</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% drive[:podium].each_with_index do |row, i| %>
+              <% [
+                ['Projects', drive[:podium], [drive[:project_first], drive[:project_second], drive[:project_third]]],
+                ['Funds', drive[:fund_podium], [drive[:fund_first], drive[:fund_second], drive[:fund_third]]]
+              ].each do |title, podium, prizes| %>
+                <% if podium.present? %>
+                  <h6 class="mt-3 mb-1"><%= title %></h6>
+                  <table class="table table-sm mb-0 artizen-podium">
+                    <thead>
                       <tr>
-                        <td>
-                          <span class="text-muted"><%= i + 1 %>.</span>
-                          <a href="<%= row[:url] %>" class="text-dark"><%= row[:name] %></a>
-                        </td>
-                        <td class="text-right text-nowrap"><%= usd(prizes[i]) %></td>
-                        <td class="text-right text-nowrap"><%= usd(row[:sales_match]) %></td>
-                        <td class="text-right text-nowrap"><%= ActiveSupport::NumberHelper.number_to_delimited(row[:points].to_i) %></td>
-                        <td class="text-right text-nowrap"><%= compact_num(row[:score]) %></td>
+                        <th></th>
+                        <th class="text-right">Prize</th>
+                        <th class="text-right">Sales+match</th>
+                        <th class="text-right">Points</th>
+                        <th class="text-right">Score</th>
                       </tr>
-                    <% end %>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      <% podium.each_with_index do |row, i| %>
+                        <tr>
+                          <td>
+                            <span class="text-muted"><%= i + 1 %>.</span>
+                            <a href="<%= row[:url] %>" class="text-dark"><%= row[:name] %></a>
+                          </td>
+                          <td class="text-right text-nowrap"><%= usd(prizes[i]) %></td>
+                          <td class="text-right text-nowrap"><%= usd(row[:sales_match]) %></td>
+                          <td class="text-right text-nowrap"><%= ActiveSupport::NumberHelper.number_to_delimited(row[:points].to_i) %></td>
+                          <td class="text-right text-nowrap"><%= compact_num(row[:score]) %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                <% end %>
               <% end %>
             </div>
           </div>

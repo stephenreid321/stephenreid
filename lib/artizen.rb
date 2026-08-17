@@ -6,7 +6,7 @@ module Artizen
   PAGE_SIZE = 100
   IN_BATCH = 50
   PARALLEL_THREADS = 8
-  LEADERBOARD_CACHE = 'artizen/leaderboard/v23'.freeze
+  LEADERBOARD_CACHE = 'artizen/leaderboard/v24'.freeze
   PROJECT_CACHE = 'artizen/project/v19'.freeze
   FUND_CACHE = 'artizen/fund/v10'.freeze
   VENUS_ACCOUNT_ID = '1774215063859x668765896046542800'.freeze
@@ -188,33 +188,42 @@ module Artizen
       pages = parallel(drives) do |drive|
         get(
           'boostparticipant',
-          limit: 50,
+          limit: 100,
           cursor: 0,
           sort_field: 'boost score',
           descending: true,
           constraints: [{ key: 'boost', constraint_type: 'equals', value: drive[:id] }].to_json
         )['results'] || []
       end
-      projects = fetch_by_ids('project', pages.flatten.map { |row| row['project'] }).index_by { |p| p['_id'] }
+      records = pages.flatten
+      projects = fetch_by_ids('project', records.map { |row| row['project'] }).index_by { |p| p['_id'] }
+      funds = fetch_by_ids('fund', records.map { |row| row['fund'] }).index_by { |f| f['_id'] }
 
       drives.zip(pages).each do |drive, rows|
-        drive[:podium] = rows.filter_map do |row|
-          pid = row['project']
-          next if pid.blank?
-
-          project = projects[pid]
-          slug = (project && project['Slug'].presence) || pid
-          points = row['boost points received'].to_f
-          sales_match = row['sales + match (both)'].to_f
-          {
-            name: (project && project['Name']).to_s.strip.presence || 'Project',
-            url: local_project_path(slug),
-            sales_match: sales_match,
-            points: points,
-            score: points * sales_match / 10.0
-          }
-        end.first(3)
+        drive[:podium] = podium_rows(rows, :project, projects, :local_project_path, 'Name')
+        drive[:fund_podium] = podium_rows(rows, :fund, funds, :local_fund_path, 'name')
       end
+    end
+
+    def podium_rows(rows, key, records, path_method, name_field)
+      rows.filter_map do |row|
+        next if key == :fund && row['project'].present?
+
+        id = row[key == :project ? 'project' : 'fund']
+        next if id.blank?
+
+        record = records[id]
+        slug = (record && (record['Slug'] || record['slugg']).presence) || id
+        points = row['boost points received'].to_f
+        sales_match = row['sales + match (both)'].to_f
+        {
+          name: (record && record[name_field]).to_s.strip.presence || key.to_s.capitalize,
+          url: send(path_method, slug),
+          sales_match: sales_match,
+          points: points,
+          score: points * sales_match / 10.0
+        }
+      end.first(3)
     end
 
     def normalize_drive(row)
