@@ -4,6 +4,9 @@
   <% if @drives.empty? %>
     <p class="text-muted">No fund drives in this season.</p>
   <% else %>
+    <p class="text-muted small mb-3">
+      Projects and funds are ranked by boost score: points × (sales + match) / 10.
+    </p>
     <div class="row">
       <% @drives.each do |drive| %>
         <div class="col-md-6 col-xl-4 mb-3">
@@ -44,11 +47,35 @@
                   <dt class="col-6">Match / project</dt>
                   <dd class="col-6 text-right"><%= usd(drive[:match_per_project]) %></dd>
                 <% end %>
-                <% if drive[:project_first] %>
-                  <dt class="col-6">1st / 2nd / 3rd</dt>
-                  <dd class="col-6 text-right"><%= usd(drive[:project_first]) %> / <%= usd(drive[:project_second]) %> / <%= usd(drive[:project_third]) %></dd>
-                <% end %>
               </dl>
+              <% if drive[:podium].present? %>
+                <% prizes = [drive[:project_first], drive[:project_second], drive[:project_third]] %>
+                <table class="table table-sm mb-0 mt-3 artizen-podium">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th class="text-right">Prize</th>
+                      <th class="text-right">Sales+match</th>
+                      <th class="text-right">Points</th>
+                      <th class="text-right">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% drive[:podium].each_with_index do |row, i| %>
+                      <tr>
+                        <td>
+                          <span class="text-muted"><%= i + 1 %>.</span>
+                          <a href="<%= row[:url] %>" class="text-dark"><%= row[:name] %></a>
+                        </td>
+                        <td class="text-right text-nowrap"><%= usd(prizes[i]) %></td>
+                        <td class="text-right text-nowrap"><%= usd(row[:sales_match]) %></td>
+                        <td class="text-right text-nowrap"><%= ActiveSupport::NumberHelper.number_to_delimited(row[:points].to_i) %></td>
+                        <td class="text-right text-nowrap"><%= compact_num(row[:score]) %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              <% end %>
             </div>
           </div>
         </div>

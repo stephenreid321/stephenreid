@@ -57,6 +57,25 @@ StephenReid::App.helpers do
     ActiveSupport::NumberHelper.number_to_currency(n, unit: '$', precision: precision)
   end
 
+  def compact_num(value)
+    return if value.nil?
+
+    n = value.to_f.abs
+    sign = value.to_f.negative? ? '-' : ''
+    suffix, div = if n >= 1_000_000_000
+                    ['b', 1_000_000_000.0]
+                  elsif n >= 1_000_000
+                    ['m', 1_000_000.0]
+                  elsif n >= 1_000
+                    ['k', 1_000.0]
+                  else
+                    return "#{sign}#{n.round}"
+                  end
+    scaled = n / div
+    text = scaled >= 100 ? scaled.round.to_s : format('%.1f', scaled).sub(/\.0$/, '')
+    "#{sign}#{text}#{suffix}"
+  end
+
   def artizen_funding(row)
     sales = row[:sales].to_f
     venus = row[:venus].to_f

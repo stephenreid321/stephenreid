@@ -6,7 +6,7 @@ module Artizen
   PAGE_SIZE = 100
   IN_BATCH = 50
   PARALLEL_THREADS = 8
-  LEADERBOARD_CACHE = 'artizen/leaderboard/v22'.freeze
+  LEADERBOARD_CACHE = 'artizen/leaderboard/v23'.freeze
   PROJECT_CACHE = 'artizen/project/v19'.freeze
   FUND_CACHE = 'artizen/fund/v10'.freeze
   VENUS_ACCOUNT_ID = '1774215063859x668765896046542800'.freeze
@@ -171,13 +171,50 @@ module Artizen
     end
 
     def fetch_drives(season_id)
-      list(
+      drives = list(
         'boost',
         constraints: [
           { key: 'season', constraint_type: 'equals', value: season_id },
           { key: 'Type', constraint_type: 'equals', value: 'Fund drive' }
         ]
       ).map { |row| normalize_drive(row) }.sort_by { |drive| -(drive[:number] || 0) }
+      attach_drive_podiums(drives)
+      drives
+    end
+
+    def attach_drive_podiums(drives)
+      return if drives.empty?
+
+      pages = parallel(drives) do |drive|
+        get(
+          'boostparticipant',
+          limit: 50,
+          cursor: 0,
+          sort_field: 'boost score',
+          descending: true,
+          constraints: [{ key: 'boost', constraint_type: 'equals', value: drive[:id] }].to_json
+        )['results'] || []
+      end
+      projects = fetch_by_ids('project', pages.flatten.map { |row| row['project'] }).index_by { |p| p['_id'] }
+
+      drives.zip(pages).each do |drive, rows|
+        drive[:podium] = rows.filter_map do |row|
+          pid = row['project']
+          next if pid.blank?
+
+          project = projects[pid]
+          slug = (project && project['Slug'].presence) || pid
+          points = row['boost points received'].to_f
+          sales_match = row['sales + match (both)'].to_f
+          {
+            name: (project && project['Name']).to_s.strip.presence || 'Project',
+            url: local_project_path(slug),
+            sales_match: sales_match,
+            points: points,
+            score: points * sales_match / 10.0
+          }
+        end.first(3)
+      end
     end
 
     def normalize_drive(row)
