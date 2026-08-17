@@ -1,6 +1,9 @@
 <%= partial :'artizen/board' %>
 
 <% unless @artizen_error && @projects.blank? && @funds.blank? %>
+  <p class="text-muted mb-2">
+    Fund unlocked = match paid to projects plus awards on curated submissions (Artizen’s distributed). Raised = unlocked + available.
+  </p>
   <table id="artizen-funds-table" class="table table-sm">
     <thead>
       <tr>
@@ -8,9 +11,8 @@
         <th class="text-right">Contributions</th>
         <% if @season && @season[:current] %>
           <th class="text-right">Unlocked</th>
-          <th class="text-right">Raised</th>
           <th class="text-right">Available</th>
-          <th class="text-right">Prize</th>
+          <th class="text-right">Raised</th>
         <% end %>
       </tr>
     </thead>
@@ -29,16 +31,8 @@
           <td class="text-right" data-order="<%= fund[:season_total] %>"><%= usd(fund[:season_total]) %></td>
           <% if @season && @season[:current] %>
             <td class="text-right" data-order="<%= fund[:unlocked] || -1 %>"><%= usd(fund[:unlocked]) %></td>
-            <td class="text-right" data-order="<%= fund[:raised] || -1 %>"><%= usd(fund[:raised]) %></td>
             <td class="text-right" data-order="<%= fund[:available] || -1 %>"><%= usd(fund[:available]) %></td>
-            <td class="text-right" data-order="<%= fund[:prize_usd] || -1 %>">
-              <% if fund[:prize_usd] %>
-                <%= usd(fund[:prize_usd]) %>
-              <% elsif fund[:prize_art] %>
-                <%= ActiveSupport::NumberHelper.number_to_delimited(fund[:prize_art].round) %>
-                <small class="text-muted">ART</small>
-              <% end %>
-            </td>
+            <td class="text-right" data-order="<%= fund[:raised] || -1 %>"><%= usd(fund[:raised]) %></td>
           <% end %>
         </tr>
       <% end %>
@@ -46,7 +40,7 @@
   </table>
 
   <% if @season && @season[:current] %>
-    <%= partial :'artizen/datatable', locals: { table_id: 'artizen-funds-table', order: [[4, 'desc']], numeric: (1..5).to_a } %>
+    <%= partial :'artizen/datatable', locals: { table_id: 'artizen-funds-table', order: [[3, 'desc']], numeric: (1..4).to_a } %>
   <% else %>
     <%= partial :'artizen/datatable', locals: { table_id: 'artizen-funds-table', order: [[1, 'desc']], numeric: [1] } %>
   <% end %>

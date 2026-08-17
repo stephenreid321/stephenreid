@@ -114,7 +114,7 @@ StephenReid::App.helpers do
     pct = artizen_rank_pct(rank, total)
     label = as == :x ? artizen_multiple_label(row[field]) : usd(value)
     note = %(<br><small class="artizen-rank">#{pct}%</small>) if pct
-    %(<td class="text-right" data-order="#{value}" style="#{artizen_rank_style(pct)}">#{label}#{note}</td>).html_safe
+    %(<td class="text-right artizen-heat" data-order="#{value}" style="#{artizen_rank_style(pct)}">#{label}#{note}</td>).html_safe
   end
 
   def artizen_rank_pct(rank, total)
@@ -134,6 +134,7 @@ StephenReid::App.helpers do
   end
 
   def load_artizen_board
+    @container_class = 'container-fluid'
     @og_desc = 'Fund and project leaderboards from Artizen'
     @data = Artizen.leaderboard(season_number: params[:season])
     @seasons = @data[:seasons]

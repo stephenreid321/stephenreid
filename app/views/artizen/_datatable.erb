@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.bootstrap4.min.css">
-<script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
 <script>
   $(function() {
     $('#<%= table_id %>').DataTable({
@@ -8,8 +6,8 @@
       lengthMenu: [10, 25, 50, 100],
       searching: true,
       info: true,
+      autoWidth: false,
       order: <%= order.to_json %>,
-      fixedHeader: true,
       columnDefs: [
         { type: 'num', targets: <%= Array(numeric).to_json %> }
       ]

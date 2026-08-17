@@ -22,7 +22,12 @@
       <p>Lead sponsor: <%= @fund[:sponsor] %></p>
     <% end %>
     <% if @fund[:active] == false %>
-      <span class="badge badge-secondary">Inactive</span>
+      <span class="badge badge-secondary mr-1">Inactive</span>
+    <% end %>
+    <% if @fund[:prize_usd] %>
+      <span class="badge badge-primary">Prize <%= usd(@fund[:prize_usd]) %></span>
+    <% elsif @fund[:prize_art] %>
+      <span class="badge badge-primary">Prize <%= ActiveSupport::NumberHelper.number_to_delimited(@fund[:prize_art].round) %> ART</span>
     <% end %>
     <p class="mt-2 mb-0">
       <a href="<%= @fund[:artizen_url] %>" target="_blank" rel="noopener">View on Artizen</a>
@@ -32,6 +37,9 @@
 
 <% if @fund[:seasons].any? %>
   <h2 class="regular mt-4">Funding</h2>
+  <p class="text-muted mb-2">
+    Unlocked = match paid to projects plus awards on curated submissions (Artizen’s distributed). Raised = unlocked + available.
+  </p>
   <div class="table-responsive mb-4">
     <table class="table table-sm artizen-funding-tree">
       <thead>
@@ -39,9 +47,8 @@
           <th></th>
           <th class="text-right">Contributions</th>
           <th class="text-right">Unlocked</th>
-          <th class="text-right">Raised</th>
           <th class="text-right">Available</th>
-          <th class="text-right">Prize</th>
+          <th class="text-right">Raised</th>
         </tr>
       </thead>
       <tbody>
@@ -62,9 +69,8 @@
             </td>
             <td class="text-right"><%= usd(season[:total]) %></td>
             <td class="text-right"><%= usd(season[:unlocked]) %></td>
-            <td class="text-right"><%= usd(season[:unlocked].to_f + season[:available].to_f) %></td>
             <td class="text-right"><%= usd(season[:available]) if season[:available].to_f.positive? %></td>
-            <td class="text-right"></td>
+            <td class="text-right"><%= usd(season[:unlocked].to_f + season[:available].to_f) %></td>
           </tr>
           <% season[:drives].each_with_index do |drive, di| %>
             <% drive_id = "#{season_id}d#{di}" %>
@@ -83,9 +89,8 @@
               </td>
               <td class="text-right"></td>
               <td class="text-right"><%= usd(drive[:unlocked]) unless drive[:adjustment] %></td>
-              <td class="text-right"><%= usd(drive[:unlocked].to_f + drive[:available].to_f) if live || drive[:unlocked].to_f.positive? %></td>
               <td class="text-right"><%= usd(drive[:available]) if live %></td>
-              <td class="text-right"></td>
+              <td class="text-right"><%= usd(drive[:unlocked].to_f + drive[:available].to_f) if live || drive[:unlocked].to_f.positive? %></td>
             </tr>
             <% drive[:projects].each do |project| %>
               <tr class="artizen-tree-project<%= ' artizen-tree-hidden' unless drive_open %>" data-parent="<%= drive_id %>">
@@ -93,15 +98,15 @@
                   <span class="artizen-tree-toggle"></span>
                   <span class="artizen-tree-label">
                     <a href="<%= project[:url] %>" class="text-dark"><%= project[:name] %></a>
+                    <% if project[:hidden] %> <span class="badge badge-secondary">hidden</span><% end %>
                     <% if project[:creator] %><br>
                       <small class="text-muted"><%= project[:creator] %></small><% end %>
                   </span>
                 </td>
                 <td class="text-right"></td>
                 <td class="text-right"><%= usd(project[:unlocked]) %></td>
-                <td class="text-right"><%= usd(project[:unlocked].to_f + project[:available].to_f) if live || project[:unlocked].to_f.positive? %></td>
                 <td class="text-right"><%= usd(project[:available]) if live %></td>
-                <td class="text-right"></td>
+                <td class="text-right"><%= usd(project[:unlocked].to_f + project[:available].to_f) if live || project[:unlocked].to_f.positive? %></td>
               </tr>
             <% end %>
           <% end %>
@@ -112,15 +117,8 @@
           <th>Total</th>
           <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:total].to_f }) %></th>
           <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:unlocked].to_f }) %></th>
-          <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:unlocked].to_f + s[:available].to_f }) %></th>
           <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:available].to_f }) %></th>
-          <th class="text-right">
-            <% if @fund[:prize_usd] %>
-              <%= usd(@fund[:prize_usd]) %>
-            <% elsif @fund[:prize_art] %>
-              <%= ActiveSupport::NumberHelper.number_to_delimited(@fund[:prize_art].round) %> <small class="text-muted">ART</small>
-            <% end %>
-          </th>
+          <th class="text-right"><%= usd(@fund[:seasons].sum { |s| s[:unlocked].to_f + s[:available].to_f }) %></th>
         </tr>
       </tfoot>
     </table>

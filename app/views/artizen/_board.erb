@@ -3,7 +3,6 @@
 <div class="mb-3">
   <h2 class="regular mb-1">Artizen leaderboards</h2>
   <p class="text-muted mb-2">
-    Project raised = sales + Venus + match + prize. Sales excludes Venus artifact buys. V+M+P = Venus + match + prize. Fund raised = unlocked + available.
     Data from <a href="https://artizen.fund/" target="_blank" rel="noopener">artizen.fund</a><% if @season && @season[:total_raised] %>
     · <%= usd(@season[:total_raised]) %> raised this season<% end %>
   </p>
