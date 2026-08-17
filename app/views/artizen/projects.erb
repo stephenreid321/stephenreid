@@ -14,7 +14,7 @@
   ] %>
   <% rows = @projects.map { |project| artizen_funding(project) } %>
   <% heat = artizen_heat(rows, cols.map(&:first)) %>
-  <p class="text-muted mb-2">
+  <p class="text-muted small mb-2">
     Project raised = sales + Venus + match + prize. Sales excludes Venus artifact buys. V+M+P = Venus + match + prize.
     The % under each figure is that project's rank in the column — 1% is the top 1%.
     Color follows that percentile on a log scale: full green at 1%, fading to white at 100%.

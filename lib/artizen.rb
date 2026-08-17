@@ -6,9 +6,10 @@ module Artizen
   PAGE_SIZE = 100
   IN_BATCH = 50
   PARALLEL_THREADS = 8
-  LEADERBOARD_CACHE = 'artizen/leaderboard/v18'.freeze
-  PROJECT_CACHE = 'artizen/project/v16'.freeze
+  LEADERBOARD_CACHE = 'artizen/leaderboard/v21'.freeze
+  PROJECT_CACHE = 'artizen/project/v19'.freeze
   FUND_CACHE = 'artizen/fund/v10'.freeze
+  ENDOWMENT_RATE = 0.10
   VENUS_ACCOUNT_ID = '1774215063859x668765896046542800'.freeze
 
   class << self
@@ -89,14 +90,16 @@ module Artizen
     def build(season_number)
       seasons = fetch_seasons
       season = pick_season(seasons, season_number)
-      return { seasons: seasons, season: nil, drives: [], projects: [], funds: [], error: true } unless season
+      return { seasons: seasons, season: nil, drives: [], projects: [], funds: [], cost: nil, error: true } unless season
 
+      projects = project_rows(season)
       {
         seasons: seasons,
         season: season,
         drives: fetch_drives(season[:id]),
-        projects: project_rows(season),
+        projects: projects,
         funds: fund_rows(season[:id], current: season[:current]),
+        cost: season_cost(projects),
         error: false
       }
     end
@@ -143,6 +146,7 @@ module Artizen
 
       projects = fetch_by_ids('project', rows.map { |r| r['project'] }.compact.uniq).index_by { |p| p['_id'] }
       venus_by_project = venus_buys_by_project(season_id)
+      prizes = drive_prizes_by_project(season_id)
 
       rows.filter_map do |row|
         project = projects[row['project']] || {}
@@ -153,6 +157,8 @@ module Artizen
 
         slug = project['Slug'].presence || row['project']
         venus = venus_by_project[row['project']].to_f
+        ledger_prize = row['funding prize funds usd'].to_f
+        prize = [ledger_prize, prizes[row['project']]].max
         {
           name: name,
           url: local_project_path(slug),
@@ -161,8 +167,8 @@ module Artizen
           sales: community_sales(row['funding total sales'], venus),
           venus: venus,
           match: row['funding match'].to_f + row['funding boost '].to_f,
-          prize: row['funding prize funds usd'].to_f,
-          raised: row['funding total'].to_f
+          prize: prize,
+          raised: row['funding total'].to_f + prize - ledger_prize
         }
       end
     end
@@ -369,18 +375,26 @@ module Artizen
         venus_by_boost[drive[:id]] += tx['amount spent $USD'].to_f if drive
       end
 
+      prize_by_season = Hash.new(0.0)
       stats = Hash.new { |h, k| h[k] = {} }
       participants.each do |part|
         next if part['boost'].blank?
 
         venus = venus_by_boost[part['boost']].to_f
+        prize = part['prize earned usd'].to_f
         stats[id][part['boost']] = {
           sales: community_sales(part['fund drive sales (both)'], venus),
           venus: venus,
           match: part['match boost unlocked (both)'].to_f,
-          raised: part['sales + match (both)'].to_f,
-          prize: part['prize earned usd']&.to_f
+          prize: prize,
+          raised: part['sales + match (both)'].to_f + prize
         }
+        season_id = part['season']
+        if season_id.blank?
+          drive = drives.find { |d| d[:id] == part['boost'] }
+          season_id = drive && drive[:season_id]
+        end
+        prize_by_season[season_id] += prize if season_id && prize.positive?
       end
       slices.group_by { |s| s['boost'] }.each do |boost_id, rows|
         next if boost_id.blank?
@@ -426,7 +440,11 @@ module Artizen
         s_venus = venus_by_season[srow['season ']].to_f
         s_sales = community_sales(srow['funding total sales'], s_venus)
         s_match = srow['funding match'].to_f + srow['funding boost '].to_f
-        s_prize = srow['funding prize funds usd'].to_f
+        s_prize = [
+          srow['funding prize funds usd'].to_f,
+          prize_by_season[srow['season ']],
+          srow['old funding prize leaderboard  (usd)'].to_f
+        ].max
         s_raised = s_sales + s_venus + s_match + s_prize
         next unless s_raised.positive?
 
@@ -440,7 +458,9 @@ module Artizen
           raised: s_raised
         }
       end
+      submission_rows = list('projectsubmission', constraints: [{ key: 'Project', constraint_type: 'equals', value: id }])
       append_legacy_project_seasons(seasons, row, seasons_meta)
+      apply_legacy_submission_awards(seasons, submission_rows, seasons_meta)
       seasons.sort_by! { |s| -(s[:number] || 0) }
       {
         name: row['Name'].to_s.strip,
@@ -455,13 +475,12 @@ module Artizen
         video: row['video presentation'].presence,
         tags: tags,
         seasons: nest_project_funding(seasons, drive_details, matching_funds),
-        submissions: project_submissions(id, seasons_meta)
+        submissions: format_project_submissions(submission_rows, seasons_meta)
       }
     end
 
-    def project_submissions(project_id, seasons_meta)
-      rows = list('projectsubmission', constraints: [{ key: 'Project', constraint_type: 'equals', value: project_id }])
-      rows.reject! { |row| row['Submitted'] == false }
+    def format_project_submissions(rows, seasons_meta)
+      rows = rows.reject { |row| row['Submitted'] == false }
       fund_ids = rows.map { |row| row['Fund'] }.compact.uniq
       funds_by_id = fetch_by_ids('fund', fund_ids).index_by { |fund| fund['_id'] }
       rows.filter_map do |row|
@@ -824,6 +843,21 @@ module Artizen
       end
     end
 
+    def drive_prizes_by_project(season_id)
+      list(
+        'boostparticipant',
+        constraints: [
+          { key: 'season', constraint_type: 'equals', value: season_id },
+          { key: 'prize earned usd', constraint_type: 'greater than', value: 0 }
+        ]
+      ).each_with_object(Hash.new(0.0)) do |part, sums|
+        pid = part['project']
+        next if pid.blank?
+
+        sums[pid] += part['prize earned usd'].to_f
+      end
+    end
+
     def assign_venus_drive(tx, drives)
       created = parse_time(tx['Created Date'])
       return unless created
@@ -857,21 +891,45 @@ module Artizen
       sales.positive? ? sales : 0.0
     end
 
-    # S4/S5 predate projectseason; Artizen stores them on the project record.
-    def append_legacy_project_seasons(seasons, project, seasons_meta)
-      known = seasons.map { |season| season[:number] }
-      by_number = seasons_meta.values.index_by { |meta| meta[:number] }
-      [4, 5].each do |number|
-        next if known.include?(number)
+    def season_cost(projects)
+      sales = projects.sum { |project| project[:sales].to_f }
+      venus = projects.sum { |project| project[:venus].to_f }
+      match = projects.sum { |project| project[:match].to_f }
+      prize = projects.sum { |project| project[:prize].to_f }
+      extra = venus + match + prize
+      endowment = sales * ENDOWMENT_RATE
+      {
+        sales: sales,
+        venus: venus,
+        match: match,
+        prize: prize,
+        extra: extra,
+        endowment: endowment,
+        net: extra - endowment
+      }
+    end
 
+    # S4/S5 predate projectseason; Artizen stores them on the project record.
+    # A later projectseason stub may exist with sales but no prize/match — merge, don't skip.
+    def append_legacy_project_seasons(seasons, project, seasons_meta)
+      by_number = seasons_meta.values.index_by { |meta| meta[:number] }
+      existing = seasons.index_by { |season| season[:number] }
+      [4, 5].each do |number|
         funding = legacy_season_funding(project, number)
         next unless funding && funding[:raised].to_f.positive?
 
-        meta = by_number[number]
-        seasons << funding.merge(
-          number: number,
-          title: meta&.dig(:title) || "Season #{number}"
-        )
+        if (row = existing[number])
+          row[:sales] = [row[:sales].to_f, funding[:sales].to_f].max
+          row[:match] = [row[:match].to_f, funding[:match].to_f].max
+          row[:prize] = [row[:prize].to_f, funding[:prize].to_f].max
+          row[:raised] = row[:sales] + row[:venus].to_f + row[:match] + row[:prize]
+        else
+          meta = by_number[number]
+          seasons << funding.merge(
+            number: number,
+            title: meta&.dig(:title) || "Season #{number}"
+          )
+        end
       end
     end
 
@@ -889,6 +947,60 @@ module Artizen
       end
     end
 
+    # S4/S5 fund awards live on curated submissions, not projectseason match/prize.
+    def apply_legacy_submission_awards(seasons, submission_rows, seasons_meta)
+      awards = Hash.new { |h, k| h[k] = { match: 0.0, prize: 0.0 } }
+      submission_rows.each do |row|
+        next unless row['Status'] == 'Curated'
+
+        number = row['season number'] || seasons_meta[row['season']]&.dig(:number)
+        next unless [4, 5].include?(number)
+
+        awards[number][:match] += row['$ amount raised'].to_f
+        awards[number][:prize] += row['prize unlocked usd'].to_f
+      end
+      existing = seasons.index_by { |season| season[:number] }
+      awards.each do |number, extra|
+        added = extra[:match] + extra[:prize]
+        next unless added.positive?
+
+        if (row = existing[number])
+          row[:match] += extra[:match]
+          row[:prize] += extra[:prize]
+          row[:raised] = row[:sales].to_f + row[:venus].to_f + row[:match] + row[:prize]
+        else
+          meta = seasons_meta.values.find { |season| season[:number] == number }
+          seasons << {
+            number: number,
+            title: meta&.dig(:title) || "Season #{number}",
+            sales: 0.0,
+            venus: 0.0,
+            match: extra[:match],
+            prize: extra[:prize],
+            raised: added
+          }
+        end
+      end
+    end
+
+    def curated_awards_by_project(season_id)
+      awards = Hash.new { |h, k| h[k] = { match: 0.0, prize: 0.0 } }
+      list(
+        'projectsubmission',
+        constraints: [
+          { key: 'season', constraint_type: 'equals', value: season_id },
+          { key: 'Status', constraint_type: 'equals', value: 'Curated' }
+        ]
+      ).each do |row|
+        project_id = row['Project']
+        next if project_id.blank?
+
+        awards[project_id][:match] += row['$ amount raised'].to_f
+        awards[project_id][:prize] += row['prize unlocked usd'].to_f
+      end
+      awards
+    end
+
     def legacy_season_project_rows(season)
       number = season[:number]
       constraints = case number
@@ -899,6 +1011,7 @@ module Artizen
                     else
                       return []
                     end
+      awards = curated_awards_by_project(season[:id])
       list('project', constraints: constraints).filter_map do |project|
         next if project['Hide'] || project['unPublished']
 
@@ -906,7 +1019,15 @@ module Artizen
         next if name.blank?
 
         funding = legacy_season_funding(project, number)
-        next unless funding && funding[:raised].to_f.positive?
+        next unless funding
+
+        extra = awards[project['_id']]
+        if extra
+          funding[:match] += extra[:match]
+          funding[:prize] += extra[:prize]
+          funding[:raised] = funding[:sales] + funding[:venus] + funding[:match] + funding[:prize]
+        end
+        next unless funding[:raised].to_f.positive?
 
         slug = project['Slug'].presence || project['_id']
         funding.merge(

@@ -127,9 +127,9 @@ StephenReid::App.helpers do
     return 'background-color: #2DB963' if pct.nil? || pct <= 1
 
     t = Math.log(pct) / Math.log(100)
-    r = (45 + (255 - 45) * t).round
-    g = (185 + (255 - 185) * t).round
-    b = (99 + (255 - 99) * t).round
+    r = (45 + ((255 - 45) * t)).round
+    g = (185 + ((255 - 185) * t)).round
+    b = (99 + ((255 - 99) * t)).round
     "background-color: rgb(#{r},#{g},#{b})"
   end
 
@@ -142,6 +142,7 @@ StephenReid::App.helpers do
     @drives = @data[:drives] || []
     @projects = @data[:projects]
     @funds = @data[:funds]
+    @cost = @data[:cost]
     @artizen_error = @data[:error]
     @title = @season ? "Artizen · #{@season[:title]}" : 'Artizen'
   end
