@@ -9,7 +9,6 @@ module Artizen
   LEADERBOARD_CACHE = 'artizen/leaderboard/v22'.freeze
   PROJECT_CACHE = 'artizen/project/v19'.freeze
   FUND_CACHE = 'artizen/fund/v10'.freeze
-  ENDOWMENT_RATE = 0.10
   VENUS_ACCOUNT_ID = '1774215063859x668765896046542800'.freeze
 
   class << self
@@ -90,16 +89,14 @@ module Artizen
     def build(season_number)
       seasons = fetch_seasons
       season = pick_season(seasons, season_number)
-      return { seasons: seasons, season: nil, drives: [], projects: [], funds: [], cost: nil, error: true } unless season
+      return { seasons: seasons, season: nil, drives: [], projects: [], funds: [], error: true } unless season
 
-      projects = project_rows(season)
       {
         seasons: seasons,
         season: season,
         drives: fetch_drives(season[:id]),
-        projects: projects,
+        projects: project_rows(season),
         funds: fund_rows(season[:id], current: season[:current]),
-        cost: season_cost(projects),
         error: false
       }
     end
@@ -889,24 +886,6 @@ module Artizen
     def community_sales(gross, venus)
       sales = gross.to_f - venus.to_f
       sales.positive? ? sales : 0.0
-    end
-
-    def season_cost(projects)
-      sales = projects.sum { |project| project[:sales].to_f }
-      venus = projects.sum { |project| project[:venus].to_f }
-      match = projects.sum { |project| project[:match].to_f }
-      prize = projects.sum { |project| project[:prize].to_f }
-      extra = venus + match + prize
-      endowment = sales * ENDOWMENT_RATE
-      {
-        sales: sales,
-        venus: venus,
-        match: match,
-        prize: prize,
-        extra: extra,
-        endowment: endowment,
-        net: endowment - extra
-      }
     end
 
     # S4/S5 predate projectseason; Artizen stores them on the project record.

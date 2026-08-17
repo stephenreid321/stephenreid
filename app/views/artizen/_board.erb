@@ -18,57 +18,6 @@
   </form>
 </div>
 
-<% if @cost && @cost[:extra].to_f.positive? %>
-  <div class="row mb-3">
-    <div class="col-6 col-md-4 col-xl">
-      <div class="artizen-stat">
-        <div class="label">Sales</div>
-        <div class="value"><%= usd(@cost[:sales]) %></div>
-      </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl">
-      <div class="artizen-stat">
-        <div class="label">Venus</div>
-        <div class="value"><%= usd(@cost[:venus]) %></div>
-      </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl">
-      <div class="artizen-stat">
-        <div class="label">Match</div>
-        <div class="value"><%= usd(@cost[:match]) %></div>
-      </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl">
-      <div class="artizen-stat">
-        <div class="label">Prize</div>
-        <div class="value"><%= usd(@cost[:prize]) %></div>
-      </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl">
-      <div class="artizen-stat">
-        <div class="label">Cost (V+M+P)</div>
-        <div class="value"><%= usd(@cost[:extra]) %></div>
-      </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl">
-      <div class="artizen-stat">
-        <div class="label">Endowment 10%</div>
-        <div class="value"><%= usd(@cost[:endowment]) %></div>
-      </div>
-    </div>
-    <div class="col-6 col-md-4 col-xl">
-      <% net = @cost[:net].to_f %>
-      <div class="artizen-stat">
-        <div class="label">Net</div>
-        <div class="value"><%= '+' if net.positive? %><%= usd(net) %></div>
-      </div>
-    </div>
-  </div>
-  <p class="text-muted small mb-3">
-    Cost is Venus + match + prize on the leaderboard. Endowment is 10% of community sales (a buyer surcharge, not taken from creators; Venus pays none). Net = endowment − cost: + is Artizen profit, − is Artizen paying out. Match is mostly paid by funds, not Artizen.
-  </p>
-<% end %>
-
 <% if @artizen_error && @projects.blank? && @funds.blank? %>
   <div class="alert alert-warning">
     Could not load Artizen leaderboards. Try again later or visit

@@ -142,7 +142,6 @@ StephenReid::App.helpers do
     @drives = @data[:drives] || []
     @projects = @data[:projects]
     @funds = @data[:funds]
-    @cost = @data[:cost]
     @artizen_error = @data[:error]
     @title = @season ? "Artizen · #{@season[:title]}" : 'Artizen'
   end
