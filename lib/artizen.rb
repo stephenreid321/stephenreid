@@ -6,7 +6,7 @@ module Artizen
   PAGE_SIZE = 100
   IN_BATCH = 50
   PARALLEL_THREADS = 8
-  LEADERBOARD_CACHE = 'artizen/leaderboard/v21'.freeze
+  LEADERBOARD_CACHE = 'artizen/leaderboard/v22'.freeze
   PROJECT_CACHE = 'artizen/project/v19'.freeze
   FUND_CACHE = 'artizen/fund/v10'.freeze
   ENDOWMENT_RATE = 0.10
@@ -905,7 +905,7 @@ module Artizen
         prize: prize,
         extra: extra,
         endowment: endowment,
-        net: extra - endowment
+        net: endowment - extra
       }
     end
 

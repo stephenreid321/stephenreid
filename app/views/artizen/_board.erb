@@ -22,6 +22,12 @@
   <div class="row mb-3">
     <div class="col-6 col-md-4 col-xl">
       <div class="artizen-stat">
+        <div class="label">Sales</div>
+        <div class="value"><%= usd(@cost[:sales]) %></div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-xl">
+      <div class="artizen-stat">
         <div class="label">Venus</div>
         <div class="value"><%= usd(@cost[:venus]) %></div>
       </div>
@@ -51,14 +57,15 @@
       </div>
     </div>
     <div class="col-6 col-md-4 col-xl">
+      <% net = @cost[:net].to_f %>
       <div class="artizen-stat">
         <div class="label">Net</div>
-        <div class="value"><%= usd(@cost[:net]) %></div>
+        <div class="value"><%= '+' if net.positive? %><%= usd(net) %></div>
       </div>
     </div>
   </div>
   <p class="text-muted small mb-3">
-    Cost is Venus + match + prize on the leaderboard. Endowment is 10% of community sales (a buyer surcharge, not taken from creators; Venus pays none). Net = cost − endowment. Match is mostly paid by funds, not Artizen.
+    Cost is Venus + match + prize on the leaderboard. Endowment is 10% of community sales (a buyer surcharge, not taken from creators; Venus pays none). Net = endowment − cost: + is Artizen profit, − is Artizen paying out. Match is mostly paid by funds, not Artizen.
   </p>
 <% end %>
 
