@@ -5,8 +5,78 @@
     <p class="text-muted">No fund drives in this season.</p>
   <% else %>
     <p class="text-muted small mb-3">
-      Projects and funds are ranked by boost score: points × (sales + match) / 10.
+      Projects and funds are ranked by boost score: points × (sales + match) / 100.
     </p>
+    <% chart_drives = @drives.sort_by { |drive| drive[:number] || 0 } %>
+    <div class="artizen-prize-chart mb-4">
+      <canvas id="artizen-prize-chart"></canvas>
+    </div>
+    <script>
+      $(function() {
+        var ctx = document.getElementById('artizen-prize-chart');
+        if (!ctx) return;
+        function compactScore(n) {
+          var a = Math.abs(n);
+          var sign = n < 0 ? '-' : '';
+          var div, suffix;
+          if (a >= 1e6) { div = 1e6; suffix = 'm'; }
+          else if (a >= 1e3) { div = 1e3; suffix = 'k'; }
+          else return sign + Math.round(a);
+          var scaled = a / div;
+          var text = scaled >= 100 ? String(Math.round(scaled)) : scaled.toFixed(1).replace(/\.0$/, '');
+          return sign + text + suffix;
+        }
+        new Chart(ctx.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: <%= chart_drives.map { |d| d[:name].to_s.sub(/ Fund Drive\z/i, '') }.to_json %>,
+            datasets: [
+              { label: 'Project 1st', data: <%= chart_drives.map { |d| d.dig(:podium, 0, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:podium, 0, :name) }.to_json %>, borderColor: '#2DB963', backgroundColor: '#2DB963', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'y' },
+              { label: 'Project 2nd', data: <%= chart_drives.map { |d| d.dig(:podium, 1, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:podium, 1, :name) }.to_json %>, borderColor: '#7BC99A', backgroundColor: '#7BC99A', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'y' },
+              { label: 'Project 3rd', data: <%= chart_drives.map { |d| d.dig(:podium, 2, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:podium, 2, :name) }.to_json %>, borderColor: '#C5E8D4', backgroundColor: '#C5E8D4', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'y' },
+              { label: 'Fund 1st', data: <%= chart_drives.map { |d| d.dig(:fund_podium, 0, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:fund_podium, 0, :name) }.to_json %>, borderColor: '#4C6EF5', backgroundColor: '#4C6EF5', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'yFunds' },
+              { label: 'Fund 2nd', data: <%= chart_drives.map { |d| d.dig(:fund_podium, 1, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:fund_podium, 1, :name) }.to_json %>, borderColor: '#8DA2F7', backgroundColor: '#8DA2F7', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'yFunds' },
+              { label: 'Fund 3rd', data: <%= chart_drives.map { |d| d.dig(:fund_podium, 2, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:fund_podium, 2, :name) }.to_json %>, borderColor: '#C5CFFB', backgroundColor: '#C5CFFB', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'yFunds' }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12 } },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    var n = ctx.parsed.y;
+                    if (n == null) return ctx.dataset.label;
+                    var name = (ctx.dataset.names || [])[ctx.dataIndex];
+                    var text = ctx.dataset.label;
+                    if (name) text += ' · ' + name;
+                    return text + ': ' + compactScore(n);
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { grid: { display: false } },
+              y: {
+                position: 'left',
+                beginAtZero: true,
+                title: { display: true, text: 'Projects', color: '#2DB963' },
+                ticks: { color: '#2DB963', callback: function(v) { return compactScore(v); } }
+              },
+              yFunds: {
+                position: 'right',
+                beginAtZero: true,
+                grid: { drawOnChartArea: false },
+                title: { display: true, text: 'Funds', color: '#4C6EF5' },
+                ticks: { color: '#4C6EF5', callback: function(v) { return compactScore(v); } }
+              }
+            }
+          }
+        });
+      });
+    </script>
     <div class="row">
       <% @drives.each do |drive| %>
         <div class="col-md-6 col-xl-4 mb-3">

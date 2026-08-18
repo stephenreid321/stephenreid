@@ -24,6 +24,10 @@
   .artizen-podium td:first-child {
     padding-right: 0.5rem;
   }
+  .artizen-prize-chart {
+    position: relative;
+    height: 280px;
+  }
   .artizen-hero {
     width: 100%;
     max-height: 320px;
@@ -34,8 +38,22 @@
   #artizen-projects-table {
     table-layout: fixed;
     width: 100%;
+    min-width: 68rem;
     border-collapse: collapse;
     border-spacing: 0;
+  }
+  .artizen-table-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+  @media (max-width: 1099px) {
+    .artizen-table-scroll {
+      overflow-x: auto;
+    }
+    #artizen-projects-table thead th,
+    #artizen-funds-table thead th {
+      position: static;
+      box-shadow: none;
+    }
   }
   #artizen-projects-table .artizen-heat {
     width: 7.4%;

@@ -6,7 +6,7 @@ module Artizen
   PAGE_SIZE = 100
   IN_BATCH = 50
   PARALLEL_THREADS = 8
-  LEADERBOARD_CACHE = 'artizen/leaderboard/v24'.freeze
+  LEADERBOARD_CACHE = 'artizen/leaderboard/v25'.freeze
   PROJECT_CACHE = 'artizen/project/v19'.freeze
   FUND_CACHE = 'artizen/fund/v10'.freeze
   VENUS_ACCOUNT_ID = '1774215063859x668765896046542800'.freeze
@@ -221,7 +221,7 @@ module Artizen
           url: send(path_method, slug),
           sales_match: sales_match,
           points: points,
-          score: points * sales_match / 10.0
+          score: points * sales_match / 100.0
         }
       end.first(3)
     end
@@ -799,7 +799,7 @@ module Artizen
 
     def get(type, params)
       response = Faraday.get("#{BASE_URL}/#{type}", params) do |req|
-        req.options.timeout = 25
+        req.options.timeout = 60
         req.options.open_timeout = 5
         req.headers['Accept'] = 'application/json'
       end
@@ -814,18 +814,28 @@ module Artizen
 
       work = items.map.with_index { |item, i| [i, item] }
       results = Array.new(items.size)
+      error = nil
       mutex = Mutex.new
       workers = [PARALLEL_THREADS, work.size].min.times.map do
         Thread.new do
           loop do
+            break if error
+
             i, item = mutex.synchronize { work.shift }
             break unless i
 
-            results[i] = yield item
+            begin
+              results[i] = yield item
+            rescue StandardError => e
+              mutex.synchronize { error ||= e }
+              break
+            end
           end
         end
       end
       workers.each(&:join)
+      raise error if error
+
       results
     end
 

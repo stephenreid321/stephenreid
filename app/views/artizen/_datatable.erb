@@ -12,5 +12,6 @@
         { type: 'num', targets: <%= Array(numeric).to_json %> }
       ]
     });
+    $('#<%= table_id %>').wrap('<div class="artizen-table-scroll"></div>');
   });
 </script>

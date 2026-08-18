@@ -62,9 +62,7 @@ StephenReid::App.helpers do
 
     n = value.to_f.abs
     sign = value.to_f.negative? ? '-' : ''
-    suffix, div = if n >= 1_000_000_000
-                    ['b', 1_000_000_000.0]
-                  elsif n >= 1_000_000
+    suffix, div = if n >= 1_000_000
                     ['m', 1_000_000.0]
                   elsif n >= 1_000
                     ['k', 1_000.0]
