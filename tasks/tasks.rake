@@ -61,9 +61,3 @@ namespace :substack do
     SubstackPost.import
   end
 end
-
-namespace :artizen do
-  task cache: :environment do
-    Artizen.refresh_cache
-  end
-end
