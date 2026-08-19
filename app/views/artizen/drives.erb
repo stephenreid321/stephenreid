@@ -8,13 +8,30 @@
       Projects and funds are ranked by boost score: points × (sales + match) / 100.
     </p>
     <% chart_drives = @drives.sort_by { |drive| drive[:number] || 0 } %>
-    <div class="artizen-prize-chart mb-4">
-      <canvas id="artizen-prize-chart"></canvas>
-    </div>
+    <% chart_labels = chart_drives.map { |d| d[:name].to_s.sub(/ Fund Drive\z/i, '') } %>
+    <% score_charts = [
+         ['Projects', 'artizen-project-score-chart', :podium, %w[#2DB963 #7BC99A #C5E8D4]],
+         ['Funds', 'artizen-fund-score-chart', :fund_podium, %w[#4C6EF5 #8DA2F7 #C5CFFB]]
+       ].map do |title, canvas_id, key, colors|
+         series = %w[1st 2nd 3rd].each_with_index.map do |place, i|
+           {
+             label: place,
+             data: chart_drives.map { |d| d.dig(key, i, :score) },
+             names: chart_drives.map { |d| d.dig(key, i, :name) },
+             borderColor: colors[i],
+             backgroundColor: colors[i]
+           }
+         end
+         { title: title, id: canvas_id, series: series }
+       end %>
+    <% score_charts.each do |chart| %>
+      <h6 class="mb-1"><%= chart[:title] %></h6>
+      <div class="artizen-prize-chart mb-4">
+        <canvas id="<%= chart[:id] %>"></canvas>
+      </div>
+    <% end %>
     <script>
       $(function() {
-        var ctx = document.getElementById('artizen-prize-chart');
-        if (!ctx) return;
         function compactScore(n) {
           var a = Math.abs(n);
           var sign = n < 0 ? '-' : '';
@@ -26,54 +43,46 @@
           var text = scaled >= 100 ? String(Math.round(scaled)) : scaled.toFixed(1).replace(/\.0$/, '');
           return sign + text + suffix;
         }
-        new Chart(ctx.getContext('2d'), {
-          type: 'line',
-          data: {
-            labels: <%= chart_drives.map { |d| d[:name].to_s.sub(/ Fund Drive\z/i, '') }.to_json %>,
-            datasets: [
-              { label: 'Project 1st', data: <%= chart_drives.map { |d| d.dig(:podium, 0, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:podium, 0, :name) }.to_json %>, borderColor: '#2DB963', backgroundColor: '#2DB963', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'y' },
-              { label: 'Project 2nd', data: <%= chart_drives.map { |d| d.dig(:podium, 1, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:podium, 1, :name) }.to_json %>, borderColor: '#7BC99A', backgroundColor: '#7BC99A', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'y' },
-              { label: 'Project 3rd', data: <%= chart_drives.map { |d| d.dig(:podium, 2, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:podium, 2, :name) }.to_json %>, borderColor: '#C5E8D4', backgroundColor: '#C5E8D4', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'y' },
-              { label: 'Fund 1st', data: <%= chart_drives.map { |d| d.dig(:fund_podium, 0, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:fund_podium, 0, :name) }.to_json %>, borderColor: '#4C6EF5', backgroundColor: '#4C6EF5', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'yFunds' },
-              { label: 'Fund 2nd', data: <%= chart_drives.map { |d| d.dig(:fund_podium, 1, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:fund_podium, 1, :name) }.to_json %>, borderColor: '#8DA2F7', backgroundColor: '#8DA2F7', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'yFunds' },
-              { label: 'Fund 3rd', data: <%= chart_drives.map { |d| d.dig(:fund_podium, 2, :score) }.to_json %>, names: <%= chart_drives.map { |d| d.dig(:fund_podium, 2, :name) }.to_json %>, borderColor: '#C5CFFB', backgroundColor: '#C5CFFB', fill: false, tension: 0.2, spanGaps: true, yAxisID: 'yFunds' }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12 } },
-              tooltip: {
-                callbacks: {
-                  label: function(ctx) {
-                    var n = ctx.parsed.y;
-                    if (n == null) return ctx.dataset.label;
-                    var name = (ctx.dataset.names || [])[ctx.dataIndex];
-                    var text = ctx.dataset.label;
-                    if (name) text += ' · ' + name;
-                    return text + ': ' + compactScore(n);
+        var labels = <%= chart_labels.to_json %>;
+        var charts = <%= score_charts.map { |c| { id: c[:id], series: c[:series] } }.to_json %>;
+        charts.forEach(function(chart) {
+          var el = document.getElementById(chart.id);
+          if (!el) return;
+          new Chart(el.getContext('2d'), {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: chart.series.map(function(s) {
+                return $.extend({ fill: false, tension: 0.2, spanGaps: true }, s);
+              })
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12 } },
+                tooltip: {
+                  callbacks: {
+                    label: function(ctx) {
+                      var n = ctx.parsed.y;
+                      if (n == null) return ctx.dataset.label;
+                      var name = (ctx.dataset.names || [])[ctx.dataIndex];
+                      var text = ctx.dataset.label;
+                      if (name) text += ' · ' + name;
+                      return text + ': ' + compactScore(n);
+                    }
                   }
                 }
-              }
-            },
-            scales: {
-              x: { grid: { display: false } },
-              y: {
-                position: 'left',
-                beginAtZero: true,
-                title: { display: true, text: 'Projects', color: '#2DB963' },
-                ticks: { color: '#2DB963', callback: function(v) { return compactScore(v); } }
               },
-              yFunds: {
-                position: 'right',
-                beginAtZero: true,
-                grid: { drawOnChartArea: false },
-                title: { display: true, text: 'Funds', color: '#4C6EF5' },
-                ticks: { color: '#4C6EF5', callback: function(v) { return compactScore(v); } }
+              scales: {
+                x: { grid: { display: false } },
+                y: {
+                  beginAtZero: true,
+                  ticks: { callback: function(v) { return compactScore(v); } }
+                }
               }
             }
-          }
+          });
         });
       });
     </script>

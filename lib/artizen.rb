@@ -13,27 +13,17 @@ module Artizen
 
   class << self
     def leaderboard(season_number: nil)
-      cache_fetch("#{LEADERBOARD_CACHE}/#{season_number || 'current'}") { build(season_number) }
-    rescue StandardError => e
-      Honeybadger.notify(e) if defined?(Honeybadger)
-      warn "[Artizen] #{e.class}: #{e.message}"
-      { seasons: [], season: nil, drives: [], projects: [], funds: [], error: true }
+      with_artizen_errors({ seasons: [], season: nil, drives: [], projects: [], funds: [], error: true }) do
+        cache_fetch("#{LEADERBOARD_CACHE}/#{season_number || 'current'}") { build(season_number) }
+      end
     end
 
     def project(slug)
-      cache_fetch("#{PROJECT_CACHE}/#{slug}") { build_project(slug) }
-    rescue StandardError => e
-      Honeybadger.notify(e) if defined?(Honeybadger)
-      warn "[Artizen] #{e.class}: #{e.message}"
-      nil
+      with_artizen_errors(nil) { cache_fetch("#{PROJECT_CACHE}/#{slug}") { build_project(slug) } }
     end
 
     def fund(slug)
-      cache_fetch("#{FUND_CACHE}/#{slug}") { build_fund(slug) }
-    rescue StandardError => e
-      Honeybadger.notify(e) if defined?(Honeybadger)
-      warn "[Artizen] #{e.class}: #{e.message}"
-      nil
+      with_artizen_errors(nil) { cache_fetch("#{FUND_CACHE}/#{slug}") { build_fund(slug) } }
     end
 
     def refresh_cache
@@ -141,7 +131,7 @@ module Artizen
       ).reject { |row| row['hide from competition'] }
       return legacy_season_project_rows(season) if rows.empty?
 
-      projects = fetch_by_ids('project', rows.map { |r| r['project'] }.compact.uniq).index_by { |p| p['_id'] }
+      projects = indexed('project', rows.map { |r| r['project'] })
       venus_by_project = venus_buys_by_project(season_id)
       prizes = drive_prizes_by_project(season_id)
 
@@ -186,30 +176,33 @@ module Artizen
       return if drives.empty?
 
       pages = parallel(drives) do |drive|
-        get(
+        get_results(
           'boostparticipant',
           limit: 100,
           cursor: 0,
           sort_field: 'boost score',
           descending: true,
           constraints: [{ key: 'boost', constraint_type: 'equals', value: drive[:id] }].to_json
-        )['results'] || []
+        )
       end
       records = pages.flatten
-      projects = fetch_by_ids('project', records.map { |row| row['project'] }).index_by { |p| p['_id'] }
-      funds = fetch_by_ids('fund', records.map { |row| row['fund'] }).index_by { |f| f['_id'] }
-
+      catalogs = {
+        project: indexed('project', records.map { |row| row['project'] }),
+        fund: indexed('fund', records.map { |row| row['fund'] })
+      }
       drives.zip(pages).each do |drive, rows|
-        drive[:podium] = podium_rows(rows, :project, projects, :local_project_path, 'Name')
-        drive[:fund_podium] = podium_rows(rows, :fund, funds, :local_fund_path, 'name')
+        drive[:podium] = podium_rows(rows, :project, catalogs[:project])
+        drive[:fund_podium] = podium_rows(rows, :fund, catalogs[:fund])
       end
     end
 
-    def podium_rows(rows, key, records, path_method, name_field)
+    def podium_rows(rows, kind, records)
+      field = kind.to_s
+      name_field = kind == :fund ? 'name' : 'Name'
       rows.filter_map do |row|
-        next if key == :fund && row['project'].present?
+        next if kind == :fund && row['project'].present?
 
-        id = row[key == :project ? 'project' : 'fund']
+        id = row[field]
         next if id.blank?
 
         record = records[id]
@@ -217,8 +210,8 @@ module Artizen
         points = row['boost points received'].to_f
         sales_match = row['sales + match (both)'].to_f
         {
-          name: (record && record[name_field]).to_s.strip.presence || key.to_s.capitalize,
-          url: send(path_method, slug),
+          name: (record && record[name_field]).to_s.strip.presence || field.capitalize,
+          url: kind == :fund ? local_fund_path(slug) : local_project_path(slug),
           sales_match: sales_match,
           points: points,
           score: points * sales_match / 100.0
@@ -246,15 +239,17 @@ module Artizen
         match_pot: row['total match pot funds']&.to_f,
         prize_projects: row['prize pot projects']&.to_f,
         prize_funds: row['prize pot funds']&.to_f,
-        project_first: row['project 1st prize ']&.to_f,
-        project_second: row['project 2nd prize ']&.to_f,
-        project_third: row['project 3rd prize ']&.to_f,
-        fund_first: row['fund 1st prize ']&.to_f,
-        fund_second: row['fund 2nd prize ']&.to_f,
-        fund_third: row['fund 3rd prize ']&.to_f,
         goal: row['goal']&.to_f,
         match_per_project: row['Artizen match per project']&.to_f
-      }
+      }.merge(drive_place_prizes(row))
+    end
+
+    def drive_place_prizes(row)
+      %w[project fund].flat_map do |kind|
+        [%w[first 1st], %w[second 2nd], %w[third 3rd]].map do |ord, nth|
+          [:"#{kind}_#{ord}", row["#{kind} #{nth} prize "]&.to_f]
+        end
+      end.to_h
     end
 
     def project_drive_details(drives, stats_by_drive)
@@ -399,14 +394,13 @@ module Artizen
 
       id = row['_id']
       slug_value = row['Slug'].presence || id
-      seasons_meta = fetch_seasons.index_by { |s| s[:id] }
+      seasons_meta = seasons_by_id
       season_rows = list('projectseason', constraints: [{ key: 'project', constraint_type: 'equals', value: id }])
       slices = list('projectfundboostslice', constraints: [{ key: 'project', constraint_type: 'equals', value: id }])
       participants = list('boostparticipant', constraints: [{ key: 'project', constraint_type: 'equals', value: id }])
 
       boost_ids = (slices + participants).map { |r| r['boost'] }.compact.uniq
-      drives = fetch_by_ids('boost', boost_ids).map { |r| normalize_drive(r) }
-      apply_season_names(drives, seasons_meta)
+      drives = fetch_normalized_drives(boost_ids, seasons_meta)
       drives.sort_by! { |d| [-(d[:season_number] || 0), -(d[:number] || 0)] }
 
       venus_txs = venus_transactions(project_id: id)
@@ -442,7 +436,7 @@ module Artizen
       slices.group_by { |s| s['boost'] }.each do |boost_id, rows|
         next if boost_id.blank?
 
-        leftover = rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f }
+        leftover = leftover_match(rows)
         next unless leftover.positive?
 
         drive = drives.find { |d| d[:id] == boost_id }
@@ -451,7 +445,7 @@ module Artizen
       end
 
       fund_ids = slices.map { |s| s['fund'] }.compact.uniq
-      funds_by_id = fetch_by_ids('fund', fund_ids).index_by { |f| f['_id'] }
+      funds_by_id = indexed('fund', fund_ids)
       matching_funds = slices.group_by { |s| [s['fund'], s['boost']] }.filter_map do |(fund_id, boost_id), rows|
         fund = funds_by_id[fund_id]
         next unless fund
@@ -467,7 +461,7 @@ module Artizen
           drive_multiple: drive && drive[:multiple],
           season: drive && drive[:season],
           season_number: drive && drive[:season_number],
-          available: drive && drive[:active] ? rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f } : 0.0,
+          available: drive && drive[:active] ? leftover_match(rows) : 0.0,
           unlocked: rows.sum { |r| r['match unlocked'].to_f },
           cap: rows.sum { |r| r['match cap $'].to_f }
         }
@@ -525,7 +519,7 @@ module Artizen
     def format_project_submissions(rows, seasons_meta)
       rows = rows.reject { |row| row['Submitted'] == false }
       fund_ids = rows.map { |row| row['Fund'] }.compact.uniq
-      funds_by_id = fetch_by_ids('fund', fund_ids).index_by { |fund| fund['_id'] }
+      funds_by_id = indexed('fund', fund_ids)
       rows.filter_map do |row|
         fund = funds_by_id[row['Fund']]
         next unless fund
@@ -564,7 +558,7 @@ module Artizen
 
       id = row['_id']
       slug_value = row['Slug'].presence || id
-      ext = (get('fundextendedinfo', limit: 1, constraints: [{ key: '_id', constraint_type: 'equals', value: row['Extended info'] }].to_json)['results'] || []).first if row['Extended info']
+      ext = find_by('fundextendedinfo', '_id', row['Extended info']).first if row['Extended info']
 
       slices = list(
         'projectfundboostslice',
@@ -575,11 +569,10 @@ module Artizen
       )
       award_rows = list_fund_awards([id])
       project_ids = (slices.map { |s| s['project'] } + award_rows.map { |s| s['Project'] }).compact.uniq
-      projects = fetch_by_ids('project', project_ids).index_by { |p| p['_id'] }
+      projects = indexed('project', project_ids)
       boost_ids = slices.map { |s| s['boost'] }.compact.uniq
-      seasons_meta = fetch_seasons.index_by { |s| s[:id] }
-      drives = fetch_by_ids('boost', boost_ids).map { |r| normalize_drive(r) }.index_by { |d| d[:id] }
-      apply_season_names(drives.values, seasons_meta)
+      seasons_meta = seasons_by_id
+      drives = fetch_normalized_drives(boost_ids, seasons_meta).index_by { |d| d[:id] }
 
       matched_projects = slices.group_by { |s| [s['project'], s['boost']] }.filter_map do |(project_id, boost_id), rows|
         project = projects[project_id]
@@ -599,7 +592,7 @@ module Artizen
           drive_multiple: drive && drive[:multiple],
           season: drive && drive[:season],
           season_number: drive && drive[:season_number],
-          available: rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f },
+          available: leftover_match(rows),
           unlocked: rows.sum { |r| r['match unlocked'].to_f }
         }
       end
@@ -648,11 +641,11 @@ module Artizen
     end
 
     def find_one(type, slug, slug_field: 'Slug')
-      rows = get(type, limit: 5, constraints: [{ key: slug_field, constraint_type: 'equals', value: slug }].to_json)['results'] || []
+      rows = find_by(type, slug_field, slug, limit: 5)
       row = rows.find { |r| !r['Hide'] && !r['unPublished'] } || rows.first
       return row if row
 
-      (get(type, limit: 1, constraints: [{ key: '_id', constraint_type: 'equals', value: slug }].to_json)['results'] || []).first
+      find_by(type, '_id', slug).first
     end
 
     def fund_rows(season_id, current: false)
@@ -677,7 +670,7 @@ module Artizen
 
       funds = fetch_by_ids('fund', totals.keys)
       unlocked = current ? fund_unlocked(totals.keys) : {}
-      exts = fetch_by_ids('fundextendedinfo', funds.map { |fund| fund['Extended info'] }).index_by { |row| row['_id'] }
+      exts = indexed('fundextendedinfo', funds.map { |fund| fund['Extended info'] })
       ranked = funds.filter_map do |fund|
         id = fund['_id']
         season_total = totals[id].to_f
@@ -783,7 +776,7 @@ module Artizen
       return results if remaining <= 0
 
       cursors = 1.upto((remaining.to_f / PAGE_SIZE).ceil).map { |i| i * PAGE_SIZE }
-      extra = parallel(cursors) { |cursor| get(type, params.merge(cursor: cursor))['results'] || [] }
+      extra = parallel(cursors) { |cursor| get_results(type, params.merge(cursor: cursor)) }
       results + extra.flatten
     end
 
@@ -792,9 +785,36 @@ module Artizen
       return [] if ids.empty?
 
       pages = parallel(ids.each_slice(IN_BATCH).to_a) do |batch|
-        get(type, limit: PAGE_SIZE, constraints: [{ key: '_id', constraint_type: 'in', value: batch }].to_json)['results'] || []
+        get_results(type, limit: PAGE_SIZE, constraints: [{ key: '_id', constraint_type: 'in', value: batch }].to_json)
       end
       pages.flatten
+    end
+
+    def indexed(type, ids)
+      fetch_by_ids(type, ids).index_by { |row| row['_id'] }
+    end
+
+    def seasons_by_id
+      fetch_seasons.index_by { |s| s[:id] }
+    end
+
+    def fetch_normalized_drives(boost_ids, seasons_meta)
+      drives = fetch_by_ids('boost', boost_ids).map { |r| normalize_drive(r) }
+      apply_season_names(drives, seasons_meta)
+      drives
+    end
+
+    def leftover_match(rows)
+      rows.sum { |r| r['match cap $'].to_f - r['match unlocked'].to_f }
+    end
+
+    def with_artizen_errors(fallback, context: nil)
+      yield
+    rescue StandardError => e
+      Honeybadger.notify(e) if defined?(Honeybadger)
+      prefix = context ? "#{context} failed: " : ''
+      warn "[Artizen] #{prefix}#{e.class}: #{e.message}"
+      fallback
     end
 
     def get(type, params)
@@ -806,6 +826,14 @@ module Artizen
       raise "Artizen API #{response.status} for #{type}" unless response.success?
 
       JSON.parse(response.body).fetch('response')
+    end
+
+    def get_results(type, params)
+      get(type, params)['results'] || []
+    end
+
+    def find_by(type, key, value, limit: 1)
+      get_results(type, limit: limit, constraints: [{ key: key, constraint_type: 'equals', value: value }].to_json)
     end
 
     def parallel(items)
@@ -860,17 +888,13 @@ module Artizen
     end
 
     def rebuild(key, &)
-      cache_write(key, &)
-    rescue StandardError => e
-      Honeybadger.notify(e) if defined?(Honeybadger)
-      warn "[Artizen] #{key} failed: #{e.class}: #{e.message}"
-      nil
+      with_artizen_errors(nil, context: key) { cache_write(key, &) }
     end
 
     def venus_account_id
       return @venus_account_id if defined?(@venus_account_id)
 
-      rows = get('useraccount', limit: 1, constraints: [{ key: 'name', constraint_type: 'equals', value: 'Venus' }].to_json)['results'] || []
+      rows = find_by('useraccount', 'name', 'Venus')
       @venus_account_id = rows.dig(0, '_id') || VENUS_ACCOUNT_ID
     end
 
