@@ -69,6 +69,7 @@ class SubstackPost
     doc.search('img').each do |tag|
       tag['src'] = tag['srcset'].split(' ')[-2] if tag['srcset']
     end
+    Substack.expand_mentions!(doc)
 
     ReverseMarkdown.convert(doc.to_html.gsub('<div></div>', ''))
   end

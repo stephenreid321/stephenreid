@@ -61,6 +61,46 @@ module Substack
       ''
     end
 
+    # Substack @-mentions are empty <span class="mention-wrap"> nodes; the label
+    # lives in data-attrs JSON and is filled in by client JS. Expand them so
+    # markdown conversion keeps the names.
+    def expand_mentions!(doc)
+      doc.css('span.mention-wrap, [data-component-name="MentionToDOM"]').each do |node|
+        attrs = parse_json_attr(node['data-attrs'])
+        name = attrs['name'].to_s.strip
+        next if name.blank?
+
+        url = mention_url(attrs)
+        replacement = if url.present?
+          node.document.create_element('a', name, 'href' => url)
+        else
+          name
+        end
+        node.replace(replacement)
+      end
+      doc
+    end
+
+    def mention_url(attrs)
+      explicit = attrs['url'].to_s.strip
+      return explicit if explicit.present?
+
+      id = attrs['id']
+      return '' if id.blank?
+
+      slug = attrs['name'].to_s.parameterize
+      path = slug.present? ? "#{id}-#{slug}" : id.to_s
+      "https://open.substack.com/users/#{path}"
+    end
+
+    def parse_json_attr(raw)
+      return {} if raw.to_s.strip.empty?
+
+      JSON.parse(raw)
+    rescue JSON::ParserError
+      {}
+    end
+
     def fetch_notes_page(conn:, base_api:, cursor:)
       path = cursor ? "/notes?cursor=#{URI.encode_www_form_component(cursor)}" : '/notes'
       request_json(conn, "#{base_api}#{path}")
