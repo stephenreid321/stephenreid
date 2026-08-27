@@ -1,5 +1,5 @@
 module Context
-  def self.context(book_summaries: false, notes_limit: nil, posts_limit: nil)
+  def self.context(notes_limit: nil, posts_limit: nil)
     sections = [
       {
         title: 'Short bio in the third person',
@@ -18,17 +18,10 @@ module Context
       }
     ]
 
-    sections << if book_summaries
-                  {
-                    title: "Books I've read, with summaries",
-                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.sort_by { |b| b[:date_read] }.reverse.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read], summary: '(summary missing)' } }
-                  }
-                else
-                  {
-                    title: "Books I've read",
-                    books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.sort_by { |b| b[:date_read] }.reverse.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read] } }
-                  }
-                end
+    sections << {
+      title: "Books I've read",
+      books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.sort_by { |b| b[:date_read] }.reverse.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read] } }
+    }
 
     sections << {
       title: 'Substack notes',
@@ -42,9 +35,8 @@ module Context
     { document: { section: sections } }
   end
 
-  def self.markdown(book_summaries: false, notes_limit: nil, posts_limit: nil)
+  def self.markdown(notes_limit: nil, posts_limit: nil)
     data = context(
-      book_summaries: book_summaries,
       notes_limit: notes_limit,
       posts_limit: posts_limit
     )
@@ -56,20 +48,15 @@ module Context
       if section[:content]
         result << section[:content]
       elsif section[:books]
-        result << if section[:title].include?('summaries')
-                    section[:books].map { |b| "### #{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n\n#{b[:summary]}" }.join("\n\n")
-                  else
-                    section[:books].map { |b| "#{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n" }.join("\n")
-                  end
+        result << section[:books].map { |b| "#{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n" }.join("\n")
       end
 
       result.join("\n\n")
     end
   end
 
-  def self.xml(book_summaries: false, notes_limit: nil, posts_limit: nil)
+  def self.xml(notes_limit: nil, posts_limit: nil)
     data = context(
-      book_summaries: book_summaries,
       notes_limit: notes_limit,
       posts_limit: posts_limit
     )

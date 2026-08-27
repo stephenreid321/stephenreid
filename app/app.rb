@@ -79,7 +79,6 @@ module StephenReid
 
     get '/context', provides: :txt do
       ::Context.markdown(
-        book_summaries: params[:book_summaries],
         notes_limit: params[:notes_limit],
         posts_limit: params[:posts_limit]
       ).join("\n\n")
