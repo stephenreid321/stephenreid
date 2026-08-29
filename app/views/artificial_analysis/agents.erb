@@ -5,7 +5,7 @@
   </div>
 <% else %>
   <% chart_keys = @chart_keys %>
-  <% agents_score_column_classes = [{ cell_class: 'agents-index-cell' }] + chart_keys.map { |k| { cell_class: "agents-bench-#{k}" } } %>
+  <% agents_score_column_classes = [{ cell_class: 'agents-index-cell' }] + chart_keys.map { |k| { cell_class: "agents-bench-#{k.tr('.', '-')}" } } %>
   <div class="mb-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
@@ -26,7 +26,6 @@
     </div>
   </div>
 
-  <div class="table-responsive">
     <table id="agents-table" class="table table-sm">
       <thead>
         <tr>
@@ -63,7 +62,7 @@
             <% chart_keys.each do |key| %>
               <% comp = row.dig('components_by_dataset', key) %>
               <% reward = comp&.dig('mean', 'reward') %>
-              <td class="text-right agents-bench-<%= key %>" data-order="<%= reward ? (reward.to_f * 100).round : -1 %>">
+              <td class="text-right agents-bench-<%= key.tr('.', '-') %>" data-order="<%= reward ? (reward.to_f * 100).round : -1 %>">
                 <% if reward %>
                   <%= (reward.to_f * 100).round %>
                   <small class="text-muted rank-display"></small>
@@ -91,7 +90,6 @@
         <% end %>
       </tbody>
     </table>
-  </div>
 
   <script>
     var agentsChartData = <%== @agent_rows.map.with_index { |r, i|
@@ -108,6 +106,7 @@
     }.to_json %>;
 
     var AGENTS_SCORE_COLUMNS = <%== agents_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
+    var DEFAULT_AGENTS_BASELINE_LABEL = 'Codex - GPT-5.6 Sol (medium)';
 
     var familyColors = {
       'Claude Code': 'rgba(217, 119, 6, 0.85)',
@@ -121,6 +120,7 @@
         paging: false,
         searching: true,
         info: true,
+        dom: "<'d-flex justify-content-end mb-2'f><'table-responsive'tr><'row'<'col-sm-12'i>>",
         order: [[3, 'desc']],
         columnDefs: [
           { className: 'text-right', targets: [3, 4, 5, 6, 7, 8] },
@@ -160,7 +160,10 @@
               .text(r.label + ' (' + indexDisplay(r) + ')')
           );
         });
-        $sel.val('');
+        var defaultRow = agentsChartData.find(function(r) {
+          return r.label === DEFAULT_AGENTS_BASELINE_LABEL;
+        });
+        $sel.val(defaultRow ? defaultRow.id : '');
       }
 
       function baselineMinIndex() {

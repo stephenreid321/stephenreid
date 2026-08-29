@@ -7,7 +7,7 @@ require 'zlib'
 module ArtificialAnalysis
   BASE_URL = 'https://artificialanalysis.ai'
   MANIFEST_PATTERN = /"path":"(\/data\/[^"]+\.txt)","key":"([a-f0-9]+)"/.freeze
-  DEFAULT_AGENT_CHART_KEYS = %w[deep-swe terminal-bench-v2 swe-atlas-qna].freeze
+  DEFAULT_AGENT_CHART_KEYS = %w[deep-swe terminal-bench-v2.1 swe-atlas-qna].freeze
 
   class << self
     def llm_models
