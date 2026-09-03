@@ -158,7 +158,7 @@
               <% end %>
             </td>
           <% end %>
-          <td class="time-per-task-cell" data-order="<%= model['time_per_task'] || 0 %>"><%= display_or_dash(model['time_per_task']) { |t| t >= 3600 ? sprintf('%.1f h', t / 3600.0) : t >= 60 ? sprintf('%.1f min', t / 60.0) : sprintf('%.0f s', t) } %></td>
+          <td class="time-per-task-cell" data-order="<%= model['time_per_task'] || 0 %>"><%= display_or_dash(model['time_per_task']) { |t| sprintf('%.0f s', t) } %></td>
           <td class="cost-per-task-cell" data-order="<%= model['cost_per_task'] || 0 %>"><%= display_or_dash(model['cost_per_task'], format: '%.3f', prefix: '$') %></td>
           <%
             cost_time = model['cost_per_task'].to_f > 0 && model['time_per_task'].to_f > 0 ? model['cost_per_task'].to_f * model['time_per_task'].to_f : nil
@@ -496,8 +496,6 @@
     }
 
     function formatDuration(seconds) {
-      if (seconds >= 3600) return (seconds / 3600).toFixed(1) + ' h';
-      if (seconds >= 60) return (seconds / 60).toFixed(1) + ' min';
       return seconds.toFixed(0) + ' s';
     }
 
