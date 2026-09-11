@@ -14,8 +14,8 @@ StephenReid::App.controller do
 
   get '/agents', cache: true do
     @title = 'Coding agents'
-    @chart_keys = ArtificialAnalysis::DEFAULT_AGENT_CHART_KEYS
-    @agent_rows = ArtificialAnalysis.coding_agents(chart_keys: @chart_keys)
+    @agent_rows = ArtificialAnalysis.coding_agents
+    @chart_keys = ArtificialAnalysis.resolve_agent_chart_keys(@agent_rows)
 
     erb :'artificial_analysis/agents'
   end

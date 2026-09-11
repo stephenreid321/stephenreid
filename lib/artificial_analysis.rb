@@ -7,7 +7,7 @@ require 'zlib'
 module ArtificialAnalysis
   BASE_URL = 'https://artificialanalysis.ai'
   MANIFEST_PATTERN = /"path":"(\/data\/[^"]+\.txt)","key":"([a-f0-9]+)"/.freeze
-  DEFAULT_AGENT_CHART_KEYS = %w[deep-swe terminal-bench-v2.1 swe-atlas-qna].freeze
+  DEFAULT_AGENT_CHART_KEYS = %w[deep-swe-v1.1 terminal-bench-v4 swe-atlas-qna].freeze
 
   class << self
     def llm_models
@@ -25,15 +25,30 @@ module ArtificialAnalysis
       []
     end
 
+    def resolve_agent_chart_keys(rows, preferred = DEFAULT_AGENT_CHART_KEYS)
+      preferred = DEFAULT_AGENT_CHART_KEYS if preferred.nil? || preferred.empty?
+      return preferred if rows.nil? || rows.empty?
+
+      common = rows.map { |row| (row['components_by_dataset'] || {}).keys }.reduce(:&) || []
+      return preferred if common.empty? || preferred.all? { |key| common.include?(key) }
+
+      (preferred & common) | common
+    end
+
     def coding_agents(chart_keys: DEFAULT_AGENT_CHART_KEYS)
       body = fetch_page('/agents/coding-agents')
       rows = extract_agent_benchmark_rows(body)
       rows.each do |row|
+        agent = row.dig('display', 'agent')
+        model = row.dig('display', 'model')
+        row['displayLabel'] = "#{agent} - #{model}" if agent.to_s.strip != '' && model.to_s.strip != ''
+
         components = row['evals'] || row['componentScores'] || []
         row['components_by_dataset'] = components.each_with_object({}) do |c, h|
           h[c['datasetIndexName']] = c
         end
       end
+      chart_keys = resolve_agent_chart_keys(rows, chart_keys)
       rows.select! do |row|
         chart_keys.all? { |key| row.dig('components_by_dataset', key, 'mean', 'reward') }
       end

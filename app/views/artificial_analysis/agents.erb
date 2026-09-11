@@ -98,7 +98,7 @@
       {
         id: r['id'].presence || "agent-row-#{i}",
         label: r['displayLabel'],
-        agentFamily: r['agentName'],
+        agentFamily: r.dig('display', 'agent') || r['agentName'],
         indexScore: r['indexScore']&.to_f,
         cost: mean['costUsd']&.to_f,
         wallSec: wall
@@ -106,13 +106,21 @@
     }.to_json %>;
 
     var AGENTS_SCORE_COLUMNS = <%== agents_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
-    var DEFAULT_AGENTS_BASELINE_LABEL = 'Codex - GPT-5.6 Sol (medium)';
+    var AGENTS_NUMERIC_TARGETS = <%== (3...(3 + chart_keys.length + 2)).to_a.to_json %>;
+    var DEFAULT_AGENTS_BASELINE_LABEL = 'Codex - GPT-5.6 Sol (max)';
+    var DEFAULT_AGENTS_BASELINE_PREFIX = 'Codex - GPT-5.6 Sol';
 
     var familyColors = {
       'Claude Code': 'rgba(217, 119, 6, 0.85)',
       'Cursor CLI': 'rgba(99, 102, 241, 0.85)',
       'Codex': 'rgba(16, 185, 129, 0.85)',
-      'Gemini CLI': 'rgba(66, 133, 244, 0.85)'
+      'Gemini CLI': 'rgba(66, 133, 244, 0.85)',
+      'Muse Code': 'rgba(236, 72, 153, 0.85)',
+      'Devin Fusion CLI': 'rgba(14, 165, 233, 0.85)',
+      'Antigravity SDK': 'rgba(234, 179, 8, 0.85)',
+      'Opencode': 'rgba(168, 85, 247, 0.85)',
+      'Grok Build': 'rgba(239, 68, 68, 0.85)',
+      'Kimi Code CLI': 'rgba(20, 184, 166, 0.85)'
     };
 
     $(function() {
@@ -123,8 +131,8 @@
         dom: "<'d-flex justify-content-end mb-2'f><'table-responsive'tr><'row'<'col-sm-12'i>>",
         order: [[3, 'desc']],
         columnDefs: [
-          { className: 'text-right', targets: [3, 4, 5, 6, 7, 8] },
-          { type: 'num', targets: [3, 4, 5, 6, 7, 8] }
+          { className: 'text-right', targets: AGENTS_NUMERIC_TARGETS },
+          { type: 'num', targets: AGENTS_NUMERIC_TARGETS }
         ]
       });
 
@@ -162,6 +170,8 @@
         });
         var defaultRow = agentsChartData.find(function(r) {
           return r.label === DEFAULT_AGENTS_BASELINE_LABEL;
+        }) || agentsChartData.find(function(r) {
+          return r.label.indexOf(DEFAULT_AGENTS_BASELINE_PREFIX) === 0;
         });
         $sel.val(defaultRow ? defaultRow.id : '');
       }
