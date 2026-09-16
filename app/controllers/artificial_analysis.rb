@@ -1,5 +1,5 @@
 StephenReid::App.controller do
-  before '/llms', '/agents' do
+  before '/llms', '/agents', '/frontiercode' do
     @container_class = 'container-fluid'
     @stylesheet = 'light'
   end
@@ -18,5 +18,15 @@ StephenReid::App.controller do
     @chart_keys = ArtificialAnalysis.resolve_agent_chart_keys(@agent_rows)
 
     erb :'artificial_analysis/agents'
+  end
+
+  get '/frontiercode', cache: true do
+    @title = 'FrontierCode'
+    @frontiercode_rows = FrontierCode.rows
+    @lab_colors = @frontiercode_rows.each_with_object({}) do |row, colors|
+      colors[row['lab']] = row['labColor'] if row['lab'] && row['labColor']
+    end
+
+    erb :'artificial_analysis/frontiercode'
   end
 end

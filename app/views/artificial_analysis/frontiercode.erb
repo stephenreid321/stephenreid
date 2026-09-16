@@ -1,0 +1,331 @@
+<% if @frontiercode_rows.empty? %>
+  <div class="alert alert-warning">
+    Could not load FrontierCode results from Cognition. Try again later or visit
+    <a href="https://cognition.com/frontiercode" class="alert-link" target="_blank" rel="noopener">their leaderboard</a> directly.
+  </div>
+<% else %>
+  <% frontiercode_score_column_classes = [{ cell_class: 'frontiercode-score-cell' }, { cell_class: 'frontiercode-pass-cell' }] %>
+  <div class="mb-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+        <h5 class="mb-0">Cost v output tokens</h5>
+        <div class="form-inline mt-2 mt-md-0 align-items-end">
+          <div class="form-group mb-0 mr-2">
+            <label for="frontiercode-baseline-select" class="mb-1 mr-1 d-block small text-muted">At least as smart as</label>
+            <select id="frontiercode-baseline-select" class="form-control form-control-sm" style="min-width: 14rem; max-width: 26rem;"></select>
+          </div>
+          <button id="frontiercode-reset-zoom" class="btn btn-sm btn-outline-secondary mb-0 mt-2 mt-md-0">Reset zoom</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="position: relative; height: 420px;">
+          <canvas id="frontiercode-scatter-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <table id="frontiercode-table" class="table table-sm">
+      <thead>
+        <tr>
+          <th>Configuration</th>
+          <th>Model</th>
+          <th>Effort</th>
+          <th>Harness</th>
+          <th class="text-right">Score</th>
+          <th class="text-right">Pass rate</th>
+          <th class="text-right">Flag rate</th>
+          <th class="text-right">Cost</th>
+          <th class="text-right">Output tokens</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @frontiercode_rows.each do |row| %>
+          <tr>
+            <td>
+              <strong><%= row['displayLabel'] %></strong>
+            </td>
+            <td><%= row['model'] %></td>
+            <td>
+              <% if row['effort'].to_s.strip != '' && row['effort'] != 'none' %>
+                <%= row['effort'] %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td><%= row['harness'] %></td>
+            <td class="text-right frontiercode-score-cell" data-order="<%= (row['score'].to_f * 100).round(1) %>">
+              <%= sprintf('%.1f', row['score'].to_f * 100) %>
+              <small class="text-muted rank-display"></small>
+            </td>
+            <td class="text-right frontiercode-pass-cell" data-order="<%= row['passRate'] ? (row['passRate'].to_f * 100).round(1) : -1 %>">
+              <% if row['passRate'] %>
+                <%= sprintf('%.1f', row['passRate'].to_f * 100) %>
+                <small class="text-muted rank-display"></small>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td class="text-right" data-order="<%= row['flagRate'] ? (row['flagRate'].to_f * 100).round(1) : -1 %>">
+              <% if row['flagRate'] %>
+                <%= sprintf('%.1f', row['flagRate'].to_f * 100) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td class="text-right" data-order="<%= row['cost'] || -1 %>">
+              <% if row['cost'] %>
+                <%= sprintf('$%.2f', row['cost'].to_f) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td class="text-right" data-order="<%= row['tokens'] || -1 %>">
+              <% if row['tokens'] %>
+                <% tokens = row['tokens'].to_f %>
+                <%= tokens >= 1000 ? sprintf('%.1fk', tokens / 1000.0) : sprintf('%.1f', tokens) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <script>
+    var frontiercodeChartData = <%== @frontiercode_rows.map { |r|
+      {
+        id: r['id'],
+        label: r['displayLabel'],
+        lab: r['lab'],
+        score: r['score']&.to_f,
+        cost: r['cost'],
+        tokens: r['tokens']
+      }
+    }.to_json %>;
+
+    var FRONTIERCODE_SCORE_COLUMNS = <%== frontiercode_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
+    var FRONTIERCODE_NUMERIC_TARGETS = [4, 5, 6, 7, 8];
+    var DEFAULT_FRONTIERCODE_BASELINE_LABEL = 'GPT-5.6 Sol (max)';
+    var DEFAULT_FRONTIERCODE_BASELINE_PREFIX = 'GPT-5.6 Sol';
+
+    var labColors = <%== @lab_colors.to_json %>;
+
+    function hexToRgba(hex, alpha) {
+      if (!hex) return 'rgba(100, 100, 100, 0.7)';
+      var h = hex.replace('#', '');
+      if (h.length === 3) h = h.split('').map(function(c) { return c + c; }).join('');
+      var r = parseInt(h.slice(0, 2), 16);
+      var g = parseInt(h.slice(2, 4), 16);
+      var b = parseInt(h.slice(4, 6), 16);
+      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+    }
+
+    $(function() {
+      var frontiercodeTable = $('#frontiercode-table').DataTable({
+        paging: false,
+        searching: true,
+        info: true,
+        dom: "<'d-flex justify-content-end mb-2'f><'table-responsive'tr><'row'<'col-sm-12'i>>",
+        order: [[4, 'desc']],
+        columnDefs: [
+          { className: 'text-right', targets: FRONTIERCODE_NUMERIC_TARGETS },
+          { type: 'num', targets: FRONTIERCODE_NUMERIC_TARGETS }
+        ]
+      });
+
+      function updateFrontiercodeScoreRanks() {
+        updateTableScoreRanks(frontiercodeTable, FRONTIERCODE_SCORE_COLUMNS);
+      }
+
+      frontiercodeTable.on('draw', function() {
+        updateFrontiercodeScoreRanks();
+      });
+      updateFrontiercodeScoreRanks();
+
+      function scoreDisplay(row) {
+        if (row.score == null || isNaN(row.score)) return null;
+        return Math.round(row.score * 1000) / 10;
+      }
+
+      function populateFrontiercodeBaselineSelect() {
+        var $sel = $('#frontiercode-baseline-select');
+        $sel.empty();
+        $sel.append($('<option></option>').attr('value', '').text(''));
+        frontiercodeChartData.slice().filter(function(r) {
+          return scoreDisplay(r) != null;
+        }).sort(function(a, b) {
+          var da = scoreDisplay(a);
+          var db = scoreDisplay(b);
+          if (db !== da) return da - db;
+          return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
+        }).forEach(function(r) {
+          $sel.append(
+            $('<option></option>')
+              .attr('value', r.id)
+              .text(r.label + ' (' + scoreDisplay(r).toFixed(1) + ')')
+          );
+        });
+        var defaultRow = frontiercodeChartData.find(function(r) {
+          return r.label === DEFAULT_FRONTIERCODE_BASELINE_LABEL;
+        }) || frontiercodeChartData.find(function(r) {
+          return r.label.indexOf(DEFAULT_FRONTIERCODE_BASELINE_PREFIX) === 0;
+        });
+        $sel.val(defaultRow ? defaultRow.id : '');
+      }
+
+      function baselineMinScore() {
+        var id = $('#frontiercode-baseline-select').val();
+        if (!id) return null;
+        var base = frontiercodeChartData.find(function(r) { return String(r.id) === String(id); });
+        if (!base) return null;
+        return scoreDisplay(base);
+      }
+
+      $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        if (settings.nTable.id !== 'frontiercode-table') return true;
+
+        var floor = baselineMinScore();
+        if (floor == null) return true;
+
+        var row = frontiercodeTable.row(dataIndex).node();
+        var score = parseFloat($(row).find('td.frontiercode-score-cell').data('order'));
+        if (isNaN(score) || score < 0) return false;
+        return score >= floor;
+      });
+
+      function applyFrontiercodeBaselineFilter() {
+        frontiercodeTable.draw();
+        rebuildChart();
+      }
+
+      populateFrontiercodeBaselineSelect();
+      frontiercodeTable.draw();
+
+      var scatterChart = null;
+
+      function formatTokens(tokens) {
+        if (tokens >= 1000) return (tokens / 1000).toFixed(1) + 'k';
+        return tokens.toFixed(1);
+      }
+
+      function rebuildChart() {
+        if (!scatterChart) return;
+        var floor = baselineMinScore();
+        var byLab = {};
+        frontiercodeChartData.forEach(function(row) {
+          var scoreDisp = scoreDisplay(row);
+          if (scoreDisp == null) return;
+          if (floor != null && scoreDisp < floor) return;
+          var cost = row.cost;
+          var tokens = row.tokens;
+          if (cost == null || tokens == null || cost <= 0 || tokens <= 0) return;
+          var lab = row.lab || 'Other';
+          if (!byLab[lab]) byLab[lab] = [];
+          byLab[lab].push({
+            x: tokens,
+            y: cost,
+            label: row.label,
+            tooltip: row.label +
+              ': score ' + scoreDisp.toFixed(1) +
+              ', $' + cost.toFixed(2) +
+              ', ' + formatTokens(tokens) + ' tokens'
+          });
+        });
+
+        scatterChart.data.datasets = Object.keys(byLab).sort().map(function(lab) {
+          return {
+            label: lab,
+            data: byLab[lab],
+            backgroundColor: hexToRgba(labColors[lab], 0.85),
+            pointRadius: 7,
+            pointHoverRadius: 9,
+            datalabels: { display: false }
+          };
+        });
+        scatterChart.update();
+      }
+
+      var ctx = document.getElementById('frontiercode-scatter-chart');
+      if (ctx && frontiercodeChartData.length) {
+        var leaderLinePlugin = createLeaderLinePlugin({ pointRadius: 10 });
+
+        registerScatterChartPlugins();
+        scatterChart = new Chart(ctx.getContext('2d'), {
+          type: 'scatter',
+          data: { datasets: [] },
+          plugins: [leaderLinePlugin],
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: scatterChartLayoutPadding()
+            },
+            plugins: {
+              datalabels: {
+                display: false
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    var p = ctx.raw;
+                    return p.tooltip;
+                  }
+                }
+              },
+              legend: {
+                display: true,
+                position: 'bottom'
+              },
+              zoom: {
+                limits: {
+                  x: { min: 0 },
+                  y: { min: 0 }
+                },
+                pan: {
+                  enabled: true,
+                  mode: 'xy'
+                },
+                zoom: {
+                  wheel: { enabled: true },
+                  pinch: { enabled: true },
+                  mode: 'xy'
+                }
+              }
+            },
+            scales: {
+              x: {
+                min: 0,
+                title: { display: true, text: 'Output tokens' },
+                ticks: {
+                  callback: function(v) {
+                    if (v >= 1000) return (v / 1000).toFixed(0) + 'k';
+                    return v;
+                  }
+                }
+              },
+              y: {
+                min: 0,
+                title: { display: true, text: 'Cost / rollout' },
+                ticks: {
+                  callback: function(v) {
+                    return '$' + (v >= 10 ? v.toFixed(0) : v.toFixed(2));
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      $('#frontiercode-baseline-select').on('change', applyFrontiercodeBaselineFilter);
+
+      $('#frontiercode-reset-zoom').on('click', function() {
+        if (scatterChart) scatterChart.resetZoom();
+      });
+
+      rebuildChart();
+    });
+  </script>
+<% end %>
