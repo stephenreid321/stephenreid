@@ -1,5 +1,5 @@
 StephenReid::App.controller do
-  before '/llms', '/agents', '/frontiercode' do
+  before do
     @container_class = 'container-fluid'
     @stylesheet = 'light'
   end
@@ -16,6 +16,7 @@ StephenReid::App.controller do
     @title = 'Coding agents'
     @agent_rows = ArtificialAnalysis.coding_agents
     @chart_keys = ArtificialAnalysis.resolve_agent_chart_keys(@agent_rows)
+    @family_colors = EvalColors.map_for(@agent_rows.map { |row| row.dig('display', 'agent') || row['agentName'] })
 
     erb :'artificial_analysis/agents'
   end
@@ -28,5 +29,15 @@ StephenReid::App.controller do
     end
 
     erb :'artificial_analysis/frontiercode'
+  end
+
+  get '/evals', cache: true do
+    @title = 'CursorBench'
+    @cursorbench_rows = CursorBench.rows
+    @family_colors = @cursorbench_rows.each_with_object({}) do |row, colors|
+      colors[row['model']] = row['familyColor'] if row['model'] && row['familyColor']
+    end
+
+    erb :'artificial_analysis/evals'
   end
 end

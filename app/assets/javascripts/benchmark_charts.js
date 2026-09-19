@@ -14,6 +14,16 @@ function scatterChartLayoutPadding () {
   return { left: 20, right: 20, top: 10, bottom: 10 };
 }
 
+function hexToRgba (hex, alpha) {
+  if (!hex) return 'rgba(100, 100, 100, 0.7)';
+  var h = String(hex).replace('#', '');
+  if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+  var r = parseInt(h.slice(0, 2), 16);
+  var g = parseInt(h.slice(2, 4), 16);
+  var b = parseInt(h.slice(4, 6), 16);
+  return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + (alpha == null ? 0.85 : alpha) + ')';
+}
+
 function canvasEventCoords (canvas, evt) {
   var rect = canvas.getBoundingClientRect();
   var scaleX = canvas.width / rect.width;

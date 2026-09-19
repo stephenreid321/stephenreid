@@ -1,0 +1,309 @@
+<% if @cursorbench_rows.empty? %>
+  <div class="alert alert-warning">
+    Could not load CursorBench results from Cursor. Try again later or visit
+    <a href="https://cursor.com/evals" class="alert-link" target="_blank" rel="noopener">their evals page</a> directly.
+  </div>
+<% else %>
+  <% cursorbench_score_column_classes = [{ cell_class: 'cursorbench-score-cell' }] %>
+  <div class="mb-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+        <h5 class="mb-0">CursorBench</h5>
+        <div class="form-inline mt-2 mt-md-0 align-items-end">
+          <div class="form-group mb-0 mr-2">
+            <label for="cursorbench-baseline-select" class="mb-1 mr-1 d-block small text-muted">At least as smart as</label>
+            <select id="cursorbench-baseline-select" class="form-control form-control-sm" style="min-width: 14rem; max-width: 26rem;"></select>
+          </div>
+          <button id="cursorbench-reset-zoom" class="btn btn-sm btn-outline-secondary mb-0 mt-2 mt-md-0">Reset zoom</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="position: relative; height: 420px;">
+          <canvas id="cursorbench-scatter-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <table id="cursorbench-table" class="table table-sm">
+      <thead>
+        <tr>
+          <th>Configuration</th>
+          <th>Model</th>
+          <th>Effort</th>
+          <th class="text-right">Score</th>
+          <th class="text-right">Cost</th>
+          <th class="text-right">Tokens</th>
+          <th class="text-right">Steps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cursorbench_rows.each do |row| %>
+          <tr>
+            <td>
+              <strong><%= row['displayLabel'] %></strong>
+            </td>
+            <td><%= row['model'] %></td>
+            <td>
+              <% if row['effort'].to_s.strip != '' %>
+                <%= row['effort'] %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td class="text-right cursorbench-score-cell" data-order="<%= (row['score'].to_f * 100).round(1) %>">
+              <%= sprintf('%.1f', row['score'].to_f * 100) %>
+              <small class="text-muted rank-display"></small>
+            </td>
+            <td class="text-right" data-order="<%= row['cost'] || -1 %>">
+              <% if row['cost'] %>
+                <%= sprintf('$%.2f', row['cost'].to_f) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td class="text-right" data-order="<%= row['tokens'] || -1 %>">
+              <% if row['tokens'] %>
+                <%= row['tokens'].to_i.to_fs(:delimited) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <td class="text-right" data-order="<%= row['steps'] || -1 %>">
+              <% if row['steps'] %>
+                <%= row['steps'] %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <script>
+    var cursorbenchChartData = <%== @cursorbench_rows.map { |r|
+      {
+        id: r['id'],
+        label: r['displayLabel'],
+        family: r['model'],
+        score: r['score']&.to_f,
+        cost: r['cost'],
+        tokens: r['tokens']
+      }
+    }.to_json %>;
+
+    var CURSORBENCH_SCORE_COLUMNS = <%== cursorbench_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
+    var CURSORBENCH_NUMERIC_TARGETS = [3, 4, 5, 6];
+    var DEFAULT_CURSORBENCH_BASELINE_LABEL = 'Grok 4.6 High';
+    var DEFAULT_CURSORBENCH_BASELINE_PREFIX = 'Grok 4.6 High';
+
+    var familyColors = <%== @family_colors.to_json %>;
+
+    $(function() {
+      var cursorbenchTable = $('#cursorbench-table').DataTable({
+        paging: false,
+        searching: true,
+        info: true,
+        dom: "<'d-flex justify-content-end mb-2'f><'table-responsive'tr><'row'<'col-sm-12'i>>",
+        order: [[3, 'desc']],
+        columnDefs: [
+          { className: 'text-right', targets: CURSORBENCH_NUMERIC_TARGETS },
+          { type: 'num', targets: CURSORBENCH_NUMERIC_TARGETS }
+        ]
+      });
+
+      function updateCursorbenchScoreRanks() {
+        updateTableScoreRanks(cursorbenchTable, CURSORBENCH_SCORE_COLUMNS);
+      }
+
+      cursorbenchTable.on('draw', function() {
+        updateCursorbenchScoreRanks();
+      });
+      updateCursorbenchScoreRanks();
+
+      function scoreDisplay(row) {
+        if (row.score == null || isNaN(row.score)) return null;
+        return Math.round(row.score * 1000) / 10;
+      }
+
+      function populateCursorbenchBaselineSelect() {
+        var $sel = $('#cursorbench-baseline-select');
+        $sel.empty();
+        $sel.append($('<option></option>').attr('value', '').text(''));
+        cursorbenchChartData.slice().filter(function(r) {
+          return scoreDisplay(r) != null;
+        }).sort(function(a, b) {
+          var da = scoreDisplay(a);
+          var db = scoreDisplay(b);
+          if (db !== da) return da - db;
+          return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
+        }).forEach(function(r) {
+          $sel.append(
+            $('<option></option>')
+              .attr('value', r.id)
+              .text(r.label + ' (' + scoreDisplay(r).toFixed(1) + ')')
+          );
+        });
+        var defaultRow = cursorbenchChartData.find(function(r) {
+          return r.label === DEFAULT_CURSORBENCH_BASELINE_LABEL;
+        }) || cursorbenchChartData.find(function(r) {
+          return r.label.indexOf(DEFAULT_CURSORBENCH_BASELINE_PREFIX) === 0;
+        });
+        $sel.val(defaultRow ? defaultRow.id : '');
+      }
+
+      function baselineMinScore() {
+        var id = $('#cursorbench-baseline-select').val();
+        if (!id) return null;
+        var base = cursorbenchChartData.find(function(r) { return String(r.id) === String(id); });
+        if (!base) return null;
+        return scoreDisplay(base);
+      }
+
+      $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        if (settings.nTable.id !== 'cursorbench-table') return true;
+
+        var floor = baselineMinScore();
+        if (floor == null) return true;
+
+        var row = cursorbenchTable.row(dataIndex).node();
+        var score = parseFloat($(row).find('td.cursorbench-score-cell').data('order'));
+        if (isNaN(score) || score < 0) return false;
+        return score >= floor;
+      });
+
+      function applyCursorbenchBaselineFilter() {
+        cursorbenchTable.draw();
+        rebuildChart();
+      }
+
+      populateCursorbenchBaselineSelect();
+      cursorbenchTable.draw();
+
+      var scatterChart = null;
+
+      function formatTokens(tokens) {
+        if (tokens >= 1000) return (tokens / 1000).toFixed(1) + 'k';
+        return String(tokens);
+      }
+
+      function rebuildChart() {
+        if (!scatterChart) return;
+        var floor = baselineMinScore();
+        var byFamily = {};
+        cursorbenchChartData.forEach(function(row) {
+          var scoreDisp = scoreDisplay(row);
+          if (scoreDisp == null) return;
+          if (floor != null && scoreDisp < floor) return;
+          var cost = row.cost;
+          var tokens = row.tokens;
+          if (cost == null || tokens == null || cost <= 0 || tokens <= 0) return;
+          var family = row.family || 'Other';
+          if (!byFamily[family]) byFamily[family] = [];
+          byFamily[family].push({
+            x: tokens,
+            y: cost,
+            label: row.label,
+            tooltip: row.label +
+              ': score ' + scoreDisp.toFixed(1) +
+              ', $' + cost.toFixed(2) +
+              ', ' + formatTokens(tokens) + ' tokens'
+          });
+        });
+
+        scatterChart.data.datasets = Object.keys(byFamily).sort().map(function(family) {
+          return {
+            label: family,
+            data: byFamily[family],
+            backgroundColor: hexToRgba(familyColors[family]),
+            pointRadius: 7,
+            pointHoverRadius: 9,
+            datalabels: { display: false }
+          };
+        });
+        scatterChart.update();
+      }
+
+      var ctx = document.getElementById('cursorbench-scatter-chart');
+      if (ctx && cursorbenchChartData.length) {
+        var leaderLinePlugin = createLeaderLinePlugin({ pointRadius: 10 });
+
+        registerScatterChartPlugins();
+        scatterChart = new Chart(ctx.getContext('2d'), {
+          type: 'scatter',
+          data: { datasets: [] },
+          plugins: [leaderLinePlugin],
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: scatterChartLayoutPadding()
+            },
+            plugins: {
+              datalabels: {
+                display: false
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    var p = ctx.raw;
+                    return p.tooltip;
+                  }
+                }
+              },
+              legend: {
+                display: true,
+                position: 'bottom'
+              },
+              zoom: {
+                limits: {
+                  x: { min: 0 },
+                  y: { min: 0 }
+                },
+                pan: {
+                  enabled: true,
+                  mode: 'xy'
+                },
+                zoom: {
+                  wheel: { enabled: true },
+                  pinch: { enabled: true },
+                  mode: 'xy'
+                }
+              }
+            },
+            scales: {
+              x: {
+                min: 0,
+                title: { display: true, text: 'Tokens / task' },
+                ticks: {
+                  callback: function(v) {
+                    if (v >= 1000) return (v / 1000).toFixed(0) + 'k';
+                    return v;
+                  }
+                }
+              },
+              y: {
+                min: 0,
+                title: { display: true, text: 'Cost / task' },
+                ticks: {
+                  callback: function(v) {
+                    return '$' + (v >= 10 ? v.toFixed(0) : v.toFixed(2));
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      $('#cursorbench-baseline-select').on('change', applyCursorbenchBaselineFilter);
+
+      $('#cursorbench-reset-zoom').on('click', function() {
+        if (scatterChart) scatterChart.resetZoom();
+      });
+
+      rebuildChart();
+    });
+  </script>
+<% end %>

@@ -4,22 +4,6 @@ module FrontierCode
   DATA_URL = 'https://cognition.com/data/frontiercode-leaderboard/data.json'
   VERSION = 'v1_1'
   DATASET = 'main'
-  LAB_MATCHERS = [
-    [/\AClaude/i, 'Anthropic'],
-    [/\AGPT/i, 'OpenAI'],
-    [/\AGrok/i, 'xAI'],
-    [/\ASWE/i, 'Cognition'],
-    [/\AKimi/i, 'Moonshot'],
-    [/\AComposer/i, 'Cursor'],
-    [/\AGLM/i, 'Zhipu'],
-    [/\ADeepSeek/i, 'DeepSeek'],
-    [/\AMiniMax/i, 'MiniMax'],
-    [/\AInkling/i, 'Thinking Machines'],
-    [/\AQwen/i, 'Alibaba'],
-    [/\ANemotron/i, 'NVIDIA'],
-    [/\AGemini/i, 'Google'],
-    [/\AMistral/i, 'Mistral']
-  ].freeze
 
   class << self
     def rows
@@ -27,11 +11,10 @@ module FrontierCode
       version = payload[VERSION] || {}
       data = version['data'] || {}
       harnesses = version['harness'] || {}
-      lab_colors = version['lab_colors'] || {}
 
       rows = []
       data.each do |model, efforts|
-        lab = lab_for(model)
+        lab = EvalColors.lab_for(model) || 'Other'
         (efforts || {}).each do |effort, subsets|
           metrics = (subsets || {})[DATASET] || {}
           score = metrics['new_score']
@@ -43,7 +26,7 @@ module FrontierCode
             'effort' => effort,
             'harness' => harnesses[model],
             'lab' => lab,
-            'labColor' => lab_colors[lab],
+            'labColor' => EvalColors.hex(lab),
             'displayLabel' => display_label(model, effort),
             'score' => score.to_f,
             'passRate' => metrics['correct']&.to_f,
@@ -65,11 +48,6 @@ module FrontierCode
       return model if effort.to_s.strip == '' || effort == 'none'
 
       "#{model} (#{effort})"
-    end
-
-    def lab_for(model)
-      match = LAB_MATCHERS.find { |pattern, _lab| model.match?(pattern) }
-      match ? match[1] : 'Other'
     end
   end
 end

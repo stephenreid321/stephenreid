@@ -9,7 +9,7 @@
   <div class="mb-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-        <h5 class="mb-0">Tasks per dollar v time per task</h5>
+        <h5 class="mb-0">AA Coding Agents</h5>
         <div class="form-inline mt-2 mt-md-0 align-items-end">
           <div class="form-group mb-0 mr-2">
             <label for="agents-baseline-select" class="mb-1 mr-1 d-block small text-muted">At least as smart as</label>
@@ -38,7 +38,7 @@
             <% label = sample&.dig('components_by_dataset', key, 'evaluationDatasetSlug') || key.titleize %>
             <th class="text-right"><%= label %></th>
           <% end %>
-          <th class="text-right">Tasks per $</th>
+          <th class="text-right">Cost</th>
           <th class="text-right">Time per task (s)</th>
         </tr>
       </thead>
@@ -71,9 +71,9 @@
                 <% end %>
               </td>
             <% end %>
-            <td class="text-right" data-order="<%= mean['costUsd'].to_f.positive? ? (1.0 / mean['costUsd'].to_f) : -1 %>">
-              <% if mean['costUsd'].to_f.positive? %>
-                <%= sprintf('%.2f', 1.0 / mean['costUsd'].to_f) %>
+            <td class="text-right" data-order="<%= mean['costUsd'] || -1 %>">
+              <% if mean['costUsd'] %>
+                <%= sprintf('$%.2f', mean['costUsd'].to_f) %>
               <% else %>
                 <span class="text-muted">—</span>
               <% end %>
@@ -107,21 +107,10 @@
 
     var AGENTS_SCORE_COLUMNS = <%== agents_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
     var AGENTS_NUMERIC_TARGETS = <%== (3...(3 + chart_keys.length + 2)).to_a.to_json %>;
-    var DEFAULT_AGENTS_BASELINE_LABEL = 'Codex - GPT-5.6 Sol (max)';
-    var DEFAULT_AGENTS_BASELINE_PREFIX = 'Codex - GPT-5.6 Sol';
+    var DEFAULT_AGENTS_BASELINE_LABEL = 'Grok Build - Grok 4.6 (xhigh)';
+    var DEFAULT_AGENTS_BASELINE_PREFIX = 'Grok Build - Grok 4.6 (xhigh)';
 
-    var familyColors = {
-      'Claude Code': 'rgba(217, 119, 6, 0.85)',
-      'Cursor CLI': 'rgba(99, 102, 241, 0.85)',
-      'Codex': 'rgba(16, 185, 129, 0.85)',
-      'Gemini CLI': 'rgba(66, 133, 244, 0.85)',
-      'Muse Code': 'rgba(236, 72, 153, 0.85)',
-      'Devin Fusion CLI': 'rgba(14, 165, 233, 0.85)',
-      'Antigravity SDK': 'rgba(234, 179, 8, 0.85)',
-      'Opencode': 'rgba(168, 85, 247, 0.85)',
-      'Grok Build': 'rgba(239, 68, 68, 0.85)',
-      'Kimi Code CLI': 'rgba(20, 184, 166, 0.85)'
-    };
+    var familyColors = <%== @family_colors.to_json %>;
 
     $(function() {
       var agentsTable = $('#agents-table').DataTable({
@@ -217,18 +206,16 @@
           var wall = row.wallSec;
           var cost = row.cost;
           if (cost == null || wall == null || cost <= 0 || wall <= 0) return;
-          var tpd = 1 / cost;
           var fam = row.agentFamily || 'Other';
           if (!byFamily[fam]) byFamily[fam] = [];
           var wallSecsLabel = Math.round(wall) + 's';
-          var tpdLabel = tpd.toFixed(2);
           byFamily[fam].push({
             x: wall,
-            y: tpd,
+            y: cost,
             label: row.label,
             tooltip: row.label +
               ': index ' + idxDisp +
-              ', ' + tpdLabel + ' tasks/$' +
+              ', $' + cost.toFixed(2) +
               ', ' + wallSecsLabel
           });
         });
@@ -237,7 +224,7 @@
           return {
             label: fam,
             data: byFamily[fam],
-            backgroundColor: familyColors[fam] || 'rgba(100, 100, 100, 0.7)',
+            backgroundColor: hexToRgba(familyColors[fam]),
             pointRadius: 7,
             pointHoverRadius: 9,
             datalabels: { display: false }
@@ -295,7 +282,6 @@
             },
             scales: {
               x: {
-                reverse: true,
                 min: 0,
                 title: { display: true, text: 'Time per task (seconds)' },
                 ticks: {
@@ -306,12 +292,10 @@
               },
               y: {
                 min: 0,
-                title: { display: true, text: 'Tasks per dollar' },
+                title: { display: true, text: 'Cost / task' },
                 ticks: {
                   callback: function(v) {
-                    if (v >= 10) return v.toFixed(1);
-                    if (v >= 1) return v.toFixed(2);
-                    return v.toFixed(2);
+                    return '$' + (v >= 10 ? v.toFixed(0) : v.toFixed(2));
                   }
                 }
               }

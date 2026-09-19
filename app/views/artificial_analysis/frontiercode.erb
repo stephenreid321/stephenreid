@@ -8,7 +8,7 @@
   <div class="mb-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-        <h5 class="mb-0">Cost v output tokens</h5>
+        <h5 class="mb-0">FrontierCode</h5>
         <div class="form-inline mt-2 mt-md-0 align-items-end">
           <div class="form-group mb-0 mr-2">
             <label for="frontiercode-baseline-select" class="mb-1 mr-1 d-block small text-muted">At least as smart as</label>
@@ -25,73 +25,73 @@
     </div>
   </div>
 
-    <table id="frontiercode-table" class="table table-sm">
-      <thead>
+  <table id="frontiercode-table" class="table table-sm">
+    <thead>
+      <tr>
+        <th>Configuration</th>
+        <th>Model</th>
+        <th>Effort</th>
+        <th>Harness</th>
+        <th class="text-right">Score</th>
+        <th class="text-right">Pass rate</th>
+        <th class="text-right">Flag rate</th>
+        <th class="text-right">Cost</th>
+        <th class="text-right">Output tokens</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @frontiercode_rows.each do |row| %>
         <tr>
-          <th>Configuration</th>
-          <th>Model</th>
-          <th>Effort</th>
-          <th>Harness</th>
-          <th class="text-right">Score</th>
-          <th class="text-right">Pass rate</th>
-          <th class="text-right">Flag rate</th>
-          <th class="text-right">Cost</th>
-          <th class="text-right">Output tokens</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @frontiercode_rows.each do |row| %>
-          <tr>
-            <td>
-              <strong><%= row['displayLabel'] %></strong>
-            </td>
-            <td><%= row['model'] %></td>
-            <td>
-              <% if row['effort'].to_s.strip != '' && row['effort'] != 'none' %>
-                <%= row['effort'] %>
-              <% else %>
-                <span class="text-muted">—</span>
-              <% end %>
-            </td>
-            <td><%= row['harness'] %></td>
-            <td class="text-right frontiercode-score-cell" data-order="<%= (row['score'].to_f * 100).round(1) %>">
-              <%= sprintf('%.1f', row['score'].to_f * 100) %>
+          <td>
+            <strong><%= row['displayLabel'] %></strong>
+          </td>
+          <td><%= row['model'] %></td>
+          <td>
+            <% if row['effort'].to_s.strip != '' && row['effort'] != 'none' %>
+              <%= row['effort'] %>
+            <% else %>
+              <span class="text-muted">—</span>
+            <% end %>
+          </td>
+          <td><%= row['harness'] %></td>
+          <td class="text-right frontiercode-score-cell" data-order="<%= (row['score'].to_f * 100).round(1) %>">
+            <%= sprintf('%.1f', row['score'].to_f * 100) %>
+            <small class="text-muted rank-display"></small>
+          </td>
+          <td class="text-right frontiercode-pass-cell" data-order="<%= row['passRate'] ? (row['passRate'].to_f * 100).round(1) : -1 %>">
+            <% if row['passRate'] %>
+              <%= sprintf('%.1f', row['passRate'].to_f * 100) %>
               <small class="text-muted rank-display"></small>
-            </td>
-            <td class="text-right frontiercode-pass-cell" data-order="<%= row['passRate'] ? (row['passRate'].to_f * 100).round(1) : -1 %>">
-              <% if row['passRate'] %>
-                <%= sprintf('%.1f', row['passRate'].to_f * 100) %>
-                <small class="text-muted rank-display"></small>
-              <% else %>
-                <span class="text-muted">—</span>
-              <% end %>
-            </td>
-            <td class="text-right" data-order="<%= row['flagRate'] ? (row['flagRate'].to_f * 100).round(1) : -1 %>">
-              <% if row['flagRate'] %>
-                <%= sprintf('%.1f', row['flagRate'].to_f * 100) %>
-              <% else %>
-                <span class="text-muted">—</span>
-              <% end %>
-            </td>
-            <td class="text-right" data-order="<%= row['cost'] || -1 %>">
-              <% if row['cost'] %>
-                <%= sprintf('$%.2f', row['cost'].to_f) %>
-              <% else %>
-                <span class="text-muted">—</span>
-              <% end %>
-            </td>
-            <td class="text-right" data-order="<%= row['tokens'] || -1 %>">
-              <% if row['tokens'] %>
-                <% tokens = row['tokens'].to_f %>
-                <%= tokens >= 1000 ? sprintf('%.1fk', tokens / 1000.0) : sprintf('%.1f', tokens) %>
-              <% else %>
-                <span class="text-muted">—</span>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            <% else %>
+              <span class="text-muted">—</span>
+            <% end %>
+          </td>
+          <td class="text-right" data-order="<%= row['flagRate'] ? (row['flagRate'].to_f * 100).round(1) : -1 %>">
+            <% if row['flagRate'] %>
+              <%= sprintf('%.1f', row['flagRate'].to_f * 100) %>
+            <% else %>
+              <span class="text-muted">—</span>
+            <% end %>
+          </td>
+          <td class="text-right" data-order="<%= row['cost'] || -1 %>">
+            <% if row['cost'] %>
+              <%= sprintf('$%.2f', row['cost'].to_f) %>
+            <% else %>
+              <span class="text-muted">—</span>
+            <% end %>
+          </td>
+          <td class="text-right" data-order="<%= row['tokens'] || -1 %>">
+            <% if row['tokens'] %>
+              <% tokens = row['tokens'].to_f %>
+              <%= tokens >= 1000 ? sprintf('%.1fk', tokens / 1000.0) : sprintf('%.1f', tokens) %>
+            <% else %>
+              <span class="text-muted">—</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <script>
     var frontiercodeChartData = <%== @frontiercode_rows.map { |r|
@@ -107,20 +107,10 @@
 
     var FRONTIERCODE_SCORE_COLUMNS = <%== frontiercode_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
     var FRONTIERCODE_NUMERIC_TARGETS = [4, 5, 6, 7, 8];
-    var DEFAULT_FRONTIERCODE_BASELINE_LABEL = 'GPT-5.6 Sol (max)';
-    var DEFAULT_FRONTIERCODE_BASELINE_PREFIX = 'GPT-5.6 Sol';
+    var DEFAULT_FRONTIERCODE_BASELINE_LABEL = 'Grok 4.6 (high)';
+    var DEFAULT_FRONTIERCODE_BASELINE_PREFIX = 'Grok 4.6 (high)';
 
     var labColors = <%== @lab_colors.to_json %>;
-
-    function hexToRgba(hex, alpha) {
-      if (!hex) return 'rgba(100, 100, 100, 0.7)';
-      var h = hex.replace('#', '');
-      if (h.length === 3) h = h.split('').map(function(c) { return c + c; }).join('');
-      var r = parseInt(h.slice(0, 2), 16);
-      var g = parseInt(h.slice(2, 4), 16);
-      var b = parseInt(h.slice(4, 6), 16);
-      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
-    }
 
     $(function() {
       var frontiercodeTable = $('#frontiercode-table').DataTable({
@@ -238,7 +228,7 @@
           return {
             label: lab,
             data: byLab[lab],
-            backgroundColor: hexToRgba(labColors[lab], 0.85),
+            backgroundColor: hexToRgba(labColors[lab]),
             pointRadius: 7,
             pointHoverRadius: 9,
             datalabels: { display: false }
