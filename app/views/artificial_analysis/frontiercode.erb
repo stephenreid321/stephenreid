@@ -36,6 +36,7 @@
         <th class="text-right">Pass rate</th>
         <th class="text-right">Flag rate</th>
         <th class="text-right">Cost</th>
+        <th class="text-right">Rollouts / dollar</th>
         <th class="text-right">Output tokens</th>
       </tr>
     </thead>
@@ -80,6 +81,14 @@
               <span class="text-muted">—</span>
             <% end %>
           </td>
+          <% rollouts_per_dollar = row['cost'].to_f > 0 ? 1.0 / row['cost'].to_f : nil %>
+          <td class="text-right" data-order="<%= rollouts_per_dollar || -1 %>">
+            <% if rollouts_per_dollar %>
+              <%= sprintf('%.2f', rollouts_per_dollar) %>
+            <% else %>
+              <span class="text-muted">—</span>
+            <% end %>
+          </td>
           <td class="text-right" data-order="<%= row['tokens'] || -1 %>">
             <% if row['tokens'] %>
               <% tokens = row['tokens'].to_f %>
@@ -106,9 +115,9 @@
     }.to_json %>;
 
     var FRONTIERCODE_SCORE_COLUMNS = <%== frontiercode_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
-    var FRONTIERCODE_NUMERIC_TARGETS = [4, 5, 6, 7, 8];
-    var DEFAULT_FRONTIERCODE_BASELINE_LABEL = 'Grok 4.6 (high)';
-    var DEFAULT_FRONTIERCODE_BASELINE_PREFIX = 'Grok 4.6 (high)';
+    var FRONTIERCODE_NUMERIC_TARGETS = [4, 5, 6, 7, 8, 9];
+    var DEFAULT_FRONTIERCODE_BASELINE_LABEL = 'Claude Opus 5.5 (low)';
+    var DEFAULT_FRONTIERCODE_BASELINE_PREFIX = 'Claude Opus 5.5 (low)';
 
     var labColors = <%== @lab_colors.to_json %>;
 
@@ -215,10 +224,11 @@
           if (!byLab[lab]) byLab[lab] = [];
           byLab[lab].push({
             x: tokens,
-            y: cost,
+            y: 1 / cost,
             label: row.label,
             tooltip: row.label +
               ': score ' + scoreDisp.toFixed(1) +
+              ', ' + (1 / cost).toFixed(2) + ' rollouts/dollar' +
               ', $' + cost.toFixed(2) +
               ', ' + formatTokens(tokens) + ' tokens'
           });
@@ -287,6 +297,7 @@
             scales: {
               x: {
                 min: 0,
+                reverse: true,
                 title: { display: true, text: 'Output tokens' },
                 ticks: {
                   callback: function(v) {
@@ -297,10 +308,10 @@
               },
               y: {
                 min: 0,
-                title: { display: true, text: 'Cost / rollout' },
+                title: { display: true, text: 'Rollouts / dollar' },
                 ticks: {
                   callback: function(v) {
-                    return '$' + (v >= 10 ? v.toFixed(0) : v.toFixed(2));
+                    return v >= 10 ? v.toFixed(0) : v.toFixed(2);
                   }
                 }
               }

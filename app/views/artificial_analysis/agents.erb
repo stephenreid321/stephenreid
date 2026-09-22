@@ -39,6 +39,7 @@
             <th class="text-right"><%= label %></th>
           <% end %>
           <th class="text-right">Cost</th>
+          <th class="text-right">Tasks / dollar</th>
           <th class="text-right">Time per task (s)</th>
         </tr>
       </thead>
@@ -78,6 +79,14 @@
                 <span class="text-muted">—</span>
               <% end %>
             </td>
+            <% tasks_per_dollar = mean['costUsd'].to_f > 0 ? 1.0 / mean['costUsd'].to_f : nil %>
+            <td class="text-right" data-order="<%= tasks_per_dollar || -1 %>">
+              <% if tasks_per_dollar %>
+                <%= sprintf('%.2f', tasks_per_dollar) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
             <td class="text-right" data-order="<%= mean['agentWallTimeSec'] || -1 %>">
               <% if mean['agentWallTimeSec'] %>
                 <% sec = mean['agentWallTimeSec'].to_f %>
@@ -106,9 +115,9 @@
     }.to_json %>;
 
     var AGENTS_SCORE_COLUMNS = <%== agents_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
-    var AGENTS_NUMERIC_TARGETS = <%== (3...(3 + chart_keys.length + 2)).to_a.to_json %>;
-    var DEFAULT_AGENTS_BASELINE_LABEL = 'Grok Build - Grok 4.6 (xhigh)';
-    var DEFAULT_AGENTS_BASELINE_PREFIX = 'Grok Build - Grok 4.6 (xhigh)';
+    var AGENTS_NUMERIC_TARGETS = <%== (3...(4 + chart_keys.length + 3)).to_a.to_json %>;
+    var DEFAULT_AGENTS_BASELINE_LABEL = 'Claude Code - Opus 5.5 (low)';
+    var DEFAULT_AGENTS_BASELINE_PREFIX = 'Claude Code - Opus 5.5 (low)';
 
     var familyColors = <%== @family_colors.to_json %>;
 
@@ -211,10 +220,11 @@
           var wallSecsLabel = Math.round(wall) + 's';
           byFamily[fam].push({
             x: wall,
-            y: cost,
+            y: 1 / cost,
             label: row.label,
             tooltip: row.label +
               ': index ' + idxDisp +
+              ', ' + (1 / cost).toFixed(2) + ' tasks/dollar' +
               ', $' + cost.toFixed(2) +
               ', ' + wallSecsLabel
           });
@@ -283,6 +293,7 @@
             scales: {
               x: {
                 min: 0,
+                reverse: true,
                 title: { display: true, text: 'Time per task (seconds)' },
                 ticks: {
                   callback: function(v) {
@@ -292,10 +303,10 @@
               },
               y: {
                 min: 0,
-                title: { display: true, text: 'Cost / task' },
+                title: { display: true, text: 'Tasks / dollar' },
                 ticks: {
                   callback: function(v) {
-                    return '$' + (v >= 10 ? v.toFixed(0) : v.toFixed(2));
+                    return v >= 10 ? v.toFixed(0) : v.toFixed(2);
                   }
                 }
               }

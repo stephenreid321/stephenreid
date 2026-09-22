@@ -33,6 +33,7 @@
           <th>Effort</th>
           <th class="text-right">Score</th>
           <th class="text-right">Cost</th>
+          <th class="text-right">Tasks / dollar</th>
           <th class="text-right">Tokens</th>
           <th class="text-right">Steps</th>
         </tr>
@@ -58,6 +59,14 @@
             <td class="text-right" data-order="<%= row['cost'] || -1 %>">
               <% if row['cost'] %>
                 <%= sprintf('$%.2f', row['cost'].to_f) %>
+              <% else %>
+                <span class="text-muted">—</span>
+              <% end %>
+            </td>
+            <% tasks_per_dollar = row['cost'].to_f > 0 ? 1.0 / row['cost'].to_f : nil %>
+            <td class="text-right" data-order="<%= tasks_per_dollar || -1 %>">
+              <% if tasks_per_dollar %>
+                <%= sprintf('%.2f', tasks_per_dollar) %>
               <% else %>
                 <span class="text-muted">—</span>
               <% end %>
@@ -94,9 +103,9 @@
     }.to_json %>;
 
     var CURSORBENCH_SCORE_COLUMNS = <%== cursorbench_score_column_classes.map { |c| { cellClass: c[:cell_class] } }.to_json %>;
-    var CURSORBENCH_NUMERIC_TARGETS = [3, 4, 5, 6];
-    var DEFAULT_CURSORBENCH_BASELINE_LABEL = 'Grok 4.6 High';
-    var DEFAULT_CURSORBENCH_BASELINE_PREFIX = 'Grok 4.6 High';
+    var CURSORBENCH_NUMERIC_TARGETS = [3, 4, 5, 6, 7];
+    var DEFAULT_CURSORBENCH_BASELINE_LABEL = 'Opus 5.5 Low';
+    var DEFAULT_CURSORBENCH_BASELINE_PREFIX = 'Opus 5.5 Low';
 
     var familyColors = <%== @family_colors.to_json %>;
 
@@ -203,10 +212,11 @@
           if (!byFamily[family]) byFamily[family] = [];
           byFamily[family].push({
             x: tokens,
-            y: cost,
+            y: 1 / cost,
             label: row.label,
             tooltip: row.label +
               ': score ' + scoreDisp.toFixed(1) +
+              ', ' + (1 / cost).toFixed(2) + ' tasks/dollar' +
               ', $' + cost.toFixed(2) +
               ', ' + formatTokens(tokens) + ' tokens'
           });
@@ -275,6 +285,7 @@
             scales: {
               x: {
                 min: 0,
+                reverse: true,
                 title: { display: true, text: 'Tokens / task' },
                 ticks: {
                   callback: function(v) {
@@ -285,10 +296,10 @@
               },
               y: {
                 min: 0,
-                title: { display: true, text: 'Cost / task' },
+                title: { display: true, text: 'Tasks / dollar' },
                 ticks: {
                   callback: function(v) {
-                    return '$' + (v >= 10 ? v.toFixed(0) : v.toFixed(2));
+                    return v >= 10 ? v.toFixed(0) : v.toFixed(2);
                   }
                 }
               }
