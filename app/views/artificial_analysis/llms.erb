@@ -196,7 +196,7 @@
     @index_attributes.map { |attr| [attr, attr.titleize] }.to_h.to_json
   %>;
 
-  var DEFAULT_MIN_MODEL_SLUG = 'gemini-3-7-flash-low';
+  var DEFAULT_MIN_MODEL_SLUG = 'claude-opus-5-5-low';
   var initialMinModelSlug = <%== params[:min_model_slug].to_json %>;
   var initialMaxModelSlug = <%== params[:max_model_slug].to_json %>;
   var initialFastModelSlug = <%== params[:fast_model_slug].to_json %>;
