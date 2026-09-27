@@ -36,7 +36,8 @@ namespace :posts do
                   .lines.map(&:strip).reject(&:empty?)
 
     data = JSON.parse(response.body)
-    data['results'].first(50).sort_by { |r| -Time.parse(r['last_moved_at']).to_i }.each do |r|
+    # Post oldest first so the newest archive item is last and sits on top of Bluesky
+    data['results'].sort_by { |r| Time.parse(r['last_moved_at']) }.last(50).each do |r|
       url = r['source_url'].gsub('youtu.be/', 'youtube.com/watch?v=')
       next if Time.parse(r['last_moved_at']) < 7.days.ago
       next if posted_urls.include?(url)
