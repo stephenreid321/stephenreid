@@ -18,7 +18,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <%= ul_nav [
+      <% nav_items = [
             ['Background', '/background'],   
             ['Coaching', '/coaching'],                        
             ['Courses',             
@@ -43,7 +43,23 @@
                ['Treasure map', 'https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8'],
                ['Stockholm', 'https://www.google.com/maps/d/u/0/edit?mid=1X51vy5tXN9BuueD9jVDCQd2M5AF-l5k'],
              ]],             
-          ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link' %>
+          ] %>
+      <ul class="navbar-nav mr-auto">
+        <% nav_items.each do |name, path| %>
+          <% if path.is_a?(Array) %>
+            <li class="nav-item dropdown">
+              <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="javascript:;"><%= name %><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <% path.each do |subname, subpath| %>
+                  <li class="nav-item"><a class="dropdown-item <%= 'active' if request.path == subpath %>" href="<%= subpath %>"><%= subname %></a></li>
+                <% end %>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item"><a class="nav-link <%= 'active' if request.path == path %>" href="<%= path %>"><%= name %></a></li>
+          <% end %>
+        <% end %>
+      </ul>
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-lg-inline">

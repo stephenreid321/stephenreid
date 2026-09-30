@@ -26,7 +26,7 @@ module StephenReid
         StephenReid::App.cache.clear
         redirect request.path
       end
-      fix_params!
+      blanks_to_nils!(params)
       if params[:code] && ENV['ADMIN_CODE'].present?
         session[:admin] = true if Rack::Utils.secure_compare(params[:code], ENV['ADMIN_CODE'])
         redirect request.path
