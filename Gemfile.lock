@@ -1,26 +1,3 @@
-GIT
-  remote: https://github.com/mislav/will_paginate.git
-  revision: 50017c3eb0712e7b3a53268a81e81a184b7a49f6
-  specs:
-    will_paginate (4.0.1)
-
-GIT
-  remote: https://github.com/stephenreid321/activate-admin.git
-  revision: 528fc9341ef81b253dceceefb9127154135223ff
-  specs:
-    activate-admin (0.0.26)
-      activate-tools
-      erubi
-      padrino
-      will_paginate
-
-GIT
-  remote: https://github.com/stephenreid321/activate-tools.git
-  revision: 2a759a857b35669d272a87f37a7572b4d4193ccd
-  specs:
-    activate-tools (0.0.31)
-      padrino
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,7 +26,6 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
     base64 (0.3.0)
-    bcrypt (3.1.21)
     benchmark (0.5.0)
     better_html (2.2.0)
       actionview (>= 7.0)
@@ -289,10 +265,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activate-admin!
-  activate-tools!
   activesupport
-  bcrypt
   better_html
   chroma
   concurrent-ruby
@@ -315,7 +288,6 @@ DEPENDENCIES
   rubocop
   sass
   sinatra
-  will_paginate!
 
 RUBY VERSION
    ruby 3.4.7p58

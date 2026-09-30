@@ -27,14 +27,14 @@
           <th></th>
           <th style="width: 8em">Current weight</th>
           <th style="width: 8em">
-            <% if current_account %>
+            <% if admin? %>
               With multipliers<br/>
               (next rebalance)
             <% else %>
               Next rebalance
             <% end %>
           </th>
-          <% if current_account %>
+          <% if admin? %>
             <th style="width: 8em">Without multipliers</th>
           <% end %>
         </tr>
@@ -60,7 +60,7 @@
       target="_blank" href="https://iconomi.com/asset/<%= asset.ticker %>">
             <%= asset.name %> (<%= k %>)
           </a>
-          <% if current_account %>
+          <% if admin? %>
             <%= partial :'iconomi/multiplier', locals: { asset: asset } %>
           <% end %>
         </td>
@@ -94,7 +94,7 @@
             <%= number_to_percentage (proposed_with_multipliers[k] * 100), precision: 1 %>
           <% end %>
         </td>
-        <% if current_account %>
+        <% if admin? %>
           <td data-sort="<%= proposed_without_multipliers[k] || 0 %>" style="white-space: nowrap;">
             <% if proposed_without_multipliers[k] %>
               <%= number_to_percentage (proposed_without_multipliers[k] * 100), precision: 1 %>

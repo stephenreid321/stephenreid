@@ -2,9 +2,6 @@ module StephenReid
   class App < Padrino::Application
     register Padrino::Rendering
     register Padrino::Helpers
-    register WillPaginate::Sinatra
-    helpers Activate::ParamHelpers
-    helpers Activate::NavigationHelpers
 
     use Honeybadger::Rack::UserFeedback
     use Honeybadger::Rack::UserInformer
@@ -20,7 +17,6 @@ module StephenReid
 
     use Rack::Session::Cookie, expire_after: 1.year.to_i, secret: ENV['SESSION_SECRET']
     set :public_folder, Padrino.root('app', 'assets')
-    set :default_builder, 'ActivateFormBuilder'
 
     before do
       @stylesheet = params[:stylesheet] || 'dark'
@@ -31,6 +27,10 @@ module StephenReid
         redirect request.path
       end
       fix_params!
+      if params[:code] && ENV['ADMIN_CODE'].present?
+        session[:admin] = true if Rack::Utils.secure_compare(params[:code], ENV['ADMIN_CODE'])
+        redirect request.path
+      end
       Time.zone = 'London'
       @og_image = "https://api.apiflash.com/v1/urltoimage?access_key=#{ENV['APIFLASH_KEY']}&url=#{URI.encode_www_form_component("#{ENV['BASE_URI']}#{request.path}?no_modal=1")}&width=1280&height=672&ttl=2592000" unless Padrino.env == :development
     end

@@ -40,37 +40,6 @@ class Strategy
   end
   field :last_posted_at, type: Time
 
-  def self.admin_fields
-    {
-      ticker: :text,
-      name: :text,
-      holdings: :collection,
-      score: :number,
-      score_fee_weighted: :number,
-      aum: :number,
-      manager: :text,
-      managementType: :text,
-      managementFee: :number,
-      performanceFee: :number,
-      entryFee: :number,
-      exitFee: :number,
-      numberOfAssets: :number,
-      lastRebalanced: :datetime,
-      monthlyRebalancedCount: :number,
-      last_posted_at: :datetime,
-      status: :select
-    }
-                .merge(%w[day week month three_month six_month year].to_h do |t|
-                         [:"r#{t}", :number]
-                       end)
-                .merge(%w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].map do |x|
-                         [
-                           [:"nscore_#{x}", :number],
-                           [:"index_#{x}", :number]
-                         ]
-                       end.flatten(1).to_h)
-  end
-
   has_many :holdings, dependent: :destroy
 
   validates_presence_of :ticker

@@ -1,4 +1,4 @@
-<% if current_account %>
+<% if admin? %>
   <a href="javascript:;" onclick="$(this).hide().next().css('display', 'inline').find('input').focus().select()">
     <% if asset.multiplier %>
       <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>

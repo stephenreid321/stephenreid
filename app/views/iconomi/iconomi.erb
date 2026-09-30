@@ -114,21 +114,12 @@ count = strategies.count
     </td>
     <td class="block">
       <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>"><%= strategy.name %></a>
-      <a style="display: none" target="_blank" class="block-edit" href="/admin/edit/Strategy/<%=strategy.id%>"><i class="text-white bi bi-pencil"></i></a>
       <br />
-      <% if current_account %>
-        <a target="_blank" href="/admin/edit/Asset/<%=asset.id%>" class="badge badge-primary"
-        style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
-          <%= asset.ticker %>
-          <%= holding.percent %>
-        </a>
-      <% else %>
-        <span class="badge badge-primary"
-        style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
-          <%= asset.ticker %>
-          <%= holding.percent %>
-        </span>
-      <% end %>
+      <span class="badge badge-primary"
+      style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
+        <%= asset.ticker %>
+        <%= holding.percent %>
+      </span>
     </td>
     <td data-sort="<%= strategy.nscore_score_fee_weighted %>">
       <span class="score">

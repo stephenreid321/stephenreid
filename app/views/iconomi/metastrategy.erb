@@ -48,7 +48,7 @@
 </p>
 
 
-<% if current_account %>
+<% if admin? %>
   <div class="text-center mb-3">
     <div class="d-inline" data-pagelet-url="/metastrategy/n"></div>
     <a href="/metastrategy/propose">Propose</a>
@@ -105,7 +105,7 @@
     <% } %>
   </tr>
 </table>
-<% if Padrino.env == :development || current_account %>
+<% if Padrino.env == :development || admin? %>
   <div data-pagelet-url="/metastrategy/table" class="mb-3">
     <%= partial :'iconomi/metastrategy' %>
   </div>

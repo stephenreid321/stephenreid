@@ -10,11 +10,6 @@ gem 'rake'
 gem 'sass'
 gem 'sinatra'
 
-# Admin
-gem 'activate-admin', github: 'stephenreid321/activate-admin'
-gem 'activate-tools', github: 'stephenreid321/activate-tools'
-gem 'will_paginate', github: 'mislav/will_paginate'
-
 # Linting
 gem 'better_html'
 gem 'erb_lint', require: false
@@ -22,7 +17,6 @@ gem 'htmlbeautifier'
 gem 'rubocop'
 
 # Basics
-gem 'bcrypt'
 gem 'chroma'
 gem 'csv'
 gem 'redcarpet'

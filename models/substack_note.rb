@@ -23,16 +23,6 @@ class SubstackNote
 
   BASE_COLUMNS = (STRING_TYPES + INTEGER_TYPES).freeze
 
-  # Admin UI for STRING_TYPES (default :text). INTEGER_TYPES use :number.
-  URL_TYPES = %w[
-    primary_link post_canonical_url post_cover_image_url publication_logo_url comment_photo_url
-  ].freeze
-
-  TEXT_AREA_TYPES = %w[
-    comment_bio context_json post_subtitle post_description body quote_selections_json reactions_json
-    attachments_json body_json parent_comments_json
-  ].freeze
-
   BASE_COLUMNS.each do |name|
     field name.to_sym, type: INTEGER_TYPES.include?(name) ? Integer : String
   end
@@ -40,22 +30,6 @@ class SubstackNote
   field :raw_json, type: String
 
   validates_uniqueness_of :entity_key
-
-  def self.admin_fields
-    fields = {}
-    STRING_TYPES.each do |name|
-      fields[name.to_sym] =
-        if URL_TYPES.include?(name)
-          :url
-        elsif TEXT_AREA_TYPES.include?(name)
-          :text_area
-        else
-          :text
-        end
-    end
-    INTEGER_TYPES.each { |name| fields[name.to_sym] = :number }
-    fields
-  end
 
   # Each type maps to `render_<type>_attachment` below.
   ATTACHMENT_TYPES = %w[image video link publication comment post].freeze

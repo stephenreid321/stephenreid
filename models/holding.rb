@@ -14,13 +14,4 @@ class Holding
   def summary
     "#{strategy.ticker if strategy} #{asset.ticker if asset} #{percent}"
   end
-
-  def self.admin_fields
-    {
-      summary: { type: :text, edit: false },
-      strategy_id: :lookup,
-      asset_id: :lookup,
-      weight: :number
-    }
-  end
 end

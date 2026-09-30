@@ -27,31 +27,6 @@ class SubstackPost
 
   validates_uniqueness_of :post_id
 
-  def self.admin_fields
-    {
-      post_id: :number,
-      publication_id: :number,
-      slug: :text,
-      title: :text,
-      subtitle: :text_area,
-      description: :text_area,
-      post_date: :text,
-      canonical_url: :url,
-      post_type: :text,
-      audience: :text,
-      podcast_url: :url,
-      cover_image_url: :url,
-      reaction_count: :number,
-      comment_count: :number,
-      restacks: :number,
-      wordcount: :number,
-      truncated_body_text: :text_area,
-      body_html: :text_area,
-      reactions_json: :text_area,
-      raw_json: :text_area
-    }
-  end
-
   def to_markdown
     html = body_html.to_s
     return '' if html.blank?
