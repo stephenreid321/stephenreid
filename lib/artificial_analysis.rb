@@ -7,17 +7,48 @@ require 'zlib'
 module ArtificialAnalysis
   BASE_URL = 'https://artificialanalysis.ai'
   MANIFEST_PATTERN = /"path":"(\/data\/[^"]+\.txt)","key":"([a-f0-9]+)"/.freeze
-  DEFAULT_AGENT_CHART_KEYS = %w[deep-swe-v1.1 terminal-bench-v4 swe-atlas-qna].freeze
+  TERMINAL_BENCH_4_TASKS = 66
 
   class << self
     def llm_models
-      body = fetch_page('/models')
-      manifests(body).each do |path, key|
-        payload = decrypt_manifest(path, key)
+      fetch_models('/models').map { |model| normalize_llm_model(model) }
+    end
+
+    def terminal_bench_4_rows
+      fetch_models('/evaluations/terminalbench-4-0').filter_map do |model|
+        score = model['terminalBench40']
+        next if score.nil? || model['deprecated']
+
+        tokens = model.dig('canonicalEvalTokenCounts', 'terminalBench40') || {}
+        output_tokens = tokens['answer'].to_f + tokens['reasoning'].to_f
+        creator = model['creator'] || {}
+        lab = EvalColors.lab_for(model['name']) || creator['name'] || 'Other'
+
+        {
+          'id' => model['slug'],
+          'model' => model.dig('release', 'name') || model['name'],
+          'effort' => model['suffix'],
+          'lab' => lab,
+          'labColor' => EvalColors::LABS[lab] || creator['color'] || EvalColors::FALLBACK,
+          'displayLabel' => model['shortName'] || model['name'],
+          'releaseDate' => model['releaseDate'],
+          'score' => score.to_f,
+          'cost' => terminal_bench_4_cost(model, tokens),
+          'tokens' => output_tokens.positive? ? output_tokens / TERMINAL_BENCH_4_TASKS : nil
+        }
+      end.sort_by { |row| -row['score'] }
+    end
+
+    private
+
+    def fetch_models(path)
+      body = fetch_page(path)
+      manifests(body).each do |manifest_path, key|
+        payload = decrypt_manifest(manifest_path, key)
         next unless payload.is_a?(Hash)
 
         models = payload['models']
-        return models.map { |model| normalize_llm_model(model) } if models.is_a?(Array)
+        return models if models.is_a?(Array)
       rescue OpenSSL::Cipher::CipherError, JSON::ParserError, Zlib::Error
         next
       end
@@ -25,50 +56,22 @@ module ArtificialAnalysis
       []
     end
 
-    def resolve_agent_chart_keys(rows, preferred = DEFAULT_AGENT_CHART_KEYS)
-      preferred = DEFAULT_AGENT_CHART_KEYS if preferred.nil? || preferred.empty?
-      return preferred if rows.nil? || rows.empty?
+    # Matches AA's cost per task: uncached input is billed at the cache write
+    # price, and cacheable input is split into hits and writes by cacheHitRate.
+    def terminal_bench_4_cost(model, tokens)
+      prices = model.values_at('price1mInputTokens', 'price1mOutputTokens', 'cacheHitPrice', 'cacheWritePrice', 'cacheHitRate')
+      return nil if tokens.empty? || prices.any?(&:nil?)
 
-      common = rows.map { |row| (row['components_by_dataset'] || {}).keys }.reduce(:&) || []
-      return preferred if common.empty? || preferred.all? { |key| common.include?(key) }
-
-      (preferred & common) | common
+      _input_price, output_price, hit_price, write_price, hit_rate = prices.map(&:to_f)
+      cacheable = tokens['cacheableInput'].to_f
+      uncached = tokens['input'].to_f - cacheable
+      output = tokens['answer'].to_f + tokens['reasoning'].to_f
+      total = (uncached * write_price) +
+              (cacheable * hit_rate * hit_price) +
+              (cacheable * (1 - hit_rate) * write_price) +
+              (output * output_price)
+      total / 1_000_000 / TERMINAL_BENCH_4_TASKS
     end
-
-    def coding_agents(chart_keys: DEFAULT_AGENT_CHART_KEYS)
-      body = fetch_page('/agents/coding-agents')
-      rows = extract_agent_benchmark_rows(body)
-      rows.each do |row|
-        agent = row.dig('display', 'agent')
-        model = row.dig('display', 'model')
-        row['displayLabel'] = "#{agent} - #{model}" if agent.to_s.strip != '' && model.to_s.strip != ''
-
-        components = row['evals'] || row['componentScores'] || []
-        row['components_by_dataset'] = components.each_with_object({}) do |c, h|
-          h[c['datasetIndexName']] = c
-        end
-      end
-      chart_keys = resolve_agent_chart_keys(rows, chart_keys)
-      rows.select! do |row|
-        chart_keys.all? { |key| row.dig('components_by_dataset', key, 'mean', 'reward') }
-      end
-      fast_bases = rows.filter_map do |row|
-        label = row['displayLabel']
-        label.end_with?(' Fast') ? label.delete_suffix(' Fast') : nil
-      end
-      rows.select! { |row| !fast_bases.include?(row['displayLabel']) }
-      times = rows.filter_map { |row| row.dig('mean', 'agentWallTimeSec')&.to_f }.select(&:positive?).sort
-      if times.any?
-        median_time = times.length.odd? ? times[times.length / 2] : (times[times.length / 2 - 1] + times[times.length / 2]) / 2.0
-        max_time = 2 * median_time
-        rows.select! { |row| row.dig('mean', 'agentWallTimeSec').to_f <= max_time }
-      end
-      rows.sort_by { |r| -(r['indexScore'] || 0).to_f }
-    rescue JSON::ParserError
-      []
-    end
-
-    private
 
     def fetch_page(path)
       Faraday.get("#{BASE_URL}#{path}") { |req| req.headers['RSC'] = '1' }.body.force_encoding('UTF-8').scrub
@@ -109,68 +112,6 @@ module ArtificialAnalysis
         'cost_per_task' => cost_per_task.is_a?(Hash) ? cost_per_task.dig('cost', 'total') : nil,
         'time_per_task' => model['intelligenceIndexTimePerTask']
       }
-    end
-
-    # Extract a JSON array value that follows `key` in an RSC payload, skipping
-    # bracket characters that appear inside strings.
-    def extract_json_array(body, key)
-      bytes = body.b
-      i = bytes.index(key.b)
-      return nil unless i
-
-      start = i + key.bytesize
-      start += 1 while start < bytes.bytesize && bytes.byteslice(start, 1) =~ /\s/
-      return nil unless bytes.byteslice(start, 1) == '['
-
-      depth = 0
-      in_string = false
-      escape = false
-      bytes.byteslice(start..).each_byte.with_index do |c, idx|
-        if escape
-          escape = false
-          next
-        end
-        if in_string
-          if c == 92 # backslash
-            escape = true
-          elsif c == 34 # double quote
-            in_string = false
-          end
-          next
-        end
-        case c
-        when 34 # double quote
-          in_string = true
-        when 91 # [
-          depth += 1
-        when 93 # ]
-          depth -= 1
-          return bytes.byteslice(start, idx + 1).force_encoding('UTF-8') if depth.zero?
-        end
-      end
-      nil
-    end
-
-    # AA embeds the full agent list in `benchmarkRows`, with React Flight refs into
-    # the smaller default `rows` array for the initially selected configurations.
-    def extract_agent_benchmark_rows(body)
-      rows_json = extract_json_array(body, '"rows":')
-      benchmark_rows_json = extract_json_array(body, '"benchmarkRows":')
-      return [] unless benchmark_rows_json
-
-      rows = rows_json ? JSON.parse(rows_json) : []
-      benchmark_rows = JSON.parse(benchmark_rows_json)
-      resolved = benchmark_rows.map do |item|
-        if item.is_a?(Hash)
-          item
-        elsif item.is_a?(String) && item.include?(':rows:')
-          rows[item.split(':').last.to_i]
-        end
-      end.compact
-
-      resolved.uniq { |row| row['id'] }
-    rescue JSON::ParserError
-      []
     end
   end
 end

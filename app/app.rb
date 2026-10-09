@@ -134,6 +134,7 @@ module StephenReid
       '/knowledgegraph' => '/',
       '/maps' => '/life-as-practice',
       '/life-as-practice' => 'https://lifeaspractice.com/',
+      '/evals' => '/cursor',
       '/technological-metamodernism' => 'https://stephenreid.substack.com/p/technological-metamodernism-course'
     }.each do |k, v|
       get k.to_s do

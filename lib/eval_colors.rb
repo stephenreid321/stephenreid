@@ -69,13 +69,5 @@ module EvalColors
     def hex(name)
       LABS[lab_for(name)] || FALLBACK
     end
-
-    def map_for(names)
-      names.each_with_object({}) do |name, colors|
-        next if name.to_s.strip == ''
-
-        colors[name] = hex(name)
-      end
-    end
   end
 end

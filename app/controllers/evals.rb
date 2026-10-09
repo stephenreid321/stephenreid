@@ -9,16 +9,7 @@ StephenReid::App.controller do
     @title = 'LLMs'
     @models = ArtificialAnalysis.llm_models
 
-    erb :'artificial_analysis/llms'
-  end
-
-  get '/agents', cache: true do
-    @title = 'Coding agents'
-    @agent_rows = ArtificialAnalysis.coding_agents
-    @chart_keys = ArtificialAnalysis.resolve_agent_chart_keys(@agent_rows)
-    @family_colors = EvalColors.map_for(@agent_rows.map { |row| row.dig('display', 'agent') || row['agentName'] })
-
-    erb :'artificial_analysis/agents'
+    erb :'evals/llms'
   end
 
   get '/frontiercode', cache: true do
@@ -28,16 +19,26 @@ StephenReid::App.controller do
       colors[row['lab']] = row['labColor'] if row['lab'] && row['labColor']
     end
 
-    erb :'artificial_analysis/frontiercode'
+    erb :'evals/frontiercode'
   end
 
-  get '/evals', cache: true do
+  get '/tb4', cache: true do
+    @title = 'Terminal-Bench 4.0'
+    @tb4_rows = ArtificialAnalysis.terminal_bench_4_rows
+    @lab_colors = @tb4_rows.each_with_object({}) do |row, colors|
+      colors[row['lab']] = row['labColor'] if row['lab'] && row['labColor']
+    end
+
+    erb :'evals/tb4'
+  end
+
+  get '/cursor', cache: true do
     @title = 'CursorBench'
     @cursorbench_rows = CursorBench.rows
     @family_colors = @cursorbench_rows.each_with_object({}) do |row, colors|
       colors[row['model']] = row['familyColor'] if row['model'] && row['familyColor']
     end
 
-    erb :'artificial_analysis/evals'
+    erb :'evals/cursorbench'
   end
 end
