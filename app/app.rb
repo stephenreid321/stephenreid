@@ -140,9 +140,5 @@ module StephenReid
         redirect v
       end
     end
-
-    get %r{\A/artizen} do
-      redirect 'https://artizen.fyi', 301
-    end
   end
 end
