@@ -39,6 +39,7 @@ module EvalColors
     [/\AFable/i, 'Anthropic'],
     [/\AOpus/i, 'Anthropic'],
     [/\ASonnet/i, 'Anthropic'],
+    [/\AHaiku/i, 'Anthropic'],
     [/\AGPT/i, 'OpenAI'],
     [/\AGrok/i, 'xAI'],
     [/\AGemini/i, 'Google'],
