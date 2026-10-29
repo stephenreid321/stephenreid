@@ -5,14 +5,13 @@
       type: 'doughnut',
       data: {
         datasets: [{
-            data: <%= actual.map { |k,v| v } %>,
-            backgroundColor: <%= actual.each_with_index.map { |p,i|
-              k, v = p
+            data: <%= actual.values %>,
+            backgroundColor: <%= actual.keys.map do |k|
               asset = Asset.find_by(ticker: k)
               asset.color ? "##{asset.color}" : asset.virtual_color
-            } %>
+            end %>
           }],
-        labels: <%= actual.map { |k,v| k } %>
+        labels: <%= actual.keys %>
       },
       options: {
         plugins: {

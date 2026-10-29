@@ -1,0 +1,14 @@
+{
+  "https://cdn.jsdelivr.net/gh/symbiota-coop/dandelion@b2ac10e0761e8d8a2942750f80261a99233d6118/app/assets/javascripts/pagelets.js": "sha384-+8+534eS5TId5I7m4Bsb4I8ZUr6JEnS1rVLQDweJvRvzs3VGxxP7wD+U+hyIwE3/",
+  "https://cdn.jsdelivr.net/npm/@github/relative-time-element@5.3.1/dist/bundle.js": "sha384-cnbx4aWcNvSE6Pa1QB9qAp3emGtktlU/GTaHJEwGJGv0D1Q0iMV6VNbw+JlWLkBR",
+  "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css": "sha384-nWN3KqaaVcbEsCjLSV+2jMjh62Iny/+mN3srM8TZeM8N6aj7eDl5wwYggjAJ4/sJ",
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js": "sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI",
+  "https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js": "sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ",
+  "https://cdn.jsdelivr.net/npm/datatables.net-bs5@3.1.4/css/dataTables.bootstrap5.min.css": "sha384-OZKa6QSlaaq/LGR1sBFkYhC0c/nacIFh1chsblhDUxggC9Zb0XLEEMs95i1Kydnt",
+  "https://cdn.jsdelivr.net/npm/datatables.net-bs5@3.1.4/js/dataTables.bootstrap5.min.js": "sha384-4d8X9sr6Gnv9AgIQn6bv3lmQxj5fD+9bVAun0/XMmdy7oPRvT0adfiUUiiYpi4Ck",
+  "https://cdn.jsdelivr.net/npm/datatables.net@3.1.4/js/dataTables.min.js": "sha384-Lg8qwUDhp1uuDJinT3SMR9sxQyVjC/2NPPFkbPahEVgqBRrWGI6zfmrgPYTaVgrS",
+  "https://cdn.jsdelivr.net/npm/iframe-resizer@4.4.5/js/iframeResizer.min.js": "sha384-d4pFvBiujcVxXGj//e5dSs/V4+RxupURhD/ya3MLEtk3eLLdLqVHgtUDExXjMD8O",
+  "https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js": "sha384-fgGyf7Mo7DURSOMnOy7ed+dkq5Job205Gnzu6QIg0BOHKaqt4D76Dt8VlDCzcMHV",
+  "https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js": "sha384-OrTQ4SX93DM+F6I/lxcQk0NBoyL04SrMnx36hM8B3NaVDZfETz+2fxG1+mjBXmuU",
+  "https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js": "sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+}

@@ -7,7 +7,12 @@ $font-family-sans-serif: 'Overpass', sans-serif;
 // $lead-font-size
 //
 //
-@import "bootstrap/bootstrap";
+// Bootstrap 4's tables, in the body colour
+$table-color: #212529; // Bootstrap's default $body-color, which isn't defined yet
+// Bootstrap 4's links: underlined only on hover
+$link-decoration: none;
+$link-hover-decoration: underline;
+@import "bootstrap/scss/bootstrap";
 $highlight-color: #FDFFAA;
 $contrast-color: darken($body-color, 15%);
 

@@ -42,7 +42,7 @@ class SubstackPost
     end
     doc.search('div.image-link-expand').remove
     doc.search('img').each do |tag|
-      tag['src'] = tag['srcset'].split(' ')[-2] if tag['srcset']
+      tag['src'] = tag['srcset'].split[-2] if tag['srcset']
     end
     Substack.expand_mentions!(doc)
 

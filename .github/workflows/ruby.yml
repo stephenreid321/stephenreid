@@ -1,0 +1,61 @@
+name: Ruby
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    # script/lint sets each linter's command and flags, for the pre-commit hook too
+    - name: Run RuboCop
+      run: script/lint --all --only rubocop
+
+    - name: Run erb_lint
+      run: script/lint --all --only erb_lint
+
+    - name: Install Node
+      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+
+    - name: Install linters
+      run: npm ci
+
+    - name: Run ESLint
+      run: script/lint --all --only eslint
+
+    # uvx runs the zizmor version script/lint names
+    - name: Install uv
+      uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      with:
+        version: 0.13.1
+
+    # With GH_TOKEN, zizmor runs its online audits too (impostor commits, known-vulnerable actions, tag comments that
+    # don't match their commits)
+    - name: Run zizmor
+      run: script/lint --all --only zizmor
+      env:
+        GH_TOKEN: ${{ github.token }}

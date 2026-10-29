@@ -1,5 +1,6 @@
 AllCops:
-  NewCops: enable 
+  NewCops: enable
+  SuggestExtensions: false
 Layout/EndAlignment:
   AutoCorrect: true
 Style/SymbolArray:
@@ -46,3 +47,5 @@ Lint/SuppressedException:
   Enabled: false  
 
 
+Style/OneClassPerFile:
+  Enabled: false

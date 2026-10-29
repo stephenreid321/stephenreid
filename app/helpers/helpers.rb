@@ -1,6 +1,6 @@
 StephenReid::App.helpers do
   def timeago(x)
-    %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x.iso8601}</abbr>)
+    %(<relative-time datetime="#{x.iso8601}">#{x.iso8601}</relative-time>)
   end
 
   def md(slug, render: true)
@@ -28,9 +28,9 @@ StephenReid::App.helpers do
 
   def bool_badge(value, yes_text: 'Yes', no_text: 'No')
     if value
-      %(<span class="badge badge-success">#{yes_text}</span>)
+      %(<span class="badge text-bg-success">#{yes_text}</span>)
     else
-      %(<span class="badge badge-secondary">#{no_text}</span>)
+      %(<span class="badge text-bg-secondary">#{no_text}</span>)
     end
   end
 

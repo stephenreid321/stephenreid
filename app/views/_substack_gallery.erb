@@ -26,8 +26,8 @@
         <div class="grid-sizer"></div>
         <% substack_gallery.each do |cell| %>
           <div class="grid-item">
-            <a href="<%=h cell[:note_url] %>" target="_blank" rel="noopener" class="d-block bg-dark">
-              <img src="<%=h cell[:image_url] %>" alt="" onerror="this.closest('.grid-item').style.display='none'">
+            <a href="<%= h cell[:note_url] %>" target="_blank" rel="noopener" class="d-block bg-dark">
+              <img src="<%= h cell[:image_url] %>" alt="" onerror="this.closest('.grid-item').style.display='none'">
             </a>
           </div>
         <% end %>

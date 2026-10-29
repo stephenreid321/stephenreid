@@ -1,15 +1,15 @@
 <% if admin? %>
   <a href="javascript:;" onclick="$(this).hide().next().css('display', 'inline').find('input').focus().select()">
     <% if asset.multiplier %>
-      <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
+      <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'text-bg-primary' : 'text-bg-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
     <% else %>
       <span class="text-contrast">&hellip;</span>
     <% end %>
   </a>
-  <% form_tag "/assets/#{asset.id}/multiplier", style: 'display: none', class: 'form-inline' do %>
+  <% form_tag "/assets/#{asset.id}/multiplier", style: 'display: none' do %>
     <script>
     $(function() {
-      $("#asset-multiplier-<%=asset.id%>").bind('blur keydown',function(e) {
+      $("#asset-multiplier-<%= asset.id %>").bind('blur keydown',function(e) {
         if (e.type === 'blur' || e.keyCode === 13) {
           event.preventDefault();
           $(this.form).submit()
@@ -22,6 +22,6 @@
   <% end %>
 <% else %>
   <% if asset.multiplier && asset.multiplier != 1 %>
-    <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'badge-primary' : 'badge-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
+    <span class="badge <%= params[:badge_class] || (asset.multiplier > 1 ? 'text-bg-primary' : 'text-bg-secondary') %>"><%= asset.multiplier == asset.multiplier.to_i ? asset.multiplier.to_i : asset.multiplier %>x</span>
   <% end %>
 <% end %>

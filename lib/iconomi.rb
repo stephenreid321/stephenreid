@@ -19,7 +19,7 @@ class Iconomi
         'ICN-SIGN' => signature,
         'ICN-TIMESTAMP' => t
       }
-    ).get("https://api.iconomi.com#{path}#{parameters ? "?#{parameters}" : ''}").body
+    ).get("https://api.iconomi.com#{path}#{"?#{parameters}" if parameters}").body
   end
 
   def self.post(path, request_body)

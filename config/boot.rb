@@ -17,4 +17,6 @@ Mongoid.raise_not_found_error = false
 
 Padrino.load!
 
+require_relative 'frontend_dependencies'
+
 Delayed::Worker.max_attempts = 1

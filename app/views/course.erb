@@ -1,66 +1,51 @@
-<% 
+<%
 base_uri = "https://raw.githubusercontent.com/stephenreid321/courses/main/#{Rack::Utils.escape_path(@course[:name])}"
-doc = Nokogiri::HTML(URI.open("#{base_uri}/course.html"))
+doc = Nokogiri::HTML(URI.open("#{base_uri}/course.html")) # rubocop:disable Security/Open -- a fixed GitHub URL
 head = doc.search('head')
 body = doc.search('body')
 
 body.search('a[id^=cmnt_ref]').each { |a| a.parent.remove }
 body.search('a[id^=cmnt]').each { |a| a.parent.parent.remove }
 
-body.search('img').each { |img|
+body.search('img').each do |img|
   img['src'] = "#{base_uri}/#{img['src']}"
-  if img['style'] && img['style'].match(/width:\s*([\d\.]+)px/) && $1.to_i >= 576
-    img.remove_attribute('style')
-  end
-  if img.parent.name == 'span'
-    img.parent.remove_attribute('style')
-  end  
-  if img.ancestors('table').any?
-    img.remove_attribute('style')
-  end
+  img.remove_attribute('style') if img['style'] && img['style'].match(/width:\s*([\d\.]+)px/) && $1.to_i >= 576
+  img.parent.remove_attribute('style') if img.parent.name == 'span'
+  img.remove_attribute('style') if img.ancestors('table').any?
   # Remove negative margin values from image style
-  if img['style'] && img['style'].match(/margin(-\w+)?:\s*-[\d\.]+/)
-    img['style'] = img['style'].gsub(/margin(-\w+)?:\s*-[\d\.]+[^;]*;?/, '')
-    # Remove style attribute if it's empty after the replacement
-    img.remove_attribute('style') if img['style'].strip.empty?
-  end
-}
+  next unless img['style'] && img['style'].match(/margin(-\w+)?:\s*-[\d\.]+/)
+  img['style'] = img['style'].gsub(/margin(-\w+)?:\s*-[\d.]+[^;]*;?/, '')
+  # Remove style attribute if it's empty after the replacement
+  img.remove_attribute('style') if img['style'].strip.empty?
+end
 
 # Add class to the first image
 first_img = body.at('img')
-if first_img
-  first_img['class'] = 'first-image'
-end
+first_img['class'] = 'first-image' if first_img
 
 # Add movie emoji to YouTube links
 body.search('a').each do |link|
-  if link['href'] && link['href'].include?('youtube') && link.parent == link.parent.parent.children.first
-    link.inner_html = %Q{<img src="/images/youtube.png" class="youtube-icon" />#{link.inner_html}}
-  end
-  
+  link.inner_html = %Q{<img src="/images/youtube.png" class="youtube-icon">#{link.inner_html}} if link['href'] && link['href'].include?('youtube') && link.parent == link.parent.parent.children.first
+
   # Remove Google redirect from URLs
-  if link['href'] && link['href'].match?(/google\.com\/url\?q=(.+?)(&|$)/)
-    link['href'] = URI.decode_www_form_component(link['href'].match(/google\.com\/url\?q=(.+?)(&|$)/)[1])
-  end
-  
+  link['href'] = URI.decode_www_form_component(link['href'].match(/google\.com\/url\?q=(.+?)(&|$)/)[1]) if link['href'] && link['href'].match?(/google\.com\/url\?q=(.+?)(&|$)/)
+
   # Shorten very long link text
-  if link.content.starts_with?('https://') && link.content.length >= 100
-    link.content = link.content.split('/').first(3).join('/') + '/...'
-  end
+  link.content = link.content.split('/').first(3).join('/') + '/...' if link.content.starts_with?('https://') && link.content.length >= 100
 end
 
 # Remove empty paragraph elements before and after unordered lists
 body.search('ul').each do |ul|
   # Check previous sibling
-  if ul.previous_element && ul.previous_element.name == 'p' && 
-     ul.previous_element.text.strip.empty? && 
+  if ul.previous_element && ul.previous_element.name == 'p' &&
+     ul.previous_element.text.strip.empty? &&
      ul.previous_element.search('img').empty?
     ul.previous_element.remove
   end
-  
+
   # Check next sibling
-  if ul.next_element && ul.next_element.name == 'p' && 
-     ul.next_element.text.strip.empty? && 
+  if ul.next_element && ul.next_element.name == 'p' &&
+     ul.next_element.text.strip.empty? &&
      ul.next_element.search('img').empty?
     ul.next_element.remove
   end
@@ -68,21 +53,15 @@ end
 
 # Remove all empty paragraph elements
 body.search('p').each do |paragraph|
-  if paragraph.text.strip.empty? && paragraph.search('img').empty?
-    paragraph.remove
-  end
+  paragraph.remove if paragraph.text.strip.empty? && paragraph.search('img').empty?
 end
 
 # Set margin-bottom: 0 for paragraphs containing anchor links that start with #
 body.search('a').each do |link|
-  if link['href'] && link['href'].start_with?('#')
-    parent_p = link.ancestors('p').first
-    if parent_p
-      parent_p['class'] = "#{parent_p['class'] || ''} bottom-padding-10".strip
-    end
-  end
+  next unless link['href'] && link['href'].start_with?('#')
+  parent_p = link.ancestors('p').first
+  parent_p['class'] = "#{parent_p['class'] || ''} bottom-padding-10".strip if parent_p
 end
-
 %>
 
 <html>

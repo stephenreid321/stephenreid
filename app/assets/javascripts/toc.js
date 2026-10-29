@@ -44,7 +44,6 @@
         let scrollPosition = $(window).scrollTop();
 
         headings.forEach((heading, index) => {
-          const headingTag = heading.tagName.toLowerCase();
           const id = heading.id;
           const headingElement = $('#' + id);
           const headerMarginTop = parseInt(headingElement.css('margin-top'), 10);

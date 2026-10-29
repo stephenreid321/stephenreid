@@ -1,6 +1,7 @@
 class Strategy
   include Mongoid::Document
   include Mongoid::Timestamps
+
   class RoundingError < StandardError; end
   class NotEnoughStrategies < StandardError; end
 
@@ -153,7 +154,7 @@ class Strategy
           begin
             puts "error: #{strategy.ticker}, attempt 3"
             strategy.update
-          rescue StandardError => e
+          rescue StandardError
             puts "error: #{strategy.ticker}, deleting"
             strategy.destroy
             # Airbrake.notify(e)

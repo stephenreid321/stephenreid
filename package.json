@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "description": "Linting for app/assets/javascripts (ESLint). The site itself loads its JavaScript from a CDN (config/frontend_dependencies.rb)",
+  "scripts": {
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.13.0",
+    "globals": "17.13.0"
+  }
+}

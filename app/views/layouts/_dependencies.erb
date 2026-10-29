@@ -1,29 +1,14 @@
-<% {
-         'jquery/3.2.0' => 'jquery.min.js',
-         'popper.js/1.11.0' => 'umd/popper.min.js',
-         'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
-         'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',
-         'Chart.js/3.5.1' => 'chart.js',
-         'js-cookie/2.2.1' => 'js.cookie.min.js',
-         'chroma-js/2.0.6' => 'chroma.min.js',
-         'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css',
-         'iframe-resizer/4.2.1' => 'iframeResizer.min.js',
-         'bootstrap-icons/1.13.1' => 'font/bootstrap-icons.min.css'
-       }.each { |k,v| %>
-<% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
-<% case f.split('.').last.to_sym; when :js %>
-  <script src="<%= u %>"></script>
-<% when :css %>
-  <link rel="stylesheet" href="<%= u %>">
-<% end %>
-<% } %>
-<% } %>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-<% [
-       '//rawcdn.githack.com/symbiota-coop/dandelion/b2ac10e0761e8d8a2942750f80261a99233d6118/app/assets/javascripts/pagelets.js',
-       '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
-       '/javascripts/toc.js',
-       "/javascripts/app.js?#{@cachebuster}"
-     ].each { |f| %>
-<script src="<%= f %>"></script>
-<% } %>
+<% FRONTEND_DEPENDENCIES.each do |package, files| %>
+  <% files.split.each do |f| %>
+    <%= cdn_tag package, f, **(FRONTEND_MODULES.include?(package) ? { type: 'module' } : {}) %>
+  <% end %>
+<% end %>
+<% FRONTEND_URLS.each do |url| %>
+  <%= cdn_tag url %>
+<% end %>
+
+<% ['/javascripts/toc.js', "/javascripts/app.js?#{@cachebuster}"].each do |f| %>
+  <script src="<%= f %>"></script>
+<% end %>

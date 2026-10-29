@@ -1,8 +1,8 @@
 <% proposed_with_multipliers = JSON.parse(Stash.find_by(key: 'proposed_with_multipliers').value) %>
 <% proposed_without_multipliers = JSON.parse(Stash.find_by(key: 'proposed_without_multipliers').value) %>
-<% actual = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['targetWeight']] }] %>
-<% rebalanced = Hash[JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].map { |h| [h['assetTicker'], h['rebalancedWeight']] }] %>
-<% diff = Hash[actual.map { |k, _v| [k, actual[k] - rebalanced[k]] }] %>
+<% actual = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].to_h { |h| [h['assetTicker'], h['targetWeight']] } %>
+<% rebalanced = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))['values'].to_h { |h| [h['assetTicker'], h['rebalancedWeight']] } %>
+<% diff = actual.to_h { |k, _v| [k, actual[k] - rebalanced[k]] } %>
 <% y = 50_000 %>
 
 <style>
@@ -28,7 +28,7 @@
           <th style="width: 8em">Current weight</th>
           <th style="width: 8em">
             <% if admin? %>
-              With multipliers<br/>
+              With multipliers<br>
               (next rebalance)
             <% else %>
               Next rebalance
@@ -47,16 +47,16 @@
           <% if actual[k] %>
             <% if diff[k] < 0 %>
               <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
-                                                                                                                       'green'
-                                                                                                                     elsif diff[k].negative?
-                                                                                                                       'red'
-                                                                                                                     end %>; width: <%= "#{100 * -diff[k] / diff.values.map(&:abs).max}%" %>"></div>
+                                                                                                                           'green'
+                                                                                                                         elsif diff[k].negative?
+                                                                                                                           'red'
+                                                                                                                         end %>; width: <%= "#{100 * -diff[k] / diff.values.map(&:abs).max}%" %>"></div>
             <% end %>
           <% end %>
         </td>
         <td class="assetName" style="white-space: nowrap;">
           <a
-      data-toggle="tooltip"
+      data-bs-toggle="tooltip"
       target="_blank" href="https://iconomi.com/asset/<%= asset.ticker %>">
             <%= asset.name %> (<%= k %>)
           </a>
@@ -68,10 +68,10 @@
           <% if actual[k] %>
             <% if diff[k] > 0 %>
               <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: <%= if diff[k].positive?
-                                                                                                                       'green'
-                                                                                                                     elsif diff[k].negative?
-                                                                                                                       'red'
-                                                                                                                     end %>; width: <%= "#{100 * diff[k] / diff.values.map(&:abs).max}%" %>"></div>
+                                                                                                                           'green'
+                                                                                                                         elsif diff[k].negative?
+                                                                                                                           'red'
+                                                                                                                         end %>; width: <%= "#{100 * diff[k] / diff.values.map(&:abs).max}%" %>"></div>
             <% end %>
           <% end %>
         </td>
@@ -80,10 +80,10 @@
             <%= number_to_percentage (actual[k] * 100), precision: 1 %>
             <small>
               <span style="color: <%= if diff[k].positive?
-                                    'green'
-                                  elsif diff[k].negative?
-                                    'red'
-                                  end %>">
+                                        'green'
+                                      elsif diff[k].negative?
+                                        'red'
+                                      end %>">
                 <%= '+' if diff[k].positive? %><%= (diff[k] * 10_000).round %>
               </span>
             </small>

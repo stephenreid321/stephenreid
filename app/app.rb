@@ -10,11 +10,6 @@ module StephenReid
     register Padrino::Cache
     enable :caching unless Padrino.env == :development
 
-    require 'sass/plugin/rack'
-    Sass::Plugin.options[:template_location] = Padrino.root('app', 'assets', 'stylesheets')
-    Sass::Plugin.options[:css_location] = Padrino.root('app', 'assets', 'stylesheets')
-    use Sass::Plugin::Rack
-
     use Rack::Session::Cookie, expire_after: 1.year.to_i, secret: ENV['SESSION_SECRET']
     set :public_folder, Padrino.root('app', 'assets')
 

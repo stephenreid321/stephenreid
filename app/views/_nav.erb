@@ -9,37 +9,36 @@
 </style>
 
 <div id="nav">
-  <nav class="navbar navbar-expand-lg navbar-<%=@stylesheet%>">
+  <nav class="navbar navbar-expand-lg navbar-<%= @stylesheet %> px-3">
     <a class="navbar-brand" href="/">
       <img src="/images/octopus-circle.png" style="height: 30px; position: relative; top: -1px">
     </a>
     <a style="font-family: 'Zilap Evolution'" class="navbar-brand" href="/">Stephen Reid</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <% nav_items = [
-            ['Background', '/background'],   
-            ['Coaching', '/coaching'],                        
-            ['Events', '/events'],
-            ['Courses',             
+           ['Background', '/background'],
+           ['Coaching', '/coaching'],
+           ['Events', '/events'],
+           ['Courses',
             [['Life as Practice (Sep 2025)', 'https://lifeaspractice.com/']] +
-            COURSES.sort_by { |c| c[:date] || Time.now.to_s }.reverse.map { |c| [c[:name], "/courses/#{c[:slug]}"] }
-            ],                                     
-            ['Knowledge',
-             [
-               ['Books', '/books'],
-               ['Films', '/films'],
-               ['Speaking engagements', '/speaking-engagements'],
-               ['Treasure map', 'https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8'],
-               ['Stockholm', 'https://www.google.com/maps/d/u/0/edit?mid=1X51vy5tXN9BuueD9jVDCQd2M5AF-l5k'],
-             ]],             
-          ] %>
-      <ul class="navbar-nav mr-auto">
+              COURSES.sort_by { |c| c[:date] || Time.now.to_s }.reverse.map { |c| [c[:name], "/courses/#{c[:slug]}"] }],
+           ['Knowledge',
+            [
+              ['Books', '/books'],
+              ['Films', '/films'],
+              ['Speaking engagements', '/speaking-engagements'],
+              ['Treasure map', 'https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8'],
+              ['Stockholm', 'https://www.google.com/maps/d/u/0/edit?mid=1X51vy5tXN9BuueD9jVDCQd2M5AF-l5k']
+            ]]
+         ] %>
+      <ul class="navbar-nav me-auto">
         <% nav_items.each do |name, path| %>
           <% if path.is_a?(Array) %>
             <li class="nav-item dropdown">
-              <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="javascript:;"><%= name %><b class="caret"></b></a>
+              <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle" href="javascript:;"><%= name %><b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <% path.each do |subname, subpath| %>
                   <li class="nav-item"><a class="dropdown-item <%= 'active' if request.path == subpath %>" href="<%= subpath %>"><%= subname %></a></li>
@@ -52,12 +51,12 @@
         <% end %>
       </ul>
 
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item d-none d-lg-inline">
-          <a target="_blank" class="btn btn-secondary btn-sm" href="mailto:stephen@stephenreid.net">Email me</a>
+          <a target="_blank" class="btn btn-secondary btn-sm text-nowrap" href="mailto:stephen@stephenreid.net">Email me</a>
         </li>
         <li class="nav-item d-none d-lg-inline">
-          <a target="_blank" class="btn btn-primary btn-sm" href="https://stephenreid.substack.com/">Subscribe on Substack</a>
+          <a target="_blank" class="btn btn-primary btn-sm text-nowrap" href="https://stephenreid.substack.com/">Subscribe on Substack</a>
         </li>
         <li class="nav-item d-lg-none">
           <a target="_blank" class="btn btn-secondary mb-1 mt-2" href="mailto:stephen@stephenreid.net">Email me</a>

@@ -19,8 +19,6 @@ $(function () {
   $('.blog_post a[href^=http]').attr('target', '_blank')
   $('.blog_post table').addClass('table')
 
-  $('abbr.timeago').timeago()
-
   $(document).on('click', 'a[data-confirm]', function (e) {
     const message = $(this).data('confirm')
     if (!confirm(message)) {
@@ -44,7 +42,7 @@ $(function () {
   })
 
   function ajaxCompleted () {
-    $('[data-toggle="tooltip"]').tooltip({
+    $('[data-bs-toggle="tooltip"]').tooltip({
       html: true
     })
 
@@ -54,10 +52,11 @@ $(function () {
       if (d > b) { $(this).css('color', 'green') } else if (d < b) { $(this).css('color', 'red') }
     })
 
+    // Shades each score's cell from white (0) to green (100)
     $('.score').each(function () {
-      const d = parseFloat($(this).text())
-      const scale = chroma.scale(['white', '#2DB963'])
-      $(this).closest('td').css('background-color', scale(d / 100).hex()).addClass('text-dark')
+      const t = Math.min(Math.max(parseFloat($(this).text()) / 100, 0), 1) || 0
+      const [r, g, b] = [[255, 0x2D], [255, 0xB9], [255, 0x63]].map(([from, to]) => Math.round(from + (to - from) * t))
+      $(this).closest('td').css('background-color', `rgb(${r}, ${g}, ${b})`).addClass('text-dark')
     })
   }
   $(document).ajaxComplete(function () {

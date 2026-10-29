@@ -1,0 +1,119 @@
+#!/usr/bin/env ruby
+# Runs our linters, each on the files of its kind. CI's lint job (.github/workflows/ruby.yml) runs it too, so this is the
+# one place their commands and flags are set:
+#
+#   script/lint FILE...     the files as they are on disk
+#   script/lint --staged    the staged version of each staged file (the pre-commit hook in .githooks)
+#   script/lint --all       everything, as CI does
+#
+# Add --only <linter> (rubocop, erb_lint, eslint or zizmor) to run just one, as CI's separate steps do.
+# A changed linter config runs that linter on everything, as CI would. Exits non-zero if any linter fails.
+require 'open3'
+
+$stdout.sync = true # so the summary on stderr comes after the output
+Dir.chdir(File.expand_path('..', __dir__))
+
+QUIET = { 'RUBYOPT' => '-W0' }.freeze # hides the parser gem's warnings about Ruby versions it doesn't know
+
+LINTERS = [
+  {
+    name: 'RuboCop',
+    files: %r{\.(rb|rake|ru)\z|\A(Gemfile|Rakefile)\z|\Ascript/lint\z},
+    configs: /\A\.rubocop\.yml\z/,
+    command: %w[bundle exec rubocop --force-exclusion],
+    stdin: ->(file) { ['--stdin', file] },
+    env: QUIET
+  },
+  {
+    name: 'erb_lint',
+    files: %r{\Aapp/views/.+\.erb\z},
+    # Templates are checked with .rubocop.yml too
+    configs: /\A(\.erb_lint\.yml|\.rubocop\.yml)\z/,
+    command: %w[bundle exec erb_lint],
+    all: %w[--lint-all],
+    stdin: ->(file) { ['--stdin', file] },
+    env: QUIET
+  },
+  {
+    name: 'ESLint',
+    files: %r{\Aapp/assets/javascripts/.+\.js\z},
+    configs: /\A(eslint\.config\.mjs|package(-lock)?\.json)\z/,
+    command: %w[npx --no-install eslint --no-warn-ignored],
+    stdin: ->(file) { ['--stdin', '--stdin-filename', file] },
+    node: true
+  },
+  {
+    # GitHub Actions workflows. uvx runs this exact version, so none arrives unchosen; with GH_TOKEN set (as in CI) it
+    # runs its online audits too
+    name: 'zizmor',
+    files: %r{\A\.github/workflows/.+\.ya?ml\z},
+    configs: %r{\A(\.github/)?zizmor\.ya?ml\z},
+    command: %w[uvx zizmor@1.31.1 --quiet --no-progress],
+    all: ['.'],
+    stdin: ->(_file) { ['-'] },
+    uv: true
+  }
+].freeze
+
+USAGE = "Usage: script/lint [--only #{LINTERS.map { |linter| linter[:name].downcase }.join('|')}] FILE... | --staged | --all".freeze
+
+if (at = ARGV.index('--only'))
+  only = ARGV.slice!(at, 2).last
+  abort USAGE unless LINTERS.any? { |linter| linter[:name].downcase == only&.downcase }
+end
+mode = ARGV.first&.start_with?('--') ? ARGV.shift : nil
+abort USAGE unless (mode.nil? && ARGV.any?) || (%w[--staged --all].include?(mode) && ARGV.empty?)
+
+files =
+  case mode
+  when '--staged' then `git diff --cached --name-only --diff-filter=ACMR -z`.split("\0")
+  when '--all' then []
+  else ARGV.map { |f| f.delete_prefix('./') }
+  end
+
+# Each job is a command, its env and what to pipe to it
+jobs = LINTERS.flat_map do |linter|
+  next [] if only && linter[:name].downcase != only.downcase
+
+  all = mode == '--all' || files.any? { |f| f.match?(linter[:configs]) }
+  mine = files.grep(linter[:files])
+  next [] unless all || mine.any?
+
+  # Only the versions package-lock.json installs: npx would otherwise fetch a missing linter, of any age
+  if linter[:node] && !File.exist?("node_modules/.bin/#{linter[:name].downcase}")
+    warn "#{linter[:name]} isn't installed, so run npm ci first"
+    next [{ name: linter[:name], missing: true }]
+  end
+  if linter[:uv] && ENV['PATH'].split(File::PATH_SEPARATOR).none? { |dir| File.executable?(File.join(dir, 'uvx')) }
+    warn "#{linter[:name]} runs with uvx, so install uv first (https://docs.astral.sh/uv/)"
+    next [{ name: linter[:name], missing: true }]
+  end
+
+  env = linter[:env] || {}
+  if all
+    [{ name: linter[:name], command: linter[:command] + (linter[:all] || []), env: env }]
+  elsif mode == '--staged'
+    # One run per file, given the staged version on stdin, so unstaged edits don't count
+    mine.map do |f|
+      { name: linter[:name], command: linter[:command] + linter[:stdin].call(f), env: env, stdin: Open3.capture2('git', 'show', ":#{f}").first }
+    end
+  else
+    [{ name: linter[:name], command: linter[:command] + mine, env: env }]
+  end
+end
+
+failed = jobs.select { |job| job[:missing] }.map { |job| job[:name] }
+jobs.reject { |job| job[:missing] }.each do |job|
+  output, status = Open3.capture2e(job[:env], *job[:command], stdin_data: job[:stdin] || '')
+  next if status.success?
+
+  failed << job[:name]
+  puts output
+end
+
+if failed.any?
+  warn "\nFailed: #{failed.uniq.join(', ')}"
+  exit 1
+elsif jobs.any?
+  puts "Passed: #{jobs.map { |job| job[:name] }.uniq.join(', ')}"
+end

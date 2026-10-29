@@ -1,0 +1,17 @@
+{
+  "name": "stephenreid-frontend",
+  "private": true,
+  "description": "The packages the site loads from jsDelivr, at the versions it loads. Nothing installs them: config/frontend_dependencies.rb reads the versions",
+  "dependencies": {
+    "@github/relative-time-element": "5.3.1",
+    "bootstrap": "5.3.8",
+    "bootstrap-icons": "1.13.2",
+    "chart.js": "4.5.1",
+    "datatables.net": "3.1.4",
+    "datatables.net-bs5": "3.1.4",
+    "iframe-resizer": "4.4.5",
+    "jquery": "4.0.0",
+    "js-cookie": "3.0.8",
+    "masonry-layout": "4.2.2"
+  }
+}

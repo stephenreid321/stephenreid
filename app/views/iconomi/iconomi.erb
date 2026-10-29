@@ -19,9 +19,7 @@ count = strategies.count
       <div class="row justify-content-center">
         <div class="col-auto">
           <div class="input-group" style="width: 10rem">
-            <div class="input-group-prepend">
-              <span class="input-group-text">$</span>
-            </div>
+            <span class="input-group-text">$</span>
             <%= number_field_tag :investment, class: 'form-control-lg form-control', value: 1000, id: 'investment', onchange: 'proposedPosition()' %>
           </div>
         </div>
@@ -114,8 +112,8 @@ count = strategies.count
     </td>
     <td class="block">
       <a target="_blank" href="https://iconomi.com/asset/<%= strategy.ticker %>"><%= strategy.name %></a>
-      <br />
-      <span class="badge badge-primary"
+      <br>
+      <span class="badge text-bg-primary"
       style="background-color: <%= asset.color ? "##{asset.color}" : asset.virtual_color %>">
         <%= asset.ticker %>
         <%= holding.percent %>

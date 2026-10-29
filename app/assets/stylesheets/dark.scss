@@ -7,7 +7,14 @@ $font-size-base: 1.125rem;
 $lead-font-size: (
   $font-size-base * 1.1
 );
-@import "bootstrap/bootstrap";
+$secondary: lighten($body-bg, 15%);
+$body-emphasis-color: white;
+// Bootstrap 4's tables, in the body colour
+$table-color: $body-color;
+// Bootstrap 4's links: underlined only on hover
+$link-decoration: none;
+$link-hover-decoration: underline;
+@import "bootstrap/scss/bootstrap";
 $highlight-color: #E5C07C;
 $contrast-color: white;
 
@@ -78,10 +85,6 @@ $dark-color: #343a40;
 .btn-secondary:hover {
   background-color: lighten($body-bg, 10%);
   border-color: lighten($body-bg, 10%);
-}
-
-.badge-secondary {
-  background-color: lighten($body-bg, 15%);
 }
 
 .text-muted {

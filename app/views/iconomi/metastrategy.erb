@@ -1,6 +1,6 @@
 <% strategy_live = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure')) %>
 <% strategy = Strategy.find_by(ticker: 'DECENTCOOP') %>
-<% strategies = Strategy.and(:status => 'verified') %>
+<% strategies = Strategy.and(status: 'verified') %>
 <div class="row justify-content-center text-center">
   <div class="col-6 col-lg-2 mb-4">
     <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,1)" src="/images/meta-sq.jpg"></a>
@@ -14,12 +14,12 @@
       It's a great 'set-and-forget' option and is my top recommendation for those new to crypto investing.
     </p>
     <p class="lead">
-      Metastrategy is currently the #<%=acs_index = strategy.nscore_index('aum', strategies: strategies)[1]%> most copied strategy on ICONOMI (by value).
+      Metastrategy is currently the #<%= acs_index = strategy.nscore_index('aum', strategies: strategies)[1] %> most copied strategy on ICONOMI (by value).
     </p>
     <p class="lead d-none">
-      Of the <%=acs_index-1%> <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
-      Metastrategy is <a href="/iconomi">outperforming</a> <%=(outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| (other_strategy.ryear || 0) < strategy.ryear }).count%> of them over the 1-year timeframe:
-      <%=outperforming.map { |strategy| strategy.name }.to_sentence(last_word_connector: ' and ')%>.
+      Of the <%= acs_index - 1 %> <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
+      Metastrategy is <a href="/iconomi">outperforming</a> <%= (outperforming = strategies.order('aum desc').and(:aum.gt => strategy.aum).select { |other_strategy| (other_strategy.ryear || 0) < strategy.ryear }).count %> of them over the 1-year timeframe:
+      <%= outperforming.map(&:name).to_sentence(last_word_connector: ' and ') %>.
       If you're already copying these strategies, you're probably better off switching to Metastrategy.
       <a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group &rarr;</a>
     </p>
@@ -47,7 +47,6 @@
   Rebalanced <%= timeago Time.at(strategy_live['lastRebalanced']) %>
 </p>
 
-
 <% if admin? %>
   <div class="text-center mb-3">
     <div class="d-inline" data-pagelet-url="/metastrategy/n"></div>
@@ -61,20 +60,19 @@
       <% if Asset.and(:status.ne => 'verified').count > 0 %>
         Currently excluded coins:
         <%= Asset.and(:status.ne => 'verified').map do |asset|
-            %{<a class="badge #{asset.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}">#{asset.name} (#{asset.ticker})</a>}
-          end.join(' ') %>
+              %{<a class="badge #{asset.status.nil? ? 'text-bg-secondary' : 'text-bg-danger'}" target="_blank" href="https://iconomi.com/asset/#{asset.ticker}">#{asset.name} (#{asset.ticker})</a>}
+            end.join(' ') %>
         <br>
       <% end %>
       <% if Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').count > 0 %>
         Currently excluded strategies:
         <%= Strategy.and(:status.ne => 'verified').and(:ticker.ne => 'AUSTS').map do |strategy|
-            %(<a class="badge #{strategy.status.nil? ? 'badge-secondary' : 'badge-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
-          end.join(' ') %>
+              %(<a class="badge #{strategy.status.nil? ? 'text-bg-secondary' : 'text-bg-danger'}" target="_blank" href="https://iconomi.com/asset/#{strategy.ticker}">#{strategy.name} #{"(#{strategy.nscore_score})" if strategy.nscore_score} </a>)
+            end.join(' ') %>
       <% end %>
     </p>
   <% end %>
 <% end %>
-
 
 <table class="table mt-3" style="width: auto; margin: auto">
   <thead style="border-top: none">
@@ -83,8 +81,8 @@
       <th style="text-align: center">7d</th>
       <th style="text-align: center">1M</th>
       <th style="text-align: center">3M</th>
-      <th style="text-align: center" >6M</th>
-      <th style="text-align: center" >1Y</th>
+      <th style="text-align: center">6M</th>
+      <th style="text-align: center">1Y</th>
     </tr>
   </thead>
   <tr>
@@ -92,14 +90,14 @@
     <td style="text-align: center">
       <% if strategy.send("r#{t}") %>
         <% nscore, index = strategy.nscore_index("r#{t}", strategies: strategies) %>
-        <!-- <%= number_to_percentage 100*strategy.send("r#{t}"), precision: 0 %> -->
+        <!-- <%= number_to_percentage 100 * strategy.send("r#{t}"), precision: 0 %> -->
         <span class="score d-none">
           <%= number_with_precision nscore, precision: 1 %>
         </span>
         <!-- <br> -->
         Top
-        <br />
-        <%= number_to_percentage 100*index/strategies.count, precision: 0 %>
+        <br>
+        <%= number_to_percentage 100 * index / strategies.count, precision: 0 %>
       <% end %>
     </td>
     <% } %>

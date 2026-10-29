@@ -1,9 +1,9 @@
 <div id="alert-wrap">
   <% { error: 'alert-danger', warning: 'alert-warning', notice: 'alert-info' }.each { |k,v| %>
   <% if flash[k] %>
-    <div class="fade in alert <%= v %> alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <div class="fade show alert <%= v %> alert-dismissible">
       <%= flash[k] %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
   <% } %>

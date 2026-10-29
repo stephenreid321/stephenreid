@@ -1,6 +1,6 @@
 module Substack
-  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'
-  CDN_IMAGE_HOST = 'substackcdn.com'
+  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'.freeze
+  CDN_IMAGE_HOST = 'substackcdn.com'.freeze
   GALLERY_IMAGE_WIDTH = 480
 
   class << self
@@ -72,10 +72,10 @@ module Substack
 
         url = mention_url(attrs)
         replacement = if url.present?
-          node.document.create_element('a', name, 'href' => url)
-        else
-          name
-        end
+                        node.document.create_element('a', name, 'href' => url)
+                      else
+                        name
+                      end
         node.replace(replacement)
       end
       doc
