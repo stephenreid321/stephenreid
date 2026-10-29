@@ -43,3 +43,29 @@ blockquote {
     color: $footer-link-hover-color;
   }
 }
+
+// The homepage hero, full width and up against the nav, over a rippling grid (ripple.js)
+html {
+  overflow-x: clip; // 100vw includes the scrollbar
+}
+
+.ripple-hero {
+  --ripple-still: #{mix($body-color, $body-bg, 6%)};
+  --ripple-crest: #{mix($primary, $body-bg, 50%)};
+  --ripple-trough: #{mix($body-color, $body-bg, 18%)};
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: -$spacer * 1.5; // the nav's mb-4
+  padding-block: $spacer * 3;
+
+  canvas {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    mask-image: linear-gradient(to bottom, black 75%, transparent);
+  }
+}
