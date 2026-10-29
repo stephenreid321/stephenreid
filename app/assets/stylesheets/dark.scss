@@ -1,5 +1,4 @@
 $primary: #B16DC6;
-$font-family-sans-serif: 'Space Grotesk', sans-serif;
 $body-bg: #292C35;
 $body-color: #c4cbd4;
 $body-emphasis-color: white;
@@ -7,8 +6,6 @@ $body-secondary-color: darken($body-color, 20%); // text-muted
 $contrast-color: white;
 $highlight-color: #E5C07C;
 $code-color: #C5636C;
-$font-size-base: 1.125rem;
-$lead-font-size: $font-size-base * 1.1;
 $secondary: lighten($body-bg, 15%);
 $dark: darken($body-bg, 5%); // bg-dark, cards and the footer
 $card-bg: $dark;

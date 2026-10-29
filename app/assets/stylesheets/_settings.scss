@@ -3,6 +3,10 @@
 // Bootstrap 4's text colours on coloured backgrounds: white on the primary colour, as Bootstrap 5's default 4.5:1 would
 // make it black
 $min-contrast-ratio: 2;
+// Both themes' type
+$font-family-sans-serif: 'Space Grotesk', sans-serif;
+$font-size-base: 1.125rem;
+$lead-font-size: $font-size-base * 1.1;
 // Bootstrap 4's links: underlined only on hover
 $link-decoration: none;
 $link-hover-decoration: underline;
