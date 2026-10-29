@@ -18,39 +18,22 @@ namespace :strategies do
 end
 
 namespace :posts do
+  desc "Post to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet"
   task sync: :environment do
-    conn = Faraday.new(url: 'https://readwise.io/api/v3') do |faraday|
-      faraday.request :url_encoded
-      faraday.adapter Faraday.default_adapter
-    end
+    response = Faraday.get('https://readwise.io/api/v3/list', { location: 'archive', updatedAfter: 7.days.ago.iso8601 },
+                           { 'Authorization' => "Token #{ENV['READWISE_ACCESS_TOKEN']}" })
+    bluesky = Bluesky.new
+    posted_urls = bluesky.recent_link_urls
 
-    response = conn.get('list', {
-                          location: 'archive',
-                          updatedAfter: 7.days.ago.iso8601
-                        }) do |req|
-      req.headers['Authorization'] = "Token #{ENV['READWISE_ACCESS_TOKEN']}"
-      req.headers['Content-Type'] = 'application/json'
-    end
-
-    posted_urls = `python #{Shellwords.escape(Padrino.root.to_s)}/scripts/bluesky.py --recent-urls`
-                  .lines.map(&:strip).reject(&:empty?)
-
-    data = JSON.parse(response.body)
     # Post oldest first so the newest archive item is last and sits on top of Bluesky
-    data['results'].sort_by { |r| Time.parse(r['last_moved_at']) }.last(50).each do |r|
+    JSON.parse(response.body)['results'].sort_by { |r| Time.parse(r['last_moved_at']) }.last(50).each do |r|
       url = r['source_url'].gsub('youtu.be/', 'youtube.com/watch?v=')
       next if Time.parse(r['last_moved_at']) < 7.days.ago
       next if posted_urls.include?(url)
 
       puts url
-
       title = r['title'].to_s
-      description = r['summary'].to_s.truncate(150)
-      thumbnail = r['image_url'].to_s
-
-      args = [Shellwords.escape(title), Shellwords.escape(url), Shellwords.escape(title), Shellwords.escape(description)]
-      args << Shellwords.escape(thumbnail) if thumbnail.present?
-      `python #{Shellwords.escape(Padrino.root.to_s)}/scripts/bluesky.py #{args.join(' ')}`
+      bluesky.post_link(text: title, url: url, title: title, description: r['summary'].to_s.truncate(150), image_url: r['image_url'].presence)
       posted_urls << url
     end
   end
