@@ -6,8 +6,10 @@ $min-contrast-ratio: 2;
 // Bootstrap 4's links: underlined only on hover
 $link-decoration: none;
 $link-hover-decoration: underline;
-// Bootstrap 4's tables, in the body colour
+// Bootstrap 4's tables, in the body colour and with its roomier cells
 $table-color: $body-color;
+$table-cell-padding-y: .75rem;
+$table-cell-padding-x: .75rem;
 $headings-color: $contrast-color;
 $small-font-size: 90%;
 $mark-padding: 0;
