@@ -40,7 +40,7 @@
 
   function resize () {
     const dpr = window.devicePixelRatio || 1
-    // The observer also fires once on start, which mustn't wipe the first stone
+    // The observer also fires once on start, with the size unchanged
     if (canvas.clientWidth === width && canvas.clientHeight === height) return
     width = canvas.clientWidth
     height = canvas.clientHeight
@@ -209,7 +209,5 @@
     if (visible) start()
   }).observe(hero)
 
-  // Start with a stone dropped in the middle, so the hero ripples as the page opens
-  drop(width / 2, height / 2, force)
   start()
 })()
