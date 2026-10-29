@@ -3,5 +3,9 @@
 <script>
   $(function () {
     $('#<%= id %>').iFrameResize({ checkOrigin: false, heightCalculationMethod: 'taggedElement' })
+    document.addEventListener('themechange', function (e) {
+      const iframe = document.getElementById('<%= id %>')
+      iframe.src = iframe.src.replace(/theme=\w+/, `theme=${e.detail}`)
+    })
   })
 </script>

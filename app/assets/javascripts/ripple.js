@@ -30,9 +30,13 @@
     ctx.fillStyle = getComputedStyle(hero).getPropertyValue(name).trim()
     return ctx.fillStyle.match(/[0-9a-f]{2}/gi).map((h) => parseInt(h, 16))
   }
-  const still = colour('--ripple-still')
-  const crest = colour('--ripple-crest')
-  const trough = colour('--ripple-trough')
+  let still, crest, trough
+  function readColours () {
+    still = colour('--ripple-still')
+    crest = colour('--ripple-crest')
+    trough = colour('--ripple-trough')
+  }
+  readColours()
 
   function resize () {
     const dpr = window.devicePixelRatio || 1
@@ -152,6 +156,11 @@
   }
 
   resize()
+  // The nav's switch changed theme
+  document.addEventListener('themechange', () => {
+    readColours()
+    draw()
+  })
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   // The pointer events are on the hero, so the water still responds under its text and picture

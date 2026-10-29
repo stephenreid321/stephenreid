@@ -26,11 +26,7 @@
 
 <%= partial :'layouts/dependencies' %>
 
-<% [
-     "/stylesheets/#{@stylesheet}.css?#{@cachebuster}"
-   ].each { |f| %>
-<link rel="stylesheet" href="<%= f %>">
-<% } %>
+<link rel="stylesheet" data-theme-stylesheet href="/stylesheets/<%= @stylesheet %>.css?<%= @cachebuster %>">
 
 <%= favicon_tag @favicon || 'octopus-circle.png' %>
 <title><%= t = if @full_title
