@@ -142,7 +142,7 @@
     const [x1, y1] = hoverAt
     const [x0, y0] = hoverFrom || hoverAt
     hoverFrom = hoverAt
-    if (performance.now() - hoverMoved < 150) stir(x1, y1, force * 0.15)
+    if (performance.now() - hoverMoved < 150) stir(x1, y1, force * 0.6)
     const dist = Math.hypot(x1 - x0, y1 - y0) / cell
     if (dist < 0.05) return
     const n = Math.ceil(dist * 2)
