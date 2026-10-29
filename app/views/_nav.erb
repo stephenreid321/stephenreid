@@ -75,16 +75,18 @@
 <script>
   $("#nav a[href^=http]").attr('target', '_blank')
   $("#nav a[href^='/courses']").attr('target', '_blank')
-  // Switches theme in place: loads the other theme's stylesheet, then drops the old one and tells the page (themechange),
-  // so what reads the theme can follow. The cookie remembers it for the server
+  // Switches theme in place: loads the other theme's stylesheet for print, so it doesn't apply yet, then in one go applies
+  // it, drops the old one and tells the page (themechange), so what reads the theme, like the hero's grid, changes in
+  // the same frame as the rest. The cookie remembers it for the server
   $('#theme-switch').change(function () {
     const theme = this.checked ? 'dark' : 'light'
     Cookies.set('theme', theme, { expires: 365, sameSite: 'Lax' })
     const current = $('link[data-theme-stylesheet]').last()
-    const link = current.clone().attr('href', current.attr('href').replace(/\/(dark|light)\.css/, `/${theme}.css`))
+    const link = current.clone().attr({ href: current.attr('href').replace(/\/(dark|light)\.css/, `/${theme}.css`), media: 'print' })
     link.on('load', function () {
       // Flipped back while it loaded
       if (theme !== ($('#theme-switch').prop('checked') ? 'dark' : 'light')) return link.remove()
+      link.removeAttr('media')
       $('link[data-theme-stylesheet]').not(link).remove()
       $('#nav .navbar').toggleClass('navbar-dark', theme === 'dark').toggleClass('navbar-light', theme === 'light')
       document.dispatchEvent(new CustomEvent('themechange', { detail: theme }))
