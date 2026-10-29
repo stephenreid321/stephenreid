@@ -45,7 +45,8 @@ blockquote {
 }
 
 // The homepage hero, full width and up against the nav, over a rippling grid (ripple.js)
-html {
+// Only on the hero's page, so wide pages elsewhere still scroll sideways
+html:has(.ripple-hero) {
   overflow-x: clip; // 100vw includes the scrollbar
 }
 
