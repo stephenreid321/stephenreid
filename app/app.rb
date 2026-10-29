@@ -14,7 +14,12 @@ module StephenReid
     set :public_folder, Padrino.root('app', 'assets')
 
     before do
-      @stylesheet = params[:stylesheet] || 'dark'
+      # The nav's toggle sets ?theme=, which the session remembers; ?stylesheet= picks a theme for just that page
+      if %w[dark light].include?(params[:theme])
+        session[:theme] = params[:theme]
+        redirect request.path
+      end
+      @stylesheet = [params[:stylesheet], session[:theme]].find { |theme| %w[dark light].include?(theme) } || 'dark'
       @cachebuster = Padrino.env == :development ? SecureRandom.uuid : ENV['HEROKU_SLUG_COMMIT']
       redirect "#{ENV['BASE_URI']}#{request.path}" if ENV['BASE_URI'] && (ENV['BASE_URI'] != "#{request.scheme}://#{request.env['HTTP_HOST']}")
       if params[:r]

@@ -47,7 +47,14 @@
         <% end %>
       </ul>
 
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item">
+          <label class="nav-link form-switch d-flex align-items-center gap-2 ps-0" for="theme-switch">
+            <i class="bi bi-sun"></i>
+            <input class="form-check-input float-none m-0" type="checkbox" role="switch" id="theme-switch" aria-label="Dark theme" <%= 'checked' if @stylesheet == 'dark' %>>
+            <i class="bi bi-moon"></i>
+          </label>
+        </li>
         <li class="nav-item d-none d-lg-inline">
           <a target="_blank" class="btn btn-secondary btn-sm text-nowrap" href="mailto:stephen@stephenreid.net">Email me</a>
         </li>
@@ -68,4 +75,5 @@
 <script>
   $("#nav a[href^=http]").attr('target', '_blank')
   $("#nav a[href^='/courses']").attr('target', '_blank')
+  $('#theme-switch').change(function () { location.href = '?theme=' + (this.checked ? 'dark' : 'light') })
 </script>
