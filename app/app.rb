@@ -73,10 +73,7 @@ module StephenReid
     end
 
     get '/context', provides: :txt do
-      ::Context.markdown(
-        notes_limit: params[:notes_limit],
-        posts_limit: params[:posts_limit]
-      ).join("\n\n")
+      ::Context.markdown(notes_limit: params[:notes_limit], posts_limit: params[:posts_limit])
     end
 
     get '/substack/notes', provides: :txt do

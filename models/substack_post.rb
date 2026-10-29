@@ -54,7 +54,7 @@ class SubstackPost
     def import
       unless Substack.api_sync_enabled?
         puts 'ℹ️  Substack post import skipped: set SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL.'
-        return { api_sync: false, sync_created: 0 }
+        return
       end
 
       imported = 0
@@ -86,8 +86,6 @@ class SubstackPost
       SubstackPost.where(:post_id.nin => seen_ids).delete_all if seen_ids.any?
 
       puts "🗄️  Substack post import: #{imported} post(s)"
-
-      { api_sync: true, sync_created: imported }
     end
 
     def markdown_export(limit: nil)

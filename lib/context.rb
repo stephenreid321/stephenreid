@@ -1,77 +1,18 @@
+# Everything about Stephen as one markdown document, for /context
 module Context
-  def self.context(notes_limit: nil, posts_limit: nil)
-    sections = [
-      {
-        title: 'Short bio in the third person',
-        content: File.read("#{Padrino.root}/app/markdown/bio.md").force_encoding('utf-8')
-      },
-      {
-        title: 'Training and teachers',
-        content: File.read("#{Padrino.root}/app/markdown/training.md").force_encoding('utf-8')
-      },
-      {
-        title: 'Speaking engagements',
-        content: SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.map do |speaking_engagement|
-          name = speaking_engagement[:url].present? ? "[#{speaking_engagement[:name]}](#{speaking_engagement[:url]})" : speaking_engagement[:name]
-          "#{[speaking_engagement[:date], speaking_engagement[:location]].compact.join(', ')}: #{name}"
-        end.join("\n\n")
-      }
-    ]
-
-    sections << {
-      title: "Books I've read",
-      books: BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.sort_by { |b| b[:date_read] }.reverse.map { |b| { title: b[:title], author: b[:author], date_read: b[:date_read] } }
-    }
-
-    sections << {
-      title: 'Substack notes',
-      content: SubstackNote.markdown_export(limit: notes_limit).force_encoding('utf-8')
-    }
-    sections << {
-      title: 'Substack posts',
-      content: SubstackPost.markdown_export(limit: posts_limit).force_encoding('utf-8')
-    }
-
-    { document: { section: sections } }
-  end
-
   def self.markdown(notes_limit: nil, posts_limit: nil)
-    data = context(
-      notes_limit: notes_limit,
-      posts_limit: posts_limit
-    )
-    sections = data[:document][:section]
-
-    sections.map do |section|
-      result = ["## #{section[:title]}"]
-
-      if section[:content]
-        result << section[:content]
-      elsif section[:books]
-        result << section[:books].map { |b| "#{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n" }.join("\n")
-      end
-
-      result.join("\n\n")
-    end
-  end
-
-  def self.xml(notes_limit: nil, posts_limit: nil)
-    data = context(
-      notes_limit: notes_limit,
-      posts_limit: posts_limit
-    )
-    sections = data[:document][:section]
-
-    sections.map do |section|
-      section_hash = { title: section[:title] }
-
-      if section[:content]
-        section_hash[:content] = section[:content]
-      elsif section[:books]
-        section_hash[:book] = section[:books]
-      end
-
-      section_hash.to_xml(root: 'section', skip_instruct: true)
-    end
+    {
+      'Short bio in the third person' => File.read("#{Padrino.root}/app/markdown/bio.md", encoding: 'UTF-8'),
+      'Training and teachers' => File.read("#{Padrino.root}/app/markdown/training.md", encoding: 'UTF-8'),
+      'Speaking engagements' => SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.map do |s|
+        name = s[:url].present? ? "[#{s[:name]}](#{s[:url]})" : s[:name]
+        "#{[s[:date], s[:location]].compact.join(', ')}: #{name}"
+      end.join("\n\n"),
+      "Books I've read" => BOOKS.select { |b| b[:date_read] && b[:date_read] >= '2018-01-01' }.sort_by { |b| b[:date_read] }.reverse.map do |b|
+        "#{b[:title]} by #{b[:author]} (read #{b[:date_read]})\n"
+      end.join("\n"),
+      'Substack notes' => SubstackNote.markdown_export(limit: notes_limit),
+      'Substack posts' => SubstackPost.markdown_export(limit: posts_limit)
+    }.map { |title, content| "## #{title}\n\n#{content}" }.join("\n\n")
   end
 end

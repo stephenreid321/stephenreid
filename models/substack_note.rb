@@ -69,7 +69,7 @@ class SubstackNote
     def import
       unless Substack.api_sync_enabled?
         puts 'ℹ️  API import skipped: set SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL.'
-        return { api_sync: false, sync_created: 0 }
+        return
       end
 
       delete_all
@@ -94,8 +94,6 @@ class SubstackNote
       end
 
       puts "🗄️  API import: #{imported} SubstackNote(s)"
-
-      { api_sync: true, sync_created: imported }
     end
 
     def markdown_export(limit: nil)

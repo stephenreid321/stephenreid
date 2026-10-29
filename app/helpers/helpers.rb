@@ -26,29 +26,6 @@ StephenReid::App.helpers do
     halt(403) unless admin?
   end
 
-  def bool_badge(value, yes_text: 'Yes', no_text: 'No')
-    if value
-      %(<span class="badge text-bg-success">#{yes_text}</span>)
-    else
-      %(<span class="badge text-bg-secondary">#{no_text}</span>)
-    end
-  end
-
-  def display_or_dash(value, format: nil, prefix: nil, suffix: nil, &block)
-    if value
-      formatted = if block
-                    yield(value)
-                  else
-                    (format ? format(format, value) : value)
-                  end
-      result = prefix.to_s + formatted.to_s
-      result += %( <small class="text-muted">#{suffix}</small>) if suffix
-      result
-    else
-      %(<span class="text-muted">—</span>)
-    end
-  end
-
   def blanks_to_nils!(hash)
     hash.each do |k, v|
       if v.blank?
