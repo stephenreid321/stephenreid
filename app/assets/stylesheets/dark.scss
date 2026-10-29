@@ -9,6 +9,8 @@ $code-color: #C5636C;
 $secondary: lighten($body-bg, 15%);
 $dark: darken($body-bg, 5%); // bg-dark, cards and the footer
 $card-bg: $dark;
+$input-bg: white; // Bootstrap 4's white form fields, as Bootstrap 5's take the body's background
+$input-color: #212529; // Bootstrap's default light body colour
 $table-border-color: $dark;
 $dropdown-bg: $body-bg;
 $dropdown-link-color: $body-color;
