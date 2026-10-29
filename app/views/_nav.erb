@@ -26,7 +26,6 @@
             COURSES.sort_by { |c| c[:date] || Time.now.to_s }.reverse.map { |c| [c[:name], "/courses/#{c[:slug]}"] }
             ],                                     
             ['Events', '/events'],
-            ['Metastrategy', '/metastrategy'],               
             ['Knowledge',
              [
                ['Books', '/books'],
