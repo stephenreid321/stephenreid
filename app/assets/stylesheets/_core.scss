@@ -49,10 +49,12 @@ html {
   overflow-x: clip; // 100vw includes the scrollbar
 }
 
+$ripple-shade: 10% !default; // how much black darkens the grid's squares
+
 .ripple-hero {
-  --ripple-still: #{mix(black, mix($body-color, $body-bg, 6%), 10%)};
+  --ripple-still: #{mix(black, mix($body-color, $body-bg, 6%), $ripple-shade)};
   --ripple-crest: #{mix($primary, $body-bg, 50%)};
-  --ripple-trough: #{mix(black, mix($body-color, $body-bg, 18%), 10%)};
+  --ripple-trough: #{mix(black, mix($body-color, $body-bg, 18%), $ripple-shade)};
   position: relative;
   isolation: isolate;
   width: 100vw;

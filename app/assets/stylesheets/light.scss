@@ -1,15 +1,30 @@
 $primary: #2DB963;
-$body-color: #212529; // Bootstrap's default, named for the variables below
-$contrast-color: darken($body-color, 15%);
+// Grey body text, so what's picked out in the contrast colour (as white is in the dark theme) stands out in black
+$body-bg: #F9F9F8; // stephenreid.substack.com's background
+$body-color: #3e444a; // between $gray-700 and $gray-800
+$contrast-color: black;
 $mark-bg: #FDFFAA;
+$carousel-indicator-active-bg: $contrast-color; // the carousel's dots and arrows are white by default
+$carousel-control-color: $contrast-color;
 $navbar-light-color: $body-color;
 $navbar-light-hover-color: $contrast-color;
 $blockquote-border-color: lighten($primary, 25%);
-$footer-bg: #f8f9fa; // $gray-100
-$footer-border-color: #e9ecef; // $gray-200
+$footer-bg: darken($body-bg, 3%);
+$footer-border-color: darken($body-bg, 7%);
 $footer-link-color: $contrast-color;
 $footer-link-hover-color: darken($contrast-color, 10%);
+$ripple-shade: 0%;
 
 @import "settings";
 @import "bootstrap/scss/bootstrap";
 @import "core";
+
+// White artwork drawn for the dark theme, in black
+.dark-artwork {
+  filter: invert(1);
+}
+
+// Black alone barely stands out from the grey body text, as white does in the dark theme
+.text-contrast {
+  font-weight: $font-weight-medium;
+}
