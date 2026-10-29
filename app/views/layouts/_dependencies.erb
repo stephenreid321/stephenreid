@@ -21,12 +21,8 @@
 
 <% [
        '//rawcdn.githack.com/symbiota-coop/dandelion/b2ac10e0761e8d8a2942750f80261a99233d6118/app/assets/javascripts/pagelets.js',
-       '//cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0',
-       '//cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js',
-       '//cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js',
        '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
        '/javascripts/toc.js',
-       '/javascripts/benchmark_charts.js',
        "/javascripts/app.js?#{@cachebuster}"
      ].each { |f| %>
 <script src="<%= f %>"></script>
