@@ -34,9 +34,4 @@
 <p class="mb-3">
   <a href="https://dandelion.events/u/stephenreid">Check out my Dandelion profile</a>
 </p>
-<iframe style="overflow: scroll; border: 0; height: 100vh; width:100%;" id="dandelion-feedback" src="https://dandelion.events/u/stephenreid/feedback?minimal=true&hide_pictures=1"></iframe>
-<script>
-  $(function() {
-       $('#dandelion-feedback').iFrameResize({log: true, checkOrigin: false, heightCalculationMethod : 'taggedElement'})
-  })
-</script>
+<%= partial :dandelion_iframe, locals: { id: 'dandelion-feedback', src: 'https://dandelion.events/u/stephenreid/feedback?minimal=true&hide_pictures=1' } %>

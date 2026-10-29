@@ -2,8 +2,8 @@
 module Context
   def self.markdown(notes_limit: nil, posts_limit: nil)
     {
-      'Short bio in the third person' => File.read("#{Padrino.root}/app/markdown/bio.md", encoding: 'UTF-8'),
-      'Training and teachers' => File.read("#{Padrino.root}/app/markdown/training.md", encoding: 'UTF-8'),
+      'Short bio in the third person' => MarkdownFile.read(:bio),
+      'Training and teachers' => MarkdownFile.read(:training),
       'Speaking engagements' => SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.map do |s|
         name = s[:url].present? ? "[#{s[:name]}](#{s[:url]})" : s[:name]
         "#{[s[:date], s[:location]].compact.join(', ')}: #{name}"

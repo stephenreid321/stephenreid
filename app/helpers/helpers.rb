@@ -3,19 +3,8 @@ StephenReid::App.helpers do
     %(<relative-time datetime="#{x.iso8601}">#{x.iso8601}</relative-time>)
   end
 
-  def md(slug, render: true)
-    begin
-      text = File.read("#{Padrino.root}/app/markdown/#{slug}.md").force_encoding('utf-8')
-      text = text.gsub(/\A---(.|\n)*?---/, '')
-    rescue StandardError
-      text = slug
-    end
-    if render
-      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
-      markdown.render(text)
-    else
-      text
-    end
+  def md(name)
+    MarkdownFile.html(name)
   end
 
   def admin?
