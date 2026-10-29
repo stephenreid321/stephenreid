@@ -1,33 +1,17 @@
-.navbar-dark .navbar-nav .nav-link {
-  color: $body-color
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: $contrast-color
-}
+// Styles both themes share, after Bootstrap
 
 h2:not(.regular) {
   border-bottom: 3px solid $contrast-color;
   display: inline-block
 }
 
-p.lead {
+p.lead,
+th,
+.table > :not(caption) > * > th {
   color: $contrast-color
 }
 
-th {
-  color: $contrast-color
-}
-
-.text-contrast {
-  color: $contrast-color !important
-}
-
+.text-contrast,
 .text-contrast:hover {
   color: $contrast-color !important
 }
@@ -36,66 +20,26 @@ th {
   color: $body-color !important
 }
 
-// .text-standard:hover {
-//   color: $contrast-color !important
-// }
-
-.bg-standard {
-  background: $body-bg !important
-}
-
-.btn-twitter {
-  color: white;
-  border-color: #379CF0;
-  background-color: #379CF0
-}
-
-.btn-twitter:hover {
-  color: white;
-  border-color: darken(#379CF0, 10%);
-  background-color: darken(#379CF0, 10%);
-}
-
-code,
-pre code {
-  color: $code-color
-}
-
 blockquote {
-  border-left: 0.3em solid lighten($primary, 15%);
+  border-left: 0.3em solid $blockquote-border-color;
   padding-left: 1em;
   font-style: italic
-}
-
-blockquote footer {
-  font-size: 1rem !important
-}
-
-small,
-.small {
-  font-size: 90%
 }
 
 .dropdown-item.active {
   font-weight: bold
 }
 
-.text-sm,
-.text-sm p {
-  font-size: 90% !important;
-  line-height: 1.2rem !important
-}
+#footer {
+  background-color: $footer-bg;
+  border-top: 1px solid $footer-border-color;
 
-p.attribution {
-  text-align: right;
-  font-size: 0.95rem !important
-}
+  a:not(.btn) {
+    color: $footer-link-color;
+  }
 
-
-.badge.bg-warning {
-  color: white
-}
-
-.bgo:hover {
-  opacity: 0 !important
+  a:not(.btn):hover,
+  a:not(.btn):focus {
+    color: $footer-link-hover-color;
+  }
 }

@@ -1,70 +1,20 @@
 $primary: #2DB963;
 $font-family-sans-serif: 'Overpass', sans-serif;
-// $body-bg
-// $body-color
-// $code-color
-// $font-size-base
-// $lead-font-size
-//
-//
-// Bootstrap 4's tables, in the body colour
-$table-color: #212529; // Bootstrap's default $body-color, which isn't defined yet
-// Bootstrap 4's links: underlined only on hover
-$link-decoration: none;
-$link-hover-decoration: underline;
-@import "bootstrap/scss/bootstrap";
-$highlight-color: #FDFFAA;
+$body-color: #212529; // Bootstrap's default, named for the variables below
 $contrast-color: darken($body-color, 15%);
+$font-weight-normal: 300;
+$btn-font-weight: 400;
+$input-group-addon-font-weight: 400;
+$font-weight-bolder: 600;
+$mark-bg: #FDFFAA;
+$navbar-light-color: $body-color;
+$navbar-light-hover-color: $contrast-color;
+$blockquote-border-color: lighten($primary, 25%);
+$footer-bg: #f8f9fa; // $gray-100
+$footer-border-color: #e9ecef; // $gray-200
+$footer-link-color: $contrast-color;
+$footer-link-hover-color: darken($contrast-color, 10%);
 
+@import "settings";
+@import "bootstrap/scss/bootstrap";
 @import "core";
-@import "blog";
-@import "datatables";
-@import "range_slider";
-@import "toc";
-
-body,
-small,
-.form-control,
-.dropdown-item {
-  font-weight: 300
-}
-
-b,
-strong {
-  font-weight: 600
-}
-
-mark,
-.mark {
-  color: $body-color;
-  background: $highlight-color;
-  padding-left: 0;
-  padding-right: 0
-}
-
-blockquote {
-  border-left: 0.3em solid lighten($primary, 25%);
-}
-
-.navbar-light .navbar-nav .nav-link {
-  color: $body-color;
-}
-
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:focus {
-  color: $contrast-color;
-}
-
-#footer {
-  background-color: $gray-100;
-  border-top: 1px solid $gray-200;
-
-  a:not(.btn) {
-    color: $contrast-color;
-  }
-
-  a:not(.btn):hover,
-  a:not(.btn):focus {
-    color: darken($contrast-color, 10%);
-  }
-}

@@ -3,22 +3,6 @@ $(function () {
     if ($(this).prop('naturalWidth') == 1 && $(this).prop('naturalHeight') == 1) { $(this).hide() }
   })
 
-  $('.card.post').hover(function () {
-    $('.card-text small', this).removeClass('text-muted')
-  }, function () {
-    $('.card-text small', this).addClass('text-muted')
-  })
-
-  if ($('.blog_post').length > 0 && $('.blog_post').html().indexOf('h2') > 0) {
-    $('#toc').toc({
-      container: '.blog_post',
-      selectors: 'h1,h2,h3,h4'
-    })
-  }
-
-  $('.blog_post a[href^=http]').attr('target', '_blank')
-  $('.blog_post table').addClass('table')
-
   $(document).on('click', 'a[data-confirm]', function (e) {
     const message = $(this).data('confirm')
     if (!confirm(message)) {
@@ -27,29 +11,9 @@ $(function () {
     }
   })
 
-  $('.card').hover(function () {
-    $('.showOnHover', this).addClass('d-lg-inline')
-  }, function () {
-    $('.showOnHover', this).removeClass('d-lg-inline')
-  })
-
-  $('.range-slider__range').on('input', function () {
-    $(this).next().html($(this).val())
-  })
-
-  $('.range-slider__value').each(function () {
-    $(this).html($(this).prev().val())
-  })
-
   function ajaxCompleted () {
     $('[data-bs-toggle="tooltip"]').tooltip({
       html: true
-    })
-
-    $('.rg').each(function () {
-      const d = parseFloat($(this).text())
-      const b = 0
-      if (d > b) { $(this).css('color', 'green') } else if (d < b) { $(this).css('color', 'red') }
     })
 
     // Shades each score's cell from white (0) to green (100)

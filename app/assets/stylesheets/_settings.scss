@@ -1,0 +1,13 @@
+// Bootstrap variables both themes share, after each theme's own and before Bootstrap
+
+// Bootstrap 4's text colours on coloured backgrounds: white on the primary colour, as Bootstrap 5's default 4.5:1 would
+// make it black
+$min-contrast-ratio: 2;
+// Bootstrap 4's links: underlined only on hover
+$link-decoration: none;
+$link-hover-decoration: underline;
+// Bootstrap 4's tables, in the body colour
+$table-color: $body-color;
+$headings-color: $contrast-color;
+$small-font-size: 90%;
+$mark-padding: 0;

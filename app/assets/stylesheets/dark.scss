@@ -2,169 +2,45 @@ $primary: #B16DC6;
 $font-family-sans-serif: 'Space Grotesk', sans-serif;
 $body-bg: #292C35;
 $body-color: #c4cbd4;
+$body-emphasis-color: white;
+$body-secondary-color: darken($body-color, 20%); // text-muted
+$contrast-color: white;
+$highlight-color: #E5C07C;
 $code-color: #C5636C;
 $font-size-base: 1.125rem;
-$lead-font-size: (
-  $font-size-base * 1.1
-);
+$lead-font-size: $font-size-base * 1.1;
 $secondary: lighten($body-bg, 15%);
-$body-emphasis-color: white;
-// Bootstrap 4's tables, in the body colour
-$table-color: $body-color;
-// Bootstrap 4's links: underlined only on hover
-$link-decoration: none;
-$link-hover-decoration: underline;
+$dark: darken($body-bg, 5%); // bg-dark, cards and the footer
+$card-bg: $dark;
+$table-border-color: $dark;
+$dropdown-bg: $body-bg;
+$dropdown-link-color: $body-color;
+$dropdown-link-hover-color: $contrast-color;
+$dropdown-link-hover-bg: $body-bg;
+$dropdown-link-active-bg: $body-bg;
+$navbar-dark-color: $body-color;
+$badge-font-weight: normal;
+$mark-bg: transparent;
+$blockquote-border-color: $highlight-color;
+$footer-bg: $dark;
+$footer-border-color: darken($body-bg, 10%);
+$footer-link-color: $body-color;
+$footer-link-hover-color: $contrast-color;
+
+@import "settings";
 @import "bootstrap/scss/bootstrap";
-$highlight-color: #E5C07C;
-$contrast-color: white;
-
 @import "core";
-@import "blog";
-@import "datatables";
-@import "range_slider";
-@import "toc";
 
-$bg-dark: darken($body-bg, 5%);
-$border-dark: darken($body-bg, 10%);
-$dark-color: #343a40;
-
-.bg-dark {
-  background-color: $bg-dark !important;
-}
-
-.border-dark {
-  border-color: $border-dark !important;
-}
-
-.card {
-  background-color: $bg-dark
-}
-
-.table th,
-.table td {
-  border-color: $bg-dark
-}
-
-.modal h1,
-.modal h2,
-.modal h3,
-.modal h4,
-.modal h5,
-.modal h6 {
-  color: $dark-color
-}
-
-.modal p.lead {
-  color: $dark-color
-}
-
-.dropdown-menu {
-  background-color: $body-bg
-}
-
-.dropdown-item {
-  color: $body-color
-}
-
-.dropdown-item:hover,
-.dropdown-item:focus {
-  color: $contrast-color;
-  background-color: $body-bg
-}
-
-.dropdown-item.active,
-.dropdown-item:active {
-  background-color: $body-bg
-}
-
-.btn-secondary {
-  background-color: lighten($body-bg, 15%);
-  border-color: lighten($body-bg, 15%);
-}
-
-.btn-secondary:hover {
-  background-color: lighten($body-bg, 10%);
-  border-color: lighten($body-bg, 10%);
-}
-
-.text-muted {
-  color: darken($body-color, 20%) !important
-}
-
-.blockquote-footer {
-  color: darken($body-color, 20%) !important
-}
-
-.blog_post table,
-.blog_post table mark {
-  color: $contrast-color
-}
-
-.blog_post .table th,
-.blog_post .table td {
-  border-color: $contrast-color
+// The newsletter modal is light
+.modal :is(h1, h2, h3, h4, h5, h6, p.lead) {
+  color: #343a40
 }
 
 mark,
 .mark {
-  color: $body-color;
-  text-decoration: underline;
-  text-decoration-color: $highlight-color;
-  text-decoration-thickness: 2px;
-  background: none;
-  padding-left: 0;
-  padding-right: 0
-}
-
-.page-link,
-.page-item.disabled .page-link {
-  background-color: $body-bg;
-  border: 1px solid darken($body-bg, 10%);
-}
-
-.page-link:hover,
-.page-item.active .page-link {
-  background-color: darken($body-bg, 10%);
-  border: 1px solid darken($body-bg, 10%);
-}
-
-.page-link:focus {
-  box-shadow: none;
-}
-
-.breadcrumb-item+.breadcrumb-item::before,
-.breadcrumb-item.active {
-  color: darken($body-color, 25%)
-}
-
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
-  color: $body-color;
+  text-decoration: underline 2px $highlight-color;
 }
 
 blockquote {
   color: white;
-  border-left: 0.3em solid $highlight-color;
-}
-
-.fira {
-  font-family: 'Space Grotesk', sans-serif !important
-}
-
-.badge {
-  font-weight: normal
-}
-
-#footer {
-  background-color: $bg-dark;
-  border-top: 1px solid $border-dark;
-
-  a:not(.btn) {
-    color: $body-color;
-  }
-
-  a:not(.btn):hover,
-  a:not(.btn):focus {
-    color: $contrast-color;
-  }
 }

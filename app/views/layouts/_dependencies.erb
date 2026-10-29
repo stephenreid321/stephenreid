@@ -9,6 +9,4 @@
   <%= cdn_tag url %>
 <% end %>
 
-<% ['/javascripts/toc.js', "/javascripts/app.js?#{@cachebuster}"].each do |f| %>
-  <script src="<%= f %>"></script>
-<% end %>
+<script src="/javascripts/app.js?<%= @cachebuster %>"></script>

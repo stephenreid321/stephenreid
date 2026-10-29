@@ -28,7 +28,7 @@ Templates are checked for Lint and Security cops only (`.erb_lint.yml`), not sty
 
 ## Stylesheets
 
-The site has two themes, `dark` and `light` (`?stylesheet=light`), each `app/assets/stylesheets/<theme>.scss`: Bootstrap 5's variables, then Bootstrap, then the shared partials (`_core.scss` and the rest). Never edit the compiled `dark.css` and `light.css`: change the Sass and run `rake stylesheets:build` (needs Node), which compiles both with Dart Sass and Bootstrap at the version in `frontend/package.json`, so the CSS and Bootstrap's JavaScript always match. Commit the compiled CSS with its source.
+The site has two themes, `dark` and `light` (`?stylesheet=light`), each `app/assets/stylesheets/<theme>.scss`: the theme's Bootstrap variables, then `_settings.scss` (variables both share), Bootstrap, and `_core.scss` (styles both share). Style with Bootstrap variables where one exists, rather than overriding its classes. Never edit the compiled `dark.css` and `light.css`: change the Sass and run `rake stylesheets:build` (needs Node), which compiles both with Dart Sass and Bootstrap at the version in `frontend/package.json`, so the CSS and Bootstrap's JavaScript always match. Commit the compiled CSS with its source.
 
 Markup uses Bootstrap 5: `data-bs-*` attributes, `ms-*`/`me-*`, `text-start`/`text-end`, `text-bg-*` badges and `visually-hidden`.
 

@@ -11,9 +11,9 @@ count = strategies.count
   <div class="col-lg-6 text-center">
     <% form_tag '', method: 'get', class: 'mb-3' do %>
       <label>Number of funds</label>
-      <div class="range-slider">
-        <input id="funds" name="funds" class="range-slider__range" type="range" value="5" min="1" max="10" step="1" onchange="proposedPosition()">
-        <span class="range-slider__value">0</span>
+      <div class="d-flex align-items-center gap-2">
+        <input id="funds" name="funds" class="form-range" type="range" value="5" min="1" max="10" step="1" oninput="this.nextElementSibling.value = this.value" onchange="proposedPosition()">
+        <output class="badge text-bg-primary">5</output>
       </div>
       <label>Investment</label>
       <div class="row justify-content-center">

@@ -1,11 +1,7 @@
 <style>
   #nav .navbar-brand { font-size: 2em; }
-  #nav .navbar-brand:hover { }
-    @media(min-width: 992px) {
-      #nav .nav-item {  }
-    }
-    #nav .nav-item { font-size: 0.85rem; padding-right: 0.5rem; }
-    #nav .nav-link.active { font-weight: bold }
+  #nav .nav-item { font-size: 0.85rem; padding-right: 0.5rem; }
+  #nav .nav-link.active { font-weight: bold; color: var(--bs-navbar-color) }
 </style>
 
 <div id="nav">
@@ -38,7 +34,7 @@
         <% nav_items.each do |name, path| %>
           <% if path.is_a?(Array) %>
             <li class="nav-item dropdown">
-              <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle" href="javascript:;"><%= name %><b class="caret"></b></a>
+              <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle <%= 'active' if path.any? { |_, subpath| subpath == request.path } %>" href="javascript:;"><%= name %></a>
               <ul class="dropdown-menu">
                 <% path.each do |subname, subpath| %>
                   <li class="nav-item"><a class="dropdown-item <%= 'active' if request.path == subpath %>" href="<%= subpath %>"><%= subname %></a></li>
@@ -72,5 +68,4 @@
 <script>
   $("#nav a[href^=http]").attr('target', '_blank')
   $("#nav a[href^='/courses']").attr('target', '_blank')
-  $('.dropdown-item.active').closest('.dropdown').find('.dropdown-toggle').addClass('active')
 </script>
