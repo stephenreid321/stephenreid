@@ -39,6 +39,7 @@ LINTERS = [
     files: %r{\Aapp/assets/javascripts/.+\.js\z},
     configs: /\A(eslint\.config\.mjs|package(-lock)?\.json)\z/,
     command: %w[npx --no-install eslint --no-warn-ignored],
+    all: ['app/assets/javascripts'],
     stdin: ->(file) { ['--stdin', '--stdin-filename', file] },
     node: true
   },

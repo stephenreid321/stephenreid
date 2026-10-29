@@ -5,7 +5,7 @@ import globals from 'globals'
 // (config/frontend_dependencies.rb)
 export default [
   {
-    ignores: ['node_modules/**', 'app/assets/fonts/**']
+    ignores: ['node_modules/**', 'vendor/**', 'app/assets/fonts/**']
   },
   js.configs.recommended,
   {
