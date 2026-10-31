@@ -128,6 +128,21 @@ module IconomiPages
       lines.join("\n")
     end
 
+    # The body of the GitHub issue the Site workflow opens for the strategies and assets with no status yet (not those
+    # excluded): blank when there are none
+    def unreviewed
+      items = { 'strategies' => Strategy.all.reject { |s| s.status || s.ticker == 'AUSTS' },
+                'assets' => Asset.all.values.reject(&:status) }.reject { |_, list| list.empty? }
+      return '' if items.empty?
+
+      lines = items.flat_map do |kind, list|
+        ["New #{kind}, with no status in data/iconomi_#{kind}.csv:", '', *list.map { |i| "- #{i.name} (#{i.ticker})" }, '']
+      end
+      lines << 'Give each a status there (`verified` or `excluded`), or run Tasks → verify to verify them all. This ' \
+               'issue closes itself once none is left.'
+      lines.join("\n")
+    end
+
     private
 
     def percent(weight)

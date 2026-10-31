@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      # For the issue about new strategies and assets
+      issues: write
     steps:
     - name: Git checkout
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -79,6 +81,24 @@ jobs:
       run: bundle exec rake iconomi:summary
       env:
         NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}
+
+    # One open issue (label iconomi-new) while there are strategies or assets with no status yet: opened when the first
+    # appears, commented on when the list changes, which notifies, and closed when none is left
+    - name: Open or close the issue for new strategies and assets
+      run: |
+        body=$(bundle exec rake iconomi:unreviewed)
+        number=$(gh issue list --state open --label iconomi-new --json number --jq '.[0].number // empty')
+        if [ -n "$body" ] && [ -z "$number" ]; then
+          gh issue create --label iconomi-new --title 'New ICONOMI strategies or assets to review' --body "$body"
+        elif [ -n "$body" ] && [ "$body" != "$(gh issue view "$number" --json body --jq .body)" ]; then
+          gh issue edit "$number" --body "$body"
+          gh issue comment "$number" --body "The list has changed:"$'\n\n'"$body"
+        elif [ -z "$body" ] && [ -n "$number" ]; then
+          gh issue close "$number" --comment 'Every strategy and asset has a status now.'
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}
 
     - name: Upload the site
       uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0

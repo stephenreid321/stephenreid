@@ -45,6 +45,11 @@ namespace :iconomi do
     summary = IconomiPages.summary
     ENV['GITHUB_STEP_SUMMARY'] ? File.write(ENV['GITHUB_STEP_SUMMARY'], summary, mode: 'a') : puts(summary)
   end
+
+  desc 'Print the strategies and assets with no status yet, for the GitHub issue the Site workflow keeps (blank if none)'
+  task unreviewed: :environment do
+    print IconomiPages.unreviewed
+  end
 end
 
 namespace :site do
