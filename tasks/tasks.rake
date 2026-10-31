@@ -30,7 +30,7 @@ namespace :data do
 end
 
 namespace :iconomi do
-  desc 'Mark the strategies and assets with no status as verified, in data/iconomi_strategies.csv and data/iconomi_assets.csv'
+  desc 'Mark the strategies and assets with no status as verified, in data/iconomi/strategies.csv and data/iconomi/assets.csv'
   task verify: :environment do
     puts "Verified: #{Strategy.verify.join(', ').presence || 'nothing new'}"
   end

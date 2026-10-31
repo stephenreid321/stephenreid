@@ -80,7 +80,7 @@ jobs:
     # A push with GITHUB_TOKEN doesn't run the Site workflow, so this runs it
     - name: Commit and rebuild the site
       run: |
-        git add data/iconomi_strategies.csv data/iconomi_assets.csv
+        git add data/iconomi/strategies.csv data/iconomi/assets.csv
         git diff --cached --quiet && exit 0
         git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
           commit -m 'Verify the new ICONOMI strategies and assets'

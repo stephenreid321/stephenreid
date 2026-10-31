@@ -1,5 +1,5 @@
 # A strategy on ICONOMI, fetched with its holdings into data/fetched/iconomi.json (rake data:iconomi). Its status comes
-# from data/iconomi_strategies.csv, which you edit by hand. Scores are worked out each time the data is read
+# from data/iconomi/strategies.csv, which you edit by hand. Scores are worked out each time the data is read
 class Strategy
   class RoundingError < StandardError; end
   class NotEnoughStrategies < StandardError; end
@@ -132,7 +132,7 @@ class Strategy
     end
 
     def csv_file
-      CuratedCsv.new('iconomi_strategies', %w[ticker name status])
+      CuratedCsv.new('iconomi/strategies', %w[ticker name status])
     end
 
     def find_by_ticker(ticker)
@@ -178,8 +178,8 @@ class Strategy
       reset!
     end
 
-    # Marks the strategies and assets that have no status as verified, in data/iconomi_strategies.csv and
-    # data/iconomi_assets.csv, as the old admin page's Verify did. Returns those it marked
+    # Marks the strategies and assets that have no status as verified, in data/iconomi/strategies.csv and
+    # data/iconomi/assets.csv, as the old admin page's Verify did. Returns those it marked
     def verify
       fetched = Fetched.read(:iconomi, {})
       changed = csv_file.verify(fetched.fetch('strategies', []).to_h { |s| [s['ticker'], s['name']] }) +

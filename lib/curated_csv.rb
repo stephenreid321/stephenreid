@@ -1,4 +1,4 @@
-# A CSV in data/ that you edit by hand, with a row per ticker: what you've decided about ICONOMI's assets and strategies
+# A CSV in data/iconomi/ that you edit by hand, with a row per ticker: what you've decided about ICONOMI's assets and strategies
 class CuratedCsv
   attr_reader :path, :columns
 

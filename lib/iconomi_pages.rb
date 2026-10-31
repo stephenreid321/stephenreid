@@ -121,7 +121,7 @@ module IconomiPages
       { 'strategies' => Strategy.unverified.reject { |s| s.ticker == 'AUSTS' }, 'assets' => Asset.all.values.reject(&:verified?) }.each do |kind, items|
         next if items.empty?
 
-        lines << "Unverified #{kind} (no status, or excluded) in data/iconomi_#{kind}.csv:" << ''
+        lines << "Unverified #{kind} (no status, or excluded) in data/iconomi/#{kind}.csv:" << ''
         lines += items.map { |i| "- #{i.name} (#{i.ticker}): #{i.status || 'no status'}" }
         lines << ''
       end
@@ -136,7 +136,7 @@ module IconomiPages
       return '' if items.empty?
 
       lines = items.flat_map do |kind, list|
-        ["New #{kind}, with no status in data/iconomi_#{kind}.csv:", '', *list.map { |i| "- #{i.name} (#{i.ticker})" }, '']
+        ["New #{kind}, with no status in data/iconomi/#{kind}.csv:", '', *list.map { |i| "- #{i.name} (#{i.ticker})" }, '']
       end
       lines << 'Give each a status there (`verified` or `excluded`), or run Tasks → verify to verify them all. This ' \
                'issue closes itself once none is left.'

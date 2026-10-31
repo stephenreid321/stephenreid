@@ -1,5 +1,5 @@
-# A coin on ICONOMI. Its name comes from the strategies' holdings (data/fetched/iconomi.json); its status, multiplier
-# and colour from data/iconomi_assets.csv, which you edit by hand
+# A coin on ICONOMI. Its name comes from the strategies' holdings (data/fetched/iconomi.json); its status and colour
+# from data/iconomi/assets.csv, and its multiplier from data/iconomi/multipliers.csv, which you edit by hand
 class Asset
   attr_reader :ticker, :name, :status, :multiplier, :color
 
@@ -35,7 +35,12 @@ class Asset
 
   class << self
     def csv_file
-      CuratedCsv.new('iconomi_assets', %w[ticker name status multiplier color])
+      CuratedCsv.new('iconomi/assets', %w[ticker name status color])
+    end
+
+    # The assets Metastrategy weights up or down: a row each, with its multiplier
+    def multipliers_file
+      CuratedCsv.new('iconomi/multipliers', %w[ticker name multiplier])
     end
 
     # Each asset, by ticker
@@ -43,9 +48,11 @@ class Asset
       @all ||= begin
         names = Fetched.read(:iconomi, {}).fetch('assets', {})
         rows = csv_file.rows
+        multipliers = multipliers_file.rows
         (names.keys | rows.keys).to_h do |ticker|
           row = rows.fetch(ticker, {})
-          [ticker, new(ticker: ticker, name: names[ticker] || row['name'], status: row['status'], multiplier: row['multiplier'], color: row['color'])]
+          [ticker, new(ticker: ticker, name: names[ticker] || row['name'], status: row['status'],
+                       multiplier: multipliers.dig(ticker, 'multiplier'), color: row['color'])]
         end
       end
     end
