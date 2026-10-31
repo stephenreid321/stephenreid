@@ -14,6 +14,7 @@ $footer-border-color: darken($body-bg, 7%);
 $footer-link-color: $contrast-color;
 $footer-link-hover-color: darken($contrast-color, 10%);
 $ripple-shade: 0%;
+$ripple-tint: 3%;
 
 @import "settings";
 @import "bootstrap/scss/bootstrap";

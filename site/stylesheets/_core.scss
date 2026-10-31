@@ -70,9 +70,10 @@ html:has(.ripple-hero) {
 }
 
 $ripple-shade: 10% !default; // how much black darkens the grid's squares
+$ripple-tint: 6% !default; // how much of the text colour is in the still squares
 
 .ripple-hero {
-  --ripple-still: #{mix(black, mix($body-color, $body-bg, 6%), $ripple-shade)};
+  --ripple-still: #{mix(black, mix($body-color, $body-bg, $ripple-tint), $ripple-shade)};
   --ripple-crest: #{mix($primary, $body-bg, 50%)};
   --ripple-trough: #{mix(black, mix($body-color, $body-bg, 18%), $ripple-shade)};
   position: relative;
