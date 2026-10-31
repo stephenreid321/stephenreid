@@ -11,6 +11,20 @@ th,
   color: $contrast-color
 }
 
+// DataTables' sort arrows in the theme's colours: it only lightens them for a page marked dark (data-bs-theme), which
+// ours isn't
+table.dataTable thead {
+  --dt-order-arrow_color: #{$body-color};
+  --dt-order-arrow_color-current: #{$contrast-color};
+  --dt-order-arrow_opacity: 0.4;
+  --dt-order-arrow_opacity-current: 1;
+
+  // On the right, as on text columns: DataTables puts them on the left of number and date columns
+  th:is(.dt-type-numeric, .dt-type-date) div.dt-column-header {
+    flex-direction: row
+  }
+}
+
 .text-contrast,
 .text-contrast:hover {
   color: $contrast-color !important
