@@ -128,8 +128,8 @@ module StephenReid
     end
   end
 
-  # A script or stylesheet from jsDelivr: an npm package's file, at the version in frontend/package.json, or a URL. Its
-  # hash from frontend/integrity.json is its integrity attribute, so the browser won't run it if it changes
+  # A script or stylesheet from jsDelivr: an npm package's file, at the version in config/frontend_package.json, or a URL. Its
+  # hash from config/frontend_integrity.json is its integrity attribute, so the browser won't run it if it changes
   def self.cdn_tag(package_or_url, file = nil, **attributes)
     url = file ? FRONTEND_NPM_URL.call(package_or_url, file) : package_or_url
     attributes = attributes.merge(integrity: FRONTEND_INTEGRITY.fetch(url), crossorigin: 'anonymous')

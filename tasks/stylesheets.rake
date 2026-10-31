@@ -1,5 +1,5 @@
 namespace :stylesheets do
-  desc 'Compile site/stylesheets/dark.scss and light.scss, with Bootstrap at the version in frontend/package.json (needs Node)'
+  desc 'Compile site/stylesheets/dark.scss and light.scss, with Bootstrap at the version in config/frontend_package.json (needs Node)'
   task :build do
     require 'date'
     require 'json'
@@ -7,7 +7,7 @@ namespace :stylesheets do
 
     root = File.expand_path('..', __dir__)
     stylesheets_dir = File.join(root, 'site/stylesheets')
-    bootstrap = JSON.parse(File.read(File.join(root, 'frontend/package.json')))['dependencies'].fetch('bootstrap')
+    bootstrap = JSON.parse(File.read(File.join(root, 'config/frontend_package.json')))['dependencies'].fetch('bootstrap')
     abort 'rake stylesheets:build needs Node (npm)' unless system('npm --version', out: File::NULL)
 
     Dir.mktmpdir do |dir|

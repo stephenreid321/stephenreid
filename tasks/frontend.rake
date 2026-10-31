@@ -1,12 +1,12 @@
 namespace :frontend do
-  desc 'Hash each CDN file that has no hash yet into frontend/integrity.json, for the integrity attributes cdn_tag writes, and drop those nothing loads'
+  desc 'Hash each CDN file that has no hash yet into config/frontend_integrity.json, for the integrity attributes cdn_tag writes, and drop those nothing loads'
   task :integrity do
     require 'faraday'
     require 'digest'
     require 'time'
     root = File.expand_path('..', __dir__)
     load File.join(root, 'config/frontend_dependencies.rb') unless defined?(FRONTEND_CDN_URLS)
-    path = File.join(root, 'frontend/integrity.json')
+    path = File.join(root, 'config/frontend_integrity.json')
     # Read from the file rather than FRONTEND_INTEGRITY, which the app loaded at boot
     existing = File.exist?(path) ? JSON.parse(File.read(path)) : {}
 

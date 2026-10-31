@@ -1,14 +1,14 @@
 require 'json'
 
-# The version of each npm package the site loads from jsDelivr, from frontend/package.json
-FRONTEND_VERSIONS = JSON.parse(File.read(File.expand_path('../frontend/package.json', __dir__)))['dependencies'].freeze
+# The version of each npm package the site loads from jsDelivr, from config/frontend_package.json
+FRONTEND_VERSIONS = JSON.parse(File.read(File.expand_path('frontend_package.json', __dir__)))['dependencies'].freeze
 
-# A file of an npm package on jsDelivr, at the version frontend/package.json names
+# A file of an npm package on jsDelivr, at the version config/frontend_package.json names
 FRONTEND_NPM_URL = ->(package, file) { "https://cdn.jsdelivr.net/npm/#{package}@#{FRONTEND_VERSIONS.fetch(package)}/#{file}" }
 
-# The hash of each CDN file the site loads, by its URL, from frontend/integrity.json (written by rake frontend:integrity).
+# The hash of each CDN file the site loads, by its URL, from config/frontend_integrity.json (written by rake frontend:integrity).
 # The cdn_tag Liquid tag (site/_plugins/site.rb) writes it as the file's integrity attribute, so the browser won't run a file that's changed
-FRONTEND_INTEGRITY = JSON.parse(File.read(File.expand_path('../frontend/integrity.json', __dir__))).freeze
+FRONTEND_INTEGRITY = JSON.parse(File.read(File.expand_path('frontend_integrity.json', __dir__))).freeze
 
 # The npm packages every page loads from jsDelivr, in order, and their files
 FRONTEND_DEPENDENCIES = {
