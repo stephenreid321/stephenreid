@@ -1,7 +1,6 @@
 # A strategy on ICONOMI, fetched with its holdings into data/fetched/iconomi.json (rake data:iconomi). Its status comes
 # from data/iconomi/strategies.csv, which you edit by hand. Scores are worked out each time the data is read
 class Strategy
-  class RoundingError < StandardError; end
   class NotEnoughStrategies < StandardError; end
 
   MONTH_FACTOR = 4
@@ -14,6 +13,8 @@ class Strategy
   # What's fetched for each strategy
   FIELDS = (%w[ticker name manager managementType aum numberOfAssets lastRebalanced monthlyRebalancedCount last_posted_at] +
             FEES.map { |r| "#{r}Fee" } + PERIODS.map { |t| "r#{t}" }).freeze
+  # Days ICONOMI rebalanced every strategy itself, which don't show a strategy's still managed
+  PLATFORM_REBALANCE_DATES = [Date.new(2026, 8, 26)].freeze
   # What's scored against the other strategies, as nscore_x (0 to 100) and index_x (its rank)
   SCORED = %w[aum rday rweek rmonth rthree_month rsix_month ryear score score_fee_weighted].freeze
 
@@ -43,6 +44,11 @@ class Strategy
   def top_holding
     holding = holdings.max_by { |h| h['weight'] }
     [Asset.find_by_ticker(holding['ticker']), holding['weight']] if holding
+  end
+
+  # When its manager last rebalanced it: lastRebalanced, unless that was one of ICONOMI's own
+  def managed_rebalanced_at
+    lastRebalanced unless lastRebalanced && PLATFORM_REBALANCE_DATES.include?(lastRebalanced.utc.to_date)
   end
 
   def calculate_score
@@ -223,7 +229,7 @@ class Strategy
 
     def active_mature(strategies = all, mature_period: 'THREE_MONTH')
       strategies.select do |s|
-        ((s.lastRebalanced && s.lastRebalanced >= 3.months.ago) || (s.last_posted_at && s.last_posted_at >= 3.months.ago) || (s.aum && s.aum >= 500_000)) &&
+        ((s.managed_rebalanced_at && s.managed_rebalanced_at >= 3.months.ago) || (s.last_posted_at && s.last_posted_at >= 3.months.ago) || (s.aum && s.aum >= 500_000)) &&
           !s.public_send(:"r#{mature_period.downcase}").nil? && s.verified?
       end
     end
@@ -267,23 +273,14 @@ class Strategy
       [proposed(with_multipliers).to_h, proposed(without_multipliers).to_h]
     end
 
+    # The top number_of_assets assets, weighted in proportion. In whole basis points, each rounded down with what's
+    # left over going to the largest, so they sum to exactly 1
     def proposed(assets)
-      # restrict to top n assets
-      assets = assets.sort_by { |_k, v| -v }[0..(number_of_assets - 1)]
-      t = assets.map { |_k, v| v }.sum
-      assets = assets.to_h { |k, v| [k, v / t] }
-
-      # make sure asset weights sum to exactly 1
-      assets = assets.to_h { |k, v| [k, v.floor(4)] }
-      t = assets.map { |_k, v| v }.sum
-      k = assets.keys.first
-      assets[k] += (1 - t)
-      assets[k] = assets[k].round(4)
-
-      t = assets.map { |_k, v| v }.sum
-      raise Strategy::RoundingError, assets.to_json unless t == 1
-
-      assets.map { |k, v| [k, v] }
+      top = assets.sort_by { |_k, v| -v }.first(number_of_assets)
+      total = top.sum { |_k, v| v }
+      basis_points = top.to_h { |k, v| [k, (10_000 * v / total).floor] }
+      basis_points[top.first.first] += 10_000 - basis_points.values.sum
+      basis_points.map { |k, bp| [k, bp / 10_000.0] }
     end
 
     # Rebalances Metastrategy on ICONOMI to the proposed weights, with multipliers, after fetching the strategies afresh

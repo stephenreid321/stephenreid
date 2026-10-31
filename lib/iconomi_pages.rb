@@ -90,7 +90,7 @@ module IconomiPages
     # The weights it would rebalance to, with multipliers and without; empty if they can't be worked out
     def proposals
       @proposals ||= Strategy.propose
-    rescue KeyError, Strategy::NotEnoughStrategies, Strategy::RoundingError => e
+    rescue KeyError, Strategy::NotEnoughStrategies => e
       @proposals_error = e.message
       [{}, {}]
     end
