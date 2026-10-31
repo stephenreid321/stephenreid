@@ -12,6 +12,7 @@ This is a static site built with Jekyll and served by GitHub Pages. There's no s
 - `data/fetched/` is what the site shows from other sites, as JSON (`lib/fetched.rb`). It isn't committed: `rake data:fetch` fetches it (Substack and ICONOMI need their keys in the environment; `rake data:public` fetches what needs none), and the Site workflow keeps it between builds in the Actions cache. Except Substack's: its Cloudflare turns away GitHub's runners, so `substack_notes.json` and `substack_posts.json` are committed, by the Substack workflow, which runs on a self-hosted runner on Stephen's Mac (`~/actions-runner-stephenreid`, label `substack`). Or run `rake data:substack` here and commit them
 - `rake data:iconomi` fetches every strategy on ICONOMI, unlisted ones too. Its API lists only those it features (`/v1/strategies`), so the tickers come from its site's websocket as well (`Iconomi.strategy_tickers`, undocumented), and from `data/iconomi/strategies.csv`
 - Metastrategy's number of assets is the `NUMBER_OF_ASSETS` Actions variable
+- Dandelion (`symbiota-coop/dandelion`'s `lib/library.rb` and `app/helpers/library_helpers.rb`) reads `data/goodreads_library_export.csv`, `data/dandelion_books.csv` and `data/films.csv` from master, and their images from `site/images`, for its /books and /films. Keep those paths, or change Dandelion with them
 
 ## Workflows
 
