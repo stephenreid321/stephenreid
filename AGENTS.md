@@ -45,7 +45,19 @@ Cooldown: never use a gem or JS package version released less than 7 days ago. T
 - `rake stylesheets:build` installs Bootstrap and Dart Sass with `npm install --before` set to 7 days ago, and pins Dart Sass's version
 - Gems: the Gemfile's source has `cooldown: 7`, so Bundler (4 or later) enforces it
 - GitHub Actions are pinned to a commit of a release at least 7 days old, with the release as a comment (zizmor's `unpinned-uses`). zizmor's own version is in `script/lint`, and uv's in `.github/workflows/ruby.yml`
-- The self-hosted runner on Stephen's Mac (`~/actions-runner-stephenreid`) was installed with `--disableupdate`, at a release at least 7 days old, so it doesn't update itself to a newer one. GitHub stops sending jobs to a runner left too far behind, so update it by hand to a release at least 7 days old
+- The self-hosted runner on Stephen's Mac (`~/actions-runner-stephenreid`) is configured with `--disableupdate`, so it doesn't update itself to each release the day it's out. GitHub wants such a runner updated within 30 days of a new release, or it may stop sending it jobs: the Substack workflow's runs then wait, and the site keeps the notes and posts last committed. So when a new release of `actions/runner` is out, update it by hand to the newest release at least 7 days old (`config.sh` registered it, and an update keeps that):
+
+  ```bash
+  V=2.338.2  # the release, at least 7 days old
+  F=actions-runner-osx-arm64-$V.tar.gz
+  cd ~/actions-runner-stephenreid
+  curl -sSLo $F https://github.com/actions/runner/releases/download/v$V/$F
+  # Compare with the osx-arm64 SHA in the release's notes before going on
+  gh api repos/actions/runner/releases/tags/v$V --jq .body | grep -o '<!-- BEGIN SHA osx-arm64 -->[0-9a-f]*'
+  shasum -a 256 $F
+  ./svc.sh stop && tar xzf $F && rm $F && ./svc.sh start
+  ./bin/Runner.Listener --version
+  ```
 - The root `package.json` is only linters (ESLint, `eslint.config.mjs`). It installs from `package-lock.json` (`npm ci`): pin exact versions, and when adding or bumping one run `npm install --before=<the date a week ago>` so its own dependencies are a week old too
 - The packages the site loads from jsDelivr have their versions in `config/frontend_package.json`, and only there: nothing installs them, `config/frontend_dependencies.rb` reads them. `FRONTEND_DEPENDENCIES` there lists the packages every page loads and their files; a page that needs one of its own loads it with `{% cdn_tag 'package', 'path/file.js' %}`. Load a file the package ships: jsDelivr minifies a `.min` file a package lacks on the fly, and that output can change
 - `cdn_tag` (`site/_plugins/site.rb`) writes the file's hash from `config/frontend_integrity.json` as its `integrity` attribute, so the browser refuses a file that's changed since we chose it. After adding or bumping a CDN file, run `rake frontend:integrity`, which hashes each file that has no hash yet and drops those nothing loads any more. It keeps the hashes it has rather than trusting the CDN again, and refuses a version of an npm package released less than 7 days ago
