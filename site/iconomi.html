@@ -2,28 +2,6 @@
 title: ICONOMI strategy evaluator
 permalink: /iconomi
 ---
-<div class="text-center">
-  {% include markdown.html name='iconomi' %}
-</div>
-
-<div class="row justify-content-center">
-  <div class="col-lg-6">
-    <div class="card mb-3 p-3">
-      <div class="card-body text-center">
-        <h5 class="card-title">
-          <mark>
-            Don't want to have to keep checking this page?
-          </mark>
-        </h5>
-        <p class="mb-0">
-          <a href="/metastrategy">Metastrategy</a> is my strategy on ICONOMI.<br>
-          It's an automated strategy with weekly rebalancing that is always an intelligent mix of the current top performing strategies.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
   function coinTable() {
 
@@ -51,7 +29,7 @@ permalink: /iconomi
   })
 </script>
 
-<table id="iconomi" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
+<table id="iconomi" class="table mb-5" style="font-size: 0.9rem; border-collapse: collapse !important">
   <thead>
     <tr>
       <th></th>
@@ -137,3 +115,7 @@ permalink: /iconomi
   </tr>
   {% endfor %}
 </table>
+
+<div class="text-center">
+  {% include markdown.html name='iconomi' %}
+</div>
