@@ -1,0 +1,93 @@
+name: Site
+
+# Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and
+# every six hours, or when run by hand, with fresh data from Substack and ICONOMI
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: '41 */6 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+# One deploy at a time, and none cancelled halfway
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+        # For when data/goodreads_library_export.csv was last committed, which /books shows
+        fetch-depth: 0
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    # data/fetched, as the last build left it
+    - name: Restore fetched data
+      id: fetched
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: data/fetched
+        key: fetched-${{ github.run_id }}
+        restore-keys: fetched-
+
+    - name: Fetch from Substack and ICONOMI
+      if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
+      run: bundle exec rake data:substack data:iconomi
+      env:
+        SUBSTACK_TOKEN: ${{ secrets.SUBSTACK_TOKEN }}
+        SUBSTACK_PUBLICATION_URL: ${{ vars.SUBSTACK_PUBLICATION_URL }}
+        ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
+        ICN_SECRET: ${{ secrets.ICN_SECRET }}
+
+    - name: Fetch the places and the courses' notes
+      run: bundle exec rake data:public
+
+    - name: Save fetched data
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: data/fetched
+        key: fetched-${{ github.run_id }}
+
+    - name: Build the site
+      run: bundle exec jekyll build
+      env:
+        JEKYLL_ENV: production
+        APIFLASH_KEY: ${{ secrets.APIFLASH_KEY }}
+        NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}
+
+    # Metastrategy's proposals with and without multipliers, and what's unverified, as the old admin view showed
+    - name: Summarise Metastrategy
+      run: bundle exec rake iconomi:summary
+      env:
+        NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}
+
+    - name: Upload the site
+      uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

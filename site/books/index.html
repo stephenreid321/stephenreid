@@ -1,0 +1,16 @@
+---
+title: Books
+permalink: /books/
+---
+<p class="lead">
+  Books I've read,
+  last updated <relative-time datetime="{{ site.data.books_updated }}">{{ site.data.books_updated }}</relative-time>
+</p>
+
+<div class="row">
+  {% for book in site.data.books %}
+  <div class="col-6 col-lg-2 mb-3">
+    {% include book.html book=book %}
+  </div>
+  {% endfor %}
+</div>

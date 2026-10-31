@@ -1,0 +1,13 @@
+<div class="card film shadow-sm">
+  <a href="{{ include.film.url }}">
+    <img onerror="this.style.display='none'" class="card-img-top" src="{{ include.film.image }}">
+  </a>
+  <div class="card-body">
+    <h5 class="card-title mb-0">
+      <a href="{{ include.film.url }}" class="text-contrast">{{ include.film.name }}</a>
+      <span style="opacity: 0.33">
+        {{ include.film.year }}
+      </span>
+    </h5>
+  </div>
+</div>

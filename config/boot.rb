@@ -1,21 +1,18 @@
-# Defines our constants
-RACK_ENV = ENV['RACK_ENV'] ||= 'development' unless defined?(RACK_ENV)
-PADRINO_ROOT = File.expand_path('..', __dir__) unless defined?(PADRINO_ROOT)
+# Loads the gems and lib/, for the rake tasks and the Jekyll site's plugin (site/_plugins/site.rb)
+ROOT = File.expand_path('..', __dir__) unless defined?(ROOT)
 
-# Load our dependencies
-require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
-require 'open-uri'
 require 'active_support/all'
-Bundler.require(:default, RACK_ENV)
-
-String.send(:define_method, :html_safe?) { true }
-
-Mongoid.load!("#{PADRINO_ROOT}/config/mongoid.yml")
-Mongoid.raise_not_found_error = false
-
-Padrino.load!
+require 'csv'
+require 'json'
+require 'fileutils'
+require 'open-uri'
+require 'faraday'
+require 'nokogiri'
+require 'reverse_markdown'
+require 'chroma'
 
 require_relative 'frontend_dependencies'
+Dir[File.join(ROOT, 'lib', '*.rb')].each { |f| require f }
 
-Delayed::Worker.max_attempts = 1
+Time.zone = 'London'

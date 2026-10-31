@@ -1,0 +1,193 @@
+---
+title: Coaching
+permalink: /coaching
+og_desc: What do you really want, and how can you move towards it?
+hide_subscribe: true
+---
+<style>
+  :root { --scale: clamp(1.25rem, 4vw, 2rem); }
+  h1 { font-size: calc(var(--scale) * 1.25); }
+  h2 { font-size: var(--scale); }
+  h3 { font-size: var(--scale); }
+</style>
+
+<div class="row justify-content-center align-items-center mb-5">
+  <div class="col-lg-9">
+
+    <h1>
+      <div class="d-inline d-lg-block">What do you really want,</div>
+      <div class="d-inline d-lg-block">and how can you move towards it?</div>
+    </h1>
+
+    <h2 class="regular text-standard mb-3">
+      Experience the <mark class="text-contrast">transformative power of coaching</mark>.
+    </h2>
+
+  </div>
+  <div class="col-lg-3 col-6">
+
+    <img src="/images/me-coast-sq.jpg" class="w-100 mt-5 mt-lg-0 rounded-circle" style="box-shadow: 0 0 1.5vw black">
+
+  </div>
+</div>
+
+<div class="text-center">
+  <h2 class="regular">
+    <span class="text-standard">Four sessions for</span>
+    <br>
+    7495 SEK / $795 / €695 / £595
+    <br>
+    <span class="text-standard">in person in Stockholm, or via Zoom</span>
+  </h2>
+</div>
+
+<div class="row my-5 align-items-center justify-content-center">
+  <div class="col-lg-4 col-9">
+    <img class="w-100 dark-artwork" src="/images/coaching.png">
+  </div>
+</div>
+
+<style>
+  .carousel-item {
+    height: auto;
+    min-height: 320px; /* Set a minimum height if needed */
+  }
+
+  .testimonial-text {
+    height: auto; /* Remove fixed height */
+    overflow-y: visible; /* Remove scrolling */
+  }
+
+  /* Position carousel controls outside */
+  .carousel-control-prev {
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+    width: auto;
+    height: auto;
+  }
+
+  .carousel-control-next {
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+    width: auto;
+    height: auto;
+  }
+
+  /* Make arrows darker for better visibility */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  /* Responsive positioning for carousel controls */
+  @media (max-width: 767px) {
+    .carousel-control-prev {
+      left: 0px;
+    }
+
+    .carousel-control-next {
+      right: 0px;
+    }
+  }
+</style>
+
+<div class="row justify-content-center mt-3">
+  <div class="col-lg-9">
+    {% include markdown.html name='coaching' %}
+    <div class="text-center">
+      <a class="mb-3 btn btn-primary" target="_blank" href="https://airtable.com/shrrRwZAP0igotuRv">Express your interest</a>
+      <p>
+        <em>
+          I follow the ICF's <a href="https://coachingfederation.org/ethics/code-of-ethics">Code of Ethics</a>.
+          Price includes 25% Swedish sales tax.
+        </em>
+      </p>
+    </div>
+
+    <h3>Testimonials</h3>
+
+
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% assign testimonials = site.data.testimonials | reverse %}
+        {% for testimonial in testimonials %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="row mb-3">
+              <div class="col-auto"><i class="bi bi-quote"></i></div>
+              <div class="col">
+                <p class="mb-0">{{ testimonial.text }}</p>
+                <p class="text-muted text-end mt-2">{{ testimonial.date }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="carousel-indicators">
+        {% for testimonial in testimonials %}
+          <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="{{ forloop.index0 }}" aria-label="Testimonial {{ forloop.index }}" {% if forloop.first %}class="active" aria-current="true"{% endif %}></button>
+        {% endfor %}
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function setCarouselHeight() {
+      // Find the tallest testimonial
+      let maxHeight = 0;
+      const testimonialItems = document.querySelectorAll('#testimonialCarousel .carousel-item');
+
+      // Reset heights first
+      testimonialItems.forEach(function(item) {
+        item.style.height = '';
+      });
+
+      // First pass: measure all heights
+      testimonialItems.forEach(function(item) {
+        // Make all items visible but not displayed to measure true height
+        item.style.display = 'block';
+        item.style.position = 'absolute';
+        item.style.visibility = 'hidden';
+
+        const height = item.offsetHeight;
+        maxHeight = Math.max(maxHeight, height);
+
+        // Reset display properties
+        item.style.display = '';
+        item.style.position = '';
+        item.style.visibility = '';
+      });
+
+      // Second pass: set all to the max height
+      testimonialItems.forEach(function(item) {
+        item.style.height = maxHeight + 'px';
+      });
+    }
+
+    // Set heights initially
+    setCarouselHeight();
+
+    // Reset heights on window resize
+    window.addEventListener('resize', setCarouselHeight);
+
+    // Initialize the carousel
+    $('#testimonialCarousel').carousel();
+  });
+</script>

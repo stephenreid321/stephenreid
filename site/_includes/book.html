@@ -1,0 +1,3 @@
+<a href="https://www.goodreads.com/book/show/{{ include.book.book_id }}">
+  <img {% if include.book.tooltip %} data-bs-toggle="tooltip" title="{{ include.book.tooltip }}" {% endif %} class="w-100" src="{{ include.book.cover_image }}">
+</a>

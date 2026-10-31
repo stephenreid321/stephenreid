@@ -1,5 +1,0 @@
-<dl class="row">
-  <% SPEAKING_ENGAGEMENTS.reject { |s| s[:hidden] }.each { |speaking_engagement| %>
-  <%= partial :speaking_engagement, object: speaking_engagement %>
-  <% } %>
-</dl>

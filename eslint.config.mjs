@@ -5,11 +5,11 @@ import globals from 'globals'
 // (config/frontend_dependencies.rb)
 export default [
   {
-    ignores: ['node_modules/**', 'vendor/**', 'app/assets/fonts/**']
+    ignores: ['node_modules/**', 'vendor/**', 'site/fonts/**', '_site/**']
   },
   js.configs.recommended,
   {
-    files: ['app/assets/javascripts/**/*.js'],
+    files: ['site/javascripts/**/*.js'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'script',

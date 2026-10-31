@@ -1,0 +1,29 @@
+# The site, built by Jekyll from site/ into _site (rake site:build). What it shows from other sites is fetched into
+# data/fetched first (rake data:fetch), and site/_plugins/site.rb hands that and data/'s CSVs to the templates
+title: Stephen Reid
+url: https://stephenreid.net
+source: site
+destination: _site
+timezone: Europe/London
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  # As Redcarpet rendered the markdown before: a line break isn't a <br>, quotes stay straight, headings have no ids and
+  # code isn't highlighted
+  hard_wrap: false
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+  auto_ids: false
+  syntax_highlighter_opts:
+    disable: true
+
+# The themes' Sass: rake stylesheets:build compiles it into dark.css and light.css
+exclude:
+  - stylesheets/*.scss
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default

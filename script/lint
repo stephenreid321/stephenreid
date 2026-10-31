@@ -6,7 +6,7 @@
 #   script/lint --staged    the staged version of each staged file (the pre-commit hook in .githooks)
 #   script/lint --all       everything, as CI does
 #
-# Add --only <linter> (rubocop, erb_lint, eslint or zizmor) to run just one, as CI's separate steps do.
+# Add --only <linter> (rubocop, eslint or zizmor) to run just one, as CI's separate steps do.
 # A changed linter config runs that linter on everything, as CI would. Exits non-zero if any linter fails.
 require 'open3'
 
@@ -25,21 +25,11 @@ LINTERS = [
     env: QUIET
   },
   {
-    name: 'erb_lint',
-    files: %r{\Aapp/views/.+\.erb\z},
-    # Templates are checked with .rubocop.yml too
-    configs: /\A(\.erb_lint\.yml|\.rubocop\.yml)\z/,
-    command: %w[bundle exec erb_lint],
-    all: %w[--lint-all],
-    stdin: ->(file) { ['--stdin', file] },
-    env: QUIET
-  },
-  {
     name: 'ESLint',
-    files: %r{\Aapp/assets/javascripts/.+\.js\z},
+    files: %r{\Asite/javascripts/.+\.js\z},
     configs: /\A(eslint\.config\.mjs|package(-lock)?\.json)\z/,
     command: %w[npx --no-install eslint --no-warn-ignored],
-    all: ['app/assets/javascripts'],
+    all: ['site/javascripts'],
     stdin: ->(file) { ['--stdin', '--stdin-filename', file] },
     node: true
   },

@@ -1,19 +1,61 @@
-namespace :strategies do
-  task update: :environment do
-    Strategy.import
-    Strategy.update
+namespace :data do
+  desc 'Fetch everything the site shows from other sites into data/fetched'
+  task fetch: %i[substack iconomi public]
+
+  desc "Fetch what needs no keys into data/fetched: the places and the courses' notes"
+  task public: %i[places courses]
+
+  desc 'Fetch the Substack notes and posts into data/fetched (needs SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL)'
+  task substack: :environment do
+    SubstackNote.import
+    SubstackPost.import
   end
 
+  desc 'Fetch the ICONOMI strategies and Metastrategy into data/fetched (needs ICN_API_KEY and ICN_SECRET)'
+  task iconomi: :environment do
+    next puts 'ℹ️  ICONOMI fetch skipped: set ICN_API_KEY and ICN_SECRET.' if ENV['ICN_API_KEY'].blank?
+
+    Strategy.fetch
+  end
+
+  desc 'Fetch the places on the treasure map into data/fetched'
+  task places: :environment do
+    Places.fetch
+  end
+
+  desc "Fetch the courses' notes into data/fetched"
+  task courses: :environment do
+    Course.fetch
+  end
+end
+
+namespace :iconomi do
+  desc 'Mark the strategies and assets with no status as verified, in data/iconomi_strategies.csv and data/iconomi_assets.csv'
+  task verify: :environment do
+    puts "Verified: #{Strategy.verify.join(', ').presence || 'nothing new'}"
+  end
+
+  desc 'Rebalance Metastrategy on ICONOMI, after fetching the strategies afresh (needs NUMBER_OF_ASSETS)'
   task rebalance: :environment do
-    Strategy.rebalance if Time.now.wday == 5
+    Strategy.rebalance
   end
 
-  task rebalance_without_update: :environment do
-    Strategy.rebalance(skip_update: true) if Time.now.wday == 5
+  desc "Summarise Metastrategy's proposals and what's unverified, into GitHub Actions' job summary if there is one"
+  task summary: :environment do
+    summary = IconomiPages.summary
+    ENV['GITHUB_STEP_SUMMARY'] ? File.write(ENV['GITHUB_STEP_SUMMARY'], summary, mode: 'a') : puts(summary)
+  end
+end
+
+namespace :site do
+  desc 'Build the site into _site, from what data/fetched holds'
+  task :build do
+    sh 'bundle exec jekyll build'
   end
 
-  task propose: :environment do
-    Strategy.propose_and_stash
+  desc 'Serve the site at http://localhost:4000, rebuilding it as files change'
+  task :serve do
+    sh 'bundle exec jekyll serve --livereload'
   end
 end
 
@@ -36,12 +78,5 @@ namespace :posts do
       bluesky.post_link(text: title, url: url, title: title, description: r['summary'].to_s.truncate(150), image_url: r['image_url'].presence)
       posted_urls << url
     end
-  end
-end
-
-namespace :substack do
-  task import: :environment do
-    SubstackNote.import
-    SubstackPost.import
   end
 end

@@ -1,0 +1,19 @@
+# The footer's links, with each one's tooltip
+- name: Substack
+  url: https://substack.com/@stephenreid
+  handle: stephenreid
+- name: ATProto/Bluesky
+  url: https://bsky.app/profile/stephenreid.net
+  handle: stephenreid.net
+- name: Telegram
+  url: https://t.me/stephenreid321
+  handle: stephenreid321
+- name: Dandelion
+  url: https://dandelion.events/u/stephenreid
+  handle: stephenreid
+- name: Github
+  url: http://github.com/stephenreid321
+  handle: stephenreid321
+- name: Goodreads
+  url: http://goodreads.com/stephenreid321
+  handle: stephenreid321

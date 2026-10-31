@@ -1,0 +1,2 @@
+{%- capture markdown %}{% include markdown/{{ include.name }}.md %}{% endcapture -%}
+{{ markdown | markdownify }}

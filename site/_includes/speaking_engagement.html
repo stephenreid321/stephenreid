@@ -1,0 +1,11 @@
+{% assign s = include.speaking_engagement %}
+<dt class="col-lg-4">{{ s.date | date: '%b %Y' }}{% if s.location %}, {{ s.location }}{% endif %}
+</dt>
+<dd class="col-lg-8">
+  <a href="{{ s.url }}">
+    {% if s.icon %}
+      <i class="bi bi-{{ s.icon }}"></i>
+    {% endif %}
+    {{ s.name }}
+  </a>
+</dd>

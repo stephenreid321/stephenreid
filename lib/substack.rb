@@ -118,7 +118,7 @@ module Substack
       s = slug.to_s.strip
       return nil if s.empty?
 
-      path = "#{base_api}/posts/#{Rack::Utils.escape_path(s)}"
+      path = "#{base_api}/posts/#{ERB::Util.url_encode(s)}"
       last_detail = nil
       last_error = nil
 

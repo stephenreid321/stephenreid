@@ -1,0 +1,116 @@
+name: Tasks
+
+# The jobs Heroku's scheduler and the old admin page ran. Run one by hand from the Actions tab: Tasks, Run workflow
+on:
+  schedule:
+    # Rebalance Metastrategy on Fridays, if the ICONOMI_REBALANCE variable is true
+    - cron: '17 9 * * 5'
+    # Post the week's Readwise archive to Bluesky, daily
+    - cron: '23 18 * * *'
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Task
+        type: choice
+        options:
+          - rebalance
+          - verify
+          - posts-sync
+
+permissions: {}
+
+jobs:
+  # Fetches the strategies afresh, then rebalances Metastrategy on ICONOMI to the weights /metastrategy proposes
+  rebalance:
+    if: (github.event.schedule == '17 9 * * 5' && vars.ICONOMI_REBALANCE == 'true') || inputs.task == 'rebalance'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    concurrency:
+      group: rebalance
+      cancel-in-progress: false
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    - name: Rebalance Metastrategy
+      run: bundle exec rake iconomi:rebalance
+      env:
+        ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
+        ICN_SECRET: ${{ secrets.ICN_SECRET }}
+        NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}
+
+  # Marks the strategies and assets with no status as verified, as the old admin page's Verify did, commits that to
+  # master and rebuilds the site
+  verify:
+    if: inputs.task == 'verify'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    - name: Fetch from ICONOMI
+      run: bundle exec rake data:iconomi
+      env:
+        ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
+        ICN_SECRET: ${{ secrets.ICN_SECRET }}
+
+    - name: Verify
+      run: bundle exec rake iconomi:verify
+
+    # A push with GITHUB_TOKEN doesn't run the Site workflow, so this runs it
+    - name: Commit and rebuild the site
+      run: |
+        git add data/iconomi_strategies.csv data/iconomi_assets.csv
+        git diff --cached --quiet && exit 0
+        git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+          commit -m 'Verify the new ICONOMI strategies and assets'
+        git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
+        gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ github.token }}
+
+  # Posts to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet
+  posts-sync:
+    if: github.event.schedule == '23 18 * * *' || inputs.task == 'posts-sync'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    - name: Post to Bluesky
+      run: bundle exec rake posts:sync
+      env:
+        READWISE_ACCESS_TOKEN: ${{ secrets.READWISE_ACCESS_TOKEN }}
+        BLUESKY_EMAIL: ${{ secrets.BLUESKY_EMAIL }}
+        BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}

@@ -1,12 +1,12 @@
 namespace :stylesheets do
-  desc 'Compile app/assets/stylesheets/dark.scss and light.scss, with Bootstrap at the version in frontend/package.json (needs Node)'
+  desc 'Compile site/stylesheets/dark.scss and light.scss, with Bootstrap at the version in frontend/package.json (needs Node)'
   task :build do
     require 'date'
     require 'json'
     require 'tmpdir'
 
     root = File.expand_path('..', __dir__)
-    stylesheets_dir = File.join(root, 'app/assets/stylesheets')
+    stylesheets_dir = File.join(root, 'site/stylesheets')
     bootstrap = JSON.parse(File.read(File.join(root, 'frontend/package.json')))['dependencies'].fetch('bootstrap')
     abort 'rake stylesheets:build needs Node (npm)' unless system('npm --version', out: File::NULL)
 
@@ -25,7 +25,7 @@ namespace :stylesheets do
         # after the header, not at the start of the file
         css = File.read(css_file, encoding: 'UTF-8').delete_prefix("\uFEFF")
         File.write(css_file, "/* Compiled from #{theme}.scss by `rake stylesheets:build`. Don't edit this file. */\n#{css}")
-        puts "Wrote app/assets/stylesheets/#{theme}.css"
+        puts "Wrote site/stylesheets/#{theme}.css"
       end
     end
   end

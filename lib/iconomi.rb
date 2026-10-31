@@ -1,48 +1,22 @@
+# ICONOMI's API, as the account in ICN_API_KEY and ICN_SECRET
 class Iconomi
   def self.get(path, parameters = nil)
-    t = DateTime.now.strftime('%Q')
-
-    method = 'GET'
-    message = t + method.upcase + path
-
-    signature = Base64.encode64(
-      OpenSSL::HMAC.digest(
-        'sha512',
-        ENV['ICN_SECRET'],
-        message
-      )
-    ).split.join #  to remove newlines introduced by base64 encoding
-
-    Faraday.new(
-      headers: {
-        'ICN-API-KEY' => ENV['ICN_API_KEY'],
-        'ICN-SIGN' => signature,
-        'ICN-TIMESTAMP' => t
-      }
-    ).get("https://api.iconomi.com#{path}#{"?#{parameters}" if parameters}").body
+    Faraday.new(headers: headers('GET', path)).get("https://api.iconomi.com#{path}#{"?#{parameters}" if parameters}").body
   end
 
   def self.post(path, request_body)
+    Faraday.new(headers: headers('POST', path, request_body).merge('Content-Type' => 'application/json'))
+           .post("https://api.iconomi.com#{path}", request_body).body
+  end
+
+  # A request's headers, signed with ICN_SECRET
+  def self.headers(method, path, request_body = '')
     t = DateTime.now.strftime('%Q')
-
-    method = 'POST'
-    message = t + method.upcase + path + request_body
-
-    signature = Base64.encode64(
-      OpenSSL::HMAC.digest(
-        'sha512',
-        ENV['ICN_SECRET'],
-        message
-      )
-    ).split.join #  to remove newlines introduced by base64 encoding
-
-    Faraday.new(
-      headers: {
-        'ICN-API-KEY' => ENV['ICN_API_KEY'],
-        'ICN-SIGN' => signature,
-        'ICN-TIMESTAMP' => t,
-        'Content-Type' => 'application/json'
-      }
-    ).post("https://api.iconomi.com#{path}", request_body).body
+    signature = OpenSSL::HMAC.digest('sha512', ENV['ICN_SECRET'].to_s, t + method + path + request_body)
+    {
+      'ICN-API-KEY' => ENV['ICN_API_KEY'],
+      'ICN-SIGN' => [signature].pack('m0'), # base64, without newlines
+      'ICN-TIMESTAMP' => t
+    }
   end
 end

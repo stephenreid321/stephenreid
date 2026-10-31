@@ -1,0 +1,88 @@
+<style>
+  #nav .navbar-brand { font-size: 2em; }
+  #nav .nav-item { font-size: 1rem; padding-right: 0.5rem; }
+  #nav .nav-link.active { font-weight: bold; color: var(--bs-navbar-color) }
+</style>
+
+<div id="nav">
+  <nav class="navbar navbar-expand-lg navbar-dark px-3">
+    <a class="navbar-brand" href="/">
+      <img src="/images/octopus-circle.png" style="height: 30px; position: relative; top: -1px">
+    </a>
+    <a style="font-family: 'Zilap Evolution'" class="navbar-brand" href="/">Stephen Reid</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {%- comment -%} The page's path without a trailing slash, as the nav's paths are: /books/ is /books {%- endcomment -%}
+      {% assign current = page.url | append: '#' | replace: '/#', '' | replace: '#', '' %}
+      <ul class="navbar-nav me-auto">
+        {% for item in site.data.nav %}
+          {% if item.items %}
+            {% assign active = '' %}
+            {% for subitem in item.items %}{% if subitem.path == current %}{% assign active = 'active' %}{% endif %}{% endfor %}
+            <li class="nav-item dropdown">
+              <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle {{ active }}" href="javascript:;">{{ item.name }}</a>
+              <ul class="dropdown-menu">
+                {% for subitem in item.items %}
+                  <li class="nav-item"><a class="dropdown-item {% if subitem.path == current %}active{% endif %}" href="{{ subitem.path }}">{{ subitem.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link {% if item.path == current %}active{% endif %}" href="{{ item.path }}">{{ item.name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item">
+          <label class="nav-link form-switch d-flex align-items-center gap-2 ps-0" for="theme-switch">
+            <i class="bi bi-sun"></i>
+            <input class="form-check-input float-none m-0" type="checkbox" role="switch" id="theme-switch" aria-label="Dark theme" checked>
+            <i class="bi bi-moon"></i>
+          </label>
+        </li>
+        <li class="nav-item d-none d-lg-inline">
+          <a target="_blank" class="btn btn-secondary btn-sm text-nowrap" href="mailto:stephen@stephenreid.net">Email me</a>
+        </li>
+        <li class="nav-item d-none d-lg-inline">
+          <a target="_blank" class="btn btn-primary btn-sm text-nowrap" href="https://stephenreid.substack.com/">Subscribe on Substack</a>
+        </li>
+        <li class="nav-item d-lg-none">
+          <a target="_blank" class="btn btn-secondary mb-1 mt-2" href="mailto:stephen@stephenreid.net">Email me</a>
+        </li>
+        <li class="nav-item d-lg-none">
+          <a target="_blank" class="btn btn-primary mb-1" href="https://stephenreid.substack.com/">Subscribe on Substack</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+</div>
+<script>
+  // The theme the head chose (window.theme)
+  $('#nav .navbar').toggleClass('navbar-dark', window.theme === 'dark').toggleClass('navbar-light', window.theme === 'light')
+  $('#theme-switch').prop('checked', window.theme === 'dark')
+  $("#nav a[href^=http]").attr('target', '_blank')
+  $("#nav a[href^='/courses']").attr('target', '_blank')
+  // Switches theme in place: loads the other theme's stylesheet for print, so it doesn't apply yet, then in one go applies
+  // it, drops the old one and tells the page (themechange), so what reads the theme, like the hero's grid, changes in
+  // the same frame as the rest. The cookie remembers it for the next page
+  $('#theme-switch').change(function () {
+    const theme = this.checked ? 'dark' : 'light'
+    Cookies.set('theme', theme, { expires: 365, sameSite: 'Lax' })
+    const current = $('link[data-theme-stylesheet]').last()
+    const link = current.clone().attr({ href: current.attr('href').replace(/\/(dark|light)\.css/, `/${theme}.css`), media: 'print' })
+    link.on('load', function () {
+      // Flipped back while it loaded
+      if (theme !== ($('#theme-switch').prop('checked') ? 'dark' : 'light')) return link.remove()
+      link.removeAttr('media')
+      $('link[data-theme-stylesheet]').not(link).remove()
+      window.theme = theme
+      $('#nav .navbar').toggleClass('navbar-dark', theme === 'dark').toggleClass('navbar-light', theme === 'light')
+      document.dispatchEvent(new CustomEvent('themechange', { detail: theme }))
+    })
+    current.after(link)
+  })
+</script>
