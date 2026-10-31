@@ -19,3 +19,4 @@ gem 'reverse_markdown'
 # Interacting with other websites
 gem 'faraday'
 gem 'nokogiri'
+gem 'websocket-client-simple'

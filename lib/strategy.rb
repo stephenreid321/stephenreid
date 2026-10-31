@@ -95,9 +95,10 @@ class Strategy
     m
   end
 
-  # Fetches its fees, size, structure and returns from ICONOMI
+  # Fetches its name, manager, fees, size, structure and returns from ICONOMI
   def update
     j = JSON.parse(Iconomi.get("/v1/strategies/#{ticker}"))
+    %w[name manager managementType].each { |r| public_send("#{r}=", j[r]) }
     FEES.each do |r|
       public_send("#{r}Fee=", j["#{r}Fee"])
     end
@@ -149,33 +150,60 @@ class Strategy
     end
 
     # Fetches every strategy on ICONOMI, the assets they hold and Metastrategy's structure into
-    # data/fetched/iconomi.json. A strategy that can't be fetched in three attempts is left out
-    def fetch
-      strategies = JSON.parse(Iconomi.get('/v1/strategies')).map do |s|
-        new(s.slice('ticker', 'name', 'manager', 'managementType'))
-      end
-      count = strategies.count
-      strategies = strategies.each_with_index.filter_map do |strategy, i|
-        puts "#{i + 1}/#{count}"
-        attempts = 0
-        begin
-          attempts += 1
-          strategy.update
-          strategy
-        rescue StandardError
-          if attempts < 3
-            puts "error: #{strategy.ticker}, attempt #{attempts + 1}"
-            retry
+    # data/fetched/iconomi.json, a few at a time. A strategy that can't be fetched in three attempts is left out
+    def fetch(threads: 8)
+      queue = Queue.new
+      tickers.each { |ticker| queue << ticker }
+      count = queue.size
+      queue.close
+      fetched = Array.new(threads) do
+        Thread.new do
+          done = []
+          while (ticker = queue.pop)
+            strategy = fetch_one(ticker)
+            done << strategy if strategy
           end
-          puts "error: #{strategy.ticker}, leaving it out"
-          nil
+          done
         end
-      end
+      end.flat_map(&:value)
+      puts "Fetched #{fetched.count} of #{count} strategies"
+      strategies = fetched.sort_by(&:ticker)
       assets = strategies.flat_map(&:holdings).to_h { |h| [h['ticker'], h['name']] }
       metastrategy = JSON.parse(Iconomi.get('/v1/strategies/DECENTCOOP/structure'))
       Fetched.write(:iconomi, { 'fetched_at' => Time.now.utc.iso8601, 'strategies' => strategies.map(&:attributes),
                                 'assets' => assets, 'metastrategy' => metastrategy })
       reset!
+    end
+
+    # Each strategy's ticker: those ICONOMI lists, those its site scores (unlisted ones too), and those in
+    # data/iconomi/strategies.csv. Without the site's, if its websocket fails, just the others
+    def tickers
+      listed = JSON.parse(Iconomi.get('/v1/strategies')).pluck('ticker')
+      scored = begin
+        Iconomi.strategy_tickers
+      rescue StandardError => e
+        puts "⚠️  ICONOMI's site didn't list its strategies (#{e.message}), so fetching only those listed and in data/iconomi/strategies.csv"
+        []
+      end
+      (listed | scored | csv_file.rows.keys).compact
+    end
+
+    # The strategy with this ticker, fetched from ICONOMI, or nil if it can't be in three attempts
+    def fetch_one(ticker)
+      strategy = new('ticker' => ticker)
+      attempts = 0
+      begin
+        attempts += 1
+        strategy.update
+        strategy
+      rescue StandardError => e
+        if attempts < 3
+          sleep attempts
+          retry
+        end
+        puts "error: #{ticker}, leaving it out (#{e.message[0, 300]})"
+        nil
+      end
     end
 
     # Marks the strategies and assets that have no status as verified, in data/iconomi/strategies.csv and

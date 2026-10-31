@@ -11,6 +11,7 @@ require 'faraday'
 require 'nokogiri'
 require 'reverse_markdown'
 require 'chroma'
+require 'websocket-client-simple'
 
 require_relative 'frontend_dependencies'
 Dir[File.join(ROOT, 'lib', '*.rb')].each { |f| require f }
