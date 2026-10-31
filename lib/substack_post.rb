@@ -2,7 +2,7 @@
 class SubstackPost
   FIELDS = %w[
     post_id publication_id slug title subtitle description post_date canonical_url post_type audience podcast_url
-    cover_image_url reaction_count comment_count restacks wordcount truncated_body_text body_html reactions_json
+    cover_image_url wordcount truncated_body_text body_html
   ].freeze
 
   attr_reader(*FIELDS)
@@ -91,6 +91,7 @@ class SubstackPost
       raw = archive_row.merge(detail || {})
       raw['body_html'] = body_html if body_html
 
+      # Not its likes, comments and restacks, which change from one fetch to the next and the site doesn't show
       {
         post_id: pid,
         publication_id: raw['publication_id'],
@@ -104,13 +105,9 @@ class SubstackPost
         audience: raw['audience'].to_s,
         podcast_url: raw['podcast_url'].to_s,
         cover_image_url: raw['cover_image'].to_s,
-        reaction_count: raw['reaction_count'],
-        comment_count: raw['comment_count'],
-        restacks: raw['restacks'],
         wordcount: raw['wordcount'],
         truncated_body_text: raw['truncated_body_text'].to_s,
-        body_html: raw['body_html'].to_s,
-        reactions_json: Substack.safe_json(raw['reactions'])
+        body_html: raw['body_html'].to_s
       }
     end
   end
