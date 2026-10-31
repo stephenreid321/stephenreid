@@ -44,8 +44,8 @@ jobs:
         key: fetched-${{ github.run_id }}
         restore-keys: fetched-
 
-    # Substack's Cloudflare can turn away GitHub's runners. Then the build goes on with the notes and posts the last
-    # build fetched, as a failed fetch writes nothing
+    # Substack's Cloudflare turns away GitHub's runners. Then the build goes on with the notes and posts committed in
+    # data/fetched, as a failed fetch writes nothing
     - name: Fetch from Substack
       if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
       continue-on-error: true

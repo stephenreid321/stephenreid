@@ -9,7 +9,7 @@ This is a static site built with Jekyll and served by GitHub Pages. There's no s
 ## Data
 
 - `data/*.csv` is the site's own data, committed: books, films, courses, speaking engagements, and what's been decided by hand about ICONOMI's strategies and assets (`iconomi_strategies.csv`: status; `iconomi_assets.csv`: status, multiplier, colour)
-- `data/fetched/` is what the site shows from other sites, as JSON (`lib/fetched.rb`). It isn't committed: `rake data:fetch` fetches it (Substack and ICONOMI need their keys in the environment; `rake data:public` fetches what needs none), and the Site workflow keeps it between builds in the Actions cache
+- `data/fetched/` is what the site shows from other sites, as JSON (`lib/fetched.rb`). It isn't committed: `rake data:fetch` fetches it (Substack and ICONOMI need their keys in the environment; `rake data:public` fetches what needs none), and the Site workflow keeps it between builds in the Actions cache. Except Substack's: its Cloudflare turns away GitHub's runners, so `substack_notes.json` and `substack_posts.json` are committed. To bring them up to date, run `rake data:substack` here and commit them
 - Metastrategy's number of assets is the `NUMBER_OF_ASSETS` Actions variable
 
 ## Workflows

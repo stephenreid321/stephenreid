@@ -1,5 +1,6 @@
 # What the data tasks fetch from other sites (Substack, ICONOMI, Google Maps, the courses' repo), as JSON files in
-# data/fetched. It isn't committed: CI keeps it between builds in its cache, and each build of the site reads it
+# data/fetched. It isn't committed, but for Substack's, which turns away GitHub's runners: CI keeps it between builds in its
+# cache, and each build of the site reads it
 module Fetched
   DIR = File.join(ROOT, 'data', 'fetched')
 
