@@ -28,9 +28,13 @@ class Iconomi
     end
   end
 
+  # Raises if ICONOMI refuses it, so a rebalance it turns down fails rather than passing quietly
   def self.post(path, request_body)
-    Faraday.new(headers: headers('POST', path, request_body).merge('Content-Type' => 'application/json'))
-           .post("https://api.iconomi.com#{path}", request_body).body
+    response = Faraday.new(headers: headers('POST', path, request_body).merge('Content-Type' => 'application/json'))
+                      .post("https://api.iconomi.com#{path}", request_body)
+    raise "HTTP #{response.status} for #{path}: #{response.body.to_s[0, 500]}" unless response.success?
+
+    response.body
   end
 
   # A request's headers, signed with ICN_SECRET
