@@ -3,10 +3,11 @@ name: Tasks
 # The jobs Heroku's scheduler and the old admin page ran. Run one by hand from the Actions tab: Tasks, Run workflow
 on:
   schedule:
-    # Rebalance Metastrategy on Fridays, if the ICONOMI_REBALANCE variable is true
-    - cron: '17 9 * * 5'
-    # Post the week's Readwise archive to Bluesky, daily
-    - cron: '23 18 * * *'
+    # Rebalance Metastrategy on Fridays at 17:00 Central European time, if the ICONOMI_REBALANCE variable is true
+    - cron: '0 17 * * 5'
+      timezone: 'Europe/Stockholm'
+    # Post the week's Readwise archive to Bluesky, every three hours
+    - cron: '23 */3 * * *'
   workflow_dispatch:
     inputs:
       task:
@@ -22,7 +23,7 @@ permissions: {}
 jobs:
   # Fetches the strategies afresh, then rebalances Metastrategy on ICONOMI to the weights /metastrategy proposes
   rebalance:
-    if: (github.event.schedule == '17 9 * * 5' && vars.ICONOMI_REBALANCE == 'true') || inputs.task == 'rebalance'
+    if: (github.event.schedule == '0 17 * * 5' && vars.ICONOMI_REBALANCE == 'true') || inputs.task == 'rebalance'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -92,7 +93,7 @@ jobs:
 
   # Posts to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet
   posts-sync:
-    if: github.event.schedule == '23 18 * * *' || inputs.task == 'posts-sync'
+    if: github.event.schedule == '23 */3 * * *' || inputs.task == 'posts-sync'
     runs-on: ubuntu-latest
     permissions:
       contents: read

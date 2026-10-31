@@ -15,8 +15,8 @@ This is a static site built with Jekyll and served by GitHub Pages. There's no s
 
 ## Workflows
 
-- `site.yml` builds the site and deploys it to Pages: on each push to master, from the last build's data, and every six hours (or by hand) with fresh data. Its job summary shows Metastrategy's proposals with and without multipliers, and what's unverified
-- `tasks.yml` runs what Heroku's scheduler and the old admin page did: `rebalance` (Fridays, when the `ICONOMI_REBALANCE` variable is `true`), `verify` (marks strategies and assets with no status as verified and commits that) and `posts-sync` (daily)
+- `site.yml` builds the site and deploys it to Pages: on each push to master, from the last build's data, and every three hours (or by hand) with fresh data. Its job summary shows Metastrategy's proposals with and without multipliers, and what's unverified
+- `tasks.yml` runs what Heroku's scheduler and the old admin page did: `rebalance` (Fridays at 17:00 Central European time, when the `ICONOMI_REBALANCE` variable is `true`), `verify` (marks strategies and assets with no status as verified and commits that) and `posts-sync` (every three hours)
 - `ruby.yml` lints, and builds the site with what needs no keys
 
 ## Committing

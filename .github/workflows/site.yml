@@ -1,13 +1,13 @@
 name: Site
 
 # Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and
-# every six hours, or when run by hand, with fresh data from ICONOMI. Substack's notes and posts are committed, by the
+# every three hours, or when run by hand, with fresh data from ICONOMI. Substack's notes and posts are committed, by the
 # Substack workflow
 on:
   push:
     branches: [ master ]
   schedule:
-    - cron: '41 */6 * * *'
+    - cron: '41 */3 * * *'
   workflow_dispatch:
 
 permissions: {}
