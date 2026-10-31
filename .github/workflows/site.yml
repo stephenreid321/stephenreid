@@ -44,12 +44,20 @@ jobs:
         key: fetched-${{ github.run_id }}
         restore-keys: fetched-
 
-    - name: Fetch from Substack and ICONOMI
+    # Substack's Cloudflare can turn away GitHub's runners. Then the build goes on with the notes and posts the last
+    # build fetched, as a failed fetch writes nothing
+    - name: Fetch from Substack
       if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
-      run: bundle exec rake data:substack data:iconomi
+      continue-on-error: true
+      run: bundle exec rake data:substack
       env:
         SUBSTACK_TOKEN: ${{ secrets.SUBSTACK_TOKEN }}
         SUBSTACK_PUBLICATION_URL: ${{ vars.SUBSTACK_PUBLICATION_URL }}
+
+    - name: Fetch from ICONOMI
+      if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
+      run: bundle exec rake data:iconomi
+      env:
         ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
         ICN_SECRET: ${{ secrets.ICN_SECRET }}
 
