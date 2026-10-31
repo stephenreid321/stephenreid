@@ -1,6 +1,6 @@
 <div class="card film shadow-sm">
   <a href="{{ include.film.url }}">
-    <img onerror="this.style.display='none'" class="card-img-top" src="{{ include.film.image }}">
+    <img onerror="this.style.display='none'" class="card-img-top" loading="lazy" decoding="async" src="{{ include.film.image }}">
   </a>
   <div class="card-body">
     <h5 class="card-title mb-0">
