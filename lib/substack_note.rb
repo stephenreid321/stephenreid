@@ -249,8 +249,8 @@ class SubstackNote
         'children_count' => comment.fetch('children_count', ''),
         'edited_at' => comment['edited_at'].to_s,
         'media_clip_id' => comment.fetch('media_clip_id', ''),
-        'attachments_json' => Substack.safe_json(comment['attachments']),
-        'body_json' => Substack.safe_json(comment['body_json'])
+        'attachments_json' => Substack.stable_json(comment['attachments']),
+        'body_json' => Substack.stable_json(comment['body_json'])
       }
     end
 
@@ -267,12 +267,12 @@ class SubstackNote
         'entity_key' => raw['entity_key'].to_s,
         'feed_item_type' => raw['type'].to_s,
         'context_type' => ctx&.dig('type').to_s,
-        'context_json' => ctx ? Substack.safe_json(ctx) : '',
+        'context_json' => ctx ? Substack.stable_json(ctx) : '',
         'published_at' => published_at.to_s,
         'primary_link' => primary_link(raw),
         'post_id' => post ? post['id'] : comment&.dig('post_id'),
-        'quote_selections_json' => quote_selections.empty? ? '' : Substack.safe_json(quote_selections),
-        'parent_comments_json' => raw['parentComments'] ? Substack.safe_json(raw['parentComments']) : ''
+        'quote_selections_json' => quote_selections.empty? ? '' : Substack.stable_json(quote_selections),
+        'parent_comments_json' => raw['parentComments'] ? Substack.stable_json(raw['parentComments']) : ''
       }
 
       row.merge!(post_fields(post))

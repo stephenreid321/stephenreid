@@ -54,6 +54,26 @@ module Substack
       ''
     end
 
+    # Counts and tracking that Substack changes from one fetch to the next, which the site doesn't show
+    LIVE_KEYS = %w[
+      trackingParameters reaction reactions reaction_count restacks restacked comment_count child_comment_count
+      children_count rankingDetailFreeSubscriberCount freeSubscriberCountOrderOfMagnitude followed_user_count
+      subscribed_publication_count item_current_reaction_count item_current_restack_count item_current_reply_count
+    ].freeze
+
+    # safe_json, without LIVE_KEYS at any depth, so data/fetched only changes when what the site shows does
+    def stable_json(obj)
+      safe_json(without_live_keys(obj))
+    end
+
+    def without_live_keys(obj)
+      case obj
+      when Hash then obj.except(*LIVE_KEYS).transform_values { |v| without_live_keys(v) }
+      when Array then obj.map { |v| without_live_keys(v) }
+      else obj
+      end
+    end
+
     def homepage(subdomain:, custom_domain:)
       return "https://#{custom_domain}" if custom_domain.present?
       return "https://#{subdomain}.substack.com" if subdomain.present?
