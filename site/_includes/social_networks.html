@@ -1,0 +1,7 @@
+{% for network in site.data.social_networks %}
+<div class="col-auto">
+  <a style="text-decoration:none" data-bs-toggle="tooltip" title="{{ network.handle }}" target="_blank" href="{{ network.url }}">
+    {{ network.name }}
+  </a>
+</div>
+{% endfor %}

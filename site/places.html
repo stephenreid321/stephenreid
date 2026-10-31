@@ -1,0 +1,15 @@
+---
+permalink: /places
+---
+{% for folder in site.data.places %}
+  <strong>{{ folder.name }}</strong>
+  <ul>
+    {% for place in folder.places %}
+      <li>
+        <a href="https://www.google.com/maps?q={{ place.lat }},{{ place.lng }}" target="_blank">
+          {{ place.name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}

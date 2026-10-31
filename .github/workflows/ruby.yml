@@ -32,9 +32,6 @@ jobs:
     - name: Run RuboCop
       run: script/lint --all --only rubocop
 
-    - name: Run erb_lint
-      run: script/lint --all --only erb_lint
-
     - name: Install Node
       uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
       with:
@@ -59,3 +56,26 @@ jobs:
       run: script/lint --all --only zizmor
       env:
         GH_TOKEN: ${{ github.token }}
+
+  # Builds the site with what needs no keys, so a template that doesn't build fails here rather than on master
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    - name: Fetch the places and the courses' notes
+      run: bundle exec rake data:public
+
+    - name: Build the site
+      run: bundle exec jekyll build

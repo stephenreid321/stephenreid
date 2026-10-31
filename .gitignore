@@ -38,3 +38,9 @@ tmp
 _yardoc
 doc/
 
+
+# Jekyll's build, and what rake data:fetch fetches for it
+_site
+.jekyll-cache
+.jekyll-metadata
+data/fetched

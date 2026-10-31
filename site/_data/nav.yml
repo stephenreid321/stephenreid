@@ -1,0 +1,23 @@
+# The nav's menu. Courses lists data/courses.csv's courses too, newest first (site/_plugins/site.rb)
+- name: Background
+  path: /background
+- name: Coaching
+  path: /coaching
+- name: Events
+  path: /events
+- name: Courses
+  items:
+    - name: Life as Practice (Sep 2025)
+      path: https://lifeaspractice.com/
+- name: Knowledge
+  items:
+    - name: Books
+      path: /books
+    - name: Films
+      path: /films
+    - name: Speaking engagements
+      path: /speaking-engagements
+    - name: Treasure map
+      path: https://www.google.com/maps/d/u/0/edit?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8
+    - name: Stockholm
+      path: https://www.google.com/maps/d/u/0/edit?mid=1X51vy5tXN9BuueD9jVDCQd2M5AF-l5k

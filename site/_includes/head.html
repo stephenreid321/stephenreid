@@ -1,0 +1,63 @@
+{% if jekyll.environment == 'production' %}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151445443-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-151445443-1');
+  </script>
+{% endif %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+<link rel="preload" href="/fonts/ZilapEvolution/stylesheet.css" as="style">
+<link href="/fonts/ZilapEvolution/stylesheet.css" rel="stylesheet">
+
+{% include dependencies.html %}
+
+<script>
+  // The theme: ?stylesheet= picks one for just this page, else the one the nav's switch saved in a cookie, else dark.
+  // Written in as the page loads, so it's there before the page is first drawn
+  window.theme = (function () {
+    const themes = ['dark', 'light']
+    const param = new URLSearchParams(location.search).get('stylesheet')
+    const cookie = (document.cookie.match(/(?:^|; )theme=(\w+)/) || [])[1]
+    return [param, cookie].find(function (theme) { return themes.includes(theme) }) || 'dark'
+  })()
+  document.write('<link rel="stylesheet" data-theme-stylesheet href="/stylesheets/' + window.theme + '.css?{{ site.cachebuster }}">')
+</script>
+<noscript><link rel="stylesheet" href="/stylesheets/dark.css?{{ site.cachebuster }}"></noscript>
+
+<link rel="icon" type="image/png" href="/images/{{ page.favicon | default: 'octopus-circle.png' }}">
+{% if page.full_title %}
+  {% assign title = page.full_title %}
+{% elsif page.title %}
+  {% assign title = page.title | append: ' · Stephen Reid' %}
+{% else %}
+  {% assign title = 'Stephen Reid' %}
+{% endif %}
+<title>{{ title }}</title>
+<meta property="og:title" content="{{ title }}">
+<meta name="description" content="{{ page.og_desc }}">
+{% if page.og_image %}
+  {% assign og_image = site.url | append: page.og_image %}
+{% elsif site.apiflash_key %}
+  {% capture screenshot_url %}{{ site.url }}{{ page.url }}?no_modal=1{% endcapture %}
+  {% capture og_image %}https://api.apiflash.com/v1/urltoimage?access_key={{ site.apiflash_key }}&url={{ screenshot_url | cgi_escape }}&width=1280&height=672&ttl=2592000{% endcapture %}
+{% endif %}
+<meta property="og:image" content="{{ og_image }}">
+
+{% if og_image and page.og_desc %}
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ page.og_desc }}">
+  <meta name="twitter:image" content="{{ og_image }}">
+  <meta name="twitter:card" content="summary_large_image">
+{% endif %}

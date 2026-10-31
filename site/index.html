@@ -1,0 +1,52 @@
+---
+permalink: /
+og_image: /images/link.jpg
+og_desc: Technologist, facilitator and coach
+---
+<div class="ripple-hero">
+  <canvas aria-hidden="true"></canvas>
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-8" style="font-size: 110%">
+        <p class="text-contrast">
+          Hi, I'm Stephen.
+        </p>
+
+        <p>
+          {% include markdown.html name='tagline' %}
+        </p>
+
+        <div class="mb-3">
+          <p class="text-contrast mb-3">
+            Join 3000+ others receiving my regular newsletter:
+          </p>
+          <a target="_blank" class="btn btn-primary" href="https://stephenreid.substack.com/">Subscribe on Substack</a>
+        </div>
+
+      </div>
+      <div class="col-lg-4">
+
+        <div style="position: relative;">
+          <img class="d-block w-100" src="/images/me-coast.jpg" style="box-shadow: 0 0 1.5vw black">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/ripple.js?{{ site.cachebuster }}"></script>
+
+<div class="row mt-5 justify-content-center">
+  <div class="col-lg-9">
+    <p class="text-contrast text-center">
+      Short bio in the third person
+    </p>
+    <div>
+      {% include markdown.html name='bio' %}
+    </div>
+  </div>
+</div>
+
+{% include substack_gallery.html %}
+
+<iframe class="mt-5" src="https://www.google.com/maps/d/u/0/embed?mid=1QWAa8AYdFShGu6AgvK0ePUkgogGFEl8&ehbc=2E312F" style="height: 400px; width: 100%; border: 0;"></iframe>

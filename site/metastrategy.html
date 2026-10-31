@@ -1,0 +1,84 @@
+---
+title: Metastrategy
+permalink: /metastrategy
+---
+{% assign m = site.data.metastrategy %}
+{% if m %}
+<div class="row justify-content-center text-center">
+  <div class="col-6 col-lg-2 mb-4">
+    <a href="https://iconomi.com/asset/DECENTCOOP"><img class="mb-3 w-100 rounded-circle" style="box-shadow: 0 0 1rem rgba(0,0,0,1)" src="/images/meta-sq.jpg"></a>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <p class="lead">
+      <a href="https://www.iconomi.com/asset/DECENTCOOP">Metastrategy</a> is my strategy on ICONOMI.
+      It's an automated strategy with weekly rebalancing that is always an intelligent mix of the current top performing strategies.
+      It's a great 'set-and-forget' option and is my top recommendation for those new to crypto investing.
+    </p>
+    <p class="lead">
+      Metastrategy is currently the #{{ m.acs_index }} most copied strategy on ICONOMI (by value).
+    </p>
+    <p class="lead d-none">
+      Of the {{ m.larger_strategies }} <a href="https://www.iconomi.com/strategies?sortBy=aum&sortOrder=desc&page=1">larger strategies</a>,
+      Metastrategy is <a href="/iconomi">outperforming</a> {{ m.outperforming_count }} of them over the 1-year timeframe:
+      {{ m.outperforming }}.
+      If you're already copying these strategies, you're probably better off switching to Metastrategy.
+      <a href="https://t.me/joinchat/CEMqfHYfnkAyY2U0">Join the Telegram group &rarr;</a>
+    </p>
+    <h2>Step-by-step guide to investing in Metastrategy</h2>
+    <ol class="mt-1">
+      <li>
+        <a href="https://www.iconomi.com/register">Sign up to ICONOMI</a>
+      </li>
+      <li>
+        Click Deposit and load your ICONOMI account.
+      </li>
+      <li>
+        <a href="https://iconomi.com/asset/DECENTCOOP">Go to the Metastrategy page</a> and click Copy Strategy.
+      </li>
+    </ol>
+    <p>
+      <mark>I recommend dollar-cost averaging (investing equal amounts at regular intervals) rather than going all-in.</mark>
+      This is simple to do with ICONOMI's Autocopy feature.
+      Activate Autocopy on your ICONOMI dashboard, then set up a standing order/recurring payment from your bank to ICONOMI.
+      Every time funds arrive in your ICONOMI account, they will automatically be used to copy Metastrategy.
+    </p>
+  </div>
+</div>
+<p class="text-center">
+  Rebalanced <relative-time datetime="{{ m.last_rebalanced }}">{{ m.last_rebalanced }}</relative-time>
+</p>
+
+<table class="table mt-3" style="width: auto; margin: auto">
+  <thead style="border-top: none">
+    <tr>
+      <th style="text-align: center">24h</th>
+      <th style="text-align: center">7d</th>
+      <th style="text-align: center">1M</th>
+      <th style="text-align: center">3M</th>
+      <th style="text-align: center">6M</th>
+      <th style="text-align: center">1Y</th>
+    </tr>
+  </thead>
+  <tr>
+    {% for cell in m.returns %}
+    <td style="text-align: center">
+      {% if cell %}
+        <span class="score d-none">
+          {{ cell.score }}
+        </span>
+        Top
+        <br>
+        {{ cell.top }}
+      {% endif %}
+    </td>
+    {% endfor %}
+  </tr>
+</table>
+{% include metastrategy_table.html %}
+{% else %}
+<p class="lead text-center">No data from ICONOMI yet: <code>rake data:iconomi</code> fetches it.</p>
+{% endif %}
+<h2>How Metastrategy works</h2>
+{% include markdown.html name='metastrategy' %}

@@ -1,0 +1,9 @@
+---
+title: Speaking engagements
+permalink: /speaking-engagements
+---
+<dl class="row">
+  {% for speaking_engagement in site.data.speaking_engagements %}
+  {% include speaking_engagement.html speaking_engagement=speaking_engagement %}
+  {% endfor %}
+</dl>

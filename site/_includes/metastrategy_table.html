@@ -1,0 +1,108 @@
+<style>
+  @media(min-width: 768px) {
+  td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
+  #assets th { border-top: none }
+  }
+</style>
+<script>
+  $(function () {
+      $('#assets').dataTable({info: false, paging: false, searching: false, order: [[4, "desc"]]})
+  })
+</script>
+
+<div class="row align-items-center">
+  <div class="col-lg-8">
+    <table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Asset</th>
+          <th></th>
+          <th style="width: 8em">Current weight</th>
+          <th style="width: 8em">Next rebalance</th>
+        </tr>
+      </thead>
+      {% for asset in m.assets %}
+      <tr>
+        <td style="vertical-align: middle; text-align: right; width: 10vw">
+          {% if asset.decrease_bar %}
+            <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: red; width: {{ asset.decrease_bar }}"></div>
+          {% endif %}
+        </td>
+        <td class="assetName" style="white-space: nowrap;">
+          <a
+      data-bs-toggle="tooltip"
+      target="_blank" href="https://iconomi.com/asset/{{ asset.ticker }}">
+            {{ asset.name }} ({{ asset.ticker }})
+          </a>
+        </td>
+        <td style="vertical-align: middle; width: 10vw">
+          {% if asset.increase_bar %}
+            <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: green; width: {{ asset.increase_bar }}"></div>
+          {% endif %}
+        </td>
+        <td data-sort="{{ asset.actual_sort }}" style="white-space: nowrap;">
+          {% if asset.actual %}
+            {{ asset.actual }}
+            <small>
+              <span style="color: {{ asset.diff_color }}">
+                {{ asset.diff }}
+              </span>
+            </small>
+          {% endif %}
+        </td>
+        <td data-sort="{{ asset.proposed_sort }}" style="white-space: nowrap;">
+          {{ asset.proposed }}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="col-lg-4">
+    <script>
+      $(function () {
+        var config = {
+          type: 'doughnut',
+          data: {
+            datasets: [{
+                data: {{ m.chart.data | jsonify }},
+                backgroundColor: {{ m.chart.colors | jsonify }}
+              }],
+            labels: {{ m.chart.labels | jsonify }}
+          },
+          options: {
+            plugins: {
+              legend: {
+                display: true
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    try {
+                      let label = ' ' + tooltipItem.label || '';
+                      if (label) {
+                        label += ': ';
+                      }
+
+                      const sum = tooltipItem.dataset.data.reduce((accumulator, curValue) => {
+                        return accumulator + curValue;
+                      });
+                      const value = tooltipItem.raw;
+                      label += Number((value / sum) * 100).toFixed(1) + '%';
+                      return label;
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        };
+        var ctx = document.getElementById('chart-area').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+      })
+    </script>
+    <canvas id="chart-area"></canvas>
+  </div>
+</div>
