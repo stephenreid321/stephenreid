@@ -1,0 +1,52 @@
+name: Substack
+
+# Substack's Cloudflare turns away GitHub's runners, so this runs on a self-hosted runner on Stephen's Mac (label
+# substack): it fetches the notes and posts into data/fetched, commits them to master if they've changed, and rebuilds
+# the site. It runs only while the Mac is on; until then the site keeps the notes and posts last committed
+on:
+  schedule:
+    - cron: '7 */6 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  fetch:
+    runs-on: [ self-hosted, substack ]
+    permissions:
+      contents: write
+      actions: write
+    concurrency:
+      group: substack
+      cancel-in-progress: false
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    # The Mac's own Ruby (rvm, on the runner's PATH), with the gems in the runner's workspace
+    - name: Install gems
+      run: bundle install --quiet
+      env:
+        BUNDLE_PATH: vendor/bundle
+
+    - name: Fetch from Substack
+      run: bundle exec rake data:substack
+      env:
+        BUNDLE_PATH: vendor/bundle
+        SUBSTACK_TOKEN: ${{ secrets.SUBSTACK_TOKEN }}
+        SUBSTACK_PUBLICATION_URL: ${{ vars.SUBSTACK_PUBLICATION_URL }}
+
+    # A push with GITHUB_TOKEN doesn't run the Site workflow, so this runs it
+    - name: Commit and rebuild the site
+      run: |
+        git add data/fetched/substack_notes.json data/fetched/substack_posts.json
+        git diff --cached --quiet && exit 0
+        git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+          commit -m 'Fetch the Substack notes and posts'
+        git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
+        gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ github.token }}

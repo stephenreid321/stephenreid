@@ -1,7 +1,8 @@
 name: Site
 
 # Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and
-# every six hours, or when run by hand, with fresh data from Substack and ICONOMI
+# every six hours, or when run by hand, with fresh data from ICONOMI. Substack's notes and posts are committed, by the
+# Substack workflow
 on:
   push:
     branches: [ master ]
@@ -40,19 +41,12 @@ jobs:
       id: fetched
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        path: data/fetched
+        # Not Substack's notes and posts, which the Substack workflow commits
+        path: |
+          data/fetched
+          !data/fetched/substack_*.json
         key: fetched-${{ github.run_id }}
         restore-keys: fetched-
-
-    # Substack's Cloudflare turns away GitHub's runners. Then the build goes on with the notes and posts committed in
-    # data/fetched, as a failed fetch writes nothing
-    - name: Fetch from Substack
-      if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
-      continue-on-error: true
-      run: bundle exec rake data:substack
-      env:
-        SUBSTACK_TOKEN: ${{ secrets.SUBSTACK_TOKEN }}
-        SUBSTACK_PUBLICATION_URL: ${{ vars.SUBSTACK_PUBLICATION_URL }}
 
     - name: Fetch from ICONOMI
       if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
@@ -67,7 +61,10 @@ jobs:
     - name: Save fetched data
       uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        path: data/fetched
+        # Not Substack's notes and posts, which the Substack workflow commits
+        path: |
+          data/fetched
+          !data/fetched/substack_*.json
         key: fetched-${{ github.run_id }}
 
     - name: Build the site
