@@ -23,6 +23,11 @@ table.dataTable thead {
   th:is(.dt-type-numeric, .dt-type-date) div.dt-column-header {
     flex-direction: row
   }
+
+  // More of a gap between the heading and its arrows
+  .dt-column-order {
+    margin-left: 0.25rem
+  }
 }
 
 .text-contrast,
