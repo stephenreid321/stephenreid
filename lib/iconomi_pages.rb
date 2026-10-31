@@ -118,7 +118,7 @@ module IconomiPages
         end
         lines << ''
       end
-      { 'strategies' => Strategy.unverified.reject { |s| s.ticker == 'AUSTS' }, 'assets' => Asset.all.values.reject(&:verified?) }.each do |kind, items|
+      { 'strategies' => Strategy.unverified, 'assets' => Asset.all.values.reject(&:verified?) }.each do |kind, items|
         next if items.empty?
 
         lines << "Unverified #{kind} (no status, or excluded) in data/iconomi/#{kind}.csv:" << ''
@@ -131,7 +131,7 @@ module IconomiPages
     # The body of the GitHub issue the Site workflow opens for the strategies and assets with no status yet (not those
     # excluded): blank when there are none
     def unreviewed
-      items = { 'strategies' => Strategy.all.reject { |s| s.status || s.ticker == 'AUSTS' },
+      items = { 'strategies' => Strategy.all.reject(&:status),
                 'assets' => Asset.all.values.reject(&:status) }.reject { |_, list| list.empty? }
       return '' if items.empty?
 

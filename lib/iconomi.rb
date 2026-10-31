@@ -7,16 +7,23 @@ class Iconomi
   REQUESTS_PER_MINUTE = 540
   THROTTLE = Mutex.new
 
+  # Tries again what might work a second time (a 429, an error on ICONOMI's side, a dropped connection), but not a
+  # refusal, such as the 401 for a strategy whose holdings are private
   def self.get(path, parameters = nil, attempts: 3)
     throttle
     response = Faraday.new(headers: headers('GET', path)).get("https://api.iconomi.com#{path}#{"?#{parameters}" if parameters}")
-    if response.status == 429 && attempts > 1
-      sleep response.headers['retry-after'].to_i.clamp(1, 120)
+    if (response.status == 429 || response.status >= 500) && attempts > 1
+      sleep(response.status == 429 ? response.headers['retry-after'].to_i.clamp(1, 120) : 2)
       return get(path, parameters, attempts: attempts - 1)
     end
     raise "HTTP #{response.status} for #{path}: #{response.body.to_s[0, 200]}" unless response.success?
 
     response.body
+  rescue Faraday::ConnectionFailed, Faraday::TimeoutError
+    raise if attempts <= 1
+
+    sleep 2
+    get(path, parameters, attempts: attempts - 1)
   end
 
   # Waits until it's time for the next request

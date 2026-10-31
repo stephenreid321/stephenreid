@@ -156,7 +156,7 @@ class Strategy
     end
 
     # Fetches every strategy on ICONOMI, the assets they hold and Metastrategy's structure into
-    # data/fetched/iconomi.json, a few at a time. A strategy that can't be fetched in three attempts is left out
+    # data/fetched/iconomi.json, a few at a time. A strategy that can't be fetched is left out
     def fetch(threads: 8)
       queue = Queue.new
       tickers.each { |ticker| queue << ticker }
@@ -194,22 +194,13 @@ class Strategy
       (listed | scored | csv_file.rows.keys).compact
     end
 
-    # The strategy with this ticker, fetched from ICONOMI, or nil if it can't be in three attempts
+    # The strategy with this ticker, fetched from ICONOMI, or nil if it can't be (Iconomi.get has tried again what
+    # might work a second time)
     def fetch_one(ticker)
-      strategy = new('ticker' => ticker)
-      attempts = 0
-      begin
-        attempts += 1
-        strategy.update
-        strategy
-      rescue StandardError => e
-        if attempts < 3
-          sleep attempts
-          retry
-        end
-        puts "error: #{ticker}, leaving it out (#{e.message[0, 300]})"
-        nil
-      end
+      new('ticker' => ticker).tap(&:update)
+    rescue StandardError => e
+      puts "error: #{ticker}, leaving it out (#{e.message[0, 300]})"
+      nil
     end
 
     # Marks the strategies and assets that have no status as verified, in data/iconomi/strategies.csv and
