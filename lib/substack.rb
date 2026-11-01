@@ -54,23 +54,18 @@ module Substack
       ''
     end
 
-    # Counts and tracking that Substack changes from one fetch to the next, which the site doesn't show
-    LIVE_KEYS = %w[
-      trackingParameters reaction reactions reaction_count restacks restacked comment_count child_comment_count
-      children_count rankingDetailFreeSubscriberCount freeSubscriberCountOrderOfMagnitude followed_user_count
-      subscribed_publication_count item_current_reaction_count item_current_restack_count item_current_reply_count
-    ].freeze
+    # Just +fields+ of the hash +obj+: each a key, or { key => fields } for those of a hash under it. Substack's JSON
+    # changes from one fetch to the next in ways the site doesn't show (counts, prices, tracking), so data/fetched keeps
+    # only what the site reads, and changes only when that does
+    def pick(obj, fields)
+      return unless obj.is_a?(Hash)
 
-    # safe_json, without LIVE_KEYS at any depth, so data/fetched only changes when what the site shows does
-    def stable_json(obj)
-      safe_json(without_live_keys(obj))
-    end
-
-    def without_live_keys(obj)
-      case obj
-      when Hash then obj.except(*LIVE_KEYS).transform_values { |v| without_live_keys(v) }
-      when Array then obj.map { |v| without_live_keys(v) }
-      else obj
+      fields.each_with_object({}) do |field, picked|
+        if field.is_a?(Hash)
+          field.each { |key, nested| (value = pick(obj[key], nested)) && (picked[key] = value) }
+        elsif obj.key?(field)
+          picked[field] = obj[field]
+        end
       end
     end
 

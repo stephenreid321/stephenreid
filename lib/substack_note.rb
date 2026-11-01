@@ -3,28 +3,34 @@ class SubstackNote
   # IDs and counts: Substack’s JSON uses JSON numbers, so JSON.parse yields Integer in Ruby.
   # (Exported CSV shows digits as strings — that’s CSV, not the API.) Blank API fields use fetch(..., '')
   # in flatten_raw_note; coerce_integer maps those to nil.
-  INTEGER_TYPES = %w[
-    post_id post_restacks post_reaction_count post_comment_count publication_id
-    comment_id comment_user_id reaction_count restacks children_count media_clip_id
-  ].freeze
+  # Only what the site reads, as everything else Substack sends changes from one fetch to the next (counts, prices,
+  # uploads) and would have the Substack workflow commit and rebuild the site for nothing
+  INTEGER_TYPES = %w[reaction_count post_reaction_count parent_comment_count].freeze
 
   STRING_TYPES = %w[
-    entity_key body published_at primary_link feed_item_type context_type context_json
-    post_title post_slug post_canonical_url post_date
-    post_restacked post_subtitle post_description post_cover_image_url
+    entity_key body published_at primary_link
+    post_title post_canonical_url post_subtitle post_description post_cover_image_url
     publication_name publication_subdomain publication_custom_domain publication_logo_url
-    comment_author_handle comment_author_name
-    comment_photo_url comment_bio parent_comment_id
-    quote_selections_json reactions_json restacked
-    edited_at attachments_json body_json parent_comments_json
+    comment_author_handle parent_comment_id
+    quote_selections_json attachments_json
   ].freeze
 
   BASE_COLUMNS = (STRING_TYPES + INTEGER_TYPES).freeze
 
   attr_reader(*BASE_COLUMNS)
 
-  # Each type maps to `render_<type>_attachment` below.
-  ATTACHMENT_TYPES = %w[image video link publication comment post].freeze
+  # Each type maps to `render_<type>_attachment` below, which reads these of its fields (Substack.pick)
+  PUBLICATION_FIELDS = %w[name subdomain custom_domain logo_url logo_url_wide cover_photo_url].freeze
+  ATTACHMENT_FIELDS = {
+    'image' => %w[imageUrl url],
+    'video' => ['thumbnailUrl', 'previewImageUrl', { 'mediaUpload' => %w[name mux_playback_id thumbnail_url poster] }],
+    'link' => [{ 'linkMetadata' => %w[url title host image original_image] }],
+    'publication' => [{ 'publication' => PUBLICATION_FIELDS }],
+    'publication_recommendation' => [{ 'publicationRecommendation' => [{ 'recommendedPublication' => PUBLICATION_FIELDS }] }],
+    'comment' => [{ 'comment' => ['body', 'handle', 'id', 'comment_id', 'entity_key', { 'user' => %w[handle] }] }],
+    'post' => [{ 'postSelection' => %w[text] }, { 'post' => %w[title canonical_url] }]
+  }.freeze
+  ATTACHMENT_TYPES = ATTACHMENT_FIELDS.keys.freeze
 
   def initialize(attributes)
     attributes.each { |name, value| instance_variable_set(:"@#{name}", value) if BASE_COLUMNS.include?(name.to_s) }
@@ -203,15 +209,9 @@ class SubstackNote
       return {} unless post
 
       {
-        'post_id' => post['id'],
         'post_title' => post['title'].to_s,
-        'post_slug' => post['slug'].to_s,
         'post_canonical_url' => post['canonical_url'].to_s,
-        'post_date' => post['post_date'].to_s,
-        'post_restacks' => post.fetch('restacks', ''),
-        'post_restacked' => post.key?('restacked') ? post['restacked'].to_s : '',
         'post_reaction_count' => post.fetch('reaction_count', ''),
-        'post_comment_count' => post.fetch('comment_count', ''),
         'post_subtitle' => post['subtitle'].to_s,
         'post_description' => post['description'].to_s,
         'post_cover_image_url' => post_cover_url(post)
@@ -222,7 +222,6 @@ class SubstackNote
       return {} unless pub
 
       {
-        'publication_id' => pub['id'],
         'publication_name' => pub['name'].to_s,
         'publication_subdomain' => pub['subdomain'].to_s,
         'publication_custom_domain' => pub['custom_domain'].to_s,
@@ -234,45 +233,35 @@ class SubstackNote
       return {} unless comment
 
       {
-        'comment_id' => comment['id'],
         'comment_author_handle' => comment['handle'].to_s,
-        'comment_author_name' => comment['name'].to_s,
-        'comment_user_id' => comment.fetch('user_id', ''),
-        'comment_photo_url' => (comment['photo_url'] || comment['author_photo_url']).to_s,
-        'comment_bio' => comment['bio'].to_s,
         'parent_comment_id' => (comment['parent_comment_id'] || comment['parent_id'] || comment.dig('parent_comment', 'id')).to_s,
         'body' => comment['body'].to_s,
         'reaction_count' => comment.fetch('reaction_count', ''),
-        'reactions_json' => Substack.safe_json(comment['reactions']),
-        'restacks' => comment.fetch('restacks', ''),
-        'restacked' => comment.key?('restacked') ? comment['restacked'].to_s : '',
-        'children_count' => comment.fetch('children_count', ''),
-        'edited_at' => comment['edited_at'].to_s,
-        'media_clip_id' => comment.fetch('media_clip_id', ''),
-        'attachments_json' => Substack.stable_json(comment['attachments']),
-        'body_json' => Substack.stable_json(comment['body_json'])
+        'attachments_json' => Substack.safe_json(attachments_to_keep(comment['attachments']))
       }
+    end
+
+    # Of each attachment, the fields its render_<type>_attachment reads
+    def attachments_to_keep(attachments)
+      return unless attachments.is_a?(Array)
+
+      attachments.filter_map { |att| Substack.pick(att, ['type', *ATTACHMENT_FIELDS[att['type']]]) }
     end
 
     def flatten_raw_note(raw)
       comment = raw['comment']
       post = raw['post']
       pub = raw['publication']
-      ctx = raw['context']
 
-      published_at = ctx&.dig('timestamp') || comment&.dig('date') || post&.dig('post_date') || ''
+      published_at = raw.dig('context', 'timestamp') || comment&.dig('date') || post&.dig('post_date') || ''
       quote_selections = extract_quote_selections(comment&.dig('attachments'))
 
       row = {
         'entity_key' => raw['entity_key'].to_s,
-        'feed_item_type' => raw['type'].to_s,
-        'context_type' => ctx&.dig('type').to_s,
-        'context_json' => ctx ? Substack.stable_json(ctx) : '',
         'published_at' => published_at.to_s,
         'primary_link' => primary_link(raw),
-        'post_id' => post ? post['id'] : comment&.dig('post_id'),
-        'quote_selections_json' => quote_selections.empty? ? '' : Substack.stable_json(quote_selections),
-        'parent_comments_json' => raw['parentComments'] ? Substack.stable_json(raw['parentComments']) : ''
+        'quote_selections_json' => quote_selections.empty? ? '' : Substack.safe_json(quote_selections),
+        'parent_comment_count' => (raw['parentComments'].size if raw['parentComments'].is_a?(Array))
       }
 
       row.merge!(post_fields(post))
@@ -365,6 +354,10 @@ class SubstackNote
       lines.empty? ? ["- (publication) #{truncated_json(att)}"] : lines
     end
 
+    def render_publication_recommendation_attachment(att)
+      render_publication_attachment('publication' => att.dig('publicationRecommendation', 'recommendedPublication'))
+    end
+
     def render_comment_attachment(att)
       com = att['comment'] || {}
       body = com['body'].to_s
@@ -413,7 +406,7 @@ class SubstackNote
         if ATTACHMENT_TYPES.include?(type)
           send(:"render_#{type}_attachment", att)
         else
-          ["- `#{type}` #{truncated_json(att)}"]
+          ["- `#{type}`"]
         end
       end
       return '' if lines.empty?
@@ -424,15 +417,8 @@ class SubstackNote
     end
 
     def parent_thread_hint(flat)
-      raw = flat['parent_comments_json'].to_s
-      return '' if raw.empty?
-
-      arr = JSON.parse(raw)
-      return '' unless arr.is_a?(Array) && !arr.empty?
-
-      "\n_(#{arr.size} parent comment(s))_\n"
-    rescue JSON::ParserError
-      ''
+      count = flat['parent_comment_count'].to_i
+      count.positive? ? "\n_(#{count} parent comment(s))_\n" : ''
     end
 
     def markdown_for_note(note)
