@@ -11,10 +11,11 @@ on:
 
 permissions: {}
 
-# One deploy at a time, and none cancelled halfway
+# One build at a time: a new one cancels the one running, as it builds from newer commits and data. A deploy cancelled
+# halfway leaves the last one live
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
