@@ -121,12 +121,15 @@ module Substack
       request_json(conn, "#{base_api}#{path}")
     end
 
-    def fetch_archive_page(conn:, base_api:, offset:, limit:, sort: 'new')
-      response = conn.get("#{base_api}/archive?sort=#{sort}&limit=#{limit}&offset=#{offset}")
+    # A page of the archive and the cursor of the next, nil after the last. Substack pages it with a cursor, not an offset
+    def fetch_archive_page(conn:, base_api:, cursor:, limit:, sort: 'new')
+      path = "#{base_api}/archive?sort=#{sort}&limit=#{limit}"
+      path += "&cursor=#{URI.encode_www_form_component(cursor)}" if cursor
+      response = conn.get(path)
       raise "HTTP #{response.status}: #{response.body.to_s.byteslice(0, 200)}" unless response.success?
 
-      arr = JSON.parse(response.body.to_s)
-      arr.is_a?(Array) ? arr : []
+      json = JSON.parse(response.body.to_s)
+      [Array(json['posts']), json['nextCursor'].presence]
     end
 
     def fetch_post_detail(conn:, base_api:, slug:, max_attempts: 5)

@@ -51,14 +51,11 @@ class SubstackPost
       base_api = Substack.base_api_url
 
       all_raw = []
-      offset = 0
-      page_size = 12
+      cursor = nil
       loop do
-        page = Substack.fetch_archive_page(conn: conn, base_api: base_api, offset: offset, limit: page_size)
-        break if page.empty?
-
+        page, cursor = Substack.fetch_archive_page(conn: conn, base_api: base_api, cursor: cursor, limit: 12)
         all_raw.concat(page)
-        offset += page.size
+        break if page.empty? || cursor.nil?
       end
 
       # Posts no longer in the archive drop out
