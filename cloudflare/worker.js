@@ -1,47 +1,41 @@
 // Starts the repo's scheduled GitHub Actions runs. GitHub's own schedules are best-effort: when it's busy it starts them
-// hours late or not at all. Cloudflare's Cron Triggers fire on time, so this Worker wakes at the minutes in
-// wrangler.jsonc's crons and starts each run that's due then, as Run workflow does (a workflow_dispatch event)
+// hours late or not at all. Cloudflare's Cron Triggers fire on time, so this Worker wakes on the hour (wrangler.jsonc's
+// cron) and starts each run that's due then, as Run workflow does (a workflow_dispatch event), which GitHub starts at
+// once, on the hour or not
 
 const REPO = 'stephenreid321/stephenreid'
 const BRANCH = 'master'
 const TIME_ZONE = 'Europe/Stockholm'
 
-// Each run: the minute past the hour it's due, whether it's due in that hour (by the clock in Stockholm), and the
-// workflow and inputs it's started with. Every minute here is in wrangler.jsonc's crons
+// Each run: whether it's due in an hour (by the clock in Stockholm), and the workflow and inputs it's started with.
+// They start together: if substack.yml commits, it rebuilds the site, and that build cancels the one started here
 export const RUNS = [
-  // Every three hours: Substack's notes and posts, then Bluesky, then the site with fresh data
-  { name: 'substack', minute: 7, due: (t) => t.hour % 3 === 0, workflow: 'substack.yml' },
-  { name: 'bluesky', minute: 20, due: (t) => t.hour % 3 === 0, workflow: 'bluesky.yml' },
-  { name: 'site', minute: 41, due: (t) => t.hour % 3 === 0, workflow: 'site.yml' },
-  // Daily
-  { name: 'goodreads', minute: 23, due: (t) => t.hour === 6, workflow: 'goodreads.yml' },
+  // Every three hours
+  { name: 'substack', due: (t) => t.hour % 3 === 0, workflow: 'substack.yml' },
+  { name: 'bluesky', due: (t) => t.hour % 3 === 0, workflow: 'bluesky.yml' },
+  { name: 'site', due: (t) => t.hour % 3 === 0, workflow: 'site.yml' },
+  // Daily at 06:00
+  { name: 'goodreads', due: (t) => t.hour === 6, workflow: 'goodreads.yml' },
   // Fridays at 17:00. scheduled makes the workflow rebalance only while the ICONOMI_REBALANCE variable is true
-  {
-    name: 'rebalance',
-    minute: 0,
-    due: (t) => t.weekday === 'Fri' && t.hour === 17,
-    workflow: 'iconomi-rebalance.yml',
-    inputs: { scheduled: 'true' }
-  }
+  { name: 'rebalance', due: (t) => t.weekday === 'Fri' && t.hour === 17, workflow: 'iconomi-rebalance.yml', inputs: { scheduled: 'true' } }
 ]
 
-// The weekday, hour and minute in Stockholm of a time (in milliseconds)
+// The weekday and hour in Stockholm of a time (in milliseconds)
 export function stockholmTime (ms) {
   const parts = new Intl.DateTimeFormat('en-GB', {
     timeZone: TIME_ZONE,
     weekday: 'short',
     hour: 'numeric',
-    minute: 'numeric',
     hourCycle: 'h23'
   }).formatToParts(new Date(ms))
   const part = (type) => parts.find((p) => p.type === type).value
-  return { weekday: part('weekday'), hour: Number(part('hour')), minute: Number(part('minute')) }
+  return { weekday: part('weekday'), hour: Number(part('hour')) }
 }
 
-// The runs due at a time (in milliseconds)
+// The runs due in the hour of a time (in milliseconds)
 export function dueRuns (ms) {
   const t = stockholmTime(ms)
-  return RUNS.filter((run) => run.minute === t.minute && run.due(t))
+  return RUNS.filter((run) => run.due(t))
 }
 
 // Starts a run, trying three times in case GitHub's API is briefly unavailable

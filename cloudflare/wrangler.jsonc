@@ -10,10 +10,10 @@
   // It's only woken by its crons, so it has no URL
   "workers_dev": false,
   "preview_urls": false,
-  // In UTC. Each minute that worker.js's RUNS uses, every hour: worker.js works out what's due by the clock in
-  // Stockholm, so 17:00 there is right in summer and winter. One trigger, of the free plan's five
+  // On the hour, in UTC: worker.js works out what's due by the clock in Stockholm, so 17:00 there is right in summer
+  // and winter. One trigger, of the free plan's five
   "triggers": {
-    "crons": ["0,7,20,23,41 * * * *"]
+    "crons": ["0 * * * *"]
   },
   "observability": {
     "enabled": true
