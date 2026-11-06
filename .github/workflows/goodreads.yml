@@ -1,4 +1,4 @@
-name: Goodreads
+name: Export from Goodreads
 
 # Goodreads has no API for the library export, so this exports it as a signed-in browser would, with the Cookie header
 # of one (the GOODREADS_COOKIE secret), on the self-hosted runner on Stephen's Mac (label mac), so Goodreads sees
@@ -37,7 +37,7 @@ jobs:
         BUNDLE_PATH: vendor/bundle
         GOODREADS_COOKIE: ${{ secrets.GOODREADS_COOKIE }}
 
-    # A push with GITHUB_TOKEN doesn't run the Site workflow, so this runs it
+    # A push with GITHUB_TOKEN doesn't run `site.yml`, so this runs it
     - name: Commit and rebuild the site
       run: |
         git add data/goodreads_library_export.csv

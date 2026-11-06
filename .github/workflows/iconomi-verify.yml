@@ -1,0 +1,49 @@
+name: Verify the new ICONOMI strategies and assets
+
+# Run by hand (Run workflow), when the site's issue lists strategies and assets with no status yet
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  # Marks the strategies and assets with no status as verified, as the old admin page's Verify did, commits that to
+  # master and rebuilds the site
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    - name: Fetch from ICONOMI
+      run: bundle exec rake data:iconomi
+      env:
+        ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
+        ICN_SECRET: ${{ secrets.ICN_SECRET }}
+
+    - name: Verify
+      run: bundle exec rake iconomi:verify
+
+    # A push with GITHUB_TOKEN doesn't run `site.yml`, so this runs it
+    - name: Commit and rebuild the site
+      run: |
+        git add data/iconomi/strategies.csv data/iconomi/assets.csv
+        git diff --cached --quiet && exit 0
+        git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+          commit -m 'Verify the new ICONOMI strategies and assets'
+        git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
+        gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ github.token }}

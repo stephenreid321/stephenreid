@@ -11,7 +11,7 @@ const TIME_ZONE = 'Europe/Stockholm'
 export const RUNS = [
   // Every three hours: Substack's notes and posts, then Bluesky, then the site with fresh data
   { name: 'substack', minute: 7, due: (t) => t.hour % 3 === 0, workflow: 'substack.yml' },
-  { name: 'posts-sync', minute: 23, due: (t) => t.hour % 3 === 0, workflow: 'tasks.yml', inputs: { task: 'posts-sync' } },
+  { name: 'bluesky', minute: 20, due: (t) => t.hour % 3 === 0, workflow: 'bluesky.yml' },
   { name: 'site', minute: 41, due: (t) => t.hour % 3 === 0, workflow: 'site.yml' },
   // Daily
   { name: 'goodreads', minute: 23, due: (t) => t.hour === 6, workflow: 'goodreads.yml' },
@@ -20,8 +20,8 @@ export const RUNS = [
     name: 'rebalance',
     minute: 0,
     due: (t) => t.weekday === 'Fri' && t.hour === 17,
-    workflow: 'tasks.yml',
-    inputs: { task: 'rebalance', scheduled: 'true' }
+    workflow: 'iconomi-rebalance.yml',
+    inputs: { scheduled: 'true' }
   }
 ]
 

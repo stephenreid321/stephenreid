@@ -1,4 +1,4 @@
-name: Substack
+name: Fetch from Substack
 
 # Substack's Cloudflare turns away GitHub's runners, so this runs on a self-hosted runner on Stephen's Mac (label
 # mac): it fetches the notes and posts into data/fetched, commits them to master if they've changed, and rebuilds
@@ -37,7 +37,7 @@ jobs:
         SUBSTACK_TOKEN: ${{ secrets.SUBSTACK_TOKEN }}
         SUBSTACK_PUBLICATION_URL: ${{ vars.SUBSTACK_PUBLICATION_URL }}
 
-    # A push with GITHUB_TOKEN doesn't run the Site workflow, so this runs it
+    # A push with GITHUB_TOKEN doesn't run `site.yml`, so this runs it
     - name: Commit and rebuild the site
       run: |
         git add data/fetched/substack_notes.json data/fetched/substack_posts.json

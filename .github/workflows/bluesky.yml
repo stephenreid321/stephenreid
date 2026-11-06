@@ -1,0 +1,33 @@
+name: Post to Bluesky
+
+# The Cloudflare Worker in cloudflare/ starts it every three hours, as GitHub's own schedule starts runs late or not
+# at all
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  # Posts to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    - name: Post to Bluesky
+      run: bundle exec rake bluesky:post
+      env:
+        READWISE_ACCESS_TOKEN: ${{ secrets.READWISE_ACCESS_TOKEN }}
+        BLUESKY_EMAIL: ${{ secrets.BLUESKY_EMAIL }}
+        BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}

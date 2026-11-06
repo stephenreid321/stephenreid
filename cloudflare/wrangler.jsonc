@@ -13,7 +13,7 @@
   // In UTC. Each minute that worker.js's RUNS uses, every hour: worker.js works out what's due by the clock in
   // Stockholm, so 17:00 there is right in summer and winter. One trigger, of the free plan's five
   "triggers": {
-    "crons": ["0,7,23,41 * * * *"]
+    "crons": ["0,7,20,23,41 * * * *"]
   },
   "observability": {
     "enabled": true

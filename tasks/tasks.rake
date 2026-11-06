@@ -45,13 +45,7 @@ namespace :iconomi do
     Strategy.rebalance
   end
 
-  desc "Summarise Metastrategy's proposals and what's unverified, into GitHub Actions' job summary if there is one"
-  task summary: :environment do
-    summary = IconomiPages.summary
-    ENV['GITHUB_STEP_SUMMARY'] ? File.write(ENV['GITHUB_STEP_SUMMARY'], summary, mode: 'a') : puts(summary)
-  end
-
-  desc 'Print the strategies and assets with no status yet, for the GitHub issue the Site workflow keeps (blank if none)'
+  desc 'Print the strategies and assets with no status yet, for the GitHub issue site.yml keeps (blank if none)'
   task unreviewed: :environment do
     print IconomiPages.unreviewed
   end
@@ -69,9 +63,9 @@ namespace :site do
   end
 end
 
-namespace :posts do
+namespace :bluesky do
   desc "Post to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet"
-  task sync: :environment do
+  task post: :environment do
     response = Faraday.get('https://readwise.io/api/v3/list', { location: 'archive', updatedAfter: 7.days.ago.iso8601 },
                            { 'Authorization' => "Token #{ENV['READWISE_ACCESS_TOKEN']}" })
     bluesky = Bluesky.new

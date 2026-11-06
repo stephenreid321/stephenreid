@@ -24,11 +24,6 @@ class Asset
     status == 'verified'
   end
 
-  # Its multiplier as the badge shows it: 2x, 0.5x
-  def multiplier_label
-    "#{multiplier == multiplier.to_i ? multiplier.to_i : multiplier}x" if multiplier
-  end
-
   def self.statuses
     ['', 'verified', 'excluded']
   end

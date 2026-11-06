@@ -1,0 +1,44 @@
+name: Rebalance Metastrategy
+run-name: ${{ inputs.scheduled && 'Rebalance Metastrategy, if ICONOMI_REBALANCE is true' || 'Rebalance Metastrategy' }}
+
+# The Cloudflare Worker in cloudflare/ starts it on Fridays at 17:00 Central European time, with scheduled, so it
+# rebalances only while the ICONOMI_REBALANCE variable is true. Run by hand (Run workflow), it rebalances whatever that
+# variable says
+on:
+  workflow_dispatch:
+    inputs:
+      scheduled:
+        description: Started on its schedule, so rebalance only if the ICONOMI_REBALANCE variable is true
+        type: boolean
+        default: false
+
+permissions: {}
+
+jobs:
+  # Fetches the strategies afresh, then rebalances Metastrategy on ICONOMI to the weights /metastrategy proposes
+  rebalance:
+    if: ${{ !inputs.scheduled || vars.ICONOMI_REBALANCE == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    concurrency:
+      group: rebalance
+      cancel-in-progress: false
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    - name: Rebalance Metastrategy
+      run: bundle exec rake iconomi:rebalance
+      env:
+        ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
+        ICN_SECRET: ${{ secrets.ICN_SECRET }}
+        NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}

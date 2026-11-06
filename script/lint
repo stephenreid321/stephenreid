@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Runs our linters, each on the files of its kind. CI's lint job (.github/workflows/ruby.yml) runs it too, so this is the
+# Runs our linters, each on the files of its kind. CI's lint job (.github/workflows/lint.yml) runs it too, so this is the
 # one place their commands and flags are set:
 #
 #   script/lint FILE...     the files as they are on disk

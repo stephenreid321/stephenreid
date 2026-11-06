@@ -105,30 +105,7 @@ module IconomiPages
       Strategy.reset!
     end
 
-    # For the build's summary in GitHub Actions: what the old admin view showed
-    def summary
-      with, without = proposals
-      lines = ['## Metastrategy', '']
-      lines << "Can't propose weights: #{proposals_error}" << '' if proposals_error
-      if with.any?
-        lines += ['| Asset | Multiplier | With multipliers (next rebalance) | Without multipliers |', '| --- | --- | --- | --- |']
-        lines += (with.keys | without.keys).map do |k|
-          asset = Asset.find_by_ticker(k)
-          "| #{asset.name} (#{k}) | #{asset.multiplier_label} | #{percent(with[k])} | #{percent(without[k])} |"
-        end
-        lines << ''
-      end
-      { 'strategies' => Strategy.unverified, 'assets' => Asset.all.values.reject(&:verified?) }.each do |kind, items|
-        next if items.empty?
-
-        lines << "Unverified #{kind} (no status, or excluded) in data/iconomi/#{kind}.csv:" << ''
-        lines += items.map { |i| "- #{i.name} (#{i.ticker}): #{i.status || 'no status'}" }
-        lines << ''
-      end
-      lines.join("\n")
-    end
-
-    # The body of the GitHub issue the Site workflow opens for the strategies and assets with no status yet (not those
+    # The body of the GitHub issue `site.yml` opens for the strategies and assets with no status yet (not those
     # excluded): blank when there are none
     def unreviewed
       items = { 'strategies' => Strategy.all.reject(&:status),
@@ -138,16 +115,12 @@ module IconomiPages
       lines = items.flat_map do |kind, list|
         ["New #{kind}, with no status in data/iconomi/#{kind}.csv:", '', *list.map { |i| "- #{i.name} (#{i.ticker})" }, '']
       end
-      lines << 'Give each a status there (`verified` or `excluded`), or run Tasks → verify to verify them all. This ' \
+      lines << 'Give each a status there (`verified` or `excluded`), or run Verify the new ICONOMI strategies and assets to verify them all. This ' \
                'issue closes itself once none is left.'
       lines.join("\n")
     end
 
     private
-
-    def percent(weight)
-      number_to_percentage(weight * 100, precision: 1) if weight
-    end
 
     def time_cell(time)
       time ? { 'sort' => time.to_i, 'time' => time.utc.iso8601 } : { 'sort' => 0 }

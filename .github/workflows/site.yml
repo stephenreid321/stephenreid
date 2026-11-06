@@ -1,9 +1,9 @@
-name: Site
+name: Build and deploy the site
 
-# Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and
-# every three hours, or when run by hand, with fresh data from ICONOMI. Substack's notes and posts are committed, by the
-# Substack workflow. The Cloudflare Worker in cloudflare/ starts it every three hours, as GitHub's own schedule
-# starts runs late or not at all
+# Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and with
+# fresh data from ICONOMI when run by hand, by substack.yml, goodreads.yml or iconomi-verify.yml when they commit, and
+# every three hours by the Cloudflare Worker in cloudflare/ (GitHub's own schedule starts runs late or not at all).
+# Substack's notes and posts are committed, by substack.yml
 on:
   push:
     branches: [ master ]
@@ -42,7 +42,7 @@ jobs:
       id: fetched
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        # Not Substack's notes and posts, which the Substack workflow commits
+        # Not Substack's notes and posts, which `substack.yml` commits
         path: |
           data/fetched
           !data/fetched/substack_*.json
@@ -62,7 +62,7 @@ jobs:
     - name: Save fetched data
       uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        # Not Substack's notes and posts, which the Substack workflow commits
+        # Not Substack's notes and posts, which `substack.yml` commits
         path: |
           data/fetched
           !data/fetched/substack_*.json
@@ -73,12 +73,6 @@ jobs:
       env:
         JEKYLL_ENV: production
         APIFLASH_KEY: ${{ secrets.APIFLASH_KEY }}
-        NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}
-
-    # Metastrategy's proposals with and without multipliers, and what's unverified, as the old admin view showed
-    - name: Summarise Metastrategy
-      run: bundle exec rake iconomi:summary
-      env:
         NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}
 
     # One open issue (label iconomi-new) while there are strategies or assets with no status yet: opened when the first
