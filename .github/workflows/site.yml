@@ -2,12 +2,11 @@ name: Site
 
 # Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and
 # every three hours, or when run by hand, with fresh data from ICONOMI. Substack's notes and posts are committed, by the
-# Substack workflow
+# Substack workflow. The Cloudflare Worker in cloudflare/ starts it every three hours, as GitHub's own schedule
+# starts runs late or not at all
 on:
   push:
     branches: [ master ]
-  schedule:
-    - cron: '41 */3 * * *'
   workflow_dispatch:
 
 permissions: {}

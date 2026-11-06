@@ -26,10 +26,10 @@ LINTERS = [
   },
   {
     name: 'ESLint',
-    files: %r{\Asite/javascripts/.+\.js\z},
+    files: %r{\A(site/javascripts|cloudflare)/.+\.js\z},
     configs: /\A(eslint\.config\.mjs|package(-lock)?\.json)\z/,
     command: %w[npx --no-install eslint --no-warn-ignored],
-    all: ['site/javascripts'],
+    all: %w[site/javascripts cloudflare],
     stdin: ->(file) { ['--stdin', '--stdin-filename', file] },
     node: true
   },

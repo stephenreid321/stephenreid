@@ -1,0 +1,21 @@
+// The Cloudflare Worker that starts the repo's scheduled GitHub Actions runs (worker.js). Deploy it from this folder:
+//   npm ci && npx wrangler deploy
+// with the GITHUB_TOKEN secret set (npx wrangler secret put GITHUB_TOKEN): a fine-grained token for this repo only,
+// with Actions: Read and write
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "stephenreid-cron",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-29",
+  // It's only woken by its crons, so it has no URL
+  "workers_dev": false,
+  "preview_urls": false,
+  // In UTC. Each minute that worker.js's RUNS uses, every hour: worker.js works out what's due by the clock in
+  // Stockholm, so 17:00 there is right in summer and winter. One trigger, of the free plan's five
+  "triggers": {
+    "crons": ["0,7,23,41 * * * *"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}

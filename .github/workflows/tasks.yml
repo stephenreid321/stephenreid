@@ -1,13 +1,10 @@
 name: Tasks
 
-# The jobs Heroku's scheduler and the old admin page ran. Run one by hand from the Actions tab: Tasks, Run workflow
+# The jobs Heroku's scheduler and the old admin page ran. Run one by hand from the Actions tab: Tasks, Run workflow.
+# The Cloudflare Worker in cloudflare/ starts them on time, as GitHub's own schedule starts runs late or not at all:
+# rebalance on Fridays at 17:00 Central European time (with scheduled, so only if the ICONOMI_REBALANCE variable is
+# true), and posts-sync every three hours
 on:
-  schedule:
-    # Rebalance Metastrategy on Fridays at 17:00 Central European time, if the ICONOMI_REBALANCE variable is true
-    - cron: '0 17 * * 5'
-      timezone: 'Europe/Stockholm'
-    # Post the week's Readwise archive to Bluesky, every three hours
-    - cron: '23 */3 * * *'
   workflow_dispatch:
     inputs:
       task:
@@ -17,13 +14,17 @@ on:
           - rebalance
           - verify
           - posts-sync
+      scheduled:
+        description: Started on its schedule, so rebalance only if the ICONOMI_REBALANCE variable is true
+        type: boolean
+        default: false
 
 permissions: {}
 
 jobs:
   # Fetches the strategies afresh, then rebalances Metastrategy on ICONOMI to the weights /metastrategy proposes
   rebalance:
-    if: (github.event.schedule == '0 17 * * 5' && vars.ICONOMI_REBALANCE == 'true') || inputs.task == 'rebalance'
+    if: inputs.task == 'rebalance' && (!inputs.scheduled || vars.ICONOMI_REBALANCE == 'true')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -93,7 +94,7 @@ jobs:
 
   # Posts to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet
   posts-sync:
-    if: github.event.schedule == '23 */3 * * *' || inputs.task == 'posts-sync'
+    if: inputs.task == 'posts-sync'
     runs-on: ubuntu-latest
     permissions:
       contents: read

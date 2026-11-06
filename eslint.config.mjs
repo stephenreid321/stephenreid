@@ -5,7 +5,7 @@ import globals from 'globals'
 // (config/frontend_dependencies.rb)
 export default [
   {
-    ignores: ['node_modules/**', 'vendor/**', 'site/fonts/**', '_site/**']
+    ignores: ['node_modules/**', 'cloudflare/node_modules/**', 'vendor/**', 'site/fonts/**', '_site/**']
   },
   js.configs.recommended,
   {
@@ -22,6 +22,15 @@ export default [
     },
     rules: {
       'no-empty': ['error', { allowEmptyCatch: true }]
+    }
+  },
+  // The Cloudflare Worker that starts the scheduled workflows, an ES module
+  {
+    files: ['cloudflare/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: globals.serviceworker
     }
   }
 ]
