@@ -7,17 +7,17 @@ const REPO = 'stephenreid321/stephenreid'
 const BRANCH = 'master'
 const TIME_ZONE = 'Europe/Stockholm'
 
-// Each run: whether it's due in an hour (by the clock in Stockholm), and the workflow and inputs it's started with.
+// Each run: its workflow, whether it's due in an hour (by the clock in Stockholm), and the inputs it's started with.
 // They start together: if substack.yml commits, it rebuilds the site, and that build cancels the one started here
 export const RUNS = [
   // Every three hours
-  { name: 'substack', due: (t) => t.hour % 3 === 0, workflow: 'substack.yml' },
-  { name: 'bluesky', due: (t) => t.hour % 3 === 0, workflow: 'bluesky.yml' },
-  { name: 'site', due: (t) => t.hour % 3 === 0, workflow: 'site.yml' },
+  { workflow: 'substack.yml', due: (t) => t.hour % 3 === 0 },
+  { workflow: 'bluesky.yml', due: (t) => t.hour % 3 === 0 },
+  { workflow: 'site.yml', due: (t) => t.hour % 3 === 0 },
   // Daily at 06:00
-  { name: 'goodreads', due: (t) => t.hour === 6, workflow: 'goodreads.yml' },
+  { workflow: 'goodreads.yml', due: (t) => t.hour === 6 },
   // Fridays at 17:00. scheduled makes the workflow rebalance only while the ICONOMI_REBALANCE variable is true
-  { name: 'rebalance', due: (t) => t.weekday === 'Fri' && t.hour === 17, workflow: 'iconomi-rebalance.yml', inputs: { scheduled: 'true' } }
+  { workflow: 'iconomi-rebalance.yml', due: (t) => t.weekday === 'Fri' && t.hour === 17, inputs: { scheduled: 'true' } }
 ]
 
 // The weekday and hour in Stockholm of a time (in milliseconds)
@@ -56,7 +56,7 @@ async function dispatch (run, token) {
       body: JSON.stringify({ ref: BRANCH, inputs: run.inputs || {} })
     })
     if (response.ok) return
-    error = new Error(`${run.name}: GitHub said ${response.status} ${await response.text()}`)
+    error = new Error(`${run.workflow}: GitHub said ${response.status} ${await response.text()}`)
     // A bad token, or a workflow or input GitHub doesn't know, won't come right on a retry
     if (response.status < 500 && response.status !== 429) break
   }
@@ -68,7 +68,7 @@ export default {
     const runs = dueRuns(event.scheduledTime)
     const results = await Promise.allSettled(runs.map((run) => dispatch(run, env.GITHUB_TOKEN)))
     const failed = results.filter((r) => r.status === 'rejected').map((r) => r.reason)
-    runs.forEach((run, i) => { if (results[i].status === 'fulfilled') console.log(`Started ${run.name}`) })
+    runs.forEach((run, i) => { if (results[i].status === 'fulfilled') console.log(`Started ${run.workflow}`) })
     failed.forEach((error) => console.error(error.message))
     // So Cloudflare marks the invocation as failed, in its dashboard and logs
     if (failed.length) throw new Error(`Couldn't start ${failed.length} of ${runs.length} runs`)
