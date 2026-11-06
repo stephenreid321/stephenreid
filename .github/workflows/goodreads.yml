@@ -1,0 +1,52 @@
+name: Goodreads
+
+# Goodreads has no API for the library export, so this exports it as a signed-in browser would, with the Cookie header
+# of one (the GOODREADS_COOKIE secret), on the self-hosted runner on Stephen's Mac (label mac), so Goodreads sees
+# the session from the Mac it was signed in on. It commits data/goodreads_library_export.csv to master if it's changed,
+# and rebuilds the site. It runs only while the Mac is on; until then the site keeps the export last committed
+on:
+  schedule:
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  export:
+    runs-on: [ self-hosted, mac ]
+    permissions:
+      contents: write
+      actions: write
+    concurrency:
+      group: goodreads
+      cancel-in-progress: false
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    # The Mac's own Ruby (rvm, on the runner's PATH), with the gems in the runner's workspace
+    - name: Install gems
+      run: bundle install --quiet
+      env:
+        BUNDLE_PATH: vendor/bundle
+
+    - name: Export from Goodreads
+      run: bundle exec rake data:goodreads
+      env:
+        BUNDLE_PATH: vendor/bundle
+        GOODREADS_COOKIE: ${{ secrets.GOODREADS_COOKIE }}
+
+    # A push with GITHUB_TOKEN doesn't run the Site workflow, so this runs it
+    - name: Commit and rebuild the site
+      run: |
+        git add data/goodreads_library_export.csv
+        git diff --cached --quiet && exit 0
+        git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+          commit -m 'Export the library from Goodreads'
+        git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
+        gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ github.token }}

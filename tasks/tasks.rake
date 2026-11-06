@@ -11,6 +11,11 @@ namespace :data do
     SubstackPost.import
   end
 
+  desc 'Export the library from Goodreads into data/goodreads_library_export.csv (needs GOODREADS_COOKIE)'
+  task goodreads: :environment do
+    Goodreads.fetch
+  end
+
   desc 'Fetch the ICONOMI strategies and Metastrategy into data/fetched (needs ICN_API_KEY and ICN_SECRET)'
   task iconomi: :environment do
     next puts 'ℹ️  ICONOMI fetch skipped: set ICN_API_KEY and ICN_SECRET.' if ENV['ICN_API_KEY'].blank?
