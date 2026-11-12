@@ -4,7 +4,7 @@ class SubstackNote
   # (Exported CSV shows digits as strings — that’s CSV, not the API.) Blank API fields use fetch(..., '')
   # in flatten_raw_note; coerce_integer maps those to nil.
   # Only what the site reads, as everything else Substack sends changes from one fetch to the next (counts, prices,
-  # uploads) and would have `substack.yml` commit and rebuild the site for nothing
+  # uploads) and would have `substack.yml` save them and rebuild the site for nothing
   INTEGER_TYPES = %w[reaction_count post_reaction_count parent_comment_count].freeze
 
   STRING_TYPES = %w[

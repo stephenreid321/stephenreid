@@ -8,7 +8,7 @@ const BRANCH = 'master'
 const TIME_ZONE = 'Europe/Stockholm'
 
 // Each run: its workflow, whether it's due in an hour (by the clock in Stockholm), and the inputs it's started with.
-// They start together: if substack.yml commits, it rebuilds the site, and that build cancels the one started here
+// They start together: if substack.yml fetches new notes or posts, it rebuilds the site, and that build cancels the one started here
 export const RUNS = [
   // Every three hours
   { workflow: 'substack.yml', due: (t) => t.hour % 3 === 0 },

@@ -3,7 +3,7 @@ name: Build and deploy the site
 # Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and with
 # fresh data from ICONOMI when run by hand, by substack.yml, goodreads.yml or iconomi-verify.yml when they commit, and
 # every three hours by the Cloudflare Worker in cloudflare/ (GitHub's own schedule starts runs late or not at all).
-# Substack's notes and posts are committed, by substack.yml
+# Substack's notes and posts are the ones substack.yml last saved to the cache
 on:
   push:
     branches: [ master ]
@@ -43,12 +43,24 @@ jobs:
       id: fetched
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        # Not Substack's notes and posts, which `substack.yml` commits
+        # Not Substack's notes and posts, which have a cache of their own
         path: |
           data/fetched
           !data/fetched/substack_*.json
         key: fetched-${{ github.run_id }}
         restore-keys: fetched-
+
+    # Substack's notes and posts, as `substack.yml` last saved them (on Stephen's Mac, as Substack turns away GitHub's
+    # runners). Only that saves them, and with the same paths, or the cache won't match. Restoring them every three
+    # hours keeps GitHub from evicting them, as it does a cache unused for a week
+    - name: Restore Substack's notes and posts
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          data/fetched/substack_notes.json
+          data/fetched/substack_posts.json
+        key: substack-${{ github.run_id }}
+        restore-keys: substack-
 
     - name: Fetch from ICONOMI
       if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
@@ -63,7 +75,7 @@ jobs:
     - name: Save fetched data
       uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        # Not Substack's notes and posts, which `substack.yml` commits
+        # Not Substack's notes and posts, which `substack.yml` saves
         path: |
           data/fetched
           !data/fetched/substack_*.json

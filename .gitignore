@@ -44,6 +44,3 @@ _site
 .jekyll-cache
 .jekyll-metadata
 data/fetched/*
-# Substack turns away GitHub's runners, so its notes and posts are fetched here and committed
-!data/fetched/substack_notes.json
-!data/fetched/substack_posts.json
