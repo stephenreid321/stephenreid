@@ -45,6 +45,14 @@
   {% assign title = 'Stephen Reid' %}
 {% endif %}
 <title>{{ title }}</title>
+{%- comment -%}
+  The one URL each page is at, so search engines don't index it again at /books/index.html, ?stylesheet=light and so on
+{%- endcomment -%}
+{% unless page.url == '/404.html' %}
+  {% capture canonical_url %}{{ site.url }}{{ page.url | replace: '/index.html', '/' }}{% endcapture %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+{% endunless %}
 <meta property="og:title" content="{{ title }}">
 <meta name="description" content="{{ page.og_desc }}">
 {% if page.og_image %}

@@ -20,6 +20,8 @@ kramdown:
 # The themes' Sass: rake stylesheets:build compiles it into dark.css and light.css
 exclude:
   - stylesheets/*.scss
+  # The font's specimen page, which came with it: not one of the site's pages
+  - fonts/ZilapEvolution/demo.html
 
 defaults:
   - scope:

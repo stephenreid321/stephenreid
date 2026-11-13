@@ -14,8 +14,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      {%- comment -%} The page's path without a trailing slash, as the nav's paths are: /books/ is /books {%- endcomment -%}
-      {% assign current = page.url | append: '#' | replace: '/#', '' | replace: '#', '' %}
+      {% assign current = page.url %}
       <ul class="navbar-nav me-auto">
         {% for item in site.data.nav %}
           {% if item.items %}

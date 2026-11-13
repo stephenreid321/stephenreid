@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ page.head }}
     <title>{{ page.course.name }}</title>
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace: '.html', '' }}">
     <style>
       body { margin: 0 !important; font-family: sans-serif;  }
       .container { padding: 20px !important; max-width: 800px; margin: 0 auto;}

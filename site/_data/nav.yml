@@ -14,7 +14,7 @@
 - name: Knowledge
   items:
     - name: Books
-      path: /books
+      path: /books/
     - name: Films
       path: /films
     - name: Speaking engagements
