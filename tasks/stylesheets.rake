@@ -13,7 +13,7 @@ namespace :stylesheets do
     Dir.mktmpdir do |dir|
       # --before keeps to package versions published at least 7 days ago, like the Gemfile's cooldown
       puts "Installing Bootstrap #{bootstrap} and Dart Sass..."
-      system('npm', 'install', '--prefix', dir, '--no-save', '--silent', "--before=#{(Date.today - 7).iso8601}", "bootstrap@#{bootstrap}", 'sass@1.106.1', exception: true)
+      system('npm', 'install', '--prefix', dir, '--no-save', '--silent', "--before=#{(Date.today - 7).iso8601}", "bootstrap@#{bootstrap}", 'sass@1.108.1', exception: true)
 
       %w[dark light].each do |theme|
         css_file = File.join(stylesheets_dir, "#{theme}.css")
