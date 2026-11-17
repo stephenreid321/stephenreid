@@ -1,0 +1,210 @@
+---
+title: Substack Surfacer
+permalink: /substack/
+container_class: container-fluid
+---
+{%- comment -%}
+  The last 90 days' posts of the newsletters I subscribe to on Substack (lib/substack_surfacer.rb, fetched daily by
+  substack-surfacer.yml), sorted by likes per 100 free subscribers. The dropdown shows those of the last 90, 30 or 7
+{%- endcomment -%}
+{% assign surfacer = site.data.substack_surfacer %}
+{%- comment -%}
+  The widths of the columns after Post, which takes the rest: fixed (table-layout: fixed), so the table's laid out the same
+  before DataTables starts, with every post, as after, with a page of them. The colgroup and DataTables both take them from here
+{%- endcomment -%}
+{% assign column_widths = '5.5rem 9rem 5.5rem 8rem 6rem 5.5rem' | split: ' ' %}
+<p class="lead">
+  Posts of the last
+  <select id="surfacer-days" class="form-select form-select-sm d-inline-block w-auto align-baseline" aria-label="Days">
+    <option value="90" selected>90 days</option>
+    <option value="30">30 days</option>
+    <option value="7">7 days</option>
+  </select>
+  with at least
+  <input id="surfacer-min-likes" type="number" min="0" step="1" value="0" inputmode="numeric" class="form-control form-control-sm d-inline-block align-baseline" style="width: 5rem" aria-label="Minimum likes">
+  likes from the
+  <a target="_blank" href="https://substack.com/@stephenreid">newsletters I subscribe to on Substack</a>,
+  by likes per 100 free subscribers.
+</p>
+
+{% if surfacer.posts.size > 0 %}
+<p class="text-muted small">
+  <span id="surfacer-count">{{ surfacer.posts.size }}</span> posts, updated <relative-time datetime="{{ surfacer.fetched_at }}">{{ surfacer.fetched_at }}</relative-time>.
+</p>
+
+{%- comment -%} The newsletters excluded with the table's last column, each a button that includes it again {%- endcomment -%}
+<p id="surfacer-excluded" class="small d-none">
+  Excluded:
+  <span id="surfacer-excluded-list"></span>
+</p>
+
+<script>
+  $(function () {
+    // The newsletters excluded, as [{ url, name }], kept in this browser so they stay excluded next time
+    var EXCLUDED_KEY = 'surfacer-excluded'
+    var excluded = []
+    try {
+      excluded = JSON.parse(localStorage.getItem(EXCLUDED_KEY)) || []
+    } catch (e) {}
+
+    function saveExcluded () {
+      try {
+        localStorage.setItem(EXCLUDED_KEY, JSON.stringify(excluded))
+      } catch (e) {}
+    }
+
+    // The days dropdown and the min likes box, as this browser last left them, so they're the same next time
+    var DAYS_KEY = 'surfacer-days'
+    var MIN_LIKES_KEY = 'surfacer-min-likes'
+    try {
+      var days = localStorage.getItem(DAYS_KEY)
+      if ($('#surfacer-days option').filter(function () { return this.value === days }).length) $('#surfacer-days').val(days)
+      var minLikes = localStorage.getItem(MIN_LIKES_KEY)
+      if (minLikes !== null) $('#surfacer-min-likes').val(minLikes)
+    } catch (e) {}
+
+    // Each named by its author, as the rows are, from a post of theirs in the table (it may have been saved by another name)
+    excluded.forEach(function (newsletter) {
+      var row = $('#surfacer tbody tr').filter(function () { return this.dataset.newsletterUrl === newsletter.url }).get(0)
+      if (row) newsletter.name = row.dataset.author
+    })
+
+    function isExcluded (url) {
+      return excluded.some(function (newsletter) { return newsletter.url === url })
+    }
+
+    // Only the posts of the last so many days, as the dropdown says, with at least as many likes as the box says, of the
+    // newsletters not excluded
+    $.fn.dataTable.ext.search.push(function (settings, data, index) {
+      var api = new $.fn.dataTable.Api(settings)
+      if (api.table().node().id !== 'surfacer') return true
+      var row = api.row(index).node()
+      if (isExcluded(row.dataset.newsletterUrl)) return false
+      if (Number(row.dataset.likes) < (Number($('#surfacer-min-likes').val()) || 0)) return false
+      var days = Number($('#surfacer-days').val())
+      // Back from when they were fetched, as the fetch counts, so the last 90 days are just the posts it fetched
+      return Date.parse(row.dataset.postDate) >= Date.parse('{{ surfacer.fetched_at }}') - days * 24 * 60 * 60 * 1000
+    })
+
+    var table = $('#surfacer').DataTable({
+      info: false,
+      pageLength: 50,
+      lengthChange: false,
+      // The widths the colgroup has, not those DataTables would measure
+      autoWidth: false,
+      // No search box (not searching: false, which would turn off the dropdown's filter too), and so no row above the table
+      layout: { topStart: null, topEnd: null },
+      // As lib/substack_surfacer.rb's for_template orders the posts, so they don't move when the table first sorts them
+      order: [[2, 'desc'], [1, 'desc']],
+      columnDefs: [
+        { targets: [1, 2, 3, 4, 5], className: 'text-end' },
+        { targets: 6, orderable: false, className: 'text-center' },
+        {%- for width in column_widths %}
+        { targets: {{ forloop.index }}, width: '{{ width }}' }{% unless forloop.last %},{% endunless %}
+        {%- endfor %}
+      ]
+    })
+
+    // The excluded newsletters, above the table
+    function showExcluded () {
+      var list = $('#surfacer-excluded-list').empty()
+      excluded.forEach(function (newsletter) {
+        $('<button type="button" class="btn btn-sm btn-secondary me-1 mb-1">')
+          .attr('title', 'Include ' + newsletter.name + ' again')
+          .text(newsletter.name + ' ')
+          .append('<i class="bi bi-x-lg"></i>')
+          .on('click', function () {
+            excluded = excluded.filter(function (other) { return other.url !== newsletter.url })
+            saveExcluded()
+            showExcluded()
+            table.draw(false)
+          })
+          .appendTo(list)
+      })
+      $('#surfacer-excluded').toggleClass('d-none', excluded.length === 0)
+    }
+    showExcluded()
+
+    $('#surfacer tbody').on('click', 'button.surfacer-exclude', function () {
+      var row = $(this).closest('tr').get(0)
+      if (!isExcluded(row.dataset.newsletterUrl)) {
+        excluded.push({ url: row.dataset.newsletterUrl, name: row.dataset.author })
+        saveExcluded()
+        showExcluded()
+      }
+      table.draw(false)
+    })
+
+    // The number of posts shown, as the dropdown, the box and the exclusions leave them
+    table.on('draw', function () {
+      $('#surfacer-count').text(table.rows({ search: 'applied' }).count())
+    }).draw()
+
+    $('#surfacer-days').on('change', function () {
+      try {
+        localStorage.setItem(DAYS_KEY, this.value)
+      } catch (e) {}
+      table.draw()
+    })
+
+    $('#surfacer-min-likes').on('input', function () {
+      try {
+        localStorage.setItem(MIN_LIKES_KEY, this.value)
+      } catch (e) {}
+      table.draw()
+    })
+  })
+</script>
+
+{%- comment -%}
+  Marked up as DataTables marks it up, with its classes and the sort arrows, and sorted as it sorts it, so nothing moves
+  when it starts. dt-in-place keeps it where it is in DataTables' layout (_core.scss)
+{%- endcomment -%}
+<div class="table-responsive mb-5">
+  <table id="surfacer" class="table dataTable dt-in-place" style="table-layout: fixed; min-width: 50rem">
+    <colgroup>
+      <col>
+      {%- for width in column_widths %}
+      <col style="width: {{ width }}">
+      {%- endfor %}
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Post</div><div class="dt-column-order"></div></div></th>
+        <th class="text-end dt-orderable-asc dt-orderable-desc dt-ordering-desc"><div class="dt-column-header"><div class="dt-column-title">Date</div><div class="dt-column-order"></div></div></th>
+        <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc dt-ordering-desc"><div class="dt-column-header"><div class="dt-column-title">Likes per 100 free subscribers</div><div class="dt-column-order"></div></div></th>
+        <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Likes</div><div class="dt-column-order"></div></div></th>
+        <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Free subscribers</div><div class="dt-column-order"></div></div></th>
+        <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Posts in past {{ surfacer.days }} days</div><div class="dt-column-order"></div></div></th>
+        <th class="text-center dt-orderable-none" data-dt-order="disable"><div class="dt-column-header"><div class="dt-column-title">Exclude</div></div></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in surfacer.posts %}
+      <tr data-post-date="{{ post.post_date }}" data-likes="{{ post.likes | default: 0 }}" data-newsletter-url="{{ post.newsletter_url }}" data-author="{{ post.author | escape }}">
+        {%- comment -%} text-break: a long word breaks rather than spilling out of the column {%- endcomment %}
+        <td class="text-break">
+          <a target="_blank" href="{{ post.post_url }}">{{ post.title }}</a>
+          {% if post.paid %}<span class="badge text-bg-secondary ms-1">Paid</span>{% endif %}
+          {% if post.subtitle != '' %}<br><small>{{ post.subtitle }}</small>{% endif %}
+          <br>
+          <small class="text-muted">
+            <a class="text-muted" target="_blank" href="{{ post.newsletter_url }}">{{ post.author }}</a>
+          </small>
+        </td>
+        <td class="text-nowrap text-end" data-sort="{{ post.post_date }}">{{ post.post_day }}</td>
+        <td class="text-end dt-type-numeric" data-sort="{{ post.likes_per_100_free_subscribers_sort }}">{{ post.likes_per_100_free_subscribers_shown }}</td>
+        <td class="text-end dt-type-numeric">{{ post.likes }}</td>
+        <td class="text-end dt-type-numeric" data-sort="{{ post.free_subscribers_sort }}">{{ post.free_subscribers_shown }}</td>
+        <td class="text-end dt-type-numeric">{{ post.newsletter_posts }}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-link p-0 surfacer-exclude" title="Exclude {{ post.author | escape }}" aria-label="Exclude {{ post.author | escape }}"><i class="bi bi-eye-slash"></i></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p>No posts yet: they're fetched daily.</p>
+{% endif %}

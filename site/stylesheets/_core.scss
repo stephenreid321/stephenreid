@@ -30,6 +30,18 @@ table.dataTable thead {
   }
 }
 
+// A table marked dt-in-place stays where it was before DataTables put it in its layout's row (which has a margin above)
+// and column (which has padding at the sides), so it doesn't shift when DataTables starts. !important to beat the row's
+// mt-2, a Bootstrap utility
+div.dt-container:has(table.dt-in-place) > .dt-layout-table {
+  margin-top: 0 !important;
+
+  > .dt-layout-full {
+    padding-left: 0;
+    padding-right: 0
+  }
+}
+
 .text-contrast,
 .text-contrast:hover {
   color: $contrast-color !important

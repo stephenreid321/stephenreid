@@ -16,6 +16,8 @@ export const RUNS = [
   { workflow: 'site.yml', due: (t) => t.hour % 3 === 0 },
   // Daily at 06:00
   { workflow: 'goodreads.yml', due: (t) => t.hour === 6 },
+  // Daily at 05:00. It rebuilds the site when it's done
+  { workflow: 'substack-surfacer.yml', due: (t) => t.hour === 5 },
   // Fridays at 17:00. scheduled makes the workflow rebalance only while the ICONOMI_REBALANCE variable is true
   { workflow: 'iconomi-rebalance.yml', due: (t) => t.weekday === 'Fri' && t.hour === 17, inputs: { scheduled: 'true' } }
 ]

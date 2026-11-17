@@ -48,6 +48,7 @@ module StephenReid
           s.merge(icon: SPEAKING_ICONS.find { |pattern, _| s[:url].to_s.match?(pattern) }&.last).stringify_keys
         end,
         'substack_gallery' => SubstackNote.recent_gallery_items(limit: 20).map(&:stringify_keys),
+        'substack_surfacer' => SubstackSurfacer.for_template,
         'places' => Fetched.read(:places),
         'iconomi' => IconomiPages.iconomi,
         'metastrategy' => IconomiPages.metastrategy

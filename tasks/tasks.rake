@@ -11,6 +11,11 @@ namespace :data do
     SubstackPost.import
   end
 
+  desc "Fetch the last 90 days' posts of the newsletters Stephen subscribes to on Substack into data/fetched, for /substack"
+  task substack_surfacer: :environment do
+    SubstackSurfacer.fetch
+  end
+
   desc 'Export the library from Goodreads into data/goodreads_library_export.csv (needs GOODREADS_COOKIE)'
   task goodreads: :environment do
     Goodreads.fetch

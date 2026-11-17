@@ -62,6 +62,14 @@ jobs:
         key: substack-${{ github.run_id }}
         restore-keys: substack-
 
+    # The newsletters' posts for /substack, as `substack-surfacer.yml` last saved them (on Stephen's Mac too)
+    - name: Restore the newsletters' posts
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: data/fetched/substack_surfacer.json
+        key: surfacer-${{ github.run_id }}
+        restore-keys: surfacer-
+
     - name: Fetch from ICONOMI
       if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
       run: bundle exec rake data:iconomi

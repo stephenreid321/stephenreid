@@ -5,6 +5,8 @@
   path: /coaching
 - name: Events
   path: /events
+- name: Substack Surfacer
+  path: /substack/
 - name: Courses
   items:
     - name: Technological Metamodernism (Oct 2026)
