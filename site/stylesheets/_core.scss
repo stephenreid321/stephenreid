@@ -30,6 +30,29 @@ table.dataTable thead {
   }
 }
 
+// Substack Surfacer's table (/substack/). Its columns' widths are fixed, not taken from what's in them, so it's laid out
+// the same before DataTables starts, with every post, as after, with a page of them. Post takes what the rest leave: as
+// much as each heading needs, or, once the table's wide enough for that to be less, its share of half the table, so
+// Post's no more than half. Not width: max(9rem, 11.5%) on each, which a table column takes as no width at all
+#surfacer {
+  table-layout: fixed;
+  min-width: 50rem;
+
+  // Date, Likes, Free subscribers, Likes per 100 free subscribers, Posts in the past 90 days, Exclude
+  col:nth-child(2), col:nth-child(3), col:nth-child(7) { width: 5.5rem }
+  col:nth-child(4) { width: 8rem }
+  col:nth-child(5) { width: 9rem }
+  col:nth-child(6) { width: 6rem }
+
+  // 80rem wide, as each share is then at least what its heading needs; the page's padding is 1.5rem
+  @media (min-width: 81.5rem) {
+    col:nth-child(2), col:nth-child(3), col:nth-child(7) { width: 7% }
+    col:nth-child(4) { width: 10% }
+    col:nth-child(5) { width: 11.5% }
+    col:nth-child(6) { width: 7.5% }
+  }
+}
+
 // A table marked dt-in-place stays where it was before DataTables put it in its layout's row (which has a margin above)
 // and column (which has padding at the sides), so it doesn't shift when DataTables starts. !important to beat the row's
 // mt-2, a Bootstrap utility

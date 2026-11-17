@@ -5,20 +5,17 @@ container_class: container-fluid
 ---
 {%- comment -%}
   The last 90 days' posts of the newsletters I subscribe to on Substack (lib/substack_surfacer.rb, fetched daily by
-  substack-surfacer.yml), sorted by likes per 100 free subscribers. The dropdown shows those of the last 90, 30 or 7
+  substack-surfacer.yml), sorted by likes per 100 free subscribers. The dropdown shows those of the last 90, 30, 7, 3 or 1
 {%- endcomment -%}
 {% assign surfacer = site.data.substack_surfacer %}
-{%- comment -%}
-  The widths of the columns after Post, which takes the rest: fixed (table-layout: fixed), so the table's laid out the same
-  before DataTables starts, with every post, as after, with a page of them. The colgroup and DataTables both take them from here
-{%- endcomment -%}
-{% assign column_widths = '5.5rem 9rem 5.5rem 8rem 6rem 5.5rem' | split: ' ' %}
 <p class="lead">
   Posts of the last
   <select id="surfacer-days" class="form-select form-select-sm d-inline-block w-auto align-baseline" aria-label="Days">
     <option value="90" selected>90 days</option>
     <option value="30">30 days</option>
     <option value="7">7 days</option>
+    <option value="3">3 days</option>
+    <option value="1">1 day</option>
   </select>
   with at least
   <input id="surfacer-min-likes" type="number" min="0" step="1" value="0" inputmode="numeric" class="form-control form-control-sm d-inline-block align-baseline" style="width: 5rem" aria-label="Minimum likes">
@@ -90,18 +87,15 @@ container_class: container-fluid
       info: false,
       pageLength: 50,
       lengthChange: false,
-      // The widths the colgroup has, not those DataTables would measure
+      // The widths _core.scss gives the columns, not those DataTables would measure
       autoWidth: false,
       // No search box (not searching: false, which would turn off the dropdown's filter too), and so no row above the table
       layout: { topStart: null, topEnd: null },
       // As lib/substack_surfacer.rb's for_template orders the posts, so they don't move when the table first sorts them
-      order: [[2, 'desc'], [1, 'desc']],
+      order: [[4, 'desc'], [1, 'desc']],
       columnDefs: [
         { targets: [1, 2, 3, 4, 5], className: 'text-end' },
-        { targets: 6, orderable: false, className: 'text-center' },
-        {%- for width in column_widths %}
-        { targets: {{ forloop.index }}, width: '{{ width }}' }{% unless forloop.last %},{% endunless %}
-        {%- endfor %}
+        { targets: 6, orderable: false, className: 'text-center' }
       ]
     })
 
@@ -158,23 +152,20 @@ container_class: container-fluid
 
 {%- comment -%}
   Marked up as DataTables marks it up, with its classes and the sort arrows, and sorted as it sorts it, so nothing moves
-  when it starts. dt-in-place keeps it where it is in DataTables' layout (_core.scss)
+  when it starts. dt-in-place keeps it where it is in DataTables' layout, and _core.scss gives its columns their widths
 {%- endcomment -%}
 <div class="table-responsive mb-5">
-  <table id="surfacer" class="table dataTable dt-in-place" style="table-layout: fixed; min-width: 50rem">
+  <table id="surfacer" class="table dataTable dt-in-place">
     <colgroup>
-      <col>
-      {%- for width in column_widths %}
-      <col style="width: {{ width }}">
-      {%- endfor %}
+      <col><col><col><col><col><col><col>
     </colgroup>
     <thead>
       <tr>
         <th class="dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Post</div><div class="dt-column-order"></div></div></th>
         <th class="text-end dt-orderable-asc dt-orderable-desc dt-ordering-desc"><div class="dt-column-header"><div class="dt-column-title">Date</div><div class="dt-column-order"></div></div></th>
-        <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc dt-ordering-desc"><div class="dt-column-header"><div class="dt-column-title">Likes per 100 free subscribers</div><div class="dt-column-order"></div></div></th>
         <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Likes</div><div class="dt-column-order"></div></div></th>
         <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Free subscribers</div><div class="dt-column-order"></div></div></th>
+        <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc dt-ordering-desc"><div class="dt-column-header"><div class="dt-column-title">Likes per 100 free subscribers</div><div class="dt-column-order"></div></div></th>
         <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Posts in past {{ surfacer.days }} days</div><div class="dt-column-order"></div></div></th>
         <th class="text-center dt-orderable-none" data-dt-order="disable"><div class="dt-column-header"><div class="dt-column-title">Exclude</div></div></th>
       </tr>
@@ -193,9 +184,9 @@ container_class: container-fluid
           </small>
         </td>
         <td class="text-nowrap text-end" data-sort="{{ post.post_date }}">{{ post.post_day }}</td>
-        <td class="text-end dt-type-numeric" data-sort="{{ post.likes_per_100_free_subscribers_sort }}">{{ post.likes_per_100_free_subscribers_shown }}</td>
         <td class="text-end dt-type-numeric">{{ post.likes }}</td>
         <td class="text-end dt-type-numeric" data-sort="{{ post.free_subscribers_sort }}">{{ post.free_subscribers_shown }}</td>
+        <td class="text-end dt-type-numeric" data-sort="{{ post.likes_per_100_free_subscribers_sort }}">{{ post.likes_per_100_free_subscribers_shown }}</td>
         <td class="text-end dt-type-numeric">{{ post.newsletter_posts }}</td>
         <td class="text-center">
           <button type="button" class="btn btn-link p-0 surfacer-exclude" title="Exclude {{ post.author | escape }}" aria-label="Exclude {{ post.author | escape }}"><i class="bi bi-eye-slash"></i></button>
