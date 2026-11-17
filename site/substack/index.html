@@ -6,23 +6,34 @@ container_class: container-fluid
 {%- comment -%}
   The last 90 days' posts of the newsletters I subscribe to on Substack (lib/substack_surfacer.rb, fetched daily by
   substack-surfacer.yml), sorted by likes per 100 free subscribers. The dropdown shows those of the last 90, 30, 7, 3 or 1
+  days, and the boxes those with at least so many likes and likes per 100 free subscribers
 {%- endcomment -%}
 {% assign surfacer = site.data.substack_surfacer %}
 <p class="lead">
-  Posts of the last
-  <select id="surfacer-days" class="form-select form-select-sm d-inline-block w-auto align-baseline" aria-label="Days">
-    <option value="90" selected>90 days</option>
-    <option value="30">30 days</option>
-    <option value="7">7 days</option>
-    <option value="3">3 days</option>
-    <option value="1">1 day</option>
-  </select>
-  with at least
-  <input id="surfacer-min-likes" type="number" min="0" step="1" value="0" inputmode="numeric" class="form-control form-control-sm d-inline-block align-baseline" style="width: 5rem" aria-label="Minimum likes">
-  likes from the
-  <a target="_blank" href="https://substack.com/@stephenreid">newsletters I subscribe to on Substack</a>,
-  by likes per 100 free subscribers.
+  Posts from the
+  <a target="_blank" href="https://substack.com/@stephenreid">newsletters I subscribe to on Substack</a>
 </p>
+
+<form id="surfacer-filters" class="row g-3 align-items-end mb-3" onsubmit="return false">
+  <div class="col-auto">
+    <label for="surfacer-days" class="form-label">Posted in the last</label>
+    <select id="surfacer-days" class="form-select form-select-sm">
+      <option value="90" selected>90 days</option>
+      <option value="30">30 days</option>
+      <option value="7">7 days</option>
+      <option value="3">3 days</option>
+      <option value="1">1 day</option>
+    </select>
+  </div>
+  <div class="col-auto">
+    <label for="surfacer-min-likes" class="form-label">Minimum likes</label>
+    <input id="surfacer-min-likes" type="number" min="0" step="1" value="0" inputmode="numeric" class="form-control form-control-sm">
+  </div>
+  <div class="col-auto">
+    <label for="surfacer-min-likes-per-100" class="form-label">Minimum likes per 100 free subscribers</label>
+    <input id="surfacer-min-likes-per-100" type="number" min="0" step="any" value="0" inputmode="decimal" class="form-control form-control-sm">
+  </div>
+</form>
 
 {% if surfacer.posts.size > 0 %}
 <p class="text-muted small">
@@ -53,11 +64,14 @@ container_class: container-fluid
     // The days dropdown and the min likes box, as this browser last left them, so they're the same next time
     var DAYS_KEY = 'surfacer-days'
     var MIN_LIKES_KEY = 'surfacer-min-likes'
+    var MIN_LIKES_PER_100_KEY = 'surfacer-min-likes-per-100'
     try {
       var days = localStorage.getItem(DAYS_KEY)
       if ($('#surfacer-days option').filter(function () { return this.value === days }).length) $('#surfacer-days').val(days)
       var minLikes = localStorage.getItem(MIN_LIKES_KEY)
       if (minLikes !== null) $('#surfacer-min-likes').val(minLikes)
+      var minLikesPer100 = localStorage.getItem(MIN_LIKES_PER_100_KEY)
+      if (minLikesPer100 !== null) $('#surfacer-min-likes-per-100').val(minLikesPer100)
     } catch (e) {}
 
     // Each named by its author, as the rows are, from a post of theirs in the table (it may have been saved by another name)
@@ -70,14 +84,17 @@ container_class: container-fluid
       return excluded.some(function (newsletter) { return newsletter.url === url })
     }
 
-    // Only the posts of the last so many days, as the dropdown says, with at least as many likes as the box says, of the
-    // newsletters not excluded
+    // Only the posts of the last so many days, as the dropdown says, with at least as many likes and likes per 100 free
+    // subscribers as the boxes say, of the newsletters not excluded. A post whose newsletter's free subscribers aren't known
+    // (-1) is shown only while that box is 0
     $.fn.dataTable.ext.search.push(function (settings, data, index) {
       var api = new $.fn.dataTable.Api(settings)
       if (api.table().node().id !== 'surfacer') return true
       var row = api.row(index).node()
       if (isExcluded(row.dataset.newsletterUrl)) return false
       if (Number(row.dataset.likes) < (Number($('#surfacer-min-likes').val()) || 0)) return false
+      var minLikesPer100 = Number($('#surfacer-min-likes-per-100').val()) || 0
+      if (minLikesPer100 > 0 && Number(row.dataset.likesPerHundred) < minLikesPer100) return false
       var days = Number($('#surfacer-days').val())
       // Back from when they were fetched, as the fetch counts, so the last 90 days are just the posts it fetched
       return Date.parse(row.dataset.postDate) >= Date.parse('{{ surfacer.fetched_at }}') - days * 24 * 60 * 60 * 1000
@@ -129,7 +146,7 @@ container_class: container-fluid
       table.draw(false)
     })
 
-    // The number of posts shown, as the dropdown, the box and the exclusions leave them
+    // The number of posts shown, as the dropdown, the boxes and the exclusions leave them
     table.on('draw', function () {
       $('#surfacer-count').text(table.rows({ search: 'applied' }).count())
     }).draw()
@@ -144,6 +161,13 @@ container_class: container-fluid
     $('#surfacer-min-likes').on('input', function () {
       try {
         localStorage.setItem(MIN_LIKES_KEY, this.value)
+      } catch (e) {}
+      table.draw()
+    })
+
+    $('#surfacer-min-likes-per-100').on('input', function () {
+      try {
+        localStorage.setItem(MIN_LIKES_PER_100_KEY, this.value)
       } catch (e) {}
       table.draw()
     })
@@ -172,7 +196,7 @@ container_class: container-fluid
     </thead>
     <tbody>
       {% for post in surfacer.posts %}
-      <tr data-post-date="{{ post.post_date }}" data-likes="{{ post.likes | default: 0 }}" data-newsletter-url="{{ post.newsletter_url }}" data-author="{{ post.author | escape }}">
+      <tr data-post-date="{{ post.post_date }}" data-likes="{{ post.likes | default: 0 }}" data-likes-per-hundred="{{ post.likes_per_100_free_subscribers_sort }}" data-newsletter-url="{{ post.newsletter_url }}" data-author="{{ post.author | escape }}">
         {%- comment -%} text-break: a long word breaks rather than spilling out of the column {%- endcomment %}
         <td class="text-break">
           <a target="_blank" href="{{ post.post_url }}">{{ post.title }}</a>
