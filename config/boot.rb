@@ -17,4 +17,4 @@ require_relative 'frontend_dependencies'
 Dir[File.join(ROOT, 'lib', '*.rb')].each { |f| require f }
 
 # The default for every thread, not just this one: Jekyll rebuilds on its file watcher's thread
-Time.zone_default = Time.find_zone!('London')
+Time.zone_default = Time.find_zone!('Stockholm')
