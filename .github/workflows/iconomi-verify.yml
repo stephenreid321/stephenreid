@@ -8,7 +8,7 @@ permissions: {}
 
 jobs:
   # Marks the strategies and assets with no status as verified, as the old admin page's Verify did, commits that to
-  # master and rebuilds the site
+  # master, and runs `iconomi-fetch.yml`, which closes the issue listing them and rebuilds the site
   verify:
     runs-on: ubuntu-latest
     permissions:
@@ -35,15 +35,15 @@ jobs:
     - name: Verify
       run: bundle exec rake iconomi:verify
 
-    # A push with GITHUB_TOKEN doesn't run `site.yml`, so this runs it
-    - name: Commit and rebuild the site
+    # A push with GITHUB_TOKEN doesn't run `site.yml`. `iconomi-fetch.yml` rebuilds the site, and closes the issue first
+    - name: Commit, close the issue and rebuild the site
       run: |
         git add data/iconomi/strategies.csv data/iconomi/assets.csv
         git diff --cached --quiet && exit 0
         git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
           commit -m 'Verify the new ICONOMI strategies and assets'
         git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
-        gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+        gh workflow run iconomi-fetch.yml --ref "${GITHUB_REF_NAME}"
       env:
         GITHUB_TOKEN: ${{ github.token }}
         GH_TOKEN: ${{ github.token }}

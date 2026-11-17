@@ -105,7 +105,7 @@ module IconomiPages
       Strategy.reset!
     end
 
-    # The body of the GitHub issue `site.yml` opens for the strategies and assets with no status yet (not those
+    # The body of the GitHub issue `iconomi-fetch.yml` opens for the strategies and assets with no status yet (not those
     # excluded): blank when there are none
     def unreviewed
       items = { 'strategies' => Strategy.all.reject(&:status),

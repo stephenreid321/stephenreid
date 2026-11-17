@@ -1,9 +1,8 @@
 name: Build and deploy the site
 
-# Builds the site and deploys it to GitHub Pages: on each push to master, from the data the last build fetched, and with
-# fresh data from ICONOMI when run by hand, by substack.yml, goodreads.yml or iconomi-verify.yml when they commit, and
-# every three hours by the Cloudflare Worker in cloudflare/ (GitHub's own schedule starts runs late or not at all).
-# Substack's notes and posts are the ones substack.yml last saved to the cache
+# Builds the site and deploys it to GitHub Pages: on each push to master, and when a workflow that fetches data has saved
+# it (`iconomi-fetch.yml`, `substack.yml`, `substack-surfacer.yml`) or committed it (`goodreads.yml`). It fetches nothing itself,
+# so it's quick: it builds from what those last saved to the Actions cache
 on:
   push:
     branches: [ master ]
@@ -22,8 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      # For the issue about new strategies and assets
-      issues: write
     steps:
     - name: Git checkout
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -38,9 +35,10 @@ jobs:
         ruby-version: 4.0.9
         bundler-cache: true
 
-    # data/fetched, as the last build left it
+    # What `iconomi-fetch.yml` last saved: ICONOMI's strategies, the places and the courses' notes. Paths as it saves them, or
+    # the cache won't match. Restoring this and the caches below on each build keeps GitHub from evicting them, as it
+    # does a cache unused for a week
     - name: Restore fetched data
-      id: fetched
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         # Not Substack's notes and posts, which have a cache of their own
@@ -51,8 +49,7 @@ jobs:
         restore-keys: fetched-
 
     # Substack's notes and posts, as `substack.yml` last saved them (on Stephen's Mac, as Substack turns away GitHub's
-    # runners). Only that saves them, and with the same paths, or the cache won't match. Restoring them every three
-    # hours keeps GitHub from evicting them, as it does a cache unused for a week
+    # runners). Only that saves them, and with the same paths, or the cache won't match
     - name: Restore Substack's notes and posts
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
@@ -70,49 +67,12 @@ jobs:
         key: surfacer-${{ github.run_id }}
         restore-keys: surfacer-
 
-    - name: Fetch from ICONOMI
-      if: github.event_name != 'push' || steps.fetched.outputs.cache-matched-key == ''
-      run: bundle exec rake data:iconomi
-      env:
-        ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
-        ICN_SECRET: ${{ secrets.ICN_SECRET }}
-
-    - name: Fetch the places and the courses' notes
-      run: bundle exec rake data:public
-
-    - name: Save fetched data
-      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-      with:
-        # Not Substack's notes and posts, which `substack.yml` saves
-        path: |
-          data/fetched
-          !data/fetched/substack_*.json
-        key: fetched-${{ github.run_id }}
-
     - name: Build the site
       run: bundle exec jekyll build
       env:
         JEKYLL_ENV: production
         APIFLASH_KEY: ${{ secrets.APIFLASH_KEY }}
         NUMBER_OF_ASSETS: ${{ vars.NUMBER_OF_ASSETS }}
-
-    # One open issue (label iconomi-new) while there are strategies or assets with no status yet: opened when the first
-    # appears, commented on when the list changes, which notifies, and closed when none is left
-    - name: Open or close the issue for new strategies and assets
-      run: |
-        body=$(bundle exec rake iconomi:unreviewed)
-        number=$(gh issue list --state open --label iconomi-new --json number --jq '.[0].number // empty')
-        if [ -n "$body" ] && [ -z "$number" ]; then
-          gh issue create --label iconomi-new --title 'New ICONOMI strategies or assets to review' --body "$body"
-        elif [ -n "$body" ] && [ "$body" != "$(gh issue view "$number" --json body --jq .body)" ]; then
-          gh issue edit "$number" --body "$body"
-          gh issue comment "$number" --body "The list has changed:"$'\n\n'"$body"
-        elif [ -z "$body" ] && [ -n "$number" ]; then
-          gh issue close "$number" --comment 'Every strategy and asset has a status now.'
-        fi
-      env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
 
     - name: Upload the site
       uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0

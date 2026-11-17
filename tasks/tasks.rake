@@ -50,7 +50,7 @@ namespace :iconomi do
     Strategy.rebalance
   end
 
-  desc 'Print the strategies and assets with no status yet, for the GitHub issue site.yml keeps (blank if none)'
+  desc 'Print the strategies and assets with no status yet, for the GitHub issue iconomi-fetch.yml keeps (blank if none)'
   task unreviewed: :environment do
     print IconomiPages.unreviewed
   end

@@ -1,0 +1,87 @@
+name: Fetch from ICONOMI, the places and the courses' notes
+
+# What the site shows from ICONOMI, the treasure map and the courses' repo: fetches it into data/fetched, saves it to the
+# Actions cache, where `site.yml` restores it from, keeps the issue about new strategies and assets, and rebuilds the
+# site. The Cloudflare Worker in cloudflare/ starts it every three hours, as GitHub's own schedule starts runs late or not
+# at all. Substack's notes and posts, and the newsletters' posts, are fetched on Stephen's Mac (`substack.yml`,
+# `substack-surfacer.yml`)
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # For the issue about new strategies and assets
+      issues: write
+      # To rebuild the site
+      actions: write
+    concurrency:
+      group: iconomi-fetch
+      cancel-in-progress: false
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    # As the last run saved it, so what a fetch here skips or fails at is kept. Paths as in `site.yml`, or the cache won't
+    # match: not Substack's notes and posts, or the newsletters' posts, which have caches of their own
+    - name: Restore fetched data
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          data/fetched
+          !data/fetched/substack_*.json
+        key: fetched-${{ github.run_id }}
+        restore-keys: fetched-
+
+    - name: Fetch from ICONOMI
+      run: bundle exec rake data:iconomi
+      env:
+        ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
+        ICN_SECRET: ${{ secrets.ICN_SECRET }}
+
+    - name: Fetch the places and the courses' notes
+      run: bundle exec rake data:public
+
+    - name: Save fetched data
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          data/fetched
+          !data/fetched/substack_*.json
+        key: fetched-${{ github.run_id }}
+
+    # One open issue (label iconomi-new) while there are strategies or assets with no status yet: opened when the first
+    # appears, commented on when the list changes, which notifies, and closed when none is left
+    - name: Open or close the issue for new strategies and assets
+      run: |
+        body=$(bundle exec rake iconomi:unreviewed)
+        number=$(gh issue list --state open --label iconomi-new --json number --jq '.[0].number // empty')
+        if [ -n "$body" ] && [ -z "$number" ]; then
+          gh issue create --label iconomi-new --title 'New ICONOMI strategies or assets to review' --body "$body"
+        elif [ -n "$body" ] && [ "$body" != "$(gh issue view "$number" --json body --jq .body)" ]; then
+          gh issue edit "$number" --body "$body"
+          gh issue comment "$number" --body "The list has changed:"$'\n\n'"$body"
+        elif [ -z "$body" ] && [ -n "$number" ]; then
+          gh issue close "$number" --comment 'Every strategy and asset has a status now.'
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}
+
+    - name: Rebuild the site
+      run: gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}
