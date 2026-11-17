@@ -37,13 +37,16 @@ module Substack
       "#{normalize_publication_url(ENV['SUBSTACK_PUBLICATION_URL']).chomp('/')}/api/v1"
     end
 
+    # For the publication's API. Host first, as browsers send it: Ruby's Net::HTTP adds it after the rest unless it's given,
+    # and Substack's Cloudflare takes that for a bot, which Substack then rate-limits (429)
     def http_client
-      Faraday.new do |conn|
-        conn.headers['Cookie'] = "substack.sid=#{ENV['SUBSTACK_TOKEN']}"
-        conn.headers['Accept'] = 'application/json'
-        conn.headers['Content-Type'] = 'application/json'
-        conn.headers['User-Agent'] = USER_AGENT
-      end
+      Faraday.new(headers: {
+                    'Host' => URI(normalize_publication_url(ENV['SUBSTACK_PUBLICATION_URL'])).host,
+                    'User-Agent' => USER_AGENT,
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Cookie' => "substack.sid=#{ENV['SUBSTACK_TOKEN']}"
+                  })
     end
 
     def safe_json(obj)

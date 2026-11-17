@@ -7,8 +7,8 @@ namespace :data do
 
   desc 'Fetch the Substack notes and posts into data/fetched (needs SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL)'
   task substack: :environment do
-    SubstackNote.import
-    SubstackPost.import
+    # At once, as each pages through Substack's API a page at a time, and they share nothing but the token
+    [Thread.new { SubstackNote.import }, Thread.new { SubstackPost.import }].each(&:join)
   end
 
   desc "Fetch the last 90 days' posts of the newsletters Stephen subscribes to on Substack into data/fetched, for /substack"

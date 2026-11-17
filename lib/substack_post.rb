@@ -53,7 +53,7 @@ class SubstackPost
       all_raw = []
       cursor = nil
       loop do
-        page, cursor = Substack.fetch_archive_page(conn: conn, base_api: base_api, cursor: cursor, limit: 12)
+        page, cursor = Substack.fetch_archive_page(conn: conn, base_api: base_api, cursor: cursor, limit: 25)
         all_raw.concat(page)
         break if page.empty? || cursor.nil?
       end
