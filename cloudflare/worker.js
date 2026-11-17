@@ -8,13 +8,14 @@ const BRANCH = 'master'
 const TIME_ZONE = 'Europe/Stockholm'
 
 // Each run: its workflow, whether it's due in an hour (by the clock in Stockholm), and the inputs it's started with.
-// They start together. iconomi-fetch.yml, and substack.yml when it fetches new notes or posts, each rebuild the site when they're
-// done, and a newer build cancels an older one
+// They start together. iconomi-fetch.yml, and public-fetch.yml and substack.yml when they fetch something new, each
+// rebuild the site when they're done, and a newer build cancels an older one
 export const RUNS = [
   // Every three hours
   { workflow: 'substack.yml', due: (t) => t.hour % 3 === 0 },
   { workflow: 'bluesky.yml', due: (t) => t.hour % 3 === 0 },
   { workflow: 'iconomi-fetch.yml', due: (t) => t.hour % 3 === 0 },
+  { workflow: 'public-fetch.yml', due: (t) => t.hour % 3 === 0 },
   // Daily at 06:00
   { workflow: 'goodreads.yml', due: (t) => t.hour === 6 },
   // Daily at 05:00. It rebuilds the site when it's done

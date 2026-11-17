@@ -1,0 +1,65 @@
+name: Fetch the places and the courses' notes
+
+# The places on the treasure map and the courses' notes, which need no keys: fetches them into data/fetched, saves them
+# to the Actions cache, where `site.yml` restores them from, and, if they've changed, rebuilds the site. The Cloudflare
+# Worker in cloudflare/ starts it every three hours, as GitHub's own schedule starts runs late or not at all
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # To rebuild the site
+      actions: write
+    concurrency:
+      group: public-fetch
+      cancel-in-progress: false
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@26e5b7d197ebf60545ee9667bcbace0be11ccaec # v1.334.0
+      with:
+        ruby-version: 4.0.9
+        bundler-cache: true
+
+    # As the last run saved them, to compare with what's fetched. Paths as in `site.yml`, or the cache won't match
+    - name: Restore the places and the courses' notes
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          data/fetched/places.json
+          data/fetched/courses.json
+        key: public-${{ github.run_id }}
+        restore-keys: public-
+
+    - name: Fetch the places and the courses' notes
+      id: fetch
+      run: |
+        before=$(cat data/fetched/places.json data/fetched/courses.json 2>/dev/null | shasum)
+        bundle exec rake data:public
+        after=$(cat data/fetched/places.json data/fetched/courses.json | shasum)
+        if [ "$before" != "$after" ]; then echo changed=true >> "$GITHUB_OUTPUT"; fi
+
+    - name: Save the places and the courses' notes
+      if: steps.fetch.outputs.changed == 'true'
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          data/fetched/places.json
+          data/fetched/courses.json
+        key: public-${{ github.run_id }}
+
+    - name: Rebuild the site
+      if: steps.fetch.outputs.changed == 'true'
+      run: gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}

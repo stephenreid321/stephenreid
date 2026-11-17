@@ -1,10 +1,8 @@
-name: Fetch from ICONOMI, the places and the courses' notes
+name: Fetch from ICONOMI
 
-# What the site shows from ICONOMI, the treasure map and the courses' repo: fetches it into data/fetched, saves it to the
-# Actions cache, where `site.yml` restores it from, keeps the issue about new strategies and assets, and rebuilds the
-# site. The Cloudflare Worker in cloudflare/ starts it every three hours, as GitHub's own schedule starts runs late or not
-# at all. Substack's notes and posts, and the newsletters' posts, are fetched on Stephen's Mac (`substack.yml`,
-# `substack-surfacer.yml`)
+# ICONOMI's strategies and Metastrategy: fetches them into data/fetched/iconomi.json, saves that to the Actions cache,
+# where `site.yml` restores it from, keeps the issue about new strategies and assets, and rebuilds the site. The
+# Cloudflare Worker in cloudflare/ starts it every three hours, as GitHub's own schedule starts runs late or not at all
 on:
   workflow_dispatch:
 
@@ -34,16 +32,13 @@ jobs:
         ruby-version: 4.0.9
         bundler-cache: true
 
-    # As the last run saved it, so what a fetch here skips or fails at is kept. Paths as in `site.yml`, or the cache won't
-    # match: not Substack's notes and posts, or the newsletters' posts, which have caches of their own
-    - name: Restore fetched data
+    # As the last run saved them, which the fetch reads. Path as in `site.yml`, or the cache won't match
+    - name: Restore the strategies
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        path: |
-          data/fetched
-          !data/fetched/substack_*.json
-        key: fetched-${{ github.run_id }}
-        restore-keys: fetched-
+        path: data/fetched/iconomi.json
+        key: iconomi-${{ github.run_id }}
+        restore-keys: iconomi-
 
     - name: Fetch from ICONOMI
       run: bundle exec rake data:iconomi
@@ -51,16 +46,11 @@ jobs:
         ICN_API_KEY: ${{ secrets.ICN_API_KEY }}
         ICN_SECRET: ${{ secrets.ICN_SECRET }}
 
-    - name: Fetch the places and the courses' notes
-      run: bundle exec rake data:public
-
-    - name: Save fetched data
+    - name: Save the strategies
       uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        path: |
-          data/fetched
-          !data/fetched/substack_*.json
-        key: fetched-${{ github.run_id }}
+        path: data/fetched/iconomi.json
+        key: iconomi-${{ github.run_id }}
 
     # One open issue (label iconomi-new) while there are strategies or assets with no status yet: opened when the first
     # appears, commented on when the list changes, which notifies, and closed when none is left

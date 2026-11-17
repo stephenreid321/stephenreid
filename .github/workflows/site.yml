@@ -1,8 +1,8 @@
 name: Build and deploy the site
 
 # Builds the site and deploys it to GitHub Pages: on each push to master, and when a workflow that fetches data has saved
-# it (`iconomi-fetch.yml`, `substack.yml`, `substack-surfacer.yml`) or committed it (`goodreads.yml`). It fetches nothing itself,
-# so it's quick: it builds from what those last saved to the Actions cache
+# it (`iconomi-fetch.yml`, `public-fetch.yml`, `substack.yml`, `substack-surfacer.yml`) or committed it (`goodreads.yml`).
+# It fetches nothing itself, so it's quick: it builds from what those last saved to the Actions cache
 on:
   push:
     branches: [ master ]
@@ -35,21 +35,29 @@ jobs:
         ruby-version: 4.0.9
         bundler-cache: true
 
-    # What `iconomi-fetch.yml` last saved: ICONOMI's strategies, the places and the courses' notes. Paths as it saves them, or
-    # the cache won't match. Restoring this and the caches below on each build keeps GitHub from evicting them, as it
-    # does a cache unused for a week
-    - name: Restore fetched data
+    # Each cache as the workflow that fetches it last saved it, with the paths it saves, or the cache won't match.
+    # Restoring them on each build keeps GitHub from evicting them, as it does a cache unused for a week
+
+    # ICONOMI's strategies, as `iconomi-fetch.yml` last saved them
+    - name: Restore the strategies
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
-        # Not Substack's notes and posts, which have a cache of their own
+        path: data/fetched/iconomi.json
+        key: iconomi-${{ github.run_id }}
+        restore-keys: iconomi-
+
+    # The places and the courses' notes, as `public-fetch.yml` last saved them
+    - name: Restore the places and the courses' notes
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
         path: |
-          data/fetched
-          !data/fetched/substack_*.json
-        key: fetched-${{ github.run_id }}
-        restore-keys: fetched-
+          data/fetched/places.json
+          data/fetched/courses.json
+        key: public-${{ github.run_id }}
+        restore-keys: public-
 
     # Substack's notes and posts, as `substack.yml` last saved them (on Stephen's Mac, as Substack turns away GitHub's
-    # runners). Only that saves them, and with the same paths, or the cache won't match
+    # runners)
     - name: Restore Substack's notes and posts
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
