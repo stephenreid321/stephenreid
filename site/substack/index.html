@@ -4,9 +4,9 @@ permalink: /substack/
 container_class: container-fluid
 ---
 {%- comment -%}
-  The last 90 days' posts of the newsletters I subscribe to on Substack (lib/substack_surfacer.rb, fetched daily by
-  substack-surfacer.yml), sorted by likes per 100 free subscribers. The dropdown shows those of the last 90, 30, 7, 3 or 1
-  days, and the boxes those with at least so many likes and likes per 100 free subscribers
+  The last 90 days' posts of the newsletters I subscribe to on Substack (lib/substack_surfacer.rb, fetched every three
+  hours by substack-surfacer.yml), sorted by likes per 100 free subscribers. The dropdown shows those of the last 90, 30,
+  7, 3 or 1 days, and the boxes those with at least so many likes and likes per 100 free subscribers
 {%- endcomment -%}
 {% assign surfacer = site.data.substack_surfacer %}
 <p class="lead">
@@ -221,5 +221,5 @@ container_class: container-fluid
   </table>
 </div>
 {% else %}
-<p>No posts yet: they're fetched daily.</p>
+<p>No posts yet: they're fetched every three hours.</p>
 {% endif %}

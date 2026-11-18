@@ -4,7 +4,7 @@ name: Surface the newsletters' posts from Substack
 # free subscribers, for /substack. Substack's Cloudflare turns away GitHub's runners, so like `substack.yml` this
 # runs on the self-hosted runner on Stephen's Mac (label mac): it fetches them into data/fetched, saves them to the
 # Actions cache, where `site.yml` restores them from, and rebuilds the site. It runs only while the Mac is on; until
-# then the site keeps the posts last saved. The Cloudflare Worker in cloudflare/ starts it daily, as GitHub's own
+# then the site keeps the posts last saved. The Cloudflare Worker in cloudflare/ starts it every three hours, as GitHub's own
 # schedule starts runs late or not at all
 on:
   workflow_dispatch:
