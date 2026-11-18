@@ -5,7 +5,7 @@
   path: /coaching
 - name: Events
   path: /events
-- name: Substack Surfacer
+- name: Substack
   path: /substack/
 - name: Courses
   items:

@@ -199,13 +199,10 @@ container_class: container-fluid
       <tr data-post-date="{{ post.post_date }}" data-likes="{{ post.likes | default: 0 }}" data-likes-per-hundred="{{ post.likes_per_100_free_subscribers_sort }}" data-newsletter-url="{{ post.newsletter_url }}" data-author="{{ post.author | escape }}">
         {%- comment -%} text-break: a long word breaks rather than spilling out of the column {%- endcomment %}
         <td class="text-break">
-          <a target="_blank" href="{{ post.post_url }}">{{ post.title }}</a>
+          <a target="_blank" href="{{ post.post_url }}">{{ post.title }}</a> ·
+          <a class="text-body-emphasis" target="_blank" href="{{ post.newsletter_url }}">{{ post.author }}</a>
           {% if post.paid %}<span class="badge text-bg-secondary ms-1">Paid</span>{% endif %}
-          {% if post.subtitle != '' %}<br><small>{{ post.subtitle }}</small>{% endif %}
-          <br>
-          <small class="text-muted">
-            <a class="text-muted" target="_blank" href="{{ post.newsletter_url }}">{{ post.author }}</a>
-          </small>
+          {% if post.subtitle != '' %}<br><small class="text-body-secondary">{{ post.subtitle }}</small>{% endif %}
         </td>
         <td class="text-nowrap text-end" data-sort="{{ post.post_date }}">{{ post.post_day }}</td>
         <td class="text-end dt-type-numeric">{{ post.likes }}</td>
