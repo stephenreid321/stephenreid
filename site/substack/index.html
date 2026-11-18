@@ -200,7 +200,7 @@ container_class: container-fluid
         {%- comment -%} text-break: a long word breaks rather than spilling out of the column {%- endcomment %}
         <td class="text-break">
           <a target="_blank" href="{{ post.post_url }}">{{ post.title }}</a> ·
-          <a class="text-body-emphasis" target="_blank" href="{{ post.newsletter_url }}">{{ post.author }}</a>
+          <a class="text-body" target="_blank" href="{{ post.newsletter_url }}">{{ post.author }}</a>
           {% if post.paid %}<span class="badge text-bg-secondary ms-1">Paid</span>{% endif %}
           {% if post.subtitle != '' %}<br><small class="text-body-secondary">{{ post.subtitle }}</small>{% endif %}
         </td>
