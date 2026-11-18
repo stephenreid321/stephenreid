@@ -5,6 +5,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "stephenreid-cron",
+  // Stephen's own account, so it deploys there whichever account Wrangler last used
+  "account_id": "65bdb8a167a4c8b8da24b610ef2f3ab5",
   "main": "worker.js",
   "compatibility_date": "2026-10-29",
   // It's only woken by its crons, so it has no URL
