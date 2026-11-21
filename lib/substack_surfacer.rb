@@ -96,7 +96,7 @@ module SubstackSurfacer
                    'likes_per_100_free_subscribers_sort' => post['likes_per_100_free_subscribers'] || -1,
                    'likes_per_100_free_subscribers_shown' => significant_figures(post['likes_per_100_free_subscribers']),
                    'free_subscribers_shown' => post['free_subscribers']&.delete_suffix('+'),
-                   'post_day' => Time.zone.parse(post['post_date']).strftime('%-d %b'))
+                   'post_day' => Time.zone.parse(post['post_date']).strftime('%-d %b %H:%M'))
       end.sort_by { |post| [-post['likes_per_100_free_subscribers_sort'], -Time.parse(post['post_date']).to_i] }
       { 'fetched_at' => data['fetched_at'], 'days' => data['days'] || DAYS, 'posts' => posts }
     end
