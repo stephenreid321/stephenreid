@@ -25,28 +25,17 @@ jobs:
       with:
         persist-credentials: false
 
-    # The Mac's own Ruby (rvm, on the runner's PATH), with the gems in the runner's tool cache: kept between runs, unlike
-    # the checkout, which actions/checkout cleans (git clean -ffdx), so bundle install has only to check them
-    - name: Install gems
-      run: bundle install --quiet
-      env:
-        BUNDLE_PATH: ${{ runner.tool_cache }}/stephenreid-bundle
+    - name: Install Ruby
+      uses: $/.github/actions/setup-ruby
 
     - name: Export from Goodreads
       run: bundle exec rake data:goodreads
       env:
-        BUNDLE_PATH: ${{ runner.tool_cache }}/stephenreid-bundle
         GOODREADS_COOKIE: ${{ secrets.GOODREADS_COOKIE }}
 
-    # A push with GITHUB_TOKEN doesn't run `site.yml`, so this runs it
     - name: Commit and rebuild the site
-      run: |
-        git add data/goodreads_library_export.csv
-        git diff --cached --quiet && exit 0
-        git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-          commit -m 'Export the library from Goodreads'
-        git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
-        gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-        GH_TOKEN: ${{ github.token }}
+      uses: $/.github/actions/commit
+      with:
+        paths: data/goodreads_library_export.csv
+        message: Export the library from Goodreads
+        then: site.yml

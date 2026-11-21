@@ -25,41 +25,32 @@ jobs:
         persist-credentials: false
 
     - name: Install Ruby
-      uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
-      with:
-        ruby-version: 4.0.10
-        bundler-cache: true
+      uses: $/.github/actions/setup-ruby
 
-    # As the last run saved them, to compare with what's fetched. Paths as in `site.yml`, or the cache won't match
+    # As the last run saved them, to compare with what's fetched
     - name: Restore the places and the courses' notes
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      id: cache
+      uses: $/.github/actions/fetched
       with:
-        path: |
-          data/fetched/places.json
-          data/fetched/courses.json
-        key: public-${{ github.run_id }}
-        restore-keys: public-
+        cache: public
 
     - name: Fetch the places and the courses' notes
       id: fetch
       run: |
-        before=$(cat data/fetched/places.json data/fetched/courses.json 2>/dev/null | shasum)
+        before=$(cat $PATHS 2>/dev/null | shasum)
         bundle exec rake data:public
-        after=$(cat data/fetched/places.json data/fetched/courses.json | shasum)
+        after=$(cat $PATHS | shasum)
         if [ "$before" != "$after" ]; then echo changed=true >> "$GITHUB_OUTPUT"; fi
+      env:
+        PATHS: ${{ steps.cache.outputs.paths }}
 
     - name: Save the places and the courses' notes
       if: steps.fetch.outputs.changed == 'true'
-      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: |
-          data/fetched/places.json
-          data/fetched/courses.json
-        key: public-${{ github.run_id }}
+        cache: public
+        save: true
 
     - name: Rebuild the site
       if: steps.fetch.outputs.changed == 'true'
-      run: gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
-      env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
+      uses: $/.github/actions/rebuild-site

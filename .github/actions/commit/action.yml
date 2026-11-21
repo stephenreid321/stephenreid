@@ -1,0 +1,35 @@
+name: Commit and push
+description: >-
+  Commits the files to this branch as github-actions[bot] if they've changed, pushes, and then runs a workflow, as a
+  push with GITHUB_TOKEN runs none. The job needs the contents and actions write permissions
+
+inputs:
+  paths:
+    description: The files to commit, separated by spaces
+    required: true
+  message:
+    description: The commit message
+    required: true
+  then:
+    description: The workflow to run once it's pushed
+    required: true
+
+runs:
+  using: composite
+  steps:
+  - name: Commit, push and run the workflow
+    shell: bash
+    run: |
+      # shellcheck disable=SC2086
+      git add $PATHS
+      git diff --cached --quiet && exit 0
+      git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+        commit -m "$MESSAGE"
+      git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
+      gh workflow run "$THEN" --ref "${GITHUB_REF_NAME}"
+    env:
+      PATHS: ${{ inputs.paths }}
+      MESSAGE: ${{ inputs.message }}
+      THEN: ${{ inputs.then }}
+      GITHUB_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ github.token }}

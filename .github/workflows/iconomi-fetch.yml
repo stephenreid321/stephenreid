@@ -27,18 +27,13 @@ jobs:
         persist-credentials: false
 
     - name: Install Ruby
-      uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
-      with:
-        ruby-version: 4.0.10
-        bundler-cache: true
+      uses: $/.github/actions/setup-ruby
 
-    # As the last run saved them, which the fetch reads. Path as in `site.yml`, or the cache won't match
+    # As the last run saved them, which the fetch reads
     - name: Restore the strategies
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: data/fetched/iconomi.json
-        key: iconomi-${{ github.run_id }}
-        restore-keys: iconomi-
+        cache: iconomi
 
     - name: Fetch from ICONOMI
       run: bundle exec rake data:iconomi
@@ -47,10 +42,10 @@ jobs:
         ICN_SECRET: ${{ secrets.ICN_SECRET }}
 
     - name: Save the strategies
-      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: data/fetched/iconomi.json
-        key: iconomi-${{ github.run_id }}
+        cache: iconomi
+        save: true
 
     # One open issue (label iconomi-new) while there are strategies or assets with no status yet: opened when the first
     # appears, commented on when the list changes, which notifies, and closed when none is left
@@ -71,7 +66,4 @@ jobs:
         GH_REPO: ${{ github.repository }}
 
     - name: Rebuild the site
-      run: gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
-      env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
+      uses: $/.github/actions/rebuild-site

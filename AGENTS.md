@@ -20,6 +20,13 @@ This is a static site built with Jekyll and served by GitHub Pages. There's no s
 
 Each is named in the Actions tab for what it does: Build and deploy the site (`site.yml`), Fetch from ICONOMI (`iconomi-fetch.yml`), Fetch the places and the courses' notes (`public-fetch.yml`), Rebalance Metastrategy (`iconomi-rebalance.yml`), Verify the new ICONOMI strategies and assets (`iconomi-verify.yml`), Post to Bluesky (`bluesky.yml`), Lint (`lint.yml`), Fetch from Substack (`substack.yml`), Surface the newsletters' posts from Substack (`substack-surfacer.yml`) and Export from Goodreads (`goodreads.yml`).
 
+What they share is in composite actions in `.github/actions`, used as `$/.github/actions/<name>`, so it's set once:
+
+- `setup-ruby`: Ruby at the version in `.ruby-version`, which the Gemfile reads too, with the gems. On GitHub's runners with `ruby/setup-ruby`; on the self-hosted runner on Stephen's Mac, rvm's Ruby of that version, so when you bump `.ruby-version`, `rvm install` it on the Mac too (and bump `ruby/setup-ruby` to a release that knows it)
+- `fetched`: restores or saves a cache of `data/fetched` (`iconomi`, `public`, `substack`, `surfacer`). Each cache's files are named there, and only there, as a cache restores only with the paths it was saved with
+- `rebuild-site`: runs `site.yml`
+- `commit`: commits files as github-actions[bot], pushes, and runs a workflow, as a push with `GITHUB_TOKEN` runs none
+
 - `site.yml` builds the site and deploys it to Pages, on each push to master and when a workflow that fetches data has saved or committed it. It fetches nothing itself, so it stays quick: it restores what `iconomi-fetch.yml`, `public-fetch.yml`, `substack.yml` and `substack-surfacer.yml` last saved to the Actions cache, builds, and deploys
 - `iconomi-fetch.yml` fetches from ICONOMI (`rake data:iconomi`) into the `iconomi-` cache, keeps the issue about new ICONOMI strategies and assets, and rebuilds the site (every three hours)
 - `public-fetch.yml` fetches the places and the courses' notes (`rake data:public`) into the `public-` cache, and rebuilds the site if they've changed (every three hours)

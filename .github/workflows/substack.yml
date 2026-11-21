@@ -25,48 +25,35 @@ jobs:
       with:
         persist-credentials: false
 
-    # As the last run saved them: the posts keep the bodies fetched before, and they're compared with what's fetched.
-    # Paths as in `site.yml`, or the cache won't match
+    # As the last run saved them: the posts keep the bodies fetched before, and they're compared with what's fetched
     - name: Restore the notes and posts
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      id: cache
+      uses: $/.github/actions/fetched
       with:
-        path: |
-          data/fetched/substack_notes.json
-          data/fetched/substack_posts.json
-        key: substack-${{ github.run_id }}
-        restore-keys: substack-
+        cache: substack
 
-    # The Mac's own Ruby (rvm, on the runner's PATH), with the gems in the runner's tool cache: kept between runs, unlike
-    # the checkout, which actions/checkout cleans (git clean -ffdx), so bundle install has only to check them
-    - name: Install gems
-      run: bundle install --quiet
-      env:
-        BUNDLE_PATH: ${{ runner.tool_cache }}/stephenreid-bundle
+    - name: Install Ruby
+      uses: $/.github/actions/setup-ruby
 
     - name: Fetch from Substack
       id: fetch
       run: |
-        before=$(cat data/fetched/substack_notes.json data/fetched/substack_posts.json 2>/dev/null | shasum)
+        before=$(cat $PATHS 2>/dev/null | shasum)
         bundle exec rake data:substack
-        after=$(cat data/fetched/substack_notes.json data/fetched/substack_posts.json | shasum)
+        after=$(cat $PATHS | shasum)
         if [ "$before" != "$after" ]; then echo changed=true >> "$GITHUB_OUTPUT"; fi
       env:
-        BUNDLE_PATH: ${{ runner.tool_cache }}/stephenreid-bundle
+        PATHS: ${{ steps.cache.outputs.paths }}
         SUBSTACK_TOKEN: ${{ secrets.SUBSTACK_TOKEN }}
         SUBSTACK_PUBLICATION_URL: ${{ vars.SUBSTACK_PUBLICATION_URL }}
 
     - name: Save the notes and posts
       if: steps.fetch.outputs.changed == 'true'
-      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: |
-          data/fetched/substack_notes.json
-          data/fetched/substack_posts.json
-        key: substack-${{ github.run_id }}
+        cache: substack
+        save: true
 
     - name: Rebuild the site
       if: steps.fetch.outputs.changed == 'true'
-      run: gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
-      env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
+      uses: $/.github/actions/rebuild-site

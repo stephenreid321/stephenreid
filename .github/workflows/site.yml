@@ -30,50 +30,35 @@ jobs:
         fetch-depth: 0
 
     - name: Install Ruby
-      uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
-      with:
-        ruby-version: 4.0.10
-        bundler-cache: true
+      uses: $/.github/actions/setup-ruby
 
-    # Each cache as the workflow that fetches it last saved it, with the paths it saves, or the cache won't match.
+    # Each cache as the workflow that fetches it last saved it.
     # Restoring them on each build keeps GitHub from evicting them, as it does a cache unused for a week
 
     # ICONOMI's strategies, as `iconomi-fetch.yml` last saved them
     - name: Restore the strategies
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: data/fetched/iconomi.json
-        key: iconomi-${{ github.run_id }}
-        restore-keys: iconomi-
+        cache: iconomi
 
     # The places and the courses' notes, as `public-fetch.yml` last saved them
     - name: Restore the places and the courses' notes
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: |
-          data/fetched/places.json
-          data/fetched/courses.json
-        key: public-${{ github.run_id }}
-        restore-keys: public-
+        cache: public
 
     # Substack's notes and posts, as `substack.yml` last saved them (on Stephen's Mac, as Substack turns away GitHub's
     # runners)
     - name: Restore Substack's notes and posts
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: |
-          data/fetched/substack_notes.json
-          data/fetched/substack_posts.json
-        key: substack-${{ github.run_id }}
-        restore-keys: substack-
+        cache: substack
 
     # The newsletters' posts for /substack, as `substack-surfacer.yml` last saved them (on Stephen's Mac too)
     - name: Restore the newsletters' posts
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      uses: $/.github/actions/fetched
       with:
-        path: data/fetched/substack_surfacer.json
-        key: surfacer-${{ github.run_id }}
-        restore-keys: surfacer-
+        cache: surfacer
 
     - name: Build the site
       run: bundle exec jekyll build

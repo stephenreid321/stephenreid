@@ -1,0 +1,50 @@
+name: Restore or save fetched data
+description: >-
+  Restores what a workflow that fetches data last saved to the Actions cache, or saves it. Each cache's files are
+  named here, and only here, as a cache restores only with the paths it was saved with
+
+inputs:
+  cache:
+    description: The cache, and the prefix of its keys (iconomi, public, substack or surfacer)
+    required: true
+  save:
+    description: true to save the files to the cache, rather than restore them
+    default: 'false'
+
+outputs:
+  paths:
+    description: The cache's files, one per line
+    value: ${{ steps.paths.outputs.paths }}
+
+runs:
+  using: composite
+  steps:
+  - name: Name the files
+    id: paths
+    shell: bash
+    run: |
+      case "$CACHE" in
+        iconomi) paths='data/fetched/iconomi.json' ;;
+        public) paths='data/fetched/places.json data/fetched/courses.json' ;;
+        substack) paths='data/fetched/substack_notes.json data/fetched/substack_posts.json' ;;
+        surfacer) paths='data/fetched/substack_surfacer.json' ;;
+        *) echo "No cache called $CACHE" >&2; exit 1 ;;
+      esac
+      { echo 'paths<<EOF'; printf '%s\n' $paths; echo EOF; } >> "$GITHUB_OUTPUT"
+    env:
+      CACHE: ${{ inputs.cache }}
+
+  - name: Restore the files
+    if: inputs.save != 'true'
+    uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+    with:
+      path: ${{ steps.paths.outputs.paths }}
+      key: ${{ inputs.cache }}-${{ github.run_id }}
+      restore-keys: ${{ inputs.cache }}-
+
+  - name: Save the files
+    if: inputs.save == 'true'
+    uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+    with:
+      path: ${{ steps.paths.outputs.paths }}
+      key: ${{ inputs.cache }}-${{ github.run_id }}

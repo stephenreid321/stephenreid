@@ -1,0 +1,25 @@
+name: Install Ruby
+description: Ruby at the version in .ruby-version (which the Gemfile reads too), with the gems
+
+runs:
+  using: composite
+  steps:
+  # On GitHub's runners, with the gems in the Actions cache. With no ruby-version, it reads .ruby-version
+  - name: Install Ruby
+    if: runner.environment == 'github-hosted'
+    uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
+    with:
+      bundler-cache: true
+
+  # On the self-hosted runner on Stephen's Mac, the Mac's own Ruby, installed with rvm (rvm install "$(cat
+  # .ruby-version)"), with the gems in the runner's tool cache: kept between runs, unlike the checkout, which
+  # actions/checkout cleans (git clean -ffdx), so bundle install has only to check them
+  - name: Use the Mac's Ruby
+    if: runner.environment == 'self-hosted'
+    shell: bash
+    run: |
+      ruby="$HOME/.rvm/rubies/ruby-$(cat .ruby-version)/bin"
+      if [ ! -x "$ruby/ruby" ]; then echo "Ruby $(cat .ruby-version) isn't installed with rvm on this Mac" >&2; exit 1; fi
+      echo "$ruby" >> "$GITHUB_PATH"
+      echo "BUNDLE_PATH=$RUNNER_TOOL_CACHE/stephenreid-bundle" >> "$GITHUB_ENV"
+      PATH="$ruby:$PATH" BUNDLE_PATH="$RUNNER_TOOL_CACHE/stephenreid-bundle" bundle install --quiet

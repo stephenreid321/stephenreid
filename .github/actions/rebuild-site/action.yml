@@ -1,0 +1,12 @@
+name: Rebuild the site
+description: Runs `site.yml` on this branch. The job needs the actions write permission
+
+runs:
+  using: composite
+  steps:
+  - name: Rebuild the site
+    shell: bash
+    run: gh workflow run site.yml --ref "${GITHUB_REF_NAME}"
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
