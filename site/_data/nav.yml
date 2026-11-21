@@ -7,6 +7,8 @@
   path: /events
 - name: Substack
   path: /substack/
+- name: Blyg
+  path: https://blyg.stephenreid.net/
 - name: Courses
   items:
     - name: Technological Metamodernism (Oct 2026)

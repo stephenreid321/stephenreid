@@ -13,7 +13,7 @@ const TIME_ZONE = 'Europe/Stockholm'
 export const RUNS = [
   // Every three hours
   { workflow: 'substack.yml', due: (t) => t.hour % 3 === 0 },
-  { workflow: 'bluesky.yml', due: (t) => t.hour % 3 === 0 },
+  { workflow: 'readwise.yml', due: (t) => t.hour % 3 === 0 },
   { workflow: 'iconomi-fetch.yml', due: (t) => t.hour % 3 === 0 },
   { workflow: 'public-fetch.yml', due: (t) => t.hour % 3 === 0 },
   { workflow: 'substack-surfacer.yml', due: (t) => t.hour % 3 === 0 },

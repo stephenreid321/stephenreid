@@ -71,15 +71,12 @@ end
 namespace :bluesky do
   desc "Post to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet"
   task post: :environment do
-    response = Faraday.get('https://readwise.io/api/v3/list', { location: 'archive', updatedAfter: 7.days.ago.iso8601 },
-                           { 'Authorization' => "Token #{ENV['READWISE_ACCESS_TOKEN']}" })
     bluesky = Bluesky.new
     posted_urls = bluesky.recent_link_urls
 
     # Post oldest first so the newest archive item is last and sits on top of Bluesky
-    JSON.parse(response.body)['results'].sort_by { |r| Time.parse(r['last_moved_at']) }.last(50).each do |r|
-      url = r['source_url'].gsub('youtu.be/', 'youtube.com/watch?v=')
-      next if Time.parse(r['last_moved_at']) < 7.days.ago
+    Readwise.archived_since(7.days.ago).last(50).each do |r|
+      url = r['source_url']
       next if posted_urls.include?(url)
 
       puts url

@@ -1,0 +1,57 @@
+// Stephen's blyg (https://blyg.stephenreid.net): Blygger Studio (https://github.com/blygger/blygger-studio), installed
+// from its release download. The release is in release.json; rake blyg:download fetches its worker.js, migrations and
+// normalize-import-dates.mjs into this folder (they aren't committed). Deploy it from here, with cloudflare/'s Wrangler:
+//   env -u CLOUDFLARE_API_TOKEN npx wrangler deploy
+// Its secrets, OWNER_PASSWORD and COOKIE_SECRET, are set with env -u CLOUDFLARE_API_TOKEN npx wrangler secret put
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "blyg",
+  // Stephen's own account, so it deploys there whichever account Wrangler last used
+  "account_id": "65bdb8a167a4c8b8da24b610ef2f3ab5",
+  "main": "worker.js",
+  "no_bundle": true,
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Only public HTML uses the shared 60-second cache. The router stays uncached
+  "cache": { "enabled": false },
+  "exports": {
+    "PublicHtml": { "type": "worker", "cache": { "enabled": true } }
+  },
+
+  // At the subdomain's root, as Blygger recommends. A Custom Domain makes its own DNS record
+  "vars": {
+    "MOUNT": ""
+  },
+  "routes": [
+    { "pattern": "blyg.stephenreid.net", "custom_domain": true }
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+
+  // Check saved XML every minute; poll due subscriptions every 15 minutes; housekeeping daily at midnight UTC
+  "triggers": {
+    "crons": ["* * * * *", "*/15 * * * *", "0 0 * * *"]
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "blyg-stephenreid",
+      "database_id": "3de2b6cb-30c0-4743-829c-f271d989420f",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Image attachments and the rendered feed cache
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "blyg-stephenreid-media"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,7 @@
+# What rake blyg:download extracts from the release download
+/worker.js
+/migrations/
+/normalize-import-dates.mjs
+/LICENSE
+/README.md
+/.wrangler/
