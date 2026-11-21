@@ -12,14 +12,18 @@ runs:
       bundler-cache: true
 
   # On the self-hosted runner on Stephen's Mac, the Mac's own Ruby, installed with rvm (rvm install "$(cat
-  # .ruby-version)"), with the gems in the runner's tool cache: kept between runs, unlike the checkout, which
-  # actions/checkout cleans (git clean -ffdx), so bundle install has only to check them
+  # .ruby-version)"), with the gems in the runner's tool cache, a bundle for each version of Ruby, as their native
+  # extensions are built for it: kept between runs, unlike the checkout, which actions/checkout cleans (git clean
+  # -ffdx), so bundle install has only to check them. What it writes to GITHUB_PATH and GITHUB_ENV comes from
+  # .ruby-version and the runner, not from anyone's input
   - name: Use the Mac's Ruby
     if: runner.environment == 'self-hosted'
     shell: bash
-    run: |
-      ruby="$HOME/.rvm/rubies/ruby-$(cat .ruby-version)/bin"
-      if [ ! -x "$ruby/ruby" ]; then echo "Ruby $(cat .ruby-version) isn't installed with rvm on this Mac" >&2; exit 1; fi
+    run: | # zizmor: ignore[github-env]
+      version=$(cat .ruby-version)
+      ruby="$HOME/.rvm/rubies/ruby-$version/bin"
+      bundle="$RUNNER_TOOL_CACHE/stephenreid-bundle/$version"
+      if [ ! -x "$ruby/ruby" ]; then echo "Ruby $version isn't installed with rvm on this Mac" >&2; exit 1; fi
       echo "$ruby" >> "$GITHUB_PATH"
-      echo "BUNDLE_PATH=$RUNNER_TOOL_CACHE/stephenreid-bundle" >> "$GITHUB_ENV"
-      PATH="$ruby:$PATH" BUNDLE_PATH="$RUNNER_TOOL_CACHE/stephenreid-bundle" bundle install --quiet
+      echo "BUNDLE_PATH=$bundle" >> "$GITHUB_ENV"
+      PATH="$ruby:$PATH" BUNDLE_PATH="$bundle" bundle install --quiet

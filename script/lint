@@ -34,10 +34,10 @@ LINTERS = [
     node: true
   },
   {
-    # GitHub Actions workflows. uvx runs this exact version, so none arrives unchosen; with GH_TOKEN set (as in CI) it
-    # runs its online audits too
+    # GitHub Actions workflows, and the composite actions they share. uvx runs this exact version, so none arrives
+    # unchosen; with GH_TOKEN set (as in CI) it runs its online audits too
     name: 'zizmor',
-    files: %r{\A\.github/workflows/.+\.ya?ml\z},
+    files: %r{\A\.github/(workflows/.+|actions/.+/action)\.ya?ml\z},
     configs: %r{\A(\.github/)?zizmor\.ya?ml\z},
     command: %w[uvx zizmor@1.31.1 --quiet --no-progress],
     all: ['.'],
