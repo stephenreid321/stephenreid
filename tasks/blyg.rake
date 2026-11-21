@@ -2,17 +2,17 @@ namespace :blyg do
   desc 'Publish to the blyg the links archived in Readwise in the last week since the newest one on it, as bluesky:post posts them to Bluesky (needs READWISE_ACCESS_TOKEN and BLYG_ACCESS_TOKEN)'
   task post: :environment do
     blyg = Blyg.new
-    posted_urls = Blyg.recent_link_urls
+    posted_urls = Blyg.recent_link_urls.map { |url| Readwise.clean_url(url) }
     archived = Readwise.archived_since(7.days.ago).last(50)
 
     # Only those archived after the newest that's on the blyg already, so a link never lands above ones archived after
     # it: one missed is left out rather than posted out of order
-    newest_posted = archived.rindex { |r| posted_urls.include?(Blyg.clean_url(r['source_url'])) }
+    newest_posted = archived.rindex { |r| posted_urls.include?(r['source_url']) }
     archived = archived.drop(newest_posted + 1) if newest_posted
 
     # Oldest first, so the newest archive item is last and sits on top of the blyg
     archived.each do |r|
-      url = Blyg.clean_url(r['source_url'])
+      url = r['source_url']
       next if posted_urls.include?(url)
 
       puts url

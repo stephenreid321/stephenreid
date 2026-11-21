@@ -72,7 +72,8 @@ namespace :bluesky do
   desc "Post to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet"
   task post: :environment do
     bluesky = Bluesky.new
-    posted_urls = bluesky.recent_link_urls
+    # Cleaned, as Readwise's links are: those posted before they were cleaned still have their trackers
+    posted_urls = bluesky.recent_link_urls.map { |url| Readwise.clean_url(url) }
 
     # Post oldest first so the newest archive item is last and sits on top of Bluesky
     Readwise.archived_since(7.days.ago).last(50).each do |r|

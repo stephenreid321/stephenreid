@@ -3,8 +3,6 @@
 # expires after 30 days
 class Blyg
   URL = 'https://blyg.stephenreid.net/'.freeze
-  # Query parameters that only track who shared a link or how it was clicked
-  TRACKING_PARAMS = /\A(utm_.*|fbclid|gclid|mc_cid|mc_eid|_bhlid|triedRedirect)\z/
 
   def initialize(token: ENV.fetch('BLYG_ACCESS_TOKEN'))
     @http = Faraday.new(url: "#{URL}api/") do |f|
@@ -24,21 +22,6 @@ class Blyg
     Nokogiri::XML(response.body).xpath('//item/description').flat_map do |description|
       Nokogiri::HTML.fragment(description.text).css('a[href]').map { |a| a['href'] }
     end
-  end
-
-  # A link without its tracking parameters
-  def self.clean_url(url)
-    uri = URI.parse(url)
-    return url unless uri.query
-
-    params = URI.decode_www_form(uri.query).reject do |name, _|
-      # Substack's referrer, r, on its posts (/p/…) and notes (substack.com/@…)
-      name.match?(TRACKING_PARAMS) || (name == 'r' && (uri.path.start_with?('/p/') || uri.host.to_s.end_with?('substack.com')))
-    end
-    uri.query = params.empty? ? nil : URI.encode_www_form(params)
-    uri.to_s
-  rescue URI::InvalidURIError
-    url
   end
 
   # Publishes a fragment linking to url: its title, linked, then who wrote it, as a Markdown link and an em dash
