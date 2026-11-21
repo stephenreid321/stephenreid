@@ -47,9 +47,28 @@ module SubstackSurfacer
       puts "Substack Surfacer: #{posts.size} posts from #{posts.uniq { |p| p['newsletter_url'] }.size} newsletters (#{failed.size} failed)"
     end
 
-    # The homepage of each newsletter the profile subscribes to or helps run, from the JSON its page preloads. Substack
-    # leaves those it helps run (publicationUsers: Metamoderna, say) out of its subscriptions
+    # The homepage of each newsletter the profile subscribes to or helps run. Substack leaves those it helps run
+    # (publicationUsers: Metamoderna, say) out of its subscriptions
     def subscriptions
+      profile = profile_data
+      (Array(profile['subscriptions']) + Array(profile['publicationUsers'])).filter_map do |entry|
+        publication = entry['publication'] || {}
+        Substack.homepage(subdomain: publication['subdomain'], custom_domain: publication['custom_domain']).presence
+      end.uniq
+    end
+
+    # The profile as Stephen sees it, signed in with SUBSTACK_TOKEN, which lists the subscriptions hidden from it too.
+    # Without the token, or if it's expired, as anyone sees it: from the JSON its page preloads, without those
+    def profile_data
+      if ENV['SUBSTACK_TOKEN'].present?
+        begin
+          profile = JSON.parse(get('https://substack.com/api/v1/user/profile/self', cookie: "substack.sid=#{ENV['SUBSTACK_TOKEN']}").body.to_s)
+          return profile if profile['subscriptions'].present?
+        rescue Error, JSON::ParserError => e
+          puts "⚠️  Signed in, no profile (#{e.message.truncate(100)}), so not the hidden subscriptions"
+        end
+      end
+
       # As it is now: Substack's Cloudflare caches the profile page for some minutes, so a newsletter just unsubscribed from
       # would still be there. A query string it hasn't seen gets one from Substack itself
       html = get("https://substack.com/@#{PROFILE}?#{URI.encode_www_form(fresh: Time.now.to_i)}").body.to_s
@@ -58,10 +77,7 @@ module SubstackSurfacer
 
       data = JSON.parse(json)
       data = JSON.parse(data) if data.is_a?(String)
-      (Array(data.dig('profile', 'subscriptions')) + Array(data.dig('profile', 'publicationUsers'))).filter_map do |entry|
-        publication = entry['publication'] || {}
-        Substack.homepage(subdomain: publication['subdomain'], custom_domain: publication['custom_domain']).presence
-      end.uniq
+      data['profile'] || {}
     end
 
     # The newsletter's posts since +since+, newest first
@@ -215,13 +231,15 @@ module SubstackSurfacer
 
     # A GET, following redirects, retrying when rate-limited (as Retry-After says, or backing off) and on timeouts,
     # connection errors and 5xx
-    def get(url, redirects: 5)
+    def get(url, redirects: 5, cookie: nil)
       rate_limited = 0
       transient = 0
       loop do
-        response = client.get(url, nil, headers(url))
+        response = client.get(url, nil, headers(url, cookie))
         if response.status.between?(300, 399) && response.headers['location'] && redirects.positive?
-          return get(URI.join(url, response.headers['location']).to_s, redirects: redirects - 1)
+          location = URI.join(url, response.headers['location'])
+          # The cookie only to the same host
+          return get(location.to_s, redirects: redirects - 1, cookie: (cookie if location.host == URI(url).host))
         elsif response.status == 429 && (rate_limited += 1) < RATE_LIMIT_TRIES
           retry_after = response.headers['retry-after'].to_s
           sleep [retry_after.match?(/\A\d+\z/) ? retry_after.to_i : 2**rate_limited, MAX_WAIT].min
@@ -246,8 +264,8 @@ module SubstackSurfacer
 
     # Host first, as browsers send it. Ruby's Net::HTTP adds it after the rest unless it's given, and Substack's
     # Cloudflare takes that for a bot: Substack then rate-limits nearly every request, and a fetch of seconds takes minutes
-    def headers(url)
-      { 'Host' => URI(url).host, 'User-Agent' => Substack::USER_AGENT }
+    def headers(url, cookie = nil)
+      { 'Host' => URI(url).host, 'User-Agent' => Substack::USER_AGENT, 'Cookie' => cookie }.compact
     end
   end
 end

@@ -32,8 +32,11 @@ jobs:
       uses: $/.github/actions/setup-ruby
 
     # Fails, saving nothing, if most newsletters do: the site then keeps the posts last saved
+    # Signed in as Stephen, it fetches the subscriptions hidden from his profile too
     - name: Fetch the posts
       run: bundle exec rake data:substack_surfacer
+      env:
+        SUBSTACK_TOKEN: ${{ secrets.SUBSTACK_TOKEN }}
 
     - name: Save the posts
       uses: $/.github/actions/fetched
