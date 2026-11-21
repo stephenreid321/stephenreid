@@ -47,7 +47,8 @@ module SubstackSurfacer
       puts "Substack Surfacer: #{posts.size} posts from #{posts.uniq { |p| p['newsletter_url'] }.size} newsletters (#{failed.size} failed)"
     end
 
-    # The homepage of each newsletter the profile subscribes to, from the JSON its page preloads
+    # The homepage of each newsletter the profile subscribes to or helps run, from the JSON its page preloads. Substack
+    # leaves those it helps run (publicationUsers: Metamoderna, say) out of its subscriptions
     def subscriptions
       # As it is now: Substack's Cloudflare caches the profile page for some minutes, so a newsletter just unsubscribed from
       # would still be there. A query string it hasn't seen gets one from Substack itself
@@ -57,24 +58,24 @@ module SubstackSurfacer
 
       data = JSON.parse(json)
       data = JSON.parse(data) if data.is_a?(String)
-      Array(data.dig('profile', 'subscriptions')).filter_map do |subscription|
-        publication = subscription['publication'] || {}
+      (Array(data.dig('profile', 'subscriptions')) + Array(data.dig('profile', 'publicationUsers'))).filter_map do |entry|
+        publication = entry['publication'] || {}
         Substack.homepage(subdomain: publication['subdomain'], custom_domain: publication['custom_domain']).presence
       end.uniq
     end
 
     # The newsletter's posts since +since+, newest first
     def newsletter_posts(url, since)
-      posts = archive(url, since).filter_map do |post|
+      subscribers, hidden_sections = homepage(url)
+      # The archive leaves out the posts of a section that hides them from the newsletter's listings, so those come from
+      # each such section's archive
+      found = archive(url, since) + hidden_sections.flat_map { |section_id| archive(url, since, section_id: section_id) }
+      posts = found.uniq { |post| post['id'] }.sort_by { |post| post['post_date'].to_s }.reverse.filter_map do |post|
         date = parse_time(post['post_date'])
         next unless date && date >= since
 
         post_attributes(url, post, date)
       end
-      return posts if posts.empty?
-
-      # Only for a newsletter with posts to show, as the homepage is heavy
-      subscribers = free_subscribers(url)
       count = subscriber_number(subscribers)
       posts.each do |post|
         post['free_subscribers'] = subscribers
@@ -124,11 +125,12 @@ module SubstackSurfacer
     private
 
     # Newest first, page by page, until a page reaches back before +since+
-    def archive(url, since)
+    # (Or the section's)
+    def archive(url, since, section_id: nil)
       posts = []
       cursor = nil
       loop do
-        query = { sort: 'new', limit: PAGE_SIZE, cursor: cursor }.compact
+        query = { sort: 'new', limit: PAGE_SIZE, section_id: section_id, cursor: cursor }.compact
         json = JSON.parse(get("#{url}/api/v1/archive?#{URI.encode_www_form(query)}").body.to_s)
         page = Array(json['posts'])
         posts.concat(page)
@@ -171,18 +173,28 @@ module SubstackSurfacer
       host.end_with?('.substack.com') ? host.delete_suffix('.substack.com') : host
     end
 
-    # The newsletter's free subscribers as Substack shows them ("4.8K+"), from the JSON its homepage carries; nil if it
-    # doesn't say or won't load
-    def free_subscribers(url)
+    # From the JSON the newsletter's homepage carries: its free subscribers as Substack shows them ("4.8K+", or nil if it
+    # doesn't say), and the ids of its sections that hide their posts from its listings. Nil and none if it won't load
+    def homepage(url)
       html = get(url).body.to_s
-      %w[freeSubscriberCount freeSubscriberCountOrderOfMagnitude].each do |key|
-        match = html.match(/\\?"#{key}\\?":\\?"([^"\\]+)/)
-        return match[1] if match
-      end
-      nil
+      subscribers = %w[freeSubscriberCount freeSubscriberCountOrderOfMagnitude].lazy.filter_map do |key|
+        html.match(/\\?"#{key}\\?":\\?"([^"\\]+)/)&.[](1)
+      end.first
+      [subscribers, hidden_sections(html)]
     rescue StandardError => e
-      puts "⚠️  #{url}: no subscriber count (#{e.message.truncate(100)})"
-      nil
+      puts "⚠️  #{url}: no homepage (#{e.message.truncate(100)})"
+      [nil, []]
+    end
+
+    def hidden_sections(html)
+      json = Nokogiri::HTML(html).at('script#preloads-json')&.text
+      return [] if json.blank?
+
+      data = JSON.parse(json)
+      data = JSON.parse(data) if data.is_a?(String)
+      Array(data.dig('pub', 'sections')).select { |section| section['hide_posts_from_pub_listings'] }.filter_map { |section| section['id'] }
+    rescue JSON::ParserError
+      []
     end
 
     # Each item handed to the block on WORKERS threads, and what the blocks return, in the items' order
