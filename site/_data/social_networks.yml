@@ -5,6 +5,9 @@
 - name: ATProto/Bluesky
   url: https://bsky.app/profile/stephenreid.net
   handle: stephenreid.net
+- name: Blygger
+  url: https://blyg.stephenreid.net/
+  handle: blyg.stephenreid.net
 - name: Telegram
   url: https://t.me/stephenreid321
   handle: stephenreid321

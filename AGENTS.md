@@ -38,7 +38,7 @@ What they share is in composite actions in `.github/actions`, used as `$/.github
 
 ## The blyg
 
-Stephen's blyg, at https://blyg.stephenreid.net/ (Blyg in the nav), is [Blygger Studio](https://github.com/blygger/blygger-studio), the reference client of the [Blygger protocol](https://github.com/blygger/blygger-spec): a Cloudflare Worker of its own, with a D1 database (`blyg-stephenreid`) and an R2 bucket (`blyg-stephenreid-media`), on Stephen's Cloudflare account. It isn't part of the Jekyll site: Stephen writes in its Studio (`/studio`), and it serves its public pages, feed and manifest itself.
+Stephen's blyg, at https://blyg.stephenreid.net/ (Blygger in the footer), is [Blygger Studio](https://github.com/blygger/blygger-studio), the reference client of the [Blygger protocol](https://github.com/blygger/blygger-spec): a Cloudflare Worker of its own, with a D1 database (`blyg-stephenreid`) and an R2 bucket (`blyg-stephenreid-media`), on Stephen's Cloudflare account. It isn't part of the Jekyll site: Stephen writes in its Studio (`/studio`), and it serves its public pages, feed and manifest itself.
 
 It's installed from the release download, not from source, so there's nothing of Blygger's to merge. `cloudflare/blyg/wrangler.jsonc` is its deployment config and `cloudflare/blyg/release.json` the release, with its archive's hash. `rake blyg:download` downloads that release, checks it against the release's `SHA256SUMS` and the pinned hash, and extracts `worker.js`, `migrations/` and `normalize-import-dates.mjs` into `cloudflare/blyg`, where they're ignored. Run Wrangler from `cloudflare/blyg`, where `npx wrangler` is `cloudflare/`'s, pinned (`npm ci` there first), and with `env -u CLOUDFLARE_API_TOKEN`, as above.
 
