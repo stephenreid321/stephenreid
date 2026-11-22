@@ -7,8 +7,7 @@ namespace :data do
 
   desc 'Fetch the Substack notes and posts into data/fetched (needs SUBSTACK_TOKEN and SUBSTACK_PUBLICATION_URL)'
   task substack: :environment do
-    # At once, as each pages through Substack's API a page at a time, and they share nothing but the token
-    [Thread.new { SubstackNote.import }, Thread.new { SubstackPost.import }].each(&:join)
+    Substack.fetch
   end
 
   desc "Fetch the last 90 days' posts of the newsletters Stephen subscribes to on Substack into data/fetched, for /substack"
@@ -23,9 +22,7 @@ namespace :data do
 
   desc 'Fetch the ICONOMI strategies and Metastrategy into data/fetched (needs ICN_API_KEY and ICN_SECRET)'
   task iconomi: :environment do
-    next puts 'ℹ️  ICONOMI fetch skipped: set ICN_API_KEY and ICN_SECRET.' if ENV['ICN_API_KEY'].blank?
-
-    Strategy.fetch
+    Strategy.fetch_if_keys
   end
 
   desc 'Fetch the places on the treasure map into data/fetched'
@@ -42,7 +39,7 @@ end
 namespace :iconomi do
   desc 'Mark the strategies and assets with no status as verified, in data/iconomi/strategies.csv and data/iconomi/assets.csv'
   task verify: :environment do
-    puts "Verified: #{Strategy.verify.join(', ').presence || 'nothing new'}"
+    Strategy.verify
   end
 
   desc 'Rebalance Metastrategy on ICONOMI, after fetching the strategies afresh (needs NUMBER_OF_ASSETS)'
@@ -71,11 +68,6 @@ end
 namespace :bluesky do
   desc "Post to Bluesky the links archived in Readwise in the last week that aren't on Bluesky yet"
   task post: :environment do
-    bluesky = Bluesky.new
-    Readwise.to_post(bluesky.recent_link_urls).each do |r|
-      puts r['source_url']
-      title = r['title'].to_s
-      bluesky.post_link(text: title, url: r['source_url'], title: title, description: r['summary'].to_s.truncate(150), image_url: r['image_url'].presence)
-    end
+    Bluesky.post_from_readwise
   end
 end

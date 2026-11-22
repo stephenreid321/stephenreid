@@ -4,6 +4,16 @@
 class Blyg
   URL = 'https://blyg.stephenreid.net/'.freeze
 
+  # Publishes the links archived in Readwise in the last week since the newest one on the blyg, oldest first, and prints
+  # each as it's published. Only those archived after the newest on it already, so a link never lands above one archived
+  # after it: one missed is left out rather than posted out of order. For rake blyg:post
+  def self.post_from_readwise(blyg = new)
+    Readwise.to_post(recent_link_urls, after_newest: true).each do |r|
+      puts r['source_url']
+      blyg.post_link(url: r['source_url'], title: r['title'].presence || r['source_url'], author: r['author'])
+    end
+  end
+
   def initialize(token: ENV.fetch('BLYG_ACCESS_TOKEN'))
     @http = Faraday.new(url: "#{URL}api/") do |f|
       f.request :json

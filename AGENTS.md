@@ -2,7 +2,7 @@ This is a static site built with Jekyll and served by GitHub Pages. There's no s
 
 - `site/` is Jekyll's source: pages, `_layouts`, `_includes` (the markdown the pages show is in `_includes/markdown`), `_data` (YAML) and the assets, which are served at the root (`/images`, `/javascripts`, `/stylesheets`)
 - `site/_plugins/site.rb` hands the templates their data, adds the `cdn_tag` and `cdn_dependencies` Liquid tags, and makes the pages that have no template of their own: the courses' notes, the `.txt` exports and the redirects (`REDIRECTS`, plus `/books/<slug>` to Goodreads)
-- `lib/` is plain Ruby, loaded by `config/boot.rb` for the rake tasks and the plugin. Templates can't run Ruby, so work anything out there (as `lib/iconomi_pages.rb` does for the ICONOMI pages) and hand the template the result
+- `lib/` is plain Ruby, loaded by `config/boot.rb` for the rake tasks and the plugin. Templates can't run Ruby, so work anything out there (as `lib/iconomi_pages.rb` does for the ICONOMI pages) and hand the template the result. So too the rake tasks (`tasks/`): each is a line calling `lib/` (`Stylesheets.build`, `FrontendIntegrity.update`, `Blyg.post_from_readwise`), where its code is and is tested
 
 `rake site:serve` serves the site at http://localhost:4000, rebuilding as files change; `rake site:build` builds it into `_site`.
 
@@ -61,8 +61,8 @@ and commit `release.json`. `rake blyg:post` publishes to it with its owner API, 
 
 - `test/test_config.rb` boots `lib/` and loads `test/setup`; helpers every test uses are in `test/helpers/test_helpers.rb`, and those the files on a subject share in a module of their own there (`IconomiHelpers`, `ReadwiseHelpers`). A test file is in a folder per area (`test/iconomi/`, `test/substack/`), with a class named for its area and subject (`IconomiStrategyTest`), as they all load into one process
 - Tests reach nothing outside (`test/setup/outside_services.rb`): every Faraday request goes through Faraday's test adapter, which answers only what the test stubbed with `stub_http` and refuses anything else, and ICONOMI's websocket is refused unless the test fakes it with `stub_websocket`. faraday-retry's waits are recorded (`OutsideServices.retry_waits`), not slept. Stub what's outside (the HTTP), never what's under test, and make the fake able to say no: a 429, a 5xx, a refusal
-- `with_fetched` runs a test with `data/fetched` holding what it gives and nothing else, and `fetched_after` returns what was written there; `with_env` sets environment variables for the block; `run_task` runs a rake task
-- `test/lint_test.rb` checks the rules here that no linter does: every CDN file has its hash and templates load them with `cdn_tag`, every version is exact and iframe-resizer is on 4, every disable says why, every file in `data/fetched` is in a cache that `site.yml` restores, this file names every workflow, none has a GitHub schedule, Dandelion's paths are where it reads them, tests use the shared helpers and `refute`, and `script/lint` runs each linter and fails on an offense. `script/lint` runs it, as CI's lint job does, so `rake test` leaves it out; `rake test:lint` runs it alone
+- `with_fetched` runs a test with `data/fetched` holding what it gives and nothing else, and `fetched_after` returns what was written there; `with_env` sets environment variables for the block; `stub_websocket` fakes ICONOMI's websocket. Tests test `lib/`, not the rake tasks that call it
+- `test/lint_test.rb` checks the rules here that no linter does: every CDN file has its hash and templates load them with `cdn_tag`, every version is exact and iframe-resizer is on 4, every disable says why, every file in `data/fetched` is in a cache that `site.yml` restores, this file names every workflow, none has a GitHub schedule, Dandelion's paths are where it reads them, each rake task is a line calling `lib/` and no test runs one, tests use the shared helpers and `refute`, and `script/lint` runs each linter and fails on an offense. `script/lint` runs it, as CI's lint job does, so `rake test` leaves it out; `rake test:lint` runs it alone
 - Make sure a test can fail: break what it checks, in memory rather than in the file, and see it fail (`bundle exec ruby -I test -e "require './test/iconomi/strategy_test'; Strategy.prepend(Module.new { def calculate_score = 0 })"`)
 - Never weaken a test to make it pass: if the code is wrong, fix the code
 
@@ -90,7 +90,7 @@ Markup uses Bootstrap 5: `data-bs-*` attributes, `ms-*`/`me-*`, `text-start`/`te
 
 ## Dependencies
 
-Cooldown: never use a gem or JS package version released less than 7 days ago. This guards against supply-chain attacks on freshly published versions. The rake tasks that install or pin a dependency (and `lib/blygger_release.rb`, for `blyg:download`) check it with `Cooldown` (`lib/cooldown.rb`), so it's set once there. If a version that was just released can't be found, that's why: wait until it's a week old rather than removing or shortening the cooldown.
+Cooldown: never use a gem or JS package version released less than 7 days ago. This guards against supply-chain attacks on freshly published versions. What installs or pins a dependency (`lib/stylesheets.rb`, `lib/frontend_integrity.rb` and `lib/blygger_release.rb`, for the rake tasks) checks it with `Cooldown` (`lib/cooldown.rb`), so it's set once there. If a version that was just released can't be found, that's why: wait until it's a week old rather than removing or shortening the cooldown.
 
 - `rake stylesheets:build` installs Bootstrap and Dart Sass with `npm install --before` set to 7 days ago, and pins Dart Sass's version
 - Gems: the Gemfile's source has `cooldown: 7`, so Bundler (4 or later) enforces it

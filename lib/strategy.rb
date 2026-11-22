@@ -129,6 +129,14 @@ class Strategy
       Asset.reset!
     end
 
+    # Fetches, as fetch does, unless ICN_API_KEY isn't set (as for a fork, or here without the keys): then says so, and
+    # leaves data/fetched as it is. For rake data:iconomi. Not for a rebalance, which fails without them
+    def fetch_if_keys
+      return puts 'ℹ️  ICONOMI fetch skipped: set ICN_API_KEY and ICN_SECRET.' if ENV['ICN_API_KEY'].blank?
+
+      fetch
+    end
+
     # Fetches every strategy on ICONOMI, the assets they hold and Metastrategy's structure into
     # data/fetched/iconomi.json, a few at a time. A strategy that can't be fetched is left out
     def fetch(threads: 8)
@@ -178,12 +186,13 @@ class Strategy
     end
 
     # Marks the strategies and assets that have no status as verified, in data/iconomi/strategies.csv and
-    # data/iconomi/assets.csv, as the old admin page's Verify did. Returns those it marked
+    # data/iconomi/assets.csv, as the old admin page's Verify did. Says which, and returns them
     def verify
       fetched = Fetched.read(:iconomi, {})
       changed = csv_file.verify(fetched.fetch('strategies', []).to_h { |s| [s['ticker'], s['name']] }) +
                 Asset.csv_file.verify(fetched.fetch('assets', {}))
       reset!
+      puts "Verified: #{changed.join(', ').presence || 'nothing new'}"
       changed
     end
 

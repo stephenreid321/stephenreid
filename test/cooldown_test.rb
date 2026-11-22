@@ -19,8 +19,8 @@ class CooldownTest < ActiveSupport::TestCase
   end
 
   test 'every task that installs or pins a dependency keeps to it' do
-    %w[tasks/frontend.rake lib/blygger_release.rb].each { |task| assert_includes File.read(File.join(ROOT, task)), 'Cooldown.check!', task }
-    assert_includes File.read(File.join(ROOT, 'tasks/stylesheets.rake')), "--before=\#{Cooldown.before}"
+    %w[lib/frontend_integrity.rb lib/blygger_release.rb].each { |file| assert_includes File.read(File.join(ROOT, file)), 'Cooldown.check!', file }
+    assert_includes File.read(File.join(ROOT, 'lib/stylesheets.rb')), "--before=\#{Cooldown.before}"
     assert_includes File.read(File.join(ROOT, 'Gemfile')), "cooldown: #{Cooldown::DAYS}"
   end
 end

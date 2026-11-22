@@ -1,7 +1,5 @@
 # Helpers more than one test file uses, included in every test (test/test_config.rb). A helper only one file uses
 # stays in that file
-require 'rake'
-
 module TestHelpers
   # Answers requests with these stubs (Faraday's test adapter: stub.get(url) { |env| [status, headers, body] }). Any
   # request they don't match is refused. A stub answers as often as it's matched
@@ -50,22 +48,6 @@ module TestHelpers
       block.call
       fetched
     end
-  end
-
-  # Runs a rake task (tasks/*.rake) as `rake name` would, and returns what it printed
-  def run_task(name)
-    load_tasks
-    task = Rake::Task[name]
-    task.all_prerequisite_tasks.each(&:reenable)
-    task.reenable
-    capture_io { task.invoke }.first
-  end
-
-  def load_tasks
-    return if Rake::Task.task_defined?('data:fetch')
-
-    Rake.application = Rake::Application.new
-    load File.join(ROOT, 'Rakefile')
   end
 
   # A file in test/fixtures

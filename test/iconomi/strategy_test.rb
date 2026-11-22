@@ -185,13 +185,29 @@ class IconomiStrategyTest < ActiveSupport::TestCase
     strategies_csv = curated_csv('iconomi/strategies', %w[ticker name status], 'OLD' => { 'name' => 'Old', 'status' => 'excluded' })
     assets_csv = curated_csv('iconomi/assets', %w[ticker name status color])
     fetched = { 'strategies' => [{ 'ticker' => 'OLD', 'name' => 'Old' }, { 'ticker' => 'NEW', 'name' => 'New' }], 'assets' => { 'BTC' => 'Bitcoin' } }
-    changed = nil
+    out = nil
     with_fetched(iconomi: fetched) do
-      Strategy.stub(:csv_file, strategies_csv) { Asset.stub(:csv_file, assets_csv) { changed = Strategy.verify } }
+      Strategy.stub(:csv_file, strategies_csv) { Asset.stub(:csv_file, assets_csv) { out = capture_io { Strategy.verify }.first } }
     end
 
-    assert_equal %w[NEW BTC], changed
+    assert_equal "Verified: NEW, BTC\n", out
     assert_equal({ 'OLD' => 'excluded', 'NEW' => 'verified' }, strategies_csv.rows.transform_values { |r| r['status'] })
     assert_equal({ 'ticker' => 'BTC', 'name' => 'Bitcoin', 'status' => 'verified', 'color' => nil }, assets_csv.rows['BTC'])
+  end
+
+  test 'says when there was nothing new to verify' do
+    with_iconomi([strategy_attributes('OLD')]) { assert_equal "Verified: nothing new\n", capture_io { Strategy.verify }.first }
+  end
+
+  test "skips the fetch without ICONOMI's keys, saying so, and leaves what was fetched" do
+    fetched = fetched_after(iconomi: { 'strategies' => [] }) do
+      with_env('ICN_API_KEY' => nil) { assert_match(/ICONOMI fetch skipped: set ICN_API_KEY/, capture_io { Strategy.fetch_if_keys }.first) }
+    end
+
+    assert_equal({ 'iconomi' => { 'strategies' => [] } }, fetched)
+    # With them, it fetches: here, asking ICONOMI, which nothing's stubbed to answer
+    with_env('ICN_API_KEY' => 'key', 'ICN_SECRET' => 'secret') do
+      assert_raises(Faraday::Adapter::Test::Stubs::NotFound) { Strategy.fetch_if_keys }
+    end
   end
 end

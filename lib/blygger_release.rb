@@ -42,6 +42,16 @@ module BlyggerRelease
       version
     end
 
+    # What to do once this version is downloaded
+    def next_steps(version)
+      <<~TEXT
+        Blygger Studio #{version} is in cloudflare/blyg. Read the changelog's Migrations: lines since the last release, then from cloudflare/blyg:
+          env -u CLOUDFLARE_API_TOKEN npx wrangler d1 migrations apply DB --remote
+          env -u CLOUDFLARE_API_TOKEN node normalize-import-dates.mjs --remote
+          env -u CLOUDFLARE_API_TOKEN npx wrangler deploy
+      TEXT
+    end
+
     private
 
     # GitHub's answer, following its redirects to where it keeps the downloads

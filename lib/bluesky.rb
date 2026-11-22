@@ -4,6 +4,16 @@ class Bluesky
   MAX_IMAGE_BYTES = 1_000_000 # Bluesky's limit for an image
   MAX_TEXT_LENGTH = 300 # Bluesky's limit for a post, in characters
 
+  # Posts the links archived in Readwise in the last week that aren't on Bluesky yet, oldest first, each as its title
+  # with a card for the link, and prints each as it's posted. For rake bluesky:post
+  def self.post_from_readwise(bluesky = new)
+    Readwise.to_post(bluesky.recent_link_urls).each do |r|
+      puts r['source_url']
+      title = r['title'].to_s
+      bluesky.post_link(text: title, url: r['source_url'], title: title, description: r['summary'].to_s.truncate(150), image_url: r['image_url'].presence)
+    end
+  end
+
   def initialize(identifier: ENV['BLUESKY_EMAIL'], password: ENV['BLUESKY_PASSWORD'])
     @http = Faraday.new(url: API) do |f|
       f.request :json

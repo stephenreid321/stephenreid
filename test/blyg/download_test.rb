@@ -1,6 +1,6 @@
 require 'test_config'
 
-# rake blyg:download (lib/blygger_release.rb): the Blygger Studio release the blyg runs, downloaded from GitHub and
+# lib/blygger_release.rb (rake blyg:download): the Blygger Studio release the blyg runs, downloaded from GitHub and
 # checked before it's deployed
 class BlygDownloadTest < ActiveSupport::TestCase
   API = 'https://api.github.com/repos/blygger/blygger-studio/releases/tags'.freeze
@@ -47,20 +47,19 @@ class BlygDownloadTest < ActiveSupport::TestCase
   end
 
   def download(version: nil)
-    with_env('VERSION' => version) { run_task('blyg:download') }
+    capture_io { BlyggerRelease.download(version: version) }
   end
 
   test 'downloads the pinned release, checks it, and extracts its Worker, the old migrations replaced, for wrangler deploy' do
     body = archive('0.59.0')
     stub_github('0.59.0', body)
     in_blyg_dir('version' => '0.59.0', 'sha256' => sha256(body)) do |dir|
-      out = download
+      assert_equal '0.59.0', BlyggerRelease.download
 
       assert_equal '// Blygger 0.59.0', File.read(File.join(dir, 'worker.js'))
       assert_equal %w[0002_new.sql], Dir.children(File.join(dir, 'migrations'))
       BlyggerRelease::FILES.each { |name| assert_path_exists File.join(dir, name) }
       assert_equal({ 'version' => '0.59.0', 'sha256' => sha256(body) }, JSON.parse(File.read(File.join(dir, 'release.json'))))
-      assert_match(%r{\ABlygger Studio 0\.59\.0 is in cloudflare/blyg.*wrangler d1 migrations apply.*wrangler deploy\n\z}m, out)
     end
   end
 
@@ -116,5 +115,13 @@ class BlygDownloadTest < ActiveSupport::TestCase
     stub_http { |stub| stub.get("#{API}/v9.9.9") { [404, {}, '{}'] } }
 
     assert_refused(%r{releases/tags/v9\.9\.9: 404}, { 'version' => '9.9.9' })
+  end
+
+  test 'says what to do once a release is downloaded: migrate, normalize the dates, and deploy, from cloudflare/blyg' do
+    steps = BlyggerRelease.next_steps('0.60.0')
+
+    assert_match(%r{\ABlygger Studio 0\.60\.0 is in cloudflare/blyg\. Read the changelog's Migrations: lines}, steps)
+    assert_equal ['wrangler d1 migrations apply DB --remote', 'node normalize-import-dates.mjs --remote', 'wrangler deploy'],
+                 steps.scan(/^  env -u CLOUDFLARE_API_TOKEN (?:npx )?(.+)$/).flatten
   end
 end

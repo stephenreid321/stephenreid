@@ -19,6 +19,12 @@ module Substack
   }.freeze
 
   class << self
+    # Fetches the notes and the posts into data/fetched, at once, as each pages through Substack's API a page at a
+    # time, and they share nothing but the token. For rake data:substack
+    def fetch
+      [Thread.new { SubstackNote.import }, Thread.new { SubstackPost.import }].each(&:join)
+    end
+
     # A connection that retries as RATE_LIMIT_RETRY and TRANSIENT_RETRY say. Without Faraday's own User-Agent, so each
     # request's headers come in the order Http.browser_headers gives
     def connection(timeout: nil)

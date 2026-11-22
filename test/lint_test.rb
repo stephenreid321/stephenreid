@@ -40,6 +40,13 @@ class LintTest < ActiveSupport::TestCase
     nil
   end
 
+  # The tasks in a rake file whose body is more than one line: a task calls lib/, where its code is and is tested
+  def long_tasks(rakefile)
+    rakefile.scan(/^( *)task (\S+?):?\s[^\n]*\bdo\n(.*?)^\1end$/m).filter_map do |_indent, name, body|
+      name if body.lines.count { |line| line.strip.present? && !line.strip.start_with?('#') } > 1
+    end
+  end
+
   # Runs script/lint on these files (but not lint_test, which is running it), and returns what it printed and whether
   # it passed
   def lint(*files)
@@ -126,7 +133,7 @@ class LintTest < ActiveSupport::TestCase
         assert_match EXACT, version, "#{manifest}: pin #{name} to an exact version"
       end
     end
-    pinned = Dir[File.join(ROOT, 'tasks/*.rake')].flat_map { |f| File.read(f, encoding: 'UTF-8').scan(%r{['"]((?:@[\w.-]+/)?[\w.-]+@[^'"\s]+)['"]}).flatten }
+    pinned = Dir[File.join(ROOT, '{tasks/*.rake,lib/*.rb}')].flat_map { |f| File.read(f, encoding: 'UTF-8').scan(%r{['"]((?:@[\w.-]+/)?[\w.-]+@[^'"\s]+)['"]}).flatten }
 
     pinned.reject { |package| package.include?('#{') }.each do |package|
       assert_match EXACT, package.rpartition('@').last, "pin #{package} to an exact version"
@@ -161,12 +168,24 @@ class LintTest < ActiveSupport::TestCase
 
     assert_equal helpers.uniq, helpers, 'Define each helper once, in test/helpers'
     by_hand = { /Faraday::Adapter::Test::Stubs\.new|OutsideServices\.stubs\s*=/ => 'stub_http', /\bENV\[[^\]]+\]\s*=[^=~]/ => 'with_env',
-                /Fetched\.stub\(:(read|write)/ => 'with_fetched', /Rake::Task\[/ => 'run_task' }
+                /Fetched\.stub\(:(read|write)/ => 'with_fetched' }
     Dir[File.join(ROOT, 'test/**/*_test.rb')].each do |path|
       body = File.read(path, encoding: 'UTF-8')
 
       helpers.each { |helper| refute_match(/^\s+def #{Regexp.escape(helper)}\b/, body, "#{path} defines #{helper}, which test/helpers has") }
       by_hand.each { |pattern, helper| refute_match pattern, body, "#{path}: use #{helper}" }
+    end
+  end
+
+  test 'each rake task is a line calling lib/, where its code is, and tests test lib/ rather than run the tasks' do
+    assert_equal %w[post], long_tasks("namespace :x do\n  task post: :environment do\n    x = 1\n    puts x\n  end\nend\n")
+    assert_empty long_tasks("  task post: :environment do\n    # Why\n    Blyg.post_from_readwise\n  end\n")
+
+    Dir[File.join(ROOT, 'tasks/*.rake')].each do |path|
+      assert_empty long_tasks(File.read(path, encoding: 'UTF-8')), "#{path}: move each task's code into lib/, and test it there"
+    end
+    Dir[File.join(ROOT, 'test/**/*_test.rb')].each do |path|
+      refute_match(/Rake::Task|Rake\.application|run_task/, File.read(path, encoding: 'UTF-8'), "#{path}: test the lib/ code the task calls") unless path == File.expand_path(__FILE__)
     end
   end
 

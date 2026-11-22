@@ -1,7 +1,7 @@
 require 'test_config'
 require 'helpers/readwise_helpers'
 
-# rake bluesky:post and blyg:post, which readwise.yml runs
+# Bluesky.post_from_readwise and Blyg.post_from_readwise, which readwise.yml runs (rake bluesky:post, blyg:post)
 class ReadwisePostingTest < ActiveSupport::TestCase
   include ReadwiseHelpers
 
@@ -30,7 +30,7 @@ class ReadwisePostingTest < ActiveSupport::TestCase
       end
     end
 
-    out = with_tokens { run_task('bluesky:post') }
+    out = with_tokens { capture_io { Bluesky.post_from_readwise }.first }
 
     assert_equal "https://a.com/1\nhttps://a.com/3\n", out
     assert_equal ['Bearer jwt'], records.map(&:first).uniq
@@ -74,7 +74,7 @@ class ReadwisePostingTest < ActiveSupport::TestCase
       stub.post("#{BLYG}api/items/i1/publish") { |env| json('published' => JSON.parse(env.request_body)) }
     end
 
-    out = with_tokens { run_task('blyg:post') }
+    out = with_tokens { capture_io { Blyg.post_from_readwise }.first }
 
     # Not 1, archived before 2, which is on the blyg already
     assert_equal "https://a.com/3\n", out
@@ -84,7 +84,7 @@ class ReadwisePostingTest < ActiveSupport::TestCase
   test "fails when the blyg's feed won't load, rather than posting what may be on it already" do
     stub_readwise(%w[https://a.com/1]) { |stub| stub.get("#{BLYG}feed.xml") { [503, {}, ''] } }
 
-    error = assert_raises(RuntimeError) { with_tokens { run_task('blyg:post') } }
+    error = assert_raises(RuntimeError) { with_tokens { capture_io { Blyg.post_from_readwise }.first } }
 
     assert_match(/feed.xml: 503/, error.message)
   end
