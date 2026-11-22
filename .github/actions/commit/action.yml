@@ -20,7 +20,7 @@ runs:
   - name: Commit, push and run the workflow
     shell: bash
     run: |
-      # shellcheck disable=SC2086
+      # shellcheck disable=SC2086 # PATHS is the files, separated by spaces, split into git add's arguments
       git add $PATHS
       git diff --cached --quiet && exit 0
       git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \

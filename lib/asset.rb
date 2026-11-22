@@ -1,6 +1,12 @@
 # A coin on ICONOMI. Its name comes from the strategies' holdings (data/fetched/iconomi.json); its status and colour
 # from data/iconomi/assets.csv, and its multiplier from data/iconomi/multipliers.csv, which you edit by hand
+require_relative 'curated_csv'
+
 class Asset
+  include Curated
+
+  CSV_COLUMNS = %w[ticker name status color].freeze
+
   attr_reader :ticker, :name, :status, :multiplier, :color
 
   def initialize(ticker:, name: nil, status: nil, multiplier: nil, color: nil)
@@ -20,19 +26,7 @@ class Asset
     color ? "##{color}" : virtual_color
   end
 
-  def verified?
-    status == 'verified'
-  end
-
-  def self.statuses
-    ['', 'verified', 'excluded']
-  end
-
   class << self
-    def csv_file
-      CuratedCsv.new('iconomi/assets', %w[ticker name status color])
-    end
-
     # The assets Metastrategy weights up or down: a row each, with its multiplier
     def multipliers_file
       CuratedCsv.new('iconomi/multipliers', %w[ticker name multiplier])
@@ -54,10 +48,6 @@ class Asset
 
     def find_by_ticker(ticker)
       all[ticker] || new(ticker: ticker)
-    end
-
-    def reset!
-      @all = nil
     end
   end
 end

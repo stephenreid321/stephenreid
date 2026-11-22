@@ -16,6 +16,16 @@ module Readwise
         .each { |r| r['source_url'] = clean_url(r['source_url']) }
   end
 
+  # Of the last 50 links archived in the last week, oldest first, so the newest is posted last and sits on top, those
+  # not among posted_urls (as clean_url cleans them, as those posted before it cleaned them still have their trackers),
+  # each once. With after_newest, only those archived after the newest of them that has been posted
+  def self.to_post(posted_urls, after_newest: false)
+    posted = posted_urls.map { |url| clean_url(url) }
+    archived = archived_since(7.days.ago).last(50)
+    newest = archived.rindex { |r| posted.include?(r['source_url']) } if after_newest
+    archived.drop(newest ? newest + 1 : 0).reject { |r| posted.include?(r['source_url']) }.uniq { |r| r['source_url'] }
+  end
+
   # A link as it's posted: without its tracking parameters, and YouTube's short links made long. Compare links already
   # posted through it too, as those posted before it cleaned them still have theirs
   def self.clean_url(url)

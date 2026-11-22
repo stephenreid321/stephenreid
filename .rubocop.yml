@@ -1,3 +1,10 @@
+plugins:
+  - rubocop-minitest
+
+# A test checks one behaviour, which may take several assertions to pin down: a count limits the assertions, not that
+Minitest/MultipleAssertions:
+  Enabled: false
+
 AllCops:
   NewCops: enable
   SuggestExtensions: false

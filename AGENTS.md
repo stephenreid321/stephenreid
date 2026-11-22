@@ -6,6 +6,8 @@ This is a static site built with Jekyll and served by GitHub Pages. There's no s
 
 `rake site:serve` serves the site at http://localhost:4000, rebuilding as files change; `rake site:build` builds it into `_site`.
 
+What fetching shares is in `lib/`, set once: `Http` (a browser's headers, Host first, and its user agent), `Substack` (the publication's API, any newsletter's archive and pages, and one connection that retries as Substack needs), `Iconomi` (signed, throttled requests, retried), `Readwise.to_post` (what's to post to Bluesky and the blyg) and `Cooldown` (below). Retries are `faraday-retry`'s, configured where each client is, not hand-written loops.
+
 ## Data
 
 - `data/*.csv` is the site's own data, committed: books, films, courses and speaking engagements. So is `data/iconomi/`, what's been decided by hand about ICONOMI's strategies and assets (`strategies.csv`: status; `assets.csv`: status, colour; `multipliers.csv`: the assets Metastrategy weights up or down, and by how much)
@@ -18,7 +20,7 @@ This is a static site built with Jekyll and served by GitHub Pages. There's no s
 
 ## Workflows
 
-Each is named in the Actions tab for what it does: Build and deploy the site (`site.yml`), Fetch from ICONOMI (`iconomi-fetch.yml`), Fetch the places and the courses' notes (`public-fetch.yml`), Rebalance Metastrategy (`iconomi-rebalance.yml`), Verify the new ICONOMI strategies and assets (`iconomi-verify.yml`), Post the Readwise links to Bluesky and the blyg (`readwise.yml`), Lint (`lint.yml`), Fetch from Substack (`substack.yml`), Surface the newsletters' posts from Substack (`substack-surfacer.yml`) and Export from Goodreads (`goodreads.yml`).
+Each is named in the Actions tab for what it does: Build and deploy the site (`site.yml`), Fetch from ICONOMI (`iconomi-fetch.yml`), Fetch the places and the courses' notes (`public-fetch.yml`), Rebalance Metastrategy (`iconomi-rebalance.yml`), Verify the new ICONOMI strategies and assets (`iconomi-verify.yml`), Post the Readwise links to Bluesky and the blyg (`readwise.yml`), Lint (`lint.yml`), Test (`test.yml`), Fetch from Substack (`substack.yml`), Surface the newsletters' posts from Substack (`substack-surfacer.yml`) and Export from Goodreads (`goodreads.yml`).
 
 What they share is in composite actions in `.github/actions`, used as `$/.github/actions/<name>`, so it's set once:
 
@@ -34,13 +36,14 @@ What they share is in composite actions in `.github/actions`, used as `$/.github
 - `iconomi-verify.yml` marks strategies and assets with no status as verified and commits that, as the old admin page's Verify did, then runs `iconomi-fetch.yml`, which closes the issue and rebuilds the site (by hand)
 - `readwise.yml` posts the links archived in Readwise in the last week to Bluesky (`rake bluesky:post`), skipping those already there, and publishes them to the blyg (`rake blyg:post`), only those archived after the newest already on it, so none lands above a later one. Each is a job of its own (every three hours)
 - `lint.yml` runs the linters (`script/lint`) on each push and pull request. It doesn't hold up a deploy: `site.yml` builds and deploys whatever it says
+- `test.yml` runs the tests (`rake test`) on each push and pull request. Nor does it hold up a deploy
 - None has a GitHub schedule (`on: schedule`), which GitHub treats as best-effort: when it's busy it starts runs hours late or not at all. A Cloudflare Worker (`cloudflare/worker.js`, its cron in `cloudflare/wrangler.jsonc`) starts each scheduled run on time with `workflow_dispatch`, by the clock in Stockholm: `substack.yml`, `substack-surfacer.yml`, `readwise.yml`, `iconomi-fetch.yml` and `public-fetch.yml` every three hours, `goodreads.yml` daily at 06:00, and `iconomi-rebalance.yml` on Fridays at 17:00 (with `scheduled`, so only while `ICONOMI_REBALANCE` is `true`). It wakes on the hour, and all that's due then starts together. To change when something runs, change `RUNS` in `worker.js` and deploy it from `cloudflare/`: `npm ci`, then `npx wrangler deploy`. It's on Stephen's own Cloudflare account (`account_id` in `wrangler.jsonc`), so Wrangler must be signed in to that (`npx wrangler login`; `npx wrangler whoami` says who it's signed in as). A `CLOUDFLARE_API_TOKEN` in the environment wins over that login, and the one in Stephen's shell is for another account, so its deploys fail with "Authentication error": deploy with `env -u CLOUDFLARE_API_TOKEN npx wrangler deploy`. Its `GITHUB_TOKEN` secret (`npx wrangler secret put GITHUB_TOKEN`) is a fine-grained token for this repo with Actions: Read and write. When it expires, nothing scheduled runs and the Worker's invocations fail in Cloudflare's dashboard: make a new one and put it in the secret
 
 ## The blyg
 
 Stephen's blyg, at https://blyg.stephenreid.net/ (Blygger in the footer), is [Blygger Studio](https://github.com/blygger/blygger-studio), the reference client of the [Blygger protocol](https://github.com/blygger/blygger-spec): a Cloudflare Worker of its own, with a D1 database (`blyg-stephenreid`) and an R2 bucket (`blyg-stephenreid-media`), on Stephen's Cloudflare account. It isn't part of the Jekyll site: Stephen writes in its Studio (`/studio`), and it serves its public pages, feed and manifest itself.
 
-It's installed from the release download, not from source, so there's nothing of Blygger's to merge. `cloudflare/blyg/wrangler.jsonc` is its deployment config and `cloudflare/blyg/release.json` the release, with its archive's hash. `rake blyg:download` downloads that release, checks it against the release's `SHA256SUMS` and the pinned hash, and extracts `worker.js`, `migrations/` and `normalize-import-dates.mjs` into `cloudflare/blyg`, where they're ignored. Run Wrangler from `cloudflare/blyg`, where `npx wrangler` is `cloudflare/`'s, pinned (`npm ci` there first), and with `env -u CLOUDFLARE_API_TOKEN`, as above.
+It's installed from the release download, not from source, so there's nothing of Blygger's to merge. `cloudflare/blyg/wrangler.jsonc` is its deployment config and `cloudflare/blyg/release.json` the release, with its archive's hash. `rake blyg:download` (`lib/blygger_release.rb`) downloads that release, checks it against the release's `SHA256SUMS` and the pinned hash, and extracts `worker.js`, `migrations/` and `normalize-import-dates.mjs` into `cloudflare/blyg`, where they're ignored. Run Wrangler from `cloudflare/blyg`, where `npx wrangler` is `cloudflare/`'s, pinned (`npm ci` there first), and with `env -u CLOUDFLARE_API_TOKEN`, as above.
 
 To upgrade it, to the newest release at least 7 days old (they come out several times a day): read the changelog's **Migrations:** lines since ours, `rake blyg:download VERSION=x.y.z` (which refuses a release under a week old and pins the new hash), then from `cloudflare/blyg`:
 
@@ -52,17 +55,30 @@ env -u CLOUDFLARE_API_TOKEN npx wrangler deploy
 
 and commit `release.json`. `rake blyg:post` publishes to it with its owner API, as `BLYG_ACCESS_TOKEN` (`lib/blyg.rb`), a token made in its Studio under More → Client access: REST API, with `owner:draft` and `owner:publish`. It expires after 30 days, and then `readwise.yml`'s blyg job fails: make a new one and put it in the secret (`gh secret set BLYG_ACCESS_TOKEN`) and `.env`. The Worker's secrets are `OWNER_PASSWORD`, the Studio's password, and `COOKIE_SECRET`, at least 32 random bytes (`env -u CLOUDFLARE_API_TOKEN npx wrangler secret put <name>`); AI keys are optional (see Blygger's README)
 
+## Tests
+
+`rake test` runs them all: the Ruby tests (`test/**/*_test.rb`, Minitest, in one process, in about a second) and the Cloudflare Worker's (`cloudflare/*.test.js`, Node's own test runner). `rake test:<path>` runs one file, by its path in `test/` without `_test.rb` (`rake test:iconomi/strategy`); `bundle exec ruby -I test test/iconomi/strategy_test.rb -n /fee/` runs the tests in it whose names match.
+
+- `test/test_config.rb` boots `lib/` and loads `test/setup`; helpers every test uses are in `test/helpers/test_helpers.rb`, and those the files on a subject share in a module of their own there (`IconomiHelpers`, `ReadwiseHelpers`). A test file is in a folder per area (`test/iconomi/`, `test/substack/`), with a class named for its area and subject (`IconomiStrategyTest`), as they all load into one process
+- Tests reach nothing outside (`test/setup/outside_services.rb`): every Faraday request goes through Faraday's test adapter, which answers only what the test stubbed with `stub_http` and refuses anything else, and ICONOMI's websocket is refused unless the test fakes it with `stub_websocket`. faraday-retry's waits are recorded (`OutsideServices.retry_waits`), not slept. Stub what's outside (the HTTP), never what's under test, and make the fake able to say no: a 429, a 5xx, a refusal
+- `with_fetched` runs a test with `data/fetched` holding what it gives and nothing else, and `fetched_after` returns what was written there; `with_env` sets environment variables for the block; `run_task` runs a rake task
+- `test/lint_test.rb` checks the rules here that no linter does: every CDN file has its hash and templates load them with `cdn_tag`, every version is exact and iframe-resizer is on 4, every disable says why, every file in `data/fetched` is in a cache that `site.yml` restores, this file names every workflow, none has a GitHub schedule, Dandelion's paths are where it reads them, tests use the shared helpers and `refute`, and `script/lint` runs each linter and fails on an offense. `script/lint` runs it, as CI's lint job does, so `rake test` leaves it out; `rake test:lint` runs it alone
+- Make sure a test can fail: break what it checks, in memory rather than in the file, and see it fail (`bundle exec ruby -I test -e "require './test/iconomi/strategy_test'; Strategy.prepend(Module.new { def calculate_score = 0 })"`)
+- Never weaken a test to make it pass: if the code is wrong, fix the code
+
 ## Committing
 
 Commit only the changes you made: stage your files by name rather than with `git add -A` or `git commit -a`.
 
-`script/lint` runs our linters, RuboCop, ESLint and zizmor, each on the files of its kind. CI's lint job (`.github/workflows/lint.yml`) runs it too, so it is the one place their commands and flags are set: change a linter's flags or add a linter there, not in the workflow. Run it on the files you added or changed, and fix what it reports:
+`script/lint` runs our linters, each on the files of its kind: RuboCop (with rubocop-minitest), ESLint, Stylelint on the Sass (`stylelint.config.mjs`: only rules that catch mistakes, and no named colours outside the themes), zizmor and actionlint (`.github/actionlint.yaml`, with ShellCheck on each `run:` block) on `.github`, ShellCheck on `.githooks`, and `test/lint_test.rb`, the rules here that no linter checks, which runs whenever a file it reads changes. CI's lint job (`.github/workflows/lint.yml`) runs it too, so it is the one place their commands and flags are set: change a linter's flags or add a linter there, not in the workflow. Run it on the files you added or changed, and fix what it reports, and run the tests (`rake test`):
 
 ```bash
 script/lint <files>
 ```
 
-If a linter's config is among them (`.rubocop.yml`, `eslint.config.mjs`, `package.json`), it runs that linter on everything, as CI does; `script/lint --all` runs them all, and `--only <linter>` just one. Run `npm ci` first if `node_modules` is missing, and install uv (https://docs.astral.sh/uv/) if `uvx` is.
+If a linter's config is among them (`.rubocop.yml`, `eslint.config.mjs`, `stylelint.config.mjs`, `.github/actionlint.yaml`, `package.json`), it runs that linter on everything, as CI does; `script/lint --all` runs them all, and `--only <linter>` just one. Run `npm ci` first if `node_modules` is missing, and install uv (https://docs.astral.sh/uv/) if `uvx` is: zizmor, actionlint and ShellCheck run with it, each at the version `script/lint` pins.
+
+Disable a check only where its rule genuinely doesn't apply, and say why after the rule, as `test/lint_test.rb` checks: `# rubocop:disable Cop/Name -- reason`, `// eslint-disable-next-line rule -- reason`, `/* stylelint-disable-next-line rule -- reason */`, `# zizmor: ignore[audit] -- reason`, `# shellcheck disable=SC2086 # reason`. actionlint has no disable comments: add an `ignore` pattern to `.github/actionlint.yaml`, saying why.
 
 The pre-commit hook (`.githooks/pre-commit`) runs `script/lint --staged`, which lints the staged version of each staged file. Git runs it once `core.hooksPath` is `.githooks`: run `git config core.hooksPath .githooks` once in each checkout. Never skip it with `--no-verify`.
 
@@ -74,7 +90,7 @@ Markup uses Bootstrap 5: `data-bs-*` attributes, `ms-*`/`me-*`, `text-start`/`te
 
 ## Dependencies
 
-Cooldown: never use a gem or JS package version released less than 7 days ago. This guards against supply-chain attacks on freshly published versions. If a version that was just released can't be found, that's why: wait until it's a week old rather than removing or shortening the cooldown.
+Cooldown: never use a gem or JS package version released less than 7 days ago. This guards against supply-chain attacks on freshly published versions. The rake tasks that install or pin a dependency (and `lib/blygger_release.rb`, for `blyg:download`) check it with `Cooldown` (`lib/cooldown.rb`), so it's set once there. If a version that was just released can't be found, that's why: wait until it's a week old rather than removing or shortening the cooldown.
 
 - `rake stylesheets:build` installs Bootstrap and Dart Sass with `npm install --before` set to 7 days ago, and pins Dart Sass's version
 - Gems: the Gemfile's source has `cooldown: 7`, so Bundler (4 or later) enforces it
@@ -93,7 +109,7 @@ Cooldown: never use a gem or JS package version released less than 7 days ago. T
   ./bin/Runner.Listener --version
   ```
 - `cloudflare/package.json` is only Wrangler, pinned, installed from its `package-lock.json` (`npm ci`) like the root's. Its install scripts (esbuild's, workerd's) are left unapproved: `wrangler deploy` doesn't need them
-- The root `package.json` is only linters (ESLint, `eslint.config.mjs`). It installs from `package-lock.json` (`npm ci`): pin exact versions, and when adding or bumping one run `npm install --before=<the date a week ago>` so its own dependencies are a week old too
+- The root `package.json` is only linters (ESLint, `eslint.config.mjs`; Stylelint and postcss-scss, `stylelint.config.mjs`). It installs from `package-lock.json` (`npm ci`): pin exact versions, and when adding or bumping one run `npm install --before=<the date a week ago>` so its own dependencies are a week old too
 - The packages the site loads from jsDelivr have their versions in `config/frontend_package.json`, and only there: nothing installs them, `config/frontend_dependencies.rb` reads them. `FRONTEND_DEPENDENCIES` there lists the packages every page loads and their files; a page that needs one of its own loads it with `{% cdn_tag 'package', 'path/file.js' %}`. Load a file the package ships: jsDelivr minifies a `.min` file a package lacks on the fly, and that output can change
 - `cdn_tag` (`site/_plugins/site.rb`) writes the file's hash from `config/frontend_integrity.json` as its `integrity` attribute, so the browser refuses a file that's changed since we chose it. After adding or bumping a CDN file, run `rake frontend:integrity`, which hashes each file that has no hash yet and drops those nothing loads any more. It keeps the hashes it has rather than trusting the CDN again, and refuses a version of an npm package released less than 7 days ago
 - iframe-resizer stays on 4 (4.4.5 is MIT): 5 and later are GPL-3.0, or a paid licence

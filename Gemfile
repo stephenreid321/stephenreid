@@ -10,6 +10,11 @@ gem 'jekyll', '~> 4.4'
 
 # Linting
 gem 'rubocop', require: false
+gem 'rubocop-minitest', require: false
+
+# Tests
+gem 'minitest', require: false
+gem 'minitest-mock', require: false
 
 # Basics
 gem 'chroma'
@@ -18,5 +23,6 @@ gem 'reverse_markdown'
 
 # Interacting with other websites
 gem 'faraday'
+gem 'faraday-retry'
 gem 'nokogiri'
 gem 'websocket-client-simple'

@@ -1,60 +1,117 @@
+# What fetching from Substack shares: the publication's API (SUBSTACK_PUBLICATION_URL, signed in with SUBSTACK_TOKEN)
+# for its notes and posts, and any newsletter's archive and pages, for SubstackSurfacer
 module Substack
-  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'.freeze
   CDN_IMAGE_HOST = 'substackcdn.com'.freeze
   GALLERY_IMAGE_WIDTH = 480
+  # Substack's archive API refuses a limit over 25
+  ARCHIVE_PAGE_SIZE = 25
+
+  # A 429, tried again up to 7 more times, after as long as its Retry-After says (or 2, 4, 8... seconds), up to a minute
+  RATE_LIMIT_RETRY = {
+    max: 7, interval: 2, backoff_factor: 2, max_interval: 60,
+    retry_statuses: [429], exceptions: [Faraday::RetriableResponse],
+    header_parser_block: ->(retry_after) { retry_after.to_i.clamp(0, 60) if retry_after.to_s.match?(/\A\d+\z/) }
+  }.freeze
+  # A timeout, a dropped connection or an error on Substack's side, tried again twice more, after 2 then 4 seconds
+  TRANSIENT_RETRY = {
+    max: 2, interval: 2, backoff_factor: 2,
+    retry_statuses: [500, 502, 503, 504], exceptions: [Faraday::ConnectionFailed, Faraday::TimeoutError, Faraday::RetriableResponse]
+  }.freeze
 
   class << self
-    # Resize via Substack CDN (WebP, width-limited). Unwraps existing CDN URLs first.
-    def gallery_image_url(url, width: GALLERY_IMAGE_WIDTH)
-      source = unwrap_cdn_image_url(url.to_s.strip)
-      return source if source.blank?
-      return source unless source.start_with?('http://', 'https://')
-
-      encoded = URI.encode_www_form_component(source)
-      "https://#{CDN_IMAGE_HOST}/image/fetch/w_#{width.to_i},c_limit,f_webp,q_auto:good/#{encoded}"
-    end
-
-    def unwrap_cdn_image_url(url)
-      return url unless url.include?("#{CDN_IMAGE_HOST}/image/fetch")
-
-      if url =~ /(https%3A%2F%2F.+)\z/
-        URI.decode_www_form_component(Regexp.last_match(1))
-      else
-        url
-      end
+    # A connection that retries as RATE_LIMIT_RETRY and TRANSIENT_RETRY say. Without Faraday's own User-Agent, so each
+    # request's headers come in the order Http.browser_headers gives
+    def connection(timeout: nil)
+      Faraday.new(request: { timeout: timeout }.compact) do |f|
+        f.request :retry, RATE_LIMIT_RETRY
+        f.request :retry, TRANSIENT_RETRY
+      end.tap { |conn| conn.headers.clear }
     end
 
     def api_sync_enabled?
       ENV['SUBSTACK_TOKEN'].present? && ENV['SUBSTACK_PUBLICATION_URL'].present?
     end
 
-    def normalize_publication_url(url)
-      u = url.to_s.strip
-      u.start_with?('http://', 'https://') ? u : "https://#{u}"
+    def publication_url
+      url = ENV['SUBSTACK_PUBLICATION_URL'].to_s.strip.chomp('/')
+      url.start_with?('http://', 'https://') ? url : "https://#{url}"
     end
 
-    def base_api_url
-      "#{normalize_publication_url(ENV['SUBSTACK_PUBLICATION_URL']).chomp('/')}/api/v1"
+    # A path of the publication's API (/notes, say), or a URL of it, signed in, as JSON
+    def publication_json(path)
+      url = path.start_with?('https://', 'http://') ? path : "#{publication_url}/api/v1#{path}"
+      headers = Http.browser_headers(url, 'Accept' => 'application/json', 'Content-Type' => 'application/json',
+                                          'Cookie' => "substack.sid=#{ENV['SUBSTACK_TOKEN']}")
+      response = (@publication_connection ||= connection).get(url, nil, headers)
+      raise "HTTP #{response.status}: #{response.body.to_s.byteslice(0, 200)}" unless response.success?
+
+      JSON.parse(response.body.to_s)
     end
 
-    # For the publication's API. Host first, as browsers send it: Ruby's Net::HTTP adds it after the rest unless it's given,
-    # and Substack's Cloudflare takes that for a bot, which Substack then rate-limits (429)
-    def http_client
-      Faraday.new(headers: {
-                    'Host' => URI(normalize_publication_url(ENV['SUBSTACK_PUBLICATION_URL'])).host,
-                    'User-Agent' => USER_AGENT,
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                    'Cookie' => "substack.sid=#{ENV['SUBSTACK_TOKEN']}"
-                  })
+    # A post of the publication with its body, trying again while Substack sends it without one (it sometimes does) or
+    # fails, max_attempts times in all. The last it sent if none has a body, or nil
+    def publication_post(slug, max_attempts: 5)
+      return if slug.blank?
+
+      detail = nil
+      error = nil
+      max_attempts.times do |attempt|
+        sleep(0.5 * attempt) if attempt.positive?
+        detail = publication_json("/posts/#{ERB::Util.url_encode(slug)}")
+        return detail if detail['body_html'].present?
+
+        error = 'body_html blank'
+      rescue RuntimeError, JSON::ParserError => e
+        error = e.message
+      end
+      puts "⚠️  Substack post detail: failed after #{max_attempts} attempt(s) (slug=#{slug}, error=#{error})"
+      detail
     end
 
-    def safe_json(obj)
-      return '' if obj.nil?
+    # The newsletter's posts, newest first, a page at a time with Substack's cursor, until a page reaches back before
+    # since (all of them, without since). Or those of one of its sections. The block GETs a URL as JSON
+    def archive(homepage, since: nil, section_id: nil)
+      posts = []
+      cursor = nil
+      loop do
+        query = { sort: 'new', limit: ARCHIVE_PAGE_SIZE, section_id: section_id, cursor: cursor }.compact
+        json = yield("#{homepage}/api/v1/archive?#{URI.encode_www_form(query)}")
+        page = Array(json['posts'])
+        posts.concat(page)
+        cursor = json['nextCursor'].presence
+        break if page.empty? || cursor.nil?
+        break if since && (oldest = parse_time(page.last['post_date'])) && oldest < since
+      end
+      posts
+    end
 
-      JSON.generate(obj)
-    rescue JSON::GeneratorError, Encoding::UndefinedConversionError
-      ''
+    # The JSON a Substack page preloads (script#preloads-json, sometimes JSON in a JSON string), or nil if it has none
+    def preloads(html)
+      json = Nokogiri::HTML(html).at('script#preloads-json')&.text
+      return if json.blank?
+
+      data = JSON.parse(json)
+      data.is_a?(String) ? JSON.parse(data) : data
+    end
+
+    def parse_time(value)
+      Time.zone.parse(value.to_s)
+    rescue ArgumentError
+      nil
+    end
+
+    # Resize via Substack CDN (WebP, width-limited). Unwraps existing CDN URLs first.
+    def gallery_image_url(url, width: GALLERY_IMAGE_WIDTH)
+      source = unwrap_cdn_image_url(url.to_s.strip)
+      return source unless source.start_with?('http://', 'https://')
+
+      "https://#{CDN_IMAGE_HOST}/image/fetch/w_#{width.to_i},c_limit,f_webp,q_auto:good/#{URI.encode_www_form_component(source)}"
+    end
+
+    def unwrap_cdn_image_url(url)
+      return url unless url.include?("#{CDN_IMAGE_HOST}/image/fetch") && url =~ /(https%3A%2F%2F.+)\z/
+
+      URI.decode_www_form_component(Regexp.last_match(1))
     end
 
     # Just +fields+ of the hash +obj+: each a key, or { key => fields } for those of a hash under it. Substack's JSON
@@ -79,105 +136,30 @@ module Substack
       ''
     end
 
-    # Substack @-mentions are empty <span class="mention-wrap"> nodes; the label
-    # lives in data-attrs JSON and is filled in by client JS. Expand them so
-    # markdown conversion keeps the names.
+    # Substack @-mentions are empty <span class="mention-wrap"> nodes; the label lives in data-attrs JSON and is filled
+    # in by client JS. Expand them so markdown conversion keeps the names.
     def expand_mentions!(doc)
       doc.css('span.mention-wrap, [data-component-name="MentionToDOM"]').each do |node|
-        attrs = parse_json_attr(node['data-attrs'])
+        attrs = begin
+          JSON.parse(node['data-attrs'].to_s)
+        rescue JSON::ParserError
+          {}
+        end
         name = attrs['name'].to_s.strip
         next if name.blank?
 
         url = mention_url(attrs)
-        replacement = if url.present?
-                        node.document.create_element('a', name, 'href' => url)
-                      else
-                        name
-                      end
-        node.replace(replacement)
+        node.replace(url.present? ? node.document.create_element('a', name, 'href' => url) : name)
       end
       doc
     end
 
     def mention_url(attrs)
-      explicit = attrs['url'].to_s.strip
-      return explicit if explicit.present?
-
-      id = attrs['id']
-      return '' if id.blank?
+      return attrs['url'].to_s.strip if attrs['url'].present?
+      return '' if attrs['id'].blank?
 
       slug = attrs['name'].to_s.parameterize
-      path = slug.present? ? "#{id}-#{slug}" : id.to_s
-      "https://open.substack.com/users/#{path}"
-    end
-
-    def parse_json_attr(raw)
-      return {} if raw.to_s.strip.empty?
-
-      JSON.parse(raw)
-    rescue JSON::ParserError
-      {}
-    end
-
-    def fetch_notes_page(conn:, base_api:, cursor:)
-      path = cursor ? "/notes?cursor=#{URI.encode_www_form_component(cursor)}" : '/notes'
-      request_json(conn, "#{base_api}#{path}")
-    end
-
-    # A page of the archive and the cursor of the next, nil after the last. Substack pages it with a cursor, not an offset
-    def fetch_archive_page(conn:, base_api:, cursor:, limit:, sort: 'new')
-      path = "#{base_api}/archive?sort=#{sort}&limit=#{limit}"
-      path += "&cursor=#{URI.encode_www_form_component(cursor)}" if cursor
-      response = conn.get(path)
-      raise "HTTP #{response.status}: #{response.body.to_s.byteslice(0, 200)}" unless response.success?
-
-      json = JSON.parse(response.body.to_s)
-      [Array(json['posts']), json['nextCursor'].presence]
-    end
-
-    def fetch_post_detail(conn:, base_api:, slug:, max_attempts: 5)
-      s = slug.to_s.strip
-      return nil if s.empty?
-
-      path = "#{base_api}/posts/#{ERB::Util.url_encode(s)}"
-      last_detail = nil
-      last_error = nil
-
-      max_attempts.times do |attempt|
-        response = conn.get(path)
-        unless response.success?
-          last_error = "HTTP #{response.status}"
-          sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
-          next
-        end
-
-        detail = JSON.parse(response.body.to_s)
-        last_detail = detail
-        return detail if detail['body_html'].to_s.present?
-
-        last_error = 'body_html blank'
-        sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
-      rescue JSON::ParserError => e
-        last_error = "JSON parse error: #{e.message}"
-        sleep(0.5 * (attempt + 1)) if attempt < max_attempts - 1
-      end
-
-      if last_detail && last_detail['body_html'].to_s.blank?
-        puts "⚠️  Substack post detail: body_html still blank after #{max_attempts} attempt(s) (slug=#{s})"
-      elsif last_error
-        puts "⚠️  Substack post detail: failed after #{max_attempts} attempt(s) (slug=#{s}, error=#{last_error})"
-      end
-
-      last_detail
-    end
-
-    private
-
-    def request_json(conn, url)
-      response = conn.get(url)
-      raise "HTTP #{response.status}: #{response.body.to_s.byteslice(0, 200)}" unless response.success?
-
-      JSON.parse(response.body.to_s)
+      "https://open.substack.com/users/#{slug.present? ? "#{attrs['id']}-#{slug}" : attrs['id']}"
     end
   end
 end

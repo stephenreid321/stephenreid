@@ -2,8 +2,8 @@
 class CuratedCsv
   attr_reader :path, :columns
 
-  def initialize(name, columns)
-    @path = File.join(ROOT, 'data', "#{name}.csv")
+  def initialize(name, columns, dir: File.join(ROOT, 'data'))
+    @path = File.join(dir, "#{name}.csv")
     @columns = columns
   end
 
@@ -34,6 +34,29 @@ class CuratedCsv
     CSV.open(path, 'w', encoding: 'UTF-8') do |csv|
       csv << columns
       rows.values.sort_by { |row| row['ticker'] }.each { |row| csv << columns.map { |c| row[c] } }
+    end
+  end
+end
+
+# An ICONOMI strategy or asset, whose status (verified or excluded, or none yet) is decided by hand in its CSV in
+# data/iconomi/, named for its class (strategies.csv, assets.csv), with its class's CSV_COLUMNS
+module Curated
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  def verified?
+    status == 'verified'
+  end
+
+  module ClassMethods
+    def csv_file
+      CuratedCsv.new("iconomi/#{name.underscore.pluralize}", self::CSV_COLUMNS)
+    end
+
+    # Forgets what it read, to read it again
+    def reset!
+      @all = nil
     end
   end
 end

@@ -4,6 +4,7 @@ namespace :frontend do
     require 'faraday'
     require 'digest'
     require 'time'
+    require_relative '../lib/cooldown'
     root = File.expand_path('..', __dir__)
     load File.join(root, 'config/frontend_dependencies.rb') unless defined?(FRONTEND_CDN_URLS)
     path = File.join(root, 'config/frontend_integrity.json')
@@ -22,12 +23,11 @@ namespace :frontend do
     hashes = FRONTEND_CDN_URLS.call(root).uniq.sort.to_h do |url|
       next [url, existing[url]] if existing[url]
 
-      # AGENTS.md's cooldown: hashing a version pins whatever it is, so refuse one released less than 7 days ago
+      # AGENTS.md's cooldown: hashing a version pins whatever it is, so refuse one released within it
       if (match = url.match(%r{\Ahttps://cdn\.jsdelivr\.net/npm/((?:@[^/]+/)?[^@/]+)@([^/]+)/}))
         package, version = match.captures
         released = release_times[package][version] or raise "#{package}@#{version}: not on the npm registry"
-        age = Time.now - Time.parse(released)
-        raise "#{package}@#{version}: released #{format('%.1f', age / 86_400)} days ago, under the 7-day cooldown" if age < 7 * 86_400
+        Cooldown.check!("#{package}@#{version}", released)
       end
 
       response = Faraday.get(url)

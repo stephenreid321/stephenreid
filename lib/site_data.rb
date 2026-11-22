@@ -4,7 +4,7 @@
   Object.const_set(
     name.upcase,
     CSV.read(path, headers: true, encoding: 'UTF-8').map do |row|
-      record = row.to_h.transform_keys(&:to_sym).transform_values { |v| v.nil? || v.empty? ? nil : v }
+      record = row.to_h.transform_keys(&:to_sym).transform_values(&:presence)
       record[:slug] = record[:name].to_s.parameterize if record[:name]
       record
     end.freeze
@@ -14,7 +14,7 @@ end
 cover_dir = "#{ROOT}/site/images/books"
 BOOKS = CSV.read("#{ROOT}/data/goodreads_library_export.csv", headers: true, encoding: 'UTF-8').map do |row|
   book = row.to_h.transform_keys { |k| k.to_s.downcase.gsub(/[^\w]+/, '_').gsub(/\A_|_\z/, '').to_sym }
-  book.transform_values! { |v| v.nil? || v.to_s.empty? ? nil : v }
+  book.transform_values!(&:presence)
 
   %i[isbn isbn13].each do |key|
     book[key] = book[key].gsub(/[="]/, '') if book[key]

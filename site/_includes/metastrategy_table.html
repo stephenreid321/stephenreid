@@ -1,9 +1,3 @@
-<style>
-  @media(min-width: 768px) {
-  td.assetName { width: 1px;  padding-left: 0; padding-right: 0;}
-  #assets th { border-top: none }
-  }
-</style>
 <script>
   $(function () {
       $('#assets').dataTable({info: false, paging: false, searching: false, order: [[3, "desc"]], columnDefs: [{targets: [0, 2], orderable: false}]})
@@ -12,7 +6,7 @@
 
 <div class="row align-items-center">
   <div class="col-lg-8">
-    <table id="assets" class="table" style="font-size: 0.9rem; border-collapse: collapse !important">
+    <table id="assets" class="table">
       <thead>
         <tr>
           <th></th>
@@ -24,24 +18,24 @@
       </thead>
       {% for asset in m.assets %}
       <tr>
-        <td style="vertical-align: middle; text-align: right; width: 10vw">
+        <td class="bar text-end">
           {% if asset.decrease_bar %}
-            <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: red; width: {{ asset.decrease_bar }}"></div>
+            <div class="d-none d-lg-inline-block bg-danger" style="width: {{ asset.decrease_bar }}"></div>
           {% endif %}
         </td>
-        <td class="assetName" style="white-space: nowrap;">
+        <td class="asset-name text-nowrap">
           <a
       data-bs-toggle="tooltip"
       target="_blank" href="https://iconomi.com/asset/{{ asset.ticker }}">
             {{ asset.name }} ({{ asset.ticker }})
           </a>
         </td>
-        <td style="vertical-align: middle; width: 10vw">
+        <td class="bar">
           {% if asset.increase_bar %}
-            <div class="d-none d-lg-inline-block" style="position:relative; top: 0.2rem; height: 1rem; background: green; width: {{ asset.increase_bar }}"></div>
+            <div class="d-none d-lg-inline-block bg-success" style="width: {{ asset.increase_bar }}"></div>
           {% endif %}
         </td>
-        <td data-sort="{{ asset.actual_sort }}" style="white-space: nowrap;">
+        <td class="text-nowrap" data-sort="{{ asset.actual_sort }}">
           {% if asset.actual %}
             {{ asset.actual }}
             <small>
@@ -51,7 +45,7 @@
             </small>
           {% endif %}
         </td>
-        <td data-sort="{{ asset.proposed_sort }}" style="white-space: nowrap;">
+        <td class="text-nowrap" data-sort="{{ asset.proposed_sort }}">
           {{ asset.proposed }}
         </td>
       </tr>

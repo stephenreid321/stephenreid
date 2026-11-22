@@ -5,7 +5,6 @@ module Goodreads
   BASE_URL = 'https://www.goodreads.com'.freeze
   USER_ID = '55629816'.freeze
   EXPORT_PATH = "#{ROOT}/data/goodreads_library_export.csv".freeze
-  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15'.freeze
   # How long to wait for Goodreads to make the export, and how often to look
   WAIT = 5.minutes
   POLL = 5.seconds
@@ -61,7 +60,7 @@ module Goodreads
       Faraday.new(BASE_URL) do |conn|
         # As .env quotes it, if it's been copied from there with its quotes
         conn.headers['Cookie'] = ENV['GOODREADS_COOKIE'].strip.delete_prefix('"').delete_suffix('"')
-        conn.headers['User-Agent'] = USER_AGENT
+        conn.headers['User-Agent'] = Http::BROWSER_USER_AGENT
         conn.headers['X-Requested-With'] = 'XMLHttpRequest'
       end
     end

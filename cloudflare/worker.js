@@ -12,11 +12,9 @@ const TIME_ZONE = 'Europe/Stockholm'
 // fetch something new, each rebuild the site when they're done, and a newer build cancels an older one
 export const RUNS = [
   // Every three hours
-  { workflow: 'substack.yml', due: (t) => t.hour % 3 === 0 },
-  { workflow: 'readwise.yml', due: (t) => t.hour % 3 === 0 },
-  { workflow: 'iconomi-fetch.yml', due: (t) => t.hour % 3 === 0 },
-  { workflow: 'public-fetch.yml', due: (t) => t.hour % 3 === 0 },
-  { workflow: 'substack-surfacer.yml', due: (t) => t.hour % 3 === 0 },
+  ...['substack.yml', 'readwise.yml', 'iconomi-fetch.yml', 'public-fetch.yml', 'substack-surfacer.yml'].map((workflow) => (
+    { workflow, due: (t) => t.hour % 3 === 0 }
+  )),
   // Daily at 06:00
   { workflow: 'goodreads.yml', due: (t) => t.hour === 6 },
   // Fridays at 17:00. scheduled makes the workflow rebalance only while the ICONOMI_REBALANCE variable is true

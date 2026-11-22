@@ -3,38 +3,33 @@ module IconomiPages
   extend ActiveSupport::NumberHelper
 
   class << self
-    # The strategy evaluator's table: the active, mature, verified strategies, best first
+    # The strategy evaluator's table: the active, mature, verified strategies, best first, each with its cells after
+    # its name, in the table's order: a score and rank, a time, a value, or blank
     def iconomi
       strategies = Strategy.active_mature.select(&:nscore_score).sort_by { |s| -s.score_fee_weighted }
-      count = strategies.count
-      cell = lambda do |strategy, x|
-        { 'sort' => strategy.public_send("nscore_#{x}"), 'score' => number_to_rounded(strategy.public_send("nscore_#{x}"), precision: 1),
-          'rank' => "#{strategy.public_send("index_#{x}")}/#{count}" }
-      end
       strategies.map do |strategy|
         asset, weight = strategy.top_holding
+        score = ->(x) { score_cell(strategy, x, strategies.count) }
         {
           'ticker' => strategy.ticker,
           'name' => strategy.name,
           'top_holding' => ({ 'ticker' => asset.ticker, 'percent' => "#{(weight * 100).round(2)}%", 'color' => asset.css_color } if asset),
-          'scores' => [cell.call(strategy, 'score_fee_weighted'), cell.call(strategy, 'score')],
-          'details' => [
-            { 'value' => strategy.numberOfAssets },
-            time_cell(strategy.lastRebalanced),
-            { 'value' => strategy.monthlyRebalancedCount },
-            time_cell(strategy.last_posted_at)
-          ],
-          'returns' => Strategy::PERIODS.map { |t| cell.call(strategy, "r#{t}") if strategy.public_send("r#{t}") },
-          'acs' => cell.call(strategy, 'aum')
+          'cells' => [
+            score.call('score_fee_weighted'), score.call('score'),
+            { 'value' => strategy.numberOfAssets }, time_cell(strategy.lastRebalanced),
+            { 'value' => strategy.monthlyRebalancedCount }, time_cell(strategy.last_posted_at),
+            *Strategy::PERIODS.map { |t| strategy.public_send("r#{t}") ? score.call("r#{t}") : { 'sort' => 0, 'class' => 'bg-white' } },
+            score.call('aum')
+          ]
         }
       end
     end
 
-    # Metastrategy (DECENTCOOP): how it ranks, its current weights and those it would rebalance to. nil before
+    # Metastrategy: how it ranks, its current weights and those it would rebalance to. nil before
     # ICONOMI's been fetched
     def metastrategy
       live = Fetched.read(:iconomi, {})['metastrategy']
-      strategy = Strategy.find_by_ticker('DECENTCOOP')
+      strategy = Strategy.find_by_ticker(Strategy::METASTRATEGY)
       return unless live && strategy
 
       strategies = Strategy.verified
@@ -121,6 +116,11 @@ module IconomiPages
     end
 
     private
+
+    def score_cell(strategy, x, count)
+      nscore = strategy.public_send("nscore_#{x}")
+      { 'sort' => nscore, 'score' => number_to_rounded(nscore, precision: 1), 'rank' => "#{strategy.public_send("index_#{x}")}/#{count}" }
+    end
 
     def time_cell(time)
       time ? { 'sort' => time.to_i, 'time' => time.utc.iso8601 } : { 'sort' => 0 }

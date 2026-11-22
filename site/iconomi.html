@@ -4,33 +4,17 @@ permalink: /iconomi
 container_class: container-fluid
 ---
 <script>
-  function coinTable() {
-
-    if (!$('#iconomi').hasClass('datatabled')) {
-
-      $('#iconomi').dataTable({
-        info: false,
-        paging: false,
-        searching: false,
-        order: [
-          [2, "desc"]
-        ]
-      }).addClass('datatabled').on('draw.dt', function () {
-        var i = 0;
-        $("#iconomi td:first-child").each(function () {
-          $(this).html(++i);
-        })
-      } ).trigger('draw.dt');
-
-    }
-  }
-
+  // Numbers the rows, again each time the table's sorted
   $(function () {
-    coinTable()
+    $('#iconomi').dataTable({ info: false, paging: false, searching: false, order: [[2, 'desc']] }).on('draw.dt', function () {
+      $('#iconomi td:first-child').each(function (i) {
+        $(this).html(i + 1)
+      })
+    }).trigger('draw.dt')
   })
 </script>
 
-<table id="iconomi" class="table mb-5" style="font-size: 0.9rem; border-collapse: collapse !important">
+<table id="iconomi" class="table mb-5">
   <thead>
     <tr>
       <th></th>
@@ -65,32 +49,8 @@ container_class: container-fluid
         </span>
       {% endif %}
     </td>
-    {% for cell in strategy.scores %}
-      <td data-sort="{{ cell.sort }}">
-        <span class="score">
-          {{ cell.score }}
-        </span>
-        <br>
-        <small>
-          {{ cell.rank }}
-        </small>
-      </td>
-    {% endfor %}
-    {% for cell in strategy.details %}
-      {% if cell.time %}
-        <td data-sort="{{ cell.sort }}">
-          <relative-time datetime="{{ cell.time }}">{{ cell.time }}</relative-time>
-        </td>
-      {% elsif cell.value %}
-        <td>
-          {{ cell.value }}
-        </td>
-      {% else %}
-        <td data-sort="0"></td>
-      {% endif %}
-    {% endfor %}
-    {% for cell in strategy.returns %}
-      {% if cell %}
+    {% for cell in strategy.cells %}
+      {% if cell.score %}
         <td data-sort="{{ cell.sort }}">
           <span class="score">
             {{ cell.score }}
@@ -100,19 +60,18 @@ container_class: container-fluid
             {{ cell.rank }}
           </small>
         </td>
+      {% elsif cell.time %}
+        <td data-sort="{{ cell.sort }}">
+          <relative-time datetime="{{ cell.time }}">{{ cell.time }}</relative-time>
+        </td>
+      {% elsif cell.value %}
+        <td>
+          {{ cell.value }}
+        </td>
       {% else %}
-        <td class="bg-white" data-sort="0"></td>
+        <td{% if cell.class %} class="{{ cell.class }}"{% endif %} data-sort="0"></td>
       {% endif %}
     {% endfor %}
-    <td data-sort="{{ strategy.acs.sort }}">
-      <span class="score">
-        {{ strategy.acs.score }}
-      </span>
-      <br>
-      <small>
-        {{ strategy.acs.rank }}
-      </small>
-    </td>
   </tr>
   {% endfor %}
 </table>

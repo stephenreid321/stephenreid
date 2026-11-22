@@ -41,6 +41,9 @@ jobs:
     - name: Run ESLint
       run: script/lint --all --only eslint
 
+    - name: Run Stylelint
+      run: script/lint --all --only stylelint
+
     # uvx runs the zizmor version script/lint names
     - name: Install uv
       uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
@@ -53,3 +56,14 @@ jobs:
       run: script/lint --all --only zizmor
       env:
         GH_TOKEN: ${{ github.token }}
+
+    # With ShellCheck, on the shell in each run: block
+    - name: Run actionlint
+      run: script/lint --all --only actionlint
+
+    - name: Run ShellCheck
+      run: script/lint --all --only shellcheck
+
+    # test/lint_test.rb: the rules no linter checks. It runs script/lint itself, so after Node and uv are in
+    - name: Run lint_test
+      run: script/lint --all --only lint_test

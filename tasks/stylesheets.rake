@@ -4,6 +4,7 @@ namespace :stylesheets do
     require 'date'
     require 'json'
     require 'tmpdir'
+    require_relative '../lib/cooldown'
 
     root = File.expand_path('..', __dir__)
     stylesheets_dir = File.join(root, 'site/stylesheets')
@@ -11,9 +12,9 @@ namespace :stylesheets do
     abort 'rake stylesheets:build needs Node (npm)' unless system('npm --version', out: File::NULL)
 
     Dir.mktmpdir do |dir|
-      # --before keeps to package versions published at least 7 days ago, like the Gemfile's cooldown
+      # --before keeps to package versions published before the cooldown, as the Gemfile's does
       puts "Installing Bootstrap #{bootstrap} and Dart Sass..."
-      system('npm', 'install', '--prefix', dir, '--no-save', '--silent', "--before=#{(Date.today - 7).iso8601}", "bootstrap@#{bootstrap}", 'sass@1.108.1', exception: true)
+      system('npm', 'install', '--prefix', dir, '--no-save', '--silent', "--before=#{Cooldown.before}", "bootstrap@#{bootstrap}", 'sass@1.108.1', exception: true)
 
       %w[dark light].each do |theme|
         css_file = File.join(stylesheets_dir, "#{theme}.css")

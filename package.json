@@ -7,6 +7,8 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "eslint": "10.14.0",
-    "globals": "17.14.0"
+    "globals": "17.14.0",
+    "postcss-scss": "4.0.9",
+    "stylelint": "18.0.0"
   }
 }

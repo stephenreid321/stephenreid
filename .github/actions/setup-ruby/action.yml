@@ -19,7 +19,7 @@ runs:
   - name: Use the Mac's Ruby
     if: runner.environment == 'self-hosted'
     shell: bash
-    run: | # zizmor: ignore[github-env]
+    run: | # zizmor: ignore[github-env] -- what it writes comes from .ruby-version and the runner, not anyone's input
       version=$(cat .ruby-version)
       ruby="$HOME/.rvm/rubies/ruby-$version/bin"
       bundle="$RUNNER_TOOL_CACHE/stephenreid-bundle/$version"

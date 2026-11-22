@@ -17,7 +17,7 @@ module Fetched
   end
 
   def self.write(name, data)
-    FileUtils.mkdir_p(DIR)
+    FileUtils.mkdir_p(File.dirname(path(name)))
     File.write(path(name), JSON.generate(data))
   end
 end

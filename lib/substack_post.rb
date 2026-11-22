@@ -47,23 +47,10 @@ class SubstackPost
         return
       end
 
-      conn = Substack.http_client
-      base_api = Substack.base_api_url
-
-      all_raw = []
-      cursor = nil
-      loop do
-        page, cursor = Substack.fetch_archive_page(conn: conn, base_api: base_api, cursor: cursor, limit: 25)
-        all_raw.concat(page)
-        break if page.empty? || cursor.nil?
-      end
-
+      archived = Substack.archive(Substack.publication_url) { |url| Substack.publication_json(url) }
       # Posts no longer in the archive drop out
       existing = Fetched.read(:substack_posts).index_by { |post| post['post_id'] }
-      posts = all_raw.reverse.filter_map do |archive_row|
-        post_attributes(conn: conn, base_api: base_api, archive_row: archive_row, existing: existing[archive_row['id']])
-      end
-      posts = posts.uniq { |post| post[:post_id] }
+      posts = archived.reverse.filter_map { |row| post_attributes(row, existing[row['id']]) }.uniq { |post| post[:post_id] }
       Fetched.write(:substack_posts, posts)
 
       puts "🗄️  Substack post import: #{posts.size} post(s)"
@@ -78,19 +65,17 @@ class SubstackPost
 
     private
 
-    def post_attributes(conn:, base_api:, archive_row:, existing:)
-      pid = archive_row['id']
-      return if pid.nil?
+    # What's kept of a post: the archive's row, with its body, kept from the last fetch or fetched now
+    def post_attributes(archive_row, existing)
+      return if archive_row['id'].nil?
 
       body_html = existing && existing['body_html'].presence
-      detail = (Substack.fetch_post_detail(conn: conn, base_api: base_api, slug: archive_row['slug']) unless body_html)
-
-      raw = archive_row.merge(detail || {})
+      raw = archive_row.merge(body_html ? {} : Substack.publication_post(archive_row['slug'].to_s) || {})
       raw['body_html'] = body_html if body_html
 
       # Not its likes, comments and restacks, which change from one fetch to the next and the site doesn't show
       {
-        post_id: pid,
+        post_id: archive_row['id'],
         publication_id: raw['publication_id'],
         slug: raw['slug'].to_s,
         title: raw['title'].to_s,

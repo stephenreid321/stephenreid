@@ -11,13 +11,7 @@ module SubstackSurfacer
   DAYS = 90
   # Newsletters fetched at once: 24 was no faster, 48 hit Substack's rate limits
   WORKERS = 12
-  # Substack's archive API refuses a limit over 25
-  PAGE_SIZE = 25
   TIMEOUT = 10
-  # Tries for a rate-limited request, and for a timeout, connection error or 5xx
-  RATE_LIMIT_TRIES = 8
-  TRANSIENT_TRIES = 3
-  MAX_WAIT = 60
 
   class Error < StandardError; end
 
@@ -72,11 +66,7 @@ module SubstackSurfacer
       # As it is now: Substack's Cloudflare caches the profile page for some minutes, so a newsletter just unsubscribed from
       # would still be there. A query string it hasn't seen gets one from Substack itself
       html = get("https://substack.com/@#{PROFILE}?#{URI.encode_www_form(fresh: Time.now.to_i)}").body.to_s
-      json = Nokogiri::HTML(html).at('script#preloads-json')&.text
-      raise Error, "Substack's profile page has no preloads-json" if json.blank?
-
-      data = JSON.parse(json)
-      data = JSON.parse(data) if data.is_a?(String)
+      data = Substack.preloads(html) or raise Error, "Substack's profile page has no preloads-json"
       data['profile'] || {}
     end
 
@@ -85,9 +75,11 @@ module SubstackSurfacer
       subscribers, hidden_sections = homepage(url)
       # The archive leaves out the posts of a section that hides them from the newsletter's listings, so those come from
       # each such section's archive
-      found = archive(url, since) + hidden_sections.flat_map { |section_id| archive(url, since, section_id: section_id) }
+      found = [nil, *hidden_sections].flat_map do |section_id|
+        Substack.archive(url, since: since, section_id: section_id) { |page| JSON.parse(get(page).body.to_s) }
+      end
       posts = found.uniq { |post| post['id'] }.sort_by { |post| post['post_date'].to_s }.reverse.filter_map do |post|
-        date = parse_time(post['post_date'])
+        date = Substack.parse_time(post['post_date'])
         next unless date && date >= since
 
         post_attributes(url, post, date)
@@ -140,31 +132,6 @@ module SubstackSurfacer
 
     private
 
-    # Newest first, page by page, until a page reaches back before +since+
-    # (Or the section's)
-    def archive(url, since, section_id: nil)
-      posts = []
-      cursor = nil
-      loop do
-        query = { sort: 'new', limit: PAGE_SIZE, section_id: section_id, cursor: cursor }.compact
-        json = JSON.parse(get("#{url}/api/v1/archive?#{URI.encode_www_form(query)}").body.to_s)
-        page = Array(json['posts'])
-        posts.concat(page)
-        cursor = json['nextCursor'].presence
-        break if page.empty? || cursor.nil?
-
-        oldest = parse_time(page.last['post_date'])
-        break if oldest && oldest < since
-      end
-      posts
-    end
-
-    def parse_time(value)
-      Time.zone.parse(value.to_s)
-    rescue ArgumentError
-      nil
-    end
-
     def post_attributes(url, post, date)
       authors = Array(post['publishedBylines']).filter_map { |byline| byline['name'].presence }
       {
@@ -203,12 +170,7 @@ module SubstackSurfacer
     end
 
     def hidden_sections(html)
-      json = Nokogiri::HTML(html).at('script#preloads-json')&.text
-      return [] if json.blank?
-
-      data = JSON.parse(json)
-      data = JSON.parse(data) if data.is_a?(String)
-      Array(data.dig('pub', 'sections')).select { |section| section['hide_posts_from_pub_listings'] }.filter_map { |section| section['id'] }
+      Array(Substack.preloads(html)&.dig('pub', 'sections')).select { |section| section['hide_posts_from_pub_listings'] }.filter_map { |section| section['id'] }
     rescue JSON::ParserError
       []
     end
@@ -229,43 +191,24 @@ module SubstackSurfacer
       results
     end
 
-    # A GET, following redirects, retrying when rate-limited (as Retry-After says, or backing off) and on timeouts,
-    # connection errors and 5xx
+    # A GET as a browser would, following redirects (the cookie only to the same host), and retrying as
+    # Substack.connection does
     def get(url, redirects: 5, cookie: nil)
-      rate_limited = 0
-      transient = 0
-      loop do
-        response = client.get(url, nil, headers(url, cookie))
-        if response.status.between?(300, 399) && response.headers['location'] && redirects.positive?
-          location = URI.join(url, response.headers['location'])
-          # The cookie only to the same host
-          return get(location.to_s, redirects: redirects - 1, cookie: (cookie if location.host == URI(url).host))
-        elsif response.status == 429 && (rate_limited += 1) < RATE_LIMIT_TRIES
-          retry_after = response.headers['retry-after'].to_s
-          sleep [retry_after.match?(/\A\d+\z/) ? retry_after.to_i : 2**rate_limited, MAX_WAIT].min
-        elsif response.status >= 500 && (transient += 1) < TRANSIENT_TRIES
-          sleep 2**transient
-        elsif response.success?
-          return response
-        else
-          raise Error, "HTTP #{response.status} from #{url}"
-        end
-      rescue Faraday::TimeoutError, Faraday::ConnectionFailed => e
-        raise Error, "#{e.class.name.demodulize} from #{url}" unless (transient += 1) < TRANSIENT_TRIES
-
-        sleep 2**transient
+      response = client.get(url, nil, Http.browser_headers(url, 'Cookie' => cookie))
+      if response.status.between?(300, 399) && response.headers['location'] && redirects.positive?
+        location = URI.join(url, response.headers['location'])
+        return get(location.to_s, redirects: redirects - 1, cookie: (cookie if location.host == URI(url).host))
       end
+      raise Error, "HTTP #{response.status} from #{url}" unless response.success?
+
+      response
+    rescue Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      raise Error, "#{e.class.name.demodulize} from #{url}"
     end
 
-    # One for each thread. Without Faraday's own User-Agent, so each request's headers come in the order headers gives
+    # One for each thread
     def client
-      Thread.current[:substack_surfacer_client] ||= Faraday.new(request: { timeout: TIMEOUT }).tap { |conn| conn.headers.clear }
-    end
-
-    # Host first, as browsers send it. Ruby's Net::HTTP adds it after the rest unless it's given, and Substack's
-    # Cloudflare takes that for a bot: Substack then rate-limits nearly every request, and a fetch of seconds takes minutes
-    def headers(url, cookie = nil)
-      { 'Host' => URI(url).host, 'User-Agent' => Substack::USER_AGENT, 'Cookie' => cookie }.compact
+      Thread.current[:substack_surfacer_client] ||= Substack.connection(timeout: TIMEOUT)
     end
   end
 end

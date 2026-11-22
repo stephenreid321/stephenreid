@@ -6,8 +6,10 @@
 #   script/lint --staged    the staged version of each staged file (the pre-commit hook in .githooks)
 #   script/lint --all       everything, as CI does
 #
-# Add --only <linter> (rubocop, eslint or zizmor) to run just one, as CI's separate steps do.
-# A changed linter config runs that linter on everything, as CI would. Exits non-zero if any linter fails.
+# Add --only <linter> (rubocop, eslint, stylelint, zizmor, actionlint, shellcheck or lint_test) to run just one, as CI's
+# separate steps do. A changed linter config runs that linter on everything, as CI would. lint_test (test/lint_test.rb,
+# the rules no linter checks) reads the whole checkout, so it runs as a whole whenever a file it checks changes. Exits
+# non-zero if any linter fails.
 require 'open3'
 
 $stdout.sync = true # so the summary on stderr comes after the output
@@ -43,6 +45,49 @@ LINTERS = [
     all: ['.'],
     stdin: ->(_file) { ['-'] },
     uv: true
+  },
+  {
+    # What zizmor doesn't check: that the workflows are right (expressions, needs, runs-on, inputs), and the shell in
+    # each run: block, with ShellCheck. Only workflows: it doesn't read composite actions
+    name: 'actionlint',
+    files: %r{\A\.github/workflows/.+\.ya?ml\z},
+    configs: %r{\A\.github/actionlint\.ya?ml\z},
+    command: %w[uvx --from actionlint-py==1.7.12.25 --with shellcheck-py==0.11.0.1 actionlint -no-color],
+    all: [], # it finds the workflows itself
+    stdin: ->(file) { ['-stdin-filename', file, '-'] },
+    uv: true
+  },
+  {
+    name: 'ShellCheck',
+    files: %r{\A(.+\.sh|\.githooks/.+)\z},
+    configs: /\A\.shellcheckrc\z/,
+    command: %w[uvx --from shellcheck-py==0.11.0.1 shellcheck],
+    all: -> { `git ls-files -z -- '*.sh' .githooks`.split("\0") },
+    stdin: ->(_file) { ['-'] },
+    uv: true
+  },
+  {
+    name: 'Stylelint',
+    files: %r{\Asite/stylesheets/.+\.scss\z},
+    configs: /\A(stylelint\.config\.mjs|package(-lock)?\.json)\z/,
+    command: %w[npx --no-install stylelint --allow-empty-input],
+    all: ['site/stylesheets/*.scss'],
+    stdin: ->(file) { ['--stdin-filename', file] },
+    node: true
+  },
+  {
+    # The files whose rules it checks: the linters' configs and this script, the workflows and actions, AGENTS.md, the
+    # rake tasks, the frontend's dependencies and the templates that load them, the packages, and the tests
+    name: 'lint_test',
+    files: %r{
+      \A(
+        \.rubocop\.yml | eslint\.config\.mjs | stylelint\.config\.mjs | script/lint | \.github/.+ | \.githooks/.+ | AGENTS\.md | Gemfile |
+        tasks/.+\.rake | config/frontend_.+ | site/.+\.(html|md) | (cloudflare/)?package\.json | lib/.+\.rb | test/.+\.rb
+      )\z
+    }x,
+    configs: /\A\z/,
+    command: %w[bundle exec ruby -I test test/lint_test.rb],
+    whole: true # runs on the checkout, never the files given
   }
 ].freeze
 
@@ -65,6 +110,8 @@ files =
 # Each job is a command, its env and what to pipe to it
 jobs = LINTERS.flat_map do |linter|
   next [] if only && linter[:name].downcase != only.downcase
+  # lint_test runs this script in its own tests: not lint_test again, or it would never end
+  next [] if linter[:whole] && ENV['LINT_TEST']
 
   all = mode == '--all' || files.any? { |f| f.match?(linter[:configs]) }
   mine = files.grep(linter[:files])
@@ -72,17 +119,20 @@ jobs = LINTERS.flat_map do |linter|
 
   # Only the versions package-lock.json installs: npx would otherwise fetch a missing linter, of any age
   if linter[:node] && !File.exist?("node_modules/.bin/#{linter[:name].downcase}")
-    warn "#{linter[:name]} isn't installed, so run npm ci first"
+    $stderr.write("#{linter[:name]} isn't installed, so run npm ci first\n")
     next [{ name: linter[:name], missing: true }]
   end
   if linter[:uv] && ENV['PATH'].split(File::PATH_SEPARATOR).none? { |dir| File.executable?(File.join(dir, 'uvx')) }
-    warn "#{linter[:name]} runs with uvx, so install uv first (https://docs.astral.sh/uv/)"
+    $stderr.write("#{linter[:name]} runs with uvx, so install uv first (https://docs.astral.sh/uv/)\n")
     next [{ name: linter[:name], missing: true }]
   end
 
   env = linter[:env] || {}
-  if all
-    [{ name: linter[:name], command: linter[:command] + (linter[:all] || []), env: env }]
+  if linter[:whole]
+    [{ name: linter[:name], command: linter[:command], env: env }]
+  elsif all
+    files_for_all = linter[:all].respond_to?(:call) ? linter[:all].call : linter[:all] || []
+    [{ name: linter[:name], command: linter[:command] + files_for_all, env: env }]
   elsif mode == '--staged'
     # One run per file, given the staged version on stdin, so unstaged edits don't count
     mine.map do |f|
@@ -102,8 +152,9 @@ jobs.reject { |job| job[:missing] }.each do |job|
   puts output
 end
 
+# Not warn, which RUBYOPT=-W0 (QUIET, and so lint_test's run of this script) silences
 if failed.any?
-  warn "\nFailed: #{failed.uniq.join(', ')}"
+  $stderr.write("\nFailed: #{failed.uniq.join(', ')}\n")
   exit 1
 elsif jobs.any?
   puts "Passed: #{jobs.map { |job| job[:name] }.uniq.join(', ')}"

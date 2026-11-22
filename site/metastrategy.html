@@ -50,20 +50,20 @@ permalink: /metastrategy
   Rebalanced <relative-time datetime="{{ m.last_rebalanced }}">{{ m.last_rebalanced }}</relative-time>
 </p>
 
-<table class="table mt-3" style="width: auto; margin: auto">
-  <thead style="border-top: none">
+<table id="metastrategy-returns" class="table text-center mt-3">
+  <thead>
     <tr>
-      <th style="text-align: center">24h</th>
-      <th style="text-align: center">7d</th>
-      <th style="text-align: center">1M</th>
-      <th style="text-align: center">3M</th>
-      <th style="text-align: center">6M</th>
-      <th style="text-align: center">1Y</th>
+      <th>24h</th>
+      <th>7d</th>
+      <th>1M</th>
+      <th>3M</th>
+      <th>6M</th>
+      <th>1Y</th>
     </tr>
   </thead>
   <tr>
     {% for cell in m.returns %}
-    <td style="text-align: center">
+    <td>
       {% if cell %}
         <span class="score d-none">
           {{ cell.score }}

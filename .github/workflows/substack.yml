@@ -38,8 +38,10 @@ jobs:
     - name: Fetch from Substack
       id: fetch
       run: |
+        # shellcheck disable=SC2086 # PATHS is the cache's files, one a line, split into cat's arguments
         before=$(cat $PATHS 2>/dev/null | shasum)
         bundle exec rake data:substack
+        # shellcheck disable=SC2086 # as above
         after=$(cat $PATHS | shasum)
         if [ "$before" != "$after" ]; then echo changed=true >> "$GITHUB_OUTPUT"; fi
       env:

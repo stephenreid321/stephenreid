@@ -1,0 +1,38 @@
+name: Test
+
+# Runs the tests (rake test: test/**/*_test.rb, and the Cloudflare Worker's) on each push and pull request. Like the lint
+# job, it doesn't hold up a deploy. The tests reach nothing outside (test/setup/outside_services.rb), so they need no
+# secrets and pass on any network
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Ruby
+      uses: $/.github/actions/setup-ruby
+
+    # For the Worker's tests, which use only Node's own modules
+    - name: Install Node
+      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version-file: .nvmrc
+
+    - name: Run the tests
+      run: bundle exec rake test

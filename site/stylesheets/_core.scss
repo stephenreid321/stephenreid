@@ -134,3 +134,42 @@ $ripple-tint: 6% !default; // how much of the text colour is in the still square
     mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   }
 }
+
+// The ICONOMI pages' tables (/iconomi, /metastrategy)
+#iconomi, #assets {
+  font-size: 0.9rem;
+  border-collapse: collapse !important
+}
+
+// Metastrategy's returns, centred under its description
+#metastrategy-returns {
+  width: auto;
+  margin: auto;
+
+  thead { border-top: none }
+}
+
+// Metastrategy's assets: each one's change at the next rebalance as a bar, red to the left of its name or green to the
+// right, as wide as the change against the largest
+#assets {
+  td.bar {
+    vertical-align: middle;
+    width: 10vw;
+
+    div {
+      position: relative;
+      top: 0.2rem;
+      height: 1rem
+    }
+  }
+
+  @media (min-width: 768px) {
+    td.asset-name {
+      width: 1px;
+      padding-left: 0;
+      padding-right: 0
+    }
+
+    th { border-top: none }
+  }
+}
