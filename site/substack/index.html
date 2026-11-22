@@ -1,5 +1,5 @@
 ---
-title: Substack Surfacer
+title: Substack
 permalink: /substack/
 container_class: container-fluid
 ---
@@ -109,7 +109,7 @@ container_class: container-fluid
       // No search box (not searching: false, which would turn off the dropdown's filter too), and so no row above the table
       layout: { topStart: null, topEnd: null },
       // As lib/substack_surfacer.rb's for_template orders the posts, so they don't move when the table first sorts them
-      order: [[4, 'desc'], [1, 'desc']],
+      order: [[4, 'desc']],
       columnDefs: [
         { targets: [1, 2, 3, 4, 5], className: 'text-end' },
         { targets: 6, orderable: false, className: 'text-center' }
@@ -186,7 +186,7 @@ container_class: container-fluid
     <thead>
       <tr>
         <th class="dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Post</div><div class="dt-column-order"></div></div></th>
-        <th class="text-end dt-orderable-asc dt-orderable-desc dt-ordering-desc"><div class="dt-column-header"><div class="dt-column-title">Date</div><div class="dt-column-order"></div></div></th>
+        <th class="text-end dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Date</div><div class="dt-column-order"></div></div></th>
         <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Likes</div><div class="dt-column-order"></div></div></th>
         <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><div class="dt-column-title">Free subscribers</div><div class="dt-column-order"></div></div></th>
         <th class="text-end dt-type-numeric dt-orderable-asc dt-orderable-desc dt-ordering-desc"><div class="dt-column-header"><div class="dt-column-title">Likes per 100 free subscribers</div><div class="dt-column-order"></div></div></th>

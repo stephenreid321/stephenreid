@@ -92,8 +92,8 @@ module SubstackSurfacer
     end
 
     # For the page's template: when they were fetched, and the posts with what the table sorts by, in the order the table
-    # first sorts them (by likes per 100 free subscribers, highest first, then newest first), so they don't jump about when
-    # it does
+    # first sorts them (by likes per 100 free subscribers, highest first, ties in the order fetched), so they don't jump
+    # about when it does
     def for_template
       data = Fetched.read(:substack_surfacer, {})
       # How many posts each newsletter has in the data: those of the last DAYS days
@@ -105,7 +105,7 @@ module SubstackSurfacer
                    'likes_per_100_free_subscribers_shown' => significant_figures(post['likes_per_100_free_subscribers']),
                    'free_subscribers_shown' => post['free_subscribers']&.delete_suffix('+'),
                    'post_day' => Time.zone.parse(post['post_date']).strftime('%-d %b %H:%M'))
-      end.sort_by { |post| [-post['likes_per_100_free_subscribers_sort'], -Time.parse(post['post_date']).to_i] }
+      end.sort_by.with_index { |post, i| [-post['likes_per_100_free_subscribers_sort'], i] }
       { 'fetched_at' => data['fetched_at'], 'days' => data['days'] || DAYS, 'posts' => posts }
     end
 
