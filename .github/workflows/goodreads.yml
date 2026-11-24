@@ -4,7 +4,7 @@ name: Export from Goodreads
 # of one (the GOODREADS_COOKIE secret), on the self-hosted runner on Stephen's Mac (label mac), so Goodreads sees
 # the session from the Mac it was signed in on. It commits data/goodreads_library_export.csv to master if it's changed,
 # and rebuilds the site. It runs only while the Mac is on; until then the site keeps the export last committed. The
-# Cloudflare Worker in cloudflare/ starts it daily, as GitHub's own schedule starts runs late or not at all
+# Cloudflare Worker in cloudflare/ starts it weekly, as GitHub's own schedule starts runs late or not at all
 on:
   workflow_dispatch:
 

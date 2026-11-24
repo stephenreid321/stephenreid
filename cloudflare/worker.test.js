@@ -14,9 +14,11 @@ test('starts the three-hourly runs on the hour in Stockholm, in winter and in su
   assert.deepEqual(workflows(Date.UTC(2026, 0, 14, 9)), [])
 })
 
-test("exports from Goodreads at 06:00 in Stockholm, with the three-hourly runs", () => {
-  assert.ok(workflows(Date.UTC(2026, 0, 14, 5)).includes('goodreads.yml'))
-  assert.ok(!workflows(Date.UTC(2026, 0, 14, 8)).includes('goodreads.yml'))
+test("exports from Goodreads on Mondays at 06:00 in Stockholm, with the three-hourly runs, and on no other day", () => {
+  // Monday 12 January 2026, 06:00 in Stockholm
+  assert.ok(workflows(Date.UTC(2026, 0, 12, 5)).includes('goodreads.yml'))
+  assert.ok(!workflows(Date.UTC(2026, 0, 13, 5)).includes('goodreads.yml'))
+  assert.ok(!workflows(Date.UTC(2026, 0, 12, 8)).includes('goodreads.yml'))
 })
 
 test('rebalances on Fridays at 17:00 in Stockholm, as scheduled, and on no other day', () => {

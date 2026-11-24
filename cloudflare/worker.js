@@ -15,8 +15,8 @@ export const RUNS = [
   ...['substack.yml', 'readwise.yml', 'iconomi-fetch.yml', 'public-fetch.yml', 'substack-surfacer.yml'].map((workflow) => (
     { workflow, due: (t) => t.hour % 3 === 0 }
   )),
-  // Daily at 06:00
-  { workflow: 'goodreads.yml', due: (t) => t.hour === 6 },
+  // Mondays at 06:00
+  { workflow: 'goodreads.yml', due: (t) => t.weekday === 'Mon' && t.hour === 6 },
   // Fridays at 17:00. scheduled makes the workflow rebalance only while the ICONOMI_REBALANCE variable is true
   { workflow: 'iconomi-rebalance.yml', due: (t) => t.weekday === 'Fri' && t.hour === 17, inputs: { scheduled: 'true' } }
 ]
