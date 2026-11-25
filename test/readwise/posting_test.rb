@@ -1,7 +1,8 @@
 require 'test_config'
 require 'helpers/readwise_helpers'
 
-# Bluesky.post_from_readwise and Blyg.post_from_readwise, which readwise.yml runs (rake bluesky:post, blyg:post)
+# Bluesky.post_from_readwise, Semble.post_from_readwise and Blyg.post_from_readwise, which readwise.yml runs (rake
+# bluesky:post, semble:post, blyg:post)
 class ReadwisePostingTest < ActiveSupport::TestCase
   include ReadwiseHelpers
 
@@ -61,6 +62,52 @@ class ReadwisePostingTest < ActiveSupport::TestCase
 
     # The big one with no image; the small one with it, refused, then without
     assert_equal [nil, { 'ref' => 'blob' }, nil], records.pluck('thumb')
+  end
+
+  test 'adds to Semble, oldest first, what is not among its cards yet, as URL cards on the Bluesky account' do
+    records = []
+    stub_readwise(%w[https://a.com/1 https://a.com/2 https://a.com/3]) do |stub|
+      stub.post("#{BSKY}com.atproto.server.createSession") { json('did' => 'did:me', 'accessJwt' => 'jwt') }
+      stub.get("#{BSKY}com.atproto.repo.listRecords") do |env|
+        assert_equal({ 'repo' => 'did:me', 'collection' => 'network.cosmik.card', 'limit' => '100' }, env.params)
+        json('records' => [{ 'value' => { 'type' => 'URL', 'content' => { 'url' => 'https://a.com/2?utm_source=x' } } },
+                           { 'value' => { 'type' => 'NOTE', 'content' => { 'text' => 'a note' }, 'url' => 'https://a.com/3' } }])
+      end
+      stub.post("#{BSKY}com.atproto.repo.createRecord") do |env|
+        records << [env.request_headers['Authorization'], JSON.parse(env.request_body)]
+        json({})
+      end
+    end
+
+    out = with_tokens { capture_io { Semble.post_from_readwise }.first }
+
+    # Not 2, a card already; 3 only has a note about it
+    assert_equal "https://a.com/1\nhttps://a.com/3\n", out
+    assert_equal ['Bearer jwt'], records.map(&:first).uniq
+    record = records.first.last
+
+    assert_equal %w[did:me network.cosmik.card], record.values_at('repo', 'collection')
+    assert_equal({ '$type' => 'network.cosmik.card', 'type' => 'URL' }, record['record'].slice('$type', 'type'))
+    assert_equal({ '$type' => 'network.cosmik.card#urlContent', 'url' => 'https://a.com/1',
+                   'metadata' => { '$type' => 'network.cosmik.card#urlMetadata', 'title' => 'Title of https://a.com/1' } }, record.dig('record', 'content'))
+  end
+
+  test "a Semble card's metadata has only what Readwise knows, and none when it knows nothing" do
+    contents = []
+    stub_http do |stub|
+      stub.post("#{BSKY}com.atproto.server.createSession") { json('did' => 'did:me', 'accessJwt' => 'jwt') }
+      stub.post("#{BSKY}com.atproto.repo.createRecord") do |env|
+        contents << JSON.parse(env.request_body).dig('record', 'content')
+        json({})
+      end
+    end
+    semble = Semble.new(Bluesky.new(identifier: 'e', password: 'p'))
+
+    semble.add_url(url: 'https://a.com', title: " A\n title ", description: '', author: 'Jane Doe', image_url: 'https://a.com/i.jpg')
+    semble.add_url(url: 'https://a.com', title: nil)
+
+    assert_equal [{ '$type' => 'network.cosmik.card#urlMetadata', 'title' => 'A title', 'author' => 'Jane Doe', 'imageUrl' => 'https://a.com/i.jpg' }, nil],
+                 contents.pluck('metadata')
   end
 
   test "publishes to the blyg what was archived after the newest that's on it, each linked and by its author" do

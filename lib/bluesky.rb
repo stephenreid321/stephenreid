@@ -14,7 +14,7 @@ class Bluesky
     end
   end
 
-  def initialize(identifier: ENV['BLUESKY_EMAIL'], password: ENV['BLUESKY_PASSWORD'])
+  def initialize(identifier: ENV.fetch('BLUESKY_EMAIL'), password: ENV.fetch('BLUESKY_PASSWORD'))
     @http = Faraday.new(url: API) do |f|
       f.request :json
       f.response :json
@@ -23,6 +23,16 @@ class Bluesky
     session = @http.post('com.atproto.server.createSession', identifier: identifier, password: password).body
     @did = session['did']
     @http.headers['Authorization'] = "Bearer #{session['accessJwt']}"
+  end
+
+  # The account's last 100 records in a collection, newest first, each with its uri, cid and value
+  def records(collection)
+    @http.get('com.atproto.repo.listRecords', repo: @did, collection: collection, limit: 100).body['records']
+  end
+
+  # Writes a record to a collection of the account's repo, as other AT Protocol apps (Semble) read it from the firehose
+  def create_record(collection, record)
+    @http.post('com.atproto.repo.createRecord', repo: @did, collection: collection, record: { '$type' => collection }.merge(record))
   end
 
   # The URLs of the links in the account's last 100 posts
@@ -57,12 +67,7 @@ class Bluesky
   end
 
   def create_post(text, card)
-    @http.post('com.atproto.repo.createRecord', repo: @did, collection: 'app.bsky.feed.post', record: {
-                 '$type' => 'app.bsky.feed.post',
-                 text: text.truncate(MAX_TEXT_LENGTH),
-                 createdAt: Time.now.utc.iso8601(3),
-                 langs: ['en'],
-                 embed: { '$type' => 'app.bsky.embed.external', external: card }
-               })
+    create_record('app.bsky.feed.post', text: text.truncate(MAX_TEXT_LENGTH), createdAt: Time.now.utc.iso8601(3), langs: ['en'],
+                                        embed: { '$type' => 'app.bsky.embed.external', external: card })
   end
 end

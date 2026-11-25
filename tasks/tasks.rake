@@ -71,3 +71,10 @@ namespace :bluesky do
     Bluesky.post_from_readwise
   end
 end
+
+namespace :semble do
+  desc "Add to Semble the links archived in Readwise in the last week that aren't on it yet, as cards on the Bluesky account"
+  task post: :environment do
+    Semble.post_from_readwise
+  end
+end
